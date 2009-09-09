@@ -1,0 +1,10 @@
+4dd0532163dac42cab1deb1cfc174d55 d8bded9a8eda6efdcab2dd6e4c9792ac ffffffffffffffffffffffffffffffff 102 /Users/greg/code/objc/books/build/Debug/books.app
+d64c59d4a23ed0aea736bdfbdee5086f fe4bcda1c38442a2f30bac67d8a230bd ffffffffffffffffffffffffffffffff 13600 /Users/greg/code/objc/books/build/Debug/books.app/Contents/MacOS/books
+d012f8dcc022e9506c3351055232769e f8075721ee86cb819f35483a705d5052 ffffffffffffffffffffffffffffffff 21104 /Users/greg/code/objc/books/build/books.build/Debug/books.build/Objects-normal/ppc/BooksWindowController.o
+d012f8dcc25984766c3351055232c572 2e4b0ef50a1e41193803f5c1ae8786cf ffffffffffffffffffffffffffffffff 5056 /Users/greg/code/objc/books/build/books.build/Debug/books.build/Objects-normal/ppc/main.o
+000000000a864d3f0000000000006240 d012f8dcc25984766c3351055232c502 ffffffffffffffffffffffffffffffff 33452132 /var/folders/9u/9uXkJyRcG-yAG7F2sJ2CW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/books_Prefix-fownxdiamxiioecwbihnczqrcrvz/books_Prefix.pch.gch
+000000004a6e0b3300000000000269d5 ad0689b4783ba283b46d06a23ef0412c ffffffffffffffffffffffffffffffff 35372 /Users/greg/code/objc/books/build/Debug/books.app/Contents/Resources/English.lproj/MainMenu.nib
+000000004a6c92e9000000000000005c c8d14ee07a596d794b4dfc22c4a25d22 ffffffffffffffffffffffffffffffff 92 /Users/greg/code/objc/books/build/Debug/books.app/Contents/Resources/English.lproj/InfoPlist.strings
+00000000000000000000000000000000 eae2bec468ad466d95147c5a97cf26c2 ffffffffffffffffffffffffffffffff 8 /Users/greg/code/objc/books/build/Debug/books.app/Contents/PkgInfo
+00000000000000000000000000000000 eae2bec468ad466d95147c5a97cf26c2 ffffffffffffffffffffffffffffffff 763 /Users/greg/code/objc/books/build/Debug/books.app/Contents/Info.plist
+000000000a864d3f0000000000006240 da96b34e428cf914faeabe345cea6b0a ffffffffffffffffffffffffffffffff 33452132 /var/folders/9u/9uXkJyRcG-yAG7F2sJ2CW++++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/books_Prefix-hcjvquolpeadzaceumjzfruguzkv/books_Prefix.pch.gch
