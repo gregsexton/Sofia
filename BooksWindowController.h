@@ -15,9 +15,11 @@
     IBOutlet NSComboBox *txt_publisher;
     IBOutlet NSTextField *txt_search;
     IBOutlet NSButton *btn_search;
+    IBOutlet NSButton *btn_clear;
     IBOutlet NSScrollView *scrl_view;
 }
 
 - (IBAction)searchClicked:(id)sender;
+- (IBAction)clearClicked:(id)sender;
 
 @end

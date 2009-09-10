@@ -31,4 +31,8 @@
     [txt_publisher selectItemAtIndex:0];
 }
 
+
+- (IBAction) clearClicked:(id)sender {
+      [txt_search setStringValue:@""];
+}
 @end
