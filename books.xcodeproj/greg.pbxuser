@@ -73,13 +73,37 @@
 					16,
 					200,
 					50,
-					281,
+					382,
 				);
 				PBXFileTableDataSourceColumnsKey = (
 					PBXSymbolsDataSource_SymbolTypeIconID,
 					PBXSymbolsDataSource_SymbolNameID,
 					PBXSymbolsDataSource_SymbolTypeID,
 					PBXSymbolsDataSource_ReferenceNameID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.XCSCMDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					20,
+					418,
+					20,
+					48.16259765625,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_SCM_ColumnID,
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
 				);
 			};
 			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
@@ -396,7 +420,7 @@
 	29B97316FDCFA39411CA2CEA /* main.m */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {620, 401}}";
-			sepNavSelRange = "{191, 0}";
+			sepNavSelRange = "{214, 0}";
 			sepNavVisRange = "{0, 253}";
 		};
 	};
@@ -449,15 +473,15 @@
 	37365592101CCC3C00709C8F /* BooksWindowController.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {620, 401}}";
-			sepNavSelRange = "{451, 0}";
-			sepNavVisRange = "{0, 530}";
+			sepNavSelRange = "{238, 18}";
+			sepNavVisRange = "{0, 601}";
 		};
 	};
 	37365593101CCC3C00709C8F /* BooksWindowController.m */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1032, 574}}";
 			sepNavSelRange = "{1243, 0}";
-			sepNavVisRange = "{183, 1060}";
+			sepNavVisRange = "{250, 993}";
 		};
 	};
 	3736559B101CCE8600709C8F /* PBXTextBookmark */ = {
@@ -1337,7 +1361,7 @@
 			"Xdesign Model Editor Bookmark Key" = {
 				UIContextForDetailArea = {
 					_indexOfSelectedPane = 0;
-					_indexOfSelectedView = 1;
+					_indexOfSelectedView = 0;
 				};
 				UIContextForEntityArea = {
 					_indexOfSelectedView = 0;
@@ -1358,7 +1382,7 @@
 					chosenTableWidths = (
 						103.000000,
 						22.000000,
-						92.080078,
+						70.080078,
 					);
 				};
 				UIContextForLayoutManager = {
@@ -1368,8 +1392,8 @@
 						_percentageOfCollapsedView = 0;
 						isCollapsed = yes;
 						sizes = (
-							"{{0, 0}, {745, 218}}",
-							"{{750, 0}, {392, 218}}",
+							"{{0, 0}, {677, 220}}",
+							"{{682, 0}, {356, 220}}",
 						);
 					};
 					diagramSplitGeometry = {
@@ -1378,8 +1402,8 @@
 						_percentageOfCollapsedView = 0;
 						isCollapsed = yes;
 						sizes = (
-							"{{0, 0}, {1142, 220}}",
-							"{{0, 225}, {1142, 142}}",
+							"{{0, 0}, {1038, 220}}",
+							"{{0, 225}, {1038, 385}}",
 						);
 					};
 					tableSplitGeometry = {
@@ -1388,8 +1412,8 @@
 						_percentageOfCollapsedView = 0;
 						isCollapsed = yes;
 						sizes = (
-							"{{0, 0}, {242, 218}}",
-							"{{247, 0}, {498, 218}}",
+							"{{0, 0}, {220, 220}}",
+							"{{225, 0}, {452, 220}}",
 						);
 					};
 				};
@@ -1478,7 +1502,7 @@
 					chosenTableWidthsPT = (
 						128.000000,
 						108.110840,
-						235.570801,
+						189.570801,
 					);
 					chosenTableWidthsRT = (
 						128.000000,
@@ -1486,7 +1510,7 @@
 					);
 				};
 				"xdesign model browser state key - shown/hidden" = 1;
-				"xdesign model diagram view visible rect key" = "{{-215, 277}, {1127, 127}}";
+				"xdesign model diagram view visible rect key" = "{{-163, 0}, {1023, 370}}";
 			};
 			sepNavWindowFrame = "{{114, 48}, {1038, 768}}";
 		};
@@ -3518,6 +3542,34 @@
 		rType = 0;
 		vrLen = 1060;
 		vrLoc = 183;
+	};
+	373752BA105EB25700718317 /* OverviewWindowController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {620, 401}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 246}";
+		};
+	};
+	373752BB105EB25700718317 /* OverviewWindowController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {620, 401}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 238}";
+		};
+	};
+	373752C4105EB6D500718317 /* SofiaApplication.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {620, 401}}";
+			sepNavSelRange = "{213, 0}";
+			sepNavVisRange = "{0, 225}";
+		};
+	};
+	373752C5105EB6D500718317 /* SofiaApplication.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {620, 401}}";
+			sepNavSelRange = "{351, 0}";
+			sepNavVisRange = "{0, 516}";
+		};
 	};
 	8D1107260486CEB800E47090 /* Sofia */ = {
 		activeExec = 0;
