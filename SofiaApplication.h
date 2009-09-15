@@ -9,8 +9,19 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface SofiaApplication : NSApplication {
-
+@interface SofiaApplication : NSObject {
+	
+	IBOutlet NSWindow *window;
+	
+	NSPersistentStoreCoordinator *persistentStoreCoordinator;
+	NSManagedObjectModel *managedObjectModel;
+	NSManagedObjectContext *managedObjectContext;
 }
+
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator;
+- (NSManagedObjectModel *)managedObjectModel;
+- (NSManagedObjectContext *)managedObjectContext;
+
+- (IBAction)saveAction:sender;
 
 @end
