@@ -122,6 +122,7 @@
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
+    //TODO: write a method that cleans up the current string before assinging it!!
     if ([self currentProperty] == pTitle){
 	[self setBookTitle:currentStringValue];
     }

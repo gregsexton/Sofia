@@ -10,16 +10,36 @@
 #import <GData/GDataBooks.h>
 
 @interface BooksWindowController : NSObjectController {
-    IBOutlet NSComboBox *txt_title;
-    IBOutlet NSComboBox *txt_author;
-    IBOutlet NSComboBox *txt_publisher;
     IBOutlet NSTextField *txt_search;
-    IBOutlet NSButton *btn_search;
-    IBOutlet NSButton *btn_clear;
-    IBOutlet NSScrollView *scrl_view;
+
+    IBOutlet NSTextField    *txt_isbn10;
+    IBOutlet NSTextField    *txt_isbn13;
+    IBOutlet NSComboBox	    *txt_title;
+    IBOutlet NSComboBox     *txt_titleLong;
+    IBOutlet NSComboBox     *txt_author;
+    IBOutlet NSComboBox     *txt_publisher;
+    IBOutlet NSTextField    *txt_edition;
+    IBOutlet NSComboBox     *txt_physicalDescrip;
+    IBOutlet NSTextField    *txt_dewey;
+    IBOutlet NSTextField    *txt_deweyNormal;
+    IBOutlet NSTextField    *txt_lccNumber;
+    IBOutlet NSTextField    *txt_language;
+
+    IBOutlet NSTextField    *txt_summary;
+    IBOutlet NSTextField    *txt_notes;
+    IBOutlet NSTextField    *txt_awards;
+    IBOutlet NSTextField    *txt_urls;
+
+    IBOutlet NSButton	    *btn_search;
+    IBOutlet NSButton 	    *btn_clear;
+    IBOutlet NSButton 	    *btn_save;
+    IBOutlet NSButton 	    *btn_cancel;
+
+    IBOutlet NSWindow *window;
 }
 
 - (IBAction)searchClicked:(id)sender;
 - (IBAction)clearClicked:(id)sender;
+- (IBAction)cancelClicked:(id)sender;
 
 @end

@@ -7,8 +7,15 @@
 //
 
 #import "SofiaApplication.h"
+#import "BooksWindowController.h"
 
 @implementation SofiaApplication
+
+- (void) awakeFromNib {
+    [tableView setDoubleAction:@selector(doubleClickAction:)];
+    [tableView setTarget:self]; 
+}
+
 
 /**
  Returns the support folder for the application, used to store the Core Data
@@ -135,7 +142,6 @@
     if (managedObjectContext != nil) {
         if ([managedObjectContext commitEditing]) {
             if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-				
                 // This error handling simply presents error information in a panel with an 
                 // "Ok" button, which does not include any attempt at error recovery (meaning, 
                 // attempting to fix the error.)  As a result, this implementation will 
@@ -144,28 +150,21 @@
 				
                 // Typically, this process should be altered to include application-specific 
                 // recovery steps.  
-				
                 BOOL errorResult = [[NSApplication sharedApplication] presentError:error];
-				
                 if (errorResult == YES) {
                     reply = NSTerminateCancel;
                 } 
-				
                 else {
-					
                     int alertReturn = NSRunAlertPanel(nil, @"Could not save changes while quitting. Quit anyway?" , @"Quit anyway", @"Cancel", nil);
                     if (alertReturn == NSAlertAlternateReturn) {
                         reply = NSTerminateCancel;	
-                    }
+		    }
                 }
             }
-        } 
-        
-        else {
+        }else {
             reply = NSTerminateCancel;
         }
     }
-    
     return reply;
 }
 
@@ -182,5 +181,27 @@
     [super dealloc];
 }
 
+- (IBAction) doubleClickAction:(id)sender {
+    NSArray *arr = [arrayController selectedObjects];
+    BooksWindowController *detailWin = [[BooksWindowController alloc] init];
+    if (![NSBundle loadNibNamed:@"Detail" owner:detailWin]) {
+	NSLog(@"Error loading Nib!");
+    }
+} 
 
+- (IBAction) addRemoveClickAction:(id)sender {
+NSLog([NSString stringWithFormat:@"%d", [addRemoveButtons selectedSegment]]);
+    if ([addRemoveButtons selectedSegment] == 0){ //new book
+	BooksWindowController *detailWin = [[BooksWindowController alloc] init];
+	if (![NSBundle loadNibNamed:@"Detail" owner:detailWin]) {
+	    NSLog(@"Error loading Nib!");
+	}
+    }else{ //remove book
+NSLog([NSString stringWithFormat:@"%d", [arrayController selectionIndex]]);
+NSLog([NSString stringWithFormat:@"%d", [tableView selectedRow]]);
+	//TODO: are you sure you want to remove this book? msg box
+	[arrayController removeObjectAtArrangedObjectIndex:[arrayController selectionIndex]];
+	//[arrayController removeObject:[tableView selectedRow]
+    }
+}
 @end
