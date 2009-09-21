@@ -35,11 +35,19 @@
     IBOutlet NSButton 	    *btn_save;
     IBOutlet NSButton 	    *btn_cancel;
 
-    IBOutlet NSWindow *window;
+    IBOutlet NSWindow	    *window;
+
+    NSManagedObject	    *obj;
 }
+
+@property (nonatomic,copy) NSManagedObject *obj;
 
 - (IBAction)searchClicked:(id)sender;
 - (IBAction)clearClicked:(id)sender;
 - (IBAction)cancelClicked:(id)sender;
+- (IBAction)saveClicked:(id)sender;
 
+- (void) updateUIFromManagedObject;
+- (void) updateManagedObjectFromUI;
+- (id)initWithManagedObject:(NSManagedObject*)object;
 @end

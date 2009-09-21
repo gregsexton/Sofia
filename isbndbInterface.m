@@ -15,6 +15,7 @@
 @synthesize bookISBN13;
 @synthesize bookTitle;
 @synthesize bookTitleLong;
+@synthesize bookAuthorsText;
 @synthesize bookPublisher;
 @synthesize bookEdition;
 @synthesize bookLanguage;
@@ -60,6 +61,10 @@
     }
     if ( [elementName isEqualToString:@"TitleLong"] ) {
 	[self setCurrentProperty:pTitleLong]; 
+        return;
+    }
+    if ( [elementName isEqualToString:@"AuthorsText"] ) {
+	[self setCurrentProperty:pAuthorText]; 
         return;
     }
     if ( [elementName isEqualToString:@"PublisherText"] ) {
@@ -128,6 +133,9 @@
     }
     if ([self currentProperty] == pTitleLong){
 	[self setBookTitleLong:currentStringValue];
+    }
+    if ([self currentProperty] == pAuthorText){
+	[self setBookAuthorsText:currentStringValue];
     }
     if ([self currentProperty] == pPublisher){
 	[self setBookPublisher:currentStringValue];

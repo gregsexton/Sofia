@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="32"/>
+			<integer value="4"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -18,7 +18,7 @@
 		<object class="NSMutableArray" key="IBDocument.RootObjects" id="1000">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSCustomObject" id="1001">
-				<string key="NSClassName">NSObject</string>
+				<string key="NSClassName">BooksWindowController</string>
 			</object>
 			<object class="NSCustomObject" id="1003">
 				<string key="NSClassName">FirstResponder</string>
@@ -139,21 +139,21 @@
 											<int key="CICount">4</int>
 											<string key="CIVector">{{0, 0}, {300, 300}}</string>
 										</object>
-										<real value="0.000000e+00" key="CI_inputTime"/>
-										<real value="0.000000e+00" key="CI_inputAngle"/>
+										<integer value="0" key="CI_inputTime" id="8"/>
+										<reference key="CI_inputAngle" ref="8"/>
 										<real value="1.000000e+02" key="CI_inputRadius"/>
 										<bool key="CIEnabled">YES</bool>
 									</object>
 									<real value="0.000000e+00" key="startProgress"/>
 									<string key="subtype">fromTop</string>
-									<integer value="0" key="transitionFlags" id="8"/>
+									<reference key="transitionFlags" ref="8"/>
 									<string key="type">fade</string>
 									<reference key="autoreverses" ref="8"/>
 									<real value="0.000000e+00" key="beginTime"/>
 									<real value="0.000000e+00" key="duration"/>
 									<string key="fillMode">removed</string>
 									<real value="0.000000e+00" key="frameInterval"/>
-									<integer value="1" key="removedOnCompletion" id="9"/>
+									<integer value="1" key="removedOnCompletion"/>
 									<real value="0.000000e+00" key="repeatCount"/>
 									<real value="0.000000e+00" key="repeatDuration"/>
 									<real value="1.000000e+00" key="speed"/>
@@ -1145,10 +1145,6 @@
 				<string key="NSScreenRect">{{0, 0}, {1280, 832}}</string>
 				<string key="NSMaxSize">{3.40282e+38, 3.40282e+38}</string>
 			</object>
-			<object class="NSObjectController" id="901713539">
-				<bool key="NSEditable">YES</bool>
-				<object class="_NSManagedProxy" key="_NSManagedProxy"/>
-			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<object class="NSMutableArray" key="connectionRecords">
@@ -1163,203 +1159,211 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">txt_search</string>
-						<reference key="source" ref="901713539"/>
-						<reference key="destination" ref="733424972"/>
+						<string key="label">btn_cancel</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="1017926415"/>
 					</object>
-					<int key="connectionID">39</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">clearClicked:</string>
-						<reference key="source" ref="901713539"/>
-						<reference key="destination" ref="440997084"/>
-					</object>
-					<int key="connectionID">40</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">searchClicked:</string>
-						<reference key="source" ref="901713539"/>
-						<reference key="destination" ref="994738347"/>
-					</object>
-					<int key="connectionID">41</int>
+					<int key="connectionID">127</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">btn_clear</string>
-						<reference key="source" ref="901713539"/>
+						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="440997084"/>
 					</object>
-					<int key="connectionID">42</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">btn_search</string>
-						<reference key="source" ref="901713539"/>
-						<reference key="destination" ref="994738347"/>
-					</object>
-					<int key="connectionID">43</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">txt_author</string>
-						<reference key="source" ref="901713539"/>
-						<reference key="destination" ref="513167707"/>
-					</object>
-					<int key="connectionID">44</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">txt_publisher</string>
-						<reference key="source" ref="901713539"/>
-						<reference key="destination" ref="942235788"/>
-					</object>
-					<int key="connectionID">45</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">txt_title</string>
-						<reference key="source" ref="901713539"/>
-						<reference key="destination" ref="754301693"/>
-					</object>
-					<int key="connectionID">46</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">window</string>
-						<reference key="source" ref="901713539"/>
-						<reference key="destination" ref="574505061"/>
-					</object>
-					<int key="connectionID">47</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">btn_cancel</string>
-						<reference key="source" ref="901713539"/>
-						<reference key="destination" ref="1017926415"/>
-					</object>
-					<int key="connectionID">52</int>
+					<int key="connectionID">128</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">btn_save</string>
-						<reference key="source" ref="901713539"/>
+						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="95542696"/>
 					</object>
-					<int key="connectionID">53</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">cancelClicked:</string>
-						<reference key="source" ref="901713539"/>
-						<reference key="destination" ref="1017926415"/>
-					</object>
-					<int key="connectionID">54</int>
+					<int key="connectionID">129</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">txt_isbn10</string>
-						<reference key="source" ref="901713539"/>
-						<reference key="destination" ref="489196324"/>
+						<string key="label">btn_search</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="994738347"/>
 					</object>
-					<int key="connectionID">67</int>
+					<int key="connectionID">130</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">txt_isbn13</string>
-						<reference key="source" ref="901713539"/>
-						<reference key="destination" ref="710541245"/>
+						<string key="label">txt_author</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="513167707"/>
 					</object>
-					<int key="connectionID">68</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">txt_titleLong</string>
-						<reference key="source" ref="901713539"/>
-						<reference key="destination" ref="353547637"/>
-					</object>
-					<int key="connectionID">69</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">txt_awards</string>
-						<reference key="source" ref="901713539"/>
-						<reference key="destination" ref="578477192"/>
-					</object>
-					<int key="connectionID">114</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">txt_summary</string>
-						<reference key="source" ref="901713539"/>
-						<reference key="destination" ref="712303899"/>
-					</object>
-					<int key="connectionID">115</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">txt_notes</string>
-						<reference key="source" ref="901713539"/>
-						<reference key="destination" ref="104038083"/>
-					</object>
-					<int key="connectionID">116</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">txt_urls</string>
-						<reference key="source" ref="901713539"/>
-						<reference key="destination" ref="815738882"/>
-					</object>
-					<int key="connectionID">117</int>
+					<int key="connectionID">131</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">txt_dewey</string>
-						<reference key="source" ref="901713539"/>
+						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="832354608"/>
 					</object>
-					<int key="connectionID">118</int>
+					<int key="connectionID">132</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">txt_deweyNormal</string>
-						<reference key="source" ref="901713539"/>
+						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="526068104"/>
 					</object>
-					<int key="connectionID">119</int>
+					<int key="connectionID">133</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">txt_edition</string>
-						<reference key="source" ref="901713539"/>
+						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="83225185"/>
 					</object>
-					<int key="connectionID">120</int>
+					<int key="connectionID">134</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">txt_isbn10</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="489196324"/>
+					</object>
+					<int key="connectionID">135</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">txt_isbn13</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="710541245"/>
+					</object>
+					<int key="connectionID">136</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">txt_language</string>
-						<reference key="source" ref="901713539"/>
+						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="891490749"/>
 					</object>
-					<int key="connectionID">121</int>
+					<int key="connectionID">137</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">txt_lccNumber</string>
-						<reference key="source" ref="901713539"/>
+						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="524575440"/>
 					</object>
-					<int key="connectionID">122</int>
+					<int key="connectionID">138</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">txt_physicalDescrip</string>
-						<reference key="source" ref="901713539"/>
+						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="597105528"/>
 					</object>
-					<int key="connectionID">123</int>
+					<int key="connectionID">139</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">txt_publisher</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="942235788"/>
+					</object>
+					<int key="connectionID">140</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">txt_search</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="733424972"/>
+					</object>
+					<int key="connectionID">141</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">txt_title</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="754301693"/>
+					</object>
+					<int key="connectionID">142</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">txt_titleLong</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="353547637"/>
+					</object>
+					<int key="connectionID">143</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">window</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="574505061"/>
+					</object>
+					<int key="connectionID">144</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">cancelClicked:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="1017926415"/>
+					</object>
+					<int key="connectionID">145</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">clearClicked:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="440997084"/>
+					</object>
+					<int key="connectionID">146</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">searchClicked:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="994738347"/>
+					</object>
+					<int key="connectionID">147</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">txt_awards</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="578477192"/>
+					</object>
+					<int key="connectionID">149</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">txt_notes</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="104038083"/>
+					</object>
+					<int key="connectionID">150</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">txt_summary</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="712303899"/>
+					</object>
+					<int key="connectionID">151</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">txt_urls</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="815738882"/>
+					</object>
+					<int key="connectionID">152</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">saveClicked:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="95542696"/>
+					</object>
+					<int key="connectionID">153</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1455,11 +1459,6 @@
 						<int key="objectID">22</int>
 						<reference key="object" ref="361991608"/>
 						<reference key="parent" ref="440997084"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">24</int>
-						<reference key="object" ref="901713539"/>
-						<reference key="parent" ref="1002"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">28</int>
@@ -2094,8 +2093,6 @@
 					<string>20.IBPluginDependency</string>
 					<string>21.IBPluginDependency</string>
 					<string>22.IBPluginDependency</string>
-					<string>24.CustomClassName</string>
-					<string>24.IBPluginDependency</string>
 					<string>28.IBPluginDependency</string>
 					<string>28.IBViewIntegration.shadowBlurRadius</string>
 					<string>28.IBViewIntegration.shadowColor</string>
@@ -2196,26 +2193,24 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>BooksWindowController</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<real value="0.000000e+00"/>
+					<reference ref="8"/>
 					<reference ref="232542389"/>
-					<real value="0.000000e+00"/>
-					<real value="0.000000e+00"/>
+					<reference ref="8"/>
+					<reference ref="8"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{312, 102}, {594, 619}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{312, 102}, {594, 619}}</string>
-					<reference ref="9"/>
+					<real value="1.000000e+00"/>
 					<string>{{33, 99}, {480, 360}}</string>
 					<string>{3.40282e+38, 3.40282e+38}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<real value="0.000000e+00"/>
+					<reference ref="8"/>
 					<reference ref="232542389"/>
-					<real value="0.000000e+00"/>
-					<real value="0.000000e+00"/>
+					<reference ref="8"/>
+					<reference ref="8"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2287,7 +2282,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">123</int>
+			<int key="maxID">153</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2301,10 +2296,12 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cancelClicked:</string>
 							<string>clearClicked:</string>
+							<string>saveClicked:</string>
 							<string>searchClicked:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>

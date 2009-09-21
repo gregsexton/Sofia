@@ -15,6 +15,7 @@
     NSString *bookISBN13;
     NSString *bookTitle;
     NSString *bookTitleLong;
+    NSString *bookAuthorsText;
     NSString *bookPublisher;
     NSString *bookEdition;
     NSString *bookLanguage;
@@ -32,7 +33,7 @@
     NSMutableString *currentStringValue;
     int currentProperty;
 
-    enum properties {pNoProperty, pTitle, pTitleLong, pPublisher, pSummary, pNotes, pUrls, pAwards, pAuthor, pSubject};
+    enum properties {pNoProperty, pTitle, pTitleLong, pAuthorText, pPublisher, pSummary, pNotes, pUrls, pAwards, pAuthor, pSubject};
 
 }
 
@@ -40,6 +41,7 @@
 @property (nonatomic,copy) NSString *bookISBN13;
 @property (nonatomic,copy) NSString *bookTitle;
 @property (nonatomic,copy) NSString *bookTitleLong;
+@property (nonatomic,copy) NSString *bookAuthorsText;
 @property (nonatomic,copy) NSString *bookPublisher;
 @property (nonatomic,copy) NSString *bookEdition;
 @property (nonatomic,copy) NSString *bookLanguage;

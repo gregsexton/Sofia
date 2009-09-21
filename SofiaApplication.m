@@ -182,26 +182,30 @@
 }
 
 - (IBAction) doubleClickAction:(id)sender {
-    NSArray *arr = [arrayController selectedObjects];
-    BooksWindowController *detailWin = [[BooksWindowController alloc] init];
+    NSManagedObject *obj = [[arrayController selectedObjects] lastObject];
+
+    BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj];
     if (![NSBundle loadNibNamed:@"Detail" owner:detailWin]) {
 	NSLog(@"Error loading Nib!");
     }
 } 
 
 - (IBAction) addRemoveClickAction:(id)sender {
-NSLog([NSString stringWithFormat:@"%d", [addRemoveButtons selectedSegment]]);
     if ([addRemoveButtons selectedSegment] == 0){ //new book
-	BooksWindowController *detailWin = [[BooksWindowController alloc] init];
+	NSManagedObject *obj = [[NSManagedObject alloc] initWithEntity:[[managedObjectModel entitiesByName] objectForKey:@"book"]
+							insertIntoManagedObjectContext:managedObjectContext];
+	[arrayController addObject:obj];
+
+	BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj];
 	if (![NSBundle loadNibNamed:@"Detail" owner:detailWin]) {
 	    NSLog(@"Error loading Nib!");
 	}
     }else{ //remove book
-NSLog([NSString stringWithFormat:@"%d", [arrayController selectionIndex]]);
-NSLog([NSString stringWithFormat:@"%d", [tableView selectedRow]]);
-	//TODO: are you sure you want to remove this book? msg box
-	[arrayController removeObjectAtArrangedObjectIndex:[arrayController selectionIndex]];
-	//[arrayController removeObject:[tableView selectedRow]
+	int alertReturn = NSRunAlertPanel(@"Remove Book?", @"Are you sure you wish to remove this book?" , @"No", @"Yes", nil);
+	NSLog([NSString stringWithFormat:@"%d", alertReturn]);
+	if (alertReturn == NSAlertAlternateReturn){
+	    [arrayController removeObjectAtArrangedObjectIndex:[arrayController selectionIndex]];
+	}
     }
 }
 @end

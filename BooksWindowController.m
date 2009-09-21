@@ -11,20 +11,90 @@
 
 @implementation BooksWindowController
 
+@synthesize obj;
+
 - (id)init {
     self = [super init];
     return self;
 }
 
-- (void) awakeFromNib {
-    [window makeKeyAndOrderFront:self];
+- (id)initWithManagedObject:(NSManagedObject*)object {
+    self = [super init];
+    obj = object;
+    return self;
 }
 
-- (IBAction) searchClicked:(id)sender {
+- (void) awakeFromNib {
+    [window makeKeyAndOrderFront:self];
+    if (obj != nil){
+	[self updateUIFromManagedObject];
+    }
+}
+
+- (void) updateUIFromManagedObject {
+    if (obj != nil){
+	if([obj valueForKey:@"isbn10"] != nil){
+	    [txt_isbn10 setStringValue:[obj valueForKey:@"isbn10"]];
+	}
+	if([obj valueForKey:@"isbn13"] != nil){
+	    [txt_isbn13 setStringValue:[obj valueForKey:@"isbn13"]];
+	}
+	if([obj valueForKey:@"edition"] != nil){
+	    [txt_edition setStringValue:[obj valueForKey:@"edition"]];
+	}
+	if([obj valueForKey:@"dewey"] != nil){
+	    [txt_dewey setStringValue:[obj valueForKey:@"dewey"]];
+	}
+	if([obj valueForKey:@"dewey_normalised"] != nil){
+	    [txt_deweyNormal setStringValue:[obj valueForKey:@"dewey_normalised"]];
+	}
+	if([obj valueForKey:@"lccNumber"] != nil){
+	    [txt_lccNumber setStringValue:[obj valueForKey:@"lccNumber"]];
+	}
+	if([obj valueForKey:@"language"] != nil){
+	    [txt_language setStringValue:[obj valueForKey:@"language"]];
+	}
+
+	if([obj valueForKey:@"summary"] != nil){
+	    [txt_summary setStringValue:[obj valueForKey:@"summary"]];
+	}
+	if([obj valueForKey:@"notes"] != nil){
+	    [txt_notes setStringValue:[obj valueForKey:@"notes"]];
+	}
+	if([obj valueForKey:@"awards"] != nil){
+	    [txt_awards setStringValue:[obj valueForKey:@"awards"]];
+	}
+	if([obj valueForKey:@"urls"] != nil){
+	    [txt_urls setStringValue:[obj valueForKey:@"urls"]];
+	}
+
+	if([obj valueForKey:@"title"] != nil){
+	    [txt_title addItemWithObjectValue:[[[obj valueForKey:@"title"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
+	    [txt_title selectItemAtIndex:0];
+	}
+	if([obj valueForKey:@"titleLong"] != nil){
+	    [txt_titleLong addItemWithObjectValue:[[[obj valueForKey:@"titleLong"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
+	    [txt_titleLong selectItemAtIndex:0];
+	}
+	if([obj valueForKey:@"publisherText"] != nil){
+	    [txt_publisher addItemWithObjectValue:[[[obj valueForKey:@"publisherText"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
+	    [txt_publisher selectItemAtIndex:0];
+	}
+	if([obj valueForKey:@"authorText"] != nil){
+	    [txt_author addItemWithObjectValue:[[[obj valueForKey:@"authorText"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
+	    [txt_author selectItemAtIndex:0];
+	}
+	if([obj valueForKey:@"physicalDescription"] != nil){
+	    [txt_physicalDescrip addItemWithObjectValue:[[[obj valueForKey:@"physicalDescription"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
+	    [txt_physicalDescrip selectItemAtIndex:0];
+	}
+    }
+}
+
+- (void) updateUIFromISBNDb {
     isbndbInterface *isbndb = [[isbndbInterface alloc] init];
     [isbndb searchISBN:[txt_search stringValue]];
 
-    //TODO: refactor into updateUI method
     [txt_isbn10 setStringValue:[isbndb bookISBN10]];
     [txt_isbn13 setStringValue:[isbndb bookISBN13]];
     [txt_edition setStringValue:[isbndb bookEdition]];
@@ -41,8 +111,35 @@
     [txt_title addItemWithObjectValue:[[[isbndb bookTitle] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
     [txt_titleLong addItemWithObjectValue:[[[isbndb bookTitleLong] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
     [txt_publisher addItemWithObjectValue:[[[isbndb bookPublisher] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
-    [txt_author addItemWithObjectValue:[[[isbndb bookISBN13] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
+    [txt_author addItemWithObjectValue:[[[isbndb bookAuthorsText] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
     [txt_physicalDescrip addItemWithObjectValue:[[[isbndb bookPhysicalDescrip] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
+
+}
+
+- (void) updateManagedObjectFromUI {
+    if (obj != nil){
+	//TODO: wrap these in checks?
+	[obj setValue:[txt_isbn10 stringValue] forKey:@"isbn10"];
+	[obj setValue:[txt_isbn13 stringValue] forKey:@"isbn13"];
+	[obj setValue:[txt_author stringValue] forKey:@"authorText"];
+	[obj setValue:[txt_awards stringValue] forKey:@"awards"];
+	[obj setValue:[txt_dewey stringValue] forKey:@"dewey"];
+	[obj setValue:[txt_deweyNormal stringValue] forKey:@"dewey_normalised"];
+	[obj setValue:[txt_edition stringValue] forKey:@"edition"];
+	[obj setValue:[txt_language stringValue] forKey:@"language"];
+	[obj setValue:[txt_lccNumber stringValue] forKey:@"lccNumber"];
+	[obj setValue:[txt_notes stringValue] forKey:@"notes"];
+	[obj setValue:[txt_physicalDescrip stringValue] forKey:@"physicalDescription"];
+	[obj setValue:[txt_publisher stringValue] forKey:@"publisherText"];
+	[obj setValue:[txt_summary stringValue] forKey:@"summary"];
+	[obj setValue:[txt_title stringValue] forKey:@"title"];
+	[obj setValue:[txt_titleLong stringValue] forKey:@"titleLong"];
+	[obj setValue:[txt_urls stringValue] forKey:@"urls"];
+    }
+}
+
+- (IBAction) searchClicked:(id)sender {
+    [self updateUIFromISBNDb];
 
     [txt_title selectItemAtIndex:0];
     [txt_titleLong selectItemAtIndex:0];
@@ -51,6 +148,10 @@
     [txt_physicalDescrip selectItemAtIndex:0];
 }
 
+- (IBAction)saveClicked:(id)sender {
+    [self updateManagedObjectFromUI];
+    [window close];
+}
 
 - (IBAction) clearClicked:(id)sender {
     [txt_search setStringValue:@""];
