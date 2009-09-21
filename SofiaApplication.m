@@ -155,7 +155,8 @@
                     reply = NSTerminateCancel;
                 } 
                 else {
-                    int alertReturn = NSRunAlertPanel(nil, @"Could not save changes while quitting. Quit anyway?" , @"Quit anyway", @"Cancel", nil);
+                    int alertReturn = NSRunAlertPanel(nil, @"Could not save changes while quitting. Quit anyway?",
+						      @"Quit anyway", @"Cancel", nil);
                     if (alertReturn == NSAlertAlternateReturn) {
                         reply = NSTerminateCancel;	
 		    }
@@ -182,7 +183,8 @@
 }
 
 - (IBAction) doubleClickAction:(id)sender {
-    NSManagedObject *obj = [[arrayController selectedObjects] lastObject];
+    //use the first object if multiple are selected
+    NSManagedObject *obj = [[arrayController selectedObjects] objectAtIndex:0];
 
     BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj];
     if (![NSBundle loadNibNamed:@"Detail" owner:detailWin]) {
@@ -204,8 +206,18 @@
 	int alertReturn = NSRunAlertPanel(@"Remove Book?", @"Are you sure you wish to remove this book?" , @"No", @"Yes", nil);
 	NSLog([NSString stringWithFormat:@"%d", alertReturn]);
 	if (alertReturn == NSAlertAlternateReturn){
-	    [arrayController removeObjectAtArrangedObjectIndex:[arrayController selectionIndex]];
+	    [arrayController remove:self];
 	}
     }
+}
+
+- (IBAction) aboutClickAction:(id)sender {
+	//TODO: use the info.plist file.
+	NSDictionary *aboutDict = [NSDictionary dictionaryWithObjectsAndKeys:
+				@"Sofia", @"ApplicationName", 
+				@"0.1.0", @"Version", 
+				@"Greg Sexton 2009", @"Copyright", 
+				@"0.1", @"ApplicationVersion", nil];
+	[[NSApplication sharedApplication] orderFrontStandardAboutPanelWithOptions:aboutDict];
 }
 @end

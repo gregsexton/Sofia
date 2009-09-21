@@ -13,8 +13,9 @@
 	
 	IBOutlet NSWindow *window;
 	IBOutlet NSTableView *tableView;
-	IBOutlet NSSegmentedControl *addRemoveButtons;
 	IBOutlet NSArrayController *arrayController;
+	IBOutlet NSApplication *theApplication;
+	IBOutlet NSSegmentedControl *addRemoveButtons;
 	
 	NSPersistentStoreCoordinator *persistentStoreCoordinator;
 	NSManagedObjectModel *managedObjectModel;
@@ -25,8 +26,9 @@
 - (NSManagedObjectModel *)managedObjectModel;
 - (NSManagedObjectContext *)managedObjectContext;
 
-- (IBAction)saveAction:sender;
+- (IBAction) saveAction:sender;
 - (IBAction) doubleClickAction:(id)sender;
-- (IBAction)addRemoveClickAction:(id)sender;
+- (IBAction) addRemoveClickAction:(id)sender;
+- (IBAction) aboutClickAction:(id)sender;
 
 @end

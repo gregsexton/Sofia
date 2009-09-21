@@ -69,23 +69,28 @@
 	}
 
 	if([obj valueForKey:@"title"] != nil){
-	    [txt_title addItemWithObjectValue:[[[obj valueForKey:@"title"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
+	    [txt_title addItemWithObjectValue:[[[obj valueForKey:@"title"] 
+		       stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
 	    [txt_title selectItemAtIndex:0];
 	}
 	if([obj valueForKey:@"titleLong"] != nil){
-	    [txt_titleLong addItemWithObjectValue:[[[obj valueForKey:@"titleLong"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
+	    [txt_titleLong addItemWithObjectValue:[[[obj valueForKey:@"titleLong"] 
+			   stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
 	    [txt_titleLong selectItemAtIndex:0];
 	}
 	if([obj valueForKey:@"publisherText"] != nil){
-	    [txt_publisher addItemWithObjectValue:[[[obj valueForKey:@"publisherText"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
+	    [txt_publisher addItemWithObjectValue:[[[obj valueForKey:@"publisherText"] 
+			   stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
 	    [txt_publisher selectItemAtIndex:0];
 	}
 	if([obj valueForKey:@"authorText"] != nil){
-	    [txt_author addItemWithObjectValue:[[[obj valueForKey:@"authorText"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
+	    [txt_author addItemWithObjectValue:[[[obj valueForKey:@"authorText"] 
+			stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
 	    [txt_author selectItemAtIndex:0];
 	}
 	if([obj valueForKey:@"physicalDescription"] != nil){
-	    [txt_physicalDescrip addItemWithObjectValue:[[[obj valueForKey:@"physicalDescription"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
+	    [txt_physicalDescrip addItemWithObjectValue:[[[obj valueForKey:@"physicalDescription"] 
+				 stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
 	    [txt_physicalDescrip selectItemAtIndex:0];
 	}
     }
@@ -113,7 +118,6 @@
     [txt_publisher addItemWithObjectValue:[[[isbndb bookPublisher] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
     [txt_author addItemWithObjectValue:[[[isbndb bookAuthorsText] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
     [txt_physicalDescrip addItemWithObjectValue:[[[isbndb bookPhysicalDescrip] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
-
 }
 
 - (void) updateManagedObjectFromUI {
