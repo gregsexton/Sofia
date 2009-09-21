@@ -8,7 +8,8 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="4"/>
+			<integer value="159"/>
+			<integer value="3"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -30,7 +31,7 @@
 				<int key="NSWindowStyleMask">15</int>
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{335, 131}, {594, 619}}</string>
-				<int key="NSWTFlags">1946157056</int>
+				<int key="NSWTFlags">-1275068416</int>
 				<string key="NSWindowTitle">Book Information</string>
 				<string key="NSWindowClass">NSWindow</string>
 				<nil key="NSViewClass"/>
@@ -48,7 +49,7 @@
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="950879075">
 								<int key="NSCellFlags">-1804468671</int>
-								<int key="NSCellFlags2">272630784</int>
+								<int key="NSCellFlags2">268436480</int>
 								<string key="NSContents"/>
 								<object class="NSFont" key="NSSupport" id="85247258">
 									<string key="NSName">LucidaGrande</string>
@@ -1145,18 +1146,62 @@
 				<string key="NSScreenRect">{{0, 0}, {1280, 832}}</string>
 				<string key="NSMaxSize">{3.40282e+38, 3.40282e+38}</string>
 			</object>
+			<object class="NSUserDefaultsController" id="341985038">
+				<bool key="NSSharedInstance">YES</bool>
+			</object>
+			<object class="NSWindowTemplate" id="114394167">
+				<int key="NSWindowStyleMask">23</int>
+				<int key="NSWindowBacking">2</int>
+				<string key="NSWindowRect">{{196, 439}, {351, 71}}</string>
+				<int key="NSWTFlags">-1543503872</int>
+				<string key="NSWindowTitle">Download Progress</string>
+				<string key="NSWindowClass">NSPanel</string>
+				<nil key="NSViewClass"/>
+				<string key="NSWindowContentMaxSize">{351, 71}</string>
+				<string key="NSWindowContentMinSize">{351, 71}</string>
+				<object class="NSView" key="NSWindowView" id="62072405">
+					<reference key="NSNextResponder"/>
+					<int key="NSvFlags">256</int>
+					<object class="NSMutableArray" key="NSSubviews">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSProgressIndicator" id="203352166">
+							<reference key="NSNextResponder" ref="62072405"/>
+							<int key="NSvFlags">1292</int>
+							<object class="NSPSMatrix" key="NSDrawMatrix"/>
+							<string key="NSFrame">{{18, 16}, {315, 20}}</string>
+							<reference key="NSSuperview" ref="62072405"/>
+							<int key="NSpiFlags">16394</int>
+							<double key="NSMinValue">2.000000e+01</double>
+							<double key="NSMaxValue">1.000000e+02</double>
+						</object>
+						<object class="NSTextField" id="598861882">
+							<reference key="NSNextResponder" ref="62072405"/>
+							<int key="NSvFlags">268</int>
+							<string key="NSFrame">{{86, 44}, {178, 17}}</string>
+							<reference key="NSSuperview" ref="62072405"/>
+							<bool key="NSEnabled">YES</bool>
+							<object class="NSTextFieldCell" key="NSCell" id="56719671">
+								<int key="NSCellFlags">68288064</int>
+								<int key="NSCellFlags2">272630784</int>
+								<string key="NSContents">Downloading Information...</string>
+								<reference key="NSSupport" ref="85247258"/>
+								<reference key="NSControlView" ref="598861882"/>
+								<reference key="NSBackgroundColor" ref="655670657"/>
+								<reference key="NSTextColor" ref="143833624"/>
+							</object>
+						</object>
+					</object>
+					<string key="NSFrameSize">{351, 71}</string>
+					<reference key="NSSuperview"/>
+				</object>
+				<string key="NSScreenRect">{{0, 0}, {1280, 832}}</string>
+				<string key="NSMinSize">{351, 87}</string>
+				<string key="NSMaxSize">{351, 87}</string>
+			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<object class="NSMutableArray" key="connectionRecords">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">performClick:</string>
-						<reference key="source" ref="994738347"/>
-						<reference key="destination" ref="733424972"/>
-					</object>
-					<int key="connectionID">23</int>
-				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">btn_cancel</string>
@@ -1364,6 +1409,30 @@
 						<reference key="destination" ref="95542696"/>
 					</object>
 					<int key="connectionID">153</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">progressSheet</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="114394167"/>
+					</object>
+					<int key="connectionID">163</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">progIndicator</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="203352166"/>
+					</object>
+					<int key="connectionID">164</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">searchClicked:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="733424972"/>
+					</object>
+					<int key="connectionID">166</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2057,6 +2126,49 @@
 						<reference key="object" ref="771742703"/>
 						<reference key="parent" ref="815738882"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">156</int>
+						<reference key="object" ref="341985038"/>
+						<reference key="parent" ref="1002"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">158</int>
+						<reference key="object" ref="114394167"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="62072405"/>
+						</object>
+						<reference key="parent" ref="1002"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">159</int>
+						<reference key="object" ref="62072405"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="203352166"/>
+							<reference ref="598861882"/>
+						</object>
+						<reference key="parent" ref="114394167"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">160</int>
+						<reference key="object" ref="203352166"/>
+						<reference key="parent" ref="62072405"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">161</int>
+						<reference key="object" ref="598861882"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="56719671"/>
+						</object>
+						<reference key="parent" ref="62072405"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">162</int>
+						<reference key="object" ref="56719671"/>
+						<reference key="parent" ref="598861882"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -2086,7 +2198,23 @@
 					<string>13.IBPluginDependency</string>
 					<string>14.IBPluginDependency</string>
 					<string>15.IBPluginDependency</string>
+					<string>158.IBEditorWindowLastContentRect</string>
+					<string>158.IBPluginDependency</string>
+					<string>158.IBWindowTemplateEditedContentRect</string>
+					<string>158.NSWindowTemplate.visibleAtLaunch</string>
+					<string>158.windowTemplate.hasMaxSize</string>
+					<string>158.windowTemplate.hasMinSize</string>
+					<string>158.windowTemplate.maxSize</string>
+					<string>158.windowTemplate.minSize</string>
+					<string>159.IBPluginDependency</string>
 					<string>16.IBPluginDependency</string>
+					<string>160.IBPluginDependency</string>
+					<string>160.IBViewIntegration.shadowBlurRadius</string>
+					<string>160.IBViewIntegration.shadowColor</string>
+					<string>160.IBViewIntegration.shadowOffsetHeight</string>
+					<string>160.IBViewIntegration.shadowOffsetWidth</string>
+					<string>161.IBPluginDependency</string>
+					<string>162.IBPluginDependency</string>
 					<string>17.IBPluginDependency</string>
 					<string>18.IBPluginDependency</string>
 					<string>19.IBPluginDependency</string>
@@ -2186,6 +2314,22 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>{{424, 461}, {351, 71}}</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>{{424, 461}, {351, 71}}</string>
+					<integer value="0"/>
+					<integer value="1" id="5"/>
+					<reference ref="5"/>
+					<string>{351, 71}</string>
+					<string>{351, 71}</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<real value="0.000000e+00"/>
+					<reference ref="232542389"/>
+					<real value="0.000000e+00"/>
+					<real value="0.000000e+00"/>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2282,7 +2426,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">153</int>
+			<int key="maxID">166</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2315,6 +2459,8 @@
 							<string>btn_clear</string>
 							<string>btn_save</string>
 							<string>btn_search</string>
+							<string>progIndicator</string>
+							<string>progressSheet</string>
 							<string>txt_author</string>
 							<string>txt_awards</string>
 							<string>txt_dewey</string>
@@ -2340,6 +2486,8 @@
 							<string>NSButton</string>
 							<string>NSButton</string>
 							<string>NSButton</string>
+							<string>NSProgressIndicator</string>
+							<string>NSPanel</string>
 							<string>NSComboBox</string>
 							<string>NSTextField</string>
 							<string>NSTextField</string>

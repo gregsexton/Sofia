@@ -139,6 +139,12 @@
 }
 
 - (IBAction) searchClicked:(id)sender {
+    //TODO: animation does not start
+    [progIndicator setUsesThreadedAnimation:true];
+    [progIndicator startAnimation:self];
+    [NSApp beginSheet:progressSheet modalForWindow:window
+	   modalDelegate:self didEndSelector:NULL contextInfo:nil];
+    
     [self updateUIFromISBNDb];
 
     [txt_title selectItemAtIndex:0];
@@ -146,6 +152,10 @@
     [txt_author selectItemAtIndex:0];
     [txt_publisher selectItemAtIndex:0];
     [txt_physicalDescrip selectItemAtIndex:0];
+
+    [progIndicator stopAnimation:self];
+    [progressSheet orderOut:nil];
+    [NSApp endSheet:progressSheet];
 }
 
 - (IBAction)saveClicked:(id)sender {

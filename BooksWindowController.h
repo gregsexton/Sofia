@@ -36,6 +36,9 @@
     IBOutlet NSButton 	    *btn_cancel;
 
     IBOutlet NSWindow	    *window;
+    IBOutlet NSPanel	    *progressSheet;
+
+    IBOutlet NSProgressIndicator *progIndicator;
 
     NSManagedObject	    *obj;
 }

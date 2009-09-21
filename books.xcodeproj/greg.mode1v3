@@ -216,7 +216,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>373754C61067676800718317</string>
+						<string>373754DE1067F85600718317</string>
 						<key>history</key>
 						<array>
 							<string>3737549F106652FC00718317</string>
@@ -370,7 +370,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>373754C51067676800718317</string>
+										<string>373754DD1067F85600718317</string>
 										<key>history</key>
 										<array>
 											<string>373752621055B6BE00718317</string>
@@ -640,11 +640,11 @@
 		<string>3737544210652F5700718317</string>
 		<string>373752A41059287100718317</string>
 		<string>373752A51059287100718317</string>
-		<string>373655AF101CCE8600709C8F</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
 		<string>1C78EAAD065D492600B07095</string>
 		<string>373754A310669E7800718317</string>
+		<string>373655AF101CCE8600709C8F</string>
 	</array>
 	<key>WindowString</key>
 	<string>1351 158 889 675 1280 86 1024 768 </string>
@@ -663,8 +663,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -687,6 +685,8 @@
 							<string>407pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
