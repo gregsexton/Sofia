@@ -9,7 +9,7 @@
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<integer value="159"/>
-			<integer value="3"/>
+			<integer value="32"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -648,12 +648,12 @@
 											<object class="NSTextField" id="83225185">
 												<reference key="NSNextResponder" ref="362126797"/>
 												<int key="NSvFlags">268</int>
-												<string key="NSFrame">{{86, 239}, {79, 22}}</string>
+												<string key="NSFrame">{{86, 239}, {229, 22}}</string>
 												<reference key="NSSuperview" ref="362126797"/>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSTextFieldCell" key="NSCell" id="497325179">
 													<int key="NSCellFlags">-1804468671</int>
-													<int key="NSCellFlags2">71304192</int>
+													<int key="NSCellFlags2">4195328</int>
 													<string key="NSContents"/>
 													<reference key="NSSupport" ref="85247258"/>
 													<reference key="NSControlView" ref="83225185"/>
@@ -2317,18 +2317,18 @@
 					<string>{{424, 461}, {351, 71}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{424, 461}, {351, 71}}</string>
-					<integer value="0"/>
-					<integer value="1" id="5"/>
-					<reference ref="5"/>
+					<reference ref="8"/>
+					<real value="1.000000e+00" id="819716803"/>
+					<reference ref="819716803"/>
 					<string>{351, 71}</string>
 					<string>{351, 71}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<real value="0.000000e+00"/>
+					<reference ref="8"/>
 					<reference ref="232542389"/>
-					<real value="0.000000e+00"/>
-					<real value="0.000000e+00"/>
+					<reference ref="8"/>
+					<reference ref="8"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2346,7 +2346,7 @@
 					<string>{{312, 102}, {594, 619}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{312, 102}, {594, 619}}</string>
-					<real value="1.000000e+00"/>
+					<reference ref="819716803"/>
 					<string>{{33, 99}, {480, 360}}</string>
 					<string>{3.40282e+38, 3.40282e+38}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>

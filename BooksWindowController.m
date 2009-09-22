@@ -69,28 +69,23 @@
 	}
 
 	if([obj valueForKey:@"title"] != nil){
-	    [txt_title addItemWithObjectValue:[[[obj valueForKey:@"title"] 
-		       stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
+	    [txt_title addItemWithObjectValue:[obj valueForKey:@"title"]];
 	    [txt_title selectItemAtIndex:0];
 	}
 	if([obj valueForKey:@"titleLong"] != nil){
-	    [txt_titleLong addItemWithObjectValue:[[[obj valueForKey:@"titleLong"] 
-			   stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
+	    [txt_titleLong addItemWithObjectValue:[obj valueForKey:@"titleLong"]];
 	    [txt_titleLong selectItemAtIndex:0];
 	}
 	if([obj valueForKey:@"publisherText"] != nil){
-	    [txt_publisher addItemWithObjectValue:[[[obj valueForKey:@"publisherText"] 
-			   stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
+	    [txt_publisher addItemWithObjectValue:[obj valueForKey:@"publisherText"]];
 	    [txt_publisher selectItemAtIndex:0];
 	}
 	if([obj valueForKey:@"authorText"] != nil){
-	    [txt_author addItemWithObjectValue:[[[obj valueForKey:@"authorText"] 
-			stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
+	    [txt_author addItemWithObjectValue:[obj valueForKey:@"authorText"]];
 	    [txt_author selectItemAtIndex:0];
 	}
 	if([obj valueForKey:@"physicalDescription"] != nil){
-	    [txt_physicalDescrip addItemWithObjectValue:[[[obj valueForKey:@"physicalDescription"] 
-				 stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
+	    [txt_physicalDescrip addItemWithObjectValue:[obj valueForKey:@"physicalDescription"]];
 	    [txt_physicalDescrip selectItemAtIndex:0];
 	}
     }
@@ -113,11 +108,11 @@
     [txt_awards setStringValue:[isbndb bookAwards]];
     [txt_urls setStringValue:[isbndb bookUrls]];
 
-    [txt_title addItemWithObjectValue:[[[isbndb bookTitle] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
-    [txt_titleLong addItemWithObjectValue:[[[isbndb bookTitleLong] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
-    [txt_publisher addItemWithObjectValue:[[[isbndb bookPublisher] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
-    [txt_author addItemWithObjectValue:[[[isbndb bookAuthorsText] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
-    [txt_physicalDescrip addItemWithObjectValue:[[[isbndb bookPhysicalDescrip] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString]];
+    [txt_title addItemWithObjectValue:[isbndb bookTitle]];
+    [txt_titleLong addItemWithObjectValue:[isbndb bookTitleLong]];
+    [txt_publisher addItemWithObjectValue:[isbndb bookPublisher]];
+    [txt_author addItemWithObjectValue:[isbndb bookAuthorsText]];
+    [txt_physicalDescrip addItemWithObjectValue:[isbndb bookPhysicalDescrip]];
 }
 
 - (void) updateManagedObjectFromUI {
@@ -143,7 +138,6 @@
 }
 
 - (IBAction) searchClicked:(id)sender {
-    //TODO: animation does not start
     [progIndicator setUsesThreadedAnimation:true];
     [progIndicator startAnimation:self];
     [NSApp beginSheet:progressSheet modalForWindow:window

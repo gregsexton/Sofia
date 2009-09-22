@@ -73,7 +73,7 @@
     }
     if ( [elementName isEqualToString:@"Details"] ) {
 	[self setBookEdition:[attributeDict objectForKey:@"edition_info"]];
-	[self setBookLanguage:[attributeDict objectForKey:@"language"]];
+	[self setBookLanguage:[self cleanUpString:[attributeDict objectForKey:@"language"]]];
 	[self setBookPhysicalDescrip:[attributeDict objectForKey:@"physical_description_text"]];
 	[self setBookLCCNumber:[attributeDict objectForKey:@"lcc_number"]];
 	[self setBookDewey:[attributeDict objectForKey:@"dewey_decimal"]];
@@ -127,36 +127,35 @@
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
-    //TODO: write a method that cleans up the current string before assinging it!!
     if ([self currentProperty] == pTitle){
-	[self setBookTitle:currentStringValue];
+	[self setBookTitle:[self cleanUpString:currentStringValue]];
     }
     if ([self currentProperty] == pTitleLong){
-	[self setBookTitleLong:currentStringValue];
+	[self setBookTitleLong:[self cleanUpString:currentStringValue]];
     }
     if ([self currentProperty] == pAuthorText){
-	[self setBookAuthorsText:currentStringValue];
+	[self setBookAuthorsText:[self cleanUpString:currentStringValue]];
     }
     if ([self currentProperty] == pPublisher){
-	[self setBookPublisher:currentStringValue];
+	[self setBookPublisher:[self cleanUpString:currentStringValue]];
     }
     if ([self currentProperty] == pSummary){
-	[self setBookSummary:currentStringValue];
+	[self setBookSummary:[self cleanUpString:currentStringValue]];
     }
     if ([self currentProperty] == pNotes){
-	[self setBookNotes:currentStringValue];
+	[self setBookNotes:[self cleanUpString:currentStringValue]];
     }
     if ([self currentProperty] == pUrls){
-	[self setBookUrls:currentStringValue];
+	[self setBookUrls:[self cleanUpString:currentStringValue]];
     }
     if ([self currentProperty] == pAwards){
-	[self setBookAwards:currentStringValue];
+	[self setBookAwards:[self cleanUpString:currentStringValue]];
     }
     if ([self currentProperty] == pAuthor){
-	[bookAuthors addObject:currentStringValue];
+	[bookAuthors addObject:[self cleanUpString:currentStringValue]];
     }
     if ([self currentProperty] == pSubject){
-	[bookSubjects addObject:currentStringValue];
+	[bookSubjects addObject:[self cleanUpString:currentStringValue]];
     }
     [currentStringValue release];
     currentStringValue = nil;
@@ -164,6 +163,10 @@
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser{
+}
+
+- (NSString*) cleanUpString:(NSString*) theString {
+    return [[theString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString];
 }
 
 @end
