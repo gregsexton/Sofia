@@ -138,11 +138,13 @@
 }
 
 - (IBAction) searchClicked:(id)sender {
+    //TODO: warning if this is going to clear out information
     [progIndicator setUsesThreadedAnimation:true];
     [progIndicator startAnimation:self];
     [NSApp beginSheet:progressSheet modalForWindow:window
 	   modalDelegate:self didEndSelector:NULL contextInfo:nil];
     
+    [self clearAllFields];
     [self updateUIFromISBNDb];
 
     [txt_title selectItemAtIndex:0];
@@ -163,6 +165,33 @@
 
 - (IBAction) clearClicked:(id)sender {
     [txt_search setStringValue:@""];
+    [self clearAllFields];
+}
+
+- (void) clearAllFields {
+    [txt_isbn10 setStringValue:@""];
+    [txt_isbn13 setStringValue:@""];
+    [txt_edition setStringValue:@""];
+    [txt_dewey setStringValue:@""];
+    [txt_deweyNormal setStringValue:@""];
+    [txt_lccNumber setStringValue:@""];
+    [txt_language setStringValue:@""];
+
+    [txt_summary setStringValue:@""];
+    [txt_notes setStringValue:@""];
+    [txt_awards setStringValue:@""];
+    [txt_urls setStringValue:@""];
+
+    [txt_title removeAllItems];
+    [txt_title setStringValue:@""];
+    [txt_titleLong removeAllItems];
+    [txt_titleLong setStringValue:@""];
+    [txt_publisher removeAllItems];
+    [txt_publisher setStringValue:@""];
+    [txt_author removeAllItems];
+    [txt_author setStringValue:@""];
+    [txt_physicalDescrip removeAllItems];
+    [txt_physicalDescrip setStringValue:@""];
 }
 
 - (IBAction) cancelClicked:(id)sender {
