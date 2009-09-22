@@ -214,10 +214,7 @@
 - (IBAction) aboutClickAction:(id)sender {
 	//TODO: use the info.plist file.
 	NSDictionary *aboutDict = [NSDictionary dictionaryWithObjectsAndKeys:
-				@"Sofia", @"ApplicationName", 
-				@"0.1.0", @"Version", 
-				@"Greg Sexton 2009", @"Copyright", 
-				@"0.1", @"ApplicationVersion", nil];
+				@"Greg Sexton 2009", @"Copyright", nil];
 	[[NSApplication sharedApplication] orderFrontStandardAboutPanelWithOptions:aboutDict];
 }
 @end
