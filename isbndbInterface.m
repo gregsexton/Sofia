@@ -146,6 +146,7 @@
 	[self setBookNotes:[self cleanUpString:currentStringValue]];
     }
     if ([self currentProperty] == pUrls){
+	//TODO: do not capitalize urls
 	[self setBookUrls:[self cleanUpString:currentStringValue]];
     }
     if ([self currentProperty] == pAwards){

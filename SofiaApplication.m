@@ -203,8 +203,15 @@
 	    NSLog(@"Error loading Nib!");
 	}
     }else{ //remove book
-	int alertReturn = NSRunAlertPanel(@"Remove Book?", @"Are you sure you wish to remove this book?" , @"No", @"Yes", nil);
-	NSLog([NSString stringWithFormat:@"%d", alertReturn]);
+	int alertReturn = -1;
+	int noOfRowsSelected = [tableView numberOfSelectedRows];
+	if(noOfRowsSelected == 0){
+	    NSRunInformationalAlertPanel(@"Selection Error", @"You must select at least one book to remove." , @"Ok", nil, nil);
+	}else if(noOfRowsSelected == 1){
+	    alertReturn = NSRunAlertPanel(@"Remove Book?", @"Are you sure you wish to remove this book?" , @"No", @"Yes", nil);
+	}else if(noOfRowsSelected > 1){
+	    alertReturn = NSRunAlertPanel(@"Remove Books?", @"Are you sure you wish to remove these books?" , @"No", @"Yes", nil);
+	}
 	if (alertReturn == NSAlertAlternateReturn){
 	    [arrayController remove:self];
 	}
