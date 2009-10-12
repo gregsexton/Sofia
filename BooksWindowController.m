@@ -160,6 +160,7 @@
 
 - (IBAction)saveClicked:(id)sender {
     [self updateManagedObjectFromUI];
+    [self saveManagedObjectContext:[obj managedObjectContext]];
     [window close];
 }
 
@@ -195,7 +196,16 @@
 }
 
 - (IBAction) cancelClicked:(id)sender {
+    [[obj managedObjectContext] rollback];
     [window close];
 }
 
+- (void) saveManagedObjectContext:(NSManagedObjectContext*)context {
+
+    NSError *error = nil;
+    if (![context save:&error]) {
+        [[NSApplication sharedApplication] presentError:error];
+    }
+
+}
 @end

@@ -54,4 +54,5 @@
 - (void) updateManagedObjectFromUI;
 - (id)initWithManagedObject:(NSManagedObject*)object;
 - (void) clearAllFields;
+- (void) saveManagedObjectContext:(NSManagedObjectContext*)context;
 @end

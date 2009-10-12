@@ -214,6 +214,7 @@
 	}
 	if (alertReturn == NSAlertAlternateReturn){
 	    [arrayController remove:self];
+	    [self saveAction:self];
 	}
     }
 }
