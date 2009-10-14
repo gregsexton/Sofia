@@ -16,6 +16,7 @@
     NSString *bookTitle;
     NSString *bookTitleLong;
     NSString *bookAuthorsText;
+    NSString *bookSubjectText;
     NSString *bookPublisher;
     NSString *bookEdition;
     NSString *bookLanguage;
@@ -42,6 +43,7 @@
 @property (nonatomic,copy) NSString *bookTitle;
 @property (nonatomic,copy) NSString *bookTitleLong;
 @property (nonatomic,copy) NSString *bookAuthorsText;
+@property (nonatomic,copy) NSString *bookSubjectText;
 @property (nonatomic,copy) NSString *bookPublisher;
 @property (nonatomic,copy) NSString *bookEdition;
 @property (nonatomic,copy) NSString *bookLanguage;
@@ -59,5 +61,6 @@
 
 - (BOOL)searchISBN:(NSString*)isbn;
 - (BOOL)processDetailsWithUrl:(NSURL*)url;
+- (NSString*) cleanUpString:(NSString*) theString;
 
 @end

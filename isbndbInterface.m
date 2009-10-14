@@ -16,6 +16,7 @@
 @synthesize bookTitle;
 @synthesize bookTitleLong;
 @synthesize bookAuthorsText;
+@synthesize bookSubjectText;
 @synthesize bookPublisher;
 @synthesize bookEdition;
 @synthesize bookLanguage;
@@ -32,6 +33,8 @@
 
 - (id)init {
     self = [super init];
+    //TODO: set the rest?
+    [self setBookSubjectText:@""];
     return self;
 }
 
@@ -156,7 +159,13 @@
 	[bookAuthors addObject:[self cleanUpString:currentStringValue]];
     }
     if ([self currentProperty] == pSubject){
-	[bookSubjects addObject:[self cleanUpString:currentStringValue]];
+	if(currentStringValue!=nil){
+	    [bookSubjects addObject:[self cleanUpString:currentStringValue]];
+	    //TODO: add check to save duplicated effort?
+	    if([bookSubjects count] > 0){
+		[self setBookSubjectText:[bookSubjects objectAtIndex:0]];
+	    }
+	}
     }
     [currentStringValue release];
     currentStringValue = nil;

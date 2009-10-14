@@ -18,6 +18,7 @@
     IBOutlet NSComboBox     *txt_titleLong;
     IBOutlet NSComboBox     *txt_author;
     IBOutlet NSComboBox     *txt_publisher;
+    IBOutlet NSComboBox	    *txt_subject;
     IBOutlet NSTextField    *txt_edition;
     IBOutlet NSComboBox     *txt_physicalDescrip;
     IBOutlet NSTextField    *txt_dewey;
@@ -51,8 +52,9 @@
 - (IBAction)saveClicked:(id)sender;
 
 - (void) updateUIFromManagedObject;
-- (void) updateManagedObjectFromUI;
-- (id)initWithManagedObject:(NSManagedObject*)object;
+- (id) initWithManagedObject:(NSManagedObject*)object;
 - (void) clearAllFields;
 - (void) saveManagedObjectContext:(NSManagedObjectContext*)context;
+- (BOOL) updateUIFromISBNDb;
+- (void) updateManagedObjectFromUI;
 @end

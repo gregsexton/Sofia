@@ -84,6 +84,10 @@
 	    [txt_author addItemWithObjectValue:[obj valueForKey:@"authorText"]];
 	    [txt_author selectItemAtIndex:0];
 	}
+	if([obj valueForKey:@"subjectText"] != nil){
+	    [txt_subject addItemWithObjectValue:[obj valueForKey:@"subjectText"]];
+	    [txt_subject selectItemAtIndex:0];
+	}
 	if([obj valueForKey:@"physicalDescription"] != nil){
 	    [txt_physicalDescrip addItemWithObjectValue:[obj valueForKey:@"physicalDescription"]];
 	    [txt_physicalDescrip selectItemAtIndex:0];
@@ -91,9 +95,13 @@
     }
 }
 
-- (void) updateUIFromISBNDb {
+- (BOOL) updateUIFromISBNDb {
     isbndbInterface *isbndb = [[isbndbInterface alloc] init];
-    [isbndb searchISBN:[txt_search stringValue]];
+    if(![isbndb searchISBN:[txt_search stringValue]]){
+	//error!
+	NSRunInformationalAlertPanel(@"Download Error", @"Unable to retrieve information from ISBNDb." , @"Ok", nil, nil);
+	return false;
+    }
 
     [txt_isbn10 setStringValue:[isbndb bookISBN10]];
     [txt_isbn13 setStringValue:[isbndb bookISBN13]];
@@ -112,7 +120,10 @@
     [txt_titleLong addItemWithObjectValue:[isbndb bookTitleLong]];
     [txt_publisher addItemWithObjectValue:[isbndb bookPublisher]];
     [txt_author addItemWithObjectValue:[isbndb bookAuthorsText]];
+    [txt_subject addItemWithObjectValue:[isbndb bookSubjectText]];
     [txt_physicalDescrip addItemWithObjectValue:[isbndb bookPhysicalDescrip]];
+
+    return true;
 }
 
 - (void) updateManagedObjectFromUI {
@@ -121,6 +132,7 @@
 	[obj setValue:[txt_isbn10 stringValue] forKey:@"isbn10"];
 	[obj setValue:[txt_isbn13 stringValue] forKey:@"isbn13"];
 	[obj setValue:[txt_author stringValue] forKey:@"authorText"];
+	[obj setValue:[txt_subject stringValue] forKey:@"subjectText"];
 	[obj setValue:[txt_awards stringValue] forKey:@"awards"];
 	[obj setValue:[txt_dewey stringValue] forKey:@"dewey"];
 	[obj setValue:[txt_deweyNormal stringValue] forKey:@"dewey_normalised"];
@@ -145,13 +157,14 @@
 	   modalDelegate:self didEndSelector:NULL contextInfo:nil];
     
     [self clearAllFields];
-    [self updateUIFromISBNDb];
-
-    [txt_title selectItemAtIndex:0];
-    [txt_titleLong selectItemAtIndex:0];
-    [txt_author selectItemAtIndex:0];
-    [txt_publisher selectItemAtIndex:0];
-    [txt_physicalDescrip selectItemAtIndex:0];
+    if ([self updateUIFromISBNDb]) {
+	[txt_title selectItemAtIndex:0];
+	[txt_titleLong selectItemAtIndex:0];
+	[txt_author selectItemAtIndex:0];
+	[txt_subject selectItemAtIndex:0];
+	[txt_publisher selectItemAtIndex:0];
+	[txt_physicalDescrip selectItemAtIndex:0];
+    }
 
     [progIndicator stopAnimation:self];
     [progressSheet orderOut:nil];
@@ -191,6 +204,8 @@
     [txt_publisher setStringValue:@""];
     [txt_author removeAllItems];
     [txt_author setStringValue:@""];
+    [txt_subject removeAllItems];
+    [txt_subject setStringValue:@""];
     [txt_physicalDescrip removeAllItems];
     [txt_physicalDescrip setStringValue:@""];
 }
