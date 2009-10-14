@@ -150,6 +150,29 @@
 }
 
 - (IBAction) searchClicked:(id)sender {
+    //check if the book already exists in library
+    NSError *error;
+    NSString *predicate = [[NSString alloc] initWithFormat:@"isbn10 MATCHES '%@' OR isbn13 MATCHES '%@'",
+							   [txt_search stringValue],
+							   [txt_search stringValue]];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"book" inManagedObjectContext:[obj managedObjectContext]]];
+    [request setPredicate:[NSPredicate predicateWithFormat:predicate]];
+    if([[obj managedObjectContext] countForFetchRequest:request error:&error] > 0){
+        //[[NSApplication sharedApplication] presentError:error];
+	int alertReturn;
+	alertReturn = NSRunInformationalAlertPanel(@"Duplicate Entry",
+						   @"A book with this ISBN number is already in your library.",
+						   @"Cancel",
+						   @"Display",
+						   nil);
+	if (alertReturn == NSAlertAlternateReturn){
+	    [self setObj:[[[obj managedObjectContext] executeFetchRequest:request error:&error] objectAtIndex:0]];
+	    [self updateUIFromManagedObject];
+	}
+	return;
+    }
+
     //TODO: warning if this is going to clear out information
     [progIndicator setUsesThreadedAnimation:true];
     [progIndicator startAnimation:self];

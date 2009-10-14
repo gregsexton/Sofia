@@ -44,7 +44,7 @@
     NSManagedObject	    *obj;
 }
 
-@property (nonatomic,copy) NSManagedObject *obj;
+@property (nonatomic, assign) NSManagedObject *obj;
 
 - (IBAction)searchClicked:(id)sender;
 - (IBAction)clearClicked:(id)sender;
