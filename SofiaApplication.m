@@ -208,9 +208,11 @@
 	if(noOfRowsSelected == 0){
 	    NSRunInformationalAlertPanel(@"Selection Error", @"You must select at least one book to remove." , @"Ok", nil, nil);
 	}else if(noOfRowsSelected == 1){
-	    alertReturn = NSRunAlertPanel(@"Remove Book?", @"Are you sure you wish to remove this book?" , @"No", @"Yes", nil);
+	    alertReturn = NSRunAlertPanel(@"Remove Book?", @"Are you sure you wish to permanently remove this book?",
+					  @"No", @"Yes", nil);
 	}else if(noOfRowsSelected > 1){
-	    alertReturn = NSRunAlertPanel(@"Remove Books?", @"Are you sure you wish to remove these books?" , @"No", @"Yes", nil);
+	    alertReturn = NSRunAlertPanel(@"Remove Books?", @"Are you sure you wish to permanently remove these books?",
+					  @"No", @"Yes", nil);
 	}
 	if (alertReturn == NSAlertAlternateReturn){
 	    [arrayController remove:self];
