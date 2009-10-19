@@ -67,6 +67,10 @@
 	if([obj valueForKey:@"urls"] != nil){
 	    [txt_urls setStringValue:[obj valueForKey:@"urls"]];
 	}
+	if([obj valueForKey:@"noOfCopies"] != nil){
+	    [txt_noOfCopies setIntValue:[[obj valueForKey:@"noOfCopies"] intValue]];
+	    [step_noOfCopies setIntValue:[[obj valueForKey:@"noOfCopies"] intValue]];
+	}
 
 	if([obj valueForKey:@"title"] != nil){
 	    [txt_title addItemWithObjectValue:[obj valueForKey:@"title"]];
@@ -146,6 +150,7 @@
 	[obj setValue:[txt_title stringValue] forKey:@"title"];
 	[obj setValue:[txt_titleLong stringValue] forKey:@"titleLong"];
 	[obj setValue:[txt_urls stringValue] forKey:@"urls"];
+	[obj setValue:[txt_noOfCopies stringValue] forKey:@"noOfCopies"];
     }
 }
 
@@ -213,6 +218,7 @@
     [txt_deweyNormal setStringValue:@""];
     [txt_lccNumber setStringValue:@""];
     [txt_language setStringValue:@""];
+    [txt_noOfCopies setStringValue:@"1"];
 
     [txt_summary setStringValue:@""];
     [txt_notes setStringValue:@""];
@@ -245,5 +251,11 @@
         [[NSApplication sharedApplication] presentError:error];
     }
 
+}
+- (IBAction) copiesValueChanged:(id)sender {
+    int theValue = [sender intValue];
+
+    [step_noOfCopies setIntValue:theValue];
+    [txt_noOfCopies setIntValue:theValue];
 }
 @end

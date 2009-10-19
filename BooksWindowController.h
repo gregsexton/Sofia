@@ -25,6 +25,8 @@
     IBOutlet NSTextField    *txt_deweyNormal;
     IBOutlet NSTextField    *txt_lccNumber;
     IBOutlet NSTextField    *txt_language;
+    IBOutlet NSTextField    *txt_noOfCopies;
+    IBOutlet NSStepper	    *step_noOfCopies;
 
     IBOutlet NSTextField    *txt_summary;
     IBOutlet NSTextField    *txt_notes;
@@ -50,6 +52,7 @@
 - (IBAction)clearClicked:(id)sender;
 - (IBAction)cancelClicked:(id)sender;
 - (IBAction)saveClicked:(id)sender;
+- (IBAction)copiesValueChanged:(id)sender;
 
 - (void) updateUIFromManagedObject;
 - (id) initWithManagedObject:(NSManagedObject*)object;
