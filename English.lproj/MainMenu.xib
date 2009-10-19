@@ -1106,9 +1106,9 @@
 				<string key="NSClassName">NSFontManager</string>
 			</object>
 			<object class="NSWindowTemplate" id="970442734">
-				<int key="NSWindowStyleMask">15</int>
+				<int key="NSWindowStyleMask">4367</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{46, 62}, {939, 718}}</string>
+				<string key="NSWindowRect">{{46, 38}, {1119, 742}}</string>
 				<int key="NSWTFlags">536870912</int>
 				<string key="NSWindowTitle">Library Overview</string>
 				<string key="NSWindowClass">NSWindow</string>
@@ -1580,7 +1580,7 @@ ELIAAAAAAAgACAAIAAgAAQABAAEAAQ</bytes>
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSScrollView" id="758308659">
 							<reference key="NSNextResponder" ref="1040090277"/>
-							<int key="NSvFlags">274</int>
+							<int key="NSvFlags">306</int>
 							<object class="NSMutableArray" key="NSSubviews">
 								<bool key="EncodedWithXMLCoder">YES</bool>
 								<object class="NSClipView" id="316095046">
@@ -1591,26 +1591,27 @@ ELIAAAAAAAgACAAIAAgAAQABAAEAAQ</bytes>
 										<object class="NSTableView" id="98113484">
 											<reference key="NSNextResponder" ref="316095046"/>
 											<int key="NSvFlags">274</int>
-											<string key="NSFrameSize">{923, 671}</string>
+											<string key="NSFrameSize">{1103, 690}</string>
 											<reference key="NSSuperview" ref="316095046"/>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTableHeaderView" key="NSHeaderView" id="768935642">
 												<reference key="NSNextResponder" ref="694218242"/>
 												<int key="NSvFlags">256</int>
-												<string key="NSFrameSize">{923, 17}</string>
+												<string key="NSFrameSize">{1103, 17}</string>
 												<reference key="NSSuperview" ref="694218242"/>
 												<reference key="NSTableView" ref="98113484"/>
 											</object>
 											<object class="_NSCornerView" key="NSCornerView" id="429878103">
 												<reference key="NSNextResponder" ref="758308659"/>
 												<int key="NSvFlags">256</int>
-												<string key="NSFrame">{{924, 0}, {16, 17}}</string>
+												<string key="NSFrame">{{1104, 0}, {16, 17}}</string>
 												<reference key="NSSuperview" ref="758308659"/>
 											</object>
 											<object class="NSMutableArray" key="NSTableColumns">
 												<bool key="EncodedWithXMLCoder">YES</bool>
 												<object class="NSTableColumn" id="599255433">
-													<double key="NSWidth">2.240000e+02</double>
+													<string key="NSIdentifier">title</string>
+													<double key="NSWidth">2.530000e+02</double>
 													<double key="NSMinWidth">4.000000e+01</double>
 													<double key="NSMaxWidth">1.000000e+03</double>
 													<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -1655,6 +1656,7 @@ ELIAAAAAAAgACAAIAAgAAQABAAEAAQ</bytes>
 													<reference key="NSTableView" ref="98113484"/>
 												</object>
 												<object class="NSTableColumn" id="734982994">
+													<string key="NSIdentifier">authors</string>
 													<double key="NSWidth">1.870000e+02</double>
 													<double key="NSMinWidth">4.000000e+01</double>
 													<double key="NSMaxWidth">1.000000e+03</double>
@@ -1680,6 +1682,7 @@ ELIAAAAAAAgACAAIAAgAAQABAAEAAQ</bytes>
 													<reference key="NSTableView" ref="98113484"/>
 												</object>
 												<object class="NSTableColumn" id="634371563">
+													<string key="NSIdentifier">publisher</string>
 													<double key="NSWidth">1.700000e+02</double>
 													<double key="NSMinWidth">1.000000e+01</double>
 													<double key="NSMaxWidth">3.402823e+38</double>
@@ -1710,7 +1713,8 @@ ELIAAAAAAAgACAAIAAgAAQABAAEAAQ</bytes>
 													<reference key="NSTableView" ref="98113484"/>
 												</object>
 												<object class="NSTableColumn" id="1009510556">
-													<double key="NSWidth">4.600000e+01</double>
+													<string key="NSIdentifier">edition</string>
+													<double key="NSWidth">7.000000e+01</double>
 													<double key="NSMinWidth">1.000000e+01</double>
 													<double key="NSMaxWidth">3.402823e+38</double>
 													<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -1735,6 +1739,7 @@ ELIAAAAAAAgACAAIAAgAAQABAAEAAQ</bytes>
 													<reference key="NSTableView" ref="98113484"/>
 												</object>
 												<object class="NSTableColumn" id="378650304">
+													<string key="NSIdentifier">subjects</string>
 													<double key="NSWidth">1.920000e+02</double>
 													<double key="NSMinWidth">1.000000e+01</double>
 													<double key="NSMaxWidth">3.402823e+38</double>
@@ -1760,7 +1765,8 @@ ELIAAAAAAAgACAAIAAgAAQABAAEAAQ</bytes>
 													<reference key="NSTableView" ref="98113484"/>
 												</object>
 												<object class="NSTableColumn" id="351154035">
-													<double key="NSWidth">7.300000e+01</double>
+													<string key="NSIdentifier">isbn10</string>
+													<double key="NSWidth">9.000000e+01</double>
 													<double key="NSMinWidth">1.000000e+01</double>
 													<double key="NSMaxWidth">3.402823e+38</double>
 													<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -1785,7 +1791,8 @@ ELIAAAAAAAgACAAIAAgAAQABAAEAAQ</bytes>
 													<reference key="NSTableView" ref="98113484"/>
 												</object>
 												<object class="NSTableColumn" id="187771342">
-													<double key="NSWidth">1.000000e+01</double>
+													<string key="NSIdentifier">isbn13</string>
+													<double key="NSWidth">1.200000e+02</double>
 													<double key="NSMinWidth">1.000000e+01</double>
 													<double key="NSMaxWidth">3.402823e+38</double>
 													<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -1824,7 +1831,7 @@ ELIAAAAAAAgACAAIAAgAAQABAAEAAQ</bytes>
 											</object>
 											<double key="NSRowHeight">1.700000e+01</double>
 											<int key="NSTvFlags">-608174080</int>
-											<string key="NSAutosaveName">libaryTable</string>
+											<string key="NSAutosaveName">libraryTable</string>
 											<int key="NSGridStyleMask">1</int>
 											<int key="NSColumnAutoresizingStyle">5</int>
 											<int key="NSDraggingSourceMaskForLocal">15</int>
@@ -1832,7 +1839,7 @@ ELIAAAAAAAgACAAIAAgAAQABAAEAAQ</bytes>
 											<bool key="NSAllowsTypeSelect">YES</bool>
 										</object>
 									</object>
-									<string key="NSFrame">{{1, 17}, {923, 671}}</string>
+									<string key="NSFrame">{{1, 17}, {1103, 690}}</string>
 									<reference key="NSSuperview" ref="758308659"/>
 									<reference key="NSNextKeyView" ref="98113484"/>
 									<reference key="NSDocView" ref="98113484"/>
@@ -1842,7 +1849,7 @@ ELIAAAAAAAgACAAIAAgAAQABAAEAAQ</bytes>
 								<object class="NSScroller" id="992909148">
 									<reference key="NSNextResponder" ref="758308659"/>
 									<int key="NSvFlags">256</int>
-									<string key="NSFrame">{{924, 17}, {15, 671}}</string>
+									<string key="NSFrame">{{1104, 17}, {15, 690}}</string>
 									<reference key="NSSuperview" ref="758308659"/>
 									<reference key="NSTarget" ref="758308659"/>
 									<string key="NSAction">_doScroller:</string>
@@ -1852,7 +1859,7 @@ ELIAAAAAAAgACAAIAAgAAQABAAEAAQ</bytes>
 								<object class="NSScroller" id="231003265">
 									<reference key="NSNextResponder" ref="758308659"/>
 									<int key="NSvFlags">256</int>
-									<string key="NSFrame">{{1, 688}, {923, 15}}</string>
+									<string key="NSFrame">{{1, 707}, {1103, 15}}</string>
 									<reference key="NSSuperview" ref="758308659"/>
 									<int key="NSsFlags">1</int>
 									<reference key="NSTarget" ref="758308659"/>
@@ -1866,7 +1873,7 @@ ELIAAAAAAAgACAAIAAgAAQABAAEAAQ</bytes>
 										<bool key="EncodedWithXMLCoder">YES</bool>
 										<reference ref="768935642"/>
 									</object>
-									<string key="NSFrame">{{1, 0}, {923, 17}}</string>
+									<string key="NSFrame">{{1, 0}, {1103, 17}}</string>
 									<reference key="NSSuperview" ref="758308659"/>
 									<reference key="NSNextKeyView" ref="768935642"/>
 									<reference key="NSDocView" ref="768935642"/>
@@ -1875,7 +1882,7 @@ ELIAAAAAAAgACAAIAAgAAQABAAEAAQ</bytes>
 								</object>
 								<reference ref="429878103"/>
 							</object>
-							<string key="NSFrame">{{0, 15}, {940, 704}}</string>
+							<string key="NSFrame">{{0, 20}, {1120, 723}}</string>
 							<reference key="NSSuperview" ref="1040090277"/>
 							<reference key="NSNextKeyView" ref="316095046"/>
 							<int key="NSsFlags">50</int>
@@ -1887,7 +1894,7 @@ ELIAAAAAAAgACAAIAAgAAQABAAEAAQ</bytes>
 							<bytes key="NSScrollAmts">QSAAAEEgAABBmAAAQZgAAA</bytes>
 						</object>
 					</object>
-					<string key="NSFrameSize">{939, 718}</string>
+					<string key="NSFrameSize">{1119, 742}</string>
 					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1280, 832}}</string>
@@ -4302,9 +4309,9 @@ ELIAAAAAAAgACAAIAAgAAQABAAEAAQ</bytes>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<reference ref="9"/>
-					<string>{{29, 32}, {939, 718}}</string>
+					<string>{{17, 17}, {1119, 742}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{29, 32}, {939, 718}}</string>
+					<string>{{17, 17}, {1119, 742}}</string>
 					<reference ref="9"/>
 					<string>{196, 240}</string>
 					<string>{{202, 428}, {480, 270}}</string>
