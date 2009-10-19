@@ -258,4 +258,11 @@
     [step_noOfCopies setIntValue:theValue];
     [txt_noOfCopies setIntValue:theValue];
 }
+
+- (BOOL)tabView:(NSTabView*)tabView shouldSelectTabViewItem:(NSTabView*)tabViewItem {
+    //a hacked save between selecting tabs so that information is not lost
+    [self updateManagedObjectFromUI];
+    [self updateUIFromManagedObject];
+    return true;
+}
 @end
