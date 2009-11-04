@@ -14,6 +14,7 @@
 - (void) awakeFromNib {
     [tableView setDoubleAction:@selector(doubleClickAction:)];
     [tableView setTarget:self]; 
+    [self registerAsObserver];
 }
 
 
@@ -186,7 +187,8 @@
     //use the first object if multiple are selected
     NSManagedObject *obj = [[arrayController selectedObjects] objectAtIndex:0];
 
-    BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj];
+    BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj
+								      arrayController:arrayController];
     if (![NSBundle loadNibNamed:@"Detail" owner:detailWin]) {
 	NSLog(@"Error loading Nib!");
     }
@@ -196,12 +198,12 @@
     if ([addRemoveButtons selectedSegment] == 0){ //new book
 	NSManagedObject *obj = [[NSManagedObject alloc] initWithEntity:[[managedObjectModel entitiesByName] objectForKey:@"book"]
 							insertIntoManagedObjectContext:managedObjectContext];
-	[arrayController addObject:obj];
-
-	BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj];
+	BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj
+									  arrayController:arrayController];
 	if (![NSBundle loadNibNamed:@"Detail" owner:detailWin]) {
 	    NSLog(@"Error loading Nib!");
 	}
+	//[arrayController addObject:obj];
     }else{ //remove book
 	int alertReturn = -1;
 	int noOfRowsSelected = [tableView numberOfSelectedRows];
@@ -216,8 +218,33 @@
 	}
 	if (alertReturn == NSAlertAlternateReturn){
 	    [arrayController remove:self];
-	    [self saveAction:self];
 	}
+    }
+}
+
+- (void)registerAsObserver{
+    [arrayController addObserver:self
+		     forKeyPath:@"arrangedObjects"
+		     options:NSKeyValueObservingOptionNew
+		     context:NULL];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqual:@"arrangedObjects"]) {
+	[self updateSummaryText];
+	[self saveAction:self];
+    }
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+}
+
+- (void) updateSummaryText {
+    int count = [[arrayController arrangedObjects] count];
+    if(count == 0){
+	[summaryText setStringValue:@"Empty Library"];
+    }else if(count == 1){
+	[summaryText setStringValue:@"1 book"];
+    }else {
+	[summaryText setStringValue:[NSString stringWithFormat:@"%d books", count]];
     }
 }
 

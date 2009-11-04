@@ -44,9 +44,11 @@
     IBOutlet NSProgressIndicator *progIndicator;
 
     NSManagedObject	    *obj;
+    NSArrayController	    *arrayController;
 }
 
 @property (nonatomic, assign) NSManagedObject *obj;
+@property (nonatomic, assign) NSArrayController *arrayController;
 
 - (IBAction)searchClicked:(id)sender;
 - (IBAction)clearClicked:(id)sender;
@@ -55,7 +57,7 @@
 - (IBAction)copiesValueChanged:(id)sender;
 
 - (void) updateUIFromManagedObject;
-- (id) initWithManagedObject:(NSManagedObject*)object;
+- (id) initWithManagedObject:(NSManagedObject*)object arrayController:(NSArrayController*)arrayContr;
 - (void) clearAllFields;
 - (void) saveManagedObjectContext:(NSManagedObjectContext*)context;
 - (BOOL) updateUIFromISBNDb;

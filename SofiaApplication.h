@@ -13,6 +13,7 @@
 	
 	IBOutlet NSWindow *window;
 	IBOutlet NSTableView *tableView;
+	IBOutlet NSTextField *summaryText;
 	IBOutlet NSArrayController *arrayController;
 	IBOutlet NSApplication *theApplication;
 	IBOutlet NSSegmentedControl *addRemoveButtons;
@@ -30,5 +31,6 @@
 - (IBAction) doubleClickAction:(id)sender;
 - (IBAction) addRemoveClickAction:(id)sender;
 - (IBAction) aboutClickAction:(id)sender;
+- (void) updateSummaryText;
 
 @end

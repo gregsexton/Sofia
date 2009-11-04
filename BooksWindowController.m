@@ -12,15 +12,17 @@
 @implementation BooksWindowController
 
 @synthesize obj;
+@synthesize arrayController;
 
 - (id)init {
     self = [super init];
     return self;
 }
 
-- (id)initWithManagedObject:(NSManagedObject*)object {
+- (id)initWithManagedObject:(NSManagedObject*)object arrayController:(NSArrayController*)arrayContr{
     self = [super init];
     obj = object;
+    arrayController = arrayContr;
     return self;
 }
 
@@ -154,16 +156,25 @@
     }
 }
 
-- (IBAction) searchClicked:(id)sender {
-    //check if the book already exists in library
+- (BOOL) bookExistsCurrentlyInLibraryWithISBN:(NSString*)isbn {
     NSError *error;
     NSString *predicate = [[NSString alloc] initWithFormat:@"isbn10 MATCHES '%@' OR isbn13 MATCHES '%@'",
-							   [txt_search stringValue],
-							   [txt_search stringValue]];
+							   isbn,
+							   isbn];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"book" inManagedObjectContext:[obj managedObjectContext]]];
     [request setPredicate:[NSPredicate predicateWithFormat:predicate]];
-    if([[obj managedObjectContext] countForFetchRequest:request error:&error] > 0){
+    NSLog([NSString stringWithFormat:@"Count = %d", [[obj managedObjectContext] countForFetchRequest:request error:&error]]);
+    if([[obj managedObjectContext] countForFetchRequest:request error:&error] == 1){
+	return true;
+    }else{
+	return false;
+    }
+}
+
+- (IBAction) searchClicked:(id)sender {
+    //check if the book already exists in library
+    if([self bookExistsCurrentlyInLibraryWithISBN:[txt_search stringValue]]){
         //[[NSApplication sharedApplication] presentError:error];
 	int alertReturn;
 	alertReturn = NSRunInformationalAlertPanel(@"Duplicate Entry",
@@ -172,6 +183,13 @@
 						   @"Display",
 						   nil);
 	if (alertReturn == NSAlertAlternateReturn){
+	    NSError *error;
+	    NSString *predicate = [[NSString alloc] initWithFormat:@"isbn10 MATCHES '%@' OR isbn13 MATCHES '%@'",
+								   [txt_search stringValue],
+								   [txt_search stringValue]];
+	    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+	    [request setEntity:[NSEntityDescription entityForName:@"book" inManagedObjectContext:[obj managedObjectContext]]];
+	    [request setPredicate:[NSPredicate predicateWithFormat:predicate]];
 	    [self setObj:[[[obj managedObjectContext] executeFetchRequest:request error:&error] objectAtIndex:0]];
 	    [self updateUIFromManagedObject];
 	}
@@ -201,8 +219,14 @@
 
 - (IBAction)saveClicked:(id)sender {
     [self updateManagedObjectFromUI];
-    [self saveManagedObjectContext:[obj managedObjectContext]];
+    //does this book exist in library already? if so save context
+    //otherwise add it to arrayController which will save for you.
     [window close];
+    if([[arrayController arrangedObjects] containsObject:obj]){
+	[self saveManagedObjectContext:[obj managedObjectContext]];
+    }else {
+	[arrayController addObject:obj];
+    }
 }
 
 - (IBAction) clearClicked:(id)sender {
