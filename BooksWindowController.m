@@ -183,6 +183,9 @@
 						   @"Display",
 						   nil);
 	if (alertReturn == NSAlertAlternateReturn){
+	    //delete empty object from context
+	    [[obj managedObjectContext] deleteObject:obj];
+	    //get hold of existing object and update UI.
 	    NSError *error;
 	    NSString *predicate = [[NSString alloc] initWithFormat:@"isbn10 MATCHES '%@' OR isbn13 MATCHES '%@'",
 								   [txt_search stringValue],
