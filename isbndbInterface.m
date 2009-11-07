@@ -161,7 +161,7 @@
     if ([self currentProperty] == pSubject){
 	if(currentStringValue!=nil){
 	    [bookSubjects addObject:[self cleanUpString:currentStringValue]];
-	    //TODO: add check to save duplicated effort?
+	    //TODO: add check to save duplicated effort? this happens for each and every subject
 	    if([bookSubjects count] > 0){
 		[self setBookSubjectText:[bookSubjects objectAtIndex:0]];
 	    }

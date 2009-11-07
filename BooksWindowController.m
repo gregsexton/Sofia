@@ -164,7 +164,6 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"book" inManagedObjectContext:[obj managedObjectContext]]];
     [request setPredicate:[NSPredicate predicateWithFormat:predicate]];
-    NSLog([NSString stringWithFormat:@"Count = %d", [[obj managedObjectContext] countForFetchRequest:request error:&error]]);
     if([[obj managedObjectContext] countForFetchRequest:request error:&error] == 1){
 	return true;
     }else{
@@ -286,7 +285,7 @@
     [txt_noOfCopies setIntValue:theValue];
 }
 
-- (BOOL)tabView:(NSTabView*)tabView shouldSelectTabViewItem:(NSTabView*)tabViewItem {
+- (BOOL)tabView:(NSTabView*)tabView shouldSelectTabViewItem:(NSTabViewItem*)tabViewItem {
     //a hacked save between selecting tabs so that information is not lost
     [self updateManagedObjectFromUI];
     [self updateUIFromManagedObject];
