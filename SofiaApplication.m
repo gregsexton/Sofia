@@ -226,10 +226,10 @@
 
 //delegate method performed by booksWindowController.
 - (void) saveClicked:(BooksWindowController*)booksWindowController {
-    [self updateSummaryText];
     if(![[arrayController arrangedObjects] containsObject:[booksWindowController obj]]){
 	[arrayController addObject:[booksWindowController obj]];
     }
+    [self updateSummaryText];
 }
 
 - (void) updateSummaryText {
