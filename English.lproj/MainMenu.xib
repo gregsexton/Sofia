@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="544"/>
+			<integer value="546"/>
 			<integer value="57"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
@@ -1831,14 +1831,18 @@
 						<object class="NSTextField" id="639397870">
 							<reference key="NSNextResponder" ref="1040090277"/>
 							<int key="NSvFlags">293</int>
-							<string key="NSFrame">{{411, 6}, {296, 17}}</string>
+							<string key="NSFrame">{{412, 7}, {296, 16}}</string>
 							<reference key="NSSuperview" ref="1040090277"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="1852962">
 								<int key="NSCellFlags">68288064</int>
 								<int key="NSCellFlags2">138413056</int>
-								<string key="NSContents"/>
-								<reference key="NSSupport" ref="189518655"/>
+								<string key="NSContents">3 books</string>
+								<object class="NSFont" key="NSSupport">
+									<string key="NSName">LucidaGrande</string>
+									<double key="NSSize">12</double>
+									<int key="NSfFlags">16</int>
+								</object>
 								<reference key="NSControlView" ref="639397870"/>
 								<object class="NSColor" key="NSBackgroundColor">
 									<int key="NSColorSpace">6</int>
@@ -1846,7 +1850,10 @@
 									<string key="NSColorName">controlColor</string>
 									<reference key="NSColor" ref="659132658"/>
 								</object>
-								<reference key="NSTextColor" ref="584830682"/>
+								<object class="NSColor" key="NSTextColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC4yIDAuMiAwLjIAA</bytes>
+								</object>
 							</object>
 						</object>
 					</object>
@@ -3580,8 +3587,8 @@
 						<reference key="object" ref="1040090277"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="639397870"/>
 							<reference ref="758308659"/>
+							<reference ref="639397870"/>
 						</object>
 						<reference key="parent" ref="970442734"/>
 					</object>
@@ -4221,7 +4228,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>{{525, 802}, {197, 73}}</string>
-					<string>{{398, 391}, {399, 20}}</string>
+					<string>{{397, 391}, {399, 20}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>{74, 862}</string>
@@ -4328,7 +4335,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{410, 208}, {183, 183}}</string>
+					<string>{{409, 208}, {183, 183}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>{{23, 794}, {245, 183}}</string>

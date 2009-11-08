@@ -29,6 +29,7 @@
     [window makeKeyAndOrderFront:self];
     if (obj != nil){
 	[self updateUIFromManagedObject];
+	[self updateSummaryTabView];
     }
 }
 
@@ -97,6 +98,8 @@
 	    [txt_physicalDescrip addItemWithObjectValue:[obj valueForKey:@"physicalDescription"]];
 	    [txt_physicalDescrip selectItemAtIndex:0];
 	}
+
+	[self updateSummaryTabView];
     }
 }
 
@@ -128,6 +131,7 @@
     [txt_subject addItemWithObjectValue:[isbndb bookSubjectText]];
     [txt_physicalDescrip addItemWithObjectValue:[isbndb bookPhysicalDescrip]];
 
+    [self updateSummaryTabView];
     return true;
 }
 
@@ -242,6 +246,8 @@
     [txt_subject setStringValue:@""];
     [txt_physicalDescrip removeAllItems];
     [txt_physicalDescrip setStringValue:@""];
+
+    [self updateSummaryTabView];
 }
 
 - (IBAction) cancelClicked:(id)sender {
@@ -268,6 +274,38 @@
     //a hacked save between selecting tabs so that information is not lost
     [self updateManagedObjectFromUI];
     [self updateUIFromManagedObject];
+
     return true;
+}
+
+- (void) updateSummaryTabView{
+    [lbl_summary_isbn10		    setStringValue:[txt_isbn10 stringValue]];
+    [lbl_summary_isbn13	    	    setStringValue:[txt_isbn13 stringValue]];
+    [lbl_summary_edition    	    setStringValue:[txt_edition stringValue]];
+    [lbl_summary_dewey		    setStringValue:[txt_dewey stringValue]];
+    [lbl_summary_deweyNormal	    setStringValue:[txt_deweyNormal stringValue]];
+    [lbl_summary_lccNumber	    setStringValue:[txt_lccNumber stringValue]];
+    [lbl_summary_language   	    setStringValue:[txt_language stringValue]];
+    [lbl_summary_noOfCopies 	    setStringValue:[txt_noOfCopies stringValue]];
+    [lbl_summary_summary    	    setStringValue:[txt_summary stringValue]];
+    
+    if([txt_title numberOfItems] > 0){
+	[lbl_summary_title setStringValue:[txt_title itemObjectValueAtIndex:0]];
+    }
+    if([txt_titleLong numberOfItems] > 0){ 
+	[lbl_summary_titleLong setStringValue:[txt_titleLong itemObjectValueAtIndex:0]];
+    }
+    if([txt_author numberOfItems] > 0){ 
+	[lbl_summary_author setStringValue:[txt_author itemObjectValueAtIndex:0]];
+    }
+    if([txt_publisher numberOfItems] > 0){ 
+	[lbl_summary_publisher setStringValue:[txt_publisher itemObjectValueAtIndex:0]];
+    }
+    if([txt_subject numberOfItems] > 0){ 
+	[lbl_summary_subject setStringValue:[txt_subject itemObjectValueAtIndex:0]];
+    }
+    if([txt_physicalDescrip numberOfItems] > 0){
+	[lbl_summary_physicalDescrip setStringValue:[txt_physicalDescrip itemObjectValueAtIndex:0]];
+    }
 }
 @end

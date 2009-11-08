@@ -229,8 +229,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -277,8 +275,9 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>33</integer>
-									<integer>31</integer>
+									<integer>8</integer>
+									<integer>4</integer>
+									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
@@ -312,12 +311,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SofiaApplication.m</string>
+								<string>BooksWindowController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -325,11 +326,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>SofiaApplication.m</string>
+										<string>BooksWindowController.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>376D3E4410A6EE0200242DF7</string>
+										<string>376D3EBB10A7043400242DF7</string>
 										<key>history</key>
 										<array>
 											<string>373752621055B6BE00718317</string>
@@ -341,9 +342,9 @@
 											<string>371855DA1097C798006A363D</string>
 											<string>371855DB1097C798006A363D</string>
 											<string>371855E8109DF658006A363D</string>
-											<string>376D3D6910A5A6FD00242DF7</string>
 											<string>376D3D8F10A5A7A200242DF7</string>
-											<string>376D3DB710A5FE5900242DF7</string>
+											<string>376D3E5410A6F4E800242DF7</string>
+											<string>376D3E5E10A6F53000242DF7</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -539,14 +540,14 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>376D3E4510A6EE0200242DF7</string>
+		<string>376D3EBC10A7043400242DF7</string>
 		<string>376D3D6410A5A6BB00242DF7</string>
 		<string>376D3D6510A5A6BB00242DF7</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>376D3D9110A5A7A200242DF7</string>
-		<string>373655AF101CCE8600709C8F</string>
-		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
 		<string>1CD10A99069EF8BA00B06720</string>
+		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
+		<string>1C78EAAD065D492600B07095</string>
+		<string>373655AF101CCE8600709C8F</string>
 	</array>
 	<key>WindowString</key>
 	<string>1308 67 1217 845 0 0 2560 1418 </string>
@@ -570,7 +571,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SofiaApplication.m</string>
+								<string>BooksWindowController.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -881,6 +882,8 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -926,7 +929,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>Identifier</key>
