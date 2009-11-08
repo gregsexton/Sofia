@@ -14,7 +14,8 @@
 - (void) awakeFromNib {
     [tableView setDoubleAction:@selector(doubleClickAction:)];
     [tableView setTarget:self]; 
-    [self registerAsObserver];
+    //[self updateSummaryText]; //TODO: this doesn't work KVO???
+    [self registerAsArrayControllerObserver];
 }
 
 
@@ -187,8 +188,7 @@
     //use the first object if multiple are selected
     NSManagedObject *obj = [[arrayController selectedObjects] objectAtIndex:0];
 
-    BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj
-								      arrayController:arrayController];
+    BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj];
     if (![NSBundle loadNibNamed:@"Detail" owner:detailWin]) {
 	NSLog(@"Error loading Nib!");
     }
@@ -198,12 +198,12 @@
     if ([addRemoveButtons selectedSegment] == 0){ //new book
 	NSManagedObject *obj = [[NSManagedObject alloc] initWithEntity:[[managedObjectModel entitiesByName] objectForKey:@"book"]
 							insertIntoManagedObjectContext:managedObjectContext];
-	BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj
-									  arrayController:arrayController];
+
+	BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj];
+	[detailWin setDelegate:self];
 	if (![NSBundle loadNibNamed:@"Detail" owner:detailWin]) {
 	    NSLog(@"Error loading Nib!");
 	}
-	//[arrayController addObject:obj];
     }else{ //remove book
 	int alertReturn = -1;
 	int noOfRowsSelected = [tableView numberOfSelectedRows];
@@ -218,23 +218,18 @@
 	}
 	if (alertReturn == NSAlertAlternateReturn){
 	    [arrayController remove:self];
+	    [self saveAction:self];
+	    [self updateSummaryText];
 	}
     }
 }
 
-- (void)registerAsObserver{
-    [arrayController addObserver:self
-		     forKeyPath:@"arrangedObjects"
-		     options:NSKeyValueObservingOptionNew
-		     context:NULL];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([keyPath isEqual:@"arrangedObjects"]) {
-	[self updateSummaryText];
-	[self saveAction:self];
+//delegate method performed by booksWindowController.
+- (void) saveClicked:(BooksWindowController*)booksWindowController {
+    [self updateSummaryText];
+    if(![[arrayController arrangedObjects] containsObject:[booksWindowController obj]]){
+	[arrayController addObject:[booksWindowController obj]];
     }
-    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 
 - (void) updateSummaryText {
@@ -247,6 +242,32 @@
 	[summaryText setStringValue:[NSString stringWithFormat:@"%d books", count]];
     }
 }
+
+//this method registers to observe the objects held in the
+//tableview it is used to update the summary text when the
+//application first loads. After first running it is disabled and
+//future updating is handled by the delgate method saveClicked.
+- (void)registerAsArrayControllerObserver{
+    [arrayController addObserver:self
+		     forKeyPath:@"arrangedObjects"
+		     options:NSKeyValueObservingOptionNew
+		     context:NULL];
+}
+
+- (void)unregisterForArrayControllerChangeNotification{
+    [arrayController removeObserver:self
+                     forKeyPath:@"arrangedObjects"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqual:@"arrangedObjects"]) {
+	[self updateSummaryText];
+	[self saveAction:self];
+	[self unregisterForArrayControllerChangeNotification]; //perform once at startup then unregister.
+    }
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+}
+
 
 - (IBAction) aboutClickAction:(id)sender {
 	NSDictionary *aboutDict = [NSDictionary dictionaryWithObjectsAndKeys:

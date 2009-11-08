@@ -277,9 +277,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>10</integer>
-									<integer>4</integer>
-									<integer>0</integer>
+									<integer>33</integer>
+									<integer>31</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
@@ -330,7 +329,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>376D3DA310A5FBDB00242DF7</string>
+										<string>376D3E4410A6EE0200242DF7</string>
 										<key>history</key>
 										<array>
 											<string>373752621055B6BE00718317</string>
@@ -344,7 +343,7 @@
 											<string>371855E8109DF658006A363D</string>
 											<string>376D3D6910A5A6FD00242DF7</string>
 											<string>376D3D8F10A5A7A200242DF7</string>
-											<string>376D3D4810A5A4F500242DF7</string>
+											<string>376D3DB710A5FE5900242DF7</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -540,13 +539,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>376D3DA410A5FBDB00242DF7</string>
+		<string>376D3E4510A6EE0200242DF7</string>
 		<string>376D3D6410A5A6BB00242DF7</string>
 		<string>376D3D6510A5A6BB00242DF7</string>
 		<string>1C78EAAD065D492600B07095</string>
-		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
-		<string>373655AF101CCE8600709C8F</string>
 		<string>376D3D9110A5A7A200242DF7</string>
+		<string>373655AF101CCE8600709C8F</string>
+		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 	</array>
 	<key>WindowString</key>
@@ -571,7 +570,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>BooksWindowController.m</string>
+								<string>SofiaApplication.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -723,10 +722,10 @@
 									<key>Frame</key>
 									<string>{{455, 0}, {569, 342}}</string>
 									<key>RubberWindowFrame</key>
-									<string>1399 723 1024 686 0 0 2560 1418 </string>
+									<string>1404 723 1024 686 0 0 2560 1418 </string>
 								</dict>
 								<key>RubberWindowFrame</key>
-								<string>1399 723 1024 686 0 0 2560 1418 </string>
+								<string>1404 723 1024 686 0 0 2560 1418 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXDebugSessionModule</string>
@@ -760,7 +759,7 @@
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
 			<key>WindowString</key>
-			<string>1399 723 1024 686 0 0 2560 1418 </string>
+			<string>1404 723 1024 686 0 0 2560 1418 </string>
 			<key>WindowToolGUID</key>
 			<string>1CD10A99069EF8BA00B06720</string>
 			<key>WindowToolIsVisible</key>
