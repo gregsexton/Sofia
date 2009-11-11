@@ -22,6 +22,7 @@
 - (id)initWithManagedObject:(NSManagedObject*)object {
     self = [super init];
     obj = object;
+    managedObjectContext = [obj managedObjectContext];
     return self;
 }
 
@@ -30,6 +31,12 @@
     if (obj != nil){
 	[self updateUIFromManagedObject];
 	[self updateSummaryTabView];
+    }
+}
+
+- (NSManagedObjectContext *) managedObjectContext{
+    if (managedObjectContext != nil) {
+        return managedObjectContext;
     }
 }
 
@@ -192,7 +199,7 @@
 	return;
     }
 
-    //TODO: warning if this is going to clear out information
+    //TODO: warning if this is going to clear out information - re-download data won't work as will display duplicate -- add another option?
     [progIndicator setUsesThreadedAnimation:true];
     [progIndicator startAnimation:self];
     [NSApp beginSheet:progressSheet modalForWindow:window
@@ -277,13 +284,11 @@
 }
 
 - (BOOL)tabView:(NSTabView *)tabView shouldSelectTabViewItem:(NSTabViewItem *)tabViewItem{
-    NSLog(@"in shouldSelectTabViewItem");
     [self updateSummaryTabView];
     return true;
 }
 
 - (void) updateSummaryTabView{
-    NSLog(@"in updateSummaryTabView");
     [lbl_summary_isbn10		    setStringValue:[txt_isbn10 stringValue]];
     [lbl_summary_isbn13	    	    setStringValue:[txt_isbn13 stringValue]];
     [lbl_summary_edition    	    setStringValue:[txt_edition stringValue]];

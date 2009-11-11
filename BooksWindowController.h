@@ -61,6 +61,7 @@
     IBOutlet NSTextField    *lbl_summary_summary;
 
     NSManagedObject	    *obj;
+    NSManagedObjectContext  *managedObjectContext; //TODO: use this instead of [obj managedObjectContext]
     id			    *delegate;
 }
 
