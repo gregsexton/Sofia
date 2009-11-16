@@ -157,14 +157,20 @@
 	[self setBookAwards:[self cleanUpString:currentStringValue]];
     }
     if ([self currentProperty] == pAuthor){
-	[bookAuthors addObject:[self cleanUpString:currentStringValue]];
+	NSString *cleanString = [self cleanUpString:currentStringValue];
+	if(![cleanString isEqualToString:@""]){
+	    [bookAuthors addObject:cleanString];
+	}
     }
     if ([self currentProperty] == pSubject){
 	if(currentStringValue!=nil){
-	    [bookSubjects addObject:[self cleanUpString:currentStringValue]];
-	    //TODO: add check to save duplicated effort? this happens for each and every subject
-	    if([bookSubjects count] > 0){
-		[self setBookSubjectText:[bookSubjects objectAtIndex:0]];
+	    NSString *cleanString = [self cleanUpString:currentStringValue];
+	    if(![cleanString isEqualToString:@""]){
+		[bookSubjects addObject:cleanString];
+		//TODO: add check to save duplicated effort? this happens for each and every subject
+		if([bookSubjects count] > 0){
+		    [self setBookSubjectText:[bookSubjects objectAtIndex:0]];
+		}
 	    }
 	}
     }
