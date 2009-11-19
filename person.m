@@ -1,17 +1,16 @@
 // 
-//  author.m
+//  person.m
 //  books
 //
 //  Created by Greg on 16/11/2009.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
-#import "author.h"
+#import "person.h"
 
-#import "book.h"
 
-@implementation author 
+@implementation person 
 
-@dynamic books;
+@dynamic name;
 
 @end

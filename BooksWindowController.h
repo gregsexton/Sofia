@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <GData/GDataBooks.h>
+#import "book.h"
 
 @interface BooksWindowController : NSObjectController {
     IBOutlet NSTextField *txt_search;
@@ -60,12 +61,17 @@
     IBOutlet NSTextField    *lbl_summary_noOfCopies;
     IBOutlet NSTextField    *lbl_summary_summary;
 
-    NSManagedObject	    *obj;
+    IBOutlet NSTableView	*authorsTableView;
+    IBOutlet NSTableView	*subjectsTableView;
+    IBOutlet NSArrayController	*authorsArrayController;
+    IBOutlet NSArrayController	*subjectsArrayController;
+
+    book	    	    *obj;
     NSManagedObjectContext  *managedObjectContext; //TODO: use this instead of [obj managedObjectContext]
     id			    *delegate;
 }
 
-@property (nonatomic, assign) NSManagedObject *obj;
+@property (nonatomic, assign) book *obj;
 @property (nonatomic, assign) id *delegate;
 
 - (IBAction)searchClicked:(id)sender;
@@ -75,7 +81,7 @@
 - (IBAction)copiesValueChanged:(id)sender;
 
 - (void) updateUIFromManagedObject;
-- (id) initWithManagedObject:(NSManagedObject*)object;
+- (id) initWithManagedObject:(book*)object;
 - (void) clearAllFields;
 - (void) saveManagedObjectContext:(NSManagedObjectContext*)context;
 - (BOOL) updateUIFromISBNDb;

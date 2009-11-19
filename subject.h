@@ -2,12 +2,13 @@
 //  subject.h
 //  books
 //
-//  Created by Greg on 15/11/2009.
+//  Created by Greg on 16/11/2009.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
 #import <CoreData/CoreData.h>
 
+@class book;
 
 @interface subject :  NSManagedObject  
 {
@@ -20,8 +21,8 @@
 
 
 @interface subject (CoreDataGeneratedAccessors)
-- (void)addBooksObject:(NSManagedObject *)value;
-- (void)removeBooksObject:(NSManagedObject *)value;
+- (void)addBooksObject:(book *)value;
+- (void)removeBooksObject:(book *)value;
 - (void)addBooks:(NSSet *)value;
 - (void)removeBooks:(NSSet *)value;
 

@@ -8,13 +8,15 @@
 
 #import "SofiaApplication.h"
 #import "BooksWindowController.h"
+#import "book.h"
+#import "author.h"
+#import "subject.h"
 
 @implementation SofiaApplication
 
 - (void) awakeFromNib {
     [tableView setDoubleAction:@selector(doubleClickAction:)];
     [tableView setTarget:self]; 
-    //[self updateSummaryText]; //TODO: this doesn't work KVO???
     [self registerAsArrayControllerObserver];
 }
 
@@ -99,6 +101,8 @@
     if (coordinator != nil) {
         managedObjectContext = [[NSManagedObjectContext alloc] init];
         [managedObjectContext setPersistentStoreCoordinator: coordinator];
+	//this line was suggested as fixing the EXC_BAD_ACCESS error, turns out I don't need it.
+	//[managedObjectContext setRetainsRegisteredObjects:YES];
     }
     
     return managedObjectContext;
@@ -186,7 +190,7 @@
 
 - (IBAction) doubleClickAction:(id)sender {
     //use the first object if multiple are selected
-    NSManagedObject *obj = [[arrayController selectedObjects] objectAtIndex:0];
+    book *obj = [[arrayController selectedObjects] objectAtIndex:0];
 
     BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj];
     if (![NSBundle loadNibNamed:@"Detail" owner:detailWin]) {
@@ -196,7 +200,7 @@
 
 - (IBAction) addRemoveClickAction:(id)sender {
     if ([addRemoveButtons selectedSegment] == 0){ //new book
-	NSManagedObject *obj = [[NSManagedObject alloc] initWithEntity:[[managedObjectModel entitiesByName] objectForKey:@"book"]
+	book *obj = [[book alloc] initWithEntity:[[managedObjectModel entitiesByName] objectForKey:@"book"]
 							insertIntoManagedObjectContext:managedObjectContext];
 
 	BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj];
@@ -262,7 +266,6 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if ([keyPath isEqual:@"arrangedObjects"]) {
 	[self updateSummaryText];
-	[self saveAction:self];
 	[self unregisterForArrayControllerChangeNotification]; //perform once at startup then unregister.
     }
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];

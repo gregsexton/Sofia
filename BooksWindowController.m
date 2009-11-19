@@ -5,9 +5,13 @@
 //  Created by Greg Sexton on 26/07/2009.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
+//TODO: use generated accessors for book object
 
 #import "BooksWindowController.h"
 #import "isbndbInterface.h"
+#import "book.h"
+#import "author.h"
+#import "subject.h"
 
 @implementation BooksWindowController
 
@@ -19,7 +23,7 @@
     return self;
 }
 
-- (id)initWithManagedObject:(NSManagedObject*)object {
+- (id)initWithManagedObject:(book*)object {
     self = [super init];
     obj = object;
     managedObjectContext = [obj managedObjectContext];
@@ -118,6 +122,7 @@
 	return false;
     }
 
+    //programmatically set ui elements
     [txt_isbn10 setStringValue:[isbndb bookISBN10]];
     [txt_isbn13 setStringValue:[isbndb bookISBN13]];
     [txt_edition setStringValue:[isbndb bookEdition]];
@@ -144,6 +149,33 @@
     [txt_physicalDescrip addItemWithObjectValue:[isbndb bookPhysicalDescrip]];
     [txt_physicalDescrip selectItemAtIndex:0];
 
+    //loop over authors and subject arrays and update tables
+    //TODO: does subject/author already exist? add to it
+    //TODO: when clicking add start editing automatically.
+    NSString *object;
+    NSEnumerator *baEnum = [[isbndb bookAuthors] objectEnumerator];
+    while (object = [baEnum nextObject]) {
+	author *authorObj = [NSEntityDescription insertNewObjectForEntityForName:@"author" inManagedObjectContext:managedObjectContext];
+	
+	//author *authorObj = [[author alloc] initWithEntity:[[[NSManagedObjectModel mergedModelFromBundles:nil] entitiesByName] objectForKey:@"author"]
+					    //insertIntoManagedObjectContext:managedObjectContext];
+	[authorObj setValue:object forKey:@"name"];
+	[authorObj addBooksObject:obj];
+	//[obj addAuthorsObject:authorObj];
+	//[authorsArrayController addObject:authorObj];
+    }
+    NSEnumerator *bsEnum = [[isbndb bookSubjects] objectEnumerator];
+    while (object = [bsEnum nextObject]) {
+	subject *subjectObj = [NSEntityDescription insertNewObjectForEntityForName:@"subject" inManagedObjectContext:managedObjectContext];
+	//subject *subjectObj = [[subject alloc] initWithEntity:[[[NSManagedObjectModel mergedModelFromBundles:nil] entitiesByName] objectForKey:@"subject"]
+					       //insertIntoManagedObjectContext:managedObjectContext];
+	[subjectObj setValue:object forKey:@"name"];
+	[subjectObj addBooksObject:obj];		//looks like it fills in the inverse either way
+	//[obj addSubjectsObject:subjectObj];
+	//[subjectsArrayController addObject:subjectObj];
+    }
+    
+    //lastly update the summary tab
     [self updateSummaryTabView];
     return true;
 }
@@ -222,7 +254,7 @@
 
 - (IBAction)saveClicked:(id)sender {
     [self updateManagedObjectFromUI];
-    [self saveManagedObjectContext:[obj managedObjectContext]];
+    [self saveManagedObjectContext:managedObjectContext];
     [window close];
     [delegate saveClicked:self];
 }
