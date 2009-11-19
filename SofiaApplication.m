@@ -11,6 +11,7 @@
 #import "book.h"
 #import "author.h"
 #import "subject.h"
+#import "AuthorsWindowController.h"
 
 @implementation SofiaApplication
 
@@ -188,6 +189,14 @@
     [super dealloc];
 }
 
+- (IBAction) manageAuthorsClickAction:(id)sender {
+	AuthorsWindowController *detailWin = [[AuthorsWindowController alloc] initWithManagedObjectContext:managedObjectContext];
+	//[detailWin setDelegate:self];
+	if (![NSBundle loadNibNamed:@"AuthorDetail" owner:detailWin]) {
+	    NSLog(@"Error loading Nib!");
+	}
+}
+
 - (IBAction) doubleClickAction:(id)sender {
     //use the first object if multiple are selected
     book *obj = [[arrayController selectedObjects] objectAtIndex:0];
@@ -199,32 +208,40 @@
 } 
 
 - (IBAction) addRemoveClickAction:(id)sender {
-    if ([addRemoveButtons selectedSegment] == 0){ //new book
-	book *obj = [[book alloc] initWithEntity:[[managedObjectModel entitiesByName] objectForKey:@"book"]
-							insertIntoManagedObjectContext:managedObjectContext];
+    if ([addRemoveButtons selectedSegment] == 0){
+	[self addBookAction:self];
+    }else{
+	[self removeBookAction:self];
+    }
+}
 
-	BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj];
-	[detailWin setDelegate:self];
-	if (![NSBundle loadNibNamed:@"Detail" owner:detailWin]) {
-	    NSLog(@"Error loading Nib!");
-	}
-    }else{ //remove book
-	int alertReturn = -1;
-	int noOfRowsSelected = [tableView numberOfSelectedRows];
-	if(noOfRowsSelected == 0){
-	    NSRunInformationalAlertPanel(@"Selection Error", @"You must select at least one book to remove." , @"Ok", nil, nil);
-	}else if(noOfRowsSelected == 1){
-	    alertReturn = NSRunAlertPanel(@"Remove Book?", @"Are you sure you wish to permanently remove this book?",
-					  @"No", @"Yes", nil);
-	}else if(noOfRowsSelected > 1){
-	    alertReturn = NSRunAlertPanel(@"Remove Books?", @"Are you sure you wish to permanently remove these books?",
-					  @"No", @"Yes", nil);
-	}
-	if (alertReturn == NSAlertAlternateReturn){
-	    [arrayController remove:self];
-	    [self saveAction:self];
-	    [self updateSummaryText];
-	}
+- (IBAction) addBookAction:(id)sender {
+    book *obj = [[book alloc] initWithEntity:[[managedObjectModel entitiesByName] objectForKey:@"book"]
+						    insertIntoManagedObjectContext:managedObjectContext];
+
+    BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj];
+    [detailWin setDelegate:self];
+    if (![NSBundle loadNibNamed:@"Detail" owner:detailWin]) {
+	NSLog(@"Error loading Nib!");
+    }
+}
+
+- (IBAction) removeBookAction:(id)sender {
+    int alertReturn = -1;
+    int noOfRowsSelected = [tableView numberOfSelectedRows];
+    if(noOfRowsSelected == 0){
+	NSRunInformationalAlertPanel(@"Selection Error", @"You must select at least one book to remove." , @"Ok", nil, nil);
+    }else if(noOfRowsSelected == 1){
+	alertReturn = NSRunAlertPanel(@"Remove Book?", @"Are you sure you wish to permanently remove this book?",
+				      @"No", @"Yes", nil);
+    }else if(noOfRowsSelected > 1){
+	alertReturn = NSRunAlertPanel(@"Remove Books?", @"Are you sure you wish to permanently remove these books?",
+				      @"No", @"Yes", nil);
+    }
+    if (alertReturn == NSAlertAlternateReturn){
+	[arrayController remove:self];
+	[self saveAction:self];
+	[self updateSummaryText];
     }
 }
 

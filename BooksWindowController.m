@@ -308,6 +308,7 @@
     }
 
 }
+
 - (IBAction) copiesValueChanged:(id)sender {
     int theValue = [sender intValue];
 

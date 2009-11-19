@@ -30,7 +30,10 @@
 - (IBAction) saveAction:sender;
 - (IBAction) doubleClickAction:(id)sender;
 - (IBAction) addRemoveClickAction:(id)sender;
+- (IBAction) addBookAction:(id)sender;
+- (IBAction) removeBookAction:(id)sender;
 - (IBAction) aboutClickAction:(id)sender;
+- (IBAction) manageAuthorsClickAction:(id)sender;
 - (void) updateSummaryText;
 
 @end
