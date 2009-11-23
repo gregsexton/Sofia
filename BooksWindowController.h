@@ -1,6 +1,5 @@
 //
 //  BooksWindowController.h
-//  books
 //
 //  Created by Greg Sexton on 26/07/2009.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.

@@ -1,6 +1,5 @@
 //
 //  isbndbInterface.h
-//  books
 //
 //  Created by Greg Sexton on 06/09/2009.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.

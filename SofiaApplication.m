@@ -1,6 +1,5 @@
 //
 //  SofiaApplication.m
-//  books
 //
 //  Created by Greg Sexton on 14/09/2009.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
@@ -18,7 +17,10 @@
 - (void) awakeFromNib {
     [tableView setDoubleAction:@selector(doubleClickAction:)];
     [tableView setTarget:self]; 
-    [self registerAsArrayControllerObserver];
+    //guarantee loaded before updating summary text. this works better than observing.
+    NSError *error;
+    [arrayController fetchWithRequest:nil merge:NO error:&error];
+    [self updateSummaryText];
 }
 
 
@@ -268,6 +270,7 @@
 //tableview it is used to update the summary text when the
 //application first loads. After first running it is disabled and
 //future updating is handled by the delgate method saveClicked.
+//TODO: delete these 3?
 - (void)registerAsArrayControllerObserver{
     [arrayController addObserver:self
 		     forKeyPath:@"arrangedObjects"

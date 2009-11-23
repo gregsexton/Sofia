@@ -1,6 +1,5 @@
 //
 //  BooksWindowController.m
-//  books
 //
 //  Created by Greg Sexton on 26/07/2009.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
@@ -8,6 +7,7 @@
 //TODO: use generated accessors for book object
 
 #import "BooksWindowController.h"
+#import "AuthorsWindowController.h"
 #import "isbndbInterface.h"
 #import "book.h"
 #import "author.h"
@@ -36,6 +36,8 @@
 	[self updateUIFromManagedObject];
 	[self updateSummaryTabView];
     }
+    [authorsTableView setDoubleAction:@selector(doubleClickAuthorAction:)];
+    [authorsTableView setTarget:self]; 
 }
 
 - (NSManagedObjectContext *) managedObjectContext{
@@ -339,4 +341,15 @@
     [lbl_summary_subject setStringValue:[txt_subject stringValue]];
     [lbl_summary_physicalDescrip setStringValue:[txt_physicalDescrip stringValue]];
 }
+
+- (IBAction) doubleClickAuthorAction:(id)sender {
+    //use the first object if multiple are selected
+    author *authorobj = [[authorsArrayController selectedObjects] objectAtIndex:0];
+    AuthorsWindowController *detailWin = [[AuthorsWindowController alloc] initWithManagedObjectContext:managedObjectContext
+									  selectedAuthor:authorobj];
+    if (![NSBundle loadNibNamed:@"AuthorDetail" owner:detailWin]) {
+	NSLog(@"Error loading Nib!");
+    }
+}
+
 @end
