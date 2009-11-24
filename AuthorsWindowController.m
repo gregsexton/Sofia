@@ -38,6 +38,7 @@
     if(initialSelection != nil){
 	//assumes that the order of arrangedObjects is the same as
 	//the index of the rows in the tableview.
+	//TODO: scroll to selected row.
 	NSIndexSet *index = [NSIndexSet indexSetWithIndex:[[authorArrayController arrangedObjects] indexOfObject:initialSelection]];
 	[authorTableView selectRowIndexes:index byExtendingSelection:NO];
     }

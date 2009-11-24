@@ -152,34 +152,50 @@
     [txt_physicalDescrip selectItemAtIndex:0];
 
     //loop over authors and subject arrays and update tables
-    //TODO: does subject/author already exist? add to it
     //TODO: when clicking add start editing automatically.
     NSString *object;
+    //update authors
     NSEnumerator *baEnum = [[isbndb bookAuthors] objectEnumerator];
     while (object = [baEnum nextObject]) {
-	author *authorObj = [NSEntityDescription insertNewObjectForEntityForName:@"author" inManagedObjectContext:managedObjectContext];
-	
-	//author *authorObj = [[author alloc] initWithEntity:[[[NSManagedObjectModel mergedModelFromBundles:nil] entitiesByName] objectForKey:@"author"]
-					    //insertIntoManagedObjectContext:managedObjectContext];
+	author *authorObj;
+	NSFetchRequest *request = [self authorExistsWithName:object];
+	if(request != nil){
+	    //author with exact name already exists HACK WARNING: this may not be the same author, the author may be named differently etc
+	    //TODO: fix this! possibly do another isbndb lookup to see if it is the same author?
+	    NSError *error;
+	    authorObj = [[managedObjectContext executeFetchRequest:request error:&error] objectAtIndex:0];
+	}else{
+	    authorObj = [NSEntityDescription insertNewObjectForEntityForName:@"author" inManagedObjectContext:managedObjectContext];
+	}
 	[authorObj setValue:object forKey:@"name"];
 	[authorObj addBooksObject:obj];
-	//[obj addAuthorsObject:authorObj];
-	//[authorsArrayController addObject:authorObj];
     }
+    //update subjects
     NSEnumerator *bsEnum = [[isbndb bookSubjects] objectEnumerator];
     while (object = [bsEnum nextObject]) {
 	subject *subjectObj = [NSEntityDescription insertNewObjectForEntityForName:@"subject" inManagedObjectContext:managedObjectContext];
-	//subject *subjectObj = [[subject alloc] initWithEntity:[[[NSManagedObjectModel mergedModelFromBundles:nil] entitiesByName] objectForKey:@"subject"]
-					       //insertIntoManagedObjectContext:managedObjectContext];
 	[subjectObj setValue:object forKey:@"name"];
 	[subjectObj addBooksObject:obj];		//looks like it fills in the inverse either way
-	//[obj addSubjectsObject:subjectObj];
-	//[subjectsArrayController addObject:subjectObj];
     }
     
     //lastly update the summary tab
     [self updateSummaryTabView];
     return true;
+}
+
+- (NSFetchRequest*) authorExistsWithName:(NSString*)authorName{
+    //returns the request in order to get hold of these authors
+    //otherwise returns nil if the author cannot be found.
+    NSError *error;
+    NSString *predicate = [[NSString alloc] initWithFormat:@"name MATCHES '%@'", authorName];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"author" inManagedObjectContext:managedObjectContext]];
+    [request setPredicate:[NSPredicate predicateWithFormat:predicate]];
+    if([managedObjectContext countForFetchRequest:request error:&error] > 0){
+	return request;
+    }else{
+	return nil;
+    }
 }
 
 - (void) updateManagedObjectFromUI {

@@ -216,7 +216,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>37D7085810BB3FDD0004F441</string>
+						<string>37D7086510BC66B20004F441</string>
 						<key>history</key>
 						<array>
 							<string>376D41B010B4AA7D00242DF7</string>
@@ -371,7 +371,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>37D7085710BB3FDD0004F441</string>
+										<string>37D7086410BC66B20004F441</string>
 										<key>history</key>
 										<array>
 											<string>373752621055B6BE00718317</string>
@@ -585,15 +585,15 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>37D7085910BB3FDD0004F441</string>
+		<string>37D7086610BC66B20004F441</string>
 		<string>37D7068F10B4AA900004F441</string>
 		<string>37D7069010B4AA900004F441</string>
 		<string>376D400A10AB84FF00242DF7</string>
-		<string>373655AF101CCE8600709C8F</string>
 		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>37D7071410B4C8880004F441</string>
 		<string>1C78EAAD065D492600B07095</string>
+		<string>373655AF101CCE8600709C8F</string>
 	</array>
 	<key>WindowString</key>
 	<string>1268 257 1217 845 0 0 2560 1418 </string>
@@ -617,7 +617,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>AuthorsWindowController.h</string>
+								<string>BooksWindowController.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
