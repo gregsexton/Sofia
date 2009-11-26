@@ -8,6 +8,7 @@
 #import <Cocoa/Cocoa.h>
 #import <GData/GDataBooks.h>
 #import "book.h"
+#import "author.h"
 
 @interface BooksWindowController : NSObjectController {
     IBOutlet NSTextField *txt_search;
@@ -66,6 +67,7 @@
     IBOutlet NSArrayController	*subjectsArrayController;
 
     book	    	    *obj;
+    author		    *doubleClickedAuthor;
     NSManagedObjectContext  *managedObjectContext; //TODO: use this instead of [obj managedObjectContext]
     id			    *delegate;
 }
@@ -77,6 +79,7 @@
 - (IBAction)clearClicked:(id)sender;
 - (IBAction)cancelClicked:(id)sender;
 - (IBAction)saveClicked:(id)sender;
+- (IBAction)addAuthorClicked:(id)sender;
 - (IBAction)copiesValueChanged:(id)sender;
 
 - (void) updateUIFromManagedObject;

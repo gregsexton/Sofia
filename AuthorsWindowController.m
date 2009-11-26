@@ -12,6 +12,7 @@
 
 
 @implementation AuthorsWindowController
+@synthesize delegate;
 
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context {
     managedObjectContext = context;
@@ -52,6 +53,10 @@
 
 - (IBAction)saveClicked:(id)sender {
     [self saveManagedObjectContext:managedObjectContext];
+    //let delegate know
+    if([[self delegate] respondsToSelector:@selector(savedWithAuthorSelection:)]) {
+	[[self delegate] savedWithAuthorSelection:[[authorArrayController selectedObjects] objectAtIndex:0]];
+    }
     [window close];
 }
 

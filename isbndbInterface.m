@@ -150,7 +150,7 @@
     }
     if ([self currentProperty] == pUrls){
 	//TODO: do not capitalize urls
-	[self setBookUrls:[self cleanUpString:currentStringValue]];
+	[self setBookUrls:[[self cleanUpString:currentStringValue] lowercaseString]];
     }
     if ([self currentProperty] == pAwards){
 	[self setBookAwards:[self cleanUpString:currentStringValue]];

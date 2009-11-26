@@ -216,7 +216,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>37D7086510BC66B20004F441</string>
+						<string>37D708AC10BF11E00004F441</string>
 						<key>history</key>
 						<array>
 							<string>376D41B010B4AA7D00242DF7</string>
@@ -316,7 +316,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>20</integer>
+									<integer>5</integer>
 									<integer>4</integer>
 									<integer>0</integer>
 								</array>
@@ -359,7 +359,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>BooksWindowController.m</string>
+								<string>author.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -367,11 +367,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>BooksWindowController.m</string>
+										<string>author.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>37D7086410BC66B20004F441</string>
+										<string>37D708AB10BF11E00004F441</string>
 										<key>history</key>
 										<array>
 											<string>373752621055B6BE00718317</string>
@@ -381,7 +381,6 @@
 											<string>371855DA1097C798006A363D</string>
 											<string>371855E8109DF658006A363D</string>
 											<string>376D3FFB10AB829800242DF7</string>
-											<string>376D414410B21B5600242DF7</string>
 											<string>376D419110B32CBF00242DF7</string>
 											<string>37D7073A10B5DCA90004F441</string>
 											<string>37D707BA10B5FDB70004F441</string>
@@ -389,7 +388,8 @@
 											<string>37D707E410B96E320004F441</string>
 											<string>37D7080E10BB0E1A0004F441</string>
 											<string>37D7082310BB11D90004F441</string>
-											<string>37D7082410BB11D90004F441</string>
+											<string>37D7089B10BF0FB40004F441</string>
+											<string>37D7089C10BF0FB40004F441</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -585,15 +585,15 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>37D7086610BC66B20004F441</string>
+		<string>37D708AD10BF11E00004F441</string>
 		<string>37D7068F10B4AA900004F441</string>
 		<string>37D7069010B4AA900004F441</string>
-		<string>376D400A10AB84FF00242DF7</string>
-		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>37D7071410B4C8880004F441</string>
 		<string>1C78EAAD065D492600B07095</string>
+		<string>376D400A10AB84FF00242DF7</string>
 		<string>373655AF101CCE8600709C8F</string>
+		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>1268 257 1217 845 0 0 2560 1418 </string>

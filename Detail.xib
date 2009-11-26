@@ -236,17 +236,17 @@
 											<object class="NSTextField" id="393839971">
 												<reference key="NSNextResponder" ref="14031021"/>
 												<int key="NSvFlags">268</int>
-												<string key="NSFrame">{{163, 443}, {458, 15}}</string>
+												<string key="NSFrame">{{163, 441}, {458, 22}}</string>
 												<reference key="NSSuperview" ref="14031021"/>
 												<int key="NSViewLayerContentsRedrawPolicy">2</int>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSTextFieldCell" key="NSCell" id="499694122">
-													<int key="NSCellFlags">68288064</int>
-													<int key="NSCellFlags2">272630784</int>
+													<int key="NSCellFlags">67239488</int>
+													<int key="NSCellFlags2">272632064</int>
 													<string key="NSContents"/>
-													<object class="NSFont" key="NSSupport" id="849288758">
-														<string key="NSName">Helvetica-Bold</string>
-														<double key="NSSize">12</double>
+													<object class="NSFont" key="NSSupport">
+														<string key="NSName">LucidaGrande-Bold</string>
+														<double key="NSSize">18</double>
 														<int key="NSfFlags">16</int>
 													</object>
 													<reference key="NSControlView" ref="393839971"/>
@@ -337,7 +337,11 @@
 													<int key="NSCellFlags">68288064</int>
 													<int key="NSCellFlags2">272630784</int>
 													<string key="NSContents">ISBN 10:</string>
-													<reference key="NSSupport" ref="849288758"/>
+													<object class="NSFont" key="NSSupport" id="849288758">
+														<string key="NSName">Helvetica-Bold</string>
+														<double key="NSSize">12</double>
+														<int key="NSfFlags">16</int>
+													</object>
 													<reference key="NSControlView" ref="991259746"/>
 													<reference key="NSBackgroundColor" ref="655670657"/>
 													<reference key="NSTextColor" ref="143833624"/>
@@ -2848,14 +2852,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">add:</string>
-						<reference key="source" ref="763685894"/>
-						<reference key="destination" ref="906827589"/>
-					</object>
-					<int key="connectionID">320</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">remove:</string>
 						<reference key="source" ref="763685894"/>
 						<reference key="destination" ref="810907004"/>
@@ -3021,6 +3017,14 @@
 						</object>
 					</object>
 					<int key="connectionID">357</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">addAuthorClicked:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="906827589"/>
+					</object>
+					<int key="connectionID">358</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3858,7 +3862,6 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="403684829"/>
-							<reference ref="393839971"/>
 							<reference ref="1054577959"/>
 							<reference ref="313585820"/>
 							<reference ref="410141379"/>
@@ -3886,6 +3889,7 @@
 							<reference ref="356606809"/>
 							<reference ref="273917355"/>
 							<reference ref="619725546"/>
+							<reference ref="393839971"/>
 						</object>
 						<reference key="parent" ref="670430723"/>
 					</object>
@@ -4856,9 +4860,9 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{896, 470}, {681, 658}}</string>
+					<string>{{596, 547}, {681, 658}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{896, 470}, {681, 658}}</string>
+					<string>{{596, 547}, {681, 658}}</string>
 					<real value="1"/>
 					<string>{{33, 99}, {480, 360}}</string>
 					<string>{3.40282e+38, 3.40282e+38}</string>
@@ -4954,7 +4958,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">357</int>
+			<int key="maxID">358</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4966,6 +4970,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>addAuthorClicked:</string>
 							<string>cancelClicked:</string>
 							<string>clearClicked:</string>
 							<string>copiesValueChanged:</string>
@@ -4974,6 +4979,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>

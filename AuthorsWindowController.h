@@ -19,7 +19,10 @@
 
     author			*initialSelection;
     NSManagedObjectContext	*managedObjectContext;
+
+    id				*delegate;
 }
+@property (nonatomic, assign) id *delegate;
 
 - (IBAction)saveClicked:(id)sender;
 - (IBAction)cancelClicked:(id)sender;

@@ -361,11 +361,30 @@
 - (IBAction) doubleClickAuthorAction:(id)sender {
     //use the first object if multiple are selected
     author *authorobj = [[authorsArrayController selectedObjects] objectAtIndex:0];
+    doubleClickedAuthor = authorobj;
+    [self displayManagedAuthorsWithSelectedAuthor:authorobj];
+}
+
+- (void) savedWithAuthorSelection:(author*)selectedAuthor{ //delegate method
+    if(doubleClickedAuthor != nil){
+	[doubleClickedAuthor removeBooksObject:obj];
+	doubleClickedAuthor = nil;
+    }
+    [selectedAuthor addBooksObject:obj];
+}
+
+- (void) displayManagedAuthorsWithSelectedAuthor:(author*)authorObj{
     AuthorsWindowController *detailWin = [[AuthorsWindowController alloc] initWithManagedObjectContext:managedObjectContext
-									  selectedAuthor:authorobj];
+									  selectedAuthor:authorObj];
+    [detailWin setDelegate:self];
     if (![NSBundle loadNibNamed:@"AuthorDetail" owner:detailWin]) {
 	NSLog(@"Error loading Nib!");
     }
+}
+
+- (IBAction)addAuthorClicked:(id)sender{
+    doubleClickedAuthor = nil; //just to make sure!
+    [self displayManagedAuthorsWithSelectedAuthor:nil];
 }
 
 @end
