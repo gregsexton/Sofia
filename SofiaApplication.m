@@ -11,12 +11,20 @@
 #import "author.h"
 #import "subject.h"
 #import "AuthorsWindowController.h"
+#import "AccessKeyViewController.h"
+#import "MBPreferencesController.h"
 
 @implementation SofiaApplication
 
 - (void) awakeFromNib {
+    //setup preferences
+    AccessKeyViewController *accessKeys = [[AccessKeyViewController alloc] initWithNibName:@"Preferences_AccessKeys" bundle:nil];
+    [[MBPreferencesController sharedController] setModules:[NSArray arrayWithObjects:accessKeys, nil]];
+    [accessKeys release];
+
     [tableView setDoubleAction:@selector(doubleClickAction:)];
     [tableView setTarget:self]; 
+
     //guarantee loaded before updating summary text. this works better than observing.
     NSError *error;
     [arrayController fetchWithRequest:nil merge:NO error:&error];
@@ -31,7 +39,7 @@
  former cannot be found), the system's temporary directory.
  */
 
-- (NSString *)applicationSupportFolder {
+- (NSString*)applicationSupportFolder {
 	
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
     NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : NSTemporaryDirectory();
@@ -44,7 +52,7 @@
  by merging all of the models found in the application bundle.
  */
 
-- (NSManagedObjectModel *)managedObjectModel {
+- (NSManagedObjectModel*)managedObjectModel {
 	
     if (managedObjectModel != nil) {
         return managedObjectModel;
@@ -297,4 +305,9 @@
 				@"Greg Sexton 2009", @"Copyright", nil];
 	[[NSApplication sharedApplication] orderFrontStandardAboutPanelWithOptions:aboutDict];
 }
+
+- (IBAction) displayPreferencesClickAction:(id)sender{
+
+    [[MBPreferencesController sharedController] showWindow:sender];
+}    
 @end

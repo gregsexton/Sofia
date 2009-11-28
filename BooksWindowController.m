@@ -120,7 +120,7 @@
     isbndbInterface *isbndb = [[isbndbInterface alloc] init];
     if(![isbndb searchISBN:[txt_search stringValue]]){
 	//error!
-	NSRunInformationalAlertPanel(@"Download Error", @"Unable to retrieve information from ISBNDb." , @"Ok", nil, nil);
+	NSRunInformationalAlertPanel(@"Download Error", @"Unable to retrieve information from ISBNDb. Please check internet connectivity and a valid access key in your preferences." , @"Ok", nil, nil);
 	return false;
     }
 

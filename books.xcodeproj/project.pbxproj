@@ -21,6 +21,9 @@
 		376D414010B21B4C00242DF7 /* person.m in Sources */ = {isa = PBXBuildFile; fileRef = 376D413C10B21B4C00242DF7 /* person.m */; };
 		37D7073310B5D7FE0004F441 /* AuthorDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D7073210B5D7FE0004F441 /* AuthorDetail.xib */; };
 		37D7073710B5D8BE0004F441 /* AuthorsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D7073610B5D8BE0004F441 /* AuthorsWindowController.m */; };
+		37D708DB10C190100004F441 /* MBPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D708DA10C190100004F441 /* MBPreferencesController.m */; };
+		37D708EF10C191EF0004F441 /* Preferences_AccessKeys.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D708EE10C191EF0004F441 /* Preferences_AccessKeys.xib */; };
+		37D708F410C192980004F441 /* AccessKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D708F310C192980004F441 /* AccessKeyViewController.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -56,6 +59,11 @@
 		37D7073210B5D7FE0004F441 /* AuthorDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthorDetail.xib; sourceTree = "<group>"; };
 		37D7073510B5D8BE0004F441 /* AuthorsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorsWindowController.h; sourceTree = "<group>"; };
 		37D7073610B5D8BE0004F441 /* AuthorsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorsWindowController.m; sourceTree = "<group>"; };
+		37D708D910C190100004F441 /* MBPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBPreferencesController.h; sourceTree = "<group>"; };
+		37D708DA10C190100004F441 /* MBPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBPreferencesController.m; sourceTree = "<group>"; };
+		37D708EE10C191EF0004F441 /* Preferences_AccessKeys.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Preferences_AccessKeys.xib; sourceTree = "<group>"; };
+		37D708F210C192980004F441 /* AccessKeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccessKeyViewController.h; sourceTree = "<group>"; };
+		37D708F310C192980004F441 /* AccessKeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccessKeyViewController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Sofia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sofia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -122,6 +130,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				37D708D010C18F7C0004F441 /* Controllers */,
 				376D413510B21B4C00242DF7 /* author.h */,
 				376D413610B21B4C00242DF7 /* author.m */,
 				376D413710B21B4C00242DF7 /* subject.h */,
@@ -132,12 +141,6 @@
 				376D413C10B21B4C00242DF7 /* person.m */,
 				32CA4F630368D1EE00C91783 /* books_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
-				37365592101CCC3C00709C8F /* BooksWindowController.h */,
-				37365593101CCC3C00709C8F /* BooksWindowController.m */,
-				373752C4105EB6D500718317 /* SofiaApplication.h */,
-				373752C5105EB6D500718317 /* SofiaApplication.m */,
-				37D7073510B5D8BE0004F441 /* AuthorsWindowController.h */,
-				37D7073610B5D8BE0004F441 /* AuthorsWindowController.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -145,6 +148,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				37D708ED10C191CD0004F441 /* Preference Panes */,
 				371855D41097C237006A363D /* icon.icns */,
 				373752BF105EB4FF00718317 /* Detail.xib */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
@@ -164,6 +168,39 @@
 				373751491054219600718317 /* database.xcdatamodel */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		37D708D010C18F7C0004F441 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				37D708F110C192460004F441 /* Preference Pane Controllers */,
+				37D708D910C190100004F441 /* MBPreferencesController.h */,
+				37D708DA10C190100004F441 /* MBPreferencesController.m */,
+				37365592101CCC3C00709C8F /* BooksWindowController.h */,
+				37365593101CCC3C00709C8F /* BooksWindowController.m */,
+				373752C4105EB6D500718317 /* SofiaApplication.h */,
+				373752C5105EB6D500718317 /* SofiaApplication.m */,
+				37D7073510B5D8BE0004F441 /* AuthorsWindowController.h */,
+				37D7073610B5D8BE0004F441 /* AuthorsWindowController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		37D708ED10C191CD0004F441 /* Preference Panes */ = {
+			isa = PBXGroup;
+			children = (
+				37D708EE10C191EF0004F441 /* Preferences_AccessKeys.xib */,
+			);
+			name = "Preference Panes";
+			sourceTree = "<group>";
+		};
+		37D708F110C192460004F441 /* Preference Pane Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				37D708F210C192980004F441 /* AccessKeyViewController.h */,
+				37D708F310C192980004F441 /* AccessKeyViewController.m */,
+			);
+			name = "Preference Pane Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,6 +252,7 @@
 				3737550E106839A700718317 /* Credits.html in Resources */,
 				371855D51097C237006A363D /* icon.icns in Resources */,
 				37D7073310B5D7FE0004F441 /* AuthorDetail.xib in Resources */,
+				37D708EF10C191EF0004F441 /* Preferences_AccessKeys.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +273,8 @@
 				376D413F10B21B4C00242DF7 /* book.m in Sources */,
 				376D414010B21B4C00242DF7 /* person.m in Sources */,
 				37D7073710B5D8BE0004F441 /* AuthorsWindowController.m in Sources */,
+				37D708DB10C190100004F441 /* MBPreferencesController.m in Sources */,
+				37D708F410C192980004F441 /* AccessKeyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

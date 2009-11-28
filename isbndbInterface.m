@@ -39,10 +39,15 @@
 
 - (BOOL)searchISBN:(NSString*)isbn {
     //returns true if the search is successful
-    //TODO: make the access key part of a config file
-    NSURL *detailsUrl = [[NSURL alloc] initWithString:[@"http://isbndb.com/api/books.xml?access_key=&results=details,texts,prices,subjects,marc,authors&index1=isbn&value1=" stringByAppendingString:isbn]];
+    NSString *accessKey = [[NSUserDefaults standardUserDefaults] objectForKey:@"isbndb_accessKey"];
+    if(accessKey == nil || [accessKey isEqualToString:@""]){
+	return false; //accessKey not valid or not set
+    }else{
+	NSString *urlPrefix = [@"http://isbndb.com/api/books.xml?access_key=" stringByAppendingString:accessKey];
+	NSURL *detailsUrl = [[NSURL alloc] initWithString:[urlPrefix stringByAppendingString:[@"&results=details,texts,prices,subjects,marc,authors&index1=isbn&value1=" stringByAppendingString:isbn]]];
 
-    return [self processDetailsWithUrl: detailsUrl];
+	return [self processDetailsWithUrl:detailsUrl];
+    }
 }
 
 - (BOOL)processDetailsWithUrl:(NSURL*)url{

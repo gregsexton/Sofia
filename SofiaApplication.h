@@ -33,6 +33,7 @@
 - (IBAction) removeBookAction:(id)sender;
 - (IBAction) aboutClickAction:(id)sender;
 - (IBAction) manageAuthorsClickAction:(id)sender;
+- (IBAction) displayPreferencesClickAction:(id)sender;
 - (void) updateSummaryText;
 
 @end
