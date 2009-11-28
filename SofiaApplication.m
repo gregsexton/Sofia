@@ -11,6 +11,7 @@
 #import "author.h"
 #import "subject.h"
 #import "AuthorsWindowController.h"
+#import "SubjectWindowController.h"
 #import "AccessKeyViewController.h"
 #import "GeneralViewController.h"
 #import "MBPreferencesController.h"
@@ -206,6 +207,14 @@
 	AuthorsWindowController *detailWin = [[AuthorsWindowController alloc] initWithManagedObjectContext:managedObjectContext];
 	//[detailWin setDelegate:self];
 	if (![NSBundle loadNibNamed:@"AuthorDetail" owner:detailWin]) {
+	    NSLog(@"Error loading Nib!");
+	}
+}
+
+- (IBAction) manageSubjectsClickAction:(id)sender {
+	SubjectWindowController *detailWin = [[SubjectWindowController alloc] initWithManagedObjectContext:managedObjectContext];
+	//[detailWin setDelegate:self];
+	if (![NSBundle loadNibNamed:@"SubjectDetail" owner:detailWin]) {
 	    NSLog(@"Error loading Nib!");
 	}
 }

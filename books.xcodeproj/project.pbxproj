@@ -26,6 +26,8 @@
 		37D708F410C192980004F441 /* AccessKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D708F310C192980004F441 /* AccessKeyViewController.m */; };
 		37D7095F10C1BFC90004F441 /* Preferences_General.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D7095E10C1BFC90004F441 /* Preferences_General.xib */; };
 		37D7096310C1BFFB0004F441 /* GeneralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D7096210C1BFFB0004F441 /* GeneralViewController.m */; };
+		37D7099E10C1D8400004F441 /* SubjectDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D7099D10C1D8400004F441 /* SubjectDetail.xib */; };
+		37D709A410C1D8E50004F441 /* SubjectWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D709A310C1D8E50004F441 /* SubjectWindowController.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -69,6 +71,9 @@
 		37D7095E10C1BFC90004F441 /* Preferences_General.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Preferences_General.xib; sourceTree = "<group>"; };
 		37D7096110C1BFFB0004F441 /* GeneralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralViewController.h; sourceTree = "<group>"; };
 		37D7096210C1BFFB0004F441 /* GeneralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralViewController.m; sourceTree = "<group>"; };
+		37D7099D10C1D8400004F441 /* SubjectDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubjectDetail.xib; sourceTree = "<group>"; };
+		37D709A210C1D8E50004F441 /* SubjectWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubjectWindowController.h; sourceTree = "<group>"; };
+		37D709A310C1D8E50004F441 /* SubjectWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubjectWindowController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Sofia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sofia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -161,6 +166,7 @@
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				3737550D106839A700718317 /* Credits.html */,
 				37D7073210B5D7FE0004F441 /* AuthorDetail.xib */,
+				37D7099D10C1D8400004F441 /* SubjectDetail.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -187,6 +193,8 @@
 				373752C5105EB6D500718317 /* SofiaApplication.m */,
 				37D7073510B5D8BE0004F441 /* AuthorsWindowController.h */,
 				37D7073610B5D8BE0004F441 /* AuthorsWindowController.m */,
+				37D709A210C1D8E50004F441 /* SubjectWindowController.h */,
+				37D709A310C1D8E50004F441 /* SubjectWindowController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -262,6 +270,7 @@
 				37D7073310B5D7FE0004F441 /* AuthorDetail.xib in Resources */,
 				37D708EF10C191EF0004F441 /* Preferences_AccessKeys.xib in Resources */,
 				37D7095F10C1BFC90004F441 /* Preferences_General.xib in Resources */,
+				37D7099E10C1D8400004F441 /* SubjectDetail.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +294,7 @@
 				37D708DB10C190100004F441 /* MBPreferencesController.m in Sources */,
 				37D708F410C192980004F441 /* AccessKeyViewController.m in Sources */,
 				37D7096310C1BFFB0004F441 /* GeneralViewController.m in Sources */,
+				37D709A410C1D8E50004F441 /* SubjectWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -269,9 +269,7 @@
 								<string>080E96DDFE201D6D7F000001</string>
 								<string>29B97315FDCFA39411CA2CEA</string>
 								<string>37D708D010C18F7C0004F441</string>
-								<string>37D708F110C192460004F441</string>
 								<string>29B97317FDCFA39411CA2CEA</string>
-								<string>37D708ED10C191CD0004F441</string>
 								<string>29B97323FDCFA39411CA2CEA</string>
 								<string>1C37FBAC04509CD000000102</string>
 								<string>1C37FABC05509CD000000102</string>
@@ -280,15 +278,12 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>8</integer>
-									<integer>6</integer>
-									<integer>5</integer>
-									<integer>4</integer>
+									<integer>27</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {309, 786}}</string>
+							<string>{{0, 40}, {309, 786}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -323,7 +318,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>AccessKeyViewController.m</string>
+								<string>SofiaApplication.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -331,7 +326,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>AccessKeyViewController.m</string>
+										<string>SofiaApplication.m</string>
+										<key>_historyCapacity</key>
+										<integer>0</integer>
+										<key>bookmark</key>
+										<string>37D709BA10C1DB270004F441</string>
 										<key>history</key>
 										<array>
 											<string>373752621055B6BE00718317</string>
@@ -342,14 +341,15 @@
 											<string>371855E8109DF658006A363D</string>
 											<string>376D3FFB10AB829800242DF7</string>
 											<string>376D419110B32CBF00242DF7</string>
-											<string>37D7073A10B5DCA90004F441</string>
-											<string>37D707BA10B5FDB70004F441</string>
 											<string>37D707E310B96E320004F441</string>
-											<string>37D7082310BB11D90004F441</string>
 											<string>37D7089B10BF0FB40004F441</string>
 											<string>37D708D310C18F9D0004F441</string>
 											<string>37D7093B10C1A5D10004F441</string>
 											<string>37D7093C10C1A5D10004F441</string>
+											<string>37D709AC10C1DAE70004F441</string>
+											<string>37D709AD10C1DAE70004F441</string>
+											<string>37D709AE10C1DAE70004F441</string>
+											<string>37D709AF10C1DAE70004F441</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -545,7 +545,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>37D7099410C1C9FF0004F441</string>
+		<string>37D709BB10C1DB270004F441</string>
 		<string>37D7099510C1C9FF0004F441</string>
 		<string>37D7099610C1C9FF0004F441</string>
 		<string>1C78EAAD065D492600B07095</string>
@@ -570,12 +570,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string></string>
+								<string>SubjectWindowController.h</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -642,7 +644,7 @@
 			<key>WindowToolGUID</key>
 			<string>373655AF101CCE8600709C8F</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>
