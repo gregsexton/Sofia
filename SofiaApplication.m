@@ -12,6 +12,7 @@
 #import "subject.h"
 #import "AuthorsWindowController.h"
 #import "AccessKeyViewController.h"
+#import "GeneralViewController.h"
 #import "MBPreferencesController.h"
 
 @implementation SofiaApplication
@@ -19,8 +20,10 @@
 - (void) awakeFromNib {
     //setup preferences
     AccessKeyViewController *accessKeys = [[AccessKeyViewController alloc] initWithNibName:@"Preferences_AccessKeys" bundle:nil];
-    [[MBPreferencesController sharedController] setModules:[NSArray arrayWithObjects:accessKeys, nil]];
+    GeneralViewController *general = [[GeneralViewController alloc] initWithNibName:@"Preferences_General" bundle:nil];
+    [[MBPreferencesController sharedController] setModules:[NSArray arrayWithObjects:general, accessKeys, nil]];
     [accessKeys release];
+    [general release];
 
     [tableView setDoubleAction:@selector(doubleClickAction:)];
     [tableView setTarget:self]; 

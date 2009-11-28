@@ -23,7 +23,7 @@
 
 - (NSImage *)image
 {
-	return [NSImage imageNamed:@"NSPreferencesGeneral"];
+	return [NSImage imageNamed:@"NSUserGroup"];
 }
 
 @end
