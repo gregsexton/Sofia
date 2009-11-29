@@ -2062,7 +2062,7 @@
 														<int key="NSViewLayerContentsRedrawPolicy">2</int>
 														<reference key="NSTarget" ref="537149746"/>
 														<string key="NSAction">_doScroller:</string>
-														<double key="NSCurValue">1</double>
+														<double key="NSCurValue">0.99315068493150682</double>
 														<double key="NSPercent">0.1947367936372757</double>
 													</object>
 													<object class="NSScroller" id="92466049">
@@ -2074,6 +2074,7 @@
 														<int key="NSsFlags">1</int>
 														<reference key="NSTarget" ref="537149746"/>
 														<string key="NSAction">_doScroller:</string>
+														<double key="NSCurValue">0.0033388981636060101</double>
 														<double key="NSPercent">0.96598639455782309</double>
 													</object>
 													<object class="NSClipView" id="157532070">
@@ -2860,14 +2861,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">add:</string>
-						<reference key="source" ref="241700745"/>
-						<reference key="destination" ref="374150054"/>
-					</object>
-					<int key="connectionID">322</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">remove:</string>
 						<reference key="source" ref="241700745"/>
 						<reference key="destination" ref="773289110"/>
@@ -3025,6 +3018,14 @@
 						<reference key="destination" ref="906827589"/>
 					</object>
 					<int key="connectionID">358</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">addSubjectClicked:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="374150054"/>
+					</object>
+					<int key="connectionID">359</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -4860,9 +4861,9 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{596, 547}, {681, 658}}</string>
+					<string>{{855, 580}, {681, 658}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{596, 547}, {681, 658}}</string>
+					<string>{{855, 580}, {681, 658}}</string>
 					<real value="1"/>
 					<string>{{33, 99}, {480, 360}}</string>
 					<string>{3.40282e+38, 3.40282e+38}</string>
@@ -4958,7 +4959,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">358</int>
+			<int key="maxID">359</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4971,6 +4972,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>addAuthorClicked:</string>
+							<string>addSubjectClicked:</string>
 							<string>cancelClicked:</string>
 							<string>clearClicked:</string>
 							<string>copiesValueChanged:</string>
@@ -4979,6 +4981,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>

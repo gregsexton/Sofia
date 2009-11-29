@@ -8,10 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 #import "subject.h"
+#import "book.h"
+#import "BooksWindowController.h"
 
 
 @interface SubjectWindowController : NSObject {
-
     IBOutlet NSWindow		*window;
 
     IBOutlet NSArrayController	*bookArrayController;
@@ -23,9 +24,14 @@
     NSManagedObjectContext	*managedObjectContext;
 
     id				*delegate;
-
 }
+@property (nonatomic, assign) id *delegate;
 
+- (IBAction)saveClicked:(id)sender;
+- (IBAction)cancelClicked:(id)sender;
+- (IBAction) doubleClickBookAction:(id)sender;
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context;
+- (id)initWithManagedObjectContext:(NSManagedObjectContext*)context selectedSubject:(subject*)subjectInput;
+- (void) saveManagedObjectContext:(NSManagedObjectContext*)context;
 
 @end

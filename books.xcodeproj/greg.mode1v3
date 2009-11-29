@@ -278,11 +278,12 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>0</integer>
+									<integer>53</integer>
+									<integer>50</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {309, 786}}</string>
+							<string>{{0, 183}, {309, 786}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -329,7 +330,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>37D709E010C1E7720004F441</string>
+										<string>37D70A1010C2A86C0004F441</string>
 										<key>history</key>
 										<array>
 											<string>373752621055B6BE00718317</string>
@@ -544,13 +545,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>37D709E110C1E7720004F441</string>
+		<string>37D70A1110C2A86C0004F441</string>
 		<string>37D7099510C1C9FF0004F441</string>
 		<string>37D7099610C1C9FF0004F441</string>
-		<string>1CD10A99069EF8BA00B06720</string>
-		<string>373655AF101CCE8600709C8F</string>
-		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
 		<string>1C78EAAD065D492600B07095</string>
+		<string>373655AF101CCE8600709C8F</string>
+		<string>1CD10A99069EF8BA00B06720</string>
+		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>1237 336 1217 845 0 0 2560 1418 </string>
@@ -569,14 +570,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SubjectWindowController.h</string>
+								<string>BooksWindowController.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -585,7 +584,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {1144, 405}}</string>
 								<key>RubberWindowFrame</key>
-								<string>60 348 1144 686 0 0 2560 1418 </string>
+								<string>231 302 1144 686 0 0 2560 1418 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -593,6 +592,8 @@
 							<string>405pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -609,7 +610,7 @@
 								<key>Frame</key>
 								<string>{{0, 410}, {1144, 235}}</string>
 								<key>RubberWindowFrame</key>
-								<string>60 348 1144 686 0 0 2560 1418 </string>
+								<string>231 302 1144 686 0 0 2560 1418 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXBuildResultsModule</string>
@@ -639,7 +640,7 @@
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.buildV3</string>
 			<key>WindowString</key>
-			<string>60 348 1144 686 0 0 2560 1418 </string>
+			<string>231 302 1144 686 0 0 2560 1418 </string>
 			<key>WindowToolGUID</key>
 			<string>373655AF101CCE8600709C8F</string>
 			<key>WindowToolIsVisible</key>

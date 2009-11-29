@@ -8,6 +8,7 @@
 
 #import "BooksWindowController.h"
 #import "AuthorsWindowController.h"
+#import "SubjectWindowController.h"
 #import "isbndbInterface.h"
 #import "book.h"
 #import "author.h"
@@ -38,6 +39,8 @@
     }
     [authorsTableView setDoubleAction:@selector(doubleClickAuthorAction:)];
     [authorsTableView setTarget:self]; 
+    [subjectsTableView setDoubleAction:@selector(doubleClickSubjectAction:)];
+    [subjectsTableView setTarget:self]; 
 }
 
 - (NSManagedObjectContext *) managedObjectContext{
@@ -173,9 +176,17 @@
     //update subjects
     NSEnumerator *bsEnum = [[isbndb bookSubjects] objectEnumerator];
     while (object = [bsEnum nextObject]) {
-	subject *subjectObj = [NSEntityDescription insertNewObjectForEntityForName:@"subject" inManagedObjectContext:managedObjectContext];
+	subject *subjectObj;
+	NSFetchRequest *request = [self subjectExistsWithName:object];
+	if(request != nil){
+	    //subject with exact name already exists -- add to this instead of creating a new subject
+	    NSError *error;
+	    subjectObj = [[managedObjectContext executeFetchRequest:request error:&error] objectAtIndex:0];
+	}else{
+	    subjectObj = [NSEntityDescription insertNewObjectForEntityForName:@"subject" inManagedObjectContext:managedObjectContext];
+	}
 	[subjectObj setValue:object forKey:@"name"];
-	[subjectObj addBooksObject:obj];		//looks like it fills in the inverse either way
+	[subjectObj addBooksObject:obj];
     }
     
     //lastly update the summary tab
@@ -190,6 +201,21 @@
     NSString *predicate = [[NSString alloc] initWithFormat:@"name MATCHES '%@'", authorName];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"author" inManagedObjectContext:managedObjectContext]];
+    [request setPredicate:[NSPredicate predicateWithFormat:predicate]];
+    if([managedObjectContext countForFetchRequest:request error:&error] > 0){
+	return request;
+    }else{
+	return nil;
+    }
+}
+
+- (NSFetchRequest*) subjectExistsWithName:(NSString*)subjectName{
+    //returns the request in order to get hold of these subjects
+    //otherwise returns nil if the subject cannot be found.
+    NSError *error;
+    NSString *predicate = [[NSString alloc] initWithFormat:@"name MATCHES '%@'", subjectName];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"subject" inManagedObjectContext:managedObjectContext]];
     [request setPredicate:[NSPredicate predicateWithFormat:predicate]];
     if([managedObjectContext countForFetchRequest:request error:&error] > 0){
 	return request;
@@ -358,6 +384,7 @@
     [lbl_summary_physicalDescrip setStringValue:[txt_physicalDescrip stringValue]];
 }
 
+//author methods
 - (IBAction) doubleClickAuthorAction:(id)sender {
     //use the first object if multiple are selected
     author *authorobj = [[authorsArrayController selectedObjects] objectAtIndex:0];
@@ -387,4 +414,37 @@
     [self displayManagedAuthorsWithSelectedAuthor:nil];
 }
 
+//subject methods
+- (IBAction) doubleClickSubjectAction:(id)sender {
+    //use the first object if multiple are selected
+    NSLog(@"doubleClickSubjectAction");
+    subject *subjectobj = [[subjectsArrayController selectedObjects] objectAtIndex:0];
+    doubleClickedSubject = subjectobj;
+    [self displayManagedSubjectsWithSelectedSubject:subjectobj];
+}
+
+- (void) savedWithSubjectSelection:(subject*)selectedSubject{ //delegate method
+    NSLog(@"savedWithSubjectSelection");
+    if(doubleClickedSubject != nil){
+	[doubleClickedSubject removeBooksObject:obj];
+	doubleClickedSubject = nil;
+    }
+    [selectedSubject addBooksObject:obj];
+}
+
+- (void) displayManagedSubjectsWithSelectedSubject:(subject*)subjectObj{
+    NSLog(@"displayManagedSubjectsWithSelectedSubject");
+    SubjectWindowController *detailWin = [[SubjectWindowController alloc] initWithManagedObjectContext:managedObjectContext
+									  selectedSubject:subjectObj];
+    [detailWin setDelegate:self];
+    if (![NSBundle loadNibNamed:@"SubjectDetail" owner:detailWin]) {
+	NSLog(@"Error loading Nib!");
+    }
+}
+
+- (IBAction)addSubjectClicked:(id)sender{
+    NSLog(@"addSubjectClicked");
+    doubleClickedSubject = nil; //just to make sure!
+    [self displayManagedSubjectsWithSelectedSubject:nil];
+}
 @end

@@ -68,6 +68,7 @@
 
     book	    	    *obj;
     author		    *doubleClickedAuthor;
+    subject		    *doubleClickedSubject;
     NSManagedObjectContext  *managedObjectContext; //TODO: use this instead of [obj managedObjectContext]
     id			    *delegate;
 }
@@ -75,13 +76,18 @@
 @property (nonatomic, assign) book *obj;
 @property (nonatomic, assign) id *delegate;
 
-- (IBAction)searchClicked:(id)sender;
-- (IBAction)clearClicked:(id)sender;
-- (IBAction)cancelClicked:(id)sender;
-- (IBAction)saveClicked:(id)sender;
-- (IBAction)addAuthorClicked:(id)sender;
-- (IBAction)copiesValueChanged:(id)sender;
+- (IBAction) searchClicked:(id)sender;
+- (IBAction) clearClicked:(id)sender;
+- (IBAction) cancelClicked:(id)sender;
+- (IBAction) saveClicked:(id)sender;
+- (IBAction) addAuthorClicked:(id)sender;
+- (IBAction) addSubjectClicked:(id)sender;
+- (IBAction) copiesValueChanged:(id)sender;
 
+- (NSFetchRequest*) authorExistsWithName:(NSString*)authorName;
+- (NSFetchRequest*) subjectExistsWithName:(NSString*)subjectName;
+- (void) displayManagedAuthorsWithSelectedAuthor:(author*)authorObj;
+- (void) displayManagedSubjectsWithSelectedSubject:(subject*)subjectObj;
 - (void) updateUIFromManagedObject;
 - (id) initWithManagedObject:(book*)object;
 - (void) clearAllFields;
