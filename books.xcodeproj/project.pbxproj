@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
+		371182B210C454E200732634 /* SidebarOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 371182B110C454E200732634 /* SidebarOutlineView.m */; };
 		371855D51097C237006A363D /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 371855D41097C237006A363D /* icon.icns */; };
 		37365594101CCC3C00709C8F /* BooksWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37365593101CCC3C00709C8F /* BooksWindowController.m */; };
 		3737514A1054219700718317 /* database.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 373751491054219600718317 /* database.xcdatamodel */; };
@@ -42,6 +43,8 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* books_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = books_Prefix.pch; sourceTree = "<group>"; };
+		371182B010C454E200732634 /* SidebarOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarOutlineView.h; sourceTree = "<group>"; };
+		371182B110C454E200732634 /* SidebarOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarOutlineView.m; sourceTree = "<group>"; };
 		371855D41097C237006A363D /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = icon_design/icon.icns; sourceTree = "<group>"; };
 		37365592101CCC3C00709C8F /* BooksWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooksWindowController.h; sourceTree = "<group>"; };
 		37365593101CCC3C00709C8F /* BooksWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BooksWindowController.m; sourceTree = "<group>"; };
@@ -95,6 +98,8 @@
 			children = (
 				3737514C105426BF00718317 /* isbndbInterface.h */,
 				3737514D105426BF00718317 /* isbndbInterface.m */,
+				371182B010C454E200732634 /* SidebarOutlineView.h */,
+				371182B110C454E200732634 /* SidebarOutlineView.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -295,6 +300,7 @@
 				37D708F410C192980004F441 /* AccessKeyViewController.m in Sources */,
 				37D7096310C1BFFB0004F441 /* GeneralViewController.m in Sources */,
 				37D709A410C1D8E50004F441 /* SubjectWindowController.m in Sources */,
+				371182B210C454E200732634 /* SidebarOutlineView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +341,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = books_Prefix.pch;
+				GCC_VERSION = 4.2;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = Sofia;
@@ -353,6 +360,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = books_Prefix.pch;
+				GCC_VERSION = 4.2;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = Sofia;
