@@ -6,15 +6,6 @@
 //
 
 #import "SofiaApplication.h"
-#import "BooksWindowController.h"
-#import "book.h"
-#import "author.h"
-#import "subject.h"
-#import "AuthorsWindowController.h"
-#import "SubjectWindowController.h"
-#import "AccessKeyViewController.h"
-#import "GeneralViewController.h"
-#import "MBPreferencesController.h"
 
 @implementation SofiaApplication
 
@@ -33,6 +24,7 @@
     NSError *error;
     [arrayController fetchWithRequest:nil merge:NO error:&error];
     [self updateSummaryText];
+
 }
 
 
@@ -250,6 +242,9 @@
 - (IBAction) addBookAction:(id)sender {
     book *obj = [[book alloc] initWithEntity:[[managedObjectModel entitiesByName] objectForKey:@"book"]
 						    insertIntoManagedObjectContext:managedObjectContext];
+
+    //add to appropriate library
+    [[sideBar selectedLibrary] addBooksObject:obj];
 
     BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj];
     [detailWin setDelegate:self];

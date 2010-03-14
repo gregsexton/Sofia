@@ -7,10 +7,19 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "Library.h"
+#import "SofiaApplication.h"
 
 
 @interface SidebarOutlineView : NSOutlineView <NSOutlineViewDelegate, NSOutlineViewDataSource> {
 
+    IBOutlet NSArrayController *arrayController;
+    IBOutlet SofiaApplication *application;
+
+    Library* bookLibrary;
+    Library* shoppingListLibrary;
+    Library* currentlySelectedLibrary;
+    NSManagedObjectContext *managedObjectContext;
 }
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item;
@@ -18,4 +27,6 @@
 - (void)outlineView:(NSOutlineView *)outlineView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn byItem:(id)item;
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item;
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item;
+- (void)setSelectedItem:(id)item;
+- (Library*) selectedLibrary;
 @end

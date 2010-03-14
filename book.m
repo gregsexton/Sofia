@@ -2,8 +2,8 @@
 //  book.m
 //  books
 //
-//  Created by Greg on 16/11/2009.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Created by Greg on 14/03/2010.
+//  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
 #import "book.h"
@@ -32,7 +32,9 @@
 @dynamic urls;
 @dynamic notes;
 @dynamic publisher;
+@dynamic lists;
 @dynamic subjects;
 @dynamic authors;
+@dynamic library;
 
 @end

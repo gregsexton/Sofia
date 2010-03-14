@@ -2,8 +2,8 @@
 //  book.h
 //  books
 //
-//  Created by Greg on 16/11/2009.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Created by Greg on 14/03/2010.
+//  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
 #import <CoreData/CoreData.h>
@@ -34,13 +34,20 @@
 @property (nonatomic, retain) NSString * urls;
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSManagedObject * publisher;
+@property (nonatomic, retain) NSSet* lists;
 @property (nonatomic, retain) NSSet* subjects;
 @property (nonatomic, retain) NSSet* authors;
+@property (nonatomic, retain) NSManagedObject * library;
 
 @end
 
 
 @interface book (CoreDataGeneratedAccessors)
+- (void)addListsObject:(NSManagedObject *)value;
+- (void)removeListsObject:(NSManagedObject *)value;
+- (void)addLists:(NSSet *)value;
+- (void)removeLists:(NSSet *)value;
+
 - (void)addSubjectsObject:(subject *)value;
 - (void)removeSubjectsObject:(subject *)value;
 - (void)addSubjects:(NSSet *)value;

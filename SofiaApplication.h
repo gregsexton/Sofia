@@ -6,7 +6,16 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import "BooksWindowController.h"
+#import "book.h"
+#import "author.h"
+#import "subject.h"
+#import "AuthorsWindowController.h"
+#import "SubjectWindowController.h"
+#import "AccessKeyViewController.h"
+#import "GeneralViewController.h"
+#import "MBPreferencesController.h"
+@class SidebarOutlineView;
 
 @interface SofiaApplication : NSObject {
 	
@@ -16,6 +25,7 @@
 	IBOutlet NSArrayController *arrayController;
 	IBOutlet NSApplication *theApplication;
 	IBOutlet NSSegmentedControl *addRemoveButtons;
+	IBOutlet SidebarOutlineView *sideBar;
 	
 	NSPersistentStoreCoordinator *persistentStoreCoordinator;
 	NSManagedObjectModel *managedObjectModel;
