@@ -8,6 +8,7 @@
 
 #import "SidebarOutlineView.h"
 
+// TODO: seriously refactor out all the string literals!
 
 @implementation SidebarOutlineView
 
@@ -110,6 +111,26 @@
     return false;
 }
 
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item {
+    if([item isEqualToString:@"LIBRARY"]){
+	return false;
+    }
+    if([item isEqualToString:@"BOOK LISTS"]){
+	return false;
+    }
+    if([item isEqualToString:@"SMART BOOK LISTS"]){
+	return false;
+    }
+    if([item isEqualToString:@"Books"]){
+	return false;
+    }
+    if([item isEqualToString:@"Shopping List"]){
+	return false;
+    }
+
+    return true;
+}
+
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item{
     if(item == nil){
 	return 3;
@@ -136,6 +157,17 @@
     return false;
 }
 
+- (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor{
+    //TODO: make sure the new name isn't one of my names or
+    //already exists and return false
+
+    NSString *oldName = [self itemAtRow:[self selectedRow]];
+    NSString *newName = [fieldEditor string];
+    list *theList = [self getBookList:oldName];
+    theList.name = newName;
+    return true;
+}
+
 - (void)setSelectedItem:(id)item {
     NSInteger itemIndex = [self rowForItem:item];
     if (itemIndex < 0) {
@@ -145,7 +177,7 @@
     [self selectRowIndexes:[NSIndexSet indexSetWithIndex:itemIndex] byExtendingSelection:NO];
 }
 
-- (Library*) selectedLibrary{
+- (Library*)selectedLibrary{
     return currentlySelectedLibrary;
 }
 
@@ -171,7 +203,7 @@
     }
 }
 
-- (IBAction) addListAction:(id)sender{
+- (IBAction)addListAction:(id)sender{
     NSManagedObjectModel *managedObjectModel = [application managedObjectModel];
 
     list *obj = [[list alloc] initWithEntity:[[managedObjectModel entitiesByName] objectForKey:@"list"]
@@ -181,7 +213,7 @@
     [self setSelectedItem:[obj name]];
 }
 
-- (NSInteger) numberOfBookLists{
+- (NSInteger)numberOfBookLists{
     NSError *error;
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"list" inManagedObjectContext:managedObjectContext]];
@@ -190,12 +222,23 @@
     return blah;
 }
 
-- (NSArray*) getBookLists{
+- (NSArray*)getBookLists{
     NSError *error;
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"list" inManagedObjectContext:managedObjectContext]];
 
     return [managedObjectContext executeFetchRequest:request error:&error];
 }
+
+- (list*)getBookList:(NSString*)listName{
+    NSError *error;
+    NSString *predicate = [[NSString alloc] initWithFormat:@"name MATCHES '%@'", listName];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"list" inManagedObjectContext:managedObjectContext]];
+    [request setPredicate:[NSPredicate predicateWithFormat:predicate]];
+
+    return [[managedObjectContext executeFetchRequest:request error:&error] objectAtIndex:0];
+}
+
 
 @end

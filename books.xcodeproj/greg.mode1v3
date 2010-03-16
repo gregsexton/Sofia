@@ -232,6 +232,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -314,8 +316,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -333,7 +333,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>37BAF67F114EFFBD00F95C41</string>
+										<string>37BAF6B311500F6900F95C41</string>
 										<key>history</key>
 										<array>
 											<string>373752621055B6BE00718317</string>
@@ -366,8 +366,8 @@
 											<string>37BAF5B5114EEE9100F95C41</string>
 											<string>37BAF5B6114EEE9100F95C41</string>
 											<string>37BAF5B7114EEE9100F95C41</string>
-											<string>37BAF61F114EF82500F95C41</string>
-											<string>37BAF626114EF86E00F95C41</string>
+											<string>37BAF6AF11500F5400F95C41</string>
+											<string>37BAF6B011500F5400F95C41</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -563,13 +563,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>37BAF680114EFFBD00F95C41</string>
+		<string>37BAF6B211500F5400F95C41</string>
 		<string>37BAF4A4114D483B00F95C41</string>
 		<string>37BAF491114BDC5E00F95C41</string>
 		<string>37BAF492114BDC5E00F95C41</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>373655AF101CCE8600709C8F</string>
 		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 	</array>
 	<key>WindowString</key>
@@ -589,8 +589,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -613,6 +611,8 @@
 							<string>405pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -746,10 +746,10 @@
 									<key>Frame</key>
 									<string>{{597, 0}, {766, 423}}</string>
 									<key>RubberWindowFrame</key>
-									<string>196 120 1363 1227 0 0 2560 1418 </string>
+									<string>200 120 1363 1227 0 0 2560 1418 </string>
 								</dict>
 								<key>RubberWindowFrame</key>
-								<string>196 120 1363 1227 0 0 2560 1418 </string>
+								<string>200 120 1363 1227 0 0 2560 1418 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXDebugSessionModule</string>
@@ -783,7 +783,7 @@
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
 			<key>WindowString</key>
-			<string>196 120 1363 1227 0 0 2560 1418 </string>
+			<string>200 120 1363 1227 0 0 2560 1418 </string>
 			<key>WindowToolGUID</key>
 			<string>1CD10A99069EF8BA00B06720</string>
 			<key>WindowToolIsVisible</key>
