@@ -12,11 +12,11 @@
 @implementation SidebarOutlineView
 
 - (void) awakeFromNib {
+    managedObjectContext = [application managedObjectContext];
     [super awakeFromNib];
     [self setDelegate:self];
     [self setDataSource:self];
     [self expandItem:nil expandChildren:true];
-    managedObjectContext = [application managedObjectContext];
     [self assignLibraryObjects];
     [self setSelectedItem:@"Books"];
     currentlySelectedLibrary = bookLibrary;
@@ -79,6 +79,15 @@
 		return @"Error!";
 	}
     }
+    if([item isEqualToString:@"BOOK LISTS"]){
+	NSArray *lists = [self getBookLists];
+	list *list = [lists objectAtIndex:index];
+	NSString *name = list.name;
+	[name retain];
+	return name;
+    }
+
+    return @"ERROR!";
 }
 
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item{
@@ -107,6 +116,9 @@
     }
     if([item isEqualToString:@"LIBRARY"]){
 	return 2;
+    }
+    if([item isEqualToString:@"BOOK LISTS"]){
+	return [self numberOfBookLists];
     }
     return 0;
 }
@@ -157,6 +169,33 @@
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:predString];
 	[arrayController setFilterPredicate:predicate];
     }
+}
+
+- (IBAction) addListAction:(id)sender{
+    NSManagedObjectModel *managedObjectModel = [application managedObjectModel];
+
+    list *obj = [[list alloc] initWithEntity:[[managedObjectModel entitiesByName] objectForKey:@"list"]
+						    insertIntoManagedObjectContext:managedObjectContext];
+
+    [self reloadData];
+    [self setSelectedItem:[obj name]];
+}
+
+- (NSInteger) numberOfBookLists{
+    NSError *error;
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"list" inManagedObjectContext:managedObjectContext]];
+
+    NSInteger blah = [managedObjectContext countForFetchRequest:request error:&error];
+    return blah;
+}
+
+- (NSArray*) getBookLists{
+    NSError *error;
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"list" inManagedObjectContext:managedObjectContext]];
+
+    return [managedObjectContext executeFetchRequest:request error:&error];
 }
 
 @end

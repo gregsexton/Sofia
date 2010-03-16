@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "Library.h"
 #import "SofiaApplication.h"
+#import "list.h"
 
 
 @interface SidebarOutlineView : NSOutlineView <NSOutlineViewDelegate, NSOutlineViewDataSource> {
@@ -21,6 +22,8 @@
     Library* currentlySelectedLibrary;
     NSManagedObjectContext *managedObjectContext;
 }
+
+- (IBAction) addListAction:(id)sender;
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item;
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item;

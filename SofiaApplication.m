@@ -225,6 +225,7 @@
     //use the first object if multiple are selected
     book *obj = [[arrayController selectedObjects] objectAtIndex:0];
 
+    //TODO: add a readonly field to constructor to get rid of search box and buttons
     BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj];
     if (![NSBundle loadNibNamed:@"Detail" owner:detailWin]) {
 	NSLog(@"Error loading Nib!");
