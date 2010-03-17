@@ -13,7 +13,7 @@
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<integer value="24"/>
-			<integer value="782"/>
+			<integer value="546"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1356,7 +1356,7 @@
 											<bool key="EncodedWithXMLCoder">YES</bool>
 											<object class="NSSegmentItem">
 												<double key="NSSegmentItemWidth">32</double>
-												<object class="NSCustomResource" key="NSSegmentItemImage" id="696065085">
+												<object class="NSCustomResource" key="NSSegmentItemImage" id="431970011">
 													<string key="NSClassName">NSImage</string>
 													<string key="NSResourceName">NSAddTemplate</string>
 												</object>
@@ -1727,7 +1727,7 @@
 														<object class="NSTableView" id="98113484">
 															<reference key="NSNextResponder" ref="316095046"/>
 															<int key="NSvFlags">4370</int>
-															<string key="NSFrameSize">{940, 683}</string>
+															<string key="NSFrameSize">{940, 684}</string>
 															<reference key="NSSuperview" ref="316095046"/>
 															<bool key="NSEnabled">YES</bool>
 															<object class="NSTableHeaderView" key="NSHeaderView" id="768935642">
@@ -1960,7 +1960,7 @@
 															<int key="NSTableViewDraggingDestinationStyle">0</int>
 														</object>
 													</object>
-													<string key="NSFrame">{{1, 17}, {940, 683}}</string>
+													<string key="NSFrame">{{1, 17}, {940, 684}}</string>
 													<reference key="NSSuperview" ref="758308659"/>
 													<reference key="NSNextKeyView" ref="98113484"/>
 													<reference key="NSDocView" ref="98113484"/>
@@ -1970,7 +1970,7 @@
 												<object class="NSScroller" id="992909148">
 													<reference key="NSNextResponder" ref="758308659"/>
 													<int key="NSvFlags">4352</int>
-													<string key="NSFrame">{{941, 17}, {15, 683}}</string>
+													<string key="NSFrame">{{941, 17}, {15, 684}}</string>
 													<reference key="NSSuperview" ref="758308659"/>
 													<reference key="NSTarget" ref="758308659"/>
 													<string key="NSAction">_doScroller:</string>
@@ -1980,7 +1980,7 @@
 												<object class="NSScroller" id="231003265">
 													<reference key="NSNextResponder" ref="758308659"/>
 													<int key="NSvFlags">256</int>
-													<string key="NSFrame">{{1, 700}, {940, 15}}</string>
+													<string key="NSFrame">{{1, 701}, {940, 15}}</string>
 													<reference key="NSSuperview" ref="758308659"/>
 													<int key="NSsFlags">1</int>
 													<reference key="NSTarget" ref="758308659"/>
@@ -2003,7 +2003,7 @@
 												</object>
 												<reference ref="429878103"/>
 											</object>
-											<string key="NSFrameSize">{957, 716}</string>
+											<string key="NSFrame">{{0, -1}, {957, 717}}</string>
 											<reference key="NSSuperview" ref="939342826"/>
 											<reference key="NSNextKeyView" ref="316095046"/>
 											<int key="NSsFlags">50</int>
@@ -2026,21 +2026,21 @@
 							<int key="NSDividerStyle">2</int>
 							<string key="NSAutosaveName">overviewSplit</string>
 						</object>
-						<object class="NSButton" id="632423417">
+						<object class="NSButton" id="1047265181">
 							<reference key="NSNextResponder" ref="1040090277"/>
 							<int key="NSvFlags">256</int>
 							<string key="NSFrame">{{20, 0}, {35, 25}}</string>
 							<reference key="NSSuperview" ref="1040090277"/>
 							<bool key="NSEnabled">YES</bool>
-							<object class="NSButtonCell" key="NSCell" id="919162748">
+							<object class="NSButtonCell" key="NSCell" id="993505576">
 								<int key="NSCellFlags">-2080244224</int>
 								<int key="NSCellFlags2">134217728</int>
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="189518655"/>
-								<reference key="NSControlView" ref="632423417"/>
+								<reference key="NSControlView" ref="1047265181"/>
 								<int key="NSButtonFlags">-2033958657</int>
 								<int key="NSButtonFlags2">163</int>
-								<reference key="NSNormalImage" ref="696065085"/>
+								<reference key="NSNormalImage" ref="431970011"/>
 								<string key="NSAlternateContents"/>
 								<string key="NSKeyEquivalent"/>
 								<int key="NSPeriodicDelay">400</int>
@@ -2889,7 +2889,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">addListAction:</string>
 						<reference key="source" ref="956318075"/>
-						<reference key="destination" ref="632423417"/>
+						<reference key="destination" ref="1047265181"/>
 					</object>
 					<int key="connectionID">797</int>
 				</object>
@@ -3761,8 +3761,8 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="639397870"/>
+							<reference ref="1047265181"/>
 							<reference ref="82794934"/>
-							<reference ref="632423417"/>
 						</object>
 						<reference key="parent" ref="970442734"/>
 					</object>
@@ -4134,17 +4134,17 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">795</int>
-						<reference key="object" ref="632423417"/>
+						<reference key="object" ref="1047265181"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="919162748"/>
+							<reference ref="993505576"/>
 						</object>
 						<reference key="parent" ref="1040090277"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">796</int>
-						<reference key="object" ref="919162748"/>
-						<reference key="parent" ref="632423417"/>
+						<reference key="object" ref="993505576"/>
+						<reference key="parent" ref="1047265181"/>
 					</object>
 				</object>
 			</object>
@@ -4605,9 +4605,9 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{759, 475}, {1158, 743}}</string>
+					<string>{{759, 474}, {1158, 743}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{759, 475}, {1158, 743}}</string>
+					<string>{{759, 474}, {1158, 743}}</string>
 					<integer value="1"/>
 					<string>{196, 240}</string>
 					<string>{{202, 428}, {480, 270}}</string>

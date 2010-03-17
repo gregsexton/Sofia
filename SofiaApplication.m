@@ -261,10 +261,10 @@
     if(noOfRowsSelected == 0){
 	NSRunInformationalAlertPanel(@"Selection Error", @"You must select at least one book to remove." , @"Ok", nil, nil);
     }else if(noOfRowsSelected == 1){
-	alertReturn = NSRunAlertPanel(@"Remove Book?", @"Are you sure you wish to permanently remove this book?",
+	alertReturn = NSRunAlertPanel(@"Remove Book?", @"Are you sure you wish to permanently remove this book from Sofia?",
 				      @"No", @"Yes", nil);
     }else if(noOfRowsSelected > 1){
-	alertReturn = NSRunAlertPanel(@"Remove Books?", @"Are you sure you wish to permanently remove these books?",
+	alertReturn = NSRunAlertPanel(@"Remove Books?", @"Are you sure you wish to permanently remove these books from Sofia?",
 				      @"No", @"Yes", nil);
     }
     if (alertReturn == NSAlertAlternateReturn){

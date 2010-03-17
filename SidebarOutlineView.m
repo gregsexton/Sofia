@@ -188,6 +188,7 @@
 }
 
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification{
+    //TODO update book count when selection changes
 
     NSInteger selectedRow = [self selectedRow];
     id item = [self itemAtRow:selectedRow];
@@ -202,6 +203,10 @@
     if([item isEqualToString:@"Shopping List"]){
 	predString = [[NSString alloc] initWithFormat:@"library.name MATCHES '%@'", @"Shopping List"];
 	currentlySelectedLibrary = shoppingListLibrary;
+    }
+
+    if([[self parentForItem:item] isEqualToString:@"BOOK LISTS"]){
+	predString = [[NSString alloc] initWithFormat:@"ANY lists.name MATCHES '%@'", item];
     }
 
     if(predString != nil){
