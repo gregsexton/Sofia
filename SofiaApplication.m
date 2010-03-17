@@ -245,7 +245,8 @@
 						    insertIntoManagedObjectContext:managedObjectContext];
 
     //add to appropriate library
-    [[sideBar selectedLibrary] addBooksObject:obj];
+    Library *lib = [sideBar selectedLibrary];
+    [lib addBooksObject:obj];
 
     BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj];
     [detailWin setDelegate:self];

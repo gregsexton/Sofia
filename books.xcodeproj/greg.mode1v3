@@ -232,8 +232,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -280,8 +278,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>46</integer>
-									<integer>43</integer>
+									<integer>23</integer>
+									<integer>6</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -305,7 +303,7 @@
 							<real>309</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>168 165 1319 1069 0 0 2560 1418 </string>
+						<string>1062 195 1319 1069 0 0 2560 1418 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -316,12 +314,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SidebarOutlineView.m</string>
+								<string>SofiaApplication.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -329,11 +329,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>SidebarOutlineView.m</string>
+										<string>SofiaApplication.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>37BAF6B311500F6900F95C41</string>
+										<string>37BAF76911517FA700F95C41</string>
 										<key>history</key>
 										<array>
 											<string>373752621055B6BE00718317</string>
@@ -361,13 +361,13 @@
 											<string>37BAF50D114D6A0100F95C41</string>
 											<string>37BAF510114D6A0100F95C41</string>
 											<string>37BAF515114D6A9500F95C41</string>
-											<string>37BAF524114D965300F95C41</string>
-											<string>37BAF529114D996700F95C41</string>
-											<string>37BAF5B5114EEE9100F95C41</string>
 											<string>37BAF5B6114EEE9100F95C41</string>
 											<string>37BAF5B7114EEE9100F95C41</string>
 											<string>37BAF6AF11500F5400F95C41</string>
-											<string>37BAF6B011500F5400F95C41</string>
+											<string>37BAF71B1151789900F95C41</string>
+											<string>37BAF71C1151789900F95C41</string>
+											<string>37BAF7231151790B00F95C41</string>
+											<string>37BAF7241151790B00F95C41</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -381,7 +381,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {988, 938}}</string>
 								<key>RubberWindowFrame</key>
-								<string>168 165 1319 1069 0 0 2560 1418 </string>
+								<string>1062 195 1319 1069 0 0 2560 1418 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -401,7 +401,7 @@
 								<key>Frame</key>
 								<string>{{0, 943}, {988, 85}}</string>
 								<key>RubberWindowFrame</key>
-								<string>168 165 1319 1069 0 0 2560 1418 </string>
+								<string>1062 195 1319 1069 0 0 2560 1418 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -563,17 +563,17 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>37BAF6B211500F5400F95C41</string>
+		<string>37BAF76A11517FA700F95C41</string>
 		<string>37BAF4A4114D483B00F95C41</string>
 		<string>37BAF491114BDC5E00F95C41</string>
 		<string>37BAF492114BDC5E00F95C41</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>373655AF101CCE8600709C8F</string>
 		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 	</array>
 	<key>WindowString</key>
-	<string>168 165 1319 1069 0 0 2560 1418 </string>
+	<string>1062 195 1319 1069 0 0 2560 1418 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -594,7 +594,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SidebarOutlineView.m</string>
+								<string>SofiaApplication.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -746,10 +746,10 @@
 									<key>Frame</key>
 									<string>{{597, 0}, {766, 423}}</string>
 									<key>RubberWindowFrame</key>
-									<string>200 120 1363 1227 0 0 2560 1418 </string>
+									<string>1017 106 1363 1227 0 0 2560 1418 </string>
 								</dict>
 								<key>RubberWindowFrame</key>
-								<string>200 120 1363 1227 0 0 2560 1418 </string>
+								<string>1017 106 1363 1227 0 0 2560 1418 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXDebugSessionModule</string>
@@ -783,7 +783,7 @@
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
 			<key>WindowString</key>
-			<string>200 120 1363 1227 0 0 2560 1418 </string>
+			<string>1017 106 1363 1227 0 0 2560 1418 </string>
 			<key>WindowToolGUID</key>
 			<string>1CD10A99069EF8BA00B06720</string>
 			<key>WindowToolIsVisible</key>

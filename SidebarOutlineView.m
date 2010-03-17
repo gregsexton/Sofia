@@ -28,7 +28,7 @@
     NSFetchRequest *request = [self libraryExistsWithName:@"Books"];
     if(request != nil){
 	NSError *error;
-	bookLibrary = [[managedObjectContext executeFetchRequest:request error:&error] objectAtIndex:0];
+	bookLibrary = [[[managedObjectContext executeFetchRequest:request error:&error] objectAtIndex:0] retain];
     }else{
 	bookLibrary = [NSEntityDescription insertNewObjectForEntityForName:@"Library" inManagedObjectContext:managedObjectContext];
 	[bookLibrary setName:@"Books"];
@@ -37,7 +37,7 @@
     request = [self libraryExistsWithName:@"Shopping List"];
     if(request != nil){
 	NSError *error;
-	shoppingListLibrary = [[managedObjectContext executeFetchRequest:request error:&error] objectAtIndex:0];
+	shoppingListLibrary = [[[managedObjectContext executeFetchRequest:request error:&error] objectAtIndex:0] retain];
     }else{
 	shoppingListLibrary = [NSEntityDescription insertNewObjectForEntityForName:@"Library" inManagedObjectContext:managedObjectContext];
 	[shoppingListLibrary setName:@"Shopping List"];
@@ -83,9 +83,8 @@
     if([item isEqualToString:@"BOOK LISTS"]){
 	NSArray *lists = [self getBookLists];
 	list *list = [lists objectAtIndex:index];
-	NSString *name = list.name;
-	[name retain];
-	return name;
+	NSString *name = [NSString stringWithString:list.name];
+	return [name retain];
     }
 
     return @"ERROR!";
@@ -158,13 +157,20 @@
 }
 
 - (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor{
-    //TODO: make sure the new name isn't one of my names or
-    //already exists and return false
+    //TODO: make sure the new name isn't one of my names or already exists and return false
+
+    NSString *newName = [fieldEditor string];
+
+    //perform checks on the new name:
+    if([newName isEqualToString:@""]){
+	return false;
+    }
 
     NSString *oldName = [self itemAtRow:[self selectedRow]];
-    NSString *newName = [fieldEditor string];
     list *theList = [self getBookList:oldName];
+    [oldName release];
     theList.name = newName;
+    [application saveAction:self];
     return true;
 }
 
@@ -187,9 +193,10 @@
     id item = [self itemAtRow:selectedRow];
     NSString *predString = nil;
 
+    currentlySelectedLibrary = bookLibrary; //default to bookLibrary, unless specified
+
     if([item isEqualToString:@"Books"]){
 	predString = [[NSString alloc] initWithFormat:@"library.name MATCHES '%@'", @"Books"];
-	currentlySelectedLibrary = bookLibrary;
     }
 
     if([item isEqualToString:@"Shopping List"]){
@@ -209,11 +216,12 @@
     list *obj = [[list alloc] initWithEntity:[[managedObjectModel entitiesByName] objectForKey:@"list"]
 						    insertIntoManagedObjectContext:managedObjectContext];
 
+    [application saveAction:self];
     [self reloadData];
     [self setSelectedItem:[obj name]];
 }
 
-- (NSInteger)numberOfBookLists{
+- (NSUInteger)numberOfBookLists{
     NSError *error;
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"list" inManagedObjectContext:managedObjectContext]];
@@ -232,6 +240,7 @@
 
 - (list*)getBookList:(NSString*)listName{
     NSError *error;
+    //TODO: need to escape bad characters (e.g ') in listName; this probably applies elsewhere!
     NSString *predicate = [[NSString alloc] initWithFormat:@"name MATCHES '%@'", listName];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"list" inManagedObjectContext:managedObjectContext]];

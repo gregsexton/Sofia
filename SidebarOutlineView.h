@@ -32,4 +32,5 @@
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item;
 - (void)setSelectedItem:(id)item;
 - (Library*) selectedLibrary;
+- (NSUInteger)numberOfBookLists;
 @end

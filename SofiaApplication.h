@@ -15,6 +15,7 @@
 #import "AccessKeyViewController.h"
 #import "GeneralViewController.h"
 #import "MBPreferencesController.h"
+#import "Library.h"
 @class SidebarOutlineView;
 
 @interface SofiaApplication : NSObject {
