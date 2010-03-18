@@ -419,14 +419,12 @@
 //subject methods
 - (IBAction) doubleClickSubjectAction:(id)sender {
     //use the first object if multiple are selected
-    NSLog(@"doubleClickSubjectAction");
     subject *subjectobj = [[subjectsArrayController selectedObjects] objectAtIndex:0];
     doubleClickedSubject = subjectobj;
     [self displayManagedSubjectsWithSelectedSubject:subjectobj];
 }
 
 - (void) savedWithSubjectSelection:(subject*)selectedSubject{ //delegate method
-    NSLog(@"savedWithSubjectSelection");
     if(doubleClickedSubject != nil){
 	[doubleClickedSubject removeBooksObject:obj];
 	doubleClickedSubject = nil;
@@ -435,7 +433,6 @@
 }
 
 - (void) displayManagedSubjectsWithSelectedSubject:(subject*)subjectObj{
-    NSLog(@"displayManagedSubjectsWithSelectedSubject");
     SubjectWindowController *detailWin = [[SubjectWindowController alloc] initWithManagedObjectContext:managedObjectContext
 									  selectedSubject:subjectObj];
     [detailWin setDelegate:self];
@@ -445,7 +442,6 @@
 }
 
 - (IBAction)addSubjectClicked:(id)sender{
-    NSLog(@"addSubjectClicked");
     doubleClickedSubject = nil; //just to make sure!
     [self displayManagedSubjectsWithSelectedSubject:nil];
 }

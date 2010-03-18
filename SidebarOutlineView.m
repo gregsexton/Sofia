@@ -307,6 +307,7 @@
 }
 
 // Overridden Methods //////////////////////////////////////////////////////
+
 - (void)keyDown:(NSEvent *)theEvent{
     NSLog(@"SidebarOutlineView: keyDown: %c", [[theEvent characters] characterAtIndex:0]);
     unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
