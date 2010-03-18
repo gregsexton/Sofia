@@ -18,6 +18,8 @@
 #import "Library.h"
 @class SidebarOutlineView;
 
+#define SofiaDragType @"SofiaDragType"
+
 @interface SofiaApplication : NSObject {
 	
 	IBOutlet NSWindow *window;

@@ -13,7 +13,7 @@
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<integer value="24"/>
-			<integer value="546"/>
+			<integer value="547"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1356,7 +1356,7 @@
 											<bool key="EncodedWithXMLCoder">YES</bool>
 											<object class="NSSegmentItem">
 												<double key="NSSegmentItemWidth">32</double>
-												<object class="NSCustomResource" key="NSSegmentItemImage" id="431970011">
+												<object class="NSCustomResource" key="NSSegmentItemImage" id="802670655">
 													<string key="NSClassName">NSImage</string>
 													<string key="NSResourceName">NSAddTemplate</string>
 												</object>
@@ -2026,21 +2026,21 @@
 							<int key="NSDividerStyle">2</int>
 							<string key="NSAutosaveName">overviewSplit</string>
 						</object>
-						<object class="NSButton" id="1047265181">
+						<object class="NSButton" id="38671545">
 							<reference key="NSNextResponder" ref="1040090277"/>
 							<int key="NSvFlags">256</int>
 							<string key="NSFrame">{{20, 0}, {35, 25}}</string>
 							<reference key="NSSuperview" ref="1040090277"/>
 							<bool key="NSEnabled">YES</bool>
-							<object class="NSButtonCell" key="NSCell" id="993505576">
+							<object class="NSButtonCell" key="NSCell" id="329945836">
 								<int key="NSCellFlags">-2080244224</int>
 								<int key="NSCellFlags2">134217728</int>
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="189518655"/>
-								<reference key="NSControlView" ref="1047265181"/>
+								<reference key="NSControlView" ref="38671545"/>
 								<int key="NSButtonFlags">-2033958657</int>
 								<int key="NSButtonFlags2">163</int>
-								<reference key="NSNormalImage" ref="431970011"/>
+								<reference key="NSNormalImage" ref="802670655"/>
 								<string key="NSAlternateContents"/>
 								<string key="NSKeyEquivalent"/>
 								<int key="NSPeriodicDelay">400</int>
@@ -2889,9 +2889,17 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">addListAction:</string>
 						<reference key="source" ref="956318075"/>
-						<reference key="destination" ref="1047265181"/>
+						<reference key="destination" ref="38671545"/>
 					</object>
 					<int key="connectionID">797</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">dataSource</string>
+						<reference key="source" ref="98113484"/>
+						<reference key="destination" ref="145402063"/>
+					</object>
+					<int key="connectionID">798</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3761,7 +3769,7 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="639397870"/>
-							<reference ref="1047265181"/>
+							<reference ref="38671545"/>
 							<reference ref="82794934"/>
 						</object>
 						<reference key="parent" ref="970442734"/>
@@ -4134,17 +4142,17 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">795</int>
-						<reference key="object" ref="1047265181"/>
+						<reference key="object" ref="38671545"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="993505576"/>
+							<reference ref="329945836"/>
 						</object>
 						<reference key="parent" ref="1040090277"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">796</int>
-						<reference key="object" ref="993505576"/>
-						<reference key="parent" ref="1047265181"/>
+						<reference key="object" ref="329945836"/>
+						<reference key="parent" ref="38671545"/>
 					</object>
 				</object>
 			</object>
@@ -4719,7 +4727,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">797</int>
+			<int key="maxID">798</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

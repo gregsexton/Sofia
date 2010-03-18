@@ -11,6 +11,7 @@
 #import "SofiaApplication.h"
 #import "list.h"
 
+#define SofiaDragType @"SofiaDragType"
 
 @interface SidebarOutlineView : NSOutlineView <NSOutlineViewDelegate, NSOutlineViewDataSource> {
 
@@ -33,4 +34,5 @@
 - (void)setSelectedItem:(id)item;
 - (Library*) selectedLibrary;
 - (NSUInteger)numberOfBookLists;
+- (void)addBook:(book*)theBook toList:(NSString*)theList andSave:(BOOL)save;
 @end

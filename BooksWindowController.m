@@ -14,6 +14,8 @@
 #import "author.h"
 #import "subject.h"
 
+//TODO: reorder all of the methods into a more logical state!
+
 @implementation BooksWindowController
 
 @synthesize obj;

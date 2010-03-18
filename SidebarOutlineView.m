@@ -9,10 +9,13 @@
 #import "SidebarOutlineView.h"
 
 // TODO: seriously refactor out all the string literals!
+// TODO: remove the disclosure triangles from headers
+// TODO: make the header text just slightly smaller
+// TODO: make it impossible to select headers
 
 @implementation SidebarOutlineView
 
-- (void) awakeFromNib {
+- (void)awakeFromNib {
     managedObjectContext = [application managedObjectContext];
     [super awakeFromNib];
     [self setDelegate:self];
@@ -21,9 +24,10 @@
     [self assignLibraryObjects];
     [self setSelectedItem:@"Books"];
     currentlySelectedLibrary = bookLibrary;
+    [self registerForDraggedTypes:[NSArray arrayWithObjects:SofiaDragType, nil]];
 }
 
-- (void) assignLibraryObjects {
+- (void)assignLibraryObjects {
 
     NSFetchRequest *request = [self libraryExistsWithName:@"Books"];
     if(request != nil){
@@ -58,6 +62,69 @@
 	return nil;
     }
 }
+
+- (IBAction)addListAction:(id)sender{
+    NSManagedObjectModel *managedObjectModel = [application managedObjectModel];
+
+    list *obj = [[list alloc] initWithEntity:[[managedObjectModel entitiesByName] objectForKey:@"list"]
+						    insertIntoManagedObjectContext:managedObjectContext];
+
+    [application saveAction:self];
+    [self reloadData];
+    [self setSelectedItem:[obj name]];
+}
+
+- (NSUInteger)numberOfBookLists{
+    NSError *error;
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"list" inManagedObjectContext:managedObjectContext]];
+
+    NSInteger count = [managedObjectContext countForFetchRequest:request error:&error];
+    return count;
+}
+
+- (NSArray*)getBookLists{
+    NSError *error;
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"list" inManagedObjectContext:managedObjectContext]];
+
+    return [managedObjectContext executeFetchRequest:request error:&error];
+}
+
+- (void)addBook:(book*)theBook toList:(NSString*)theList andSave:(BOOL)save{
+    list* lst = [self getBookList:theList];
+    [lst addBooksObject:theBook];
+    if(save){
+	[application saveAction:self];
+    }
+}
+
+- (list*)getBookList:(NSString*)listName{
+    NSError *error;
+    //TODO: need to escape bad characters (e.g ') in listName; this probably applies elsewhere!
+    NSString *predicate = [[NSString alloc] initWithFormat:@"name MATCHES '%@'", listName];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"list" inManagedObjectContext:managedObjectContext]];
+    [request setPredicate:[NSPredicate predicateWithFormat:predicate]];
+
+    return [[managedObjectContext executeFetchRequest:request error:&error] objectAtIndex:0];
+}
+
+- (void)setSelectedItem:(id)item{
+    NSInteger itemIndex = [self rowForItem:item];
+    if (itemIndex < 0) {
+        return; //do nothing if item doesn't exist
+    }
+
+    [self selectRowIndexes:[NSIndexSet indexSetWithIndex:itemIndex] byExtendingSelection:NO];
+}
+
+- (Library*)selectedLibrary{
+    return currentlySelectedLibrary;
+}
+
+
+// Delegate Methods //////////////////////////////////////////////////////
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item{
     if(item == nil){
@@ -174,19 +241,6 @@
     return true;
 }
 
-- (void)setSelectedItem:(id)item {
-    NSInteger itemIndex = [self rowForItem:item];
-    if (itemIndex < 0) {
-        return; //do nothing if item doesn't exist
-    }
-
-    [self selectRowIndexes:[NSIndexSet indexSetWithIndex:itemIndex] byExtendingSelection:NO];
-}
-
-- (Library*)selectedLibrary{
-    return currentlySelectedLibrary;
-}
-
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification{
     //TODO update book count when selection changes
 
@@ -213,46 +267,52 @@
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:predString];
 	[arrayController setFilterPredicate:predicate];
     }
+
+    [application updateSummaryText];
 }
 
-- (IBAction)addListAction:(id)sender{
-    NSManagedObjectModel *managedObjectModel = [application managedObjectModel];
+- (BOOL)outlineView:(NSOutlineView *)outlineView 
+	 acceptDrop:(id < NSDraggingInfo >)info 
+	       item:(id)item 
+	 childIndex:(NSInteger)index{
 
-    list *obj = [[list alloc] initWithEntity:[[managedObjectModel entitiesByName] objectForKey:@"list"]
-						    insertIntoManagedObjectContext:managedObjectContext];
+
+    NSPasteboard* pBoard = [info draggingPasteboard];
+
+    NSData* data = [pBoard dataForType:SofiaDragType];
+    NSArray* theBooks = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+
+    for(NSURL* objectURI in theBooks){
+	NSManagedObjectID* objId = [[application persistentStoreCoordinator] managedObjectIDForURIRepresentation:objectURI];
+	book* theBook = [managedObjectContext objectWithID:objId];
+	[self addBook:theBook toList:item andSave:false];
+    }
 
     [application saveAction:self];
-    [self reloadData];
-    [self setSelectedItem:[obj name]];
+    return YES;
 }
 
-- (NSUInteger)numberOfBookLists{
-    NSError *error;
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"list" inManagedObjectContext:managedObjectContext]];
+- (NSDragOperation)outlineView:(NSOutlineView *)outlineView 
+		  validateDrop:(id < NSDraggingInfo >)info 
+		  proposedItem:(id)item 
+	    proposedChildIndex:(NSInteger)index{
 
-    NSInteger blah = [managedObjectContext countForFetchRequest:request error:&error];
-    return blah;
+
+    if([[self parentForItem:item] isEqualToString:@"BOOK LISTS"]){
+	return NSDragOperationCopy;
+    }else{
+	return NSDragOperationNone;
+    }
 }
 
-- (NSArray*)getBookLists{
-    NSError *error;
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"list" inManagedObjectContext:managedObjectContext]];
+// Overridden Methods //////////////////////////////////////////////////////
+- (void)keyDown:(NSEvent *)theEvent{
+    NSLog(@"SidebarOutlineView: keyDown: %c", [[theEvent characters] characterAtIndex:0]);
+    unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
+    if (key == NSDeleteCharacter || key == NSBackspaceCharacter){
+	NSLog(@"NSDeleteCharacter or NSBackspaceCharacter pressed");
+    }
 
-    return [managedObjectContext executeFetchRequest:request error:&error];
 }
-
-- (list*)getBookList:(NSString*)listName{
-    NSError *error;
-    //TODO: need to escape bad characters (e.g ') in listName; this probably applies elsewhere!
-    NSString *predicate = [[NSString alloc] initWithFormat:@"name MATCHES '%@'", listName];
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"list" inManagedObjectContext:managedObjectContext]];
-    [request setPredicate:[NSPredicate predicateWithFormat:predicate]];
-
-    return [[managedObjectContext executeFetchRequest:request error:&error] objectAtIndex:0];
-}
-
 
 @end
