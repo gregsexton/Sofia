@@ -23,7 +23,6 @@
     [self expandItem:nil expandChildren:true];
     [self assignLibraryObjects];
     [self setSelectedItem:@"Books"];
-    currentlySelectedLibrary = bookLibrary;
     [self registerForDraggedTypes:[NSArray arrayWithObjects:SofiaDragType, nil]];
 }
 
@@ -117,6 +116,8 @@
     }
 
     [self selectRowIndexes:[NSIndexSet indexSetWithIndex:itemIndex] byExtendingSelection:NO];
+    //tell the delegate!
+    [[self delegate]outlineViewSelectionDidChange:nil]; //FIXME: this will break if I start to use the notification in the delegate
 }
 
 - (Library*)selectedLibrary{
