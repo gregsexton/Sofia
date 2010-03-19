@@ -151,6 +151,20 @@
     return [self itemAtRow:[self selectedRow]];
 }
 
+- (void)removeCurrentlySelectedList{
+	NSString* item = [self selectedItem];
+	if([[self parentForItem:item] isEqualToString:@"BOOK LISTS"]){
+	    //confirm!
+	    int alertReturn = NSRunAlertPanel(@"Remove List?", @"Are you sure you wish to permanently remove this book list from Sofia?",
+				      @"No", @"Yes", nil);
+	    if (alertReturn == NSAlertAlternateReturn){
+		list* theListToDelete = [self getBookList:item];
+		[managedObjectContext deleteObject:theListToDelete];
+		[application saveAction:self];
+		[self reloadData];
+	    }
+	}
+}
 
 // Delegate Methods //////////////////////////////////////////////////////
 
@@ -360,10 +374,11 @@
 // Overridden Methods //////////////////////////////////////////////////////
 
 - (void)keyDown:(NSEvent *)theEvent{
-    NSLog(@"SidebarOutlineView: keyDown: %c", [[theEvent characters] characterAtIndex:0]);
+    //NSLog(@"SidebarOutlineView: keyDown: %c", [[theEvent characters] characterAtIndex:0]);
     unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
+
     if (key == NSDeleteCharacter || key == NSBackspaceCharacter){
-	NSLog(@"NSDeleteCharacter or NSBackspaceCharacter pressed");
+	[self removeCurrentlySelectedList];
     }
 
 }
