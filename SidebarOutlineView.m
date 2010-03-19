@@ -8,10 +8,12 @@
 
 #import "SidebarOutlineView.h"
 
-// TODO: seriously refactor out all the string literals!
+// TODO: seriously, refactor out all the string literals!
 // TODO: remove the disclosure triangles from headers
 // TODO: make the header text just slightly smaller
 // TODO: make it impossible to select headers
+// TODO: drag and drop between libraries
+// TODO: searching displays all books!
 
 @implementation SidebarOutlineView
 
@@ -98,6 +100,27 @@
     }
 }
 
+- (void)moveBook:(book*)theBook toLibrary:(NSString*)theLibrary andSave:(BOOL)save{
+    //get hold of the libraries
+    Library* moveToLib = nil;
+    Library* moveFromLib = theBook.library;
+
+    if([theLibrary isEqualToString:@"Books"]){
+	moveToLib = bookLibrary;
+    }else if([theLibrary isEqualToString:@"Shopping List"]){
+	moveToLib = shoppingListLibrary;
+    }else{
+	return; //error!
+    }
+
+    [moveFromLib removeBooksObject:theBook];
+    [moveToLib addBooksObject:theBook];
+
+    if(save){
+	[application saveAction:self];
+    }
+}
+
 - (list*)getBookList:(NSString*)listName{
     NSError *error;
     //TODO: need to escape bad characters (e.g ') in listName; this probably applies elsewhere!
@@ -117,11 +140,15 @@
 
     [self selectRowIndexes:[NSIndexSet indexSetWithIndex:itemIndex] byExtendingSelection:NO];
     //tell the delegate!
-    [[self delegate]outlineViewSelectionDidChange:nil]; //FIXME: this will break if I start to use the notification in the delegate
+    [[self delegate] outlineViewSelectionDidChange:nil]; //FIXME: this will break if I start to use the notification in the delegate
 }
 
 - (Library*)selectedLibrary{
     return currentlySelectedLibrary;
+}
+
+- (id)selectedItem{
+    return [self itemAtRow:[self selectedRow]];
 }
 
 
@@ -234,7 +261,7 @@
 	return false;
     }
 
-    NSString *oldName = [self itemAtRow:[self selectedRow]];
+    NSString *oldName = [self selectedItem];
     list *theList = [self getBookList:oldName];
     [oldName release];
     theList.name = newName;
@@ -243,10 +270,8 @@
 }
 
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification{
-    //TODO update book count when selection changes
 
-    NSInteger selectedRow = [self selectedRow];
-    id item = [self itemAtRow:selectedRow];
+    id item = [self selectedItem];
     NSString *predString = nil;
 
     currentlySelectedLibrary = bookLibrary; //default to bookLibrary, unless specified
@@ -272,6 +297,8 @@
     [application updateSummaryText];
 }
 
+//delegates for drag and drop
+
 - (BOOL)outlineView:(NSOutlineView *)outlineView 
 	 acceptDrop:(id < NSDraggingInfo >)info 
 	       item:(id)item 
@@ -286,7 +313,23 @@
     for(NSURL* objectURI in theBooks){
 	NSManagedObjectID* objId = [[application persistentStoreCoordinator] managedObjectIDForURIRepresentation:objectURI];
 	book* theBook = [managedObjectContext objectWithID:objId];
-	[self addBook:theBook toList:item andSave:false];
+
+	if([[self parentForItem:item] isEqualToString:@"LIBRARY"]){
+
+	    [self moveBook:theBook toLibrary:item andSave:false];
+
+	    //HACK: this gets the filter to refresh, may be very slow for large libraries(?) 
+	    [managedObjectContext processPendingChanges];
+	    //TODO: is this a potential memory leak???
+	    NSPredicate* pred = [[arrayController filterPredicate] retain];
+	    [arrayController setFilterPredicate:nil];
+	    [arrayController setFilterPredicate:pred];
+
+	}else if([[self parentForItem:item] isEqualToString:@"BOOK LISTS"]){
+
+	    [self addBook:theBook toList:item andSave:false];
+
+	}
     }
 
     [application saveAction:self];
@@ -298,9 +341,17 @@
 		  proposedItem:(id)item 
 	    proposedChildIndex:(NSInteger)index{
 
+    if([self selectedItem] == item){
+    //can't drag from current selection into itself
+	    return NSDragOperationNone;
+    }
 
     if([[self parentForItem:item] isEqualToString:@"BOOK LISTS"]){
 	return NSDragOperationCopy;
+
+    }else if([[self parentForItem:item] isEqualToString:@"LIBRARY"]){
+	return NSDragOperationMove;
+
     }else{
 	return NSDragOperationNone;
     }

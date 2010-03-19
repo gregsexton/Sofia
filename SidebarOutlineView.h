@@ -17,6 +17,7 @@
 
     IBOutlet NSArrayController *arrayController;
     IBOutlet SofiaApplication *application;
+    IBOutlet NSTableView *mainTableView;
 
     Library* bookLibrary;
     Library* shoppingListLibrary;
@@ -35,4 +36,6 @@
 - (Library*) selectedLibrary;
 - (NSUInteger)numberOfBookLists;
 - (void)addBook:(book*)theBook toList:(NSString*)theList andSave:(BOOL)save;
+- (id)selectedItem;
+- (void)moveBook:(book*)theBook toLibrary:(NSString*)theLibrary andSave:(BOOL)save;
 @end

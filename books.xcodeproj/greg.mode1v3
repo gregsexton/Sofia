@@ -280,7 +280,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>21</integer>
+									<integer>19</integer>
 									<integer>6</integer>
 									<integer>0</integer>
 								</array>
@@ -321,7 +321,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>list.h</string>
+								<string>book.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -329,11 +329,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>list.h</string>
+										<string>book.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>37BAF8441152E7B300F95C41</string>
+										<string>37BAF8991152F55700F95C41</string>
 										<key>history</key>
 										<array>
 											<string>373752621055B6BE00718317</string>
@@ -360,14 +360,14 @@
 											<string>37BAF50D114D6A0100F95C41</string>
 											<string>37BAF5B6114EEE9100F95C41</string>
 											<string>37BAF71C1151789900F95C41</string>
-											<string>37BAF7231151790B00F95C41</string>
 											<string>37BAF775115192D400F95C41</string>
 											<string>37BAF77D1151937800F95C41</string>
-											<string>37BAF8201152D59C00F95C41</string>
 											<string>37BAF8211152D59C00F95C41</string>
 											<string>37BAF8221152D59C00F95C41</string>
 											<string>37BAF8231152D59C00F95C41</string>
-											<string>37BAF777115192D400F95C41</string>
+											<string>37BAF8591152EDC800F95C41</string>
+											<string>37BAF8631152EEA700F95C41</string>
+											<string>37BAF85A1152EDC800F95C41</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -563,7 +563,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>37BAF8451152E7B300F95C41</string>
+		<string>37BAF89A1152F55700F95C41</string>
 		<string>37BAF4A4114D483B00F95C41</string>
 		<string>37BAF491114BDC5E00F95C41</string>
 		<string>37BAF492114BDC5E00F95C41</string>

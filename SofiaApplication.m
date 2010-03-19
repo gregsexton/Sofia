@@ -288,7 +288,7 @@
 - (void) updateSummaryText {
     int count = [[arrayController arrangedObjects] count];
     if(count == 0){
-	[summaryText setStringValue:@"Empty Library"];
+	[summaryText setStringValue:@"Empty"];
     }else if(count == 1){
 	[summaryText setStringValue:@"1 book"];
     }else {
