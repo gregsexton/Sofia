@@ -8,7 +8,6 @@
 
 #import "SidebarOutlineView.h"
 
-// TODO: seriously, refactor out all the string literals!
 // TODO: use uri representation for items
 // TODO: remove the disclosure triangles from headers
 // TODO: make the header text just slightly smaller
@@ -27,28 +26,29 @@
     [self setDataSource:self];
     [self expandItem:nil expandChildren:true];
     [self assignLibraryObjects];
-    [self setSelectedItem:@"Books"];
+    [self setSelectedItem:BOOK_LIBRARY];
     [self registerForDraggedTypes:[NSArray arrayWithObjects:SofiaDragType, nil]];
+
 }
 
 - (void)assignLibraryObjects {
 
-    NSFetchRequest *request = [self libraryExistsWithName:@"Books"];
+    NSFetchRequest *request = [self libraryExistsWithName:BOOK_LIBRARY];
     if(request != nil){
 	NSError *error;
 	bookLibrary = [[[managedObjectContext executeFetchRequest:request error:&error] objectAtIndex:0] retain];
     }else{
 	bookLibrary = [NSEntityDescription insertNewObjectForEntityForName:@"Library" inManagedObjectContext:managedObjectContext];
-	[bookLibrary setName:@"Books"];
+	[bookLibrary setName:BOOK_LIBRARY];
     }
 
-    request = [self libraryExistsWithName:@"Shopping List"];
+    request = [self libraryExistsWithName:SHOPPING_LIST_LIBRARY];
     if(request != nil){
 	NSError *error;
 	shoppingListLibrary = [[[managedObjectContext executeFetchRequest:request error:&error] objectAtIndex:0] retain];
     }else{
 	shoppingListLibrary = [NSEntityDescription insertNewObjectForEntityForName:@"Library" inManagedObjectContext:managedObjectContext];
-	[shoppingListLibrary setName:@"Shopping List"];
+	[shoppingListLibrary setName:SHOPPING_LIST_LIBRARY];
     }
 }
 
@@ -108,9 +108,9 @@
     Library* moveToLib = nil;
     Library* moveFromLib = theBook.library;
 
-    if([theLibrary isEqualToString:@"Books"]){
+    if([theLibrary isEqualToString:BOOK_LIBRARY]){
 	moveToLib = bookLibrary;
-    }else if([theLibrary isEqualToString:@"Shopping List"]){
+    }else if([theLibrary isEqualToString:SHOPPING_LIST_LIBRARY]){
 	moveToLib = shoppingListLibrary;
     }else{
 	return; //error!
@@ -156,7 +156,7 @@
 
 - (void)removeCurrentlySelectedList{
 	NSString* item = [self selectedItem];
-	if([[self parentForItem:item] isEqualToString:@"BOOK LISTS"]){
+	if([[self parentForItem:item] isEqualToString:CAT_BOOK_LISTS]){
 	    //confirm!
 	    int alertReturn = NSRunAlertPanel(@"Remove List?", @"Are you sure you wish to permanently remove this book list from Sofia?",
 				      @"No", @"Yes", nil);
@@ -175,24 +175,22 @@
     if(item == nil){
 	switch(index){
 	    case 0:
-		return @"LIBRARY";
+		return CAT_LIBRARY;
 	    case 1:
-		return @"BOOK LISTS";
+		return CAT_BOOK_LISTS;
 	    case 2:
-		return @"SMART BOOK LISTS";
+		return CAT_SMART_BOOK_LISTS;
 	}
     }
-    if([item isEqualToString:@"LIBRARY"]){
+    if([item isEqualToString:CAT_LIBRARY]){
 	switch(index){
 	    case 0:
-		return @"Books";
+		return BOOK_LIBRARY;
 	    case 1:
-		return @"Shopping List";
-	    default:
-		return @"Error!";
+		return SHOPPING_LIST_LIBRARY;
 	}
     }
-    if([item isEqualToString:@"BOOK LISTS"]){
+    if([item isEqualToString:CAT_BOOK_LISTS]){
 	NSArray *lists = [self getBookLists];
 	list *list = [lists objectAtIndex:index];
 	NSString *name = [NSString stringWithString:list.name];
@@ -210,32 +208,32 @@
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item{
-    if([item isEqualToString:@"LIBRARY"]){
+    if([item isEqualToString:CAT_LIBRARY]){
 	return true;
     }
-    if([item isEqualToString:@"BOOK LISTS"]){
+    if([item isEqualToString:CAT_BOOK_LISTS]){
 	return true;
     }
-    if([item isEqualToString:@"SMART BOOK LISTS"]){
+    if([item isEqualToString:CAT_SMART_BOOK_LISTS]){
 	return true;
     }
     return false;
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item {
-    if([item isEqualToString:@"LIBRARY"]){
+    if([item isEqualToString:CAT_LIBRARY]){
 	return false;
     }
-    if([item isEqualToString:@"BOOK LISTS"]){
+    if([item isEqualToString:CAT_BOOK_LISTS]){
 	return false;
     }
-    if([item isEqualToString:@"SMART BOOK LISTS"]){
+    if([item isEqualToString:CAT_SMART_BOOK_LISTS]){
 	return false;
     }
-    if([item isEqualToString:@"Books"]){
+    if([item isEqualToString:BOOK_LIBRARY]){
 	return false;
     }
-    if([item isEqualToString:@"Shopping List"]){
+    if([item isEqualToString:SHOPPING_LIST_LIBRARY]){
 	return false;
     }
 
@@ -246,23 +244,23 @@
     if(item == nil){
 	return 3;
     }
-    if([item isEqualToString:@"LIBRARY"]){
+    if([item isEqualToString:CAT_LIBRARY]){
 	return 2;
     }
-    if([item isEqualToString:@"BOOK LISTS"]){
+    if([item isEqualToString:CAT_BOOK_LISTS]){
 	return [self numberOfBookLists];
     }
     return 0;
 }
 
 - (BOOL)outlineView:(NSOutlineView*)outlineView isGroupItem:(id)item {
-    if([item isEqualToString:@"LIBRARY"]){
+    if([item isEqualToString:CAT_LIBRARY]){
 	return true;
     }
-    if([item isEqualToString:@"BOOK LISTS"]){
+    if([item isEqualToString:CAT_BOOK_LISTS]){
 	return true;
     }
-    if([item isEqualToString:@"SMART BOOK LISTS"]){
+    if([item isEqualToString:CAT_SMART_BOOK_LISTS]){
 	return true;
     }
     return false;
@@ -293,16 +291,16 @@
 
     currentlySelectedLibrary = bookLibrary; //default to bookLibrary, unless specified
 
-    if([item isEqualToString:@"Books"]){
-	predString = [[NSString alloc] initWithFormat:@"library.name MATCHES '%@'", @"Books"];
+    if([item isEqualToString:BOOK_LIBRARY]){
+	predString = [[NSString alloc] initWithFormat:@"library.name MATCHES '%@'", BOOK_LIBRARY];
     }
 
-    if([item isEqualToString:@"Shopping List"]){
-	predString = [[NSString alloc] initWithFormat:@"library.name MATCHES '%@'", @"Shopping List"];
+    if([item isEqualToString:SHOPPING_LIST_LIBRARY]){
+	predString = [[NSString alloc] initWithFormat:@"library.name MATCHES '%@'", SHOPPING_LIST_LIBRARY];
 	currentlySelectedLibrary = shoppingListLibrary;
     }
 
-    if([[self parentForItem:item] isEqualToString:@"BOOK LISTS"]){
+    if([[self parentForItem:item] isEqualToString:CAT_BOOK_LISTS]){
 	predString = [[NSString alloc] initWithFormat:@"ANY lists.name MATCHES '%@'", item];
     }
 
@@ -331,7 +329,7 @@
 	NSManagedObjectID* objId = [[application persistentStoreCoordinator] managedObjectIDForURIRepresentation:objectURI];
 	book* theBook = [managedObjectContext objectWithID:objId];
 
-	if([[self parentForItem:item] isEqualToString:@"LIBRARY"]){
+	if([[self parentForItem:item] isEqualToString:CAT_LIBRARY]){
 
 	    [self moveBook:theBook toLibrary:item andSave:false];
 
@@ -339,7 +337,7 @@
 	    [managedObjectContext processPendingChanges];
 	    [arrayController fetch:self];
 
-	}else if([[self parentForItem:item] isEqualToString:@"BOOK LISTS"]){
+	}else if([[self parentForItem:item] isEqualToString:CAT_BOOK_LISTS]){
 
 	    [self addBook:theBook toList:item andSave:false];
 
@@ -360,10 +358,10 @@
 	    return NSDragOperationNone;
     }
 
-    if([[self parentForItem:item] isEqualToString:@"BOOK LISTS"]){
+    if([[self parentForItem:item] isEqualToString:CAT_BOOK_LISTS]){
 	return NSDragOperationCopy;
 
-    }else if([[self parentForItem:item] isEqualToString:@"LIBRARY"]){
+    }else if([[self parentForItem:item] isEqualToString:CAT_LIBRARY]){
 	return NSDragOperationMove;
 
     }else{

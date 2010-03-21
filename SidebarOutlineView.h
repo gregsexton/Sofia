@@ -13,6 +13,13 @@
 
 #define SofiaDragType @"SofiaDragType"
 
+#define CAT_LIBRARY @"LIBRARY"
+#define CAT_BOOK_LISTS @"BOOK LISTS"
+#define CAT_SMART_BOOK_LISTS @"SMART BOOK LISTS"
+
+#define BOOK_LIBRARY @"Books"
+#define SHOPPING_LIST_LIBRARY @"Shopping List"
+
 @interface SidebarOutlineView : NSOutlineView <NSOutlineViewDelegate, NSOutlineViewDataSource> {
 
     IBOutlet NSArrayController *arrayController;
@@ -23,6 +30,7 @@
     Library* shoppingListLibrary;
     Library* currentlySelectedLibrary;
     NSManagedObjectContext *managedObjectContext;
+
 }
 
 - (IBAction) addListAction:(id)sender;
