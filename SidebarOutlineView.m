@@ -9,11 +9,14 @@
 #import "SidebarOutlineView.h"
 
 // TODO: seriously, refactor out all the string literals!
+// TODO: use uri representation for items
 // TODO: remove the disclosure triangles from headers
 // TODO: make the header text just slightly smaller
 // TODO: make it impossible to select headers
-// TODO: drag and drop between libraries
 // TODO: searching displays all books!
+// TODO: add right click context menus
+// TODO: implement smart book lists
+// TODO: create abiltiy to edit smart book lists predicate using new window 
 
 @implementation SidebarOutlineView
 
@@ -332,12 +335,9 @@
 
 	    [self moveBook:theBook toLibrary:item andSave:false];
 
-	    //HACK: this gets the filter to refresh, may be very slow for large libraries(?) 
+	    //refresh the filter
 	    [managedObjectContext processPendingChanges];
-	    //TODO: is this a potential memory leak???
-	    NSPredicate* pred = [[arrayController filterPredicate] retain];
-	    [arrayController setFilterPredicate:nil];
-	    [arrayController setFilterPredicate:pred];
+	    [arrayController fetch:self];
 
 	}else if([[self parentForItem:item] isEqualToString:@"BOOK LISTS"]){
 
@@ -381,6 +381,7 @@
 	[self removeCurrentlySelectedList];
     }
 
+    //TODO: pass on to next first responder if not going to handle it
 }
 
 @end

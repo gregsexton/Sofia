@@ -9,6 +9,7 @@
 
 
 //TODO: reorder all of the methods into a more logical state!
+//TODO: make table view a new inherited class with custom code self contained
 
 @implementation SofiaApplication
 
