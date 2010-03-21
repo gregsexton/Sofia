@@ -6,6 +6,7 @@
 //
 
 #import "SofiaApplication.h"
+#import "SidebarOutlineView.h"
 
 
 //TODO: reorder all of the methods into a more logical state!

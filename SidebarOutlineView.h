@@ -43,7 +43,7 @@
 - (void)setSelectedItem:(id)item;
 - (Library*) selectedLibrary;
 - (NSUInteger)numberOfBookLists;
-- (void)addBook:(book*)theBook toList:(NSString*)theList andSave:(BOOL)save;
+- (void)addBook:(book*)theBook toList:(list*)theList andSave:(BOOL)save;
 - (id)selectedItem;
-- (void)moveBook:(book*)theBook toLibrary:(NSString*)theLibrary andSave:(BOOL)save;
+- (void)moveBook:(book*)theBook toLibrary:(Library*)theLibrary andSave:(BOOL)save;
 @end
