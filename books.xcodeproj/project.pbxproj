@@ -22,6 +22,7 @@
 		37BAF500114D69D000F95C41 /* book.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FB114D69D000F95C41 /* book.m */; };
 		37BAF501114D69D000F95C41 /* list.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FD114D69D000F95C41 /* list.m */; };
 		37BAF502114D69D000F95C41 /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FF114D69D000F95C41 /* Library.m */; };
+		37BAF94511566BA700F95C41 /* BooksTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF94411566BA700F95C41 /* BooksTableView.m */; };
 		37D7073310B5D7FE0004F441 /* AuthorDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D7073210B5D7FE0004F441 /* AuthorDetail.xib */; };
 		37D7073710B5D8BE0004F441 /* AuthorsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D7073610B5D8BE0004F441 /* AuthorsWindowController.m */; };
 		37D708DB10C190100004F441 /* MBPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D708DA10C190100004F441 /* MBPreferencesController.m */; };
@@ -69,6 +70,8 @@
 		37BAF4FD114D69D000F95C41 /* list.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = list.m; sourceTree = "<group>"; };
 		37BAF4FE114D69D000F95C41 /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
 		37BAF4FF114D69D000F95C41 /* Library.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Library.m; sourceTree = "<group>"; };
+		37BAF94311566BA700F95C41 /* BooksTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooksTableView.h; sourceTree = "<group>"; };
+		37BAF94411566BA700F95C41 /* BooksTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BooksTableView.m; sourceTree = "<group>"; };
 		37D7073210B5D7FE0004F441 /* AuthorDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthorDetail.xib; sourceTree = "<group>"; };
 		37D7073510B5D8BE0004F441 /* AuthorsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorsWindowController.h; sourceTree = "<group>"; };
 		37D7073610B5D8BE0004F441 /* AuthorsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorsWindowController.m; sourceTree = "<group>"; };
@@ -106,6 +109,8 @@
 				3737514D105426BF00718317 /* isbndbInterface.m */,
 				371182B010C454E200732634 /* SidebarOutlineView.h */,
 				371182B110C454E200732634 /* SidebarOutlineView.m */,
+				37BAF94311566BA700F95C41 /* BooksTableView.h */,
+				37BAF94411566BA700F95C41 /* BooksTableView.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -313,6 +318,7 @@
 				37BAF500114D69D000F95C41 /* book.m in Sources */,
 				37BAF501114D69D000F95C41 /* list.m in Sources */,
 				37BAF502114D69D000F95C41 /* Library.m in Sources */,
+				37BAF94511566BA700F95C41 /* BooksTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

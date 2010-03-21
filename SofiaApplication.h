@@ -16,14 +16,13 @@
 #import "GeneralViewController.h"
 #import "MBPreferencesController.h"
 #import "Library.h"
+@class BooksTableView;
 @class SidebarOutlineView;
-
-#define SofiaDragType @"SofiaDragType"
 
 @interface SofiaApplication : NSObject {
 	
 	IBOutlet NSWindow *window;
-	IBOutlet NSTableView *tableView;
+	IBOutlet BooksTableView *tableView;
 	IBOutlet NSTextField *summaryText;
 	IBOutlet NSArrayController *arrayController;
 	IBOutlet NSApplication *theApplication;
@@ -40,7 +39,6 @@
 - (NSManagedObjectContext *)managedObjectContext;
 
 - (IBAction) saveAction:sender;
-- (IBAction) doubleClickAction:(id)sender;
 - (IBAction) addRemoveClickAction:(id)sender;
 - (IBAction) addBookAction:(id)sender;
 - (IBAction) removeBookAction:(id)sender;

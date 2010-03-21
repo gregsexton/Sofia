@@ -13,7 +13,7 @@
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<integer value="205"/>
-			<integer value="782"/>
+			<integer value="544"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1356,7 +1356,7 @@
 											<bool key="EncodedWithXMLCoder">YES</bool>
 											<object class="NSSegmentItem">
 												<double key="NSSegmentItemWidth">32</double>
-												<object class="NSCustomResource" key="NSSegmentItemImage" id="735529101">
+												<object class="NSCustomResource" key="NSSegmentItemImage" id="955060787">
 													<string key="NSClassName">NSImage</string>
 													<string key="NSResourceName">NSAddTemplate</string>
 												</object>
@@ -2027,21 +2027,21 @@
 							<int key="NSDividerStyle">2</int>
 							<string key="NSAutosaveName">overviewSplit</string>
 						</object>
-						<object class="NSButton" id="979509521">
+						<object class="NSButton" id="337783072">
 							<reference key="NSNextResponder" ref="1040090277"/>
 							<int key="NSvFlags">256</int>
 							<string key="NSFrame">{{20, 0}, {35, 25}}</string>
 							<reference key="NSSuperview" ref="1040090277"/>
 							<bool key="NSEnabled">YES</bool>
-							<object class="NSButtonCell" key="NSCell" id="404699762">
+							<object class="NSButtonCell" key="NSCell" id="33276599">
 								<int key="NSCellFlags">-2080244224</int>
 								<int key="NSCellFlags2">134217728</int>
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="189518655"/>
-								<reference key="NSControlView" ref="979509521"/>
+								<reference key="NSControlView" ref="337783072"/>
 								<int key="NSButtonFlags">-2033958657</int>
 								<int key="NSButtonFlags2">163</int>
-								<reference key="NSNormalImage" ref="735529101"/>
+								<reference key="NSNormalImage" ref="955060787"/>
 								<string key="NSAlternateContents"/>
 								<string key="NSKeyEquivalent"/>
 								<int key="NSPeriodicDelay">400</int>
@@ -2723,22 +2723,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">delegate</string>
-						<reference key="source" ref="98113484"/>
-						<reference key="destination" ref="145402063"/>
-					</object>
-					<int key="connectionID">713</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">tableView</string>
-						<reference key="source" ref="145402063"/>
-						<reference key="destination" ref="98113484"/>
-					</object>
-					<int key="connectionID">714</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">window</string>
 						<reference key="source" ref="145402063"/>
 						<reference key="destination" ref="970442734"/>
@@ -2890,25 +2874,41 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">addListAction:</string>
 						<reference key="source" ref="956318075"/>
-						<reference key="destination" ref="979509521"/>
+						<reference key="destination" ref="337783072"/>
 					</object>
 					<int key="connectionID">797</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">dataSource</string>
+						<string key="label">arrayController</string>
 						<reference key="source" ref="98113484"/>
-						<reference key="destination" ref="145402063"/>
+						<reference key="destination" ref="440274433"/>
 					</object>
-					<int key="connectionID">798</int>
+					<int key="connectionID">800</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">mainTableView</string>
-						<reference key="source" ref="956318075"/>
+						<string key="label">tableView</string>
+						<reference key="source" ref="145402063"/>
 						<reference key="destination" ref="98113484"/>
 					</object>
-					<int key="connectionID">799</int>
+					<int key="connectionID">801</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">sideBar</string>
+						<reference key="source" ref="98113484"/>
+						<reference key="destination" ref="956318075"/>
+					</object>
+					<int key="connectionID">802</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">application</string>
+						<reference key="source" ref="98113484"/>
+						<reference key="destination" ref="145402063"/>
+					</object>
+					<int key="connectionID">803</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3778,7 +3778,7 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="639397870"/>
-							<reference ref="979509521"/>
+							<reference ref="337783072"/>
 							<reference ref="82794934"/>
 						</object>
 						<reference key="parent" ref="970442734"/>
@@ -4151,17 +4151,17 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">795</int>
-						<reference key="object" ref="979509521"/>
+						<reference key="object" ref="337783072"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="404699762"/>
+							<reference ref="33276599"/>
 						</object>
 						<reference key="parent" ref="1040090277"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">796</int>
-						<reference key="object" ref="404699762"/>
-						<reference key="parent" ref="979509521"/>
+						<reference key="object" ref="33276599"/>
+						<reference key="parent" ref="337783072"/>
 					</object>
 				</object>
 			</object>
@@ -4363,6 +4363,7 @@
 					<string>547.IBViewIntegration.shadowOffsetHeight</string>
 					<string>547.IBViewIntegration.shadowOffsetWidth</string>
 					<string>548.IBPluginDependency</string>
+					<string>549.CustomClassName</string>
 					<string>549.IBPluginDependency</string>
 					<string>550.IBPluginDependency</string>
 					<string>551.IBPluginDependency</string>
@@ -4639,6 +4640,7 @@
 					<real value="0.0"/>
 					<real value="0.0"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>BooksTableView</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4736,11 +4738,38 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">799</int>
+			<int key="maxID">803</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<object class="IBPartialClassDescription">
+					<string key="className">BooksTableView</string>
+					<string key="superclassName">NSTableView</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">doubleClickAction:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>application</string>
+							<string>arrayController</string>
+							<string>sideBar</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>SofiaApplication</string>
+							<string>NSArrayController</string>
+							<string>SidebarOutlineView</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">BooksTableView.h</string>
+					</object>
+				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">SidebarOutlineView</string>
 					<string key="superclassName">NSOutlineView</string>
@@ -4754,13 +4783,11 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>application</string>
 							<string>arrayController</string>
-							<string>mainTableView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>SofiaApplication</string>
 							<string>NSArrayController</string>
-							<string>NSTableView</string>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -4779,7 +4806,6 @@
 							<string>addBookAction:</string>
 							<string>addRemoveClickAction:</string>
 							<string>displayPreferencesClickAction:</string>
-							<string>doubleClickAction:</string>
 							<string>manageAuthorsClickAction:</string>
 							<string>manageSubjectsClickAction:</string>
 							<string>removeBookAction:</string>
@@ -4787,7 +4813,6 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -4816,7 +4841,7 @@
 							<string>NSArrayController</string>
 							<string>SidebarOutlineView</string>
 							<string>NSTextField</string>
-							<string>NSTableView</string>
+							<string>BooksTableView</string>
 							<string>NSApplication</string>
 							<string>NSWindow</string>
 						</object>

@@ -491,6 +491,14 @@
 			37BAF92D1156697700F95C41 /* PBXTextBookmark */ = 37BAF92D1156697700F95C41 /* PBXTextBookmark */;
 			37BAF935115669E300F95C41 /* PBXTextBookmark */ = 37BAF935115669E300F95C41 /* PBXTextBookmark */;
 			37BAF93911566A2400F95C41 /* PBXTextBookmark */ = 37BAF93911566A2400F95C41 /* PBXTextBookmark */;
+			37BAF9601156713300F95C41 /* PBXTextBookmark */ = 37BAF9601156713300F95C41 /* PBXTextBookmark */;
+			37BAF9611156713300F95C41 /* PBXTextBookmark */ = 37BAF9611156713300F95C41 /* PBXTextBookmark */;
+			37BAF9621156713300F95C41 /* PBXTextBookmark */ = 37BAF9621156713300F95C41 /* PBXTextBookmark */;
+			37BAF9631156713300F95C41 /* PBXTextBookmark */ = 37BAF9631156713300F95C41 /* PBXTextBookmark */;
+			37BAF9641156713300F95C41 /* PBXTextBookmark */ = 37BAF9641156713300F95C41 /* PBXTextBookmark */;
+			37BAF9651156713300F95C41 /* PBXTextBookmark */ = 37BAF9651156713300F95C41 /* PBXTextBookmark */;
+			37BAF9661156713300F95C41 /* PBXTextBookmark */ = 37BAF9661156713300F95C41 /* PBXTextBookmark */;
+			37BAF9671156713300F95C41 /* PBXTextBookmark */ = 37BAF9671156713300F95C41 /* PBXTextBookmark */;
 			37D707E310B96E320004F441 = 37D707E310B96E320004F441 /* PBXTextBookmark */;
 			37D7089B10BF0FB40004F441 = 37D7089B10BF0FB40004F441 /* PBXTextBookmark */;
 			37D708D310C18F9D0004F441 = 37D708D310C18F9D0004F441 /* PBXTextBookmark */;
@@ -522,16 +530,16 @@
 	};
 	371182B010C454E200732634 /* SidebarOutlineView.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1083, 481}}";
-			sepNavSelRange = "{1189, 0}";
-			sepNavVisRange = "{0, 821}";
+			sepNavIntBoundsRect = "{{0, 0}, {1143, 923}}";
+			sepNavSelRange = "{613, 0}";
+			sepNavVisRange = "{0, 1634}";
 		};
 	};
 	371182B110C454E200732634 /* SidebarOutlineView.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1143, 4849}}";
-			sepNavSelRange = "{12215, 0}";
-			sepNavVisRange = "{2314, 2292}";
+			sepNavIntBoundsRect = "{{0, 0}, {985, 5005}}";
+			sepNavSelRange = "{7482, 0}";
+			sepNavVisRange = "{5255, 1706}";
 		};
 	};
 	371182E910C924EB00732634 /* PBXTextBookmark */ = {
@@ -689,9 +697,9 @@
 	};
 	37365593101CCC3C00709C8F /* BooksWindowController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1083, 6071}}";
-			sepNavSelRange = "{16114, 0}";
-			sepNavVisRange = "{15666, 1055}";
+			sepNavIntBoundsRect = "{{0, 0}, {1143, 6240}}";
+			sepNavSelRange = "{15596, 0}";
+			sepNavVisRange = "{14313, 2676}";
 		};
 	};
 	373751491054219600718317 /* database.xcdatamodel */ = {
@@ -893,16 +901,16 @@
 	};
 	373752C4105EB6D500718317 /* SofiaApplication.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1083, 598}}";
-			sepNavSelRange = "{467, 0}";
-			sepNavVisRange = "{0, 722}";
+			sepNavIntBoundsRect = "{{0, 0}, {1143, 923}}";
+			sepNavSelRange = "{572, 0}";
+			sepNavVisRange = "{0, 1523}";
 		};
 	};
 	373752C5105EB6D500718317 /* SofiaApplication.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1143, 4563}}";
-			sepNavSelRange = "{12660, 0}";
-			sepNavVisRange = "{10037, 2617}";
+			sepNavIntBoundsRect = "{{0, 0}, {1143, 4329}}";
+			sepNavSelRange = "{11490, 0}";
+			sepNavVisRange = "{8990, 2505}";
 		};
 	};
 	37375314105EEAAA00718317 /* PBXTextBookmark */ = {
@@ -4521,7 +4529,7 @@
 		fRef = 373752C4105EB6D500718317 /* SofiaApplication.h */;
 		name = "SofiaApplication.h: 20";
 		rLen = 0;
-		rLoc = 467;
+		rLoc = 494;
 		rType = 0;
 		vrLen = 722;
 		vrLoc = 0;
@@ -9525,7 +9533,7 @@
 		ignoreCount = 0;
 		lineNumber = 161;
 		location = Sofia;
-		modificationTime = 290875938.982761;
+		modificationTime = 290876961.986143;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -9543,7 +9551,7 @@
 		ignoreCount = 0;
 		lineNumber = 172;
 		location = Sofia;
-		modificationTime = 290875938.983528;
+		modificationTime = 290876961.986938;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -9561,7 +9569,7 @@
 		ignoreCount = 0;
 		lineNumber = 234;
 		location = Sofia;
-		modificationTime = 290875938.984095;
+		modificationTime = 290876961.98733;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -9709,7 +9717,7 @@
 		ignoreCount = 0;
 		lineNumber = 244;
 		location = Sofia;
-		modificationTime = 290875938.98458;
+		modificationTime = 290876961.987662;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -9874,7 +9882,7 @@
 		ignoreCount = 0;
 		lineNumber = 27;
 		location = Sofia;
-		modificationTime = 290875938.984919;
+		modificationTime = 290876961.987973;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -9992,7 +10000,7 @@
 		ignoreCount = 0;
 		lineNumber = 208;
 		location = Sofia;
-		modificationTime = 290875938.985556;
+		modificationTime = 290876961.988377;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -15774,7 +15782,7 @@
 		ignoreCount = 0;
 		lineNumber = 271;
 		location = Sofia;
-		modificationTime = 290875938.986014;
+		modificationTime = 290876961.988761;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -16912,6 +16920,100 @@
 		vrLen = 1971;
 		vrLoc = 0;
 	};
+	37BAF94311566BA700F95C41 /* BooksTableView.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {927, 906}}";
+			sepNavSelRange = "{585, 0}";
+			sepNavVisRange = "{0, 585}";
+		};
+	};
+	37BAF94411566BA700F95C41 /* BooksTableView.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1143, 949}}";
+			sepNavSelRange = "{1967, 0}";
+			sepNavVisRange = "{0, 2277}";
+		};
+	};
+	37BAF9601156713300F95C41 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 37BAF4FA114D69D000F95C41 /* book.h */;
+		name = "book.h: 41";
+		rLen = 0;
+		rLoc = 1413;
+		rType = 0;
+		vrLen = 1971;
+		vrLoc = 0;
+	};
+	37BAF9611156713300F95C41 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 373752C5105EB6D500718317 /* SofiaApplication.m */;
+		name = "SofiaApplication.m: 330";
+		rLen = 0;
+		rLoc = 11856;
+		rType = 0;
+		vrLen = 2551;
+		vrLoc = 8086;
+	};
+	37BAF9621156713300F95C41 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 373752C4105EB6D500718317 /* SofiaApplication.h */;
+		name = "SofiaApplication.h: 26";
+		rLen = 0;
+		rLoc = 643;
+		rType = 0;
+		vrLen = 1576;
+		vrLoc = 0;
+	};
+	37BAF9631156713300F95C41 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 371182B110C454E200732634 /* SidebarOutlineView.m */;
+		name = "SidebarOutlineView.m: 256";
+		rLen = 0;
+		rLoc = 7482;
+		rType = 0;
+		vrLen = 1706;
+		vrLoc = 5255;
+	};
+	37BAF9641156713300F95C41 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 371182B010C454E200732634 /* SidebarOutlineView.h */;
+		name = "SidebarOutlineView.h: 30";
+		rLen = 0;
+		rLoc = 757;
+		rType = 0;
+		vrLen = 1675;
+		vrLoc = 0;
+	};
+	37BAF9651156713300F95C41 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 37BAF94411566BA700F95C41 /* BooksTableView.m */;
+		name = "BooksTableView.m: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 422;
+		vrLoc = 0;
+	};
+	37BAF9661156713300F95C41 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 37BAF94311566BA700F95C41 /* BooksTableView.h */;
+		name = "BooksTableView.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 207;
+		vrLoc = 0;
+	};
+	37BAF9671156713300F95C41 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 37BAF94311566BA700F95C41 /* BooksTableView.h */;
+		name = "BooksTableView.h: 26";
+		rLen = 0;
+		rLoc = 585;
+		rType = 0;
+		vrLen = 585;
+		vrLoc = 0;
+	};
 	37D7073510B5D8BE0004F441 /* AuthorsWindowController.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {825, 669}}";
@@ -16999,7 +17101,7 @@
 		fRef = 373752C4105EB6D500718317 /* SofiaApplication.h */;
 		name = "SofiaApplication.h: 22";
 		rLen = 0;
-		rLoc = 616;
+		rLoc = 643;
 		rType = 0;
 		vrLen = 1132;
 		vrLoc = 0;

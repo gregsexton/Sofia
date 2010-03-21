@@ -24,7 +24,6 @@
 
     IBOutlet NSArrayController *arrayController;
     IBOutlet SofiaApplication *application;
-    IBOutlet NSTableView *mainTableView;
 
     Library* bookLibrary;
     Library* shoppingListLibrary;

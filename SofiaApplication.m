@@ -7,6 +7,7 @@
 
 #import "SofiaApplication.h"
 #import "SidebarOutlineView.h"
+#import "BooksTableView.h"
 
 
 //TODO: reorder all of the methods into a more logical state!
@@ -21,9 +22,6 @@
     [[MBPreferencesController sharedController] setModules:[NSArray arrayWithObjects:general, accessKeys, nil]];
     [accessKeys release];
     [general release];
-
-    [tableView setDoubleAction:@selector(doubleClickAction:)];
-    [tableView setTarget:self]; 
 
     //guarantee loaded before updating summary text. this works better than observing.
     NSError *error;
@@ -226,17 +224,6 @@
 	}
 }
 
-- (IBAction) doubleClickAction:(id)sender {
-    //use the first object if multiple are selected
-    book *obj = [[arrayController selectedObjects] objectAtIndex:0];
-
-    //TODO: add a readonly field to constructor to get rid of search box and buttons
-    BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj];
-    if (![NSBundle loadNibNamed:@"Detail" owner:detailWin]) {
-	NSLog(@"Error loading Nib!");
-    }
-} 
-
 - (IBAction) addRemoveClickAction:(id)sender {
     if ([addRemoveButtons selectedSegment] == 0){
 	[self addBookAction:self];
@@ -334,23 +321,5 @@
 
     [[MBPreferencesController sharedController] showWindow:sender];
 }    
-
-//alow the tableview to be a drag and drop source
-- (BOOL)tableView:(NSTableView *)aTableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard{
-    [pboard declareTypes:[NSArray arrayWithObject:SofiaDragType] owner:self];
-
-    //get an array of URIs for the selected objects
-    NSMutableArray* rows = [NSMutableArray array];
-    NSArray* selectedObjects = [[arrayController arrangedObjects] objectsAtIndexes:rowIndexes];
-
-    for (NSManagedObject* o in selectedObjects) {
-	[rows addObject:[[o objectID] URIRepresentation]];
-    }
-
-    NSData* encodedIDs = [NSKeyedArchiver archivedDataWithRootObject:rows];
-
-    [pboard setData:encodedIDs forType:SofiaDragType];
-    return true;
-}
 
 @end
