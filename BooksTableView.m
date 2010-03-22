@@ -66,8 +66,10 @@
 	if([item isKindOfClass:[Library class]]){
 	    [application removeBookAction:self];
 	}
+    }else{
+	//pass on to next first responder if not going to handle it
+	[super keyDown:theEvent];
     }
 
-    //TODO: pass on to next first responder if not going to handle it
 }
 @end

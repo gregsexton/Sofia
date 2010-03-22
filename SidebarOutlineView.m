@@ -8,7 +8,7 @@
 
 #import "SidebarOutlineView.h"
 
-// TODO: remove the disclosure triangles from headers
+// TODO: remove the disclosure triangles from library header
 // TODO: make the header text just slightly smaller
 // TODO: make it impossible to select headers
 // TODO: searching displays all books!
@@ -74,6 +74,7 @@
     [application saveAction:self];
     [self reloadData];
     [self setSelectedItem:obj];
+    [self beginEditingCurrentlySelectedItem];
 }
 
 - (NSUInteger)numberOfBookLists{
@@ -133,19 +134,26 @@
     return [self itemAtRow:[self selectedRow]];
 }
 
-- (void)removeCurrentlySelectedList{
-	id item = [self selectedItem];
+- (void)removeCurrentlySelectedItem{
+    id item = [self selectedItem];
 
-	if([item isKindOfClass:[list class]]){
-	    //confirm!
-	    int alertReturn = NSRunAlertPanel(@"Remove List?", @"Are you sure you wish to permanently remove this book list from Sofia?",
-				      @"No", @"Yes", nil);
-	    if (alertReturn == NSAlertAlternateReturn){
-		[managedObjectContext deleteObject:item];
-		[application saveAction:self];
-		[self reloadData];
-	    }
+    if([item isKindOfClass:[list class]]){
+	//confirm!
+	int alertReturn = NSRunAlertPanel(@"Remove List?", @"Are you sure you wish to permanently remove this book list from Sofia?",
+				  @"No", @"Yes", nil);
+	if (alertReturn == NSAlertAlternateReturn){
+	    [managedObjectContext deleteObject:item];
+	    [application saveAction:self];
+	    [self reloadData];
 	}
+    }
+}
+
+- (void) beginEditingCurrentlySelectedItem{
+    [self editColumn:0
+		 row:[self selectedRow]
+	   withEvent:nil
+	      select:YES];
 }
 
 // Delegate Methods //////////////////////////////////////////////////////
@@ -373,10 +381,53 @@
     unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
 
     if (key == NSDeleteCharacter || key == NSBackspaceCharacter){
-	[self removeCurrentlySelectedList];
+	[self removeCurrentlySelectedItem];
+    }else{
+	//pass on to the next first responder
+	[super keyDown:theEvent];
     }
+}
 
-    //TODO: pass on to next first responder if not going to handle it
+-(NSMenu*)menuForEvent:(NSEvent*)evt{
+    NSPoint pt = [self convertPoint:[evt locationInWindow] fromView:nil];
+    int row = [self rowAtPoint:pt];
+
+    [self setSelectedItem:[self itemAtRow:row]];
+
+    NSMenu *theMenu = [[[NSMenu alloc] initWithTitle:@"Contextual Menu"] autorelease];
+    [theMenu insertItemWithTitle:@"Rename"
+			  action:@selector(beginEditingCurrentlySelectedItem)
+		   keyEquivalent:@""
+			 atIndex:0];
+
+    [theMenu insertItemWithTitle:@"Delete"
+			  action:@selector(removeCurrentlySelectedItem)
+		   keyEquivalent:@""
+			 atIndex:1];
+    return theMenu;
+}
+
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem{
+    id item = [self selectedItem];
+    NSString* title = [menuItem title];
+
+    if([item isKindOfClass:[list class]]){
+
+	return true; //everything is valid
+
+    }else{
+	if([title isEqualToString:@"Rename"]){
+
+	    return false;
+
+	}else if([title isEqualToString:@"Delete"]){
+
+	    return false;
+
+	}
+    }
+    //shouldn't get here...
+    return true;
 }
 
 @end
