@@ -8,13 +8,10 @@
 
 #import "SidebarOutlineView.h"
 
-// TODO: remove the disclosure triangles from library header
-// TODO: make the header text just slightly smaller
-// TODO: make it impossible to select headers
 // TODO: searching displays all books!
-// TODO: add right click context menus
 // TODO: implement smart book lists
 // TODO: create abiltiy to edit smart book lists predicate using new window 
+// TODO: icons! two columns?
 
 @implementation SidebarOutlineView
 
@@ -197,6 +194,24 @@
 }
 
 - (void)outlineView:(NSOutlineView *)outlineView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn byItem:(id)item{
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item{
+    if([item isKindOfClass:[NSString class]]){
+	return false;
+    }else{
+	return true;
+    }
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldShowOutlineCellForItem:(id)item{
+    if([item isKindOfClass:[NSString class]]){
+	if([item isEqualToString:CAT_LIBRARY]){
+	    return false;
+	}
+    }
+
+    return true;
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item{
