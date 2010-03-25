@@ -15,11 +15,19 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+
     managedObjectContext = [application managedObjectContext];
+
     [self assignLibraryObjects];
     [self registerForDraggedTypes:[NSArray arrayWithObjects:SofiaDragType, nil]];
     [self setDelegate:self];
     [self setDataSource:self];
+
+    NSTableColumn* tableColumn = [[self tableColumns] objectAtIndex:0];
+    ImageAndTextCell* imageAndTextCell = [[[ImageAndTextCell alloc] init] autorelease];
+    [imageAndTextCell setEditable: YES];
+    [tableColumn setDataCell:imageAndTextCell];
+
     [self expandItem:nil expandChildren:true];
     [self setSelectedItem:bookLibrary];
 }
@@ -258,6 +266,36 @@
 	return [[item name] retain];
     }else if([item isKindOfClass:[Library class]]){
 	return [[item name] retain];
+    }
+}
+
+- (void)outlineView:(NSOutlineView*)olv willDisplayCell:(NSCell*)cell forTableColumn:(NSTableColumn*)tableColumn item:(id)item{
+    if([item isKindOfClass:[NSString class]]){
+
+	[(ImageAndTextCell*)cell setImage:nil];
+
+    }else if([item isKindOfClass:[list class]]){
+
+	[(ImageAndTextCell*)cell setImage:[NSImage imageNamed:@"list.tif"]];
+
+    }else if([item isKindOfClass:[smartList class]]){
+	
+	[(ImageAndTextCell*)cell setImage:[NSImage imageNamed:@"smartlist.tif"]];
+
+    }else if([item isKindOfClass:[Library class]]){
+
+	if([[item name] isEqualToString:BOOK_LIBRARY]){
+
+	    [(ImageAndTextCell*)cell setImage:[NSImage imageNamed:@"book.tif"]];
+
+	}else if([[item name] isEqualToString:SHOPPING_LIST_LIBRARY]){
+
+	    [(ImageAndTextCell*)cell setImage:[NSImage imageNamed:@"shopping2.tif"]];
+
+	}
+	
+    }else{
+	[(ImageAndTextCell*)cell setImage:nil];
     }
 }
 

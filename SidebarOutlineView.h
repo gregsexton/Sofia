@@ -11,6 +11,7 @@
 #import "SofiaApplication.h"
 #import "list.h"
 #import "smartList.h"
+#import "ImageAndTextCell.h"
 
 #define SofiaDragType @"SofiaDragType"
 
