@@ -10,6 +10,7 @@
 #import "Library.h"
 #import "SofiaApplication.h"
 #import "list.h"
+#import "smartList.h"
 
 #define SofiaDragType @"SofiaDragType"
 
@@ -32,7 +33,8 @@
 
 }
 
-- (IBAction) addListAction:(id)sender;
+- (IBAction)addListAction:(id)sender;
+- (IBAction)addSmartListAction:(id)sender;
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item;
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item;

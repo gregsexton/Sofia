@@ -9,7 +9,6 @@
 #import "SidebarOutlineView.h"
 
 // TODO: searching displays all books!
-// TODO: implement smart book lists
 // TODO: create abiltiy to edit smart book lists predicate using new window 
 // TODO: icons! two columns?
 
@@ -74,12 +73,33 @@
     [self beginEditingCurrentlySelectedItem];
 }
 
+- (IBAction)addSmartListAction:(id)sender{
+    NSManagedObjectModel *managedObjectModel = [application managedObjectModel];
+
+    smartList* obj = [[smartList alloc] initWithEntity:[[managedObjectModel entitiesByName] objectForKey:@"smartList"] 
+			insertIntoManagedObjectContext:managedObjectContext];
+
+    [application saveAction:self];
+    [self reloadData];
+    [self setSelectedItem:obj];
+    [self beginEditingCurrentlySelectedItem];
+}
+
 - (NSUInteger)numberOfBookLists{
     NSError *error;
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"list" inManagedObjectContext:managedObjectContext]];
 
-    NSInteger count = [managedObjectContext countForFetchRequest:request error:&error];
+    NSUInteger count = [managedObjectContext countForFetchRequest:request error:&error];
+    return count;
+}
+
+- (NSUInteger)numberOfSmartBookLists{
+    NSError *error;
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"smartList" inManagedObjectContext:managedObjectContext]];
+
+    NSUInteger count = [managedObjectContext countForFetchRequest:request error:&error];
     return count;
 }
 
@@ -87,6 +107,14 @@
     NSError *error;
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"list" inManagedObjectContext:managedObjectContext]];
+
+    return [managedObjectContext executeFetchRequest:request error:&error];
+}
+
+- (NSArray*)getSmartBookLists{
+    NSError *error;
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"smartList" inManagedObjectContext:managedObjectContext]];
 
     return [managedObjectContext executeFetchRequest:request error:&error];
 }
@@ -132,10 +160,10 @@
 }
 
 - (void)removeCurrentlySelectedItem{
+    //TODO: if you delete the last item it selects smart book lists
     id item = [self selectedItem];
 
-    if([item isKindOfClass:[list class]]){
-	//confirm!
+    if([item isKindOfClass:[list class]] || [item isKindOfClass:[smartList class]]){
 	int alertReturn = NSRunAlertPanel(@"Remove List?", @"Are you sure you wish to permanently remove this book list from Sofia?",
 				  @"No", @"Yes", nil);
 	if (alertReturn == NSAlertAlternateReturn){
@@ -180,6 +208,12 @@
 	return [list retain];
     }
 
+    if([item isEqualToString:CAT_SMART_BOOK_LISTS]){
+	NSArray *lists = [self getSmartBookLists];
+	smartList *list = [lists objectAtIndex:index];
+	return [list retain];
+    }
+
     return @"ERROR!";
 }
 
@@ -187,6 +221,8 @@
     if([item isKindOfClass:[NSString class]]){
 	return item;
     }else if([item isKindOfClass:[list class]]){
+	return [[item name] retain];
+    }else if([item isKindOfClass:[smartList class]]){
 	return [[item name] retain];
     }else if([item isKindOfClass:[Library class]]){
 	return [[item name] retain];
@@ -266,6 +302,9 @@
 	if([item isEqualToString:CAT_BOOK_LISTS]){
 	    return [self numberOfBookLists];
 	}
+	if([item isEqualToString:CAT_SMART_BOOK_LISTS]){
+	    return [self numberOfSmartBookLists];
+	}
     }
 
     return 0;
@@ -290,6 +329,7 @@
 
 - (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor{
     //TODO: make sure the new name isn't one of my names or already exists and return false
+    //TODO: renaming has a bug -- can't quite work it out...
 
     NSString *newName = [fieldEditor string];
 
@@ -300,6 +340,11 @@
 
     if([[self selectedItem] isKindOfClass:[list class]]){
 	list *theList = [self selectedItem];
+	theList.name = newName;
+    }
+
+    if([[self selectedItem] isKindOfClass:[smartList class]]){
+	smartList *theList = [self selectedItem];
 	theList.name = newName;
     }
 
@@ -324,6 +369,13 @@
 
     if([item isKindOfClass:[list class]]){
 	predString = [[NSString alloc] initWithFormat:@"ANY lists.name MATCHES '%@'", [item name]];
+    }
+
+    if([item isKindOfClass:[smartList class]]){
+	if([item filter] == nil || [[item filter] isEqualToString:@""]){
+	    //TODO: don't display any books!
+	}
+	predString = [item filter];
     }
 
     if(predString != nil){
@@ -427,20 +479,19 @@
     NSString* title = [menuItem title];
 
     if([item isKindOfClass:[list class]]){
-
 	return true; //everything is valid
-
-    }else{
-	if([title isEqualToString:@"Rename"]){
-
-	    return false;
-
-	}else if([title isEqualToString:@"Delete"]){
-
-	    return false;
-
-	}
     }
+    
+    if([item isKindOfClass:[smartList class]]){
+	return true; //everything valid for now
+    }
+    
+    if([title isEqualToString:@"Rename"]){
+	return false;
+    }else if([title isEqualToString:@"Delete"]){
+	return false;
+    }
+    
     //shouldn't get here...
     return true;
 }
