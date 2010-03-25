@@ -9,7 +9,8 @@
 #import "SidebarOutlineView.h"
 
 // TODO: create abiltiy to edit smart book lists predicate using new window 
-// TODO: icons! two columns?
+// TODO: fix renaming!!!
+// TODO: sort
 
 @implementation SidebarOutlineView
 
@@ -291,9 +292,7 @@
 	}else if([[item name] isEqualToString:SHOPPING_LIST_LIBRARY]){
 
 	    [(ImageAndTextCell*)cell setImage:[NSImage imageNamed:@"shopping2.tif"]];
-
 	}
-	
     }else{
 	[(ImageAndTextCell*)cell setImage:nil];
     }
@@ -348,14 +347,15 @@
 	if([item isEqualToString:CAT_SMART_BOOK_LISTS]){
 	    return false;
 	}
-	if([item isEqualToString:BOOK_LIBRARY]){
+    }
+    if([item isKindOfClass:[Library class]]){
+	if([[item name] isEqualToString:BOOK_LIBRARY]){
 	    return false;
 	}
-	if([item isEqualToString:SHOPPING_LIST_LIBRARY]){
+	if([[item name] isEqualToString:SHOPPING_LIST_LIBRARY]){
 	    return false;
 	}
     }
-
     return true;
 }
 
