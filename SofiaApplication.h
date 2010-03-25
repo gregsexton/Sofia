@@ -46,6 +46,7 @@
 - (IBAction) manageAuthorsClickAction:(id)sender;
 - (IBAction) manageSubjectsClickAction:(id)sender;
 - (IBAction) displayPreferencesClickAction:(id)sender;
+- (IBAction) search:(id)sender;
 - (void) updateSummaryText;
 
 @end

@@ -25,6 +25,7 @@
 
     IBOutlet NSArrayController *arrayController;
     IBOutlet SofiaApplication *application;
+    IBOutlet NSSearchField *searchField;
 
     Library* bookLibrary;
     Library* shoppingListLibrary;
@@ -47,4 +48,5 @@
 - (void)addBook:(book*)theBook toList:(list*)theList andSave:(BOOL)save;
 - (id)selectedItem;
 - (void)moveBook:(book*)theBook toLibrary:(Library*)theLibrary andSave:(BOOL)save;
+- (NSPredicate*)getPredicateForSelectedItem;
 @end

@@ -8,7 +8,6 @@
 
 #import "SidebarOutlineView.h"
 
-// TODO: searching displays all books!
 // TODO: create abiltiy to edit smart book lists predicate using new window 
 // TODO: icons! two columns?
 
@@ -179,6 +178,39 @@
 		 row:[self selectedRow]
 	   withEvent:nil
 	      select:YES];
+}
+
+- (NSPredicate*)getPredicateForSelectedItem{
+    id item = [self selectedItem];
+    NSString *predString = nil;
+
+    currentlySelectedLibrary = bookLibrary; //default to bookLibrary, unless specified
+
+    if([item isKindOfClass:[Library class]]){
+	predString = [[NSString alloc] initWithFormat:@"library.name MATCHES '%@'", [item name]];
+
+	if([[item name] isEqualToString:SHOPPING_LIST_LIBRARY]){
+	    currentlySelectedLibrary = shoppingListLibrary;
+	}
+    }
+
+    if([item isKindOfClass:[list class]]){
+	predString = [[NSString alloc] initWithFormat:@"ANY lists.name MATCHES '%@'", [item name]];
+    }
+
+    if([item isKindOfClass:[smartList class]]){
+	if([item filter] == nil || [[item filter] isEqualToString:@""]){
+	    //TODO: don't display any books!
+	}
+	predString = [item filter];
+    }
+
+    if(predString != nil){
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:predString];
+	return predicate;
+    }
+
+    return nil;
 }
 
 // Delegate Methods //////////////////////////////////////////////////////
@@ -354,35 +386,11 @@
 
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification{
 
-    id item = [self selectedItem];
-    NSString *predString = nil;
+    NSPredicate* predicate = [self getPredicateForSelectedItem];
+    [arrayController setFilterPredicate:predicate];
+    [application updateSummaryText];
+    [searchField setStringValue:@""]; //clear out anything in search
 
-    currentlySelectedLibrary = bookLibrary; //default to bookLibrary, unless specified
-
-    if([item isKindOfClass:[Library class]]){
-	predString = [[NSString alloc] initWithFormat:@"library.name MATCHES '%@'", [item name]];
-
-	if([[item name] isEqualToString:SHOPPING_LIST_LIBRARY]){
-	    currentlySelectedLibrary = shoppingListLibrary;
-	}
-    }
-
-    if([item isKindOfClass:[list class]]){
-	predString = [[NSString alloc] initWithFormat:@"ANY lists.name MATCHES '%@'", [item name]];
-    }
-
-    if([item isKindOfClass:[smartList class]]){
-	if([item filter] == nil || [[item filter] isEqualToString:@""]){
-	    //TODO: don't display any books!
-	}
-	predString = [item filter];
-    }
-
-    if(predString != nil){
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:predString];
-	[arrayController setFilterPredicate:predicate];
-	[application updateSummaryText];
-    }
 }
 
 //delegates for drag and drop

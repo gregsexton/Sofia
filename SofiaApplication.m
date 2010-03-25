@@ -322,4 +322,30 @@
     [[MBPreferencesController sharedController] showWindow:sender];
 }    
 
+- (IBAction)search:(id)sender{
+    //TODO: split words up
+    
+    NSString* searchVal = [sender stringValue];
+    NSPredicate* totalPred;
+
+    if([searchVal isEqualToString:@""]){
+	totalPred = [sideBar getPredicateForSelectedItem];
+    }else{
+	NSArray* predicates = [NSArray arrayWithObjects:
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"title contains[cd] '%@'", searchVal]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"authorText contains[cd] '%@'", searchVal]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"publisherText contains[cd] '%@'", searchVal]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"subjectText contains[cd] '%@'", searchVal]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn10 contains[cd] '%@'", searchVal]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn13 contains[cd] '%@'", searchVal]], nil];
+	NSPredicate* searchPred = [NSCompoundPredicate orPredicateWithSubpredicates:predicates];
+
+	NSArray* searchAndCurrentFilter = [NSArray arrayWithObjects:searchPred, [sideBar getPredicateForSelectedItem], nil];
+	totalPred = [NSCompoundPredicate andPredicateWithSubpredicates:searchAndCurrentFilter];
+    }
+
+    [arrayController setFilterPredicate:totalPred];
+    [self updateSummaryText];
+}
+
 @end
