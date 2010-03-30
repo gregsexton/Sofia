@@ -10,7 +10,6 @@
 
 // TODO: create abiltiy to edit smart book lists predicate using new window 
 // TODO: fix renaming!!!
-// TODO: sort
 
 @implementation SidebarOutlineView
 
@@ -112,19 +111,24 @@
 }
 
 - (NSArray*)getBookLists{
-    NSError *error;
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"list" inManagedObjectContext:managedObjectContext]];
-
-    return [managedObjectContext executeFetchRequest:request error:&error];
+    return [self getAllManagedObjectsWithEntityName:@"list" sortDescriptorKey:@"name"];
 }
 
 - (NSArray*)getSmartBookLists{
+    return [self getAllManagedObjectsWithEntityName:@"smartList" sortDescriptorKey:@"name"];
+}
+
+- (NSArray*)getAllManagedObjectsWithEntityName:(NSString*)entityName sortDescriptorKey:(NSString*)sortKey{
     NSError *error;
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"smartList" inManagedObjectContext:managedObjectContext]];
+    [request setEntity:[NSEntityDescription entityForName:entityName inManagedObjectContext:managedObjectContext]];
 
-    return [managedObjectContext executeFetchRequest:request error:&error];
+    NSArray* objects = [managedObjectContext executeFetchRequest:request error:&error];
+    NSSortDescriptor* descriptor = [[[NSSortDescriptor alloc] initWithKey:sortKey 
+								ascending:YES] autorelease];
+    objects = [objects sortedArrayUsingDescriptors:[NSArray arrayWithObject:descriptor]];
+
+    return objects;
 }
 
 - (void)addBook:(book*)theBook toList:(list*)theList andSave:(BOOL)save{
@@ -258,6 +262,10 @@
     return @"ERROR!";
 }
 
+- (id)outlineView:(NSOutlineView *)outlineView persistentObjectForItem:(id)item{
+    return item; //TODO: no idea what this really does! haha
+}
+
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item{
     if([item isKindOfClass:[NSString class]]){
 	return item;
@@ -268,6 +276,7 @@
     }else if([item isKindOfClass:[Library class]]){
 	return [[item name] retain];
     }
+    return @"Error!";
 }
 
 - (void)outlineView:(NSOutlineView*)olv willDisplayCell:(NSCell*)cell forTableColumn:(NSTableColumn*)tableColumn item:(id)item{
@@ -408,14 +417,16 @@
 	return false;
     }
 
-    if([[self selectedItem] isKindOfClass:[list class]]){
-	list *theList = [self selectedItem];
-	theList.name = newName;
+    id item = [self selectedItem];
+
+    if([item isKindOfClass:[list class]]){
+	list *theList = item;
+	[theList setName:newName];
     }
 
-    if([[self selectedItem] isKindOfClass:[smartList class]]){
-	smartList *theList = [self selectedItem];
-	theList.name = newName;
+    if([item isKindOfClass:[smartList class]]){
+	smartList *theList = item;
+	[theList setName:newName];
     }
 
     [application saveAction:self];

@@ -283,9 +283,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>33</integer>
-									<integer>32</integer>
-									<integer>31</integer>
+									<integer>50</integer>
+									<integer>47</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -325,7 +324,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>shopping2.tif</string>
+								<string>database.xcdatamodel</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -333,11 +332,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>shopping2.tif</string>
+										<string>database.xcdatamodel</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>37BAFBF2115C1F7500F95C41</string>
+										<string>37BAFC4811621E7900F95C41</string>
 										<key>history</key>
 										<array>
 											<string>373752621055B6BE00718317</string>
@@ -369,7 +368,6 @@
 											<string>37BAF975115675C700F95C41</string>
 											<string>37BAF9D411582FB700F95C41</string>
 											<string>37BAFA4B115A7AC300F95C41</string>
-											<string>37BAFA71115A7DE000F95C41</string>
 											<string>37BAFB83115C0A8400F95C41</string>
 											<string>37BAFB84115C0A8400F95C41</string>
 											<string>37BAFB85115C0A8400F95C41</string>
@@ -380,7 +378,8 @@
 											<string>37BAFBCD115C176900F95C41</string>
 											<string>37BAFBE1115C1D2400F95C41</string>
 											<string>37BAFBE2115C1D2400F95C41</string>
-											<string>37BAFBE3115C1D2400F95C41</string>
+											<string>37BAFC1811612C5500F95C41</string>
+											<string>37BAFA71115A7DE000F95C41</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -576,13 +575,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>37BAFBF3115C1F7500F95C41</string>
+		<string>37BAFC4711621C2300F95C41</string>
 		<string>37BAFB95115C0A8400F95C41</string>
 		<string>37BAFB96115C0A8400F95C41</string>
-		<string>1C78EAAD065D492600B07095</string>
-		<string>1CD10A99069EF8BA00B06720</string>
 		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>373655AF101CCE8600709C8F</string>
+		<string>1CD10A99069EF8BA00B06720</string>
 	</array>
 	<key>WindowString</key>
 	<string>1043 110 1319 1069 0 0 2560 1418 </string>
@@ -917,6 +916,8 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -962,7 +963,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>Identifier</key>

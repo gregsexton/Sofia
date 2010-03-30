@@ -50,4 +50,5 @@
 - (id)selectedItem;
 - (void)moveBook:(book*)theBook toLibrary:(Library*)theLibrary andSave:(BOOL)save;
 - (NSPredicate*)getPredicateForSelectedItem;
+- (NSArray*)getAllManagedObjectsWithEntityName:(NSString*)entityName sortDescriptorKey:(NSString*)sortKey;
 @end
