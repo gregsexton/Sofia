@@ -236,11 +236,14 @@
     book *obj = [[book alloc] initWithEntity:[[managedObjectModel entitiesByName] objectForKey:@"book"]
 						    insertIntoManagedObjectContext:managedObjectContext];
 
+    [obj setDateAdded:[NSDate date]];
+
     //add to appropriate library
     Library *lib = [sideBar selectedLibrary];
     [lib addBooksObject:obj];
 
-    BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj];
+    BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj 
+										 withSearch:YES];
     [detailWin setDelegate:self];
     if (![NSBundle loadNibNamed:@"Detail" owner:detailWin]) {
 	NSLog(@"Error loading Nib!");

@@ -20,15 +20,17 @@
 
 @synthesize obj;
 @synthesize delegate;
+@synthesize displaySearch;
 
 - (id)init {
     self = [super init];
     return self;
 }
 
-- (id)initWithManagedObject:(book*)object {
+- (id)initWithManagedObject:(book*)object withSearch:(BOOL)withSearch{
     self = [super init];
     obj = object;
+    displaySearch = !withSearch;
     managedObjectContext = [obj managedObjectContext];
     return self;
 }
