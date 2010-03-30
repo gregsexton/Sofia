@@ -7,6 +7,7 @@
 
 #import "isbndbInterface.h"
 
+//TODO: reorder all of the methods into a more logical state!
 
 @implementation isbndbInterface
 @synthesize currentProperty;

@@ -6,15 +6,12 @@
 //
 
 #import "SofiaApplication.h"
-#import "BooksWindowController.h"
-#import "book.h"
-#import "author.h"
-#import "subject.h"
-#import "AuthorsWindowController.h"
-#import "SubjectWindowController.h"
-#import "AccessKeyViewController.h"
-#import "GeneralViewController.h"
-#import "MBPreferencesController.h"
+#import "SidebarOutlineView.h"
+#import "BooksTableView.h"
+
+
+//TODO: reorder all of the methods into a more logical state!
+//TODO: make table view a new inherited class with custom code self contained
 
 @implementation SofiaApplication
 
@@ -26,13 +23,11 @@
     [accessKeys release];
     [general release];
 
-    [tableView setDoubleAction:@selector(doubleClickAction:)];
-    [tableView setTarget:self]; 
-
     //guarantee loaded before updating summary text. this works better than observing.
     NSError *error;
     [arrayController fetchWithRequest:nil merge:NO error:&error];
     [self updateSummaryText];
+
 }
 
 
@@ -229,16 +224,6 @@
 	}
 }
 
-- (IBAction) doubleClickAction:(id)sender {
-    //use the first object if multiple are selected
-    book *obj = [[arrayController selectedObjects] objectAtIndex:0];
-
-    BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj];
-    if (![NSBundle loadNibNamed:@"Detail" owner:detailWin]) {
-	NSLog(@"Error loading Nib!");
-    }
-} 
-
 - (IBAction) addRemoveClickAction:(id)sender {
     if ([addRemoveButtons selectedSegment] == 0){
 	[self addBookAction:self];
@@ -251,7 +236,14 @@
     book *obj = [[book alloc] initWithEntity:[[managedObjectModel entitiesByName] objectForKey:@"book"]
 						    insertIntoManagedObjectContext:managedObjectContext];
 
-    BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj];
+    [obj setDateAdded:[NSDate date]];
+
+    //add to appropriate library
+    Library *lib = [sideBar selectedLibrary];
+    [lib addBooksObject:obj];
+
+    BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj 
+										 withSearch:YES];
     [detailWin setDelegate:self];
     if (![NSBundle loadNibNamed:@"Detail" owner:detailWin]) {
 	NSLog(@"Error loading Nib!");
@@ -264,10 +256,10 @@
     if(noOfRowsSelected == 0){
 	NSRunInformationalAlertPanel(@"Selection Error", @"You must select at least one book to remove." , @"Ok", nil, nil);
     }else if(noOfRowsSelected == 1){
-	alertReturn = NSRunAlertPanel(@"Remove Book?", @"Are you sure you wish to permanently remove this book?",
+	alertReturn = NSRunAlertPanel(@"Remove Book?", @"Are you sure you wish to permanently remove this book from Sofia?",
 				      @"No", @"Yes", nil);
     }else if(noOfRowsSelected > 1){
-	alertReturn = NSRunAlertPanel(@"Remove Books?", @"Are you sure you wish to permanently remove these books?",
+	alertReturn = NSRunAlertPanel(@"Remove Books?", @"Are you sure you wish to permanently remove these books from Sofia?",
 				      @"No", @"Yes", nil);
     }
     if (alertReturn == NSAlertAlternateReturn){
@@ -288,7 +280,7 @@
 - (void) updateSummaryText {
     int count = [[arrayController arrangedObjects] count];
     if(count == 0){
-	[summaryText setStringValue:@"Empty Library"];
+	[summaryText setStringValue:@"Empty"];
     }else if(count == 1){
 	[summaryText setStringValue:@"1 book"];
     }else {
@@ -332,4 +324,31 @@
 
     [[MBPreferencesController sharedController] showWindow:sender];
 }    
+
+- (IBAction)search:(id)sender{
+    //TODO: split words up
+    
+    NSString* searchVal = [sender stringValue];
+    NSPredicate* totalPred;
+
+    if([searchVal isEqualToString:@""]){
+	totalPred = [sideBar getPredicateForSelectedItem];
+    }else{
+	NSArray* predicates = [NSArray arrayWithObjects:
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"title contains[cd] '%@'", searchVal]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"authorText contains[cd] '%@'", searchVal]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"publisherText contains[cd] '%@'", searchVal]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"subjectText contains[cd] '%@'", searchVal]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn10 contains[cd] '%@'", searchVal]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn13 contains[cd] '%@'", searchVal]], nil];
+	NSPredicate* searchPred = [NSCompoundPredicate orPredicateWithSubpredicates:predicates];
+
+	NSArray* searchAndCurrentFilter = [NSArray arrayWithObjects:searchPred, [sideBar getPredicateForSelectedItem], nil];
+	totalPred = [NSCompoundPredicate andPredicateWithSubpredicates:searchAndCurrentFilter];
+    }
+
+    [arrayController setFilterPredicate:totalPred];
+    [self updateSummaryText];
+}
+
 @end

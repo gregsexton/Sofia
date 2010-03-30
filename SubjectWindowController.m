@@ -8,6 +8,8 @@
 
 #import "SubjectWindowController.h"
 
+//TODO: pressing backspace removes an subject or book from subject
+//depending on selected tableview
 
 @implementation SubjectWindowController
 @synthesize delegate;
@@ -48,6 +50,13 @@
     }
 }
 
+- (void) beginEditingCurrentlySelectedItemInSubjectsTable{
+    [subjectTableView editColumn:0
+			     row:[subjectTableView selectedRow] 
+		       withEvent:nil 
+			  select:YES];
+}
+
 - (IBAction)saveClicked:(id)sender {
     [self saveManagedObjectContext:managedObjectContext];
     //let delegate know
@@ -77,4 +86,10 @@
 	NSLog(@"Error loading Nib!");
     }
 } 
+
+- (IBAction)addAuthorAction:(id)sender{
+    [subjectArrayController add:self];
+    //TODO: select the added item and begin editing it.
+    //[self beginEditingCurrentlySelectedItemInSubjectsTable];
+}
 @end

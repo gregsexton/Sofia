@@ -26,7 +26,8 @@
 
 - (IBAction)saveClicked:(id)sender;
 - (IBAction)cancelClicked:(id)sender;
-- (IBAction) doubleClickBookAction:(id)sender;
+- (IBAction)doubleClickBookAction:(id)sender;
+- (IBAction)addAuthorAction:(id)sender;
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context;
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context selectedAuthor:(author*)authorInput;
 - (void) saveManagedObjectContext:(NSManagedObjectContext*)context;

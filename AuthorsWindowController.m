@@ -10,6 +10,8 @@
 #import "author.h"
 #import "BooksWindowController.h"
 
+//TODO: pressing backspace removes an author or book from author
+//depending on selected tableview
 
 @implementation AuthorsWindowController
 @synthesize delegate;
@@ -51,6 +53,14 @@
     }
 }
 
+- (void) beginEditingCurrentlySelectedItemInAuthorsTable{
+    NSInteger selectRow = [authorTableView selectedRow];
+    [authorTableView editColumn:0
+			    row:[authorTableView selectedRow] 
+		      withEvent:nil 
+			 select:YES];
+}
+
 - (IBAction)saveClicked:(id)sender {
     [self saveManagedObjectContext:managedObjectContext];
     //let delegate know
@@ -80,4 +90,10 @@
 	NSLog(@"Error loading Nib!");
     }
 } 
+
+- (IBAction)addAuthorAction:(id)sender{
+    [authorArrayController add:self];
+    //TODO: select the added item and begin editing it.
+    //[self beginEditingCurrentlySelectedItemInAuthorsTable];
+}
 @end

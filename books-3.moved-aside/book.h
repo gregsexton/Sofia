@@ -2,15 +2,13 @@
 //  book.h
 //  books
 //
-//  Created by Greg on 30/03/2010.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Created by Greg on 16/11/2009.
+//  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
 #import <CoreData/CoreData.h>
 
-@class Library;
 @class author;
-@class list;
 @class subject;
 
 @interface book :  NSManagedObject  
@@ -28,7 +26,6 @@
 @property (nonatomic, retain) NSString * awards;
 @property (nonatomic, retain) NSString * edition;
 @property (nonatomic, retain) NSString * noOfCopies;
-@property (nonatomic, retain) NSNumber * read;
 @property (nonatomic, retain) NSString * subjectText;
 @property (nonatomic, retain) NSString * titleLong;
 @property (nonatomic, retain) NSString * physicalDescription;
@@ -36,22 +33,14 @@
 @property (nonatomic, retain) NSString * dewey;
 @property (nonatomic, retain) NSString * urls;
 @property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSDate * dateAdded;
 @property (nonatomic, retain) NSManagedObject * publisher;
-@property (nonatomic, retain) NSSet* lists;
 @property (nonatomic, retain) NSSet* subjects;
 @property (nonatomic, retain) NSSet* authors;
-@property (nonatomic, retain) Library * library;
 
 @end
 
 
 @interface book (CoreDataGeneratedAccessors)
-- (void)addListsObject:(list *)value;
-- (void)removeListsObject:(list *)value;
-- (void)addLists:(NSSet *)value;
-- (void)removeLists:(NSSet *)value;
-
 - (void)addSubjectsObject:(subject *)value;
 - (void)removeSubjectsObject:(subject *)value;
 - (void)addSubjects:(NSSet *)value;

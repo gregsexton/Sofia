@@ -14,19 +14,23 @@
 #import "author.h"
 #import "subject.h"
 
+//TODO: reorder all of the methods into a more logical state!
+
 @implementation BooksWindowController
 
 @synthesize obj;
 @synthesize delegate;
+@synthesize displaySearch;
 
 - (id)init {
     self = [super init];
     return self;
 }
 
-- (id)initWithManagedObject:(book*)object {
+- (id)initWithManagedObject:(book*)object withSearch:(BOOL)withSearch{
     self = [super init];
     obj = object;
+    displaySearch = !withSearch;
     managedObjectContext = [obj managedObjectContext];
     return self;
 }
@@ -417,14 +421,12 @@
 //subject methods
 - (IBAction) doubleClickSubjectAction:(id)sender {
     //use the first object if multiple are selected
-    NSLog(@"doubleClickSubjectAction");
     subject *subjectobj = [[subjectsArrayController selectedObjects] objectAtIndex:0];
     doubleClickedSubject = subjectobj;
     [self displayManagedSubjectsWithSelectedSubject:subjectobj];
 }
 
 - (void) savedWithSubjectSelection:(subject*)selectedSubject{ //delegate method
-    NSLog(@"savedWithSubjectSelection");
     if(doubleClickedSubject != nil){
 	[doubleClickedSubject removeBooksObject:obj];
 	doubleClickedSubject = nil;
@@ -433,7 +435,6 @@
 }
 
 - (void) displayManagedSubjectsWithSelectedSubject:(subject*)subjectObj{
-    NSLog(@"displayManagedSubjectsWithSelectedSubject");
     SubjectWindowController *detailWin = [[SubjectWindowController alloc] initWithManagedObjectContext:managedObjectContext
 									  selectedSubject:subjectObj];
     [detailWin setDelegate:self];
@@ -443,7 +444,6 @@
 }
 
 - (IBAction)addSubjectClicked:(id)sender{
-    NSLog(@"addSubjectClicked");
     doubleClickedSubject = nil; //just to make sure!
     [self displayManagedSubjectsWithSelectedSubject:nil];
 }
