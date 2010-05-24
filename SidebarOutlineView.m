@@ -8,7 +8,7 @@
 
 #import "SidebarOutlineView.h"
 
-// TODO: create abiltiy to edit smart book lists predicate using new window 
+// TODO: reload after editing smartlist predicate
 // TODO: fix renaming!!!
 
 @implementation SidebarOutlineView
@@ -224,6 +224,17 @@
     }
 
     return nil;
+}
+
+- (void) editCurrentlySelectedSmartList{
+    id item = [self selectedItem];
+    if([item isKindOfClass:[smartList class]]){
+	smartList* list = item;
+	PredicateEditorWindowController *predWin = [[PredicateEditorWindowController alloc] initWithSmartList:list];
+	if (![NSBundle loadNibNamed:@"PredicateEditor" owner:predWin]) {
+	    NSLog(@"Error loading Nib!");
+	}
+    }
 }
 
 // Delegate Methods //////////////////////////////////////////////////////
@@ -528,6 +539,14 @@
 			  action:@selector(removeCurrentlySelectedItem)
 		   keyEquivalent:@""
 			 atIndex:1];
+
+    if([[self selectedItem] isKindOfClass:[smartList class]]){
+	[theMenu insertItemWithTitle:@"Edit Smart Book List"
+			      action:@selector(editCurrentlySelectedSmartList)
+		       keyEquivalent:@""
+			     atIndex:2];
+    }
+
     return theMenu;
 }
 

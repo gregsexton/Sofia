@@ -12,6 +12,7 @@
 #import "list.h"
 #import "smartList.h"
 #import "ImageAndTextCell.h"
+#import "PredicateEditorWindowController.h"
 
 #define SofiaDragType @"SofiaDragType"
 
@@ -51,4 +52,5 @@
 - (void)moveBook:(book*)theBook toLibrary:(Library*)theLibrary andSave:(BOOL)save;
 - (NSPredicate*)getPredicateForSelectedItem;
 - (NSArray*)getAllManagedObjectsWithEntityName:(NSString*)entityName sortDescriptorKey:(NSString*)sortKey;
+- (void) editCurrentlySelectedSmartList;
 @end

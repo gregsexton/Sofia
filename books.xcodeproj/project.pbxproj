@@ -30,6 +30,8 @@
 		37BAFBDA115C1C7700F95C41 /* shopping.tif in Resources */ = {isa = PBXBuildFile; fileRef = 37BAFBD9115C1C7700F95C41 /* shopping.tif */; };
 		37BAFBDE115C1D1500F95C41 /* shopping2.tif in Resources */ = {isa = PBXBuildFile; fileRef = 37BAFBDD115C1D1500F95C41 /* shopping2.tif */; };
 		37BAFC521162214A00F95C41 /* book.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAFC511162214A00F95C41 /* book.m */; };
+		37BAFC941162510C00F95C41 /* PredicateEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37BAFC931162510C00F95C41 /* PredicateEditor.xib */; };
+		37BAFC981162516900F95C41 /* PredicateEditorWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAFC971162516900F95C41 /* PredicateEditorWindowController.m */; };
 		37D7073310B5D7FE0004F441 /* AuthorDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D7073210B5D7FE0004F441 /* AuthorDetail.xib */; };
 		37D7073710B5D8BE0004F441 /* AuthorsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D7073610B5D8BE0004F441 /* AuthorsWindowController.m */; };
 		37D708DB10C190100004F441 /* MBPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D708DA10C190100004F441 /* MBPreferencesController.m */; };
@@ -88,6 +90,9 @@
 		37BAFBDD115C1D1500F95C41 /* shopping2.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = shopping2.tif; sourceTree = "<group>"; };
 		37BAFC501162214A00F95C41 /* book.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = book.h; sourceTree = "<group>"; };
 		37BAFC511162214A00F95C41 /* book.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = book.m; sourceTree = "<group>"; };
+		37BAFC931162510C00F95C41 /* PredicateEditor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PredicateEditor.xib; sourceTree = "<group>"; };
+		37BAFC961162516900F95C41 /* PredicateEditorWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PredicateEditorWindowController.h; sourceTree = "<group>"; };
+		37BAFC971162516900F95C41 /* PredicateEditorWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PredicateEditorWindowController.m; sourceTree = "<group>"; };
 		37D7073210B5D7FE0004F441 /* AuthorDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthorDetail.xib; sourceTree = "<group>"; };
 		37D7073510B5D8BE0004F441 /* AuthorsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorsWindowController.h; sourceTree = "<group>"; };
 		37D7073610B5D8BE0004F441 /* AuthorsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorsWindowController.m; sourceTree = "<group>"; };
@@ -190,6 +195,7 @@
 				3737550D106839A700718317 /* Credits.html */,
 				37D7073210B5D7FE0004F441 /* AuthorDetail.xib */,
 				37D7099D10C1D8400004F441 /* SubjectDetail.xib */,
+				37BAFC931162510C00F95C41 /* PredicateEditor.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -264,6 +270,8 @@
 				37D7073610B5D8BE0004F441 /* AuthorsWindowController.m */,
 				37D709A210C1D8E50004F441 /* SubjectWindowController.h */,
 				37D709A310C1D8E50004F441 /* SubjectWindowController.m */,
+				37BAFC961162516900F95C41 /* PredicateEditorWindowController.h */,
+				37BAFC971162516900F95C41 /* PredicateEditorWindowController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -345,6 +353,7 @@
 				37BAFBCA115C173300F95C41 /* book.tif in Resources */,
 				37BAFBDA115C1C7700F95C41 /* shopping.tif in Resources */,
 				37BAFBDE115C1D1500F95C41 /* shopping2.tif in Resources */,
+				37BAFC941162510C00F95C41 /* PredicateEditor.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,6 +384,7 @@
 				37BAFA31115A778000F95C41 /* smartList.m in Sources */,
 				37BAFB78115C085B00F95C41 /* ImageAndTextCell.m in Sources */,
 				37BAFC521162214A00F95C41 /* book.m in Sources */,
+				37BAFC981162516900F95C41 /* PredicateEditorWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
