@@ -131,6 +131,11 @@
 	return false;
     }
 
+    if(![isbndb successfullyFoundBook]){
+	NSRunInformationalAlertPanel(@"Search Error", @"No results found for this ISBN on ISBNDb." , @"Ok", nil, nil);
+	return false;
+    }
+
     //programmatically set ui elements
     [txt_isbn10 setStringValue:[isbndb bookISBN10]];
     [txt_isbn13 setStringValue:[isbndb bookISBN13]];

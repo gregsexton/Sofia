@@ -30,6 +30,7 @@
 @synthesize bookAwards;
 @synthesize bookSubjects;
 @synthesize bookAuthors;
+@synthesize successfullyFoundBook;
 
 - (id)init {
     self = [super init];
@@ -58,7 +59,19 @@
     return [parser parse]; //returns false if unsuccessful in parsing.
 }
 
-- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
+- (void)parser:(NSXMLParser *)parser 
+	didStartElement:(NSString *)elementName 
+	   namespaceURI:(NSString *)namespaceURI 
+	  qualifiedName:(NSString *)qName 
+	     attributes:(NSDictionary *)attributeDict {
+
+    if ( [elementName isEqualToString:@"BookList"] ) {
+	if( [[attributeDict objectForKey:@"total_results"] isEqualToString:@"1"] ){
+	    [self setSuccessfullyFoundBook:true];
+	}else{
+	    [self setSuccessfullyFoundBook:false];
+	}
+    }
     if ( [elementName isEqualToString:@"BookData"] ) {
 	[self setBookISBN10:[attributeDict objectForKey:@"isbn"]]; 
 	[self setBookISBN13:[attributeDict objectForKey:@"isbn13"]]; 

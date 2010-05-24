@@ -9,6 +9,7 @@
 #import "SidebarOutlineView.h"
 
 // TODO: reload after editing smartlist predicate
+// TODO: add the rest of the predicate choices
 // TODO: fix renaming!!!
 
 @implementation SidebarOutlineView

@@ -32,6 +32,7 @@
 
     NSMutableString *currentStringValue;
     int currentProperty;
+    BOOL successfullyFoundBook; 
 
     enum properties {pNoProperty, pTitle, pTitleLong, pAuthorText, pPublisher, pSummary, pNotes, pUrls, pAwards, pAuthor, pSubject};
 
@@ -57,6 +58,7 @@
 @property (nonatomic,copy) NSMutableArray *bookSubjects;
 @property (nonatomic,copy) NSMutableArray *bookAuthors;
 @property (nonatomic) int currentProperty;
+@property (nonatomic) BOOL successfullyFoundBook;
 
 - (BOOL)searchISBN:(NSString*)isbn;
 - (BOOL)processDetailsWithUrl:(NSURL*)url;
