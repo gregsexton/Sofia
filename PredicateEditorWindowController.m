@@ -12,6 +12,9 @@
 @implementation PredicateEditorWindowController
 @synthesize delegate;
 
+//TODO: custom row template for read boolean
+//TODO: convert noOfCopies to an integer
+
 - (id)initWithSmartList:(smartList*)list{
     self = [super init];
     predicate = [[NSPredicate predicateWithFormat:[list filter]] retain];
@@ -30,8 +33,14 @@
 
 - (IBAction)okClicked:(id)sender {
     NSString* pred = [[predicateEditor objectValue] predicateFormat];
+//NSLog(pred);
     [listToTransferTo setFilter:pred];
     [window close];
+
+    //let delegate know
+    if([[self delegate] respondsToSelector:@selector(predicateEditingDidFinish:)]) {
+	[[self delegate] predicateEditingDidFinish:[predicateEditor objectValue]];
+    }
 }
 
 - (IBAction)cancelClicked:(id)sender {

@@ -8,8 +8,6 @@
 
 #import "SidebarOutlineView.h"
 
-// TODO: reload after editing smartlist predicate
-// TODO: add the rest of the predicate choices
 // TODO: fix renaming!!!
 
 @implementation SidebarOutlineView
@@ -232,10 +230,19 @@
     if([item isKindOfClass:[smartList class]]){
 	smartList* list = item;
 	PredicateEditorWindowController *predWin = [[PredicateEditorWindowController alloc] initWithSmartList:list];
+	[predWin setDelegate:self];
 	if (![NSBundle loadNibNamed:@"PredicateEditor" owner:predWin]) {
 	    NSLog(@"Error loading Nib!");
 	}
     }
+}
+
+- (void)updateFilterPredicateWith:(NSPredicate*)predicate{
+
+    [arrayController setFilterPredicate:predicate];
+    [application updateSummaryText];
+    [searchField setStringValue:@""]; //clear out anything in search
+
 }
 
 // Delegate Methods //////////////////////////////////////////////////////
@@ -448,10 +455,13 @@
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification{
 
     NSPredicate* predicate = [self getPredicateForSelectedItem];
-    [arrayController setFilterPredicate:predicate];
-    [application updateSummaryText];
-    [searchField setStringValue:@""]; //clear out anything in search
+    [self updateFilterPredicateWith:predicate];
 
+}
+
+//delegate for PredicateEditorWindowController.
+- (void)predicateEditingDidFinish:(NSPredicate*)predicate{
+    [self updateFilterPredicateWith:predicate];
 }
 
 //delegates for drag and drop

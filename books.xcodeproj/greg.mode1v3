@@ -232,8 +232,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -282,13 +280,14 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>49</integer>
-									<integer>46</integer>
+									<integer>4</integer>
+									<integer>2</integer>
+									<integer>1</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 112}, {309, 1010}}</string>
+							<string>{{0, 0}, {309, 1010}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -318,12 +317,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>database.xcdatamodel</string>
+								<string>SidebarOutlineView.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -331,11 +332,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>database.xcdatamodel</string>
+										<string>SidebarOutlineView.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>375F2A5911ABBADA0062E12E</string>
+										<string>375F2A8211AC76870062E12E</string>
 										<key>history</key>
 										<array>
 											<string>373752621055B6BE00718317</string>
@@ -362,7 +363,6 @@
 											<string>37BAFB85115C0A8400F95C41</string>
 											<string>37BAFB86115C0A8400F95C41</string>
 											<string>37BAFB87115C0A8400F95C41</string>
-											<string>37BAFBBD115C152300F95C41</string>
 											<string>37BAFBC5115C167400F95C41</string>
 											<string>37BAFBCD115C176900F95C41</string>
 											<string>37BAFBE1115C1D2400F95C41</string>
@@ -377,7 +377,8 @@
 											<string>375F2A2E11AB23520062E12E</string>
 											<string>375F2A4111AB28A60062E12E</string>
 											<string>375F2A5711ABBADA0062E12E</string>
-											<string>375F2A5811ABBADA0062E12E</string>
+											<string>375F2A7711AC75780062E12E</string>
+											<string>375F2A7811AC75780062E12E</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -573,13 +574,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>375F2A5A11ABBADA0062E12E</string>
+		<string>375F2A8311AC76870062E12E</string>
 		<string>375F2A5011AB29D30062E12E</string>
 		<string>375F29F8117E525F0062E12E</string>
 		<string>375F29F9117E525F0062E12E</string>
-		<string>373655AF101CCE8600709C8F</string>
 		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
+		<string>373655AF101CCE8600709C8F</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 	</array>
 	<key>WindowString</key>
@@ -599,14 +600,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>PredicateEditorWindowController.m</string>
+								<string>SidebarOutlineView.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -623,6 +622,8 @@
 							<string>955pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>

@@ -53,4 +53,5 @@
 - (NSPredicate*)getPredicateForSelectedItem;
 - (NSArray*)getAllManagedObjectsWithEntityName:(NSString*)entityName sortDescriptorKey:(NSString*)sortKey;
 - (void) editCurrentlySelectedSmartList;
+- (void)updateFilterPredicateWith:(NSPredicate*)predicate;
 @end
