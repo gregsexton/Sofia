@@ -20,7 +20,7 @@
 }
 
 - (void)dealloc{
-    //[predicate release];
+    [predicate release];
     [super dealloc];
 }
 
@@ -29,7 +29,6 @@
 }
 
 - (IBAction)okClicked:(id)sender {
-
     NSString* pred = [[predicateEditor objectValue] predicateFormat];
     [listToTransferTo setFilter:pred];
     [window close];

@@ -232,6 +232,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -280,8 +282,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>10</integer>
-									<integer>1</integer>
+									<integer>49</integer>
+									<integer>46</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -316,14 +318,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>isbndbInterface.m</string>
+								<string>database.xcdatamodel</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -331,11 +331,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>isbndbInterface.m</string>
+										<string>database.xcdatamodel</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>375F2A5211AB29D40062E12E</string>
+										<string>375F2A5911ABBADA0062E12E</string>
 										<key>history</key>
 										<array>
 											<string>373752621055B6BE00718317</string>
@@ -374,10 +374,10 @@
 											<string>37BAFCC41162601D00F95C41</string>
 											<string>37BAFCC51162601D00F95C41</string>
 											<string>37BAFCDF116261F500F95C41</string>
-											<string>375F2A0411AAFA410062E12E</string>
 											<string>375F2A2E11AB23520062E12E</string>
 											<string>375F2A4111AB28A60062E12E</string>
-											<string>375F2A4211AB28A60062E12E</string>
+											<string>375F2A5711ABBADA0062E12E</string>
+											<string>375F2A5811ABBADA0062E12E</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -573,13 +573,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>375F2A5A11ABBADA0062E12E</string>
 		<string>375F2A5011AB29D30062E12E</string>
-		<string>375F2A4B11AB29BE0062E12E</string>
 		<string>375F29F8117E525F0062E12E</string>
 		<string>375F29F9117E525F0062E12E</string>
 		<string>373655AF101CCE8600709C8F</string>
-		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
 		<string>1C78EAAD065D492600B07095</string>
+		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 	</array>
 	<key>WindowString</key>

@@ -15,9 +15,9 @@
     IBOutlet NSWindow*		    window;
     IBOutlet NSPredicateEditor*	    predicateEditor;
 
-    id*			    delegate;
-    NSPredicate*	    predicate;
-    smartList*		    listToTransferTo;
+    id*				    delegate;
+    NSPredicate*		    predicate;
+    smartList*			    listToTransferTo;
 }
 
 @property (nonatomic, assign) id *delegate;
