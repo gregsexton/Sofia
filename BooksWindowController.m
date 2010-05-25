@@ -4,7 +4,6 @@
 //  Created by Greg Sexton on 26/07/2009.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
-//TODO: use generated accessors for book object
 
 #import "BooksWindowController.h"
 #import "AuthorsWindowController.h"
@@ -15,6 +14,7 @@
 #import "subject.h"
 
 //TODO: reorder all of the methods into a more logical state!
+//TODO: use generated accessors for book object
 
 @implementation BooksWindowController
 
