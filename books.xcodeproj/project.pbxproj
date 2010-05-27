@@ -16,6 +16,7 @@
 		373752C0105EB4FF00718317 /* Detail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 373752BF105EB4FF00718317 /* Detail.xib */; };
 		373752C6105EB6D500718317 /* SofiaApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 373752C5105EB6D500718317 /* SofiaApplication.m */; };
 		3737550E106839A700718317 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 3737550D106839A700718317 /* Credits.html */; };
+		375F2A9A11ADD43A0062E12E /* amazonInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 375F2A9911ADD43A0062E12E /* amazonInterface.m */; };
 		376D413D10B21B4C00242DF7 /* author.m in Sources */ = {isa = PBXBuildFile; fileRef = 376D413610B21B4C00242DF7 /* author.m */; };
 		376D413E10B21B4C00242DF7 /* subject.m in Sources */ = {isa = PBXBuildFile; fileRef = 376D413810B21B4C00242DF7 /* subject.m */; };
 		376D414010B21B4C00242DF7 /* person.m in Sources */ = {isa = PBXBuildFile; fileRef = 376D413C10B21B4C00242DF7 /* person.m */; };
@@ -67,6 +68,8 @@
 		373752C4105EB6D500718317 /* SofiaApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SofiaApplication.h; sourceTree = "<group>"; };
 		373752C5105EB6D500718317 /* SofiaApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SofiaApplication.m; sourceTree = "<group>"; };
 		3737550D106839A700718317 /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
+		375F2A9811ADD43A0062E12E /* amazonInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amazonInterface.h; sourceTree = "<group>"; };
+		375F2A9911ADD43A0062E12E /* amazonInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = amazonInterface.m; sourceTree = "<group>"; };
 		376D413510B21B4C00242DF7 /* author.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = author.h; sourceTree = "<group>"; };
 		376D413610B21B4C00242DF7 /* author.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = author.m; sourceTree = "<group>"; };
 		376D413710B21B4C00242DF7 /* subject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = subject.h; sourceTree = "<group>"; };
@@ -129,6 +132,8 @@
 				37BAFB73115C083300F95C41 /* Cocoa Extensions */,
 				3737514C105426BF00718317 /* isbndbInterface.h */,
 				3737514D105426BF00718317 /* isbndbInterface.m */,
+				375F2A9811ADD43A0062E12E /* amazonInterface.h */,
+				375F2A9911ADD43A0062E12E /* amazonInterface.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -385,6 +390,7 @@
 				37BAFB78115C085B00F95C41 /* ImageAndTextCell.m in Sources */,
 				37BAFC521162214A00F95C41 /* book.m in Sources */,
 				37BAFC981162516900F95C41 /* PredicateEditorWindowController.m in Sources */,
+				375F2A9A11ADD43A0062E12E /* amazonInterface.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
