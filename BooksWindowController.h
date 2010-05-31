@@ -9,6 +9,7 @@
 #import <GData/GDataBooks.h>
 #import "book.h"
 #import "author.h"
+#import "amazonInterface.h"
 
 @interface BooksWindowController : NSObjectController {
     IBOutlet NSTextField *txt_search;

@@ -124,6 +124,9 @@
 }
 
 - (BOOL) updateUIFromISBNDb {
+    amazonInterface* amazon = [[amazonInterface alloc] init];
+    [amazon testUrlGeneration];
+
     isbndbInterface *isbndb = [[isbndbInterface alloc] init];
     if(![isbndb searchISBN:[txt_search stringValue]]){
 	//error!
