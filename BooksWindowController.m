@@ -15,6 +15,7 @@
 
 //TODO: reorder all of the methods into a more logical state!
 //TODO: use generated accessors for book object
+//TODO: refactor!
 
 @implementation BooksWindowController
 
@@ -123,13 +124,25 @@
     }
 }
 
-- (BOOL) updateUIFromISBNDb {
+- (BOOL) updateUIFromAmazon {
+
     amazonInterface* amazon = [[amazonInterface alloc] init];
-    [amazon testUrlGeneration];
+
+    if(![amazon searchISBN:[txt_search stringValue]]){
+	NSRunInformationalAlertPanel(@"Download Error", @"Unable to retrieve information from Amazon. Please check internet connectivity and valid access keys in your preferences." , @"Ok", nil, nil);
+	return false;
+    }
+
+    NSLog([amazon imageURL]);
+    [img_summary_cover setImage:[amazon frontCover]];
+
+    return true;
+}
+
+- (BOOL) updateUIFromISBNDb {
 
     isbndbInterface *isbndb = [[isbndbInterface alloc] init];
     if(![isbndb searchISBN:[txt_search stringValue]]){
-	//error!
 	NSRunInformationalAlertPanel(@"Download Error", @"Unable to retrieve information from ISBNDb. Please check internet connectivity and a valid access key in your preferences." , @"Ok", nil, nil);
 	return false;
     }
@@ -302,6 +315,8 @@
 	[txt_publisher selectItemAtIndex:0];
 	[txt_physicalDescrip selectItemAtIndex:0];
     }
+
+    [self updateUIFromAmazon];
 
     [progIndicator stopAnimation:self];
     [progressSheet orderOut:nil];

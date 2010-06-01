@@ -7,8 +7,6 @@
 
 #import "isbndbInterface.h"
 
-//TODO: reorder all of the methods into a more logical state!
-
 @implementation isbndbInterface
 @synthesize currentProperty;
 @synthesize bookISBN10;
@@ -200,6 +198,7 @@
 - (void)parserDidEndDocument:(NSXMLParser *)parser{
 }
 
+//TODO: make this a category of NSString?
 - (NSString*) cleanUpString:(NSString*) theString {
     return [[theString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString];
 }
