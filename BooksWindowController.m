@@ -4,7 +4,6 @@
 //  Created by Greg Sexton on 26/07/2009.
 //  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
-//TODO: use generated accessors for book object
 
 #import "BooksWindowController.h"
 #import "AuthorsWindowController.h"
@@ -15,6 +14,8 @@
 #import "subject.h"
 
 //TODO: reorder all of the methods into a more logical state!
+//TODO: use generated accessors for book object
+//TODO: refactor!
 
 @implementation BooksWindowController
 
@@ -123,11 +124,31 @@
     }
 }
 
+- (BOOL) updateUIFromAmazon {
+
+    amazonInterface* amazon = [[amazonInterface alloc] init];
+
+    if(![amazon searchISBN:[txt_search stringValue]]){
+	NSRunInformationalAlertPanel(@"Download Error", @"Unable to retrieve information from Amazon. Please check internet connectivity and valid access keys in your preferences." , @"Ok", nil, nil);
+	return false;
+    }
+
+    NSLog([amazon imageURL]);
+    [img_summary_cover setImage:[amazon frontCover]];
+
+    return true;
+}
+
 - (BOOL) updateUIFromISBNDb {
+
     isbndbInterface *isbndb = [[isbndbInterface alloc] init];
     if(![isbndb searchISBN:[txt_search stringValue]]){
-	//error!
 	NSRunInformationalAlertPanel(@"Download Error", @"Unable to retrieve information from ISBNDb. Please check internet connectivity and a valid access key in your preferences." , @"Ok", nil, nil);
+	return false;
+    }
+
+    if(![isbndb successfullyFoundBook]){
+	NSRunInformationalAlertPanel(@"Search Error", @"No results found for this ISBN on ISBNDb." , @"Ok", nil, nil);
 	return false;
     }
 
@@ -294,6 +315,8 @@
 	[txt_publisher selectItemAtIndex:0];
 	[txt_physicalDescrip selectItemAtIndex:0];
     }
+
+    [self updateUIFromAmazon];
 
     [progIndicator stopAnimation:self];
     [progressSheet orderOut:nil];

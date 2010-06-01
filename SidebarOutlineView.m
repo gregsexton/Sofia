@@ -8,7 +8,6 @@
 
 #import "SidebarOutlineView.h"
 
-// TODO: create abiltiy to edit smart book lists predicate using new window 
 // TODO: fix renaming!!!
 
 @implementation SidebarOutlineView
@@ -226,6 +225,26 @@
     return nil;
 }
 
+- (void) editCurrentlySelectedSmartList{
+    id item = [self selectedItem];
+    if([item isKindOfClass:[smartList class]]){
+	smartList* list = item;
+	PredicateEditorWindowController *predWin = [[PredicateEditorWindowController alloc] initWithSmartList:list];
+	[predWin setDelegate:self];
+	if (![NSBundle loadNibNamed:@"PredicateEditor" owner:predWin]) {
+	    NSLog(@"Error loading Nib!");
+	}
+    }
+}
+
+- (void)updateFilterPredicateWith:(NSPredicate*)predicate{
+
+    [arrayController setFilterPredicate:predicate];
+    [application updateSummaryText];
+    [searchField setStringValue:@""]; //clear out anything in search
+
+}
+
 // Delegate Methods //////////////////////////////////////////////////////
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item{
@@ -436,10 +455,13 @@
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification{
 
     NSPredicate* predicate = [self getPredicateForSelectedItem];
-    [arrayController setFilterPredicate:predicate];
-    [application updateSummaryText];
-    [searchField setStringValue:@""]; //clear out anything in search
+    [self updateFilterPredicateWith:predicate];
 
+}
+
+//delegate for PredicateEditorWindowController.
+- (void)predicateEditingDidFinish:(NSPredicate*)predicate{
+    [self updateFilterPredicateWith:predicate];
 }
 
 //delegates for drag and drop
@@ -528,6 +550,14 @@
 			  action:@selector(removeCurrentlySelectedItem)
 		   keyEquivalent:@""
 			 atIndex:1];
+
+    if([[self selectedItem] isKindOfClass:[smartList class]]){
+	[theMenu insertItemWithTitle:@"Edit Smart Book List"
+			      action:@selector(editCurrentlySelectedSmartList)
+		       keyEquivalent:@""
+			     atIndex:2];
+    }
+
     return theMenu;
 }
 

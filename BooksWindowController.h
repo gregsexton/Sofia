@@ -9,6 +9,7 @@
 #import <GData/GDataBooks.h>
 #import "book.h"
 #import "author.h"
+#import "amazonInterface.h"
 
 @interface BooksWindowController : NSObjectController {
     IBOutlet NSTextField *txt_search;
@@ -61,6 +62,8 @@
     IBOutlet NSTextField    *lbl_summary_noOfCopies;
     IBOutlet NSTextField    *lbl_summary_summary;
 
+    IBOutlet NSImageView    *img_summary_cover;
+
     IBOutlet NSTableView	*authorsTableView;
     IBOutlet NSTableView	*subjectsTableView;
     IBOutlet NSArrayController	*authorsArrayController;
@@ -95,6 +98,7 @@
 - (void) clearAllFields;
 - (void) saveManagedObjectContext:(NSManagedObjectContext*)context;
 - (BOOL) updateUIFromISBNDb;
+- (BOOL) updateUIFromAmazon;
 - (void) updateManagedObjectFromUI;
 - (void) updateSummaryTabView;
 @end
