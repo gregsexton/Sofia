@@ -120,6 +120,12 @@
 	    [txt_physicalDescrip selectItemAtIndex:0];
 	}
 
+	if([obj coverImage] != nil){
+	    NSImage* img = [obj coverImage];
+	    [img_summary_cover setImage:img];
+	    [img_cover setImage:img];
+	}
+
 	[self updateSummaryTabView];
     }
 }
@@ -133,8 +139,9 @@
 	return false;
     }
 
-    NSLog([amazon imageURL]);
+    //NSLog([amazon imageURL]);
     [img_summary_cover setImage:[amazon frontCover]];
+    [img_cover setImage:[amazon frontCover]];
 
     return true;
 }
@@ -270,6 +277,7 @@
 	[obj setValue:[txt_titleLong stringValue] forKey:@"titleLong"];
 	[obj setValue:[txt_urls stringValue] forKey:@"urls"];
 	[obj setValue:[txt_noOfCopies stringValue] forKey:@"noOfCopies"];
+	[obj setCoverImage:[img_summary_cover image]];
     }
 }
 
@@ -303,8 +311,10 @@
     //TODO: warning if this is going to clear out information - re-download data won't work as will display duplicate -- add another option?
     [progIndicator setUsesThreadedAnimation:true];
     [progIndicator startAnimation:self];
-    [NSApp beginSheet:progressSheet modalForWindow:window
-	   modalDelegate:self didEndSelector:NULL contextInfo:nil];
+    [NSApp beginSheet:progressSheet modalForWindow:window 
+				     modalDelegate:self 
+				    didEndSelector:NULL 
+				       contextInfo:nil];
     
     [self clearAllFields];
     if ([self updateUIFromISBNDb]) {

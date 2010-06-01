@@ -22,6 +22,7 @@
 		375F2E3411AF1E0C0062E12E /* SignedAwsSearchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 375F2E3311AF1E0C0062E12E /* SignedAwsSearchRequest.m */; };
 		375F321211B473AB0062E12E /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 375F31FD11B473AB0062E12E /* GTMBase64.m */; };
 		375F324011B479290062E12E /* GTMNSString+URLArguments.m in Sources */ = {isa = PBXBuildFile; fileRef = 375F323F11B479290062E12E /* GTMNSString+URLArguments.m */; };
+		375F330211B5C2120062E12E /* book.m in Sources */ = {isa = PBXBuildFile; fileRef = 375F330111B5C2120062E12E /* book.m */; };
 		376D413D10B21B4C00242DF7 /* author.m in Sources */ = {isa = PBXBuildFile; fileRef = 376D413610B21B4C00242DF7 /* author.m */; };
 		376D413E10B21B4C00242DF7 /* subject.m in Sources */ = {isa = PBXBuildFile; fileRef = 376D413810B21B4C00242DF7 /* subject.m */; };
 		376D414010B21B4C00242DF7 /* person.m in Sources */ = {isa = PBXBuildFile; fileRef = 376D413C10B21B4C00242DF7 /* person.m */; };
@@ -35,7 +36,6 @@
 		37BAFBCA115C173300F95C41 /* book.tif in Resources */ = {isa = PBXBuildFile; fileRef = 37BAFBC9115C173300F95C41 /* book.tif */; };
 		37BAFBDA115C1C7700F95C41 /* shopping.tif in Resources */ = {isa = PBXBuildFile; fileRef = 37BAFBD9115C1C7700F95C41 /* shopping.tif */; };
 		37BAFBDE115C1D1500F95C41 /* shopping2.tif in Resources */ = {isa = PBXBuildFile; fileRef = 37BAFBDD115C1D1500F95C41 /* shopping2.tif */; };
-		37BAFC521162214A00F95C41 /* book.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAFC511162214A00F95C41 /* book.m */; };
 		37BAFC941162510C00F95C41 /* PredicateEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37BAFC931162510C00F95C41 /* PredicateEditor.xib */; };
 		37BAFC981162516900F95C41 /* PredicateEditorWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAFC971162516900F95C41 /* PredicateEditorWindowController.m */; };
 		37D7073310B5D7FE0004F441 /* AuthorDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D7073210B5D7FE0004F441 /* AuthorDetail.xib */; };
@@ -87,6 +87,8 @@
 		375F323E11B479290062E12E /* GTMNSString+URLArguments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+URLArguments.h"; sourceTree = "<group>"; };
 		375F323F11B479290062E12E /* GTMNSString+URLArguments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+URLArguments.m"; sourceTree = "<group>"; };
 		375F324111B479310062E12E /* GTMGarbageCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMGarbageCollection.h; sourceTree = "<group>"; };
+		375F330011B5C2120062E12E /* book.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = book.h; sourceTree = "<group>"; };
+		375F330111B5C2120062E12E /* book.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = book.m; sourceTree = "<group>"; };
 		376D413510B21B4C00242DF7 /* author.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = author.h; sourceTree = "<group>"; };
 		376D413610B21B4C00242DF7 /* author.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = author.m; sourceTree = "<group>"; };
 		376D413710B21B4C00242DF7 /* subject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = subject.h; sourceTree = "<group>"; };
@@ -108,8 +110,6 @@
 		37BAFBC9115C173300F95C41 /* book.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = book.tif; sourceTree = "<group>"; };
 		37BAFBD9115C1C7700F95C41 /* shopping.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = shopping.tif; sourceTree = "<group>"; };
 		37BAFBDD115C1D1500F95C41 /* shopping2.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = shopping2.tif; sourceTree = "<group>"; };
-		37BAFC501162214A00F95C41 /* book.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = book.h; sourceTree = "<group>"; };
-		37BAFC511162214A00F95C41 /* book.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = book.m; sourceTree = "<group>"; };
 		37BAFC931162510C00F95C41 /* PredicateEditor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PredicateEditor.xib; sourceTree = "<group>"; };
 		37BAFC961162516900F95C41 /* PredicateEditorWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PredicateEditorWindowController.h; sourceTree = "<group>"; };
 		37BAFC971162516900F95C41 /* PredicateEditorWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PredicateEditorWindowController.m; sourceTree = "<group>"; };
@@ -287,8 +287,8 @@
 				376D413810B21B4C00242DF7 /* subject.m */,
 				376D413B10B21B4C00242DF7 /* person.h */,
 				376D413C10B21B4C00242DF7 /* person.m */,
-				37BAFC501162214A00F95C41 /* book.h */,
-				37BAFC511162214A00F95C41 /* book.m */,
+				375F330011B5C2120062E12E /* book.h */,
+				375F330111B5C2120062E12E /* book.m */,
 			);
 			name = "NSMangedObject Subclasses";
 			sourceTree = "<group>";
@@ -464,7 +464,6 @@
 				37BAF94511566BA700F95C41 /* BooksTableView.m in Sources */,
 				37BAFA31115A778000F95C41 /* smartList.m in Sources */,
 				37BAFB78115C085B00F95C41 /* ImageAndTextCell.m in Sources */,
-				37BAFC521162214A00F95C41 /* book.m in Sources */,
 				37BAFC981162516900F95C41 /* PredicateEditorWindowController.m in Sources */,
 				375F2A9A11ADD43A0062E12E /* amazonInterface.m in Sources */,
 				375F2E3011AF1DDE0062E12E /* hmac_sha2.c in Sources */,
@@ -472,6 +471,7 @@
 				375F2E3411AF1E0C0062E12E /* SignedAwsSearchRequest.m in Sources */,
 				375F321211B473AB0062E12E /* GTMBase64.m in Sources */,
 				375F324011B479290062E12E /* GTMNSString+URLArguments.m in Sources */,
+				375F330211B5C2120062E12E /* book.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
