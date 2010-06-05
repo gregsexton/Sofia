@@ -232,6 +232,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -283,14 +285,12 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>9</integer>
-									<integer>3</integer>
-									<integer>1</integer>
+									<integer>44</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {309, 1185}}</string>
+							<string>{{0, 34}, {309, 1185}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -320,26 +320,18 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>BooksImageBrowserView.m</string>
+								<string>&lt;No Editor&gt;</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
 									<dict>
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
-										<key>PBXProjectModuleLabel</key>
-										<string>BooksImageBrowserView.m</string>
-										<key>_historyCapacity</key>
-										<integer>0</integer>
-										<key>bookmark</key>
-										<string>374514D911BA7C80001C7960</string>
 										<key>history</key>
 										<array>
 											<string>37BAF4AC114D484D00F95C41</string>
@@ -399,7 +391,7 @@
 											<string>375F331011B5C5820062E12E</string>
 											<string>374514B811B7178E001C7960</string>
 											<string>374514B911B7178E001C7960</string>
-											<string>374514BA11B7178E001C7960</string>
+											<string>3745150411BA9927001C7960</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -595,13 +587,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>374514D811BA7C6F001C7960</string>
+		<string>3745151D11BA9D66001C7960</string>
 		<string>3745149F11B712F6001C7960</string>
 		<string>374514A011B712F6001C7960</string>
-		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
 		<string>1C78EAAD065D492600B07095</string>
-		<string>373655AF101CCE8600709C8F</string>
+		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
 		<string>1CD10A99069EF8BA00B06720</string>
+		<string>373655AF101CCE8600709C8F</string>
 	</array>
 	<key>WindowString</key>
 	<string>1203 114 1343 1244 0 0 2560 1418 </string>
@@ -620,14 +612,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>BooksImageBrowserView.m</string>
+								<string>SofiaApplication.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -644,6 +634,8 @@
 							<string>841pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>

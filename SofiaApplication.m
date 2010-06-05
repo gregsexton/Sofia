@@ -11,10 +11,16 @@
 
 
 //TODO: reorder all of the methods into a more logical state!
+//TODO: save the current view and reload it on startup
 
 @implementation SofiaApplication
 
 - (void) awakeFromNib {
+    
+    //setup the main view
+    currentView = nil;
+    [self changeMainViewFor:mainTableView];
+    
     //setup preferences
     AccessKeyViewController *accessKeys = [[AccessKeyViewController alloc] initWithNibName:@"Preferences_AccessKeys" bundle:nil];
     GeneralViewController *general = [[GeneralViewController alloc] initWithNibName:@"Preferences_General" bundle:nil];
@@ -349,5 +355,36 @@
     [arrayController setFilterPredicate:totalPred];
     [self updateSummaryText];
 }
+
+
+- (IBAction)changeViewClickAction:(id)sender{
+    if ([changeViewButtons selectedSegment] == 0){
+	[self changeMainViewFor:mainTableView];
+    }else if([changeViewButtons selectedSegment] == 1){
+	[imagesView reloadData];
+	[self changeMainViewFor:mainImagesView];
+    }else if([changeViewButtons selectedSegment] == 2){
+	//TODO
+    }else{
+	//serious error!
+    }
+}
+
+- (void)changeMainViewFor:(NSView*)viewToChangeTo{
+
+    //handle size and position
+    NSRect rect = [mainView frame];
+    rect.origin.x = 0;
+    rect.origin.y = 0;
+    [viewToChangeTo setFrame:rect];
+
+    if(currentView == nil){
+	[mainView addSubview:viewToChangeTo];
+    }else{
+	[mainView replaceSubview:[currentView retain] with:viewToChangeTo];
+    }
+    currentView = viewToChangeTo;
+}
+
 
 @end
