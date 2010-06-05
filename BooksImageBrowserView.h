@@ -27,12 +27,13 @@
 
     NSImage* image;
     NSString* imageID;
+    NSString* imageSub;
     
 }
 @property(readwrite,copy) NSImage * image;
 @property(readwrite,copy) NSString * imageID;
 
-- (id)initWithImage:(NSImage *)image imageID:(NSString *)imageID;
+- (id)initWithImage:(NSImage*)anImage imageID:(NSString*)anImageID subtitle:(NSString*)aSubtitle;
 - (NSString *)imageUID;
 - (NSString *)imageRepresentationType;
 - (id)imageRepresentation;

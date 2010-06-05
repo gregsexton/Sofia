@@ -14,6 +14,10 @@
 - (void)awakeFromNib {
     [self setDelegate:self];
     [self setDataSource:self];
+
+    //setup colors TODO: have these as user preferences?
+    //[self setValue:[NSColor darkGrayColor] forKey:IKImageBrowserBackgroundColorKey];
+
     [self reloadData];
 }
 
@@ -25,7 +29,7 @@
 - (id)imageBrowser:(IKImageBrowserView *)aBrowser itemAtIndex:(NSUInteger)index{
     book* theBook = [[arrayController arrangedObjects] objectAtIndex:index];
     NSImage* img = [theBook coverImage];
-    return [[BooksImageBrowserItem alloc] initWithImage:img imageID:[theBook title]];
+    return [[BooksImageBrowserItem alloc] initWithImage:img imageID:[theBook title] subtitle:[theBook authorText]];
 }
 
 @end
@@ -35,10 +39,11 @@
 //The item to be used by BooksImageBrowserView
 @implementation BooksImageBrowserItem
 
-- (id)initWithImage:(NSImage*)anImage imageID:(NSString*)anImageID{
+- (id)initWithImage:(NSImage*)anImage imageID:(NSString*)anImageID subtitle:(NSString*)aSubtitle{
     if (self = [super init]) {
 	    image = [anImage copy];
 	    imageID = [anImageID copy];
+	    imageSub = [aSubtitle copy];
     }
     return self;
 }
@@ -63,6 +68,10 @@
 
 - (NSString*) imageTitle{
     return imageID;
+}
+
+- (NSString*) imageSubtitle{
+    return imageSub;
 }
 
 @end

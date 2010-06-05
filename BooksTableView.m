@@ -19,6 +19,7 @@
 }
 
 - (IBAction) doubleClickAction:(id)sender {
+    //TODO: is anything selected? getting array out of bounds errors
     //use the first object if multiple are selected
     book *obj = [[arrayController selectedObjects] objectAtIndex:0];
 
