@@ -16,6 +16,8 @@
 		373752C0105EB4FF00718317 /* Detail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 373752BF105EB4FF00718317 /* Detail.xib */; };
 		373752C6105EB6D500718317 /* SofiaApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 373752C5105EB6D500718317 /* SofiaApplication.m */; };
 		3737550E106839A700718317 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 3737550D106839A700718317 /* Credits.html */; };
+		3745147F11B70B2A001C7960 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3745147E11B70B2A001C7960 /* Quartz.framework */; };
+		3745148611B70B85001C7960 /* BooksImageBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3745148511B70B85001C7960 /* BooksImageBrowserView.m */; };
 		375F2A9A11ADD43A0062E12E /* amazonInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 375F2A9911ADD43A0062E12E /* amazonInterface.m */; };
 		375F2E3011AF1DDE0062E12E /* hmac_sha2.c in Sources */ = {isa = PBXBuildFile; fileRef = 375F2E2B11AF1DDE0062E12E /* hmac_sha2.c */; };
 		375F2E3211AF1DDE0062E12E /* sha2.c in Sources */ = {isa = PBXBuildFile; fileRef = 375F2E2E11AF1DDE0062E12E /* sha2.c */; };
@@ -73,6 +75,9 @@
 		373752C4105EB6D500718317 /* SofiaApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SofiaApplication.h; sourceTree = "<group>"; };
 		373752C5105EB6D500718317 /* SofiaApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SofiaApplication.m; sourceTree = "<group>"; };
 		3737550D106839A700718317 /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
+		3745147E11B70B2A001C7960 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		3745148411B70B85001C7960 /* BooksImageBrowserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooksImageBrowserView.h; sourceTree = "<group>"; };
+		3745148511B70B85001C7960 /* BooksImageBrowserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BooksImageBrowserView.m; sourceTree = "<group>"; };
 		375F2A9811ADD43A0062E12E /* amazonInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amazonInterface.h; sourceTree = "<group>"; };
 		375F2A9911ADD43A0062E12E /* amazonInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = amazonInterface.m; sourceTree = "<group>"; };
 		375F2E2B11AF1DDE0062E12E /* hmac_sha2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hmac_sha2.c; sourceTree = "<group>"; };
@@ -137,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				3745147F11B70B2A001C7960 /* Quartz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,6 +176,7 @@
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+				3745147E11B70B2A001C7960 /* Quartz.framework */,
 			);
 			name = "Other Frameworks";
 			sourceTree = "<group>";
@@ -300,6 +307,8 @@
 				371182B110C454E200732634 /* SidebarOutlineView.m */,
 				37BAF94311566BA700F95C41 /* BooksTableView.h */,
 				37BAF94411566BA700F95C41 /* BooksTableView.m */,
+				3745148411B70B85001C7960 /* BooksImageBrowserView.h */,
+				3745148511B70B85001C7960 /* BooksImageBrowserView.m */,
 			);
 			name = "Cocoa Extensions";
 			sourceTree = "<group>";
@@ -472,6 +481,7 @@
 				375F321211B473AB0062E12E /* GTMBase64.m in Sources */,
 				375F324011B479290062E12E /* GTMNSString+URLArguments.m in Sources */,
 				375F330211B5C2120062E12E /* book.m in Sources */,
+				3745148611B70B85001C7960 /* BooksImageBrowserView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
