@@ -11,6 +11,8 @@
 
 @implementation BooksTableView
 
+//TODO: have a read? column
+
 - (void)awakeFromNib {
     [self setDoubleAction:@selector(doubleClickAction:)];
     [self setTarget:self]; 

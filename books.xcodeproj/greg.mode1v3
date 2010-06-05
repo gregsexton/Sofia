@@ -587,13 +587,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>3745155C11BAC1EB001C7960</string>
+		<string>3745156411BAF8C7001C7960</string>
 		<string>3745149F11B712F6001C7960</string>
 		<string>374514A011B712F6001C7960</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
-		<string>373655AF101CCE8600709C8F</string>
 		<string>1C78EAAD065D492600B07095</string>
+		<string>373655AF101CCE8600709C8F</string>
 	</array>
 	<key>WindowString</key>
 	<string>1203 114 1343 1244 0 0 2560 1418 </string>
