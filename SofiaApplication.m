@@ -260,6 +260,7 @@
 }
 
 - (IBAction) removeBookAction:(id)sender {
+    //TODO removing doesn't work in image view, selection is based on the table
     int alertReturn = -1;
     int noOfRowsSelected = [tableView numberOfSelectedRows];
     if(noOfRowsSelected == 0){
@@ -284,6 +285,7 @@
 	[arrayController addObject:[booksWindowController obj]];
     }
     [self updateSummaryText];
+    [imagesView reloadData];
 }
 
 - (void) updateSummaryText {
@@ -375,6 +377,7 @@
 }
 
 - (void)changeMainViewFor:(NSView*)viewToChangeTo{
+    //TODO maintain the selected item when switching the view.
 
     //handle size and position
     NSRect rect = [mainView frame];
