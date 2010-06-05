@@ -11,9 +11,10 @@
 
 
 //TODO: reorder all of the methods into a more logical state!
-//TODO: save the current view and reload it on startup
+//TODO: save the current view and reload it on startup, including zoom level
 
 @implementation SofiaApplication
+@synthesize imageZoomLevel;
 
 - (void) awakeFromNib {
     
@@ -32,6 +33,9 @@
     NSError *error;
     [arrayController fetchWithRequest:nil merge:NO error:&error];
     [self updateSummaryText];
+
+    //initial zoom level
+    imageZoomLevel = 0.4;
 
 }
 
@@ -384,6 +388,12 @@
 	[mainView replaceSubview:[currentView retain] with:viewToChangeTo];
     }
     currentView = viewToChangeTo;
+
+    if(currentView == mainImagesView){
+	[zoomSlider setHidden:false];
+    }else{
+	[zoomSlider setHidden:true];
+    }
 }
 
 

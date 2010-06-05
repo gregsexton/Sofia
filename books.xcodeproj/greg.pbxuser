@@ -779,9 +779,9 @@
 	};
 	373752C5105EB6D500718317 /* SofiaApplication.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1143, 4589}}";
-			sepNavSelRange = "{8565, 0}";
-			sepNavVisRange = "{7341, 2577}";
+			sepNavIntBoundsRect = "{{0, 0}, {1143, 5122}}";
+			sepNavSelRange = "{13971, 0}";
+			sepNavVisRange = "{11521, 2323}";
 		};
 	};
 	37375314105EEAAA00718317 /* PBXTextBookmark */ = {
@@ -1182,7 +1182,7 @@
 		ignoreCount = 0;
 		lineNumber = 20;
 		location = Sofia;
-		modificationTime = 297442660.860115;
+		modificationTime = 297449457.284788;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1200,7 +1200,7 @@
 		ignoreCount = 0;
 		lineNumber = 24;
 		location = Sofia;
-		modificationTime = 297442660.86013;
+		modificationTime = 297449457.284796;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1731,7 +1731,7 @@
 		ignoreCount = 0;
 		lineNumber = 15;
 		location = Sofia;
-		modificationTime = 297442660.860144;
+		modificationTime = 297449457.284804;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2332,7 +2332,7 @@
 		ignoreCount = 0;
 		lineNumber = 26;
 		location = Sofia;
-		modificationTime = 297442660.860167;
+		modificationTime = 297449457.284841;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2390,7 +2390,7 @@
 		ignoreCount = 0;
 		lineNumber = 373;
 		location = Sofia;
-		modificationTime = 297442660.86018;
+		modificationTime = 297449457.284852;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2551,7 +2551,7 @@
 		ignoreCount = 0;
 		lineNumber = 256;
 		location = Sofia;
-		modificationTime = 297442660.859953;
+		modificationTime = 297449457.284675;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2589,7 +2589,7 @@
 		ignoreCount = 0;
 		lineNumber = 128;
 		location = Sofia;
-		modificationTime = 297442660.859978;
+		modificationTime = 297449457.284683;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2637,7 +2637,7 @@
 		ignoreCount = 0;
 		lineNumber = 69;
 		location = Sofia;
-		modificationTime = 297442660.859989;
+		modificationTime = 297449457.284695;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2778,7 +2778,7 @@
 		ignoreCount = 0;
 		lineNumber = 459;
 		location = Sofia;
-		modificationTime = 297442660.859998;
+		modificationTime = 297449457.284703;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -3194,7 +3194,7 @@
 		ignoreCount = 0;
 		lineNumber = 127;
 		location = Sofia;
-		modificationTime = 297442660.86001;
+		modificationTime = 297449457.284711;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -3645,7 +3645,7 @@
 		ignoreCount = 0;
 		lineNumber = 36;
 		location = Sofia;
-		modificationTime = 297442660.860019;
+		modificationTime = 297449457.284721;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -3961,7 +3961,7 @@
 		ignoreCount = 0;
 		lineNumber = 30;
 		location = Sofia;
-		modificationTime = 297442660.86003;
+		modificationTime = 297449457.284729;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -3979,7 +3979,7 @@
 		ignoreCount = 0;
 		lineNumber = 51;
 		location = Sofia;
-		modificationTime = 297442660.860039;
+		modificationTime = 297449457.28474;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -3997,7 +3997,7 @@
 		ignoreCount = 0;
 		lineNumber = 74;
 		location = Sofia;
-		modificationTime = 297442660.860051;
+		modificationTime = 297449457.284751;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4035,7 +4035,7 @@
 		ignoreCount = 0;
 		lineNumber = 62;
 		location = Sofia;
-		modificationTime = 297442660.860078;
+		modificationTime = 297449457.284759;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4108,7 +4108,7 @@
 		ignoreCount = 0;
 		lineNumber = 67;
 		location = Sofia;
-		modificationTime = 297442660.86009;
+		modificationTime = 297449457.284768;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4156,7 +4156,7 @@
 		ignoreCount = 0;
 		lineNumber = 88;
 		location = Sofia;
-		modificationTime = 297442660.860102;
+		modificationTime = 297449457.284777;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4417,7 +4417,7 @@
 		ignoreCount = 0;
 		lineNumber = 161;
 		location = Sofia;
-		modificationTime = 297442660.859522;
+		modificationTime = 297449457.284319;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4435,7 +4435,7 @@
 		ignoreCount = 0;
 		lineNumber = 172;
 		location = Sofia;
-		modificationTime = 297442660.859554;
+		modificationTime = 297449457.28436;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4453,7 +4453,7 @@
 		ignoreCount = 0;
 		lineNumber = 234;
 		location = Sofia;
-		modificationTime = 297442660.859565;
+		modificationTime = 297449457.284372;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4471,7 +4471,7 @@
 		ignoreCount = 0;
 		lineNumber = 244;
 		location = Sofia;
-		modificationTime = 297442660.859578;
+		modificationTime = 297449457.284381;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4499,7 +4499,7 @@
 		ignoreCount = 0;
 		lineNumber = 27;
 		location = Sofia;
-		modificationTime = 297442660.859736;
+		modificationTime = 297449457.284561;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4517,7 +4517,7 @@
 		ignoreCount = 0;
 		lineNumber = 208;
 		location = Sofia;
-		modificationTime = 297442660.859752;
+		modificationTime = 297449457.284572;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4535,7 +4535,7 @@
 		ignoreCount = 0;
 		lineNumber = 271;
 		location = Sofia;
-		modificationTime = 297442660.859781;
+		modificationTime = 297449457.284589;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4607,7 +4607,7 @@
 		ignoreCount = 0;
 		lineNumber = 57;
 		location = Sofia;
-		modificationTime = 297442660.859857;
+		modificationTime = 297449457.284604;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4635,7 +4635,7 @@
 		ignoreCount = 0;
 		lineNumber = 95;
 		location = Sofia;
-		modificationTime = 297442660.859871;
+		modificationTime = 297449457.284615;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4660,7 +4660,7 @@
 		ignoreCount = 0;
 		lineNumber = 78;
 		location = Sofia;
-		modificationTime = 297442660.859881;
+		modificationTime = 297449457.284625;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4688,7 +4688,7 @@
 		ignoreCount = 0;
 		lineNumber = 116;
 		location = Sofia;
-		modificationTime = 297442660.859905;
+		modificationTime = 297449457.284633;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4706,7 +4706,7 @@
 		ignoreCount = 0;
 		lineNumber = 357;
 		location = Sofia;
-		modificationTime = 297442660.859917;
+		modificationTime = 297449457.284645;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4808,7 +4808,7 @@
 		ignoreCount = 0;
 		lineNumber = 410;
 		location = Sofia;
-		modificationTime = 297442660.85993;
+		modificationTime = 297449457.284655;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4840,7 +4840,7 @@
 		ignoreCount = 0;
 		lineNumber = 32;
 		location = Sofia;
-		modificationTime = 297442660.859944;
+		modificationTime = 297449457.284664;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};

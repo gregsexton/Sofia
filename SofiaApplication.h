@@ -31,6 +31,7 @@
 	IBOutlet NSSegmentedControl *addRemoveButtons;
 	IBOutlet NSSegmentedControl *changeViewButtons;
 	IBOutlet SidebarOutlineView *sideBar;
+	IBOutlet NSSlider *zoomSlider;
 
 	IBOutlet NSView* mainView;
 	IBOutlet NSView* mainTableView; //this includes the scrollview
@@ -40,7 +41,10 @@
 	NSPersistentStoreCoordinator *persistentStoreCoordinator;
 	NSManagedObjectModel *managedObjectModel;
 	NSManagedObjectContext *managedObjectContext;
+
+	double imageZoomLevel;
 }
+@property (nonatomic) double imageZoomLevel;
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator;
 - (NSManagedObjectModel *)managedObjectModel;
