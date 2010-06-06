@@ -60,6 +60,8 @@
 - (IBAction) displayPreferencesClickAction:(id)sender;
 - (IBAction) search:(id)sender;
 - (IBAction) changeViewClickAction:(id)sender;
+- (IBAction)changeToListView:(id)sender;
+- (IBAction)changeToImagesView:(id)sender;
 - (void) updateSummaryText;
 - (void) changeMainViewFor:(NSView*)viewToChangeTo;
 

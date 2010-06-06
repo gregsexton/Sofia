@@ -26,6 +26,8 @@
 			 context:NULL];
 }
 
+// Delegate Methods //////////////////////////////////////////////////////
+
 - (NSUInteger)numberOfItemsInImageBrowser:(IKImageBrowserView *) aBrowser{	
     NSUInteger* count = [[arrayController arrangedObjects] count];
     return count;
@@ -34,7 +36,9 @@
 - (id)imageBrowser:(IKImageBrowserView *)aBrowser itemAtIndex:(NSUInteger)index{
     book* theBook = [[arrayController arrangedObjects] objectAtIndex:index];
     NSImage* img = [theBook coverImage];
-    return [[BooksImageBrowserItem alloc] initWithImage:img imageID:[theBook title] subtitle:[theBook authorText]];
+    return [[BooksImageBrowserItem alloc] initWithImage:img 
+						imageID:[theBook title] 
+					       subtitle:[theBook authorText]];
 }
 
 - (void)imageBrowser:(IKImageBrowserView *)aBrowser cellWasDoubleClickedAtIndex:(NSUInteger)index{
@@ -47,8 +51,7 @@
     }
 }
 
-//TODO: this works nicely but will it be efficient enough for a large
-//book collection?
+//TODO: this works nicely but will it be efficient enough for a large book collection?
 - (void)observeValueForKeyPath:(NSString *)keyPath 
 		      ofObject:(id)object 
 			change:(NSDictionary *)change 
@@ -57,6 +60,13 @@
 	[self reloadData];
     }
 }
+
+- (void) imageBrowserSelectionDidChange:(IKImageBrowserView *) aBrowser{
+    //let the arraycontroller know
+    [arrayController setSelectionIndexes:[self selectionIndexes]];
+}
+
+// Overridden Methods //////////////////////////////////////////////////////
 
 @end
 

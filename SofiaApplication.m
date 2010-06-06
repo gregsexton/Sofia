@@ -365,15 +365,26 @@
 
 - (IBAction)changeViewClickAction:(id)sender{
     if ([changeViewButtons selectedSegment] == 0){
-	[self changeMainViewFor:mainTableView];
+	[self changeToListView:self];
     }else if([changeViewButtons selectedSegment] == 1){
-	[imagesView reloadData];
-	[self changeMainViewFor:mainImagesView];
+	[self changeToImagesView:self];
     }else if([changeViewButtons selectedSegment] == 2){
 	//TODO
     }else{
 	//serious error!
     }
+}
+
+- (IBAction)changeToListView:(id)sender{
+    [self changeMainViewFor:mainTableView];
+    [zoomSlider setHidden:true];
+    [changeViewButtons setSelectedSegment:0];
+}
+
+- (IBAction)changeToImagesView:(id)sender{
+    [self changeMainViewFor:mainImagesView];
+    [zoomSlider setHidden:false];
+    [changeViewButtons setSelectedSegment:1];
 }
 
 - (void)changeMainViewFor:(NSView*)viewToChangeTo{
@@ -391,12 +402,6 @@
 	[mainView replaceSubview:[currentView retain] with:viewToChangeTo];
     }
     currentView = viewToChangeTo;
-
-    if(currentView == mainImagesView){
-	[zoomSlider setHidden:false];
-    }else{
-	[zoomSlider setHidden:true];
-    }
 }
 
 
