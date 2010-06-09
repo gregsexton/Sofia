@@ -13,7 +13,6 @@
 
 // Overridden Methods //////////////////////////////////////////////////////
 
-//TODO: move to the BooksTableView class
 - (void)keyDown:(NSEvent *)theEvent{
     //NSLog(@"SidebarOutlineView: keyDown: %c", [[theEvent characters] characterAtIndex:0]);
     unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];

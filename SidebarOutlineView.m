@@ -9,6 +9,7 @@
 #import "SidebarOutlineView.h"
 
 // TODO: fix renaming!!!
+// TODO: refactor out logic to a controller.
 
 @implementation SidebarOutlineView
 
