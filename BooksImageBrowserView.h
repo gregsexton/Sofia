@@ -8,13 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 #import <Quartz/Quartz.h>
-#import "book.h"
-#import "BooksWindowController.h"
 
 
 @interface BooksImageBrowserView : IKImageBrowserView {
-
-    IBOutlet NSArrayController *arrayController;
 
 }
 
