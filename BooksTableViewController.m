@@ -52,19 +52,5 @@
     return true;
 }
 
-//TODO: move to a super class for use by BooksImageBrowserController?
-- (void)removeSelectedItems{
-    id item = [sideBar selectedItem];
-    if([item isKindOfClass:[list class]]){
-	NSArray* selectedBooks = [arrayController selectedObjects];
-	[item removeBooks:[NSSet setWithArray:selectedBooks]];
-	[arrayController fetch:self]; //reload filter
-    }
-
-    if([item isKindOfClass:[Library class]]){
-	[application removeBookAction:self];
-    }
-}
-
 
 @end

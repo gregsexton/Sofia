@@ -10,20 +10,15 @@
 
 #import "book.h"
 #import "BooksWindowController.h"
-#import "SidebarOutlineView.h"
-#import "SofiaApplication.h"
+#import "BooksMainViewController.h"
 
 #define SofiaDragType @"SofiaDragType"
 
-@interface BooksTableViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource>{
+@interface BooksTableViewController : BooksMainViewController <NSTableViewDelegate, NSTableViewDataSource>{
 
     IBOutlet BooksTableView* tableView;
-    IBOutlet NSArrayController* arrayController;
-    IBOutlet SidebarOutlineView* sideBar;
-    IBOutlet SofiaApplication* application;
 }
 
 - (IBAction)doubleClickAction:(id)sender;
-- (void)removeSelectedItems;
 
 @end

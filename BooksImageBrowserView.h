@@ -8,9 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 #import <Quartz/Quartz.h>
+@class BooksImageBrowserController;
 
 
 @interface BooksImageBrowserView : IKImageBrowserView {
+
+    IBOutlet BooksImageBrowserController* viewController;
 
 }
 

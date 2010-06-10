@@ -11,11 +11,11 @@
 #import "book.h"
 #import "BooksWindowController.h"
 #import "BooksImageBrowserView.h"
+#import "BooksMainViewController.h"
 
 
-@interface BooksImageBrowserController : NSViewController {
+@interface BooksImageBrowserController : BooksMainViewController {
 
-    IBOutlet NSArrayController *arrayController;
     IBOutlet BooksImageBrowserView* browserView;
 
 }

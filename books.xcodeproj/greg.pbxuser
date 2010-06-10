@@ -226,6 +226,12 @@
 			374515A811C02A1D001C7960 /* PBXTextBookmark */ = 374515A811C02A1D001C7960 /* PBXTextBookmark */;
 			374515A911C02A1D001C7960 /* PBXTextBookmark */ = 374515A911C02A1D001C7960 /* PBXTextBookmark */;
 			374515AC11C02A40001C7960 /* PBXTextBookmark */ = 374515AC11C02A40001C7960 /* PBXTextBookmark */;
+			374515D111C195F9001C7960 /* PBXTextBookmark */ = 374515D111C195F9001C7960 /* PBXTextBookmark */;
+			374515D211C195F9001C7960 /* PBXTextBookmark */ = 374515D211C195F9001C7960 /* PBXTextBookmark */;
+			374515D311C195F9001C7960 /* PBXBookmark */ = 374515D311C195F9001C7960 /* PBXBookmark */;
+			374515D411C195F9001C7960 /* PBXTextBookmark */ = 374515D411C195F9001C7960 /* PBXTextBookmark */;
+			374515D711C1962D001C7960 /* PBXTextBookmark */ = 374515D711C1962D001C7960 /* PBXTextBookmark */;
+			374515DA11C19643001C7960 /* PBXTextBookmark */ = 374515DA11C19643001C7960 /* PBXTextBookmark */;
 			375F29EB117E525F0062E12E = 375F29EB117E525F0062E12E /* XDModelBookmark */;
 			375F29EC117E525F0062E12E = 375F29EC117E525F0062E12E /* XDModelBookmark */;
 			375F2A0411AAFA410062E12E = 375F2A0411AAFA410062E12E /* XDModelBookmark */;
@@ -783,9 +789,9 @@
 	};
 	373752C4105EB6D500718317 /* SofiaApplication.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {927, 877}}";
-			sepNavSelRange = "{643, 0}";
-			sepNavVisRange = "{0, 1551}";
+			sepNavIntBoundsRect = "{{0, 0}, {1143, 949}}";
+			sepNavSelRange = "{639, 0}";
+			sepNavVisRange = "{0, 807}";
 		};
 	};
 	373752C5105EB6D500718317 /* SofiaApplication.m */ = {
@@ -1193,7 +1199,7 @@
 		ignoreCount = 0;
 		lineNumber = 20;
 		location = Sofia;
-		modificationTime = 297805840.004291;
+		modificationTime = 297899165.762144;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1211,7 +1217,7 @@
 		ignoreCount = 0;
 		lineNumber = 24;
 		location = Sofia;
-		modificationTime = 297805840.004351;
+		modificationTime = 297899165.762157;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1742,7 +1748,7 @@
 		ignoreCount = 0;
 		lineNumber = 15;
 		location = Sofia;
-		modificationTime = 297805840.004398;
+		modificationTime = 297899165.762167;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2343,7 +2349,7 @@
 		ignoreCount = 0;
 		lineNumber = 26;
 		location = Sofia;
-		modificationTime = 297805840.004445;
+		modificationTime = 297899165.762195;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2401,7 +2407,7 @@
 		ignoreCount = 0;
 		lineNumber = 373;
 		location = Sofia;
-		modificationTime = 297805840.00449;
+		modificationTime = 297899165.762207;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2541,6 +2547,74 @@
 		rLoc = 453;
 		rType = 0;
 		vrLen = 453;
+		vrLoc = 0;
+	};
+	374515C011C19092001C7960 /* BooksMainViewController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1143, 379}}";
+			sepNavSelRange = "{460, 0}";
+			sepNavVisRange = "{0, 460}";
+		};
+	};
+	374515C111C19092001C7960 /* BooksMainViewController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {951, 987}}";
+			sepNavSelRange = "{602, 0}";
+			sepNavVisRange = "{0, 602}";
+		};
+	};
+	374515D111C195F9001C7960 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 3745159A11C0283A001C7960 /* BooksImageBrowserController.h */;
+		name = "BooksImageBrowserController.h: 24";
+		rLen = 0;
+		rLoc = 453;
+		rType = 0;
+		vrLen = 453;
+		vrLoc = 0;
+	};
+	374515D211C195F9001C7960 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 374515C011C19092001C7960 /* BooksMainViewController.h */;
+		name = "BooksMainViewController.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 227;
+		vrLoc = 0;
+	};
+	374515D311C195F9001C7960 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 374515C111C19092001C7960 /* BooksMainViewController.m */;
+	};
+	374515D411C195F9001C7960 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 374515C111C19092001C7960 /* BooksMainViewController.m */;
+		name = "BooksMainViewController.m: 28";
+		rLen = 0;
+		rLoc = 602;
+		rType = 0;
+		vrLen = 602;
+		vrLoc = 0;
+	};
+	374515D711C1962D001C7960 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 374515C111C19092001C7960 /* BooksMainViewController.m */;
+		name = "BooksMainViewController.m: 28";
+		rLen = 0;
+		rLoc = 602;
+		rType = 0;
+		vrLen = 602;
+		vrLoc = 0;
+	};
+	374515DA11C19643001C7960 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 374515C111C19092001C7960 /* BooksMainViewController.m */;
+		name = "BooksMainViewController.m: 28";
+		rLen = 0;
+		rLoc = 602;
+		rType = 0;
+		vrLen = 602;
 		vrLoc = 0;
 	};
 	375F29EB117E525F0062E12E /* XDModelBookmark */ = {
@@ -2700,7 +2774,7 @@
 		ignoreCount = 0;
 		lineNumber = 256;
 		location = Sofia;
-		modificationTime = 297805840.004157;
+		modificationTime = 297899165.761919;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2738,7 +2812,7 @@
 		ignoreCount = 0;
 		lineNumber = 128;
 		location = Sofia;
-		modificationTime = 297805840.00417;
+		modificationTime = 297899165.761928;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2786,7 +2860,7 @@
 		ignoreCount = 0;
 		lineNumber = 69;
 		location = Sofia;
-		modificationTime = 297805840.004179;
+		modificationTime = 297899165.761936;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2927,7 +3001,7 @@
 		ignoreCount = 0;
 		lineNumber = 459;
 		location = Sofia;
-		modificationTime = 297805840.004188;
+		modificationTime = 297899165.761944;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -3098,7 +3172,7 @@
 	};
 	375F2A9811ADD43A0062E12E /* amazonInterface.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1143, 786}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1143, 809}}";
 			sepNavSelRange = "{397, 0}";
 			sepNavVisRange = "{0, 687}";
 		};
@@ -3343,7 +3417,7 @@
 		ignoreCount = 0;
 		lineNumber = 127;
 		location = Sofia;
-		modificationTime = 297805840.004197;
+		modificationTime = 297899165.761953;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -3794,7 +3868,7 @@
 		ignoreCount = 0;
 		lineNumber = 36;
 		location = Sofia;
-		modificationTime = 297805840.004208;
+		modificationTime = 297899165.761961;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4110,7 +4184,7 @@
 		ignoreCount = 0;
 		lineNumber = 30;
 		location = Sofia;
-		modificationTime = 297805840.004216;
+		modificationTime = 297899165.76197;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4128,7 +4202,7 @@
 		ignoreCount = 0;
 		lineNumber = 51;
 		location = Sofia;
-		modificationTime = 297805840.004226;
+		modificationTime = 297899165.761991;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4146,7 +4220,7 @@
 		ignoreCount = 0;
 		lineNumber = 74;
 		location = Sofia;
-		modificationTime = 297805840.004234;
+		modificationTime = 297899165.762076;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4184,7 +4258,7 @@
 		ignoreCount = 0;
 		lineNumber = 62;
 		location = Sofia;
-		modificationTime = 297805840.004257;
+		modificationTime = 297899165.762091;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4257,7 +4331,7 @@
 		ignoreCount = 0;
 		lineNumber = 67;
 		location = Sofia;
-		modificationTime = 297805840.00427;
+		modificationTime = 297899165.762099;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4305,7 +4379,7 @@
 		ignoreCount = 0;
 		lineNumber = 88;
 		location = Sofia;
-		modificationTime = 297805840.004281;
+		modificationTime = 297899165.762112;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4566,7 +4640,7 @@
 		ignoreCount = 0;
 		lineNumber = 161;
 		location = Sofia;
-		modificationTime = 297805840.003842;
+		modificationTime = 297899165.761595;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4584,7 +4658,7 @@
 		ignoreCount = 0;
 		lineNumber = 172;
 		location = Sofia;
-		modificationTime = 297805840.003869;
+		modificationTime = 297899165.761622;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4602,7 +4676,7 @@
 		ignoreCount = 0;
 		lineNumber = 234;
 		location = Sofia;
-		modificationTime = 297805840.003878;
+		modificationTime = 297899165.761632;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4620,7 +4694,7 @@
 		ignoreCount = 0;
 		lineNumber = 244;
 		location = Sofia;
-		modificationTime = 297805840.003891;
+		modificationTime = 297899165.761688;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4648,7 +4722,7 @@
 		ignoreCount = 0;
 		lineNumber = 27;
 		location = Sofia;
-		modificationTime = 297805840.004028;
+		modificationTime = 297899165.761808;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4666,7 +4740,7 @@
 		ignoreCount = 0;
 		lineNumber = 208;
 		location = Sofia;
-		modificationTime = 297805840.004041;
+		modificationTime = 297899165.76182;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4684,7 +4758,7 @@
 		ignoreCount = 0;
 		lineNumber = 271;
 		location = Sofia;
-		modificationTime = 297805840.004051;
+		modificationTime = 297899165.761833;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4700,9 +4774,9 @@
 	};
 	37BAF94311566BA700F95C41 /* BooksTableView.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {927, 902}}";
-			sepNavSelRange = "{585, 0}";
-			sepNavVisRange = "{0, 585}";
+			sepNavIntBoundsRect = "{{0, 0}, {1143, 809}}";
+			sepNavSelRange = "{304, 0}";
+			sepNavVisRange = "{0, 304}";
 		};
 	};
 	37BAF94411566BA700F95C41 /* BooksTableView.m */ = {
@@ -4756,7 +4830,7 @@
 		ignoreCount = 0;
 		lineNumber = 57;
 		location = Sofia;
-		modificationTime = 297805840.004065;
+		modificationTime = 297899165.761848;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4784,7 +4858,7 @@
 		ignoreCount = 0;
 		lineNumber = 95;
 		location = Sofia;
-		modificationTime = 297805840.004076;
+		modificationTime = 297899165.76186;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4809,7 +4883,7 @@
 		ignoreCount = 0;
 		lineNumber = 78;
 		location = Sofia;
-		modificationTime = 297805840.004087;
+		modificationTime = 297899165.761867;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4837,7 +4911,7 @@
 		ignoreCount = 0;
 		lineNumber = 116;
 		location = Sofia;
-		modificationTime = 297805840.004095;
+		modificationTime = 297899165.761876;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4855,7 +4929,7 @@
 		ignoreCount = 0;
 		lineNumber = 357;
 		location = Sofia;
-		modificationTime = 297805840.004118;
+		modificationTime = 297899165.761884;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4888,9 +4962,9 @@
 		fRef = 37BAF94311566BA700F95C41 /* BooksTableView.h */;
 		name = "BooksTableView.h: 26";
 		rLen = 0;
-		rLoc = 585;
+		rLoc = 267;
 		rType = 0;
-		vrLen = 585;
+		vrLen = 267;
 		vrLoc = 0;
 	};
 	37BAFB86115C0A8400F95C41 /* PBXTextBookmark */ = {
@@ -4957,7 +5031,7 @@
 		ignoreCount = 0;
 		lineNumber = 410;
 		location = Sofia;
-		modificationTime = 297805840.004129;
+		modificationTime = 297899165.761893;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -4989,7 +5063,7 @@
 		ignoreCount = 0;
 		lineNumber = 32;
 		location = Sofia;
-		modificationTime = 297805840.004141;
+		modificationTime = 297899165.761911;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};

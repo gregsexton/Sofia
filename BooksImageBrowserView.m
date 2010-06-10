@@ -19,9 +19,30 @@
 }
 
 // Overridden Methods //////////////////////////////////////////////////////
+
+- (void)keyDown:(NSEvent *)theEvent{
+    //NSLog(@"SidebarOutlineView: keyDown: %c", [[theEvent characters] characterAtIndex:0]);
+    unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
+
+    if (key == NSDeleteCharacter || key == NSBackspaceCharacter){
+	[viewController removeSelectedItems];
+    }else{
+	//pass on to next first responder if not going to handle it
+	[super keyDown:theEvent];
+    }
+
+}
+
 @end
 
+
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 
 //The item to be used by BooksImageBrowserView
 @implementation BooksImageBrowserItem
