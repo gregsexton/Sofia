@@ -235,6 +235,7 @@
 				37D7073210B5D7FE0004F441 /* AuthorDetail.xib */,
 				37D7099D10C1D8400004F441 /* SubjectDetail.xib */,
 				37BAFC931162510C00F95C41 /* PredicateEditor.xib */,
+				373751491054219600718317 /* database.xcdatamodel */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -244,7 +245,6 @@
 			children = (
 				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
-				373751491054219600718317 /* database.xcdatamodel */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
