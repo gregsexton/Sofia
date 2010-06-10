@@ -21,14 +21,17 @@
 }
 
 - (IBAction) doubleClickAction:(id)sender {
-    //TODO: is anything selected? getting array out of bounds errors
-    //use the first object if multiple are selected
-    book *obj = [[arrayController selectedObjects] objectAtIndex:0];
 
-    BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj
-										 withSearch:NO];
-    if (![NSBundle loadNibNamed:@"Detail" owner:detailWin]) {
-	NSLog(@"Error loading Nib!");
+    NSArray* selectedObjects = [arrayController selectedObjects];
+
+    if([selectedObjects count] > 0){
+	book *obj = [selectedObjects objectAtIndex:0]; //use the first object if multiple are selected
+
+	BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj
+										     withSearch:NO];
+	if (![NSBundle loadNibNamed:@"Detail" owner:detailWin]) {
+	    NSLog(@"Error loading Nib!");
+	}
     }
 } 
 
