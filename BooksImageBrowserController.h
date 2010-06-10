@@ -18,6 +18,8 @@
 
     IBOutlet BooksImageBrowserView* browserView;
 
+    float imageZoomLevel;
 }
+@property (nonatomic) float imageZoomLevel;
 
 @end

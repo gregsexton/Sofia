@@ -42,9 +42,7 @@
 	NSManagedObjectModel *managedObjectModel;
 	NSManagedObjectContext *managedObjectContext;
 
-	double imageZoomLevel;
 }
-@property (nonatomic) double imageZoomLevel;
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator;
 - (NSManagedObjectModel *)managedObjectModel;

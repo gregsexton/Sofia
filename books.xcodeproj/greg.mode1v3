@@ -339,7 +339,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>374515DA11C19643001C7960</string>
+										<string>374515FD11C19EEF001C7960</string>
 										<key>history</key>
 										<array>
 											<string>37BAF4AC114D484D00F95C41</string>
@@ -601,12 +601,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>374515FE11C19EEF001C7960</string>
 		<string>3745149F11B712F6001C7960</string>
 		<string>374514A011B712F6001C7960</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>373655AF101CCE8600709C8F</string>
-		<string>1CD10A99069EF8BA00B06720</string>
 		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
+		<string>1C78EAAD065D492600B07095</string>
+		<string>1CD10A99069EF8BA00B06720</string>
 	</array>
 	<key>WindowString</key>
 	<string>1203 114 1343 1244 0 0 2560 1418 </string>
@@ -947,7 +948,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {1125, 620}}</string>
 								<key>RubberWindowFrame</key>
-								<string>1395 97 1125 661 0 0 2560 1418 </string>
+								<string>1392 67 1125 661 0 0 2560 1418 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXDebugCLIModule</string>
@@ -976,7 +977,7 @@
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.consoleV3</string>
 			<key>WindowString</key>
-			<string>1395 97 1125 661 0 0 2560 1418 </string>
+			<string>1392 67 1125 661 0 0 2560 1418 </string>
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>

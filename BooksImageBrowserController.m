@@ -10,6 +10,7 @@
 
 
 @implementation BooksImageBrowserController
+@synthesize imageZoomLevel;
 
 - (void)awakeFromNib {
     [browserView setDelegate:self];
@@ -21,6 +22,9 @@
 		      forKeyPath:@"arrangedObjects"
 			 options:NSKeyValueObservingOptionInitial //send message immediately
 			 context:NULL];
+
+    //initial zoom level TODO: load from last time?
+    [self setImageZoomLevel:0.4];
 }
 
 // Delegate Methods //////////////////////////////////////////////////////

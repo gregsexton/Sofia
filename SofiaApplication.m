@@ -14,13 +14,12 @@
 //TODO: save the current view and reload it on startup, including zoom level
 
 @implementation SofiaApplication
-@synthesize imageZoomLevel;
 
 - (void) awakeFromNib {
     
     //setup the main view
     currentView = nil;
-    [self changeMainViewFor:mainTableView];
+    [self changeToListView:self];
     
     //setup preferences
     AccessKeyViewController *accessKeys = [[AccessKeyViewController alloc] initWithNibName:@"Preferences_AccessKeys" bundle:nil];
@@ -33,9 +32,6 @@
     NSError *error;
     [arrayController fetchWithRequest:nil merge:NO error:&error];
     [self updateSummaryText];
-
-    //initial zoom level
-    imageZoomLevel = 0.4;
 
 }
 

@@ -22,7 +22,7 @@
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<integer value="296"/>
-			<integer value="775"/>
+			<integer value="546"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1453,18 +1453,18 @@
 				<bool key="NSClearsFilterPredicateOnInsertion">YES</bool>
 			</object>
 			<object class="NSViewController" id="741713859"/>
-			<object class="NSScrollView" id="632920149">
+			<object class="NSScrollView" id="760118393">
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="NSClipView" id="502871427">
-						<reference key="NSNextResponder" ref="632920149"/>
+					<object class="NSClipView" id="339068252">
+						<reference key="NSNextResponder" ref="760118393"/>
 						<int key="NSvFlags">2304</int>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IKImageBrowserView" id="514714555">
-								<reference key="NSNextResponder" ref="502871427"/>
+								<reference key="NSNextResponder" ref="339068252"/>
 								<int key="NSvFlags">18</int>
 								<object class="NSMutableSet" key="NSDragTypes">
 									<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1624,7 +1624,7 @@
 									</object>
 								</object>
 								<string key="NSFrameSize">{911, 697}</string>
-								<reference key="NSSuperview" ref="502871427"/>
+								<reference key="NSSuperview" ref="339068252"/>
 								<reference key="NSWindow"/>
 								<bool key="constrainsToOriginalSize">NO</bool>
 								<bool key="cellsHaveSubtitle">YES</bool>
@@ -1641,32 +1641,32 @@
 							</object>
 						</object>
 						<string key="NSFrame">{{1, 1}, {911, 697}}</string>
-						<reference key="NSSuperview" ref="632920149"/>
+						<reference key="NSSuperview" ref="760118393"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="514714555"/>
 						<reference key="NSDocView" ref="514714555"/>
 						<reference key="NSBGColor" ref="462189453"/>
 						<int key="NScvFlags">6</int>
 					</object>
-					<object class="NSScroller" id="403882739">
-						<reference key="NSNextResponder" ref="632920149"/>
+					<object class="NSScroller" id="728811066">
+						<reference key="NSNextResponder" ref="760118393"/>
 						<int key="NSvFlags">-2147483392</int>
 						<string key="NSFrame">{{897, 1}, {15, 682}}</string>
-						<reference key="NSSuperview" ref="632920149"/>
+						<reference key="NSSuperview" ref="760118393"/>
 						<reference key="NSWindow"/>
-						<reference key="NSTarget" ref="632920149"/>
+						<reference key="NSTarget" ref="760118393"/>
 						<string key="NSAction">_doScroller:</string>
 						<double key="NSCurValue">1</double>
 						<double key="NSPercent">0.96363627910614014</double>
 					</object>
-					<object class="NSScroller" id="924302004">
-						<reference key="NSNextResponder" ref="632920149"/>
+					<object class="NSScroller" id="275493952">
+						<reference key="NSNextResponder" ref="760118393"/>
 						<int key="NSvFlags">-2147483392</int>
 						<string key="NSFrame">{{1, 683}, {896, 15}}</string>
-						<reference key="NSSuperview" ref="632920149"/>
+						<reference key="NSSuperview" ref="760118393"/>
 						<reference key="NSWindow"/>
 						<int key="NSsFlags">1</int>
-						<reference key="NSTarget" ref="632920149"/>
+						<reference key="NSTarget" ref="760118393"/>
 						<string key="NSAction">_doScroller:</string>
 						<double key="NSPercent">0.50602412223815918</double>
 					</object>
@@ -1674,14 +1674,14 @@
 				<string key="NSFrameSize">{913, 699}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="502871427"/>
+				<reference key="NSNextKeyView" ref="339068252"/>
 				<int key="NSsFlags">562</int>
-				<reference key="NSVScroller" ref="403882739"/>
-				<reference key="NSHScroller" ref="924302004"/>
-				<reference key="NSContentView" ref="502871427"/>
+				<reference key="NSVScroller" ref="728811066"/>
+				<reference key="NSHScroller" ref="275493952"/>
+				<reference key="NSContentView" ref="339068252"/>
 				<bytes key="NSScrollAmts">QSAAAEEgAABC+AAAQyAAAA</bytes>
 			</object>
-			<object class="NSViewController" id="287423739"/>
+			<object class="NSViewController" id="579371245"/>
 			<object class="NSScrollView" id="758308659">
 				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">4370</int>
@@ -1979,7 +1979,7 @@
 				<reference key="NSCornerView" ref="429878103"/>
 				<bytes key="NSScrollAmts">QSAAAEEgAABBmAAAQZgAAA</bytes>
 			</object>
-			<object class="NSViewController" id="896969470"/>
+			<object class="NSViewController" id="511315320"/>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<object class="NSMutableArray" key="connectionRecords">
@@ -2601,42 +2601,6 @@
 					<int key="connectionID">832</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: imageZoomLevel</string>
-						<reference key="source" ref="247391669"/>
-						<reference key="destination" ref="145402063"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="247391669"/>
-							<reference key="NSDestination" ref="145402063"/>
-							<string key="NSLabel">value: imageZoomLevel</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">imageZoomLevel</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSValidatesImmediately</string>
-								<boolean value="YES" key="NS.object.0"/>
-							</object>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">844</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">zoomValue: imageZoomLevel</string>
-						<reference key="source" ref="514714555"/>
-						<reference key="destination" ref="145402063"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="514714555"/>
-							<reference key="NSDestination" ref="145402063"/>
-							<string key="NSLabel">zoomValue: imageZoomLevel</string>
-							<string key="NSBinding">zoomValue</string>
-							<string key="NSKeyPath">imageZoomLevel</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">848</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">zoomSlider</string>
 						<reference key="source" ref="145402063"/>
@@ -2648,7 +2612,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">mainImagesView</string>
 						<reference key="source" ref="145402063"/>
-						<reference key="destination" ref="632920149"/>
+						<reference key="destination" ref="760118393"/>
 					</object>
 					<int key="connectionID">854</int>
 				</object>
@@ -2671,7 +2635,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">application</string>
-						<reference key="source" ref="896969470"/>
+						<reference key="source" ref="511315320"/>
 						<reference key="destination" ref="145402063"/>
 					</object>
 					<int key="connectionID">858</int>
@@ -2679,7 +2643,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">arrayController</string>
-						<reference key="source" ref="896969470"/>
+						<reference key="source" ref="511315320"/>
 						<reference key="destination" ref="440274433"/>
 					</object>
 					<int key="connectionID">859</int>
@@ -2687,7 +2651,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">sideBar</string>
-						<reference key="source" ref="896969470"/>
+						<reference key="source" ref="511315320"/>
 						<reference key="destination" ref="956318075"/>
 					</object>
 					<int key="connectionID">860</int>
@@ -2695,7 +2659,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">tableView</string>
-						<reference key="source" ref="896969470"/>
+						<reference key="source" ref="511315320"/>
 						<reference key="destination" ref="98113484"/>
 					</object>
 					<int key="connectionID">861</int>
@@ -2703,7 +2667,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">view</string>
-						<reference key="source" ref="896969470"/>
+						<reference key="source" ref="511315320"/>
 						<reference key="destination" ref="758308659"/>
 					</object>
 					<int key="connectionID">862</int>
@@ -2711,7 +2675,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">arrayController</string>
-						<reference key="source" ref="287423739"/>
+						<reference key="source" ref="579371245"/>
 						<reference key="destination" ref="440274433"/>
 					</object>
 					<int key="connectionID">864</int>
@@ -2719,7 +2683,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">browserView</string>
-						<reference key="source" ref="287423739"/>
+						<reference key="source" ref="579371245"/>
 						<reference key="destination" ref="514714555"/>
 					</object>
 					<int key="connectionID">865</int>
@@ -2727,8 +2691,8 @@
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">view</string>
-						<reference key="source" ref="287423739"/>
-						<reference key="destination" ref="632920149"/>
+						<reference key="source" ref="579371245"/>
+						<reference key="destination" ref="760118393"/>
 					</object>
 					<int key="connectionID">866</int>
 				</object>
@@ -2736,14 +2700,14 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">viewController</string>
 						<reference key="source" ref="98113484"/>
-						<reference key="destination" ref="896969470"/>
+						<reference key="destination" ref="511315320"/>
 					</object>
 					<int key="connectionID">867</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">sideBar</string>
-						<reference key="source" ref="287423739"/>
+						<reference key="source" ref="579371245"/>
 						<reference key="destination" ref="956318075"/>
 					</object>
 					<int key="connectionID">868</int>
@@ -2751,7 +2715,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">application</string>
-						<reference key="source" ref="287423739"/>
+						<reference key="source" ref="579371245"/>
 						<reference key="destination" ref="145402063"/>
 					</object>
 					<int key="connectionID">869</int>
@@ -2760,9 +2724,45 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">viewController</string>
 						<reference key="source" ref="514714555"/>
-						<reference key="destination" ref="287423739"/>
+						<reference key="destination" ref="579371245"/>
 					</object>
 					<int key="connectionID">870</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">zoomValue: imageZoomLevel</string>
+						<reference key="source" ref="514714555"/>
+						<reference key="destination" ref="579371245"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="514714555"/>
+							<reference key="NSDestination" ref="579371245"/>
+							<string key="NSLabel">zoomValue: imageZoomLevel</string>
+							<string key="NSBinding">zoomValue</string>
+							<string key="NSKeyPath">imageZoomLevel</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">871</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: imageZoomLevel</string>
+						<reference key="source" ref="247391669"/>
+						<reference key="destination" ref="579371245"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="247391669"/>
+							<reference key="NSDestination" ref="579371245"/>
+							<string key="NSLabel">value: imageZoomLevel</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">imageZoomLevel</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSValidatesImmediately</string>
+								<boolean value="YES" key="NS.object.0"/>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">872</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3750,38 +3750,38 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">850</int>
-						<reference key="object" ref="632920149"/>
+						<reference key="object" ref="760118393"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="514714555"/>
-							<reference ref="924302004"/>
-							<reference ref="403882739"/>
+							<reference ref="275493952"/>
+							<reference ref="728811066"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">816</int>
 						<reference key="object" ref="514714555"/>
-						<reference key="parent" ref="632920149"/>
+						<reference key="parent" ref="760118393"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">852</int>
-						<reference key="object" ref="924302004"/>
-						<reference key="parent" ref="632920149"/>
+						<reference key="object" ref="275493952"/>
+						<reference key="parent" ref="760118393"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">851</int>
-						<reference key="object" ref="403882739"/>
-						<reference key="parent" ref="632920149"/>
+						<reference key="object" ref="728811066"/>
+						<reference key="parent" ref="760118393"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">857</int>
-						<reference key="object" ref="896969470"/>
+						<reference key="object" ref="511315320"/>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">863</int>
-						<reference key="object" ref="287423739"/>
+						<reference key="object" ref="579371245"/>
 						<reference key="parent" ref="0"/>
 					</object>
 				</object>
@@ -4293,7 +4293,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">870</int>
+			<int key="maxID">872</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
