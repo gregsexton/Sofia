@@ -10,6 +10,7 @@
 #import "SidebarOutlineView.h"
 #import "SofiaApplication.h"
 
+#define SofiaDragType @"SofiaDragType"
 
 @interface BooksMainViewController : NSViewController {
 
@@ -19,5 +20,6 @@
 }
 
 - (void)removeSelectedItems;
+- (void)writeBooksWithIndexes:(NSIndexSet*)rowIndexes toPasteboard:(NSPasteboard*)pboard;
 
 @end

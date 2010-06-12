@@ -67,4 +67,9 @@
     [arrayController setSelectionIndexes:[browserView selectionIndexes]];
 }
 
+- (NSUInteger)imageBrowser:(IKImageBrowserView *)aBrowser writeItemsAtIndexes:(NSIndexSet *)itemIndexes toPasteboard:(NSPasteboard *)pasteboard{
+    [self writeBooksWithIndexes:itemIndexes toPasteboard:pasteboard];
+    return [itemIndexes count];
+}
+
 @end

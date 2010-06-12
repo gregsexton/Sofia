@@ -24,4 +24,20 @@
     }
 }
 
+- (void)writeBooksWithIndexes:(NSIndexSet*)rowIndexes toPasteboard:(NSPasteboard*)pboard{
+    [pboard declareTypes:[NSArray arrayWithObject:SofiaDragType] owner:self];
+
+    //get an array of URIs for the selected objects
+    NSMutableArray* rows = [NSMutableArray array];
+    NSArray* selectedObjects = [[arrayController arrangedObjects] objectsAtIndexes:rowIndexes];
+
+    for (NSManagedObject* o in selectedObjects) {
+	[rows addObject:[[o objectID] URIRepresentation]];
+    }
+
+    NSData* encodedIDs = [NSKeyedArchiver archivedDataWithRootObject:rows];
+
+    [pboard setData:encodedIDs forType:SofiaDragType];
+}
+
 @end

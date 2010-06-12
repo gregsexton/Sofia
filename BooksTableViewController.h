@@ -12,8 +12,6 @@
 #import "BooksWindowController.h"
 #import "BooksMainViewController.h"
 
-#define SofiaDragType @"SofiaDragType"
-
 @interface BooksTableViewController : BooksMainViewController <NSTableViewDelegate, NSTableViewDataSource>{
 
     IBOutlet BooksTableView* tableView;
