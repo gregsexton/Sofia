@@ -12,18 +12,29 @@
 @implementation isbnExtractor
 @synthesize content;
 
-- (id)initWithContent:(NSString*)content{
+- (id)initWithContent:(NSString*)theContent{
     if(self = [super init]){
-	[self setContent:content];
+	[self setContent:theContent];
+	isbns = nil;
 	return self;
     }
 }
 
 - (NSArray*)discoveredISBNs{
     //returns an array of all matched isbns both 10 and 13
-    NSArray* returnArray = nil;
-    NSString* regexString = @"greg";
-    returnArray = [[self content] componentsMatchedByRegex:regexString];
+    //with any hypehns removed
+    NSArray* matches = nil;
+    NSString* regexString = @"(978-?)?(\\d-?){9}\\d";
+    matches = [[self content] componentsMatchedByRegex:regexString];
+
+    NSMutableArray* returnArray = [NSMutableArray arrayWithCapacity:[matches count]];
+    for(int i=0; i<[matches count]; i++){
+	NSString* s = [matches objectAtIndex:i];
+	s = [s stringByReplacingOccurrencesOfString:@"-" withString:@""];
+	[returnArray insertObject:s atIndex:i];
+    }
+
+    isbns = returnArray; //save for future processing
     return returnArray;
 }
 

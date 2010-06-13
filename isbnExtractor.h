@@ -7,11 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import "RegexKitLite.h"
 
 @interface isbnExtractor : NSObject {
 
     NSString* content;
+    NSArray* isbns;
 
 }
 
