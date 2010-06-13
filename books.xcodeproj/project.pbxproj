@@ -21,6 +21,8 @@
 		3745159011C025BC001C7960 /* BooksTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3745158F11C025BC001C7960 /* BooksTableViewController.m */; };
 		3745159C11C0283A001C7960 /* BooksImageBrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3745159B11C0283A001C7960 /* BooksImageBrowserController.m */; };
 		374515C211C19092001C7960 /* BooksMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 374515C111C19092001C7960 /* BooksMainViewController.m */; };
+		374516C511C54A52001C7960 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 374516C311C54A52001C7960 /* RegexKitLite.m */; };
+		374516E811C54F81001C7960 /* isbnExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 374516E711C54F81001C7960 /* isbnExtractor.m */; };
 		375F2A9A11ADD43A0062E12E /* amazonInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 375F2A9911ADD43A0062E12E /* amazonInterface.m */; };
 		375F2E3011AF1DDE0062E12E /* hmac_sha2.c in Sources */ = {isa = PBXBuildFile; fileRef = 375F2E2B11AF1DDE0062E12E /* hmac_sha2.c */; };
 		375F2E3211AF1DDE0062E12E /* sha2.c in Sources */ = {isa = PBXBuildFile; fileRef = 375F2E2E11AF1DDE0062E12E /* sha2.c */; };
@@ -87,6 +89,11 @@
 		3745159B11C0283A001C7960 /* BooksImageBrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BooksImageBrowserController.m; sourceTree = "<group>"; };
 		374515C011C19092001C7960 /* BooksMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooksMainViewController.h; sourceTree = "<group>"; };
 		374515C111C19092001C7960 /* BooksMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BooksMainViewController.m; sourceTree = "<group>"; };
+		374516C111C54A52001C7960 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
+		374516C211C54A52001C7960 /* RegexKitLite.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = RegexKitLite.html; sourceTree = "<group>"; };
+		374516C311C54A52001C7960 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
+		374516E611C54F81001C7960 /* isbnExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = isbnExtractor.h; sourceTree = "<group>"; };
+		374516E711C54F81001C7960 /* isbnExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = isbnExtractor.m; sourceTree = "<group>"; };
 		375F2A9811ADD43A0062E12E /* amazonInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amazonInterface.h; sourceTree = "<group>"; };
 		375F2A9911ADD43A0062E12E /* amazonInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = amazonInterface.m; sourceTree = "<group>"; };
 		375F2E2B11AF1DDE0062E12E /* hmac_sha2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hmac_sha2.c; sourceTree = "<group>"; };
@@ -167,6 +174,8 @@
 				3737514D105426BF00718317 /* isbndbInterface.m */,
 				375F2A9811ADD43A0062E12E /* amazonInterface.h */,
 				375F2A9911ADD43A0062E12E /* amazonInterface.m */,
+				374516E611C54F81001C7960 /* isbnExtractor.h */,
+				374516E711C54F81001C7960 /* isbnExtractor.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -249,6 +258,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		374516C011C54A39001C7960 /* RegexKitLite-4.0 */ = {
+			isa = PBXGroup;
+			children = (
+				374516C111C54A52001C7960 /* RegexKitLite.h */,
+				374516C211C54A52001C7960 /* RegexKitLite.html */,
+				374516C311C54A52001C7960 /* RegexKitLite.m */,
+			);
+			name = "RegexKitLite-4.0";
+			sourceTree = "<group>";
+		};
 		375F2A9B11AF1DA40062E12E /* External */ = {
 			isa = PBXGroup;
 			children = (
@@ -258,6 +277,7 @@
 				375F2E3311AF1E0C0062E12E /* SignedAwsSearchRequest.m */,
 				37D708D910C190100004F441 /* MBPreferencesController.h */,
 				37D708DA10C190100004F441 /* MBPreferencesController.m */,
+				374516C011C54A39001C7960 /* RegexKitLite-4.0 */,
 				375F31F911B473AB0062E12E /* GTM */,
 				375F2E2A11AF1DDE0062E12E /* hmac */,
 			);
@@ -404,6 +424,9 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Greg Sexton Software";
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "books" */;
 			compatibilityVersion = "Xcode 3.1";
 			hasScannedForEncodings = 1;
@@ -500,6 +523,8 @@
 				3745159011C025BC001C7960 /* BooksTableViewController.m in Sources */,
 				3745159C11C0283A001C7960 /* BooksImageBrowserController.m in Sources */,
 				374515C211C19092001C7960 /* BooksMainViewController.m in Sources */,
+				374516C511C54A52001C7960 /* RegexKitLite.m in Sources */,
+				374516E811C54F81001C7960 /* isbnExtractor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -584,6 +609,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-licucore";
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;
 			};
@@ -597,6 +623,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "CONFIGURATION_$(CONFIGURATION)";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_LDFLAGS = "-licucore";
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;
 			};
