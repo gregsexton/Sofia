@@ -63,6 +63,7 @@
     IBOutlet NSTextField    *lbl_summary_summary;
 
     IBOutlet NSImageView    *img_summary_cover;
+    IBOutlet NSImageView    *img_cover;
 
     IBOutlet NSTableView	*authorsTableView;
     IBOutlet NSTableView	*subjectsTableView;

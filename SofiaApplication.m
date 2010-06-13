@@ -11,10 +11,16 @@
 
 
 //TODO: reorder all of the methods into a more logical state!
+//TODO: save the current view and reload it on startup, including zoom level
 
 @implementation SofiaApplication
 
 - (void) awakeFromNib {
+    
+    //setup the main view
+    currentView = nil;
+    [self changeToListView:self];
+    
     //setup preferences
     AccessKeyViewController *accessKeys = [[AccessKeyViewController alloc] initWithNibName:@"Preferences_AccessKeys" bundle:nil];
     GeneralViewController *general = [[GeneralViewController alloc] initWithNibName:@"Preferences_General" bundle:nil];
@@ -250,6 +256,7 @@
 }
 
 - (IBAction) removeBookAction:(id)sender {
+    //TODO removing doesn't work in image view, selection is based on the table
     int alertReturn = -1;
     int noOfRowsSelected = [tableView numberOfSelectedRows];
     if(noOfRowsSelected == 0){
@@ -274,6 +281,7 @@
 	[arrayController addObject:[booksWindowController obj]];
     }
     [self updateSummaryText];
+    [imagesView reloadData];
 }
 
 - (void) updateSummaryText {
@@ -349,5 +357,48 @@
     [arrayController setFilterPredicate:totalPred];
     [self updateSummaryText];
 }
+
+
+- (IBAction)changeViewClickAction:(id)sender{
+    if ([changeViewButtons selectedSegment] == 0){
+	[self changeToListView:self];
+    }else if([changeViewButtons selectedSegment] == 1){
+	[self changeToImagesView:self];
+    }else if([changeViewButtons selectedSegment] == 2){
+	//TODO
+    }else{
+	//serious error!
+    }
+}
+
+- (IBAction)changeToListView:(id)sender{
+    [self changeMainViewFor:mainTableView];
+    [zoomSlider setHidden:true];
+    [changeViewButtons setSelectedSegment:0];
+}
+
+- (IBAction)changeToImagesView:(id)sender{
+    [self changeMainViewFor:mainImagesView];
+    [zoomSlider setHidden:false];
+    [changeViewButtons setSelectedSegment:1];
+}
+
+- (void)changeMainViewFor:(NSView*)viewToChangeTo{
+    //TODO maintain the selected item when switching the view.
+
+    //handle size and position
+    NSRect rect = [mainView frame];
+    rect.origin.x = 0;
+    rect.origin.y = 0;
+    [viewToChangeTo setFrame:rect];
+
+    if(currentView == nil){
+	[mainView addSubview:viewToChangeTo];
+    }else{
+	[mainView replaceSubview:[currentView retain] with:viewToChangeTo];
+    }
+    currentView = viewToChangeTo;
+}
+
 
 @end

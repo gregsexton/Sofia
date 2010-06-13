@@ -2,7 +2,7 @@
 //  book.h
 //  books
 //
-//  Created by Greg on 30/03/2010.
+//  Created by Greg on 01/06/2010.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
@@ -31,6 +31,7 @@
 @property (nonatomic, retain) NSNumber * read;
 @property (nonatomic, retain) NSString * subjectText;
 @property (nonatomic, retain) NSString * titleLong;
+@property (nonatomic, retain) id coverImage;
 @property (nonatomic, retain) NSString * physicalDescription;
 @property (nonatomic, retain) NSString * publisherText;
 @property (nonatomic, retain) NSString * dewey;

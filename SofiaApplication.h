@@ -7,6 +7,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "BooksWindowController.h"
+#import "BooksImageBrowserView.h"
 #import "book.h"
 #import "author.h"
 #import "subject.h"
@@ -23,15 +24,24 @@
 	
 	IBOutlet NSWindow *window;
 	IBOutlet BooksTableView *tableView;
+	IBOutlet BooksImageBrowserView *imagesView;
 	IBOutlet NSTextField *summaryText;
 	IBOutlet NSArrayController *arrayController;
 	IBOutlet NSApplication *theApplication;
 	IBOutlet NSSegmentedControl *addRemoveButtons;
+	IBOutlet NSSegmentedControl *changeViewButtons;
 	IBOutlet SidebarOutlineView *sideBar;
+	IBOutlet NSSlider *zoomSlider;
+
+	IBOutlet NSView* mainView;
+	IBOutlet NSView* mainTableView; //this includes the scrollview
+	IBOutlet NSView* mainImagesView;
+	NSView* currentView;
 	
 	NSPersistentStoreCoordinator *persistentStoreCoordinator;
 	NSManagedObjectModel *managedObjectModel;
 	NSManagedObjectContext *managedObjectContext;
+
 }
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator;
@@ -47,6 +57,10 @@
 - (IBAction) manageSubjectsClickAction:(id)sender;
 - (IBAction) displayPreferencesClickAction:(id)sender;
 - (IBAction) search:(id)sender;
+- (IBAction) changeViewClickAction:(id)sender;
+- (IBAction)changeToListView:(id)sender;
+- (IBAction)changeToImagesView:(id)sender;
 - (void) updateSummaryText;
+- (void) changeMainViewFor:(NSView*)viewToChangeTo;
 
 @end

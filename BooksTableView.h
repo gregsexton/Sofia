@@ -7,19 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "book.h"
-#import "BooksWindowController.h"
-#import "SidebarOutlineView.h"
-#import "SofiaApplication.h"
+#import "BooksTableViewController.h"
 
-#define SofiaDragType @"SofiaDragType"
+@interface BooksTableView : NSTableView {
 
-@interface BooksTableView : NSTableView <NSTableViewDelegate, NSTableViewDataSource> {
-    IBOutlet NSArrayController *arrayController;
-    IBOutlet SidebarOutlineView *sideBar;
-    IBOutlet SofiaApplication *application;
+    IBOutlet BooksTableViewController* viewController;
+
 }
-
-- (IBAction) doubleClickAction:(id)sender;
 
 @end

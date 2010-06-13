@@ -2,7 +2,7 @@
 //  book.m
 //  books
 //
-//  Created by Greg on 30/03/2010.
+//  Created by Greg on 01/06/2010.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
@@ -29,6 +29,7 @@
 @dynamic read;
 @dynamic subjectText;
 @dynamic titleLong;
+@dynamic coverImage;
 @dynamic physicalDescription;
 @dynamic publisherText;
 @dynamic dewey;
