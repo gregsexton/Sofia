@@ -11,6 +11,8 @@
 		371182B210C454E200732634 /* SidebarOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 371182B110C454E200732634 /* SidebarOutlineView.m */; };
 		371855D51097C237006A363D /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 371855D41097C237006A363D /* icon.icns */; };
 		3735A6D311C57D4E00DD7461 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 374516C311C54A52001C7960 /* RegexKitLite.m */; };
+		3735A79C11C6DB5E00DD7461 /* ImportBooks.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3735A79B11C6DB5E00DD7461 /* ImportBooks.xib */; };
+		3735A7A011C6DBEF00DD7461 /* ImportBooksController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3735A79F11C6DBEF00DD7461 /* ImportBooksController.m */; };
 		37365594101CCC3C00709C8F /* BooksWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37365593101CCC3C00709C8F /* BooksWindowController.m */; };
 		3737514A1054219700718317 /* database.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 373751491054219600718317 /* database.xcdatamodel */; };
 		3737514E105426BF00718317 /* isbndbInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737514D105426BF00718317 /* isbndbInterface.m */; };
@@ -74,6 +76,9 @@
 		371182B010C454E200732634 /* SidebarOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarOutlineView.h; sourceTree = "<group>"; };
 		371182B110C454E200732634 /* SidebarOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarOutlineView.m; sourceTree = "<group>"; };
 		371855D41097C237006A363D /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = icon_design/icon.icns; sourceTree = "<group>"; };
+		3735A79B11C6DB5E00DD7461 /* ImportBooks.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImportBooks.xib; sourceTree = "<group>"; };
+		3735A79E11C6DBEF00DD7461 /* ImportBooksController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportBooksController.h; sourceTree = "<group>"; };
+		3735A79F11C6DBEF00DD7461 /* ImportBooksController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportBooksController.m; sourceTree = "<group>"; };
 		37365592101CCC3C00709C8F /* BooksWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooksWindowController.h; sourceTree = "<group>"; };
 		37365593101CCC3C00709C8F /* BooksWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BooksWindowController.m; sourceTree = "<group>"; };
 		373751491054219600718317 /* database.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = database.xcdatamodel; sourceTree = "<group>"; };
@@ -262,6 +267,7 @@
 				37D7099D10C1D8400004F441 /* SubjectDetail.xib */,
 				37BAFC931162510C00F95C41 /* PredicateEditor.xib */,
 				373751491054219600718317 /* database.xcdatamodel */,
+				3735A79B11C6DB5E00DD7461 /* ImportBooks.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -400,6 +406,8 @@
 				3745159B11C0283A001C7960 /* BooksImageBrowserController.m */,
 				374515C011C19092001C7960 /* BooksMainViewController.h */,
 				374515C111C19092001C7960 /* BooksMainViewController.m */,
+				3735A79E11C6DBEF00DD7461 /* ImportBooksController.h */,
+				3735A79F11C6DBEF00DD7461 /* ImportBooksController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -534,6 +542,7 @@
 				37BAFBDA115C1C7700F95C41 /* shopping.tif in Resources */,
 				37BAFBDE115C1D1500F95C41 /* shopping2.tif in Resources */,
 				37BAFC941162510C00F95C41 /* PredicateEditor.xib in Resources */,
+				3735A79C11C6DB5E00DD7461 /* ImportBooks.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -603,6 +612,7 @@
 				374515C211C19092001C7960 /* BooksMainViewController.m in Sources */,
 				374516C511C54A52001C7960 /* RegexKitLite.m in Sources */,
 				374516E811C54F81001C7960 /* isbnExtractor.m in Sources */,
+				3735A7A011C6DBEF00DD7461 /* ImportBooksController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

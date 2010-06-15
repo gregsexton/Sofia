@@ -22,8 +22,8 @@
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<integer value="544"/>
-			<integer value="296"/>
 			<integer value="875"/>
+			<integer value="81"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -227,6 +227,24 @@
 									<string key="NSTitle">New Smart List</string>
 									<string key="NSKeyEquiv">n</string>
 									<int key="NSKeyEquivModMask">1572864</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
+								<object class="NSMenuItem" id="63170710">
+									<reference key="NSMenu" ref="720053764"/>
+									<bool key="NSIsDisabled">YES</bool>
+									<bool key="NSIsSeparator">YES</bool>
+									<string key="NSTitle"/>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
+								<object class="NSMenuItem" id="93888018">
+									<reference key="NSMenu" ref="720053764"/>
+									<string key="NSTitle">Import Books</string>
+									<string key="NSKeyEquiv"/>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
@@ -1756,7 +1774,7 @@
 									</object>
 									<object class="NSTableColumn" id="599255433">
 										<string key="NSIdentifier">title</string>
-										<double key="NSWidth">143</double>
+										<double key="NSWidth">144</double>
 										<double key="NSMinWidth">40</double>
 										<double key="NSMaxWidth">1000</double>
 										<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -1786,7 +1804,7 @@
 									</object>
 									<object class="NSTableColumn" id="734982994">
 										<string key="NSIdentifier">authors</string>
-										<double key="NSWidth">100</double>
+										<double key="NSWidth">101</double>
 										<double key="NSMinWidth">40</double>
 										<double key="NSMaxWidth">1000</double>
 										<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -1813,7 +1831,7 @@
 									</object>
 									<object class="NSTableColumn" id="1009510556">
 										<string key="NSIdentifier">edition</string>
-										<double key="NSWidth">109</double>
+										<double key="NSWidth">110</double>
 										<double key="NSMinWidth">10</double>
 										<double key="NSMaxWidth">3.4028229999999999e+38</double>
 										<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -1840,7 +1858,7 @@
 									</object>
 									<object class="NSTableColumn" id="634371563">
 										<string key="NSIdentifier">publisher</string>
-										<double key="NSWidth">133</double>
+										<double key="NSWidth">134</double>
 										<double key="NSMinWidth">10</double>
 										<double key="NSMaxWidth">3.4028229999999999e+38</double>
 										<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -1867,7 +1885,7 @@
 									</object>
 									<object class="NSTableColumn" id="378650304">
 										<string key="NSIdentifier">subjects</string>
-										<double key="NSWidth">126</double>
+										<double key="NSWidth">127</double>
 										<double key="NSMinWidth">10</double>
 										<double key="NSMaxWidth">3.4028229999999999e+38</double>
 										<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -1894,7 +1912,7 @@
 									</object>
 									<object class="NSTableColumn" id="351154035">
 										<string key="NSIdentifier">isbn10</string>
-										<double key="NSWidth">115</double>
+										<double key="NSWidth">116</double>
 										<double key="NSMinWidth">10</double>
 										<double key="NSMaxWidth">3.4028229999999999e+38</double>
 										<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -1921,7 +1939,7 @@
 									</object>
 									<object class="NSTableColumn" id="187771342">
 										<string key="NSIdentifier">isbn13</string>
-										<double key="NSWidth">168</double>
+										<double key="NSWidth">169</double>
 										<double key="NSMinWidth">10</double>
 										<double key="NSMaxWidth">3.4028229999999999e+38</double>
 										<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -2819,6 +2837,14 @@
 					</object>
 					<int key="connectionID">878</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">importBooks:</string>
+						<reference key="source" ref="145402063"/>
+						<reference key="destination" ref="93888018"/>
+					</object>
+					<int key="connectionID">884</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -2923,6 +2949,8 @@
 							<reference ref="478423571"/>
 							<reference ref="397467257"/>
 							<reference ref="19149487"/>
+							<reference ref="63170710"/>
+							<reference ref="93888018"/>
 						</object>
 						<reference key="parent" ref="379814623"/>
 					</object>
@@ -3854,6 +3882,16 @@
 						<reference key="object" ref="463453191"/>
 						<reference key="parent" ref="73751074"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">882</int>
+						<reference key="object" ref="63170710"/>
+						<reference key="parent" ref="720053764"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">883</int>
+						<reference key="object" ref="93888018"/>
+						<reference key="parent" ref="720053764"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -4104,6 +4142,8 @@
 					<string>863.IBPluginDependency</string>
 					<string>875.IBPluginDependency</string>
 					<string>879.IBPluginDependency</string>
+					<string>882.IBPluginDependency</string>
+					<string>883.IBPluginDependency</string>
 					<string>92.IBPluginDependency</string>
 					<string>92.ImportedFromIB2</string>
 				</object>
@@ -4211,13 +4251,13 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>{{525, 802}, {197, 73}}</string>
-					<string>{{833, 250}, {333, 20}}</string>
+					<string>{{812, 388}, {333, 20}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>{74, 862}</string>
 					<string>{{6, 978}, {478, 20}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{984, 137}, {231, 113}}</string>
+					<string>{{974, 188}, {231, 113}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{475, 832}, {234, 43}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4328,7 +4368,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{898, 77}, {200, 173}}</string>
+					<string>{{877, 185}, {200, 203}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>{{145, 474}, {199, 203}}</string>
@@ -4354,6 +4394,8 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 				</object>
 			</object>
@@ -4373,7 +4415,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">879</int>
+			<int key="maxID">884</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4503,6 +4545,7 @@
 							<string>changeToListView:</string>
 							<string>changeViewClickAction:</string>
 							<string>displayPreferencesClickAction:</string>
+							<string>importBooks:</string>
 							<string>manageAuthorsClickAction:</string>
 							<string>manageSubjectsClickAction:</string>
 							<string>removeBookAction:</string>
@@ -4511,6 +4554,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>

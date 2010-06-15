@@ -400,5 +400,11 @@
     currentView = viewToChangeTo;
 }
 
+- (IBAction) importBooks:(id)sender{
+    ImportBooksController *importWin = [[ImportBooksController alloc] init];
+    if (![NSBundle loadNibNamed:@"ImportBooks" owner:importWin]) {
+	NSLog(@"Error loading Nib!");
+    }
+}
 
 @end

@@ -17,6 +17,7 @@
 #import "GeneralViewController.h"
 #import "MBPreferencesController.h"
 #import "Library.h"
+#import "ImportBooksController.h"
 @class BooksTableView;
 @class SidebarOutlineView;
 
@@ -58,8 +59,9 @@
 - (IBAction) displayPreferencesClickAction:(id)sender;
 - (IBAction) search:(id)sender;
 - (IBAction) changeViewClickAction:(id)sender;
-- (IBAction)changeToListView:(id)sender;
-- (IBAction)changeToImagesView:(id)sender;
+- (IBAction) changeToListView:(id)sender;
+- (IBAction) changeToImagesView:(id)sender;
+- (IBAction) importBooks:(id)sender;
 - (void) updateSummaryText;
 - (void) changeMainViewFor:(NSView*)viewToChangeTo;
 
