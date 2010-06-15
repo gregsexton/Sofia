@@ -11,12 +11,19 @@
 
 @interface ImportBooksController : NSWindowController <NSTextViewDelegate> {
 
+    NSWindow* windowToAttachTo;
     NSArray* isbns;
-    IBOutlet NSTextView* contentTextView;
-    IBOutlet NSTextField* urlTextField;
+
+    IBOutlet NSPanel*	    importSheet;
+    IBOutlet NSTextView*    contentTextView;
+    IBOutlet NSTextField*   urlTextField;
 
 }
 @property (copy) NSArray* isbns;
+@property (assign) NSWindow* windowToAttachTo;
 
 - (IBAction)addWebsiteAction:(id)sender;
+- (IBAction)cancelAction:(id)sender;
+- (IBAction)importAction:(id)sender;
+- (IBAction)clearAction:(id)sender;
 @end

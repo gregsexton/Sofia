@@ -324,7 +324,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>BooksWindowController.m</string>
+								<string>ImportBooksController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -332,11 +332,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>BooksWindowController.m</string>
+										<string>ImportBooksController.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>3735A92F11C82E4C00DD7461</string>
+										<string>3735A96211C8399600DD7461</string>
 										<key>history</key>
 										<array>
 											<string>37BAF4C7114D509E00F95C41</string>
@@ -376,8 +376,8 @@
 											<string>375F328B11B480230062E12E</string>
 											<string>375F328E11B54C820062E12E</string>
 											<string>374514B811B7178E001C7960</string>
-											<string>3735A90511C824A500DD7461</string>
-											<string>3735A90611C824A500DD7461</string>
+											<string>3735A94C11C8333600DD7461</string>
+											<string>3735A90F11C825B800DD7461</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -573,7 +573,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>3735A93011C82E4C00DD7461</string>
+		<string>3735A96311C8399600DD7461</string>
 		<string>3735A90B11C8253500DD7461</string>
 		<string>3735A8FB11C822DA00DD7461</string>
 		<string>3735A8F611C81E8800DD7461</string>

@@ -23,6 +23,7 @@
 - (NSArray*)discoveredISBNs{
     //returns an array of all matched isbns both 10 and 13
     //with any hypehns removed
+    //TODO: remove duplicates and improve regex
     NSArray* matches = nil;
     NSString* regexString = @"(978-?)?(\\d-?){9}\\d";
     matches = [[self content] componentsMatchedByRegex:regexString];

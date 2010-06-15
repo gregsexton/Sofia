@@ -11,9 +11,19 @@
 
 @implementation ImportBooksController
 @synthesize isbns;
+@synthesize windowToAttachTo;
+
+//TODO: better icon for import toolbar button!
 
 - (void)awakeFromNib {
     [contentTextView setDelegate:self];
+
+    if(windowToAttachTo != nil){
+	[NSApp beginSheet:importSheet modalForWindow:windowToAttachTo 
+				       modalDelegate:self 
+				      didEndSelector:NULL 
+					 contextInfo:nil];
+    }
 }
 
 - (IBAction)addWebsiteAction:(id)sender{
@@ -38,6 +48,21 @@
     isbnExtractor* extract = [[isbnExtractor alloc] initWithContent:inputUrlContents];
     [self setIsbns:[extract discoveredISBNs]];
     [extract release];
+}
+
+- (IBAction)cancelAction:(id)sender{
+    [importSheet orderOut:nil];
+    [NSApp endSheet:importSheet];
+    [importSheet close];
+}
+
+- (IBAction)importAction:(id)sender{
+}
+
+- (IBAction)clearAction:(id)sender{
+    [contentTextView setString:@""];
+    [urlTextField setStringValue:@""];
+    [self setIsbns:nil];
 }
 
 - (void)textDidChange:(NSNotification *)aNotification{

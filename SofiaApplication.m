@@ -243,7 +243,7 @@
 
     [obj setDateAdded:[NSDate date]];
 
-    //add to appropriate library
+    //add to appropriate library TODO: this breaks if a book list is selected.
     Library *lib = [sideBar selectedLibrary];
     [lib addBooksObject:obj];
 
@@ -402,6 +402,7 @@
 
 - (IBAction) importBooks:(id)sender{
     ImportBooksController *importWin = [[ImportBooksController alloc] init];
+    [importWin setWindowToAttachTo:window];
     if (![NSBundle loadNibNamed:@"ImportBooks" owner:importWin]) {
 	NSLog(@"Error loading Nib!");
     }
