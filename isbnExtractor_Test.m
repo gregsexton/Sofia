@@ -27,29 +27,29 @@
 
 -(void) testObjectCreation{
 
-    STAssertNotNil(extract, @"Object created.");
-    STAssertEqualObjects([extract content], @"hello", @"content is the same.");
+    GHAssertNotNil(extract, @"Object created.");
+    GHAssertEqualObjects([extract content], @"hello", @"content is the same.");
 
 }
 
 -(void) testDiscoveredISBNs{
 
     NSArray* arr = [extract discoveredISBNs];
-    STAssertNotNil(arr, @"Object created.");
+    GHAssertNotNil(arr, @"Object created.");
 
     NSArray* arr2 = [extract2 discoveredISBNs];
-    STAssertNotNil(arr2, @"Object created.");
+    GHAssertNotNil(arr2, @"Object created.");
 
     NSArray* arr3 = [extract3 discoveredISBNs];
-    STAssertNotNil(arr3, @"Object created.");
+    GHAssertNotNil(arr3, @"Object created.");
 
-    STAssertEquals([arr count], (NSUInteger)0,  @"arr should have 0 isbns.");
-    STAssertEquals([arr2 count], (NSUInteger)1,  @"arr should have 1 isbn.");
-    STAssertEquals([arr3 count], (NSUInteger)3,  @"arr should have 3 isbn.");
+    GHAssertEquals([arr count], (NSUInteger)0,  @"arr should have 0 isbns.");
+    GHAssertEquals([arr2 count], (NSUInteger)1,  @"arr should have 1 isbn.");
+    GHAssertEquals([arr3 count], (NSUInteger)3,  @"arr should have 3 isbn.");
 
-    STAssertEqualObjects([arr3 objectAtIndex:1], @"9781933988276", @"hypen not removed from isbn.");
-    STAssertEqualObjects([arr3 objectAtIndex:0], @"0201558025", @"isbns not the same");
-    STAssertEqualObjects([arr3 objectAtIndex:2], @"9780521427067", @"isbns not the same");
+    GHAssertEqualObjects([arr3 objectAtIndex:1], @"9781933988276", @"hypen not removed from isbn.");
+    GHAssertEqualObjects([arr3 objectAtIndex:0], @"0201558025", @"isbns not the same");
+    GHAssertEqualObjects([arr3 objectAtIndex:2], @"9780521427067", @"isbns not the same");
 }
 
 @end

@@ -10,9 +10,13 @@
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		371182B210C454E200732634 /* SidebarOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 371182B110C454E200732634 /* SidebarOutlineView.m */; };
 		371855D51097C237006A363D /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 371855D41097C237006A363D /* icon.icns */; };
-		3735A6D311C57D4E00DD7461 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 374516C311C54A52001C7960 /* RegexKitLite.m */; };
 		3735A79C11C6DB5E00DD7461 /* ImportBooks.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3735A79B11C6DB5E00DD7461 /* ImportBooks.xib */; };
 		3735A7A011C6DBEF00DD7461 /* ImportBooksController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3735A79F11C6DBEF00DD7461 /* ImportBooksController.m */; };
+		3735A97911C9455700DD7461 /* GHUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3735A97811C9455700DD7461 /* GHUnit.framework */; };
+		3735A98211C9467C00DD7461 /* GHUnitTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3735A98111C9467C00DD7461 /* GHUnitTestMain.m */; };
+		3735A98811C946E000DD7461 /* isbnExtractor_Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 3745170F11C56DB0001C7960 /* isbnExtractor_Test.m */; };
+		3735A98911C946F500DD7461 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 374516C311C54A52001C7960 /* RegexKitLite.m */; };
+		3735A9D011C94AF700DD7461 /* isbnExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 374516E711C54F81001C7960 /* isbnExtractor.m */; };
 		37365594101CCC3C00709C8F /* BooksWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37365593101CCC3C00709C8F /* BooksWindowController.m */; };
 		3737514A1054219700718317 /* database.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 373751491054219600718317 /* database.xcdatamodel */; };
 		3737514E105426BF00718317 /* isbndbInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737514D105426BF00718317 /* isbndbInterface.m */; };
@@ -26,8 +30,6 @@
 		374515C211C19092001C7960 /* BooksMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 374515C111C19092001C7960 /* BooksMainViewController.m */; };
 		374516C511C54A52001C7960 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 374516C311C54A52001C7960 /* RegexKitLite.m */; };
 		374516E811C54F81001C7960 /* isbnExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 374516E711C54F81001C7960 /* isbnExtractor.m */; };
-		3745171011C56DB0001C7960 /* isbnExtractor_Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 3745170F11C56DB0001C7960 /* isbnExtractor_Test.m */; };
-		3745171611C56F92001C7960 /* isbnExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 374516E711C54F81001C7960 /* isbnExtractor.m */; };
 		375F2A9A11ADD43A0062E12E /* amazonInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 375F2A9911ADD43A0062E12E /* amazonInterface.m */; };
 		375F2E3011AF1DDE0062E12E /* hmac_sha2.c in Sources */ = {isa = PBXBuildFile; fileRef = 375F2E2B11AF1DDE0062E12E /* hmac_sha2.c */; };
 		375F2E3211AF1DDE0062E12E /* sha2.c in Sources */ = {isa = PBXBuildFile; fileRef = 375F2E2E11AF1DDE0062E12E /* sha2.c */; };
@@ -64,6 +66,16 @@
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		3735A97C11C9456E00DD7461 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D1107260486CEB800E47090 /* Sofia */;
+			remoteInfo = Sofia;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
@@ -79,6 +91,10 @@
 		3735A79B11C6DB5E00DD7461 /* ImportBooks.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImportBooks.xib; sourceTree = "<group>"; };
 		3735A79E11C6DBEF00DD7461 /* ImportBooksController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportBooksController.h; sourceTree = "<group>"; };
 		3735A79F11C6DBEF00DD7461 /* ImportBooksController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportBooksController.m; sourceTree = "<group>"; };
+		3735A97211C9453100DD7461 /* GHUnitTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GHUnitTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3735A97411C9453100DD7461 /* GHUnitTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GHUnitTest-Info.plist"; sourceTree = "<group>"; };
+		3735A97811C9455700DD7461 /* GHUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnit.framework; path = Library/Frameworks/GHUnit.framework; sourceTree = SDKROOT; };
+		3735A98111C9467C00DD7461 /* GHUnitTestMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUnitTestMain.m; sourceTree = "<group>"; };
 		37365592101CCC3C00709C8F /* BooksWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooksWindowController.h; sourceTree = "<group>"; };
 		37365593101CCC3C00709C8F /* BooksWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BooksWindowController.m; sourceTree = "<group>"; };
 		373751491054219600718317 /* database.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = database.xcdatamodel; sourceTree = "<group>"; };
@@ -102,7 +118,6 @@
 		374516C311C54A52001C7960 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		374516E611C54F81001C7960 /* isbnExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = isbnExtractor.h; sourceTree = "<group>"; };
 		374516E711C54F81001C7960 /* isbnExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = isbnExtractor.m; sourceTree = "<group>"; };
-		374516FB11C56CAD001C7960 /* Test.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Test.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		374516FC11C56CAD001C7960 /* Test-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Test-Info.plist"; sourceTree = "<group>"; };
 		3745170E11C56DB0001C7960 /* isbnExtractor_Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = isbnExtractor_Test.h; sourceTree = "<group>"; };
 		3745170F11C56DB0001C7960 /* isbnExtractor_Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = isbnExtractor_Test.m; sourceTree = "<group>"; };
@@ -165,10 +180,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		374516F811C56CAD001C7960 /* Frameworks */ = {
+		3735A97011C9453000DD7461 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3735A97911C9455700DD7461 /* GHUnit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,7 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				8D1107320486CEB800E47090 /* Sofia.app */,
-				374516FB11C56CAD001C7960 /* Test.octest */,
+				3735A97211C9453100DD7461 /* GHUnitTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -236,6 +252,8 @@
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				374516FC11C56CAD001C7960 /* Test-Info.plist */,
+				3735A97411C9453100DD7461 /* GHUnitTest-Info.plist */,
+				3735A97811C9455700DD7461 /* GHUnit.framework */,
 			);
 			name = books;
 			sourceTree = "<group>";
@@ -294,6 +312,7 @@
 		3745170D11C56D8B001C7960 /* Unit Tests */ = {
 			isa = PBXGroup;
 			children = (
+				3735A98111C9467C00DD7461 /* GHUnitTestMain.m */,
 				3745170E11C56DB0001C7960 /* isbnExtractor_Test.h */,
 				3745170F11C56DB0001C7960 /* isbnExtractor_Test.m */,
 			);
@@ -435,23 +454,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		374516FA11C56CAD001C7960 /* Test */ = {
+		3735A97111C9453000DD7461 /* GHUnitTest */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 374516FF11C56CAE001C7960 /* Build configuration list for PBXNativeTarget "Test" */;
+			buildConfigurationList = 3735A97711C9453100DD7461 /* Build configuration list for PBXNativeTarget "GHUnitTest" */;
 			buildPhases = (
-				374516F611C56CAD001C7960 /* Resources */,
-				374516F711C56CAD001C7960 /* Sources */,
-				374516F811C56CAD001C7960 /* Frameworks */,
-				374516F911C56CAD001C7960 /* ShellScript */,
+				3735A96E11C9453000DD7461 /* Resources */,
+				3735A96F11C9453000DD7461 /* Sources */,
+				3735A97011C9453000DD7461 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				3735A97D11C9456E00DD7461 /* PBXTargetDependency */,
 			);
-			name = Test;
-			productName = Test;
-			productReference = 374516FB11C56CAD001C7960 /* Test.octest */;
-			productType = "com.apple.product-type.bundle";
+			name = GHUnitTest;
+			productName = GHUnitTest;
+			productReference = 3735A97211C9453100DD7461 /* GHUnitTest.app */;
+			productType = "com.apple.product-type.application";
 		};
 		8D1107260486CEB800E47090 /* Sofia */ = {
 			isa = PBXNativeTarget;
@@ -510,13 +529,13 @@
 			projectRoot = "";
 			targets = (
 				8D1107260486CEB800E47090 /* Sofia */,
-				374516FA11C56CAD001C7960 /* Test */,
+				3735A97111C9453000DD7461 /* GHUnitTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		374516F611C56CAD001C7960 /* Resources */ = {
+		3735A96E11C9453000DD7461 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -548,30 +567,15 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		374516F911C56CAD001C7960 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		374516F711C56CAD001C7960 /* Sources */ = {
+		3735A96F11C9453000DD7461 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3745171611C56F92001C7960 /* isbnExtractor.m in Sources */,
-				3745171011C56DB0001C7960 /* isbnExtractor_Test.m in Sources */,
-				3735A6D311C57D4E00DD7461 /* RegexKitLite.m in Sources */,
+				3735A98911C946F500DD7461 /* RegexKitLite.m in Sources */,
+				3735A98811C946E000DD7461 /* isbnExtractor_Test.m in Sources */,
+				3735A9D011C94AF700DD7461 /* isbnExtractor.m in Sources */,
+				3735A98211C9467C00DD7461 /* GHUnitTestMain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -618,6 +622,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		3735A97D11C9456E00DD7461 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D1107260486CEB800E47090 /* Sofia */;
+			targetProxy = 3735A97C11C9456E00DD7461 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -638,58 +650,52 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		374516FD11C56CAE001C7960 /* Debug */ = {
+		3735A97511C9453100DD7461 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
-				INFOPLIST_FILE = "Test-Info.plist";
-				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "GHUnitTest-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
 					"-framework",
-					Cocoa,
+					Foundation,
 					"-framework",
-					SenTestingKit,
+					AppKit,
 					"-licucore",
 				);
 				PREBINDING = NO;
-				PRODUCT_NAME = Test;
-				WRAPPER_EXTENSION = octest;
+				PRODUCT_NAME = GHUnitTest;
 			};
 			name = Debug;
 		};
-		374516FE11C56CAE001C7960 /* Release */ = {
+		3735A97611C9453100DD7461 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
-				INFOPLIST_FILE = "Test-Info.plist";
-				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "GHUnitTest-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
 					"-framework",
-					Cocoa,
+					Foundation,
 					"-framework",
-					SenTestingKit,
+					AppKit,
 					"-licucore",
 				);
 				PREBINDING = NO;
-				PRODUCT_NAME = Test;
-				WRAPPER_EXTENSION = octest;
+				PRODUCT_NAME = GHUnitTest;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -776,11 +782,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		374516FF11C56CAE001C7960 /* Build configuration list for PBXNativeTarget "Test" */ = {
+		3735A97711C9453100DD7461 /* Build configuration list for PBXNativeTarget "GHUnitTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				374516FD11C56CAE001C7960 /* Debug */,
-				374516FE11C56CAE001C7960 /* Release */,
+				3735A97511C9453100DD7461 /* Debug */,
+				3735A97611C9453100DD7461 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

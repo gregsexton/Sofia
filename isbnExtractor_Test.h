@@ -6,11 +6,10 @@
 //  Copyright 2010 Greg Sexton Software. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <GHUnit/GHUnit.h>
 #import "isbnExtractor.h"
 
-
-@interface isbnExtractor_Test : SenTestCase {
+@interface isbnExtractor_Test : GHTestCase {
 
     isbnExtractor* extract;
     isbnExtractor* extract2;
