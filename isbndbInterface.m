@@ -147,6 +147,7 @@
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
+    //TODO: make more liberal use of capitalization!
     if ([self currentProperty] == pTitle){
 	[self setBookTitle:[self cleanUpString:currentStringValue]];
     }
@@ -166,7 +167,6 @@
 	[self setBookNotes:[self cleanUpString:currentStringValue]];
     }
     if ([self currentProperty] == pUrls){
-	//TODO: do not capitalize urls
 	[self setBookUrls:[[self cleanUpString:currentStringValue] lowercaseString]];
     }
     if ([self currentProperty] == pAwards){

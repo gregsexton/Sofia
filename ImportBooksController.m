@@ -14,6 +14,9 @@
 @synthesize windowToAttachTo;
 
 //TODO: better icon for import toolbar button!
+//TODO: import button
+//TODO: drag and drop a file
+//TODO: BooksWindowController delegate and write the protocol!
 
 - (void)awakeFromNib {
     [contentTextView setDelegate:self];

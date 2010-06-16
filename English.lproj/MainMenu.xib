@@ -835,21 +835,21 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="NSToolbarItem" id="115607835">
+							<object class="NSToolbarItem" id="787790060">
 								<object class="NSMutableString" key="NSToolbarItemIdentifier">
 									<characters key="NS.bytes">324E886D-F4AD-498A-92EE-38666C58542F</characters>
 								</object>
 								<string key="NSToolbarItemLabel">Import</string>
 								<string key="NSToolbarItemPaletteLabel">Import</string>
 								<nil key="NSToolbarItemToolTip"/>
-								<object class="NSButton" key="NSToolbarItemView" id="460761328">
+								<object class="NSButton" key="NSToolbarItemView" id="709862947">
 									<reference key="NSNextResponder"/>
 									<int key="NSvFlags">268</int>
 									<string key="NSFrame">{{5, 14}, {34, 25}}</string>
 									<reference key="NSSuperview"/>
 									<reference key="NSWindow"/>
 									<bool key="NSEnabled">YES</bool>
-									<object class="NSButtonCell" key="NSCell" id="361466114">
+									<object class="NSButtonCell" key="NSCell" id="714896530">
 										<int key="NSCellFlags">-2080244224</int>
 										<int key="NSCellFlags2">134217728</int>
 										<string key="NSContents">Round Textured</string>
@@ -858,12 +858,12 @@
 											<double key="NSSize">13</double>
 											<int key="NSfFlags">1044</int>
 										</object>
-										<reference key="NSControlView" ref="460761328"/>
+										<reference key="NSControlView" ref="709862947"/>
 										<int key="NSButtonFlags">-2033958657</int>
 										<int key="NSButtonFlags2">163</int>
-										<object class="NSCustomResource" key="NSNormalImage" id="692389103">
+										<object class="NSCustomResource" key="NSNormalImage" id="572715828">
 											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">NSRefreshTemplate</string>
+											<string key="NSResourceName">NSSlideshowTemplate</string>
 										</object>
 										<string key="NSAlternateContents"/>
 										<string key="NSKeyEquivalent"/>
@@ -871,7 +871,7 @@
 										<int key="NSPeriodicInterval">75</int>
 									</object>
 								</object>
-								<reference key="NSToolbarItemImage" ref="692389103"/>
+								<reference key="NSToolbarItemImage" ref="572715828"/>
 								<nil key="NSToolbarItemTarget"/>
 								<nil key="NSToolbarItemAction"/>
 								<string key="NSToolbarItemMinSize">{25, 25}</string>
@@ -1220,12 +1220,12 @@
 						<reference ref="99856646"/>
 						<reference ref="1060047137"/>
 						<reference ref="480110669"/>
-						<reference ref="115607835"/>
+						<reference ref="787790060"/>
 					</object>
 					<object class="NSMutableArray" key="NSToolbarIBDefaultItems">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<reference ref="99856646"/>
-						<reference ref="115607835"/>
+						<reference ref="787790060"/>
 						<reference ref="283218528"/>
 						<reference ref="1060047137"/>
 						<reference ref="480110669"/>
@@ -2901,7 +2901,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">importBooks:</string>
 						<reference key="source" ref="145402063"/>
-						<reference key="destination" ref="115607835"/>
+						<reference key="destination" ref="787790060"/>
 					</object>
 					<int key="connectionID">888</int>
 				</object>
@@ -3463,7 +3463,7 @@
 							<reference ref="1060047137"/>
 							<reference ref="99856646"/>
 							<reference ref="480110669"/>
-							<reference ref="115607835"/>
+							<reference ref="787790060"/>
 						</object>
 						<reference key="parent" ref="970442734"/>
 					</object>
@@ -3955,26 +3955,26 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">887</int>
-						<reference key="object" ref="115607835"/>
+						<reference key="object" ref="787790060"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="460761328"/>
+							<reference ref="709862947"/>
 						</object>
 						<reference key="parent" ref="399647017"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">885</int>
-						<reference key="object" ref="460761328"/>
+						<reference key="object" ref="709862947"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="361466114"/>
+							<reference ref="714896530"/>
 						</object>
-						<reference key="parent" ref="115607835"/>
+						<reference key="parent" ref="787790060"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">886</int>
-						<reference key="object" ref="361466114"/>
-						<reference key="parent" ref="460761328"/>
+						<reference key="object" ref="714896530"/>
+						<reference key="parent" ref="709862947"/>
 					</object>
 				</object>
 			</object>

@@ -289,6 +289,7 @@
 			3735A95A11C838BA00DD7461 /* PBXTextBookmark */ = 3735A95A11C838BA00DD7461 /* PBXTextBookmark */;
 			3735A95E11C8395000DD7461 /* PBXTextBookmark */ = 3735A95E11C8395000DD7461 /* PBXTextBookmark */;
 			3735A96211C8399600DD7461 /* PBXTextBookmark */ = 3735A96211C8399600DD7461 /* PBXTextBookmark */;
+			3735A96611C93DE100DD7461 /* PBXTextBookmark */ = 3735A96611C93DE100DD7461 /* PBXTextBookmark */;
 			374514B811B7178E001C7960 = 374514B811B7178E001C7960 /* XDModelBookmark */;
 			374515A011C02A1D001C7960 = 374515A011C02A1D001C7960 /* PBXTextBookmark */;
 			374515A111C02A1D001C7960 = 374515A111C02A1D001C7960 /* PBXTextBookmark */;
@@ -947,9 +948,9 @@
 	};
 	3735A79F11C6DBEF00DD7461 /* ImportBooksController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {951, 988}}";
-			sepNavSelRange = "{2067, 0}";
-			sepNavVisRange = "{0, 2061}";
+			sepNavIntBoundsRect = "{{0, 0}, {951, 1027}}";
+			sepNavSelRange = "{2181, 0}";
+			sepNavVisRange = "{0, 2103}";
 		};
 	};
 	3735A7A411C6DC8100DD7461 /* PBXTextBookmark */ = {
@@ -1407,7 +1408,7 @@
 		ignoreCount = 0;
 		lineNumber = 20;
 		location = Sofia;
-		modificationTime = 298334613.153125;
+		modificationTime = 298401246.306777;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1656,6 +1657,16 @@
 		rLoc = 2067;
 		rType = 0;
 		vrLen = 2061;
+		vrLoc = 0;
+	};
+	3735A96611C93DE100DD7461 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 3735A79F11C6DBEF00DD7461 /* ImportBooksController.m */;
+		name = "ImportBooksController.m: 79";
+		rLen = 0;
+		rLoc = 2181;
+		rType = 0;
+		vrLen = 2103;
 		vrLoc = 0;
 	};
 	37365585101CCA6900709C8F /* Sofia */ = {

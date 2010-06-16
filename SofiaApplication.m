@@ -10,6 +10,7 @@
 #import "BooksTableView.h"
 
 
+//TODO: fix memory leaks "vimgrep alloc *.m"
 //TODO: reorder all of the methods into a more logical state!
 //TODO: save the current view and reload it on startup, including zoom level
 
