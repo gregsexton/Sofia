@@ -14,6 +14,7 @@
     isbnExtractor* extract;
     isbnExtractor* extract2;
     isbnExtractor* extract3;
+    isbnExtractor* extract4;
 }
 
 @end

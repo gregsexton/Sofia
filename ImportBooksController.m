@@ -49,7 +49,7 @@
 
     //TODO: refactor: extract method?
     isbnExtractor* extract = [[isbnExtractor alloc] initWithContent:inputUrlContents];
-    [self setIsbns:[extract discoveredISBNs]];
+    [self setIsbns:[extract discoveredISBNsWithoutDups]];
     [extract release];
 }
 
@@ -71,7 +71,7 @@
 - (void)textDidChange:(NSNotification *)aNotification{
     NSString* inputText = [contentTextView string];
     isbnExtractor* extract = [[isbnExtractor alloc] initWithContent:inputText];
-    [self setIsbns:[extract discoveredISBNs]];
+    [self setIsbns:[extract discoveredISBNsWithoutDups]];
     [extract release];
 }
 

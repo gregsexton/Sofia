@@ -284,14 +284,14 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>9</integer>
-									<integer>2</integer>
-									<integer>1</integer>
-									<integer>0</integer>
+									<integer>70</integer>
+									<integer>67</integer>
+									<integer>64</integer>
+									<integer>62</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 201}, {309, 1185}}</string>
+							<string>{{0, 345}, {309, 1185}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -328,7 +328,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>isbnExtractor_Test.h</string>
+								<string>isbnExtractor.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -336,11 +336,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>isbnExtractor_Test.h</string>
+										<string>isbnExtractor.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>3735A9DD11C94B3000DD7461</string>
+										<string>3735AA6011CADA9E00DD7461</string>
 										<key>history</key>
 										<array>
 											<string>37BAF4C7114D509E00F95C41</string>
@@ -386,7 +386,8 @@
 											<string>3735A9AD11C949FC00DD7461</string>
 											<string>3735A9D511C94B0B00DD7461</string>
 											<string>3735A9D611C94B0B00DD7461</string>
-											<string>3735A9D711C94B0B00DD7461</string>
+											<string>3735AA0211C963E100DD7461</string>
+											<string>3735AA4D11CAD94F00DD7461</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -582,13 +583,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>3735A9DE11C94B3000DD7461</string>
+		<string>3735AA6111CADA9E00DD7461</string>
 		<string>3735A90B11C8253500DD7461</string>
 		<string>3735A8FB11C822DA00DD7461</string>
 		<string>3735A8F611C81E8800DD7461</string>
 		<string>3735A8F711C81E8800DD7461</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
 		<string>373655AF101CCE8600709C8F</string>
 	</array>
@@ -609,12 +610,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string></string>
+								<string>isbnExtractor.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -631,8 +634,6 @@
 							<string>411pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>

@@ -25,7 +25,7 @@
     //with any hypehns removed
     //TODO: remove duplicates and improve regex
     NSArray* matches = nil;
-    NSString* regexString = @"(978-?)?(\\d-?){9}\\d";
+    NSString* regexString = @"(?m:(?<=(^|[\\s\\p{P}]))(978-?)?(\\d-?){9}\\d(?=([\\s\\p{P}]|$)))";
     matches = [[self content] componentsMatchedByRegex:regexString];
 
     NSMutableArray* returnArray = [NSMutableArray arrayWithCapacity:[matches count]];
@@ -39,5 +39,21 @@
     return returnArray;
 }
 
+- (NSArray*)discoveredISBNsWithoutDups{
+    //NOTE: this function returns a sorted list.
+
+    NSArray* sorted = [[self discoveredISBNs] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+    NSMutableArray* removedDups = [NSMutableArray arrayWithCapacity:0]; //pessimistic
+
+    //remove dups
+    NSString* currentLook = nil;
+    for (NSString* s in sorted) {
+	if(![s isEqualToString:currentLook])
+	    [removedDups addObject:s];
+	currentLook = s;
+    }
+
+    return removedDups;
+}
 
 @end

@@ -20,5 +20,6 @@
 
 - (id)initWithContent:(NSString*)content;
 - (NSArray*)discoveredISBNs;
+- (NSArray*)discoveredISBNsWithoutDups;
 
 @end
