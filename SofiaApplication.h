@@ -65,4 +65,5 @@
 - (void) updateSummaryText;
 - (void) changeMainViewFor:(NSView*)viewToChangeTo;
 
+- (BooksWindowController*) createBookAndOpenDetailWindow;
 @end

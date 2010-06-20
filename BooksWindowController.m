@@ -54,6 +54,13 @@
     }
 }
 
+- (void) searchForISBN:(NSString*)isbn{
+    //programatically search for an isbn
+    [txt_search setStringValue:isbn];
+    [self searchClicked:self];
+}
+
+
 - (void) updateUIFromManagedObject {
     if (obj != nil){
 	if([obj valueForKey:@"isbn10"] != nil){
@@ -337,6 +344,7 @@
     [self updateManagedObjectFromUI];
     [self saveManagedObjectContext:managedObjectContext];
     [window close];
+    //TODO: if responds to selector...
     [delegate saveClicked:self];
 }
 
@@ -379,6 +387,8 @@
 - (IBAction) cancelClicked:(id)sender {
     [[obj managedObjectContext] rollback];
     [window close];
+    //TODO: if responds to selector...
+    [delegate cancelClicked:self];
 }
 
 - (void) saveManagedObjectContext:(NSManagedObjectContext*)context {

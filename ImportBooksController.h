@@ -8,15 +8,20 @@
 
 #import <Cocoa/Cocoa.h>
 #import "isbnExtractor.h"
+#import "BooksWindowController.h"
+@class SofiaApplication;
 
 @interface ImportBooksController : NSWindowController <NSTextViewDelegate> {
 
-    NSWindow* windowToAttachTo;
-    NSArray* isbns;
+    NSWindow*			windowToAttachTo;
+    NSArray*			isbns;
 
-    IBOutlet NSPanel*	    importSheet;
-    IBOutlet NSTextView*    contentTextView;
-    IBOutlet NSTextField*   urlTextField;
+    IBOutlet NSPanel*		importSheet;
+    IBOutlet NSTextView*	contentTextView;
+    IBOutlet NSTextField*	urlTextField;
+
+    SofiaApplication*		application;
+    NSUInteger			arrayCounter;
 
 }
 @property (copy) NSArray* isbns;

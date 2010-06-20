@@ -239,6 +239,11 @@
 }
 
 - (IBAction) addBookAction:(id)sender {
+    BooksWindowController* detailWin = [self createBookAndOpenDetailWindow];
+    [detailWin setDelegate:self];
+}
+
+- (BooksWindowController*) createBookAndOpenDetailWindow{
     book *obj = [[book alloc] initWithEntity:[[managedObjectModel entitiesByName] objectForKey:@"book"]
 						    insertIntoManagedObjectContext:managedObjectContext];
 
@@ -250,10 +255,11 @@
 
     BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj 
 										 withSearch:YES];
-    [detailWin setDelegate:self];
     if (![NSBundle loadNibNamed:@"Detail" owner:detailWin]) {
 	NSLog(@"Error loading Nib!");
     }
+
+    return detailWin;
 }
 
 - (IBAction) removeBookAction:(id)sender {
@@ -402,7 +408,7 @@
 }
 
 - (IBAction) importBooks:(id)sender{
-    ImportBooksController *importWin = [[ImportBooksController alloc] init];
+    ImportBooksController *importWin = [[ImportBooksController alloc] initWithSofiaApplication:self];
     [importWin setWindowToAttachTo:window];
     if (![NSBundle loadNibNamed:@"ImportBooks" owner:importWin]) {
 	NSLog(@"Error loading Nib!");

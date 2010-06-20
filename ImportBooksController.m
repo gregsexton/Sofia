@@ -18,6 +18,19 @@
 //TODO: drag and drop a file
 //TODO: BooksWindowController delegate and write the protocol!
 
+- (id)init{
+    if(self = [super init]){
+	arrayCounter = 0;
+    }
+    return self;
+}
+- (id)initWithSofiaApplication:(SofiaApplication*)theApplication{
+    if(self = [self init]){
+	application = theApplication;
+    }
+    return self;
+}
+	
 - (void)awakeFromNib {
     [contentTextView setDelegate:self];
 
@@ -33,8 +46,6 @@
     NSURL* inputUrl = [NSURL URLWithString:[urlTextField stringValue]];
     if(inputUrl == nil)
 	return; //TODO: error message?
-
-    //NSString* inputUrlContents = [NSString stringWithContentsOfURL:inputUrl encoding:NSUTF8StringEncoding error:&error];
 
     // Synchronously grab the data 
     NSError *error;
@@ -60,6 +71,9 @@
 }
 
 - (IBAction)importAction:(id)sender{
+    BooksWindowController* detailWin = [application createBookAndOpenDetailWindow];
+    [detailWin setDelegate:self];
+    [detailWin searchForISBN:[isbns objectAtIndex:arrayCounter]];
 }
 
 - (IBAction)clearAction:(id)sender{
@@ -68,11 +82,31 @@
     [self setIsbns:nil];
 }
 
+- (void) advanceToNextISBN {
+    if(arrayCounter+1 < [isbns count]){
+	arrayCounter++;
+	[self importAction:self];
+    }
+}
+
+//delegate methods/////////////////////////////////////////////////////////////////////////////////////
+
 - (void)textDidChange:(NSNotification *)aNotification{
     NSString* inputText = [contentTextView string];
     isbnExtractor* extract = [[isbnExtractor alloc] initWithContent:inputText];
     [self setIsbns:[extract discoveredISBNsWithoutDups]];
     [extract release];
+}
+
+//delegate method performed by booksWindowController.
+- (void) saveClicked:(BooksWindowController*)booksWindowController {
+    [application saveClicked:booksWindowController];
+    [self advanceToNextISBN];
+}
+
+//delegate method performed by booksWindowController.
+- (void) cancelClicked:(BooksWindowController*)booksWindowController {
+    [self advanceToNextISBN];
 }
 
 @end
