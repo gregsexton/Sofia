@@ -18,10 +18,11 @@
 #import "MBPreferencesController.h"
 #import "Library.h"
 #import "ImportBooksController.h"
+#import "BooksWindowControllerDelegate.h"
 @class BooksTableView;
 @class SidebarOutlineView;
 
-@interface SofiaApplication : NSObject {
+@interface SofiaApplication : NSObject <BooksWindowControllerDelegate> {
 	
 	IBOutlet NSWindow *window;
 	IBOutlet BooksTableView *tableView;

@@ -232,6 +232,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -272,6 +274,7 @@
 								<string>374516C011C54A39001C7960</string>
 								<string>37BAFB73115C083300F95C41</string>
 								<string>29B97315FDCFA39411CA2CEA</string>
+								<string>3735AAF111CEBDDA00DD7461</string>
 								<string>3745170D11C56D8B001C7960</string>
 								<string>37D708D010C18F7C0004F441</string>
 								<string>1C37FBAC04509CD000000102</string>
@@ -284,14 +287,14 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>53</integer>
-									<integer>34</integer>
+									<integer>30</integer>
+									<integer>29</integer>
 									<integer>28</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 345}, {309, 1185}}</string>
+							<string>{{0, 178}, {309, 1185}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -321,14 +324,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>ImportBooksController.m</string>
+								<string>BooksWindowControllerDelegate.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -336,11 +337,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>ImportBooksController.m</string>
+										<string>BooksWindowControllerDelegate.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>3735AAEC11CEBADF00DD7461</string>
+										<string>3735AAFD11CEBE4100DD7461</string>
 										<key>history</key>
 										<array>
 											<string>37BAF4C7114D509E00F95C41</string>
@@ -387,7 +388,8 @@
 											<string>3735AA0211C963E100DD7461</string>
 											<string>3735AA7811CE384C00DD7461</string>
 											<string>3735AA9711CE3BB000DD7461</string>
-											<string>3735AA9811CE3BB000DD7461</string>
+											<string>3735AAF311CEBDE500DD7461</string>
+											<string>3735AAF411CEBDE500DD7461</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -583,7 +585,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>3735AAED11CEBADF00DD7461</string>
+		<string>3735AAFE11CEBE4100DD7461</string>
 		<string>3737548810653A6200718317</string>
 		<string>3735A90B11C8253500DD7461</string>
 		<string>3735A8FB11C822DA00DD7461</string>
@@ -591,8 +593,8 @@
 		<string>3735A8F711C81E8800DD7461</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>1C78EAAD065D492600B07095</string>
-		<string>373655AF101CCE8600709C8F</string>
 		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
+		<string>373655AF101CCE8600709C8F</string>
 	</array>
 	<key>WindowString</key>
 	<string>1185 129 1343 1244 0 0 2560 1418 </string>
@@ -611,14 +613,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>ImportBooksController.m</string>
+								<string>BooksWindowControllerDelegate.h</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -635,6 +635,8 @@
 							<string>411pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>

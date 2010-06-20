@@ -95,6 +95,7 @@
 		3735A97411C9453100DD7461 /* GHUnitTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GHUnitTest-Info.plist"; sourceTree = "<group>"; };
 		3735A97811C9455700DD7461 /* GHUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnit.framework; path = Library/Frameworks/GHUnit.framework; sourceTree = SDKROOT; };
 		3735A98111C9467C00DD7461 /* GHUnitTestMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUnitTestMain.m; sourceTree = "<group>"; };
+		3735AAF011CEBDD300DD7461 /* BooksWindowControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooksWindowControllerDelegate.h; sourceTree = "<group>"; };
 		37365592101CCC3C00709C8F /* BooksWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooksWindowController.h; sourceTree = "<group>"; };
 		37365593101CCC3C00709C8F /* BooksWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BooksWindowController.m; sourceTree = "<group>"; };
 		373751491054219600718317 /* database.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = database.xcdatamodel; sourceTree = "<group>"; };
@@ -261,6 +262,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				3735AAF111CEBDDA00DD7461 /* Protocols */,
 				3745170D11C56D8B001C7960 /* Unit Tests */,
 				37BAFB72115C07FA00F95C41 /* NSMangedObject Subclasses */,
 				37D708D010C18F7C0004F441 /* Controllers */,
@@ -297,6 +299,14 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3735AAF111CEBDDA00DD7461 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				3735AAF011CEBDD300DD7461 /* BooksWindowControllerDelegate.h */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 		374516C011C54A39001C7960 /* RegexKitLite-4.0 */ = {

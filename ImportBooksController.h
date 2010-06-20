@@ -11,7 +11,7 @@
 #import "BooksWindowController.h"
 @class SofiaApplication;
 
-@interface ImportBooksController : NSWindowController <NSTextViewDelegate> {
+@interface ImportBooksController : NSWindowController <NSTextViewDelegate, BooksWindowControllerDelegate> {
 
     NSWindow*			windowToAttachTo;
     NSArray*			isbns;

@@ -10,6 +10,7 @@
 #import "book.h"
 #import "author.h"
 #import "amazonInterface.h"
+#import "BooksWindowControllerDelegate.h"
 
 @interface BooksWindowController : NSObjectController {
     IBOutlet NSTextField *txt_search;
@@ -70,12 +71,12 @@
     IBOutlet NSArrayController	*authorsArrayController;
     IBOutlet NSArrayController	*subjectsArrayController;
 
-    book	    	    *obj;
-    author		    *doubleClickedAuthor;
-    subject		    *doubleClickedSubject;
-    NSManagedObjectContext  *managedObjectContext; //TODO: use this instead of [obj managedObjectContext]
-    id			    *delegate;
-    BOOL		    displaySearch;
+    book				*obj;
+    author				*doubleClickedAuthor;
+    subject				*doubleClickedSubject;
+    NSManagedObjectContext		*managedObjectContext; //TODO: use this instead of [obj managedObjectContext]
+    id<BooksWindowControllerDelegate>   *delegate;
+    BOOL				displaySearch;
 }
 
 @property (nonatomic, assign) book *obj;

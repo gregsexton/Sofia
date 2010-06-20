@@ -13,7 +13,6 @@
 		activeSDKPreference = macosx10.6;
 		activeTarget = 8D1107260486CEB800E47090 /* Sofia */;
 		addToTargets = (
-			3735A97111C9453000DD7461 /* GHUnitTest */,
 		);
 		breakpoints = (
 			3735AAAD11CE812F00DD7461 /* ImportBooksController.m:71 */,
@@ -379,6 +378,11 @@
 			3735AADF11CEA46200DD7461 /* PBXTextBookmark */ = 3735AADF11CEA46200DD7461 /* PBXTextBookmark */;
 			3735AAE811CEBAB100DD7461 /* PBXTextBookmark */ = 3735AAE811CEBAB100DD7461 /* PBXTextBookmark */;
 			3735AAEC11CEBADF00DD7461 /* PBXTextBookmark */ = 3735AAEC11CEBADF00DD7461 /* PBXTextBookmark */;
+			3735AAF311CEBDE500DD7461 /* PBXTextBookmark */ = 3735AAF311CEBDE500DD7461 /* PBXTextBookmark */;
+			3735AAF411CEBDE500DD7461 /* PBXTextBookmark */ = 3735AAF411CEBDE500DD7461 /* PBXTextBookmark */;
+			3735AAF511CEBDE500DD7461 /* PBXTextBookmark */ = 3735AAF511CEBDE500DD7461 /* PBXTextBookmark */;
+			3735AAF811CEBE2C00DD7461 /* PBXTextBookmark */ = 3735AAF811CEBE2C00DD7461 /* PBXTextBookmark */;
+			3735AAFD11CEBE4100DD7461 /* PBXTextBookmark */ = 3735AAFD11CEBE4100DD7461 /* PBXTextBookmark */;
 			374514B811B7178E001C7960 = 374514B811B7178E001C7960 /* XDModelBookmark */;
 			374515A011C02A1D001C7960 = 374515A011C02A1D001C7960 /* PBXTextBookmark */;
 			374515A111C02A1D001C7960 = 374515A111C02A1D001C7960 /* PBXTextBookmark */;
@@ -1039,7 +1043,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {951, 1469}}";
 			sepNavSelRange = "{3094, 0}";
-			sepNavVisRange = "{765, 2324}";
+			sepNavVisRange = "{765, 2329}";
 		};
 	};
 	3735A7A411C6DC8100DD7461 /* PBXTextBookmark */ = {
@@ -2467,7 +2471,7 @@
 		ignoreCount = 0;
 		lineNumber = 71;
 		location = Sofia;
-		modificationTime = 298760926.142212;
+		modificationTime = 298761790.266846;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2485,7 +2489,7 @@
 		ignoreCount = 0;
 		lineNumber = 90;
 		location = Sofia;
-		modificationTime = 298760926.143434;
+		modificationTime = 298761790.2676;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2623,7 +2627,7 @@
 		ignoreCount = 0;
 		lineNumber = 95;
 		location = Sofia;
-		modificationTime = 298760926.144011;
+		modificationTime = 298761790.267919;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2696,6 +2700,63 @@
 		rType = 0;
 		vrLen = 2324;
 		vrLoc = 765;
+	};
+	3735AAF011CEBDD300DD7461 /* BooksWindowControllerDelegate.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {951, 946}}";
+			sepNavSelRange = "{405, 0}";
+			sepNavVisRange = "{0, 405}";
+		};
+	};
+	3735AAF311CEBDE500DD7461 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 3735A79F11C6DBEF00DD7461 /* ImportBooksController.m */;
+		name = "ImportBooksController.m: 113";
+		rLen = 0;
+		rLoc = 3094;
+		rType = 0;
+		vrLen = 2329;
+		vrLoc = 765;
+	};
+	3735AAF411CEBDE500DD7461 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 3735AAF011CEBDD300DD7461 /* BooksWindowControllerDelegate.h */;
+		name = "BooksWindowControllerDelegate.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 226;
+		vrLoc = 0;
+	};
+	3735AAF511CEBDE500DD7461 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 3735AAF011CEBDD300DD7461 /* BooksWindowControllerDelegate.h */;
+		name = "BooksWindowControllerDelegate.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 226;
+		vrLoc = 0;
+	};
+	3735AAF811CEBE2C00DD7461 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 3735AAF011CEBDD300DD7461 /* BooksWindowControllerDelegate.h */;
+		name = "BooksWindowControllerDelegate.h: 20";
+		rLen = 0;
+		rLoc = 375;
+		rType = 0;
+		vrLen = 375;
+		vrLoc = 0;
+	};
+	3735AAFD11CEBE4100DD7461 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 3735AAF011CEBDD300DD7461 /* BooksWindowControllerDelegate.h */;
+		name = "BooksWindowControllerDelegate.h: 21";
+		rLen = 0;
+		rLoc = 405;
+		rType = 0;
+		vrLen = 405;
+		vrLoc = 0;
 	};
 	37365585101CCA6900709C8F /* Sofia */ = {
 		isa = PBXExecutable;
@@ -2809,9 +2870,9 @@
 	};
 	37365592101CCC3C00709C8F /* BooksWindowController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {951, 1378}}";
-			sepNavSelRange = "{2676, 0}";
-			sepNavVisRange = "{0, 2740}";
+			sepNavIntBoundsRect = "{{0, 0}, {1143, 1417}}";
+			sepNavSelRange = "{3869, 0}";
+			sepNavVisRange = "{1614, 1239}";
 		};
 	};
 	37365593101CCC3C00709C8F /* BooksWindowController.m */ = {
