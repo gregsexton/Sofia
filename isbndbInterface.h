@@ -62,6 +62,6 @@
 
 - (BOOL)searchISBN:(NSString*)isbn;
 - (BOOL)processDetailsWithUrl:(NSURL*)url;
-- (NSString*) cleanUpString:(NSString*) theString;
+- (NSString*) cleanUpString:(NSString*)theString andCapitalize:(BOOL)capitalize;
 
 @end

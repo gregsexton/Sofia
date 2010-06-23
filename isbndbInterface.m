@@ -93,7 +93,8 @@
     }
     if ( [elementName isEqualToString:@"Details"] ) {
 	[self setBookEdition:[attributeDict objectForKey:@"edition_info"]];
-	[self setBookLanguage:[self cleanUpString:[attributeDict objectForKey:@"language"]]];
+	[self setBookLanguage:[self cleanUpString:[attributeDict objectForKey:@"language"]
+				    andCapitalize:YES]];
 	[self setBookPhysicalDescrip:[attributeDict objectForKey:@"physical_description_text"]];
 	[self setBookLCCNumber:[attributeDict objectForKey:@"lcc_number"]];
 	[self setBookDewey:[attributeDict objectForKey:@"dewey_decimal"]];
@@ -149,38 +150,38 @@
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
     //TODO: make more liberal use of capitalization!
     if ([self currentProperty] == pTitle){
-	[self setBookTitle:[self cleanUpString:currentStringValue]];
+	[self setBookTitle:[self cleanUpString:currentStringValue andCapitalize:YES]];
     }
     if ([self currentProperty] == pTitleLong){
-	[self setBookTitleLong:[self cleanUpString:currentStringValue]];
+	[self setBookTitleLong:[self cleanUpString:currentStringValue andCapitalize:YES]];
     }
     if ([self currentProperty] == pAuthorText){
-	[self setBookAuthorsText:[self cleanUpString:currentStringValue]];
+	[self setBookAuthorsText:[self cleanUpString:currentStringValue andCapitalize:YES]];
     }
     if ([self currentProperty] == pPublisher){
-	[self setBookPublisher:[self cleanUpString:currentStringValue]];
+	[self setBookPublisher:[self cleanUpString:currentStringValue andCapitalize:YES]];
     }
     if ([self currentProperty] == pSummary){
-	[self setBookSummary:[self cleanUpString:currentStringValue]];
+	[self setBookSummary:[self cleanUpString:currentStringValue andCapitalize:NO]];
     }
     if ([self currentProperty] == pNotes){
-	[self setBookNotes:[self cleanUpString:currentStringValue]];
+	[self setBookNotes:[self cleanUpString:currentStringValue andCapitalize:NO]];
     }
     if ([self currentProperty] == pUrls){
-	[self setBookUrls:[[self cleanUpString:currentStringValue] lowercaseString]];
+	[self setBookUrls:[self cleanUpString:currentStringValue andCapitalize:NO]];
     }
     if ([self currentProperty] == pAwards){
-	[self setBookAwards:[self cleanUpString:currentStringValue]];
+	[self setBookAwards:[self cleanUpString:currentStringValue andCapitalize:NO]];
     }
     if ([self currentProperty] == pAuthor){
-	NSString *cleanString = [self cleanUpString:currentStringValue];
+	NSString *cleanString = [self cleanUpString:currentStringValue andCapitalize:YES];
 	if(![cleanString isEqualToString:@""]){
 	    [bookAuthors addObject:cleanString];
 	}
     }
     if ([self currentProperty] == pSubject){
 	if(currentStringValue!=nil){
-	    NSString *cleanString = [self cleanUpString:currentStringValue];
+	    NSString *cleanString = [self cleanUpString:currentStringValue andCapitalize:YES];
 	    if(![cleanString isEqualToString:@""]){
 		[bookSubjects addObject:cleanString];
 		//TODO: add check to save duplicated effort? this happens for each and every subject
@@ -199,8 +200,14 @@
 }
 
 //TODO: make this a category of NSString?
-- (NSString*) cleanUpString:(NSString*) theString {
-    return [[theString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] capitalizedString];
+- (NSString*) cleanUpString:(NSString*)theString andCapitalize:(BOOL)capitalize{
+
+    NSString* returnString = [theString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+
+    if(capitalize)
+	return [returnString capitalizedString];
+    else
+	return returnString;
 }
 
 @end
