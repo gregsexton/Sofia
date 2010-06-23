@@ -14,9 +14,7 @@
 @synthesize windowToAttachTo;
 
 //TODO: better icon for import toolbar button!
-//TODO: import button
 //TODO: drag and drop a file
-//TODO: BooksWindowController delegate and write the protocol!
 
 - (id)init{
     if(self = [super init]){
@@ -58,10 +56,7 @@
 
     NSString* inputUrlContents = [[NSString alloc] initWithData:result encoding:NSASCIIStringEncoding];
 
-    //TODO: refactor: extract method?
-    isbnExtractor* extract = [[isbnExtractor alloc] initWithContent:inputUrlContents];
-    [self setIsbns:[extract discoveredISBNsWithoutDups]];
-    [extract release];
+    [self updateISBNsWithContent:inputUrlContents];
 }
 
 - (IBAction)cancelAction:(id)sender{
@@ -89,13 +84,17 @@
     }
 }
 
+- (void) updateISBNsWithContent:(NSString*)content{
+    isbnExtractor* extract = [[isbnExtractor alloc] initWithContent:content];
+    [self setIsbns:[extract discoveredISBNsWithoutDups]];
+    [extract release];
+}
+
 //delegate methods/////////////////////////////////////////////////////////////////////////////////////
 
 - (void)textDidChange:(NSNotification *)aNotification{
     NSString* inputText = [contentTextView string];
-    isbnExtractor* extract = [[isbnExtractor alloc] initWithContent:inputText];
-    [self setIsbns:[extract discoveredISBNsWithoutDups]];
-    [extract release];
+    [self updateISBNsWithContent:inputText];
 }
 
 //delegate method performed by booksWindowController.
