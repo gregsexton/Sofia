@@ -13,6 +13,7 @@
 //TODO: fix all warnings -- perhaps turn on error on warning?
 //TODO: fix memory leaks "vimgrep alloc *.m"
 //TODO: reorder all of the methods into a more logical state!
+//TODO: insert license at top of each source file -- write script?
 //TODO: save the current view and reload it on startup, including zoom level
 
 @implementation SofiaApplication

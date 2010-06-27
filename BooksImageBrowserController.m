@@ -23,8 +23,14 @@
 			 options:NSKeyValueObservingOptionInitial //send message immediately
 			 context:NULL];
 
-    //initial zoom level TODO: load from last time?
-    [self setImageZoomLevel:0.4];
+    float zoom = [[NSUserDefaults standardUserDefaults] floatForKey:@"imageViewZoomLevel"];
+    [self setImageZoomLevel:zoom];
+}
+
+- (void) setImageZoomLevel:(float)newValue {
+    //custom setter
+    imageZoomLevel = newValue;
+    [[NSUserDefaults standardUserDefaults] setFloat:newValue forKey:@"imageViewZoomLevel"];
 }
 
 // Delegate Methods //////////////////////////////////////////////////////
