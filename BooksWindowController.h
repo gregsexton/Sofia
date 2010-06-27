@@ -75,12 +75,12 @@
     author				*doubleClickedAuthor;
     subject				*doubleClickedSubject;
     NSManagedObjectContext		*managedObjectContext; //TODO: use this instead of [obj managedObjectContext]
-    id<BooksWindowControllerDelegate>   *delegate;
+    id<BooksWindowControllerDelegate>   delegate;
     BOOL				displaySearch;
 }
 
 @property (nonatomic, assign) book *obj;
-@property (nonatomic, assign) id *delegate;
+@property (nonatomic, assign) id delegate;
 @property (nonatomic) BOOL displaySearch;
 
 - (IBAction) searchClicked:(id)sender;

@@ -315,7 +315,6 @@
 	return;
     }
 
-    //TODO: warning if this is going to clear out information - re-download data won't work as will display duplicate -- add another option?
     [progIndicator setUsesThreadedAnimation:true];
     [progIndicator startAnimation:self];
     [NSApp beginSheet:progressSheet modalForWindow:window 
@@ -344,8 +343,10 @@
     [self updateManagedObjectFromUI];
     [self saveManagedObjectContext:managedObjectContext];
     [window close];
-    //TODO: if responds to selector...
-    [delegate saveClicked:self];
+
+    if([[self delegate] respondsToSelector:@selector(saveClicked:)]){
+	[delegate saveClicked:self];
+    }
 }
 
 - (IBAction) clearClicked:(id)sender {
@@ -387,8 +388,10 @@
 - (IBAction) cancelClicked:(id)sender {
     [[obj managedObjectContext] rollback];
     [window close];
-    //TODO: if responds to selector...
-    [delegate cancelClicked:self];
+
+    if([[self delegate] respondsToSelector:@selector(cancelClicked:)]){
+	[delegate cancelClicked:self];
+    }
 }
 
 - (void) saveManagedObjectContext:(NSManagedObjectContext*)context {

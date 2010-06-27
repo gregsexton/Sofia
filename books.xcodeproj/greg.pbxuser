@@ -219,6 +219,8 @@
 			37970A2011D7F572003A9D0D /* PBXTextBookmark */ = 37970A2011D7F572003A9D0D /* PBXTextBookmark */;
 			37970A2111D7F57B003A9D0D /* PBXTextBookmark */ = 37970A2111D7F57B003A9D0D /* PBXTextBookmark */;
 			37970A2811D7F5FD003A9D0D /* PBXTextBookmark */ = 37970A2811D7F5FD003A9D0D /* PBXTextBookmark */;
+			37970A3811D7F7F3003A9D0D /* PBXTextBookmark */ = 37970A3811D7F7F3003A9D0D /* PBXTextBookmark */;
+			37970A4711D7F8F9003A9D0D /* PBXTextBookmark */ = 37970A4711D7F8F9003A9D0D /* PBXTextBookmark */;
 			37BAF4C7114D509E00F95C41 = 37BAF4C7114D509E00F95C41 /* PlistBookmark */;
 			37BAF4C8114D509E00F95C41 = 37BAF4C8114D509E00F95C41 /* PBXTextBookmark */;
 			37BAF505114D6A0100F95C41 = 37BAF505114D6A0100F95C41 /* PBXTextBookmark */;
@@ -629,9 +631,9 @@
 	};
 	37365593101CCC3C00709C8F /* BooksWindowController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1419, 6227}}";
-			sepNavSelRange = "{10997, 0}";
-			sepNavVisRange = "{9453, 3224}";
+			sepNavIntBoundsRect = "{{0, 0}, {1143, 6578}}";
+			sepNavSelRange = "{16832, 0}";
+			sepNavVisRange = "{16262, 1111}";
 		};
 	};
 	373751491054219600718317 /* database.xcdatamodel */ = {
@@ -801,9 +803,9 @@
 	};
 	3737514C105426BF00718317 /* isbndbInterface.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {951, 987}}";
-			sepNavSelRange = "{823, 0}";
-			sepNavVisRange = "{0, 2195}";
+			sepNavIntBoundsRect = "{{0, 0}, {1143, 871}}";
+			sepNavSelRange = "{846, 0}";
+			sepNavVisRange = "{397, 1103}";
 		};
 	};
 	3737514D105426BF00718317 /* isbndbInterface.m */ = {
@@ -872,7 +874,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1020, 1040}}";
 			sepNavSelRange = "{2681, 0}";
-			sepNavVisRange = "{0, 2423}";
+			sepNavVisRange = "{0, 2426}";
 		};
 	};
 	374515C011C19092001C7960 /* BooksMainViewController.h */ = {
@@ -952,8 +954,8 @@
 	375F2A9811ADD43A0062E12E /* amazonInterface.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1143, 416}}";
-			sepNavSelRange = "{162, 0}";
-			sepNavVisRange = "{0, 591}";
+			sepNavSelRange = "{397, 0}";
+			sepNavVisRange = "{0, 682}";
 		};
 	};
 	375F2A9911ADD43A0062E12E /* amazonInterface.m */ = {
@@ -1460,6 +1462,26 @@
 		rLoc = 2681;
 		rType = 0;
 		vrLen = 2423;
+		vrLoc = 0;
+	};
+	37970A3811D7F7F3003A9D0D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 3745159B11C0283A001C7960 /* BooksImageBrowserController.m */;
+		name = "BooksImageBrowserController.m: 82";
+		rLen = 0;
+		rLoc = 2681;
+		rType = 0;
+		vrLen = 2426;
+		vrLoc = 0;
+	};
+	37970A4711D7F8F9003A9D0D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 3745159B11C0283A001C7960 /* BooksImageBrowserController.m */;
+		name = "BooksImageBrowserController.m: 82";
+		rLen = 0;
+		rLoc = 2681;
+		rType = 0;
+		vrLen = 2426;
 		vrLoc = 0;
 	};
 	37BAF4C7114D509E00F95C41 /* PlistBookmark */ = {
