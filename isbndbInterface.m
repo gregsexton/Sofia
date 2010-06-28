@@ -148,7 +148,6 @@
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
-    //TODO: make more liberal use of capitalization!
     if ([self currentProperty] == pTitle){
 	[self setBookTitle:[self cleanUpString:currentStringValue andCapitalize:YES]];
     }
@@ -184,8 +183,7 @@
 	    NSString *cleanString = [self cleanUpString:currentStringValue andCapitalize:YES];
 	    if(![cleanString isEqualToString:@""]){
 		[bookSubjects addObject:cleanString];
-		//TODO: add check to save duplicated effort? this happens for each and every subject
-		if([bookSubjects count] > 0){
+		if([bookSubjects count] == 1){
 		    [self setBookSubjectText:[bookSubjects objectAtIndex:0]];
 		}
 	    }
@@ -199,8 +197,8 @@
 - (void)parserDidEndDocument:(NSXMLParser *)parser{
 }
 
-//TODO: make this a category of NSString?
 - (NSString*) cleanUpString:(NSString*)theString andCapitalize:(BOOL)capitalize{
+    //if warranted could make this a category of NSString
 
     NSString* returnString = [theString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 

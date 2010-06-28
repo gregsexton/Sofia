@@ -16,6 +16,8 @@
 //TODO: reorder all of the methods into a more logical state!
 //TODO: use generated accessors for book object
 //TODO: refactor!
+//TODO: error handling: no save if not enough info (e.g isbns)
+//what happends if can't find a book on amazon?
 
 @implementation BooksWindowController
 
