@@ -74,7 +74,7 @@
     book				*obj;
     author				*doubleClickedAuthor;
     subject				*doubleClickedSubject;
-    NSManagedObjectContext		*managedObjectContext; //TODO: use this instead of [obj managedObjectContext]
+    NSManagedObjectContext		*managedObjectContext;
     id<BooksWindowControllerDelegate>   delegate;
     BOOL				displaySearch;
 }

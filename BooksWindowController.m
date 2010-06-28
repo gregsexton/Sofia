@@ -14,10 +14,9 @@
 #import "subject.h"
 
 //TODO: reorder all of the methods into a more logical state!
-//TODO: use generated accessors for book object
 //TODO: refactor!
 //TODO: error handling: no save if not enough info (e.g isbns)
-//what happends if can't find a book on amazon?
+//TODO: what happends if can't find a book on amazon?
 
 @implementation BooksWindowController
 
@@ -65,67 +64,67 @@
 
 - (void) updateUIFromManagedObject {
     if (obj != nil){
-	if([obj valueForKey:@"isbn10"] != nil){
-	    [txt_isbn10 setStringValue:[obj valueForKey:@"isbn10"]];
+	if([obj isbn10] != nil){
+	    [txt_isbn10 setStringValue:[obj isbn10]];
 	}
-	if([obj valueForKey:@"isbn13"] != nil){
-	    [txt_isbn13 setStringValue:[obj valueForKey:@"isbn13"]];
+	if([obj isbn13] != nil){
+	    [txt_isbn13 setStringValue:[obj isbn13]];
 	}
-	if([obj valueForKey:@"edition"] != nil){
-	    [txt_edition setStringValue:[obj valueForKey:@"edition"]];
+	if([obj edition] != nil){
+	    [txt_edition setStringValue:[obj edition]];
 	}
-	if([obj valueForKey:@"dewey"] != nil){
-	    [txt_dewey setStringValue:[obj valueForKey:@"dewey"]];
+	if([obj dewey] != nil){
+	    [txt_dewey setStringValue:[obj dewey]];
 	}
-	if([obj valueForKey:@"dewey_normalised"] != nil){
-	    [txt_deweyNormal setStringValue:[obj valueForKey:@"dewey_normalised"]];
+	if([obj dewey_normalised] != nil){
+	    [txt_deweyNormal setStringValue:[obj dewey_normalised]];
 	}
-	if([obj valueForKey:@"lccNumber"] != nil){
-	    [txt_lccNumber setStringValue:[obj valueForKey:@"lccNumber"]];
+	if([obj lccNumber] != nil){
+	    [txt_lccNumber setStringValue:[obj lccNumber]];
 	}
-	if([obj valueForKey:@"language"] != nil){
-	    [txt_language setStringValue:[obj valueForKey:@"language"]];
-	}
-
-	if([obj valueForKey:@"summary"] != nil){
-	    [txt_summary setStringValue:[obj valueForKey:@"summary"]];
-	}
-	if([obj valueForKey:@"notes"] != nil){
-	    [txt_notes setStringValue:[obj valueForKey:@"notes"]];
-	}
-	if([obj valueForKey:@"awards"] != nil){
-	    [txt_awards setStringValue:[obj valueForKey:@"awards"]];
-	}
-	if([obj valueForKey:@"urls"] != nil){
-	    [txt_urls setStringValue:[obj valueForKey:@"urls"]];
-	}
-	if([obj valueForKey:@"noOfCopies"] != nil){
-	    [txt_noOfCopies setIntValue:[[obj valueForKey:@"noOfCopies"] intValue]];
-	    [step_noOfCopies setIntValue:[[obj valueForKey:@"noOfCopies"] intValue]];
+	if([obj language] != nil){
+	    [txt_language setStringValue:[obj language]];
 	}
 
-	if([obj valueForKey:@"title"] != nil){
-	    [txt_title addItemWithObjectValue:[obj valueForKey:@"title"]];
+	if([obj summary] != nil){
+	    [txt_summary setStringValue:[obj summary]];
+	}
+	if([obj notes] != nil){
+	    [txt_notes setStringValue:[obj notes]];
+	}
+	if([obj awards] != nil){
+	    [txt_awards setStringValue:[obj awards]];
+	}
+	if([obj urls] != nil){
+	    [txt_urls setStringValue:[obj urls]];
+	}
+	if([obj noOfCopies] != nil){
+	    [txt_noOfCopies setIntValue:[[obj noOfCopies] intValue]];
+	    [step_noOfCopies setIntValue:[[obj noOfCopies] intValue]];
+	}
+
+	if([obj title] != nil){
+	    [txt_title addItemWithObjectValue:[obj title]];
 	    [txt_title selectItemAtIndex:0];
 	}
-	if([obj valueForKey:@"titleLong"] != nil){
-	    [txt_titleLong addItemWithObjectValue:[obj valueForKey:@"titleLong"]];
+	if([obj titleLong] != nil){
+	    [txt_titleLong addItemWithObjectValue:[obj titleLong]];
 	    [txt_titleLong selectItemAtIndex:0];
 	}
-	if([obj valueForKey:@"publisherText"] != nil){
-	    [txt_publisher addItemWithObjectValue:[obj valueForKey:@"publisherText"]];
+	if([obj publisherText] != nil){
+	    [txt_publisher addItemWithObjectValue:[obj publisherText]];
 	    [txt_publisher selectItemAtIndex:0];
 	}
-	if([obj valueForKey:@"authorText"] != nil){
-	    [txt_author addItemWithObjectValue:[obj valueForKey:@"authorText"]];
+	if([obj authorText] != nil){
+	    [txt_author addItemWithObjectValue:[obj authorText]];
 	    [txt_author selectItemAtIndex:0];
 	}
-	if([obj valueForKey:@"subjectText"] != nil){
-	    [txt_subject addItemWithObjectValue:[obj valueForKey:@"subjectText"]];
+	if([obj subjectText] != nil){
+	    [txt_subject addItemWithObjectValue:[obj subjectText]];
 	    [txt_subject selectItemAtIndex:0];
 	}
-	if([obj valueForKey:@"physicalDescription"] != nil){
-	    [txt_physicalDescrip addItemWithObjectValue:[obj valueForKey:@"physicalDescription"]];
+	if([obj physicalDescription] != nil){
+	    [txt_physicalDescrip addItemWithObjectValue:[obj physicalDescription]];
 	    [txt_physicalDescrip selectItemAtIndex:0];
 	}
 
@@ -268,24 +267,24 @@
 - (void) updateManagedObjectFromUI {
     if (obj != nil){
 	//TODO: wrap these in checks?
-	[obj setValue:[txt_isbn10 stringValue] forKey:@"isbn10"];
-	[obj setValue:[txt_isbn13 stringValue] forKey:@"isbn13"];
-	[obj setValue:[txt_author stringValue] forKey:@"authorText"];
-	[obj setValue:[txt_subject stringValue] forKey:@"subjectText"];
-	[obj setValue:[txt_awards stringValue] forKey:@"awards"];
-	[obj setValue:[txt_dewey stringValue] forKey:@"dewey"];
-	[obj setValue:[txt_deweyNormal stringValue] forKey:@"dewey_normalised"];
-	[obj setValue:[txt_edition stringValue] forKey:@"edition"];
-	[obj setValue:[txt_language stringValue] forKey:@"language"];
-	[obj setValue:[txt_lccNumber stringValue] forKey:@"lccNumber"];
-	[obj setValue:[txt_notes stringValue] forKey:@"notes"];
-	[obj setValue:[txt_physicalDescrip stringValue] forKey:@"physicalDescription"];
-	[obj setValue:[txt_publisher stringValue] forKey:@"publisherText"];
-	[obj setValue:[txt_summary stringValue] forKey:@"summary"];
-	[obj setValue:[txt_title stringValue] forKey:@"title"];
-	[obj setValue:[txt_titleLong stringValue] forKey:@"titleLong"];
-	[obj setValue:[txt_urls stringValue] forKey:@"urls"];
-	[obj setValue:[txt_noOfCopies stringValue] forKey:@"noOfCopies"];
+	[obj setIsbn10:[txt_isbn10 stringValue]];
+	[obj setIsbn13:[txt_isbn13 stringValue]];
+	[obj setAuthorText:[txt_author stringValue]];
+	[obj setSubjectText:[txt_subject stringValue]];
+	[obj setAwards:[txt_awards stringValue]];
+	[obj setDewey:[txt_dewey stringValue]];
+	[obj setDewey_normalised:[txt_deweyNormal stringValue]];
+	[obj setEdition:[txt_edition stringValue]];
+	[obj setLanguage:[txt_language stringValue]];
+	[obj setLccNumber:[txt_lccNumber stringValue]];
+	[obj setNotes:[txt_notes stringValue]];
+	[obj setPhysicalDescription:[txt_physicalDescrip stringValue]];
+	[obj setPublisherText:[txt_publisher stringValue]];
+	[obj setSummary:[txt_summary stringValue]];
+	[obj setTitle:[txt_title stringValue]];
+	[obj setTitleLong:[txt_titleLong stringValue]];
+	[obj setUrls:[txt_urls stringValue]];
+	[obj setNoOfCopies:[txt_noOfCopies stringValue]];
 	[obj setCoverImage:[img_summary_cover image]];
     }
 }
@@ -297,9 +296,9 @@
 							   [txt_search stringValue],
 							   [txt_search stringValue]];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"book" inManagedObjectContext:[obj managedObjectContext]]];
+    [request setEntity:[NSEntityDescription entityForName:@"book" inManagedObjectContext:managedObjectContext]];
     [request setPredicate:[NSPredicate predicateWithFormat:predicate]];
-    if([[obj managedObjectContext] countForFetchRequest:request error:&error] > 0){
+    if([managedObjectContext countForFetchRequest:request error:&error] > 0){
         //[[NSApplication sharedApplication] presentError:error];
 	int alertReturn;
 	alertReturn = NSRunInformationalAlertPanel(@"Duplicate Entry",
@@ -309,9 +308,9 @@
 						   nil);
 	if (alertReturn == NSAlertAlternateReturn){
 	    //delete empty object from context
-	    [[obj managedObjectContext] deleteObject:obj];
+	    [managedObjectContext deleteObject:obj];
 	    //get hold of existing object and update UI.
-	    [self setObj:[[[obj managedObjectContext] executeFetchRequest:request error:&error] objectAtIndex:0]];
+	    [self setObj:[[managedObjectContext executeFetchRequest:request error:&error] objectAtIndex:0]];
 	    [self updateUIFromManagedObject];
 	}
 	return;
@@ -388,7 +387,7 @@
 }
 
 - (IBAction) cancelClicked:(id)sender {
-    [[obj managedObjectContext] rollback];
+    [managedObjectContext rollback];
     [window close];
 
     if([[self delegate] respondsToSelector:@selector(cancelClicked:)]){
@@ -428,12 +427,12 @@
     [lbl_summary_noOfCopies 	    setStringValue:[txt_noOfCopies stringValue]];
     [lbl_summary_summary    	    setStringValue:[txt_summary stringValue]];
     
-    [lbl_summary_title setStringValue:[txt_title stringValue]];
-    [lbl_summary_titleLong setStringValue:[txt_titleLong stringValue]];
-    [lbl_summary_author setStringValue:[txt_author stringValue]];
-    [lbl_summary_publisher setStringValue:[txt_publisher stringValue]];
-    [lbl_summary_subject setStringValue:[txt_subject stringValue]];
-    [lbl_summary_physicalDescrip setStringValue:[txt_physicalDescrip stringValue]];
+    [lbl_summary_title		    setStringValue:[txt_title stringValue]];
+    [lbl_summary_titleLong	    setStringValue:[txt_titleLong stringValue]];
+    [lbl_summary_author		    setStringValue:[txt_author stringValue]];
+    [lbl_summary_publisher	    setStringValue:[txt_publisher stringValue]];
+    [lbl_summary_subject	    setStringValue:[txt_subject stringValue]];
+    [lbl_summary_physicalDescrip    setStringValue:[txt_physicalDescrip stringValue]];
 }
 
 //author methods
