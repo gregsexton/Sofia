@@ -36,14 +36,15 @@
 // Delegate Methods //////////////////////////////////////////////////////
 
 - (NSUInteger)numberOfItemsInImageBrowser:(IKImageBrowserView *) aBrowser{	
-    NSUInteger* count = [[arrayController arrangedObjects] count];
+    NSUInteger count = [[arrayController arrangedObjects] count];
     return count;
 }
 
 - (id)imageBrowser:(IKImageBrowserView *)aBrowser itemAtIndex:(NSUInteger)index{
     book* theBook = [[arrayController arrangedObjects] objectAtIndex:index];
     NSImage* img = [theBook coverImage];
-    //TODO: default image if no image.
+    if(img == nil) //use default image
+	img = [NSImage imageNamed:@"missing.png"];
     return [[BooksImageBrowserItem alloc] initWithImage:img 
 						imageID:[theBook title] 
 					       subtitle:[theBook authorText]];

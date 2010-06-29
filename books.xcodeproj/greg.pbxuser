@@ -277,6 +277,18 @@
 			37970ACA11D95542003A9D0D /* PBXBookmark */ = 37970ACA11D95542003A9D0D /* PBXBookmark */;
 			37970ACE11D9562E003A9D0D /* PBXBookmark */ = 37970ACE11D9562E003A9D0D /* PBXBookmark */;
 			37970AD011D95752003A9D0D /* PBXBookmark */ = 37970AD011D95752003A9D0D /* PBXBookmark */;
+			37970AFA11DAA85F003A9D0D /* PBXBookmark */ = 37970AFA11DAA85F003A9D0D /* PBXBookmark */;
+			37970AFB11DAA85F003A9D0D /* PBXBookmark */ = 37970AFB11DAA85F003A9D0D /* PBXBookmark */;
+			37970AFC11DAA85F003A9D0D /* PBXBookmark */ = 37970AFC11DAA85F003A9D0D /* PBXBookmark */;
+			37970AFD11DAA85F003A9D0D /* PBXBookmark */ = 37970AFD11DAA85F003A9D0D /* PBXBookmark */;
+			37970AFE11DAA85F003A9D0D /* PBXBookmark */ = 37970AFE11DAA85F003A9D0D /* PBXBookmark */;
+			37970AFF11DAA85F003A9D0D /* PBXBookmark */ = 37970AFF11DAA85F003A9D0D /* PBXBookmark */;
+			37970B0011DAA85F003A9D0D /* PBXBookmark */ = 37970B0011DAA85F003A9D0D /* PBXBookmark */;
+			37970B0111DAA85F003A9D0D /* PBXBookmark */ = 37970B0111DAA85F003A9D0D /* PBXBookmark */;
+			37970B0811DAA911003A9D0D /* PBXBookmark */ = 37970B0811DAA911003A9D0D /* PBXBookmark */;
+			37970B1211DAB0E0003A9D0D /* PBXBookmark */ = 37970B1211DAB0E0003A9D0D /* PBXBookmark */;
+			37970B1311DAB0E0003A9D0D /* PBXBookmark */ = 37970B1311DAB0E0003A9D0D /* PBXBookmark */;
+			37970B1411DAB0E0003A9D0D /* PBXBookmark */ = 37970B1411DAB0E0003A9D0D /* PBXBookmark */;
 			37BAF4C7114D509E00F95C41 = 37BAF4C7114D509E00F95C41 /* PlistBookmark */;
 			37BAF4C8114D509E00F95C41 = 37BAF4C8114D509E00F95C41 /* PBXTextBookmark */;
 			37BAF505114D6A0100F95C41 = 37BAF505114D6A0100F95C41 /* PBXTextBookmark */;
@@ -481,7 +493,7 @@
 		ignoreCount = 0;
 		lineNumber = 71;
 		location = Sofia;
-		modificationTime = 299456044.961632;
+		modificationTime = 299544556.923622;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -499,7 +511,7 @@
 		ignoreCount = 0;
 		lineNumber = 90;
 		location = Sofia;
-		modificationTime = 299456044.961659;
+		modificationTime = 299544556.923648;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -517,7 +529,7 @@
 		ignoreCount = 0;
 		lineNumber = 95;
 		location = Sofia;
-		modificationTime = 299456044.961673;
+		modificationTime = 299544556.923658;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -687,9 +699,9 @@
 	};
 	37365593101CCC3C00709C8F /* BooksWindowController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1143, 6370}}";
-			sepNavSelRange = "{18336, 0}";
-			sepNavVisRange = "{16943, 1124}";
+			sepNavIntBoundsRect = "{{0, 0}, {1143, 6071}}";
+			sepNavSelRange = "{17446, 0}";
+			sepNavVisRange = "{15585, 1157}";
 		};
 	};
 	373751491054219600718317 /* database.xcdatamodel */ = {
@@ -1446,7 +1458,7 @@
 		ignoreCount = 0;
 		lineNumber = 27;
 		location = Sofia;
-		modificationTime = 299456044.961682;
+		modificationTime = 299544556.923667;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1515,7 +1527,7 @@
 		fRef = 3745159B11C0283A001C7960 /* BooksImageBrowserController.m */;
 		name = "BooksImageBrowserController.m: 82";
 		rLen = 0;
-		rLoc = 2681;
+		rLoc = 2680;
 		rType = 0;
 		vrLen = 2423;
 		vrLoc = 0;
@@ -1525,7 +1537,7 @@
 		fRef = 3745159B11C0283A001C7960 /* BooksImageBrowserController.m */;
 		name = "BooksImageBrowserController.m: 82";
 		rLen = 0;
-		rLoc = 2681;
+		rLoc = 2680;
 		rType = 0;
 		vrLen = 2426;
 		vrLoc = 0;
@@ -1535,7 +1547,7 @@
 		fRef = 3745159B11C0283A001C7960 /* BooksImageBrowserController.m */;
 		name = "BooksImageBrowserController.m: 82";
 		rLen = 0;
-		rLoc = 2681;
+		rLoc = 2680;
 		rType = 0;
 		vrLen = 2426;
 		vrLoc = 0;
@@ -1550,11 +1562,11 @@
 		delayBeforeContinue = 0;
 		fileReference = 3737514D105426BF00718317 /* isbndbInterface.m */;
 		functionName = "-parser:didEndElement:namespaceURI:qualifiedName:";
-		hitCount = 1;
+		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 189;
 		location = Sofia;
-		modificationTime = 299456333.825161;
+		modificationTime = 299544556.923837;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1563,7 +1575,7 @@
 		fRef = 3745159B11C0283A001C7960 /* BooksImageBrowserController.m */;
 		name = "BooksImageBrowserController.m: 82";
 		rLen = 0;
-		rLoc = 2681;
+		rLoc = 2680;
 		rType = 0;
 		vrLen = 2426;
 		vrLoc = 0;
@@ -1878,6 +1890,54 @@
 	37970AD011D95752003A9D0D /* PBXBookmark */ = {
 		isa = PBXBookmark;
 		fRef = 37970AB011D920CA003A9D0D /* importarrow.png */;
+	};
+	37970AFA11DAA85F003A9D0D /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 37970AB011D920CA003A9D0D /* importarrow.png */;
+	};
+	37970AFB11DAA85F003A9D0D /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 37BAFBDD115C1D1500F95C41 /* shopping2.tif */;
+	};
+	37970AFC11DAA85F003A9D0D /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 37BAFBD9115C1C7700F95C41 /* shopping.tif */;
+	};
+	37970AFD11DAA85F003A9D0D /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 37BAFBC9115C173300F95C41 /* book.tif */;
+	};
+	37970AFE11DAA85F003A9D0D /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 37BAFBC1115C162000F95C41 /* list.tif */;
+	};
+	37970AFF11DAA85F003A9D0D /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 37BAFBB9115C14D700F95C41 /* smartlist.tif */;
+	};
+	37970B0011DAA85F003A9D0D /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 37970AF811DAA847003A9D0D /* missing.png */;
+	};
+	37970B0111DAA85F003A9D0D /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 37970AF811DAA847003A9D0D /* missing.png */;
+	};
+	37970B0811DAA911003A9D0D /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 37970AF811DAA847003A9D0D /* missing.png */;
+	};
+	37970B1211DAB0E0003A9D0D /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 37970AB011D920CA003A9D0D /* importarrow.png */;
+	};
+	37970B1311DAB0E0003A9D0D /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 37970AF811DAA847003A9D0D /* missing.png */;
+	};
+	37970B1411DAB0E0003A9D0D /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 37970AF811DAA847003A9D0D /* missing.png */;
 	};
 	37BAF4C7114D509E00F95C41 /* PlistBookmark */ = {
 		isa = PlistBookmark;
