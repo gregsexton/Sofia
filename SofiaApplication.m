@@ -14,7 +14,6 @@
 //TODO: fix memory leaks "vimgrep alloc *.m"
 //TODO: reorder all of the methods into a more logical state!
 //TODO: insert license at top of each source file -- write script?
-//TODO: save the current view and reload it on startup, including zoom level
 
 @implementation SofiaApplication
 
@@ -22,7 +21,13 @@
     
     //setup the main view
     currentView = nil;
-    [self changeToListView:self];
+    NSString* view = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentView"];
+    if(view == nil) //initial launch
+	[self changeToListView:self];
+    if([view isEqualToString:LIST_VIEW])
+	[self changeToListView:self];
+    else if([view isEqualToString:IMAGE_VIEW])
+	[self changeToImagesView:self];
     
     //setup preferences
     AccessKeyViewController *accessKeys = [[AccessKeyViewController alloc] initWithNibName:@"Preferences_AccessKeys" bundle:nil];
@@ -31,7 +36,7 @@
     [accessKeys release];
     [general release];
 
-    //guarantee loaded before updating summary text. this works better than observing.
+    //guarantee loaded before updating summary text. This works better than observing.
     NSError *error;
     [arrayController fetchWithRequest:nil merge:NO error:&error];
     [self updateSummaryText];
@@ -384,12 +389,14 @@
     [self changeMainViewFor:mainTableView];
     [zoomSlider setHidden:true];
     [changeViewButtons setSelectedSegment:0];
+    [[NSUserDefaults standardUserDefaults] setObject:LIST_VIEW forKey:@"currentView"];
 }
 
 - (IBAction)changeToImagesView:(id)sender{
     [self changeMainViewFor:mainImagesView];
     [zoomSlider setHidden:false];
     [changeViewButtons setSelectedSegment:1];
+    [[NSUserDefaults standardUserDefaults] setObject:IMAGE_VIEW forKey:@"currentView"];
 }
 
 - (void)changeMainViewFor:(NSView*)viewToChangeTo{

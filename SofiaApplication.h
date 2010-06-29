@@ -22,6 +22,10 @@
 @class BooksTableView;
 @class SidebarOutlineView;
 
+//used to save the current view for app restart
+#define LIST_VIEW @"listView"
+#define IMAGE_VIEW @"imageView"
+
 @interface SofiaApplication : NSObject <BooksWindowControllerDelegate> {
 	
 	IBOutlet NSWindow *window;

@@ -43,6 +43,7 @@
 - (id)imageBrowser:(IKImageBrowserView *)aBrowser itemAtIndex:(NSUInteger)index{
     book* theBook = [[arrayController arrangedObjects] objectAtIndex:index];
     NSImage* img = [theBook coverImage];
+    //TODO: default image if no image.
     return [[BooksImageBrowserItem alloc] initWithImage:img 
 						imageID:[theBook title] 
 					       subtitle:[theBook authorText]];
