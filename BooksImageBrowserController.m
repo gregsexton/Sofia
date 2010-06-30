@@ -60,11 +60,11 @@
     }
 }
 
-//TODO: this works nicely but will it be efficient enough for a large book collection?
 - (void)observeValueForKeyPath:(NSString *)keyPath 
 		      ofObject:(id)object 
 			change:(NSDictionary *)change 
 		       context:(void *)context{
+    //this works nicely but will it be efficient enough for a large book collection?
     if([keyPath isEqualToString:@"arrangedObjects"]){
 	[browserView reloadData];
     }

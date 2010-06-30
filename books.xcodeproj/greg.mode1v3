@@ -341,7 +341,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>37970B1411DAB0E0003A9D0D</string>
+										<string>37970B1811DBE138003A9D0D</string>
 										<key>history</key>
 										<array>
 											<string>37BAF4C7114D509E00F95C41</string>
@@ -598,13 +598,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>37970B1511DAB0E0003A9D0D</string>
+		<string>37970B1911DBE138003A9D0D</string>
 		<string>37970A0D11D7D2A1003A9D0D</string>
 		<string>37970A0E11D7D2A1003A9D0D</string>
-		<string>1C78EAAD065D492600B07095</string>
-		<string>373655AF101CCE8600709C8F</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
+		<string>1C78EAAD065D492600B07095</string>
+		<string>373655AF101CCE8600709C8F</string>
 	</array>
 	<key>WindowString</key>
 	<string>1217 174 1343 1244 0 0 2560 1418 </string>

@@ -270,7 +270,6 @@
 }
 
 - (IBAction) removeBookAction:(id)sender {
-    //TODO removing doesn't work in image view, selection is based on the table
     int alertReturn = -1;
     int noOfRowsSelected = [tableView numberOfSelectedRows];
     if(noOfRowsSelected == 0){
@@ -308,32 +307,6 @@
 	[summaryText setStringValue:[NSString stringWithFormat:@"%d books", count]];
     }
 }
-
-//this method registers to observe the objects held in the
-//tableview it is used to update the summary text when the
-//application first loads. After first running it is disabled and
-//future updating is handled by the delgate method saveClicked.
-//TODO: delete these 3?
-- (void)registerAsArrayControllerObserver{
-    [arrayController addObserver:self
-		     forKeyPath:@"arrangedObjects"
-		     options:NSKeyValueObservingOptionNew
-		     context:NULL];
-}
-
-- (void)unregisterForArrayControllerChangeNotification{
-    [arrayController removeObserver:self
-                     forKeyPath:@"arrangedObjects"];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([keyPath isEqual:@"arrangedObjects"]) {
-	[self updateSummaryText];
-	[self unregisterForArrayControllerChangeNotification]; //perform once at startup then unregister.
-    }
-    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-}
-
 
 - (IBAction) aboutClickAction:(id)sender {
 	NSDictionary *aboutDict = [NSDictionary dictionaryWithObjectsAndKeys:
