@@ -26,7 +26,6 @@
 @synthesize isbns;
 @synthesize windowToAttachTo;
 
-//TODO: better icon for import toolbar button!
 //TODO: drag and drop a file
 
 - (id)init{
@@ -56,7 +55,7 @@
 - (IBAction)addWebsiteAction:(id)sender{
     NSURL* inputUrl = [NSURL URLWithString:[urlTextField stringValue]];
     if(inputUrl == nil)
-	return; //TODO: error message?
+	return;
 
     // Synchronously grab the data 
     NSError *error;
@@ -64,8 +63,10 @@
     NSURLResponse *response;
     NSData *result = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
 
-    if(result == nil)
-	return; //TODO: error message?
+    if(result == nil){
+	NSRunInformationalAlertPanel(@"Download Error", @"Unable to retrieve web page. Please check internet connectivity." , @"Ok", nil, nil);
+	return;
+    }
 
     NSString* inputUrlContents = [[NSString alloc] initWithData:result encoding:NSASCIIStringEncoding];
 

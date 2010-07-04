@@ -27,7 +27,6 @@
 //TODO: fix all warnings -- perhaps turn on error on warning?
 //TODO: fix memory leaks "vimgrep alloc *.m"
 //TODO: reorder all of the methods into a more logical state!
-//TODO: insert license at top of each source file -- write script?
 
 @implementation SofiaApplication
 
@@ -270,9 +269,11 @@
 
     [obj setDateAdded:[NSDate date]];
 
-    //add to appropriate library TODO: this breaks if a book list is selected.
+    //add to appropriate library
     Library *lib = [sideBar selectedLibrary];
     [lib addBooksObject:obj];
+
+    //TODO: add to book list and library if a book list selected; do nothing if smart list
 
     BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj 
 										 withSearch:YES];
@@ -304,9 +305,6 @@
 
 //delegate method performed by booksWindowController.
 - (void) saveClicked:(BooksWindowController*)booksWindowController {
-    if(![[arrayController arrangedObjects] containsObject:[booksWindowController obj]]){
-	[arrayController addObject:[booksWindowController obj]];
-    }
     [self updateSummaryText];
     [imagesView reloadData];
 }
