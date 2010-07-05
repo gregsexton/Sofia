@@ -305,6 +305,7 @@
 
 //delegate method performed by booksWindowController.
 - (void) saveClicked:(BooksWindowController*)booksWindowController {
+    [arrayController rearrangeObjects]; //sort the newly added book
     [self updateSummaryText];
     [imagesView reloadData];
 }

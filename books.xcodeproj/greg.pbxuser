@@ -21,6 +21,7 @@
 			3735AAD611CEA1AE00DD7461 /* ImportBooksController.m:95 */,
 			37970A1711D7F554003A9D0D /* BooksImageBrowserController.m:27 */,
 			37970A4A11D7FBFD003A9D0D /* isbndbInterface.m:189 */,
+			37FF4DAD11E291EC001B8ECC /* SofiaApplication.m:308 */,
 		);
 		codeSenseManager = 3736558C101CCA7200709C8F /* Code sense */;
 		executables = (
@@ -74,7 +75,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					773,
+					1193,
 					20,
 					48,
 					43,
@@ -306,6 +307,13 @@
 			37BAFCC21162601D00F95C41 = 37BAFCC21162601D00F95C41 /* PBXTextBookmark */;
 			37BAFCC31162601D00F95C41 = 37BAFCC31162601D00F95C41 /* PBXTextBookmark */;
 			37BAFCDF116261F500F95C41 = 37BAFCDF116261F500F95C41 /* PBXTextBookmark */;
+			37FF4DAE11E291EC001B8ECC /* PBXTextBookmark */ = 37FF4DAE11E291EC001B8ECC /* PBXTextBookmark */;
+			37FF4DB111E291FB001B8ECC /* PBXTextBookmark */ = 37FF4DB111E291FB001B8ECC /* PBXTextBookmark */;
+			37FF4DB211E291FB001B8ECC /* PBXTextBookmark */ = 37FF4DB211E291FB001B8ECC /* PBXTextBookmark */;
+			37FF4DB311E291FB001B8ECC /* PBXTextBookmark */ = 37FF4DB311E291FB001B8ECC /* PBXTextBookmark */;
+			37FF4DC311E29265001B8ECC /* XCBuildMessageTextBookmark */ = 37FF4DC311E29265001B8ECC /* XCBuildMessageTextBookmark */;
+			37FF4DC411E29265001B8ECC /* PBXTextBookmark */ = 37FF4DC411E29265001B8ECC /* PBXTextBookmark */;
+			37FF4DC711E29268001B8ECC /* PBXTextBookmark */ = 37FF4DC711E29268001B8ECC /* PBXTextBookmark */;
 		};
 		sourceControlManager = 3736558B101CCA7200709C8F /* Source Control */;
 		userBuildSettings = {
@@ -475,7 +483,7 @@
 		fRef = 373752C5105EB6D500718317 /* SofiaApplication.m */;
 		name = "SofiaApplication.m: 419";
 		rLen = 0;
-		rLoc = 14766;
+		rLoc = 14710;
 		rType = 0;
 		vrLen = 2685;
 		vrLoc = 8206;
@@ -494,7 +502,7 @@
 		ignoreCount = 0;
 		lineNumber = 71;
 		location = Sofia;
-		modificationTime = 299622709.848389;
+		modificationTime = 300061175.59581;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -512,7 +520,7 @@
 		ignoreCount = 0;
 		lineNumber = 90;
 		location = Sofia;
-		modificationTime = 299622709.848421;
+		modificationTime = 300061175.595888;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -530,7 +538,7 @@
 		ignoreCount = 0;
 		lineNumber = 95;
 		location = Sofia;
-		modificationTime = 299622709.848431;
+		modificationTime = 300061175.595897;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -894,9 +902,9 @@
 	};
 	373752C5105EB6D500718317 /* SofiaApplication.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1143, 5538}}";
-			sepNavSelRange = "{14533, 0}";
-			sepNavVisRange = "{13992, 799}";
+			sepNavIntBoundsRect = "{{0, 0}, {1371, 5343}}";
+			sepNavSelRange = "{10955, 68}";
+			sepNavVisRange = "{9541, 2533}";
 		};
 	};
 	3745148411B70B85001C7960 /* BooksImageBrowserView.h */ = {
@@ -1459,7 +1467,7 @@
 		ignoreCount = 0;
 		lineNumber = 27;
 		location = Sofia;
-		modificationTime = 299622709.848438;
+		modificationTime = 300061175.595918;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1567,7 +1575,7 @@
 		ignoreCount = 0;
 		lineNumber = 189;
 		location = Sofia;
-		modificationTime = 299622709.848528;
+		modificationTime = 300061175.595925;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -2116,9 +2124,9 @@
 	};
 	37BAFB77115C085B00F95C41 /* ImageAndTextCell.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {971, 1729}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 3049}";
+			sepNavIntBoundsRect = "{{0, 0}, {1143, 2119}}";
+			sepNavSelRange = "{5178, 0}";
+			sepNavVisRange = "{4312, 866}";
 		};
 	};
 	37BAFB84115C0A8400F95C41 /* PBXTextBookmark */ = {
@@ -2254,6 +2262,90 @@
 			sepNavSelRange = "{1577, 0}";
 			sepNavVisRange = "{0, 2328}";
 		};
+	};
+	37FF4DAD11E291EC001B8ECC /* SofiaApplication.m:308 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 373752C5105EB6D500718317 /* SofiaApplication.m */;
+		functionName = "-saveClicked:";
+		hitCount = 2;
+		ignoreCount = 0;
+		lineNumber = 308;
+		location = Sofia;
+		modificationTime = 300061287.22524;
+		originalNumberOfMultipleMatches = 1;
+		state = 2;
+	};
+	37FF4DAE11E291EC001B8ECC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 373752C5105EB6D500718317 /* SofiaApplication.m */;
+		rLen = 1;
+		rLoc = 307;
+		rType = 1;
+	};
+	37FF4DB111E291FB001B8ECC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 37BAFB77115C085B00F95C41 /* ImageAndTextCell.m */;
+		name = "ImageAndTextCell.m: 137";
+		rLen = 0;
+		rLoc = 5178;
+		rType = 0;
+		vrLen = 3074;
+		vrLoc = 0;
+	};
+	37FF4DB211E291FB001B8ECC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 373752C5105EB6D500718317 /* SofiaApplication.m */;
+		name = "SofiaApplication.m: 307";
+		rLen = 66;
+		rLoc = 10886;
+		rType = 0;
+		vrLen = 2533;
+		vrLoc = 9541;
+	};
+	37FF4DB311E291FB001B8ECC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 373752C5105EB6D500718317 /* SofiaApplication.m */;
+		name = "SofiaApplication.m: 307";
+		rLen = 66;
+		rLoc = 10886;
+		rType = 0;
+		vrLen = 2533;
+		vrLoc = 9541;
+	};
+	37FF4DC311E29265001B8ECC /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "Expected '=', ',', ';', 'asm' or '__attribute__' before 'of'";
+		fRef = 37BAFB77115C085B00F95C41 /* ImageAndTextCell.m */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 21;
+		rType = 1;
+	};
+	37FF4DC411E29265001B8ECC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 37BAFB77115C085B00F95C41 /* ImageAndTextCell.m */;
+		name = "ImageAndTextCell.m: 137";
+		rLen = 0;
+		rLoc = 5178;
+		rType = 0;
+		vrLen = 866;
+		vrLoc = 4312;
+	};
+	37FF4DC711E29268001B8ECC /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 373752C5105EB6D500718317 /* SofiaApplication.m */;
+		name = "SofiaApplication.m: 308";
+		rLen = 68;
+		rLoc = 10955;
+		rType = 0;
+		vrLen = 2533;
+		vrLoc = 9541;
 	};
 	8D1107260486CEB800E47090 /* Sofia */ = {
 		activeExec = 0;
