@@ -30,7 +30,6 @@
 #import "AccessKeyViewController.h"
 #import "GeneralViewController.h"
 #import "MBPreferencesController.h"
-#import "Library.h"
 #import "ImportBooksController.h"
 #import "BooksWindowControllerDelegate.h"
 @class BooksTableView;

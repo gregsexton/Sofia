@@ -270,10 +270,7 @@
     [obj setDateAdded:[NSDate date]];
 
     //add to appropriate library
-    Library *lib = [sideBar selectedLibrary];
-    [lib addBooksObject:obj];
-
-    //TODO: add to book list and library if a book list selected; do nothing if smart list
+    [sideBar addToCurrentLibraryTheBook:obj];
 
     BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj 
 										 withSearch:YES];
@@ -305,7 +302,8 @@
 
 //delegate method performed by booksWindowController.
 - (void) saveClicked:(BooksWindowController*)booksWindowController {
-    [arrayController rearrangeObjects]; //sort the newly added book
+    [arrayController rearrangeObjects]; //sort the newly added book this also has the side
+					//affect of keeping smart lists updated after adding a book
     [self updateSummaryText];
     [imagesView reloadData];
 }

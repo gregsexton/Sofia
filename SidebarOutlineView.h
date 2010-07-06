@@ -57,6 +57,7 @@
 - (void)outlineView:(NSOutlineView *)outlineView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn byItem:(id)item;
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item;
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item;
+
 - (void)setSelectedItem:(id)item;
 - (Library*) selectedLibrary;
 - (NSUInteger)numberOfBookLists;
@@ -67,4 +68,5 @@
 - (NSArray*)getAllManagedObjectsWithEntityName:(NSString*)entityName sortDescriptorKey:(NSString*)sortKey;
 - (void) editCurrentlySelectedSmartList;
 - (void)updateFilterPredicateWith:(NSPredicate*)predicate;
+- (void)addToCurrentLibraryTheBook:(book*)obj;
 @end

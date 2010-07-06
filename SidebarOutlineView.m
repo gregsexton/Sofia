@@ -259,6 +259,16 @@
 
 }
 
+- (void)addToCurrentLibraryTheBook:(book*)obj{
+    Library *lib = [self selectedLibrary];
+    [lib addBooksObject:obj];
+
+    id item = [self selectedItem];
+    if([item isKindOfClass:[list class]]){
+	[self addBook:obj toList:item andSave:false];
+    }
+}
+
 // Delegate Methods //////////////////////////////////////////////////////
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item{
