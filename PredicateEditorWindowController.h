@@ -21,19 +21,20 @@
 
 #import <Cocoa/Cocoa.h>
 #import "smartList.h"
+#import "PredicateEditorWindowControllerDelegate.h"
 
 
 @interface PredicateEditorWindowController : NSObject {
 
-    IBOutlet NSWindow*		    window;
-    IBOutlet NSPredicateEditor*	    predicateEditor;
+    IBOutlet NSWindow*				window;
+    IBOutlet NSPredicateEditor*			predicateEditor;
 
-    id*				    delegate;
-    NSPredicate*		    predicate;
-    smartList*			    listToTransferTo;
+    id<PredicateEditorWindowControllerDelegate> delegate;
+    NSPredicate*				predicate;
+    smartList*					listToTransferTo;
 }
 
-@property (nonatomic, assign) id *delegate;
+@property (nonatomic, assign) id<PredicateEditorWindowControllerDelegate> delegate;
 
 - (id)initWithSmartList:(smartList*)list;
 - (IBAction)okClicked:(id)sender;

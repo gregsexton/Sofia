@@ -25,6 +25,8 @@
 // TODO: refactor out logic to a controller.
 
 @implementation SidebarOutlineView
+@synthesize bookLists;
+@synthesize smartBookLists;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -66,17 +68,28 @@
     }
 }
 
+- (void) dealloc{
+    [bookLibrary release];
+    [shoppingListLibrary release];
+    [super dealloc];
+}
+
 - (NSFetchRequest*) libraryExistsWithName:(NSString*)libraryName{
     //returns the request in order to get hold of the library
     //otherwise returns nil if the library cannot be found.
     NSError *error;
     NSString *predicate = [[NSString alloc] initWithFormat:@"name MATCHES '%@'", libraryName];
+
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"Library" inManagedObjectContext:managedObjectContext]];
     [request setPredicate:[NSPredicate predicateWithFormat:predicate]];
+
+    [predicate release];
+
     if([managedObjectContext countForFetchRequest:request error:&error] > 0){
-	return request;
+	return [request autorelease];
     }else{
+	[request release];
 	return nil;
     }
 }
@@ -111,6 +124,7 @@
     [request setEntity:[NSEntityDescription entityForName:@"list" inManagedObjectContext:managedObjectContext]];
 
     NSUInteger count = [managedObjectContext countForFetchRequest:request error:&error];
+    [request release];
     return count;
 }
 
@@ -120,15 +134,18 @@
     [request setEntity:[NSEntityDescription entityForName:@"smartList" inManagedObjectContext:managedObjectContext]];
 
     NSUInteger count = [managedObjectContext countForFetchRequest:request error:&error];
+    [request release];
     return count;
 }
 
 - (NSArray*)getBookLists{
-    return [self getAllManagedObjectsWithEntityName:@"list" sortDescriptorKey:@"name"];
+    [self setBookLists:[self getAllManagedObjectsWithEntityName:@"list" sortDescriptorKey:@"name"]];
+    return [self bookLists];
 }
 
 - (NSArray*)getSmartBookLists{
-    return [self getAllManagedObjectsWithEntityName:@"smartList" sortDescriptorKey:@"name"];
+    [self setSmartBookLists:[self getAllManagedObjectsWithEntityName:@"smartList" sortDescriptorKey:@"name"]];
+    return [self smartBookLists];
 }
 
 - (NSArray*)getAllManagedObjectsWithEntityName:(NSString*)entityName sortDescriptorKey:(NSString*)sortKey{
@@ -140,6 +157,8 @@
     NSSortDescriptor* descriptor = [[[NSSortDescriptor alloc] initWithKey:sortKey 
 								ascending:YES] autorelease];
     objects = [objects sortedArrayUsingDescriptors:[NSArray arrayWithObject:descriptor]];
+
+    [request release];
 
     return objects;
 }
@@ -189,7 +208,7 @@
 
     [self selectRowIndexes:[NSIndexSet indexSetWithIndex:itemIndex] byExtendingSelection:NO];
     //tell the delegate!
-    [[self delegate] outlineViewSelectionDidChange:nil]; //FIXME: this will break if I start to use the notification in the delegate
+    [self outlineViewSelectionDidChange:nil]; //FIXME: this will break if I start to use the notification in the delegate
 }
 
 - (Library*)selectedLibrary{
@@ -234,28 +253,29 @@
 	if([[item name] isEqualToString:SHOPPING_LIST_LIBRARY]){
 	    currentlySelectedLibrary = shoppingListLibrary;
 	}
-    }
 
-    if([item isKindOfClass:[list class]]){
+    }else if([item isKindOfClass:[list class]]){
 	predString = [[NSString alloc] initWithFormat:@"ANY lists.name MATCHES '%@'", [item name]];
-    }
 
-    if([item isKindOfClass:[smartList class]]){
-	if([item filter] == nil || [[item filter] isEqualToString:@""]){
+    }else if([item isKindOfClass:[smartList class]]){
+	smartList* list = item;
+	NSString* filter = [list filter];
+	if(filter == nil || [filter isEqualToString:@""]){
 	    //TODO: don't display any books!
 	}
-	predString = [item filter];
+	predString = [filter retain]; //retained as about to be released due to alloc's above
     }
 
     if(predString != nil){
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:predString];
+	[predString release];
 	return predicate;
     }
 
     return nil;
 }
 
-- (void) editCurrentlySelectedSmartList{
+- (void)editCurrentlySelectedSmartList{
     id item = [self selectedItem];
     if([item isKindOfClass:[smartList class]]){
 	smartList* list = item;
@@ -309,13 +329,13 @@
     if([item isEqualToString:CAT_BOOK_LISTS]){
 	NSArray *lists = [self getBookLists];
 	list *list = [lists objectAtIndex:index];
-	return [list retain];
+	return list;
     }
 
     if([item isEqualToString:CAT_SMART_BOOK_LISTS]){
 	NSArray *lists = [self getSmartBookLists];
 	smartList *list = [lists objectAtIndex:index];
-	return [list retain];
+	return list;
     }
 
     return @"ERROR!";
@@ -329,11 +349,11 @@
     if([item isKindOfClass:[NSString class]]){
 	return item;
     }else if([item isKindOfClass:[list class]]){
-	return [[item name] retain];
+	return [item name];
     }else if([item isKindOfClass:[smartList class]]){
-	return [[item name] retain];
+	return [item name];
     }else if([item isKindOfClass:[Library class]]){
-	return [[item name] retain];
+	return [item name];
     }
     return @"Error!";
 }
@@ -514,7 +534,7 @@
 
     for(NSURL* objectURI in theBooks){
 	NSManagedObjectID* objId = [[application persistentStoreCoordinator] managedObjectIDForURIRepresentation:objectURI];
-	book* theBook = [managedObjectContext objectWithID:objId];
+	book* theBook = (book*)[managedObjectContext objectWithID:objId];
 
 	if([item isKindOfClass:[Library class]]){
 

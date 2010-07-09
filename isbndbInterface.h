@@ -21,6 +21,19 @@
 
 #import <Cocoa/Cocoa.h>
 
+typedef enum { pNoProperty, 
+	       pTitle, 
+	       pTitleLong, 
+	       pAuthorText, 
+	       pPublisher, 
+	       pSummary, 
+	       pNotes, 
+	       pUrls, 
+	       pAwards, 
+	       pAuthor, 
+	       pSubject 
+}isbnProperties ;
+
 
 @interface isbndbInterface : NSObject {
 
@@ -45,10 +58,8 @@
     NSMutableArray *bookAuthors;
 
     NSMutableString *currentStringValue;
-    int currentProperty;
+    isbnProperties currentProperty;
     BOOL successfullyFoundBook; 
-
-    enum properties {pNoProperty, pTitle, pTitleLong, pAuthorText, pPublisher, pSummary, pNotes, pUrls, pAwards, pAuthor, pSubject};
 
 }
 
@@ -71,7 +82,7 @@
 @property (nonatomic,copy) NSString *bookAwards;
 @property (nonatomic,copy) NSMutableArray *bookSubjects;
 @property (nonatomic,copy) NSMutableArray *bookAuthors;
-@property (nonatomic) int currentProperty;
+@property (nonatomic) isbnProperties currentProperty;
 @property (nonatomic) BOOL successfullyFoundBook;
 
 - (BOOL)searchISBN:(NSString*)isbn;

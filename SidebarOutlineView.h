@@ -36,7 +36,7 @@
 #define BOOK_LIBRARY @"Books"
 #define SHOPPING_LIST_LIBRARY @"Shopping List"
 
-@interface SidebarOutlineView : NSOutlineView <NSOutlineViewDelegate, NSOutlineViewDataSource> {
+@interface SidebarOutlineView : NSOutlineView <NSOutlineViewDelegate, NSOutlineViewDataSource, PredicateEditorWindowControllerDelegate> {
 
     IBOutlet NSArrayController *arrayController;
     IBOutlet SofiaApplication *application;
@@ -47,7 +47,13 @@
     Library* currentlySelectedLibrary;
     NSManagedObjectContext *managedObjectContext;
 
+    NSArray* bookLists;
+    NSArray* smartBookLists;
+
 }
+
+@property (nonatomic, copy) NSArray* bookLists;
+@property (nonatomic, copy) NSArray* smartBookLists;
 
 - (IBAction)addListAction:(id)sender;
 - (IBAction)addSmartListAction:(id)sender;
@@ -58,16 +64,19 @@
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item;
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item;
 
-- (void)setSelectedItem:(id)item;
-- (Library*) selectedLibrary;
-- (NSUInteger)numberOfBookLists;
-- (void)addBook:(book*)theBook toList:(list*)theList andSave:(BOOL)save;
-- (id)selectedItem;
-- (void)moveBook:(book*)theBook toLibrary:(Library*)theLibrary andSave:(BOOL)save;
-- (NSPredicate*)getPredicateForSelectedItem;
-- (NSArray*)getAllManagedObjectsWithEntityName:(NSString*)entityName sortDescriptorKey:(NSString*)sortKey;
-- (void) editCurrentlySelectedSmartList;
-- (void)updateFilterPredicateWith:(NSPredicate*)predicate;
-- (void)addToCurrentLibraryTheBook:(book*)obj;
 - (BOOL)listOrSmartlistAlreadyNamed:(NSString*)name notIncluding:(NSManagedObject*)obj;
+- (Library*)selectedLibrary;
+- (NSArray*)getAllManagedObjectsWithEntityName:(NSString*)entityName sortDescriptorKey:(NSString*)sortKey;
+- (NSFetchRequest*)libraryExistsWithName:(NSString*)libraryName;
+- (NSPredicate*)getPredicateForSelectedItem;
+- (NSUInteger)numberOfBookLists;
+- (id)selectedItem;
+- (void)addBook:(book*)theBook toList:(list*)theList andSave:(BOOL)save;
+- (void)addToCurrentLibraryTheBook:(book*)obj;
+- (void)assignLibraryObjects;
+- (void)beginEditingCurrentlySelectedItem;
+- (void)editCurrentlySelectedSmartList;
+- (void)moveBook:(book*)theBook toLibrary:(Library*)theLibrary andSave:(BOOL)save;
+- (void)setSelectedItem:(id)item;
+- (void)updateFilterPredicateWith:(NSPredicate*)predicate;
 @end

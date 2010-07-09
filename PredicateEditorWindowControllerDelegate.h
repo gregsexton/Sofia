@@ -1,5 +1,5 @@
 //
-// amazonInterface.h
+// PredicateEditorWindowControllerDelegate.h
 //
 // Copyright 2010 Greg Sexton
 //
@@ -21,24 +21,10 @@
 
 #import <Cocoa/Cocoa.h>
 
-typedef enum {pNone, pLargeImage, pImageURL} amazonProperties;
 
-@interface amazonInterface : NSObject <NSXMLParserDelegate>{
+@protocol PredicateEditorWindowControllerDelegate
 
-    NSString* accessKey;
-    NSString* secretAccessKey;
+@optional
 
-    NSString*	imageURL;
-    NSImage*	frontCover;
-
-    amazonProperties currentProperty;
-    NSMutableString* currentStringValue;
-}
-
-@property (nonatomic,copy) NSString* imageURL;
-@property (nonatomic,copy) NSImage* frontCover;
-
-- (BOOL)searchISBN:(NSString*)isbn;
-- (BOOL)searchForImagesWithISBN:(NSString*)isbn;
-- (BOOL)processImagesWithUrl:(NSURL*)url;
+- (void)predicateEditingDidFinish:(NSPredicate*)predicate;
 @end
