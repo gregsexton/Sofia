@@ -144,6 +144,22 @@
     return objects;
 }
 
+- (BOOL)listOrSmartlistAlreadyNamed:(NSString*)name notIncluding:(NSManagedObject*)obj{
+    NSArray* lists = [self getBookLists];
+    NSArray* slists = [self getSmartBookLists];
+
+    //this could be a binary search as these arrays are sorted based on name.
+    for(list* l in lists){
+	if([[l name] isEqualToString:name] && l!=obj)
+	    return true;
+    }
+    for(smartList* l in slists){
+	if([[l name] isEqualToString:name] && l!=obj)
+	    return true;
+    }
+    return false;
+}
+
 - (void)addBook:(book*)theBook toList:(list*)theList andSave:(BOOL)save{
 
     [theList addBooksObject:theBook];
@@ -450,26 +466,21 @@
 }
 
 - (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor{
-    //TODO: make sure the new name isn't one of my names or already exists and return false
-    //TODO: renaming has a bug -- can't quite work it out...
-
     NSString *newName = [fieldEditor string];
+    id item = [self selectedItem];
 
-    //perform checks on the new name:
-    if([newName isEqualToString:@""]){
+    if([newName isEqualToString:@""] || [self listOrSmartlistAlreadyNamed:newName notIncluding:item]){
 	return false;
     }
 
-    id item = [self selectedItem];
-
     if([item isKindOfClass:[list class]]){
 	list *theList = item;
-	[theList setName:newName];
+	[theList setName:[NSString stringWithString:newName]];
     }
 
     if([item isKindOfClass:[smartList class]]){
 	smartList *theList = item;
-	[theList setName:newName];
+	[theList setName:[NSString stringWithString:newName]];
     }
 
     [application saveAction:self];

@@ -69,4 +69,5 @@
 - (void) editCurrentlySelectedSmartList;
 - (void)updateFilterPredicateWith:(NSPredicate*)predicate;
 - (void)addToCurrentLibraryTheBook:(book*)obj;
+- (BOOL)listOrSmartlistAlreadyNamed:(NSString*)name notIncluding:(NSManagedObject*)obj;
 @end

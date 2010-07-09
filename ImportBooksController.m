@@ -34,6 +34,7 @@
     }
     return self;
 }
+
 - (id)initWithSofiaApplication:(SofiaApplication*)theApplication{
     if(self = [self init]){
 	application = theApplication;
