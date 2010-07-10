@@ -64,9 +64,9 @@
 }
 
 - (NSManagedObjectContext *) managedObjectContext{
-    if (managedObjectContext != nil) {
+    if (managedObjectContext != nil)
         return managedObjectContext;
-    }
+    return nil;
 }
 
 - (void) searchForISBN:(NSString*)isbn{
@@ -157,13 +157,17 @@
     amazonInterface* amazon = [[amazonInterface alloc] init];
 
     if(![amazon searchISBN:[txt_search stringValue]]){
-	NSRunInformationalAlertPanel(@"Download Error", @"Unable to retrieve information from Amazon. Please check internet connectivity and valid access keys in your preferences." , @"Ok", nil, nil);
+	NSRunInformationalAlertPanel(@"Download Error", 
+		@"Unable to retrieve information from Amazon. Please check internet connectivity and valid access keys in your preferences." , @"Ok", nil, nil);
+	[amazon release];
 	return false;
     }
 
     //NSLog([amazon imageURL]);
     [img_summary_cover setImage:[amazon frontCover]];
     [img_cover setImage:[amazon frontCover]];
+
+    [amazon release];
 
     return true;
 }
@@ -172,12 +176,15 @@
 
     isbndbInterface *isbndb = [[isbndbInterface alloc] init];
     if(![isbndb searchISBN:[txt_search stringValue]]){
-	NSRunInformationalAlertPanel(@"Download Error", @"Unable to retrieve information from ISBNDb. Please check internet connectivity and a valid access key in your preferences." , @"Ok", nil, nil);
+	NSRunInformationalAlertPanel(@"Download Error", 
+		@"Unable to retrieve information from ISBNDb. Please check internet connectivity and a valid access key in your preferences." , @"Ok", nil, nil);
+	[isbndb release];
 	return false;
     }
 
     if(![isbndb successfullyFoundBook]){
 	NSRunInformationalAlertPanel(@"Search Error", @"No results found for this ISBN on ISBNDb." , @"Ok", nil, nil);
+	[isbndb release];
 	return false;
     }
 
@@ -245,35 +252,35 @@
     
     //lastly update the summary tab
     [self updateSummaryTabView];
+    [isbndb release];
     return true;
 }
 
 - (NSFetchRequest*) authorExistsWithName:(NSString*)authorName{
     //returns the request in order to get hold of these authors
     //otherwise returns nil if the author cannot be found.
-    NSError *error;
-    NSString *predicate = [[NSString alloc] initWithFormat:@"name MATCHES '%@'", authorName];
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"author" inManagedObjectContext:managedObjectContext]];
-    [request setPredicate:[NSPredicate predicateWithFormat:predicate]];
-    if([managedObjectContext countForFetchRequest:request error:&error] > 0){
-	return request;
-    }else{
-	return nil;
-    }
+    return [self entity:@"author" existsWithName:authorName];
 }
 
 - (NSFetchRequest*) subjectExistsWithName:(NSString*)subjectName{
     //returns the request in order to get hold of these subjects
     //otherwise returns nil if the subject cannot be found.
+    return [self entity:@"subject" existsWithName:subjectName];
+}
+
+- (NSFetchRequest*)entity:(NSString*)entity existsWithName:(NSString*)entityName{
     NSError *error;
-    NSString *predicate = [[NSString alloc] initWithFormat:@"name MATCHES '%@'", subjectName];
+    NSString *predicate = [[NSString alloc] initWithFormat:@"name MATCHES '%@'", entityName];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"subject" inManagedObjectContext:managedObjectContext]];
+    [request setEntity:[NSEntityDescription entityForName:entity inManagedObjectContext:managedObjectContext]];
     [request setPredicate:[NSPredicate predicateWithFormat:predicate]];
+
+    [predicate release];
+
     if([managedObjectContext countForFetchRequest:request error:&error] > 0){
-	return request;
+	return [request autorelease];
     }else{
+	[request release];
 	return nil;
     }
 }
@@ -304,6 +311,7 @@
 }
 
 - (IBAction) searchClicked:(id)sender {
+    //TODO: check that searching for isbn
     //check if the book already exists in library
     NSError *error;
     NSString *predicate = [[NSString alloc] initWithFormat:@"isbn10 MATCHES '%@' OR isbn13 MATCHES '%@'",
@@ -312,6 +320,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"book" inManagedObjectContext:managedObjectContext]];
     [request setPredicate:[NSPredicate predicateWithFormat:predicate]];
+    [predicate release];
     if([managedObjectContext countForFetchRequest:request error:&error] > 0){
         //[[NSApplication sharedApplication] presentError:error];
 	int alertReturn;
@@ -327,8 +336,10 @@
 	    [self setObj:[[managedObjectContext executeFetchRequest:request error:&error] objectAtIndex:0]];
 	    [self updateUIFromManagedObject];
 	}
+	[request release];
 	return;
     }
+    [request release];
 
     [progIndicator setUsesThreadedAnimation:true];
     [progIndicator startAnimation:self];

@@ -21,7 +21,6 @@
 
 #import "SidebarOutlineView.h"
 
-// TODO: fix renaming!!!
 // TODO: refactor out logic to a controller.
 
 @implementation SidebarOutlineView
@@ -342,7 +341,7 @@
 }
 
 - (id)outlineView:(NSOutlineView *)outlineView persistentObjectForItem:(id)item{
-    return item; //TODO: no idea what this really does! haha
+    return item;
 }
 
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item{

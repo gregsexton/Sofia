@@ -21,6 +21,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "author.h"
+#import "AuthorsWindowControllerDelegate.h"
 
 
 @interface AuthorsWindowController : NSObject {
@@ -34,9 +35,9 @@
     author			*initialSelection;
     NSManagedObjectContext	*managedObjectContext;
 
-    id				*delegate;
+    id<AuthorsWindowControllerDelegate>	delegate;
 }
-@property (nonatomic, assign) id *delegate;
+@property (nonatomic, assign) id<AuthorsWindowControllerDelegate> delegate;
 
 - (IBAction)saveClicked:(id)sender;
 - (IBAction)cancelClicked:(id)sender;

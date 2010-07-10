@@ -25,8 +25,10 @@
 #import "author.h"
 #import "amazonInterface.h"
 #import "BooksWindowControllerDelegate.h"
+#import "AuthorsWindowControllerDelegate.h"
+#import "SubjectWindowControllerDelegate.h"
 
-@interface BooksWindowController : NSObjectController {
+@interface BooksWindowController : NSObjectController <AuthorsWindowControllerDelegate, SubjectWindowControllerDelegate> {
     IBOutlet NSTextField *txt_search;
 
     IBOutlet NSTextField    *txt_isbn10;
@@ -97,24 +99,25 @@
 @property (nonatomic, assign) id delegate;
 @property (nonatomic) BOOL displaySearch;
 
-- (IBAction) searchClicked:(id)sender;
-- (IBAction) clearClicked:(id)sender;
-- (IBAction) cancelClicked:(id)sender;
-- (IBAction) saveClicked:(id)sender;
 - (IBAction) addAuthorClicked:(id)sender;
 - (IBAction) addSubjectClicked:(id)sender;
+- (IBAction) cancelClicked:(id)sender;
+- (IBAction) clearClicked:(id)sender;
 - (IBAction) copiesValueChanged:(id)sender;
+- (IBAction) saveClicked:(id)sender;
+- (IBAction) searchClicked:(id)sender;
 
+- (BOOL) updateUIFromAmazon;
+- (BOOL) updateUIFromISBNDb;
 - (NSFetchRequest*) authorExistsWithName:(NSString*)authorName;
 - (NSFetchRequest*) subjectExistsWithName:(NSString*)subjectName;
-- (void) displayManagedAuthorsWithSelectedAuthor:(author*)authorObj;
-- (void) displayManagedSubjectsWithSelectedSubject:(subject*)subjectObj;
-- (void) updateUIFromManagedObject;
+- (NSFetchRequest*)entity:(NSString*)entity existsWithName:(NSString*)entityName;
 - (id)   initWithManagedObject:(book*)object withSearch:(BOOL)withSearch;
 - (void) clearAllFields;
+- (void) displayManagedAuthorsWithSelectedAuthor:(author*)authorObj;
+- (void) displayManagedSubjectsWithSelectedSubject:(subject*)subjectObj;
 - (void) saveManagedObjectContext:(NSManagedObjectContext*)context;
-- (BOOL) updateUIFromISBNDb;
-- (BOOL) updateUIFromAmazon;
 - (void) updateManagedObjectFromUI;
 - (void) updateSummaryTabView;
+- (void) updateUIFromManagedObject;
 @end

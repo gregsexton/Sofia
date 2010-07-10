@@ -23,6 +23,7 @@
 #import "subject.h"
 #import "book.h"
 #import "BooksWindowController.h"
+#import "SubjectWindowControllerDelegate.h"
 
 
 @interface SubjectWindowController : NSObject {
@@ -36,9 +37,9 @@
     subject			*initialSelection;
     NSManagedObjectContext	*managedObjectContext;
 
-    id				*delegate;
+    id<SubjectWindowControllerDelegate> delegate;
 }
-@property (nonatomic, assign) id *delegate;
+@property (nonatomic, assign) id<SubjectWindowControllerDelegate> delegate;
 
 - (IBAction)saveClicked:(id)sender;
 - (IBAction)cancelClicked:(id)sender;
