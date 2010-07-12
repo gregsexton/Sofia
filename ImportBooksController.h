@@ -44,4 +44,5 @@
 - (IBAction)cancelAction:(id)sender;
 - (IBAction)importAction:(id)sender;
 - (IBAction)clearAction:(id)sender;
+- (id)initWithSofiaApplication:(SofiaApplication*)theApplication;
 @end

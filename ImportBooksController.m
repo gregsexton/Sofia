@@ -54,7 +54,10 @@
 }
 
 - (IBAction)addWebsiteAction:(id)sender{
-    NSURL* inputUrl = [NSURL URLWithString:[urlTextField stringValue]];
+    NSString* inputUrlString = [urlTextField stringValue];
+    if([inputUrlString isEqualToString:@""])
+	return;
+    NSURL* inputUrl = [NSURL URLWithString:inputUrlString];
     if(inputUrl == nil)
 	return;
 
@@ -81,6 +84,8 @@
 }
 
 - (IBAction)importAction:(id)sender{
+    if([isbns count] <= 0)
+	return;
     BooksWindowController* detailWin = [application createBookAndOpenDetailWindow];
     [detailWin setDelegate:self];
     [detailWin searchForISBN:[isbns objectAtIndex:arrayCounter]];
