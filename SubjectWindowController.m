@@ -21,6 +21,7 @@
 
 #import "SubjectWindowController.h"
 
+//TODO: refactor this extract superclass for both this and AuthorsWindowController
 //TODO: pressing backspace removes an subject or book from subject
 //depending on selected tableview
 
@@ -61,6 +62,7 @@
     if (managedObjectContext != nil) {
         return managedObjectContext;
     }
+    return nil;
 }
 
 - (void) beginEditingCurrentlySelectedItemInSubjectsTable{
@@ -94,8 +96,9 @@
     //use the first object if multiple are selected
     book *obj = [[bookArrayController selectedObjects] objectAtIndex:0];
 
-    BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj];
-    if (![NSBundle loadNibNamed:@"Detail" owner:detailWin]) {
+    BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj
+										 withSearch:false];
+    if (![NSBundle loadNibNamed:@"Detail" owner:[detailWin autorelease]]) {
 	NSLog(@"Error loading Nib!");
     }
 } 

@@ -336,7 +336,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>37FF509211EB8CB6001B8ECC</string>
+										<string>37FF50C911EBDC04001B8ECC</string>
 										<key>history</key>
 										<array>
 											<string>37FF4DB111E291FB001B8ECC</string>
@@ -546,12 +546,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>37FF50CA11EBDC04001B8ECC</string>
 		<string>37FF4DC511E29265001B8ECC</string>
 		<string>37FF4DBF11E291FB001B8ECC</string>
 		<string>37FF4DC011E291FB001B8ECC</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>373655AF101CCE8600709C8F</string>
 	</array>
 	<key>WindowString</key>
@@ -576,7 +577,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SofiaApplication.m</string>
+								<string>SubjectWindowController.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>

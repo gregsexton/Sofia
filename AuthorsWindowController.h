@@ -45,5 +45,5 @@
 - (IBAction)addAuthorAction:(id)sender;
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context;
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context selectedAuthor:(author*)authorInput;
-- (void) saveManagedObjectContext:(NSManagedObjectContext*)context;
+- (void)saveManagedObjectContext:(NSManagedObjectContext*)context;
 @end

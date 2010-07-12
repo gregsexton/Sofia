@@ -22,7 +22,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@protocol AuthorsWindowControllerDelegate
+@protocol AuthorsWindowControllerDelegate <NSObject>
 
 @optional
 
