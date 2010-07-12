@@ -282,7 +282,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>20</integer>
+									<integer>22</integer>
 									<integer>17</integer>
 									<integer>16</integer>
 									<integer>0</integer>
@@ -324,7 +324,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>AuthorsWindowControllerDelegate.h</string>
+								<string>ImportBooksControllerDelegate.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -332,11 +332,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>AuthorsWindowControllerDelegate.h</string>
+										<string>ImportBooksControllerDelegate.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>37FF4FCC11E8AE7B001B8ECC</string>
+										<string>37FF509211EB8CB6001B8ECC</string>
 										<key>history</key>
 										<array>
 											<string>37FF4DB111E291FB001B8ECC</string>
@@ -344,12 +344,13 @@
 											<string>37FF4F4A11E7CCE2001B8ECC</string>
 											<string>37FF4F4B11E7CCE2001B8ECC</string>
 											<string>37FF4F4C11E7CCE2001B8ECC</string>
-											<string>37FF4F4D11E7CCE2001B8ECC</string>
-											<string>37FF4FB911E8ADB6001B8ECC</string>
 											<string>37FF4FBA11E8ADB6001B8ECC</string>
 											<string>37FF4FBB11E8ADB6001B8ECC</string>
-											<string>37FF4FBC11E8ADB6001B8ECC</string>
-											<string>37FF4FBD11E8ADB6001B8ECC</string>
+											<string>37FF4FD511E8B98A001B8ECC</string>
+											<string>37FF4FD611E8B98A001B8ECC</string>
+											<string>37FF4FD711E8B98A001B8ECC</string>
+											<string>37FF506811EB88E5001B8ECC</string>
+											<string>37FF506911EB88E5001B8ECC</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -575,7 +576,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>BooksWindowController.m</string>
+								<string>SofiaApplication.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>

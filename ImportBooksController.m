@@ -25,6 +25,7 @@
 @implementation ImportBooksController
 @synthesize isbns;
 @synthesize windowToAttachTo;
+@synthesize delegate;
 
 //TODO: drag and drop a file
 
@@ -81,6 +82,8 @@
     [importSheet orderOut:nil];
     [NSApp endSheet:importSheet];
     [importSheet close];
+    if([[self delegate] respondsToSelector:@selector(closeClickedOnImportBooksController:)])
+	[delegate closeClickedOnImportBooksController:self];
 }
 
 - (IBAction)importAction:(id)sender{

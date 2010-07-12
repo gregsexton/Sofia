@@ -109,7 +109,10 @@
     fileManager = [NSFileManager defaultManager];
     applicationSupportFolder = [self applicationSupportFolder];
     if ( ![fileManager fileExistsAtPath:applicationSupportFolder isDirectory:NULL] ) {
-        [fileManager createDirectoryAtPath:applicationSupportFolder attributes:nil];
+        [fileManager createDirectoryAtPath:applicationSupportFolder 
+	       withIntermediateDirectories:true
+				attributes:nil
+				     error:NULL];
     }
     
 #ifdef CONFIGURATION_Debug
@@ -237,7 +240,7 @@
 - (IBAction) manageAuthorsClickAction:(id)sender {
 	AuthorsWindowController *detailWin = [[AuthorsWindowController alloc] initWithManagedObjectContext:managedObjectContext];
 	//[detailWin setDelegate:self];
-	if (![NSBundle loadNibNamed:@"AuthorDetail" owner:detailWin]) {
+	if (![NSBundle loadNibNamed:@"AuthorDetail" owner:[detailWin autorelease]]) {
 	    NSLog(@"Error loading Nib!");
 	}
 }
@@ -245,7 +248,7 @@
 - (IBAction) manageSubjectsClickAction:(id)sender {
 	SubjectWindowController *detailWin = [[SubjectWindowController alloc] initWithManagedObjectContext:managedObjectContext];
 	//[detailWin setDelegate:self];
-	if (![NSBundle loadNibNamed:@"SubjectDetail" owner:detailWin]) {
+	if (![NSBundle loadNibNamed:@"SubjectDetail" owner:[detailWin autorelease]]) {
 	    NSLog(@"Error loading Nib!");
 	}
 }
@@ -278,7 +281,8 @@
 	NSLog(@"Error loading Nib!");
     }
 
-    return detailWin;
+    [obj release];
+    return [detailWin autorelease];
 }
 
 - (IBAction) removeBookAction:(id)sender {
@@ -403,9 +407,18 @@
 - (IBAction) importBooks:(id)sender{
     ImportBooksController *importWin = [[ImportBooksController alloc] initWithSofiaApplication:self];
     [importWin setWindowToAttachTo:window];
+    [importWin setDelegate:self];
     if (![NSBundle loadNibNamed:@"ImportBooks" owner:importWin]) {
+	[importWin release];
 	NSLog(@"Error loading Nib!");
     }
+}
+
+- (void)closeClickedOnImportBooksController:(ImportBooksController*)controller{
+    //released here as a new autorelease pool is created for this
+    //modal window and the object is released early. Here is the
+    //only sensible place to release.
+    [controller release];
 }
 
 @end

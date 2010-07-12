@@ -22,6 +22,7 @@
 #import <Cocoa/Cocoa.h>
 #import "isbnExtractor.h"
 #import "BooksWindowController.h"
+#import "ImportBooksControllerDelegate.h"
 @class SofiaApplication;
 
 @interface ImportBooksController : NSWindowController <NSTextViewDelegate, BooksWindowControllerDelegate> {
@@ -35,10 +36,12 @@
 
     SofiaApplication*		application;
     NSUInteger			arrayCounter;
+    id<ImportBooksControllerDelegate> delegate;
 
 }
 @property (copy) NSArray* isbns;
 @property (assign) NSWindow* windowToAttachTo;
+@property (assign) id<ImportBooksControllerDelegate> delegate;
 
 - (IBAction)addWebsiteAction:(id)sender;
 - (IBAction)cancelAction:(id)sender;

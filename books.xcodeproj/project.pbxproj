@@ -183,6 +183,7 @@
 		37FF4F4311E7CC07001B8ECC /* PredicateEditorWindowControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PredicateEditorWindowControllerDelegate.h; sourceTree = "<group>"; };
 		37FF4FB211E8ACDA001B8ECC /* AuthorsWindowControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorsWindowControllerDelegate.h; sourceTree = "<group>"; };
 		37FF4FB311E8ACEA001B8ECC /* SubjectWindowControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubjectWindowControllerDelegate.h; sourceTree = "<group>"; };
+		37FF506411EB8838001B8ECC /* ImportBooksControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportBooksControllerDelegate.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Sofia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sofia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -315,6 +316,7 @@
 				37FF4F4311E7CC07001B8ECC /* PredicateEditorWindowControllerDelegate.h */,
 				37FF4FB211E8ACDA001B8ECC /* AuthorsWindowControllerDelegate.h */,
 				37FF4FB311E8ACEA001B8ECC /* SubjectWindowControllerDelegate.h */,
+				37FF506411EB8838001B8ECC /* ImportBooksControllerDelegate.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";

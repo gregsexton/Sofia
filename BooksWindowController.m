@@ -45,10 +45,15 @@
 
 - (id)initWithManagedObject:(book*)object withSearch:(BOOL)withSearch{
     self = [super init];
-    obj = object;
+    obj = [object retain];
     displaySearch = !withSearch;
     managedObjectContext = [obj managedObjectContext];
     return self;
+}
+
+- (void) dealloc{
+    [obj release];
+    [super dealloc];
 }
 
 - (void) awakeFromNib {

@@ -1,5 +1,5 @@
 //
-// PredicateEditorWindowControllerDelegate.h
+// ImportBooksControllerDelegate.h
 //
 // Copyright 2010 Greg Sexton
 //
@@ -20,12 +20,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
+@class ImportBooksController;
 
-
-@protocol PredicateEditorWindowControllerDelegate
+@protocol ImportBooksControllerDelegate
 
 @optional
 
-- (void)predicateEditingDidFinish:(NSPredicate*)predicate;
+- (void)closeClickedOnImportBooksController:(ImportBooksController*)controller;
 
 @end
