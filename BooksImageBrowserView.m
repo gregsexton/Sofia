@@ -20,6 +20,7 @@
 //
 
 #import "BooksImageBrowserView.h"
+#import "BooksImageBrowserController.h"
 
 
 @implementation BooksImageBrowserView
@@ -72,6 +73,7 @@
 - (void)dealloc{
     [image release];
     [imageID release];
+    [imageSub release];
     [super dealloc];
 }
 

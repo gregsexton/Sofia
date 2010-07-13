@@ -20,6 +20,7 @@
 //
 
 #import "ImportBooksController.h"
+#import "SofiaApplication.h"
 
 
 @implementation ImportBooksController

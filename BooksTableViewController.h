@@ -25,7 +25,9 @@
 #import "BooksWindowController.h"
 #import "BooksMainViewController.h"
 
-@interface BooksTableViewController : BooksMainViewController <NSTableViewDelegate, NSTableViewDataSource>{
+@interface BooksTableViewController : BooksMainViewController <NSTableViewDelegate, 
+							       NSTableViewDataSource,
+							       NSComboBoxDataSource>{
 
     IBOutlet BooksTableView* tableView;
 }

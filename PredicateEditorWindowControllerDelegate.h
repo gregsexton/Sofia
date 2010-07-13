@@ -22,7 +22,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@protocol PredicateEditorWindowControllerDelegate
+@protocol PredicateEditorWindowControllerDelegate <NSObject>
 
 @optional
 

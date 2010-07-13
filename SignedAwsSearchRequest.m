@@ -110,6 +110,7 @@ NSInteger stringByteSort(NSString *a, NSString *b, void *context);
 + (NSString *)decodeKey:(char *)keyBytes length:(int)length {
 //	NSData *data = [NSData gtm_dataByInflatingBytes:keyBytes length:length];
 //	return [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+	return nil;
 }
 
 @end

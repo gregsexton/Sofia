@@ -38,6 +38,12 @@
     imageURL = @"";
     return self;
 }
+
+- (void)dealloc{
+    if(currentStringValue)
+	[currentStringValue release];
+    [super dealloc];
+}
     
 - (BOOL)searchISBN:(NSString*)isbn{
 

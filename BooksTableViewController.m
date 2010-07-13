@@ -40,7 +40,7 @@
 
 	BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj
 										     withSearch:NO];
-	if (![NSBundle loadNibNamed:@"Detail" owner:detailWin]) {
+	if (![NSBundle loadNibNamed:@"Detail" owner:[detailWin autorelease]]) {
 	    NSLog(@"Error loading Nib!");
 	}
     }
@@ -49,7 +49,10 @@
 // Delegate Methods //////////////////////////////////////////////////////
 
 //alow the tableview to be a drag and drop source
-- (BOOL)tableView:(NSTableView *)aTableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard{
+- (BOOL)tableView:(NSTableView *)aTableView 
+	writeRowsWithIndexes:(NSIndexSet *)rowIndexes 
+		toPasteboard:(NSPasteboard *)pboard{
+			    
     [self writeBooksWithIndexes:rowIndexes toPasteboard:pboard];
     return true;
 }

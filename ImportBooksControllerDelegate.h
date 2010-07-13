@@ -22,7 +22,7 @@
 #import <Cocoa/Cocoa.h>
 @class ImportBooksController;
 
-@protocol ImportBooksControllerDelegate
+@protocol ImportBooksControllerDelegate <NSObject>
 
 @optional
 

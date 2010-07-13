@@ -24,8 +24,6 @@
 #import "BooksTableView.h"
 
 
-//TODO: fix all warnings -- perhaps turn on error on warning?
-//TODO: fix memory leaks "vimgrep alloc *.m"
 //TODO: reorder all of the methods into a more logical state!
 
 @implementation SofiaApplication

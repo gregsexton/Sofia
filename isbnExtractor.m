@@ -31,6 +31,7 @@
 	isbns = nil;
 	return self;
     }
+    return nil;
 }
 
 - (NSArray*)discoveredISBNs{

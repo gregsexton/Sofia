@@ -58,9 +58,10 @@
     NSImage* img = [theBook coverImage];
     if(img == nil) //use default image
 	img = [NSImage imageNamed:@"missing.png"];
-    return [[BooksImageBrowserItem alloc] initWithImage:img 
-						imageID:[theBook title] 
-					       subtitle:[theBook authorText]];
+    BooksImageBrowserItem* item = [[BooksImageBrowserItem alloc] initWithImage:img 
+								       imageID:[theBook title] 
+								      subtitle:[theBook authorText]];
+    return [item autorelease];
 }
 
 - (void)imageBrowser:(IKImageBrowserView *)aBrowser cellWasDoubleClickedAtIndex:(NSUInteger)index{
@@ -68,7 +69,7 @@
 
     BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj
 										 withSearch:NO];
-    if (![NSBundle loadNibNamed:@"Detail" owner:detailWin]) {
+    if (![NSBundle loadNibNamed:@"Detail" owner:[detailWin autorelease]]) {
 	NSLog(@"Error loading Nib!");
     }
 }
@@ -88,7 +89,10 @@
     [arrayController setSelectionIndexes:[browserView selectionIndexes]];
 }
 
-- (NSUInteger)imageBrowser:(IKImageBrowserView *)aBrowser writeItemsAtIndexes:(NSIndexSet *)itemIndexes toPasteboard:(NSPasteboard *)pasteboard{
+- (NSUInteger)imageBrowser:(IKImageBrowserView *)aBrowser 
+       writeItemsAtIndexes:(NSIndexSet *)itemIndexes 
+	      toPasteboard:(NSPasteboard *)pasteboard{
+
     [self writeBooksWithIndexes:itemIndexes toPasteboard:pasteboard];
     return [itemIndexes count];
 }

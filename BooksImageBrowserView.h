@@ -43,8 +43,6 @@
     NSString* imageSub;
     
 }
-@property(readwrite,copy) NSImage * image;
-@property(readwrite,copy) NSString * imageID;
 
 - (id)initWithImage:(NSImage*)anImage imageID:(NSString*)anImageID subtitle:(NSString*)aSubtitle;
 - (NSString *)imageUID;

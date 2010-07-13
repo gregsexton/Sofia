@@ -35,7 +35,7 @@ typedef enum { pNoProperty,
 }isbnProperties ;
 
 
-@interface isbndbInterface : NSObject {
+@interface isbndbInterface : NSObject <NSXMLParserDelegate> {
 
     NSString *bookISBN10;
     NSString *bookISBN13;

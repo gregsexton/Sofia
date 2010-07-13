@@ -117,6 +117,7 @@
 - (void) displayManagedAuthorsWithSelectedAuthor:(author*)authorObj;
 - (void) displayManagedSubjectsWithSelectedSubject:(subject*)subjectObj;
 - (void) saveManagedObjectContext:(NSManagedObjectContext*)context;
+- (void) searchForISBN:(NSString*)isbn;
 - (void) updateManagedObjectFromUI;
 - (void) updateSummaryTabView;
 - (void) updateUIFromManagedObject;
