@@ -291,6 +291,37 @@
     }
 }
 
+- (BOOL)bookExistsInLibraryWithISBN:(NSString*)searchedISBN{
+    //could use [self entity:existsWithName:] ?
+    NSError *error;
+    NSString *predicate = [[NSString alloc] initWithFormat:@"isbn10 MATCHES '%@' OR isbn13 MATCHES '%@'",
+							   searchedISBN,
+							   searchedISBN];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"book" inManagedObjectContext:managedObjectContext]];
+    [request setPredicate:[NSPredicate predicateWithFormat:predicate]];
+    [predicate release];
+    if([managedObjectContext countForFetchRequest:request error:&error] > 0){
+        //[[NSApplication sharedApplication] presentError:error];
+	int alertReturn;
+	alertReturn = NSRunInformationalAlertPanel(@"Duplicate Entry",
+						   @"A book with this ISBN number is already in your library.",
+						   @"Cancel",
+						   @"Display",
+						   nil);
+	if (alertReturn == NSAlertAlternateReturn){
+	    [managedObjectContext deleteObject:obj];
+	    //get hold of existing object and update UI.
+	    [self setObj:[[managedObjectContext executeFetchRequest:request error:&error] objectAtIndex:0]];
+	    [self updateUIFromManagedObject];
+	}
+	[request release];
+	return true;
+    }
+    [request release];
+    return false;
+}
+
 - (void) updateManagedObjectFromUI {
     if (obj != nil){
 	//TODO: wrap these in checks?
@@ -317,7 +348,6 @@
 }
 
 - (IBAction) searchClicked:(id)sender {
-    //TODO: extract methods out of this
     isbnExtractor* extractor = [[isbnExtractor alloc] initWithContent:[txt_search stringValue]];
     NSArray* isbns = [extractor discoveredISBNs];
     [extractor release];
@@ -327,34 +357,9 @@
     }
 
     NSString* searchedISBN = [isbns objectAtIndex:0];
-    //check if the book already exists in library
-    NSError *error;
-    NSString *predicate = [[NSString alloc] initWithFormat:@"isbn10 MATCHES '%@' OR isbn13 MATCHES '%@'",
-							   searchedISBN,
-							   searchedISBN];
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"book" inManagedObjectContext:managedObjectContext]];
-    [request setPredicate:[NSPredicate predicateWithFormat:predicate]];
-    [predicate release];
-    if([managedObjectContext countForFetchRequest:request error:&error] > 0){
-        //[[NSApplication sharedApplication] presentError:error];
-	int alertReturn;
-	alertReturn = NSRunInformationalAlertPanel(@"Duplicate Entry",
-						   @"A book with this ISBN number is already in your library.",
-						   @"Cancel",
-						   @"Display",
-						   nil);
-	if (alertReturn == NSAlertAlternateReturn){
-	    //delete empty object from context
-	    [managedObjectContext deleteObject:obj];
-	    //get hold of existing object and update UI.
-	    [self setObj:[[managedObjectContext executeFetchRequest:request error:&error] objectAtIndex:0]];
-	    [self updateUIFromManagedObject];
-	}
-	[request release];
+
+    if([self bookExistsInLibraryWithISBN:searchedISBN])
 	return;
-    }
-    [request release];
 
     [progIndicator setUsesThreadedAnimation:true];
     [progIndicator startAnimation:self];

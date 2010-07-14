@@ -108,6 +108,7 @@
 - (IBAction) saveClicked:(id)sender;
 - (IBAction) searchClicked:(id)sender;
 
+- (BOOL) bookExistsInLibraryWithISBN:(NSString*)searchedISBN;
 - (BOOL) updateUIFromAmazonWithISBN:(NSString*)searchedISBN;
 - (BOOL) updateUIFromISBNDbWithISBN:(NSString*)searchedISBN;
 - (NSFetchRequest*) authorExistsWithName:(NSString*)authorName;
