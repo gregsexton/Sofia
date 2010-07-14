@@ -232,8 +232,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -282,8 +280,10 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>56</integer>
-									<integer>55</integer>
+									<integer>40</integer>
+									<integer>25</integer>
+									<integer>16</integer>
+									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
@@ -317,12 +317,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>BooksWindowControllerDelegate.h</string>
+								<string>BooksImageBrowserController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -330,11 +332,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>BooksWindowControllerDelegate.h</string>
+										<string>BooksImageBrowserController.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>37FF516711ED14BB001B8ECC</string>
+										<string>37FF51C111EE54FC001B8ECC</string>
 										<key>history</key>
 										<array>
 											<string>37FF4DB111E291FB001B8ECC</string>
@@ -348,7 +350,9 @@
 											<string>37FF514E11ED12E5001B8ECC</string>
 											<string>37FF514F11ED12E5001B8ECC</string>
 											<string>37FF515011ED12E5001B8ECC</string>
-											<string>37FF515111ED12E5001B8ECC</string>
+											<string>37FF51A011EE4E31001B8ECC</string>
+											<string>37FF51A111EE4E31001B8ECC</string>
+											<string>37FF51A211EE4E31001B8ECC</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -544,13 +548,14 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>37FF51C211EE54FC001B8ECC</string>
 		<string>37FF4DC511E29265001B8ECC</string>
 		<string>37FF4DBF11E291FB001B8ECC</string>
 		<string>37FF4DC011E291FB001B8ECC</string>
-		<string>1C78EAAD065D492600B07095</string>
-		<string>373655AF101CCE8600709C8F</string>
-		<string>1CD10A99069EF8BA00B06720</string>
 		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
+		<string>1C78EAAD065D492600B07095</string>
+		<string>1CD10A99069EF8BA00B06720</string>
+		<string>373655AF101CCE8600709C8F</string>
 	</array>
 	<key>WindowString</key>
 	<string>660 97 1819 1278 0 0 2560 1418 </string>
@@ -574,7 +579,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>BooksImageBrowserView.m</string>
+								<string>BooksWindowController.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>

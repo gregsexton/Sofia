@@ -157,11 +157,11 @@
     }
 }
 
-- (BOOL) updateUIFromAmazon {
+- (BOOL) updateUIFromAmazonWithISBN:(NSString*)searchedISBN {
 
     amazonInterface* amazon = [[amazonInterface alloc] init];
 
-    if(![amazon searchISBN:[txt_search stringValue]]){
+    if(![amazon searchISBN:searchedISBN]){
 	NSRunInformationalAlertPanel(@"Download Error", 
 		@"Unable to retrieve information from Amazon. Please check internet connectivity and valid access keys in your preferences." , @"Ok", nil, nil);
 	[amazon release];
@@ -177,10 +177,10 @@
     return true;
 }
 
-- (BOOL) updateUIFromISBNDb {
+- (BOOL) updateUIFromISBNDbWithISBN:(NSString*)searchedISBN {
 
     isbndbInterface *isbndb = [[isbndbInterface alloc] init];
-    if(![isbndb searchISBN:[txt_search stringValue]]){
+    if(![isbndb searchISBN:searchedISBN]){
 	NSRunInformationalAlertPanel(@"Download Error", 
 		@"Unable to retrieve information from ISBNDb. Please check internet connectivity and a valid access key in your preferences." , @"Ok", nil, nil);
 	[isbndb release];
@@ -221,6 +221,7 @@
     [txt_physicalDescrip selectItemAtIndex:0];
 
     //loop over authors and subject arrays and update tables
+    //TODO: refactor: extract methods
     //TODO: when clicking add start editing automatically.
     NSString *object;
     //update authors
@@ -316,12 +317,21 @@
 }
 
 - (IBAction) searchClicked:(id)sender {
-    //TODO: check that searching for isbn
+    //TODO: extract methods out of this
+    isbnExtractor* extractor = [[isbnExtractor alloc] initWithContent:[txt_search stringValue]];
+    NSArray* isbns = [extractor discoveredISBNs];
+    [extractor release];
+    if([isbns count] != 1){
+	NSRunInformationalAlertPanel(@"Search Error", @"Please search for a book by the ISBN number." , @"Ok", nil, nil);
+	return;
+    }
+
+    NSString* searchedISBN = [isbns objectAtIndex:0];
     //check if the book already exists in library
     NSError *error;
     NSString *predicate = [[NSString alloc] initWithFormat:@"isbn10 MATCHES '%@' OR isbn13 MATCHES '%@'",
-							   [txt_search stringValue],
-							   [txt_search stringValue]];
+							   searchedISBN,
+							   searchedISBN];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"book" inManagedObjectContext:managedObjectContext]];
     [request setPredicate:[NSPredicate predicateWithFormat:predicate]];
@@ -354,7 +364,7 @@
 				       contextInfo:nil];
     
     [self clearAllFields];
-    if ([self updateUIFromISBNDb]) {
+    if ([self updateUIFromISBNDbWithISBN:searchedISBN]) {
 	[txt_title selectItemAtIndex:0];
 	[txt_titleLong selectItemAtIndex:0];
 	[txt_author selectItemAtIndex:0];
@@ -363,7 +373,7 @@
 	[txt_physicalDescrip selectItemAtIndex:0];
     }
 
-    [self updateUIFromAmazon];
+    [self updateUIFromAmazonWithISBN:searchedISBN];
 
     [progIndicator stopAnimation:self];
     [progressSheet orderOut:nil];

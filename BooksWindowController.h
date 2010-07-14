@@ -27,6 +27,7 @@
 #import "BooksWindowControllerDelegate.h"
 #import "AuthorsWindowControllerDelegate.h"
 #import "SubjectWindowControllerDelegate.h"
+#import "isbnExtractor.h"
 
 @interface BooksWindowController : NSObjectController <AuthorsWindowControllerDelegate, SubjectWindowControllerDelegate> {
     IBOutlet NSTextField *txt_search;
@@ -107,8 +108,8 @@
 - (IBAction) saveClicked:(id)sender;
 - (IBAction) searchClicked:(id)sender;
 
-- (BOOL) updateUIFromAmazon;
-- (BOOL) updateUIFromISBNDb;
+- (BOOL) updateUIFromAmazonWithISBN:(NSString*)searchedISBN;
+- (BOOL) updateUIFromISBNDbWithISBN:(NSString*)searchedISBN;
 - (NSFetchRequest*) authorExistsWithName:(NSString*)authorName;
 - (NSFetchRequest*) subjectExistsWithName:(NSString*)subjectName;
 - (NSFetchRequest*)entity:(NSString*)entity existsWithName:(NSString*)entityName;

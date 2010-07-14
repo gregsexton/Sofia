@@ -51,7 +51,6 @@
 
 
 
-
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -63,9 +62,10 @@
 
 - (id)initWithImage:(NSImage*)anImage imageID:(NSString*)anImageID subtitle:(NSString*)aSubtitle{
     if (self = [super init]) {
-	    image = [anImage copy];
-	    imageID = [anImageID copy];
-	    imageSub = [aSubtitle copy];
+	//TODO: get rid of console errors
+	image = [anImage copy];
+	imageID = [anImageID copy];
+	imageSub = [aSubtitle copy];
     }
     return self;
 }
