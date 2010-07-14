@@ -280,9 +280,9 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>40</integer>
-									<integer>25</integer>
-									<integer>16</integer>
+									<integer>9</integer>
+									<integer>3</integer>
+									<integer>1</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -324,7 +324,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>BooksImageBrowserController.m</string>
+								<string>BooksImageBrowserView.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -332,11 +332,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>BooksImageBrowserController.m</string>
+										<string>BooksImageBrowserView.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>37FF51CC11EE6203001B8ECC</string>
+										<string>37FF51EE11EE6AB0001B8ECC</string>
 										<key>history</key>
 										<array>
 											<string>37FF4DB111E291FB001B8ECC</string>
@@ -351,8 +351,8 @@
 											<string>37FF514F11ED12E5001B8ECC</string>
 											<string>37FF515011ED12E5001B8ECC</string>
 											<string>37FF51A011EE4E31001B8ECC</string>
-											<string>37FF51A111EE4E31001B8ECC</string>
-											<string>37FF51A211EE4E31001B8ECC</string>
+											<string>37FF51D711EE68FE001B8ECC</string>
+											<string>37FF51D811EE68FE001B8ECC</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -548,14 +548,14 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>37FF51CD11EE6203001B8ECC</string>
+		<string>37FF51ED11EE6AA4001B8ECC</string>
 		<string>37FF4DC511E29265001B8ECC</string>
 		<string>37FF4DBF11E291FB001B8ECC</string>
 		<string>37FF4DC011E291FB001B8ECC</string>
+		<string>373655AF101CCE8600709C8F</string>
 		<string>/Users/greg/code/objc/books/books.xcodeproj</string>
 		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
-		<string>373655AF101CCE8600709C8F</string>
 	</array>
 	<key>WindowString</key>
 	<string>660 97 1819 1278 0 0 2560 1418 </string>

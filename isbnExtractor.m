@@ -35,8 +35,8 @@
 }
 
 - (NSArray*)discoveredISBNs{
-    //returns an array of all matched isbns both 10 and 13
-    //with any hypehns removed
+    //returns an array of all matched isbns both 10 and 13 with any hypehns removed
+
     NSArray* matches = nil;
     NSString* regexString = @"(?m:(?<=(^|[\\s\\p{P}]))(978-?)?(\\d-?){9}\\d(?=([\\s\\p{P}]|$)))";
     matches = [[self content] componentsMatchedByRegex:regexString];

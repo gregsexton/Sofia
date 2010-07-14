@@ -62,10 +62,17 @@
 
 - (id)initWithImage:(NSImage*)anImage imageID:(NSString*)anImageID subtitle:(NSString*)aSubtitle{
     if (self = [super init]) {
-	//TODO: get rid of console errors
 	image = [anImage copy];
-	imageID = [anImageID copy];
-	imageSub = [aSubtitle copy];
+
+	if(anImageID == nil)
+	    imageID = @"";
+	else
+	    imageID = [anImageID copy];
+
+	if(aSubtitle == nil)
+	    imageSub = @"";
+	else
+	    imageSub = [aSubtitle copy];
     }
     return self;
 }
