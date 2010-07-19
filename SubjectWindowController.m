@@ -22,6 +22,7 @@
 #import "SubjectWindowController.h"
 
 //TODO: refactor this extract superclass for both this and AuthorsWindowController
+//TODO: get the column to sort and stay sorted!
 //TODO: pressing backspace removes an subject or book from subject
 //depending on selected tableview
 

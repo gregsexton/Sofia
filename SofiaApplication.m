@@ -239,8 +239,7 @@
 }    
 
 - (IBAction)search:(id)sender{
-    //TODO: split words up
-    
+
     NSString* searchVal = [sender stringValue];
     NSPredicate* totalPred;
 

@@ -21,8 +21,6 @@
 
 #import "SidebarOutlineView.h"
 
-// TODO: refactor out logic to a controller.
-
 @implementation SidebarOutlineView
 @synthesize bookLists;
 @synthesize smartBookLists;
