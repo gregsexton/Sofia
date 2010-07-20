@@ -27,8 +27,6 @@
 #import "author.h"
 #import "subject.h"
 
-//TODO: reorder all of the methods into a more logical state!
-//TODO: refactor!
 //TODO: error handling: no save if not enough info (e.g isbns)
 //TODO: what happends if can't find a book on amazon?
 
@@ -74,12 +72,44 @@
     return nil;
 }
 
+- (void) saveManagedObjectContext:(NSManagedObjectContext*)context {
+
+    NSError *error = nil;
+    if (![context save:&error]) {
+        [[NSApplication sharedApplication] presentError:error];
+    }
+
+}
+
 - (void) searchForISBN:(NSString*)isbn{
     //programatically search for an isbn
     [txt_search setStringValue:isbn];
     [self searchClicked:self];
 }
 
+- (void) updateManagedObjectFromUI {
+    if (obj != nil){
+	[obj setIsbn10:		    [txt_isbn10 stringValue]];
+	[obj setIsbn13:	    	    [txt_isbn13 stringValue]];
+	[obj setAuthorText: 	    [txt_author stringValue]];
+	[obj setSubjectText:	    [txt_subject stringValue]];
+	[obj setAwards:		    [txt_awards stringValue]];
+	[obj setDewey:		    [txt_dewey stringValue]];
+	[obj setDewey_normalised:   [txt_deweyNormal stringValue]];
+	[obj setEdition:	    [txt_edition stringValue]];
+	[obj setLanguage:	    [txt_language stringValue]];
+	[obj setLccNumber:	    [txt_lccNumber stringValue]];
+	[obj setNotes:		    [txt_notes stringValue]];
+	[obj setPhysicalDescription:[txt_physicalDescrip stringValue]];
+	[obj setPublisherText:	    [txt_publisher stringValue]];
+	[obj setSummary:	    [txt_summary stringValue]];
+	[obj setTitle:		    [txt_title stringValue]];
+	[obj setTitleLong:	    [txt_titleLong stringValue]];
+	[obj setUrls:		    [txt_urls stringValue]];
+	[obj setNoOfCopies:	    [txt_noOfCopies stringValue]];
+	[obj setCoverImage:	    [img_summary_cover image]];
+    }
+}
 
 - (void) updateUIFromManagedObject {
     if (obj != nil){
@@ -256,148 +286,8 @@
 	[subjectObj addBooksObject:obj];
     }
     
-    //lastly update the summary tab
-    [self updateSummaryTabView];
     [isbndb release];
     return true;
-}
-
-- (NSFetchRequest*) authorExistsWithName:(NSString*)authorName{
-    //returns the request in order to get hold of these authors
-    //otherwise returns nil if the author cannot be found.
-    return [self entity:@"author" existsWithName:authorName];
-}
-
-- (NSFetchRequest*) subjectExistsWithName:(NSString*)subjectName{
-    //returns the request in order to get hold of these subjects
-    //otherwise returns nil if the subject cannot be found.
-    return [self entity:@"subject" existsWithName:subjectName];
-}
-
-- (NSFetchRequest*)entity:(NSString*)entity existsWithName:(NSString*)entityName{
-    NSError *error;
-    NSString *predicate = [[NSString alloc] initWithFormat:@"name MATCHES '%@'", entityName];
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:entity inManagedObjectContext:managedObjectContext]];
-    [request setPredicate:[NSPredicate predicateWithFormat:predicate]];
-
-    [predicate release];
-
-    if([managedObjectContext countForFetchRequest:request error:&error] > 0){
-	return [request autorelease];
-    }else{
-	[request release];
-	return nil;
-    }
-}
-
-- (BOOL)bookExistsInLibraryWithISBN:(NSString*)searchedISBN{
-    //could use [self entity:existsWithName:] ?
-    NSError *error;
-    NSString *predicate = [[NSString alloc] initWithFormat:@"isbn10 MATCHES '%@' OR isbn13 MATCHES '%@'",
-							   searchedISBN,
-							   searchedISBN];
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"book" inManagedObjectContext:managedObjectContext]];
-    [request setPredicate:[NSPredicate predicateWithFormat:predicate]];
-    [predicate release];
-    if([managedObjectContext countForFetchRequest:request error:&error] > 0){
-        //[[NSApplication sharedApplication] presentError:error];
-	int alertReturn;
-	alertReturn = NSRunInformationalAlertPanel(@"Duplicate Entry",
-						   @"A book with this ISBN number is already in your library.",
-						   @"Cancel",
-						   @"Display",
-						   nil);
-	if (alertReturn == NSAlertAlternateReturn){
-	    [managedObjectContext deleteObject:obj];
-	    //get hold of existing object and update UI.
-	    [self setObj:[[managedObjectContext executeFetchRequest:request error:&error] objectAtIndex:0]];
-	    [self updateUIFromManagedObject];
-	}
-	[request release];
-	return true;
-    }
-    [request release];
-    return false;
-}
-
-- (void) updateManagedObjectFromUI {
-    if (obj != nil){
-	//TODO: wrap these in checks?
-	[obj setIsbn10:[txt_isbn10 stringValue]];
-	[obj setIsbn13:[txt_isbn13 stringValue]];
-	[obj setAuthorText:[txt_author stringValue]];
-	[obj setSubjectText:[txt_subject stringValue]];
-	[obj setAwards:[txt_awards stringValue]];
-	[obj setDewey:[txt_dewey stringValue]];
-	[obj setDewey_normalised:[txt_deweyNormal stringValue]];
-	[obj setEdition:[txt_edition stringValue]];
-	[obj setLanguage:[txt_language stringValue]];
-	[obj setLccNumber:[txt_lccNumber stringValue]];
-	[obj setNotes:[txt_notes stringValue]];
-	[obj setPhysicalDescription:[txt_physicalDescrip stringValue]];
-	[obj setPublisherText:[txt_publisher stringValue]];
-	[obj setSummary:[txt_summary stringValue]];
-	[obj setTitle:[txt_title stringValue]];
-	[obj setTitleLong:[txt_titleLong stringValue]];
-	[obj setUrls:[txt_urls stringValue]];
-	[obj setNoOfCopies:[txt_noOfCopies stringValue]];
-	[obj setCoverImage:[img_summary_cover image]];
-    }
-}
-
-- (IBAction) searchClicked:(id)sender {
-    isbnExtractor* extractor = [[isbnExtractor alloc] initWithContent:[txt_search stringValue]];
-    NSArray* isbns = [extractor discoveredISBNs];
-    [extractor release];
-    if([isbns count] != 1){
-	NSRunInformationalAlertPanel(@"Search Error", @"Please search for a book by the ISBN number." , @"Ok", nil, nil);
-	return;
-    }
-
-    NSString* searchedISBN = [isbns objectAtIndex:0];
-
-    if([self bookExistsInLibraryWithISBN:searchedISBN])
-	return;
-
-    [progIndicator setUsesThreadedAnimation:true];
-    [progIndicator startAnimation:self];
-    [NSApp beginSheet:progressSheet modalForWindow:window 
-				     modalDelegate:self 
-				    didEndSelector:NULL 
-				       contextInfo:nil];
-    
-    [self clearAllFields];
-    if ([self updateUIFromISBNDbWithISBN:searchedISBN]) {
-	[txt_title selectItemAtIndex:0];
-	[txt_titleLong selectItemAtIndex:0];
-	[txt_author selectItemAtIndex:0];
-	[txt_subject selectItemAtIndex:0];
-	[txt_publisher selectItemAtIndex:0];
-	[txt_physicalDescrip selectItemAtIndex:0];
-    }
-
-    [self updateUIFromAmazonWithISBN:searchedISBN];
-
-    [progIndicator stopAnimation:self];
-    [progressSheet orderOut:nil];
-    [NSApp endSheet:progressSheet];
-}
-
-- (IBAction)saveClicked:(id)sender {
-    [self updateManagedObjectFromUI];
-    [self saveManagedObjectContext:managedObjectContext];
-    [window close];
-
-    if([[self delegate] respondsToSelector:@selector(saveClicked:)]){
-	[delegate saveClicked:self];
-    }
-}
-
-- (IBAction) clearClicked:(id)sender {
-    [txt_search setStringValue:@""];
-    [self clearAllFields];
 }
 
 - (void) clearAllFields {
@@ -431,36 +321,6 @@
     [self updateSummaryTabView];
 }
 
-- (IBAction) cancelClicked:(id)sender {
-    [managedObjectContext rollback];
-    [window close];
-
-    if([[self delegate] respondsToSelector:@selector(cancelClicked:)]){
-	[delegate cancelClicked:self];
-    }
-}
-
-- (void) saveManagedObjectContext:(NSManagedObjectContext*)context {
-
-    NSError *error = nil;
-    if (![context save:&error]) {
-        [[NSApplication sharedApplication] presentError:error];
-    }
-
-}
-
-- (IBAction) copiesValueChanged:(id)sender {
-    int theValue = [sender intValue];
-
-    [step_noOfCopies setIntValue:theValue];
-    [txt_noOfCopies setIntValue:theValue];
-}
-
-- (BOOL)tabView:(NSTabView *)tabView shouldSelectTabViewItem:(NSTabViewItem *)tabViewItem{
-    [self updateSummaryTabView];
-    return true;
-}
-
 - (void) updateSummaryTabView{
     [lbl_summary_isbn10		    setStringValue:[txt_isbn10 stringValue]];
     [lbl_summary_isbn13	    	    setStringValue:[txt_isbn13 stringValue]];
@@ -478,6 +338,146 @@
     [lbl_summary_publisher	    setStringValue:[txt_publisher stringValue]];
     [lbl_summary_subject	    setStringValue:[txt_subject stringValue]];
     [lbl_summary_physicalDescrip    setStringValue:[txt_physicalDescrip stringValue]];
+}
+
+
+- (NSFetchRequest*) authorExistsWithName:(NSString*)authorName{
+    //returns the request in order to get hold of these authors
+    //otherwise returns nil if the author cannot be found.
+    return [self entity:@"author" existsWithName:authorName];
+}
+
+- (NSFetchRequest*) subjectExistsWithName:(NSString*)subjectName{
+    //returns the request in order to get hold of these subjects
+    //otherwise returns nil if the subject cannot be found.
+    return [self entity:@"subject" existsWithName:subjectName];
+}
+
+- (NSFetchRequest*)entity:(NSString*)entity existsWithName:(NSString*)entityName{
+    NSError *error;
+    NSString *predicate = [[NSString alloc] initWithFormat:@"name MATCHES '%@'", entityName];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:entity inManagedObjectContext:managedObjectContext]];
+    [request setPredicate:[NSPredicate predicateWithFormat:predicate]];
+
+    [predicate release];
+
+    if([managedObjectContext countForFetchRequest:request error:&error] > 0){
+	return [request autorelease];
+    }else{
+	[request release];
+	return nil;
+    }
+}
+
+- (BOOL)bookExistsInLibraryWithISBN:(NSString*)searchedISBN{ //has possible side effects
+    //could use [self entity:existsWithName:] ?
+    NSError *error;
+    NSString *predicate = [[NSString alloc] initWithFormat:@"isbn10 MATCHES '%@' OR isbn13 MATCHES '%@'",
+							   searchedISBN,
+							   searchedISBN];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"book" inManagedObjectContext:managedObjectContext]];
+    [request setPredicate:[NSPredicate predicateWithFormat:predicate]];
+    [predicate release];
+    if([managedObjectContext countForFetchRequest:request error:&error] > 0){
+        //[[NSApplication sharedApplication] presentError:error];
+	int alertReturn;
+	alertReturn = NSRunInformationalAlertPanel(@"Duplicate Entry",
+						   @"A book with this ISBN number is already in your library.",
+						   @"Cancel",
+						   @"Display",
+						   nil);
+	if (alertReturn == NSAlertAlternateReturn){
+	    [managedObjectContext deleteObject:obj];
+	    //get hold of existing object and update UI.
+	    [self setObj:[[managedObjectContext executeFetchRequest:request error:&error] objectAtIndex:0]];
+	    [self updateUIFromManagedObject];
+	}
+	[request release];
+	return true;
+    }
+    [request release];
+    return false;
+}
+
+- (IBAction) searchClicked:(id)sender {
+    isbnExtractor* extractor = [[isbnExtractor alloc] initWithContent:[txt_search stringValue]];
+    NSArray* isbns = [extractor discoveredISBNs];
+    [extractor release];
+    if([isbns count] != 1){
+	NSRunInformationalAlertPanel(@"Search Error", @"Please search for a book by the ISBN number." , @"Ok", nil, nil);
+	return;
+    }
+
+    NSString* searchedISBN = [isbns objectAtIndex:0]; //this will produce a formatted isbn, e.g hyphens removed
+
+    if([self bookExistsInLibraryWithISBN:searchedISBN])
+	return;
+
+    [progIndicator setUsesThreadedAnimation:true];
+    [progIndicator startAnimation:self];
+    [NSApp beginSheet:progressSheet modalForWindow:window 
+				     modalDelegate:self 
+				    didEndSelector:NULL 
+				       contextInfo:nil];
+    
+    [self clearAllFields];
+    if ([self updateUIFromISBNDbWithISBN:searchedISBN]) {
+	[txt_title selectItemAtIndex:0];
+	[txt_titleLong selectItemAtIndex:0];
+	[txt_author selectItemAtIndex:0];
+	[txt_subject selectItemAtIndex:0];
+	[txt_publisher selectItemAtIndex:0];
+	[txt_physicalDescrip selectItemAtIndex:0];
+    }
+
+    [self updateUIFromAmazonWithISBN:searchedISBN];
+    
+    //lastly update the summary tab
+    [self updateSummaryTabView];
+
+    [progIndicator stopAnimation:self];
+    [progressSheet orderOut:nil];
+    [NSApp endSheet:progressSheet];
+}
+
+- (IBAction)saveClicked:(id)sender {
+    [self updateManagedObjectFromUI];
+    [self saveManagedObjectContext:managedObjectContext];
+    [window close];
+
+    if([[self delegate] respondsToSelector:@selector(saveClicked:)]){
+	[delegate saveClicked:self];
+    }
+}
+
+- (IBAction) clearClicked:(id)sender {
+    [txt_search setStringValue:@""];
+    [self clearAllFields];
+}
+
+- (IBAction) cancelClicked:(id)sender {
+    [managedObjectContext rollback];
+    [window close];
+
+    if([[self delegate] respondsToSelector:@selector(cancelClicked:)]){
+	[delegate cancelClicked:self];
+    }
+}
+
+- (IBAction) copiesValueChanged:(id)sender {
+    int theValue = [sender intValue];
+
+    [step_noOfCopies setIntValue:theValue];
+    [txt_noOfCopies setIntValue:theValue];
+}
+
+///////////////////////    DELEGATE METHODS   //////////////////////////////////////////////////////////////////////////
+
+- (BOOL)tabView:(NSTabView *)tabView shouldSelectTabViewItem:(NSTabViewItem *)tabViewItem{
+    [self updateSummaryTabView];
+    return true;
 }
 
 //author methods
