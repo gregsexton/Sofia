@@ -27,9 +27,6 @@
 #import "author.h"
 #import "subject.h"
 
-//TODO: error handling: no save if not enough info (e.g isbns)
-//TODO: what happends if can't find a book on amazon?
-
 @implementation BooksWindowController
 
 @synthesize obj;
@@ -194,6 +191,12 @@
     if(![amazon searchISBN:searchedISBN]){
 	NSRunInformationalAlertPanel(@"Download Error", 
 		@"Unable to retrieve information from Amazon. Please check internet connectivity and valid access keys in your preferences." , @"Ok", nil, nil);
+	[amazon release];
+	return false;
+    }
+
+    if(![amazon successfullyFoundBook]){
+	NSRunInformationalAlertPanel(@"Search Error", @"No results found for this ISBN on Amazon." , @"Ok", nil, nil);
 	[amazon release];
 	return false;
     }

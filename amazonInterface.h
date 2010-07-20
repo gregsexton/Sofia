@@ -21,7 +21,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-typedef enum {pNone, pLargeImage, pImageURL} amazonProperties;
+typedef enum {pNone, pLargeImage, pImageURL, pTotalResults} amazonProperties;
 
 @interface amazonInterface : NSObject <NSXMLParserDelegate>{
 
@@ -33,10 +33,12 @@ typedef enum {pNone, pLargeImage, pImageURL} amazonProperties;
 
     amazonProperties currentProperty;
     NSMutableString* currentStringValue;
+    BOOL successfullyFoundBook; 
 }
 
 @property (nonatomic,copy) NSString* imageURL;
 @property (nonatomic,copy) NSImage* frontCover;
+@property (nonatomic) BOOL successfullyFoundBook;
 
 - (BOOL)searchISBN:(NSString*)isbn;
 - (BOOL)searchForImagesWithISBN:(NSString*)isbn;

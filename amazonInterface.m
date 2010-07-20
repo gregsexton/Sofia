@@ -23,11 +23,11 @@
 #import "SignedAwsSearchRequest.h"
 
 //TODO: present a choice of matching images; for now just use the first one.
-//TODO: fail nicely if book not found
 
 @implementation amazonInterface
 @synthesize imageURL;
 @synthesize frontCover;
+@synthesize successfullyFoundBook;
 
 - (id)init{
     self = [super init];
@@ -36,6 +36,7 @@
     secretAccessKey = [[NSUserDefaults standardUserDefaults] objectForKey:@"amazon_secretAccessKey"];
 
     imageURL = @"";
+    successfullyFoundBook = false; //assume the worst
     return self;
 }
 
@@ -88,6 +89,11 @@
         return;
     }
 
+    if([elementName isEqualToString:@"TotalResults"]){
+	currentProperty = pTotalResults;
+        return;
+    }
+
     currentProperty = pNone;
 }
 
@@ -104,11 +110,18 @@
 				      namespaceURI:(NSString *)namespaceURI 
 				     qualifiedName:(NSString *)qName {
 
-    if (currentProperty == pImageURL){
+    if(currentProperty == pImageURL){
 	if([imageURL isEqualToString:@""]){ //only capture first result, FIXME
 	    [self setImageURL:currentStringValue];
 	    [self setFrontCover:[[NSImage alloc] initWithContentsOfURL:[[[NSURL alloc] initWithString:currentStringValue] autorelease]]];
 	}
+    }
+
+    if(currentProperty == pTotalResults){
+	if([currentStringValue intValue] > 0)
+	    [self setSuccessfullyFoundBook:true];
+	else
+	    [self setSuccessfullyFoundBook:false];
     }
 
     [currentStringValue release];
