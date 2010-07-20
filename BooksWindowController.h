@@ -23,11 +23,16 @@
 #import <GData/GDataBooks.h>
 #import "book.h"
 #import "author.h"
+#import "subject.h"
 #import "amazonInterface.h"
 #import "BooksWindowControllerDelegate.h"
 #import "AuthorsWindowControllerDelegate.h"
 #import "SubjectWindowControllerDelegate.h"
 #import "isbnExtractor.h"
+#import "isbndbInterface.h"
+#import "BooksWindowController.h"
+#import "AuthorsWindowController.h"
+#import "SubjectWindowController.h"
 
 @interface BooksWindowController : NSObjectController <AuthorsWindowControllerDelegate, SubjectWindowControllerDelegate> {
     IBOutlet NSTextField *txt_search;
@@ -120,6 +125,7 @@
 - (void) displayManagedSubjectsWithSelectedSubject:(subject*)subjectObj;
 - (void) saveManagedObjectContext:(NSManagedObjectContext*)context;
 - (void) searchForISBN:(NSString*)isbn;
+- (void) updateAuthorsAndSubjectsFromISBNDb:(isbndbInterface*)isbndb;
 - (void) updateManagedObjectFromUI;
 - (void) updateSummaryTabView;
 - (void) updateUIFromManagedObject;

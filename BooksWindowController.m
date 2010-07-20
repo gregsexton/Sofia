@@ -19,14 +19,6 @@
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "BooksWindowController.h"
-#import "AuthorsWindowController.h"
-#import "SubjectWindowController.h"
-#import "isbndbInterface.h"
-#import "book.h"
-#import "author.h"
-#import "subject.h"
-
 @implementation BooksWindowController
 
 @synthesize obj;
@@ -253,8 +245,14 @@
     [txt_physicalDescrip addItemWithObjectValue:[isbndb bookPhysicalDescrip]];
     [txt_physicalDescrip selectItemAtIndex:0];
 
+    [self updateAuthorsAndSubjectsFromISBNDb:isbndb];
+    
+    [isbndb release];
+    return true;
+}
+
+- (void) updateAuthorsAndSubjectsFromISBNDb:(isbndbInterface*)isbndb{
     //loop over authors and subject arrays and update tables
-    //TODO: refactor: extract methods
     //TODO: when clicking add start editing automatically.
     NSString *object;
     //update authors
@@ -288,9 +286,6 @@
 	[subjectObj setValue:object forKey:@"name"];
 	[subjectObj addBooksObject:obj];
     }
-    
-    [isbndb release];
-    return true;
 }
 
 - (void) clearAllFields {
