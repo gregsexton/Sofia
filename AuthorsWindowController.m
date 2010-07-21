@@ -59,6 +59,11 @@
 	NSIndexSet *index = [NSIndexSet indexSetWithIndex:[[authorArrayController arrangedObjects] indexOfObject:initialSelection]];
 	[authorTableView selectRowIndexes:index byExtendingSelection:NO];
     }
+
+    //sort two tables
+    [authorTableView setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:true]]];
+    [bookTableView   setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:true]]];
+    
 }
 
 - (NSManagedObjectContext *) managedObjectContext{

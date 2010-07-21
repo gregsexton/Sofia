@@ -19,6 +19,8 @@
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#import "BooksWindowController.h"
+
 @implementation BooksWindowController
 
 @synthesize obj;

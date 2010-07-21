@@ -30,7 +30,6 @@
 #import "SubjectWindowControllerDelegate.h"
 #import "isbnExtractor.h"
 #import "isbndbInterface.h"
-#import "BooksWindowController.h"
 #import "AuthorsWindowController.h"
 #import "SubjectWindowController.h"
 
