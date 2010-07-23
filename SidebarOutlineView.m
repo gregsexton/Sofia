@@ -205,7 +205,7 @@
 
     [self selectRowIndexes:[NSIndexSet indexSetWithIndex:itemIndex] byExtendingSelection:NO];
     //tell the delegate!
-    [self outlineViewSelectionDidChange:nil]; //FIXME: this will break if I start to use the notification in the delegate
+    [self outlineViewSelectionDidChange:nil]; //this will break if the notification is used in the delegate
 }
 
 - (Library*)selectedLibrary{
@@ -217,13 +217,22 @@
 }
 
 - (void)removeCurrentlySelectedItem{
-    //TODO: if you delete the last item it selects smart book lists
     id item = [self selectedItem];
 
     if([item isKindOfClass:[list class]] || [item isKindOfClass:[smartList class]]){
 	int alertReturn = NSRunAlertPanel(@"Remove List?", @"Are you sure you wish to permanently remove this book list from Sofia?",
 				  @"No", @"Yes", nil);
 	if (alertReturn == NSAlertAlternateReturn){
+	    //check for last item deleted and select book library
+	    if([item isKindOfClass:[list class]] && [[self getBookLists] count] == 0)
+		[self setSelectedItem:bookLibrary];
+	    if([item isKindOfClass:[smartList class]] && [[self getSmartBookLists] count] == 0)
+		[self setSelectedItem:bookLibrary];
+
+	    //don't select the list below if this is the last list
+	    if(item == [[self getBookLists] lastObject] || item == [[self getSmartBookLists] lastObject])
+		[self setSelectedItem:bookLibrary];
+
 	    [managedObjectContext deleteObject:item];
 	    [application saveAction:self];
 	    [self reloadData];
@@ -501,6 +510,8 @@
     }
 
     [application saveAction:self];
+    [self reloadData]; //reorder and then reselect
+    [self setSelectedItem:item];
     return true;
 }
 
