@@ -255,7 +255,7 @@
 
 - (void) updateAuthorsAndSubjectsFromISBNDb:(isbndbInterface*)isbndb{
     //loop over authors and subject arrays and update tables
-    //TODO: when clicking add start editing automatically.
+
     NSString *object;
     //update authors
     NSEnumerator *baEnum = [[isbndb bookAuthors] objectEnumerator];

@@ -23,7 +23,6 @@
 #import "SidebarOutlineView.h"
 #import "BooksTableView.h"
 
-
 @implementation SofiaApplication
 
 - (void) awakeFromNib {
