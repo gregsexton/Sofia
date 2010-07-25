@@ -33,12 +33,16 @@
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context {
     managedObjectContext = context;
     initialSelection = nil;
+    useSelectButton = false;
     return self;
 }
 
-- (id)initWithManagedObjectContext:(NSManagedObjectContext*)context selectedAuthor:(author*)authorInput{
+- (id)initWithManagedObjectContext:(NSManagedObjectContext*)context 
+		    selectedAuthor:(author*)authorInput
+		      selectButton:(BOOL)withSelect{
     managedObjectContext = context;
     initialSelection = authorInput;
+    useSelectButton = withSelect;
     return self;
 }
 
@@ -58,6 +62,10 @@
 
     if(initialSelection != nil){
 	[self selectAndScrollToAuthor:initialSelection];
+    }
+
+    if(useSelectButton){
+	[saveButton setTitle:@"Select"];
     }
     
 }

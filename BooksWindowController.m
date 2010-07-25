@@ -498,7 +498,8 @@
 
 - (void) displayManagedAuthorsWithSelectedAuthor:(author*)authorObj{
     AuthorsWindowController *detailWin = [[AuthorsWindowController alloc] initWithManagedObjectContext:managedObjectContext
-									  selectedAuthor:authorObj];
+									  selectedAuthor:authorObj 
+									    selectButton:true];
     [detailWin setDelegate:self];
     if (![NSBundle loadNibNamed:@"AuthorDetail" owner:detailWin]) {
 	NSLog(@"Error loading Nib!");
@@ -528,7 +529,8 @@
 
 - (void) displayManagedSubjectsWithSelectedSubject:(subject*)subjectObj{
     SubjectWindowController *detailWin = [[SubjectWindowController alloc] initWithManagedObjectContext:managedObjectContext
-									  selectedSubject:subjectObj];
+									  selectedSubject:subjectObj 
+									     selectButton:true];
     [detailWin setDelegate:self];
     if (![NSBundle loadNibNamed:@"SubjectDetail" owner:detailWin]) {
 	NSLog(@"Error loading Nib!");

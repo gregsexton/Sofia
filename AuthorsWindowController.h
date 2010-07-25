@@ -31,8 +31,10 @@
     IBOutlet NSTableView	*bookTableView;
     IBOutlet NSArrayController	*authorArrayController;
     IBOutlet NSTableView	*authorTableView;
+    IBOutlet NSButton		*saveButton;
 
     author			*initialSelection;
+    BOOL			useSelectButton;
     NSManagedObjectContext	*managedObjectContext;
 
     id<AuthorsWindowControllerDelegate>	delegate;
@@ -44,7 +46,7 @@
 - (IBAction)doubleClickBookAction:(id)sender;
 - (IBAction)addAuthorAction:(id)sender;
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context;
-- (id)initWithManagedObjectContext:(NSManagedObjectContext*)context selectedAuthor:(author*)authorInput;
+- (id)initWithManagedObjectContext:(NSManagedObjectContext*)context selectedAuthor:(author*)authorInput selectButton:(BOOL)withSelect;
 - (void)saveManagedObjectContext:(NSManagedObjectContext*)context;
 - (void)selectAndScrollToAuthor:(author*)authorObj;
 @end
