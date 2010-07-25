@@ -266,9 +266,6 @@
     }else if([item isKindOfClass:[smartList class]]){
 	smartList* list = item;
 	NSString* filter = [list filter];
-	if(filter == nil || [filter isEqualToString:@""]){
-	    //TODO: don't display any books!
-	}
 	predString = [filter retain]; //retained as about to be released due to alloc's above
     }
 

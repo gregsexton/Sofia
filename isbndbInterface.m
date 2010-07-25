@@ -46,7 +46,7 @@
 
 - (id)init {
     self = [super init];
-    //TODO: set the rest?
+    //this is set here as it is calculated from list of subjects which may be empty
     [self setBookSubjectText:@""];
     return self;
 }
