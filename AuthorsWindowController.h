@@ -24,7 +24,7 @@
 #import "AuthorsWindowControllerDelegate.h"
 
 
-@interface AuthorsWindowController : NSObject {
+@interface AuthorsWindowController : NSObject{
     IBOutlet NSWindow		*window;
 
     IBOutlet NSArrayController	*bookArrayController;
@@ -49,4 +49,13 @@
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context selectedAuthor:(author*)authorInput selectButton:(BOOL)withSelect;
 - (void)saveManagedObjectContext:(NSManagedObjectContext*)context;
 - (void)selectAndScrollToAuthor:(author*)authorObj;
+@end
+
+
+@interface AuthorsTableView : NSTableView {
+
+    IBOutlet NSArrayController	*authorArrayController;
+
+}
+
 @end

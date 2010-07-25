@@ -22,9 +22,6 @@
 #import "SubjectWindowController.h"
 
 //TODO: refactor this extract superclass for both this and AuthorsWindowController
-//TODO: pressing backspace removes an subject or book from subject
-//depending on selected tableview
-//TODO: option to open with select button
 
 @implementation SubjectWindowController
 @synthesize delegate;
@@ -125,4 +122,21 @@
     [self selectAndScrollToSubject:subjectObj];
     [self beginEditingCurrentlySelectedItemInSubjectsTable];
 }
+@end
+
+
+//custom NSTableView
+@implementation SubjectsTableView
+
+- (void)keyDown:(NSEvent *)theEvent{
+    unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
+
+    if (key == NSDeleteCharacter || key == NSBackspaceCharacter){
+	[subjectArrayController remove:self];
+    }else{
+	//pass on to next first responder if not going to handle it
+	[super keyDown:theEvent];
+    }
+}
+
 @end

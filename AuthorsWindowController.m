@@ -24,9 +24,6 @@
 #import "author.h"
 #import "BooksWindowController.h"
 
-//TODO: pressing backspace removes an author or book from author
-//depending on selected tableview
-
 @implementation AuthorsWindowController
 @synthesize delegate;
 
@@ -127,4 +124,20 @@
     [self selectAndScrollToAuthor:authorObj];
     [self beginEditingCurrentlySelectedItemInAuthorsTable];
 }
+@end
+
+//custom NSTableView
+@implementation AuthorsTableView
+
+- (void)keyDown:(NSEvent *)theEvent{
+    unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
+
+    if (key == NSDeleteCharacter || key == NSBackspaceCharacter){
+	[authorArrayController remove:self];
+    }else{
+	//pass on to next first responder if not going to handle it
+	[super keyDown:theEvent];
+    }
+}
+
 @end

@@ -53,3 +53,11 @@
 - (void)selectAndScrollToSubject:(subject*)subjectObj;
 
 @end
+
+@interface SubjectsTableView : NSTableView {
+
+    IBOutlet NSArrayController	*subjectArrayController;
+
+}
+
+@end
