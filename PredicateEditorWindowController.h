@@ -41,3 +41,14 @@
 - (IBAction)cancelClicked:(id)sender;
 
 @end
+
+//custom row for bool values
+@interface BoolEditorRowTemplate : NSPredicateEditorRowTemplate{
+	NSPopUpButton *keypathPopUp;
+	NSPopUpButton *boolPopUp;
+}
+
+-(NSPopUpButton *)keypathPopUp;
+-(NSPopUpButton *)boolPopUp;
+
+@end
