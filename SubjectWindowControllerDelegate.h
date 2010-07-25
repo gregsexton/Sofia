@@ -26,6 +26,6 @@
 
 @optional
 
-- (void) savedWithSubjectSelection:(subject*)selectedSubject;
+- (void)savedWithSubjectSelection:(subject*)selectedSubject;
 
 @end

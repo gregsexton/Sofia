@@ -43,9 +43,11 @@
 
 - (IBAction)saveClicked:(id)sender;
 - (IBAction)cancelClicked:(id)sender;
-- (IBAction) doubleClickBookAction:(id)sender;
+- (IBAction)doubleClickBookAction:(id)sender;
+- (IBAction)addSubjectAction:(id)sender;
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context;
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context selectedSubject:(subject*)subjectInput;
-- (void) saveManagedObjectContext:(NSManagedObjectContext*)context;
+- (void)saveManagedObjectContext:(NSManagedObjectContext*)context;
+- (void)selectAndScrollToSubject:(subject*)subjectObj;
 
 @end

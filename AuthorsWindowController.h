@@ -46,4 +46,5 @@
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context;
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context selectedAuthor:(author*)authorInput;
 - (void)saveManagedObjectContext:(NSManagedObjectContext*)context;
+- (void)selectAndScrollToAuthor:(author*)authorObj;
 @end

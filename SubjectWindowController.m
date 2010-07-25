@@ -24,6 +24,7 @@
 //TODO: refactor this extract superclass for both this and AuthorsWindowController
 //TODO: pressing backspace removes an subject or book from subject
 //depending on selected tableview
+//TODO: option to open with select button
 
 @implementation SubjectWindowController
 @synthesize delegate;
@@ -40,7 +41,7 @@
     return self;
 }
 
-- (void) awakeFromNib {
+- (void)awakeFromNib {
     [window makeKeyAndOrderFront:self];
 
     [bookTableView setDoubleAction:@selector(doubleClickBookAction:)];
@@ -50,26 +51,29 @@
     NSError *error;
     [subjectArrayController fetchWithRequest:nil merge:NO error:&error];
 
-    if(initialSelection != nil){
-	//assumes that the order of arrangedObjects is the same as the index of the rows in the tableview.
-	//TODO: scroll to selected row.
-	NSIndexSet *index = [NSIndexSet indexSetWithIndex:[[subjectArrayController arrangedObjects] indexOfObject:initialSelection]];
-	[subjectTableView selectRowIndexes:index byExtendingSelection:NO];
-    }
-
     //sort two tables
     [subjectTableView setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:true]]];
     [bookTableView    setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:true]]];
+
+    if(initialSelection != nil){
+	[self selectAndScrollToSubject:initialSelection];
+    }
 }
 
-- (NSManagedObjectContext *) managedObjectContext{
+- (void)selectAndScrollToSubject:(subject*)subjectObj{
+    NSIndexSet *index = [NSIndexSet indexSetWithIndex:[[subjectArrayController arrangedObjects] indexOfObject:subjectObj]];
+    [subjectTableView selectRowIndexes:index byExtendingSelection:NO];
+    [subjectTableView scrollRowToVisible:[index firstIndex]];
+}
+
+- (NSManagedObjectContext *)managedObjectContext{
     if (managedObjectContext != nil) {
         return managedObjectContext;
     }
     return nil;
 }
 
-- (void) beginEditingCurrentlySelectedItemInSubjectsTable{
+- (void)beginEditingCurrentlySelectedItemInSubjectsTable{
     [subjectTableView editColumn:0
 			     row:[subjectTableView selectedRow] 
 		       withEvent:nil 
@@ -89,14 +93,14 @@
     [window close];
 }
 
-- (void) saveManagedObjectContext:(NSManagedObjectContext*)context {
+- (void)saveManagedObjectContext:(NSManagedObjectContext*)context {
     NSError *error = nil;
     if (![context save:&error]) {
         [[NSApplication sharedApplication] presentError:error];
     }
 }
 
-- (IBAction) doubleClickBookAction:(id)sender {
+- (IBAction)doubleClickBookAction:(id)sender {
     //use the first object if multiple are selected
     book *obj = [[bookArrayController selectedObjects] objectAtIndex:0];
 
@@ -107,9 +111,10 @@
     }
 } 
 
-- (IBAction)addAuthorAction:(id)sender{
-    [subjectArrayController add:self];
-    //TODO: select the added item and begin editing it.
-    //[self beginEditingCurrentlySelectedItemInSubjectsTable];
+- (IBAction)addSubjectAction:(id)sender{
+    subject* subjectObj = [[subjectArrayController newObject] autorelease];
+    [subjectArrayController addObject:subjectObj];
+    [self selectAndScrollToSubject:subjectObj];
+    [self beginEditingCurrentlySelectedItemInSubjectsTable];
 }
 @end

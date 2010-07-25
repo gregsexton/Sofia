@@ -42,7 +42,7 @@
     return self;
 }
 
-- (void) awakeFromNib {
+- (void)awakeFromNib {
     [window makeKeyAndOrderFront:self];
 
     [bookTableView setDoubleAction:@selector(doubleClickBookAction:)];
@@ -52,28 +52,30 @@
     NSError *error;
     [authorArrayController fetchWithRequest:nil merge:NO error:&error];
 
-    if(initialSelection != nil){
-	//assumes that the order of arrangedObjects is the same as
-	//the index of the rows in the tableview.
-	//TODO: scroll to selected row.
-	NSIndexSet *index = [NSIndexSet indexSetWithIndex:[[authorArrayController arrangedObjects] indexOfObject:initialSelection]];
-	[authorTableView selectRowIndexes:index byExtendingSelection:NO];
-    }
-
     //sort two tables
     [authorTableView setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:true]]];
     [bookTableView   setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:true]]];
+
+    if(initialSelection != nil){
+	[self selectAndScrollToAuthor:initialSelection];
+    }
     
 }
 
-- (NSManagedObjectContext *) managedObjectContext{
+- (void)selectAndScrollToAuthor:(author*)authorObj{
+    NSIndexSet *index = [NSIndexSet indexSetWithIndex:[[authorArrayController arrangedObjects] indexOfObject:authorObj]];
+    [authorTableView selectRowIndexes:index byExtendingSelection:NO];
+    [authorTableView scrollRowToVisible:[index firstIndex]];
+}
+
+- (NSManagedObjectContext *)managedObjectContext{
     if (managedObjectContext != nil) {
         return managedObjectContext;
     }
     return nil;
 }
 
-- (void) beginEditingCurrentlySelectedItemInAuthorsTable{
+- (void)beginEditingCurrentlySelectedItemInAuthorsTable{
     [authorTableView editColumn:0
 			    row:[authorTableView selectedRow] 
 		      withEvent:nil 
@@ -93,14 +95,14 @@
     [window close];
 }
 
-- (void) saveManagedObjectContext:(NSManagedObjectContext*)context {
+- (void)saveManagedObjectContext:(NSManagedObjectContext*)context {
     NSError *error = nil;
     if (![context save:&error]) {
         [[NSApplication sharedApplication] presentError:error];
     }
 }
 
-- (IBAction) doubleClickBookAction:(id)sender {
+- (IBAction)doubleClickBookAction:(id)sender {
     //use the first object if multiple are selected
     book *obj = [[bookArrayController selectedObjects] objectAtIndex:0];
 
@@ -112,8 +114,9 @@
 } 
 
 - (IBAction)addAuthorAction:(id)sender{
-    [authorArrayController add:self];
-    //TODO: select the added item and begin editing it.
-    //[self beginEditingCurrentlySelectedItemInAuthorsTable];
+    author* authorObj = [[authorArrayController newObject] autorelease];
+    [authorArrayController addObject:authorObj];
+    [self selectAndScrollToAuthor:authorObj];
+    [self beginEditingCurrentlySelectedItemInAuthorsTable];
 }
 @end

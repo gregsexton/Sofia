@@ -26,6 +26,6 @@
 
 @optional
 
-- (void) savedWithAuthorSelection:(author*)selectedAuthor;
+- (void)savedWithAuthorSelection:(author*)selectedAuthor;
 
 @end
