@@ -40,11 +40,12 @@
     [self setImageZoomLevel:zoom];
 }
 
-- (void) setImageZoomLevel:(float)newValue {
+- (void)setImageZoomLevel:(float)newValue { //custom setter
     //custom setter
     imageZoomLevel = newValue;
     [[NSUserDefaults standardUserDefaults] setFloat:newValue forKey:@"imageViewZoomLevel"];
 }
+
 
 // Delegate Methods //////////////////////////////////////////////////////
 
@@ -84,7 +85,7 @@
     }
 }
 
-- (void) imageBrowserSelectionDidChange:(IKImageBrowserView *) aBrowser{
+- (void)imageBrowserSelectionDidChange:(IKImageBrowserView *) aBrowser{
     //let the arraycontroller know
     [arrayController setSelectionIndexes:[browserView selectionIndexes]];
 }

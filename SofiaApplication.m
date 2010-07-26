@@ -288,6 +288,7 @@
     [self changeMainViewFor:mainTableView];
     [zoomSlider setHidden:true];
     [changeViewButtons setSelectedSegment:0];
+    [tableView scrollRowToVisible:[arrayController selectionIndex]];
     [[NSUserDefaults standardUserDefaults] setObject:LIST_VIEW forKey:@"currentView"];
 }
 
@@ -295,12 +296,13 @@
     [self changeMainViewFor:mainImagesView];
     [zoomSlider setHidden:false];
     [changeViewButtons setSelectedSegment:1];
+    [imagesView setSelectionIndexes:[arrayController selectionIndexes]
+	       byExtendingSelection:NO];
+    [imagesView scrollIndexToVisible:[arrayController selectionIndex]];
     [[NSUserDefaults standardUserDefaults] setObject:IMAGE_VIEW forKey:@"currentView"];
 }
 
 - (void)changeMainViewFor:(NSView*)viewToChangeTo{
-    //TODO maintain the selected item when switching the view.
-
     //handle size and position
     NSRect rect = [mainView frame];
     rect.origin.x = 0;

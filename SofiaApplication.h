@@ -43,8 +43,6 @@
 @interface SofiaApplication : NSObject <BooksWindowControllerDelegate, ImportBooksControllerDelegate> {
 	
 	IBOutlet NSWindow *window;
-	IBOutlet BooksTableView *tableView;
-	IBOutlet BooksImageBrowserView *imagesView;
 	IBOutlet NSTextField *summaryText;
 	IBOutlet NSArrayController *arrayController;
 	IBOutlet NSApplication *theApplication;
@@ -53,6 +51,8 @@
 	IBOutlet SidebarOutlineView *sideBar;
 	IBOutlet NSSlider *zoomSlider;
 
+	IBOutlet BooksTableView *tableView;
+	IBOutlet BooksImageBrowserView *imagesView;
 	IBOutlet NSView* mainView;
 	IBOutlet NSView* mainTableView; //this includes the scrollview
 	IBOutlet NSView* mainImagesView;
