@@ -10,6 +10,7 @@ div.header {
     margin: 0;
     padding: 0;
     min-height: 240px;
+    background: #222;
     background: #222 -webkit-gradient(linear, left top, left bottom, from(#111), to(#222));
     border-bottom: 5px solid #111;
 }
@@ -121,6 +122,10 @@ div.screenshot {
     border: 1px solid #000;
     float:left;
 }
+    div.screenshot a{
+	color: #ffffff;
+	text-decoration:none;
+    }
 
 div.footer {
     position: relative;
