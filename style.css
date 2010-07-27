@@ -1,0 +1,118 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Lucida Grande', sans-serif;
+    background: #333;
+}
+
+div.header {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    min-height: 240px;
+    background: #222 -webkit-gradient(linear, left top, left bottom, from(#111), to(#222));
+    border-bottom: 5px solid #111;
+}
+
+div.headerrule {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    min-height: 2px;
+    background: #555;
+}
+
+div.logo {
+    margin: 0 auto;
+    padding: 20px;
+    width: 148px;
+    height: 214px;
+    background: url(logo.png) center bottom no-repeat;
+}
+
+div.main{
+    margin: 0 auto 20px auto;
+    padding: 20px;
+    width: 940px;
+    background: #fff;
+    border-left: 2px solid #000;
+    border-right: 2px solid #000;
+    border-bottom: 2px solid #000;
+}
+    div.main h1 {
+        margin: 0 0 15px 0;
+        padding: 0;
+	font-size: 14px;
+	font-weight: bold;
+	color: #222;
+    }
+
+    div.main p {
+        margin: 0 0 15px 0;
+	padding: 0;
+	font-size: 12px;
+	color: #666;
+        line-height: 21px;
+    }
+	div.main p a {
+	    color: #666;
+	    text-decoration: underline;
+	}
+
+div.feature {
+    position: relative;
+    margin: 10px 10px 10px 10px;
+    padding: 10px;
+    width: 260px;
+    height: 200px;
+    background: #f2f2f2;
+    border: 1px solid #000;
+    float:left;
+}
+
+div.featureIcon {
+    width: 220px;
+    margin: 0 auto 0 auto;
+    border: 1px solid #000;
+}
+
+div.featureText {
+    margin: 0 0 10px 0;
+    height: 90px;
+}
+    div.featureText p {
+	margin: 0 0 0 0;
+	color: #000;
+    }
+
+#featWrapper { /* used to stop features floating over everything */
+    overflow: hidden;
+    margin: 0 0 10px 0;
+}
+
+div.screenshot {
+    margin: 10px 20px 20px 20px;
+    padding: 0px;
+    background: #FFF;
+    border: 1px solid #000;
+    float:left;
+}
+
+div.footer {
+    position: relative;
+    margin: 0 auto 20px auto;
+    width: 940px;
+    text-align: center;
+}
+    div.footer p {
+        font-size: 11px;
+        color: #666;
+    }
+        div.footer p a {
+            color: #666;
+	    text-decoration: none;
+	}
+	    div.footer p a:hover {
+		color: #999;
+		text-decoration: underline;
+	    }
