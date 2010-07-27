@@ -30,6 +30,28 @@ div.logo {
     background: url(logo.png) center bottom no-repeat;
 }
 
+div.download{
+    position: absolute;
+    top: 210px;
+    left: 120px;
+    margin: 0;
+    padding: 8px 14px;
+    font-size: 14px;
+    color: #ccc;
+    background: rgba(255, 255, 255, 0.2) -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.3)), to(rgba(255, 255, 255, 0.2)));
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+    div.download a {
+	margin: 0 0 0 0;
+	color: #fff;
+	text-decoration: none;
+    }
+	div.download a:hover {
+	    color: #fff;
+	    text-decoration: underline;
+	}
+
 div.main{
     margin: 0 auto 20px auto;
     padding: 20px;
@@ -68,12 +90,14 @@ div.feature {
     background: #f2f2f2;
     border: 1px solid #000;
     float:left;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
 }
 
 div.featureIcon {
     width: 220px;
     margin: 0 auto 0 auto;
-    border: 1px solid #000;
+    border: 1px solid #999;
 }
 
 div.featureText {
