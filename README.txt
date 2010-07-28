@@ -1,0 +1,113 @@
+Readme file for Sofia v0.1.0 for Mac OS X 10.6+, July 28, 2010.
+
+Introduction 
+------------
+
+What is Sofia? Sofia is a book library cataloguing application for
+Mac OS X 10.6+. It allows you to add your books from your library
+by simply entering the unique ISBN number. The details for a book
+are then downloaded from sources on the internet and populated in
+a local database. The user interface is designed to closely
+resemble iTunes and should be familiar and easy to use for
+everyone.
+
+Why use Sofia? Sofia allows you to manage your book collection. It
+allows you to quickly and easily browse and search your collection
+to find a specific book. You can sort your collection by
+categories and even group books together in book lists. You can
+specify custom and powerful searches and save these as 'smart book
+lists', that are updated automatically. Potential uses for Sofia
+include:
+
+* Quickly viewing books in your collection that you haven't yet
+  read.
+
+* Manage your shopping-list of books that you wish to purchase.
+  Easily move these books into your library once you have
+  purchased them.
+
+* Maintain reading lists for courses or research projects and then
+  make notes on individual books once you have read them.
+
+* If disaster were to strike, you would have a complete catalogue
+  of your books to be able to notify your insurance company. 
+
+
+License 
+-------
+
+Sofia is free software; you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License as
+published by the Free Software Foundation.
+
+You should have received a copy of the GNU Lesser General Public
+License along with Sofia; see the file COPYING.TXT.  If not, write
+to the Free Software Foundation, 675 Mass Ave, Cambridge, MA
+02139, USA.
+
+
+Features 
+--------
+
+* Interface based on Apple's iTunes.
+
+* Book lists allowing custom collections of books.
+
+* Smart book lists that update automatically based on search
+criteria.
+
+* Import books by ISBN, direct from the web, or extracted from
+text.
+
+* Maintain a shopping list.
+
+* Browse your library using two different views. A list view to
+quickly view a lot of information easily or by cover artwork to
+visually identify a book.
+
+* Book information including cover artwork automatically
+downloaded and populated from the web for you.
+
+* Search for a book in your library using search that narrows as
+you type.
+
+* Easily manage your authors and subjects and quickly view the
+books you own by a specific author or in a specific subject.
+
+
+Importing books into Sofia 
+--------------------------
+
+You can import books into Sofia by clicking on the add button,
+typing an ISBN number and clicking search. This will download all
+of the book's information for you. You can then edit the result
+and save the book to your library. 
+
+For a larger library, a better method is to use a barcode scanner
+that can output the ISBNs of your books. Simply copy and paste any
+text into the import window, Sofia will extract any ISBNs and
+book-by-book download the details for you. 
+
+One example of an easily available barcode scanner is zBar for the
+iPhone. This uses the iPhone's camera to scan barcodes and allows
+you to send the ISBNs to yourself via email. 
+
+Also possible, is adding books from websites. Simply enter the URL
+of the website in the import window. Sofia will download the page,
+extract any ISBN numbers from it and start adding your book.
+
+
+Release Notes 
+-------------
+
+v0.1.0	    This is the first release of Sofia. Features include:
+	    * The ability to import book details by ISBN number,
+	      ISBNDb and Amazon are used as the source of
+	      information.
+	    * Viewing books by a details list or by cover artwork.
+	    * Mass import of books by extracting ISBN numbers from
+	      text.
+	    * Viewing a book's details, including general
+	      information, notes and summary, cover artwork.  
+	    * Searching for a book in the database using simple
+	      text matching.  
