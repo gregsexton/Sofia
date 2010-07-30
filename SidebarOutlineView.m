@@ -104,6 +104,7 @@
 }
 
 - (IBAction)addSmartListAction:(id)sender{
+    //TODO: hold option key and click for this
     NSManagedObjectModel *managedObjectModel = [application managedObjectModel];
 
     smartList* obj = [[smartList alloc] initWithEntity:[[managedObjectModel entitiesByName] objectForKey:@"smartList"] 
