@@ -53,4 +53,40 @@
     [pboard setData:encodedIDs forType:SofiaDragType];
 }
 
+- (void)openDetailWindowForBook:(book*)obj{
+    BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj
+										 withSearch:NO];
+    if (![NSBundle loadNibNamed:@"Detail" owner:[detailWin autorelease]]) {
+	NSLog(@"Error loading Nib!");
+    }
+}
+
+// menu functions ////////////////////////////////////////////////////////
+
+- (NSMenu*)menuForBook:(book*)bookObj{
+    NSMenu *theMenu = [[[NSMenu alloc] initWithTitle:@"Contextual Menu"] autorelease];
+
+    [theMenu insertItemWithTitle:@"View Detail"
+			  action:@selector(menuOpenDetailWindowForBook:)
+		   keyEquivalent:@""
+			 atIndex:0];
+    [[theMenu itemAtIndex:0] setRepresentedObject:bookObj];
+    [[theMenu itemAtIndex:0] setTarget:self];
+
+    [theMenu insertItem:[NSMenuItem separatorItem]
+		atIndex:1];
+
+    [theMenu insertItemWithTitle:@"Remove Book"
+			  action:@selector(removeSelectedItems)
+		   keyEquivalent:@""
+			 atIndex:2];
+    [[theMenu itemAtIndex:2] setTarget:self];
+
+    return theMenu;
+}
+
+- (IBAction)menuOpenDetailWindowForBook:(id)sender{
+    [self openDetailWindowForBook:[sender representedObject]];
+}
+
 @end

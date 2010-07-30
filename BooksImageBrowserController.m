@@ -68,11 +68,17 @@
 - (void)imageBrowser:(IKImageBrowserView *)aBrowser cellWasDoubleClickedAtIndex:(NSUInteger)index{
     book *obj = [[arrayController arrangedObjects] objectAtIndex:index];
 
-    BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj
-										 withSearch:NO];
-    if (![NSBundle loadNibNamed:@"Detail" owner:[detailWin autorelease]]) {
-	NSLog(@"Error loading Nib!");
-    }
+    [self openDetailWindowForBook:obj];
+}
+
+- (void) imageBrowser:(IKImageBrowserView *)aBrowser cellWasRightClickedAtIndex:(NSUInteger)index 
+	    withEvent:(NSEvent *)event{
+
+    book *obj = [[arrayController arrangedObjects] objectAtIndex:index];
+    NSMenu* menu = [self menuForBook:obj];
+
+    [NSMenu popUpContextMenu:menu withEvent:event forView:aBrowser];
+
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath 

@@ -34,5 +34,8 @@
 
 - (void)removeSelectedItems;
 - (void)writeBooksWithIndexes:(NSIndexSet*)rowIndexes toPasteboard:(NSPasteboard*)pboard;
+- (void)openDetailWindowForBook:(book*)obj;
+- (NSMenu*)menuForBook:(book*)bookObj;
+- (IBAction)menuOpenDetailWindowForBook:(id)sender;
 
 @end
