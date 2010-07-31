@@ -61,7 +61,7 @@
     }
 }
 
-// menu functions ////////////////////////////////////////////////////////
+// menu methods ////////////////////////////////////////////////////////
 
 - (NSMenu*)menuForBook:(book*)bookObj{
     NSMenu *theMenu = [[[NSMenu alloc] initWithTitle:@"Contextual Menu"] autorelease];
@@ -82,11 +82,67 @@
 			 atIndex:2];
     [[theMenu itemAtIndex:2] setTarget:self];
 
+    [theMenu insertItemWithTitle:@"View Book On"
+			  action:nil
+		   keyEquivalent:@""
+			 atIndex:3];
+    [[theMenu itemAtIndex:3] setSubmenu:[self submenuViewBookOnForBook:bookObj]];
+
     return theMenu;
+}
+
+- (NSMenu*)submenuViewBookOnForBook:(book*)bookObj{
+
+    NSMenu *theMenu = [[[NSMenu alloc] initWithTitle:@"Contextual Menu"] autorelease];
+
+    NSDictionary* menuItems = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"viewBookOnMenu"];
+    if(menuItems == nil)
+	menuItems = [self createDefaultViewBookOnMenuItems];
+
+    int index = 0;
+    for(NSString* key in menuItems){
+	[theMenu insertItemWithTitle:key
+			      action:@selector(menuOpenBrowserUrlForBook:)
+		       keyEquivalent:@""
+			     atIndex:index];
+	[[theMenu itemAtIndex:index] setRepresentedObject:[NSString stringWithFormat:[menuItems objectForKey:key], [bookObj isbn13]]];
+	[[theMenu itemAtIndex:index] setTarget:self];
+	index++;
+    }
+
+    [theMenu insertItem:[NSMenuItem separatorItem] atIndex:index++];
+    [theMenu insertItemWithTitle:@"Edit Menu..."
+			  action:@selector(menuEditViewBookOnItems)
+		   keyEquivalent:@""
+			 atIndex:index];
+    [[theMenu itemAtIndex:index] setTarget:self];
+
+    return theMenu;
+}
+
+- (NSDictionary*)createDefaultViewBookOnMenuItems{
+
+    NSArray* objects = [NSArray arrayWithObjects:@"http://www.google.co.uk/search?q=%@",
+						 @"http://books.google.com/books?q=isbn:%@", nil];
+    NSArray* keys = [NSArray arrayWithObjects:@"Google",
+					      @"Google Books", nil];
+
+    NSDictionary* dict = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
+    [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"viewBookOnMenu"];
+    return dict;
 }
 
 - (IBAction)menuOpenDetailWindowForBook:(id)sender{
     [self openDetailWindowForBook:[sender representedObject]];
+}
+
+- (IBAction)menuOpenBrowserUrlForBook:(id)sender{
+    NSString* url = [sender representedObject];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
+}
+
+- (void)menuEditViewBookOnItems{
+    NSLog(@"Edit books!");
 }
 
 @end
