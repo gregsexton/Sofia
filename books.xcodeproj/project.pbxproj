@@ -43,6 +43,8 @@
 		37970AB111D920CA003A9D0D /* importarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 37970AB011D920CA003A9D0D /* importarrow.png */; };
 		37970AF911DAA847003A9D0D /* missing.png in Resources */ = {isa = PBXBuildFile; fileRef = 37970AF811DAA847003A9D0D /* missing.png */; };
 		37AF6DD611FA298B007A7C85 /* OverviewSplitViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF6DD511FA298B007A7C85 /* OverviewSplitViewDelegate.m */; };
+		37AF704B12048044007A7C85 /* ExternalLinkEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37AF704A12048044007A7C85 /* ExternalLinkEditor.xib */; };
+		37AF705D12049F87007A7C85 /* ExternalLinkEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF705C12049F87007A7C85 /* ExternalLinkEditorController.m */; };
 		37BAF501114D69D000F95C41 /* list.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FD114D69D000F95C41 /* list.m */; };
 		37BAF502114D69D000F95C41 /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FF114D69D000F95C41 /* Library.m */; };
 		37BAF94511566BA700F95C41 /* BooksTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF94411566BA700F95C41 /* BooksTableView.m */; };
@@ -151,6 +153,9 @@
 		37970AF811DAA847003A9D0D /* missing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = missing.png; sourceTree = "<group>"; };
 		37AF6DD411FA298B007A7C85 /* OverviewSplitViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverviewSplitViewDelegate.h; sourceTree = "<group>"; };
 		37AF6DD511FA298B007A7C85 /* OverviewSplitViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverviewSplitViewDelegate.m; sourceTree = "<group>"; };
+		37AF704A12048044007A7C85 /* ExternalLinkEditor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExternalLinkEditor.xib; sourceTree = "<group>"; };
+		37AF705B12049F87007A7C85 /* ExternalLinkEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExternalLinkEditorController.h; sourceTree = "<group>"; };
+		37AF705C12049F87007A7C85 /* ExternalLinkEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExternalLinkEditorController.m; sourceTree = "<group>"; };
 		37BAF4FC114D69D000F95C41 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
 		37BAF4FD114D69D000F95C41 /* list.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = list.m; sourceTree = "<group>"; };
 		37BAF4FE114D69D000F95C41 /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
@@ -300,6 +305,7 @@
 				37BAFC931162510C00F95C41 /* PredicateEditor.xib */,
 				373751491054219600718317 /* database.xcdatamodel */,
 				3735A79B11C6DB5E00DD7461 /* ImportBooks.xib */,
+				37AF704A12048044007A7C85 /* ExternalLinkEditor.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -464,6 +470,8 @@
 				374515C111C19092001C7960 /* BooksMainViewController.m */,
 				3735A79E11C6DBEF00DD7461 /* ImportBooksController.h */,
 				3735A79F11C6DBEF00DD7461 /* ImportBooksController.m */,
+				37AF705B12049F87007A7C85 /* ExternalLinkEditorController.h */,
+				37AF705C12049F87007A7C85 /* ExternalLinkEditorController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -601,6 +609,7 @@
 				3735A79C11C6DB5E00DD7461 /* ImportBooks.xib in Resources */,
 				37970AB111D920CA003A9D0D /* importarrow.png in Resources */,
 				37970AF911DAA847003A9D0D /* missing.png in Resources */,
+				37AF704B12048044007A7C85 /* ExternalLinkEditor.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -657,6 +666,7 @@
 				374516E811C54F81001C7960 /* isbnExtractor.m in Sources */,
 				3735A7A011C6DBEF00DD7461 /* ImportBooksController.m in Sources */,
 				37AF6DD611FA298B007A7C85 /* OverviewSplitViewDelegate.m in Sources */,
+				37AF705D12049F87007A7C85 /* ExternalLinkEditorController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -123,9 +123,11 @@
 - (NSDictionary*)createDefaultViewBookOnMenuItems{
 
     NSArray* objects = [NSArray arrayWithObjects:@"http://www.google.co.uk/search?q=%@",
-						 @"http://books.google.com/books?q=isbn:%@", nil];
+						 @"http://books.google.com/books?q=isbn:%@",
+						 @"http://www.amazon.co.uk/s/url=search-alias%%3Dstripbooks&field-keywords=%@", nil];
     NSArray* keys = [NSArray arrayWithObjects:@"Google",
-					      @"Google Books", nil];
+					      @"Google Books",
+					      @"Amazon", nil];
 
     NSDictionary* dict = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
     [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"viewBookOnMenu"];
@@ -142,7 +144,9 @@
 }
 
 - (void)menuEditViewBookOnItems{
-    NSLog(@"Edit books!");
+    if (![NSBundle loadNibNamed:@"ExternalLinkEditor" owner:self]) {
+	NSLog(@"Error loading Nib!");
+    }
 }
 
 @end
