@@ -40,7 +40,7 @@
     //setup preferences
     AccessKeyViewController *accessKeys = [[AccessKeyViewController alloc] initWithNibName:@"Preferences_AccessKeys" bundle:nil];
     GeneralViewController *general = [[GeneralViewController alloc] initWithNibName:@"Preferences_General" bundle:nil];
-    [[MBPreferencesController sharedController] setModules:[NSArray arrayWithObjects:general, accessKeys, nil]];
+    [[MBPreferencesController sharedController] setModules:[NSArray arrayWithObjects:accessKeys, nil]];
     [accessKeys release];
     [general release];
 
