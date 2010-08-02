@@ -20,7 +20,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <GData/GDataBooks.h>
+/*#import <GData/GDataBooks.h>*/
+#import <QuartzCore/QuartzCore.h>
 #import "book.h"
 #import "author.h"
 #import "subject.h"
@@ -92,6 +93,9 @@
     IBOutlet NSArrayController	*authorsArrayController;
     IBOutlet NSArrayController	*subjectsArrayController;
 
+    IBOutlet NSTextField    *errorLabel;
+    NSMutableArray	    *isbnSearchErrors;
+
     book				*obj;
     author				*doubleClickedAuthor;
     subject				*doubleClickedSubject;
@@ -111,6 +115,7 @@
 - (IBAction) copiesValueChanged:(id)sender;
 - (IBAction) saveClicked:(id)sender;
 - (IBAction) searchClicked:(id)sender;
+- (IBAction)removeErrorMessage:(id)sender;
 
 - (BOOL) bookExistsInLibraryWithISBN:(NSString*)searchedISBN;
 - (BOOL) updateUIFromAmazonWithISBN:(NSString*)searchedISBN;
@@ -118,6 +123,7 @@
 - (NSFetchRequest*) authorExistsWithName:(NSString*)authorName;
 - (NSFetchRequest*) subjectExistsWithName:(NSString*)subjectName;
 - (NSFetchRequest*)entity:(NSString*)entity existsWithName:(NSString*)entityName;
+- (NSString*)stringFromArrayWithCombiners:(NSArray*)array;
 - (id)   initWithManagedObject:(book*)object withSearch:(BOOL)withSearch;
 - (void) clearAllFields;
 - (void) displayManagedAuthorsWithSelectedAuthor:(author*)authorObj;
@@ -128,4 +134,5 @@
 - (void) updateManagedObjectFromUI;
 - (void) updateSummaryTabView;
 - (void) updateUIFromManagedObject;
+- (void) displayErrorMessage:(NSString*)error;
 @end

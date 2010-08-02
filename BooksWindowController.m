@@ -35,13 +35,15 @@
 - (id)initWithManagedObject:(book*)object withSearch:(BOOL)withSearch{
     self = [super init];
     obj = [object retain];
-    displaySearch = !withSearch;
     managedObjectContext = [obj managedObjectContext];
+    displaySearch = !withSearch;
+    isbnSearchErrors = [[NSMutableArray alloc] initWithCapacity:2];
     return self;
 }
 
 - (void) dealloc{
     [obj release];
+    [isbnSearchErrors release];
     [super dealloc];
 }
 
@@ -183,14 +185,15 @@
     amazonInterface* amazon = [[amazonInterface alloc] init];
 
     if(![amazon searchISBN:searchedISBN]){
-	NSRunInformationalAlertPanel(@"Download Error", 
-		@"Unable to retrieve information from Amazon. Please check internet connectivity and valid access keys in your preferences." , @"Ok", nil, nil);
+	[self displayErrorMessage:@"Unable to retrieve information from Amazon. Please check internet connectivity and a valid access key in your preferences."];
 	[amazon release];
 	return false;
     }
 
     if(![amazon successfullyFoundBook]){
-	NSRunInformationalAlertPanel(@"Search Error", @"No results found for this ISBN on Amazon." , @"Ok", nil, nil);
+	[isbnSearchErrors addObject:@"Amazon"];
+	[self displayErrorMessage:[NSString stringWithFormat:@"No results found for this ISBN on %@.", 
+							    [self stringFromArrayWithCombiners:isbnSearchErrors]]];
 	[amazon release];
 	return false;
     }
@@ -208,14 +211,15 @@
 
     isbndbInterface *isbndb = [[isbndbInterface alloc] init];
     if(![isbndb searchISBN:searchedISBN]){
-	NSRunInformationalAlertPanel(@"Download Error", 
-		@"Unable to retrieve information from ISBNDb. Please check internet connectivity and a valid access key in your preferences." , @"Ok", nil, nil);
+	[self displayErrorMessage:@"Unable to retrieve information from ISBNDb. Please check internet connectivity and a valid access key in your preferences."];
 	[isbndb release];
 	return false;
     }
 
     if(![isbndb successfullyFoundBook]){
-	NSRunInformationalAlertPanel(@"Search Error", @"No results found for this ISBN on ISBNDb." , @"Ok", nil, nil);
+	[isbnSearchErrors addObject:@"ISBNDb"];
+	[self displayErrorMessage:[NSString stringWithFormat:@"No results found for this ISBN on %@.", 
+							    [self stringFromArrayWithCombiners:isbnSearchErrors]]];
 	[isbndb release];
 	return false;
     }
@@ -318,6 +322,9 @@
     [txt_physicalDescrip removeAllItems];
     [txt_physicalDescrip setStringValue:@""];
 
+    [img_summary_cover setImage:nil];
+    [img_cover setImage:nil];
+
     [self updateSummaryTabView];
 }
 
@@ -340,6 +347,25 @@
     [lbl_summary_physicalDescrip    setStringValue:[txt_physicalDescrip stringValue]];
 }
 
+- (void)displayErrorMessage:(NSString*)error{
+    [self removeErrorMessage:self];
+    [errorLabel setStringValue:error];
+    [errorLabel setHidden:NO];
+
+    CABasicAnimation *animation = [CABasicAnimation animation];
+    [animation setValue:@"errorLabelDisplay" forKey:@"name"];
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
+    [animation setDuration:0.5f];
+    [animation setDelegate:self]; //delegate fades the error message back out see animationDidStop:finished:
+
+    [errorLabel setAnimations:[NSDictionary dictionaryWithObject:animation forKey:@"alphaValue"]];
+    [[errorLabel animator] setAlphaValue:1.0];
+}
+
+- (IBAction)removeErrorMessage:(id)sender{
+    [errorLabel setHidden:YES];
+    [errorLabel setAlphaValue:0.0];
+}
 
 - (NSFetchRequest*) authorExistsWithName:(NSString*)authorName{
     //returns the request in order to get hold of these authors
@@ -401,12 +427,36 @@
     return false;
 }
 
+- (NSString*)stringFromArrayWithCombiners:(NSArray*)array{
+    //this function returns a string of the form "foo, bar and foobar"
+    //from the array ["foo", "bar", "foobar"]
+
+    if([array count] <= 0)
+	return @"";
+    if([array count] == 1)
+	return [array objectAtIndex:0];
+
+    NSString* buildUp = [array objectAtIndex:0];
+
+    for(int i=1; i < [array count]-1; i++){
+	buildUp = [NSString stringWithFormat:@"%@, %@", buildUp, [array objectAtIndex:i]];
+    }
+
+    buildUp = [NSString stringWithFormat:@"%@ or %@", buildUp, [array lastObject]];
+
+    return buildUp;
+
+}
+
 - (IBAction) searchClicked:(id)sender {
+    [self removeErrorMessage:self];
+    [isbnSearchErrors removeAllObjects];
+
     isbnExtractor* extractor = [[isbnExtractor alloc] initWithContent:[txt_search stringValue]];
     NSArray* isbns = [extractor discoveredISBNs];
     [extractor release];
     if([isbns count] != 1){
-	NSRunInformationalAlertPanel(@"Search Error", @"Please search for a book by the ISBN number." , @"Ok", nil, nil);
+	[self displayErrorMessage:@"Please search for a book by the ISBN number."];
 	return;
     }
 
@@ -480,6 +530,23 @@
     return true;
 }
 
+- (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)flag{
+
+    if(flag && [[animation valueForKey:@"name"] isEqual:@"errorLabelDisplay"]){
+
+	CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
+/*	[animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn]];*/
+	[animation setValues:[NSArray arrayWithObjects:[NSNumber numberWithFloat:1.0],
+						       [NSNumber numberWithFloat:0.0], nil]];
+	[animation setKeyTimes:[NSArray arrayWithObjects:[NSNumber numberWithFloat:0.8],
+							 [NSNumber numberWithFloat:1.0], nil]];
+	[animation setDuration:6.0f];
+
+	[errorLabel setAnimations:[NSDictionary dictionaryWithObject:animation forKey:@"alphaValue"]];
+	[[errorLabel animator] setAlphaValue:0.0];
+    }
+}
+
 //author methods
 - (IBAction) doubleClickAuthorAction:(id)sender {
     //use the first object if multiple are selected
@@ -541,4 +608,5 @@
     doubleClickedSubject = nil; //just to make sure!
     [self displayManagedSubjectsWithSelectedSubject:nil];
 }
+
 @end
