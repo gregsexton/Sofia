@@ -45,6 +45,7 @@
 		37AF6DD611FA298B007A7C85 /* OverviewSplitViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF6DD511FA298B007A7C85 /* OverviewSplitViewDelegate.m */; };
 		37AF704B12048044007A7C85 /* ExternalLinkEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37AF704A12048044007A7C85 /* ExternalLinkEditor.xib */; };
 		37AF705D12049F87007A7C85 /* ExternalLinkEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF705C12049F87007A7C85 /* ExternalLinkEditorController.m */; };
+		37AF712112075B11007A7C85 /* VerticallyCenteredTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF712012075B11007A7C85 /* VerticallyCenteredTextField.m */; };
 		37BAF501114D69D000F95C41 /* list.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FD114D69D000F95C41 /* list.m */; };
 		37BAF502114D69D000F95C41 /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FF114D69D000F95C41 /* Library.m */; };
 		37BAF94511566BA700F95C41 /* BooksTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF94411566BA700F95C41 /* BooksTableView.m */; };
@@ -156,6 +157,8 @@
 		37AF704A12048044007A7C85 /* ExternalLinkEditor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExternalLinkEditor.xib; sourceTree = "<group>"; };
 		37AF705B12049F87007A7C85 /* ExternalLinkEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExternalLinkEditorController.h; sourceTree = "<group>"; };
 		37AF705C12049F87007A7C85 /* ExternalLinkEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExternalLinkEditorController.m; sourceTree = "<group>"; };
+		37AF711F12075B11007A7C85 /* VerticallyCenteredTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerticallyCenteredTextField.h; sourceTree = "<group>"; };
+		37AF712012075B11007A7C85 /* VerticallyCenteredTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerticallyCenteredTextField.m; sourceTree = "<group>"; };
 		37BAF4FC114D69D000F95C41 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
 		37BAF4FD114D69D000F95C41 /* list.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = list.m; sourceTree = "<group>"; };
 		37BAF4FE114D69D000F95C41 /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
@@ -430,6 +433,8 @@
 				37BAF94411566BA700F95C41 /* BooksTableView.m */,
 				3745148411B70B85001C7960 /* BooksImageBrowserView.h */,
 				3745148511B70B85001C7960 /* BooksImageBrowserView.m */,
+				37AF711F12075B11007A7C85 /* VerticallyCenteredTextField.h */,
+				37AF712012075B11007A7C85 /* VerticallyCenteredTextField.m */,
 			);
 			name = "Cocoa Extensions";
 			sourceTree = "<group>";
@@ -667,6 +672,7 @@
 				3735A7A011C6DBEF00DD7461 /* ImportBooksController.m in Sources */,
 				37AF6DD611FA298B007A7C85 /* OverviewSplitViewDelegate.m in Sources */,
 				37AF705D12049F87007A7C85 /* ExternalLinkEditorController.m in Sources */,
+				37AF712112075B11007A7C85 /* VerticallyCenteredTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
