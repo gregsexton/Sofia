@@ -99,8 +99,9 @@
     if(menuItems == nil)
 	menuItems = [self createDefaultViewBookOnMenuItems];
 
+    NSArray* sortedMenuItemsKeys = [[menuItems allKeys] sortedArrayUsingSelector:@selector(compare:)];
     int index = 0;
-    for(NSString* key in menuItems){
+    for(NSString* key in sortedMenuItemsKeys){
 	[theMenu insertItemWithTitle:key
 			      action:@selector(menuOpenBrowserUrlForBook:)
 		       keyEquivalent:@""

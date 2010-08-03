@@ -35,7 +35,7 @@
 }
 
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView{
-    //draw the background
+    //draw the background TODO: this should probably use the cells background color rather than a hardcoded value!
     [[NSColor colorWithCalibratedRed:1.0f green:0.74f blue:0.74f alpha:1.0f] set];
     NSRectFill(cellFrame);
 

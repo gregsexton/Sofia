@@ -8,6 +8,7 @@
 * Multiple image selection from amazon also drop custom image
 * Multiple images for a book
 * View this book on website...
+    * expand this so that book name (or other criteria) can be used as search term
 * Core animation errors (no popups!)
 * Expose detail windows?
 * Reorder files into neater directories.
