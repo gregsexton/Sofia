@@ -106,7 +106,7 @@
 			      action:@selector(menuOpenBrowserUrlForBook:)
 		       keyEquivalent:@""
 			     atIndex:index];
-	[[theMenu itemAtIndex:index] setRepresentedObject:[NSString stringWithFormat:[menuItems objectForKey:key], [bookObj isbn13]]];
+	[[theMenu itemAtIndex:index] setRepresentedObject:[self parseFormatString:[menuItems objectForKey:key] usingBook:bookObj]];
 	[[theMenu itemAtIndex:index] setTarget:self];
 	index++;
     }
@@ -121,11 +121,22 @@
     return theMenu;
 }
 
+- (NSString*)parseFormatString:(NSString*)formatString usingBook:(book*)bookObj{
+    NSString* retStr = formatString;
+    retStr = [retStr stringByReplacingOccurrencesOfString:@"{isbn10}" withString:[bookObj isbn10]];
+    retStr = [retStr stringByReplacingOccurrencesOfString:@"{isbn13}" withString:[bookObj isbn13]];
+    retStr = [retStr stringByReplacingOccurrencesOfString:@"{title}" withString:[bookObj title]];
+
+    retStr = [retStr stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+
+    return retStr;
+}
+
 - (NSDictionary*)createDefaultViewBookOnMenuItems{
 
-    NSArray* objects = [NSArray arrayWithObjects:@"http://www.google.co.uk/search?q=%@",
-						 @"http://books.google.com/books?q=isbn:%@",
-						 @"http://www.amazon.co.uk/s/url=search-alias%%3Dstripbooks&field-keywords=%@", nil];
+    NSArray* objects = [NSArray arrayWithObjects:@"http://www.google.co.uk/search?q={title}",
+						 @"http://books.google.com/books?q=isbn:{isbn13}",
+						 @"http://www.amazon.co.uk/s/url=search-alias%3Dstripbooks&field-keywords={isbn13}", nil];
     NSArray* keys = [NSArray arrayWithObjects:@"Google",
 					      @"Google Books",
 					      @"Amazon", nil];
@@ -140,8 +151,14 @@
 }
 
 - (IBAction)menuOpenBrowserUrlForBook:(id)sender{
-    NSString* url = [sender representedObject];
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
+    NSString* urlStr = [sender representedObject];
+    NSURL* url = [NSURL URLWithString:urlStr];
+
+    if(url == nil)
+	NSRunInformationalAlertPanel(@"URL Error", @"The requested URL is invalid. Please try checking the URL used in the link editor.",
+				     @"Ok", nil, nil);
+    else
+	[[NSWorkspace sharedWorkspace] openURL:url];
 }
 
 - (void)menuEditViewBookOnItems{

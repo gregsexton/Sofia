@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="1"/>
+			<integer value="2"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -303,13 +303,13 @@
 						<object class="NSTextField" id="154089981">
 							<reference key="NSNextResponder" ref="1006"/>
 							<int key="NSvFlags">258</int>
-							<string key="NSFrame">{{46, 11}, {542, 26}}</string>
+							<string key="NSFrame">{{46, 11}, {522, 26}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="678391469">
 								<int key="NSCellFlags">67239424</int>
 								<int key="NSCellFlags2">272629760</int>
-								<string key="NSContents">This is an advanced dialog. Only make changes here if you are sure. Use '%@' in the url to substitue the ISBN. You may need to escape other '%' signs in the url, do this with '%%'.</string>
+								<string key="NSContents">This is an advanced dialog. Only make changes here if you are sure. Use "{isbn13}" or "{isbn10}" in the url to substitue the ISBN. Use "{title}" in the url to substitute the book's title.</string>
 								<object class="NSFont" key="NSSupport">
 									<string key="NSName">LucidaGrande</string>
 									<double key="NSSize">10</double>

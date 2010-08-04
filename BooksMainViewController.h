@@ -40,6 +40,7 @@
 - (NSMenu*)menuForBook:(book*)bookObj;
 - (NSMenu*)submenuViewBookOnForBook:(book*)bookObj;
 - (NSDictionary*)createDefaultViewBookOnMenuItems;
+- (NSString*)parseFormatString:(NSString*)formatString usingBook:(book*)bookObj;
 - (IBAction)menuOpenDetailWindowForBook:(id)sender;
 - (IBAction)menuOpenBrowserUrlForBook:(id)sender;
 
