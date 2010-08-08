@@ -11,4 +11,9 @@
 
 @implementation PreviewViewController
 
+- (void)awakeFromNib{
+}
+
+// Delegate methods ////////////////////////////////////////////////////////////
+
 @end

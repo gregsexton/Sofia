@@ -13,8 +13,6 @@
 
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
-    if (self) {
-    }
     return self;
 }
 
@@ -24,9 +22,6 @@
     //TODO: change when app loses focus
     [[NSColor colorWithCalibratedRed:0.867f green:0.891f blue:0.914f alpha:1.0f] setFill];
     NSRectFill(dirtyRect);
-}
-
-- (void)awakeFromNib{
 }
 
 @end

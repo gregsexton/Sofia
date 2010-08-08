@@ -48,6 +48,7 @@
 		37AF712112075B11007A7C85 /* VerticallyCenteredTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF712012075B11007A7C85 /* VerticallyCenteredTextField.m */; };
 		37AF727F120CAAC8007A7C85 /* PreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF727E120CAAC8007A7C85 /* PreviewView.m */; };
 		37AF72A1120D7D8E007A7C85 /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF72A0120D7D8E007A7C85 /* PreviewViewController.m */; };
+		37AF72EE120DB8CA007A7C85 /* ReflectionImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF72ED120DB8CA007A7C85 /* ReflectionImageView.m */; };
 		37BAF501114D69D000F95C41 /* list.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FD114D69D000F95C41 /* list.m */; };
 		37BAF502114D69D000F95C41 /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FF114D69D000F95C41 /* Library.m */; };
 		37BAF94511566BA700F95C41 /* BooksTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF94411566BA700F95C41 /* BooksTableView.m */; };
@@ -165,6 +166,8 @@
 		37AF727E120CAAC8007A7C85 /* PreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewView.m; sourceTree = "<group>"; };
 		37AF729F120D7D8E007A7C85 /* PreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewViewController.h; sourceTree = "<group>"; };
 		37AF72A0120D7D8E007A7C85 /* PreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewViewController.m; sourceTree = "<group>"; };
+		37AF72EC120DB8CA007A7C85 /* ReflectionImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReflectionImageView.h; sourceTree = "<group>"; };
+		37AF72ED120DB8CA007A7C85 /* ReflectionImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReflectionImageView.m; sourceTree = "<group>"; };
 		37BAF4FC114D69D000F95C41 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
 		37BAF4FD114D69D000F95C41 /* list.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = list.m; sourceTree = "<group>"; };
 		37BAF4FE114D69D000F95C41 /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
@@ -443,6 +446,8 @@
 				37AF712012075B11007A7C85 /* VerticallyCenteredTextField.m */,
 				37AF727D120CAAC8007A7C85 /* PreviewView.h */,
 				37AF727E120CAAC8007A7C85 /* PreviewView.m */,
+				37AF72EC120DB8CA007A7C85 /* ReflectionImageView.h */,
+				37AF72ED120DB8CA007A7C85 /* ReflectionImageView.m */,
 			);
 			name = "Cocoa Extensions";
 			sourceTree = "<group>";
@@ -685,6 +690,7 @@
 				37AF712112075B11007A7C85 /* VerticallyCenteredTextField.m in Sources */,
 				37AF727F120CAAC8007A7C85 /* PreviewView.m in Sources */,
 				37AF72A1120D7D8E007A7C85 /* PreviewViewController.m in Sources */,
+				37AF72EE120DB8CA007A7C85 /* ReflectionImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

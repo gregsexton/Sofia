@@ -7,10 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "book.h"
 
 
 @interface PreviewViewController : NSViewController {
 
+    IBOutlet NSArrayController* arrayController;
+    IBOutlet NSImageView* imageCover;
+    IBOutlet NSImageView* imageCoverReflection;
 }
 
 @end
