@@ -15,6 +15,12 @@
     IBOutlet NSArrayController* arrayController;
     IBOutlet NSImageView* imageCover;
     IBOutlet NSImageView* imageCoverReflection;
+
+    NSAttributedString* titleString;
+    NSString* isbnString;
 }
+
+@property (nonatomic, retain) NSAttributedString* titleString;
+@property (nonatomic, retain) NSString* isbnString;
 
 @end
