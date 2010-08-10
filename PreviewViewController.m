@@ -16,7 +16,6 @@
 //TODO: download of summary missing paragraphs this may be applicable generally
 //TODO: elipsis at end of summary apply this to bookwindow also
 //TODO: number of copies, read
-//TODO: use default cover for books without one
 
 - (void)awakeFromNib{
     //register as observer
@@ -86,6 +85,11 @@
 
 }
 
+- (void)updateCoverImage:(NSImage*)img{
+    [imageCover setImage:img];
+    [imageCoverReflection setImage:img];
+}
+
 
 // Delegate methods ////////////////////////////////////////////////////////////
 
@@ -102,16 +106,25 @@
 			  fullTitle:[selectedBook titleLong]
 			     author:[selectedBook authorText]];
 	    [self updateISBN10:[selectedBook isbn10] ISBN13:[selectedBook isbn13]];
+
+	    NSImage* img = [selectedBook coverImage];
+	    if(img == nil)
+		img = [NSImage imageNamed:@"missing.png"];
+	    [self updateCoverImage:img];
+
 	}else if([[arrayController selectedObjects] count] == 0){
 	    [self updateTitleString:@"No Selection"
 			  fullTitle:@""
 			     author:@""];
 	    [self updateISBN10:@"" ISBN13:@""];
+	    [self updateCoverImage:nil];
+
 	}else if([[arrayController selectedObjects] count] > 1){
 	    [self updateTitleString:@"Multiple Selection"
 			  fullTitle:@""
 			     author:@""];
 	    [self updateISBN10:@"" ISBN13:@""];
+	    [self updateCoverImage:nil];
 	}
     }
 }

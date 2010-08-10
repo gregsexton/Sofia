@@ -23,4 +23,8 @@
 @property (nonatomic, retain) NSAttributedString* titleString;
 @property (nonatomic, retain) NSString* isbnString;
 
+- (void)updateCoverImage:(NSImage*)img;
+- (void)updateISBN10:(NSString*)isbn10 ISBN13:(NSString*)isbn13;
+- (void)updateTitleString:(NSString*)titleStr fullTitle:(NSString*)fullTitleStr author:(NSString*)authorStr;
+
 @end
