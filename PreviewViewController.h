@@ -22,10 +22,10 @@
     NSString* copiesString;
 }
 
-@property (nonatomic, retain) NSAttributedString* titleString;
-@property (nonatomic, retain) NSAttributedString* readString;
-@property (nonatomic, retain) NSString* isbnString;
-@property (nonatomic, retain) NSString* copiesString;
+@property (nonatomic, assign) NSAttributedString* titleString;
+@property (nonatomic, assign) NSAttributedString* readString;
+@property (nonatomic, assign) NSString* isbnString;
+@property (nonatomic, assign) NSString* copiesString;
 
 - (void)updateCopiesCount:(NSInteger)count;
 - (void)updateCoverImage:(NSImage*)img;

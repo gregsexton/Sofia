@@ -29,13 +29,12 @@
 
 - (void)dealloc{
     [super dealloc];
-    [titleString release];
-    [isbnString release];
-    [readString release];
-    [copiesString release];
 }
 
 - (void)updateTitleString:(NSString*)titleStr fullTitle:(NSString*)fullTitleStr author:(NSString*)authorStr{
+
+    if(titleStr == nil || fullTitleStr == nil || authorStr == nil)
+	return;							    //NSAttributedString does not like nil strings!
 
     NSColor* color = [NSColor colorWithCalibratedRed:0.2f green:0.2f blue:0.2f alpha:1.0f];
     NSFont* font = [NSFont fontWithName:@"Helvetica-Bold" size:18.0];
@@ -83,6 +82,9 @@
 }
 
 - (void)updateISBN10:(NSString*)isbn10 ISBN13:(NSString*)isbn13{
+
+    if(isbn10 == nil || isbn13 == nil)
+	return;
 
     [self setIsbnString:[NSString stringWithFormat:@"%@\t%@", isbn10, isbn13]];
 
