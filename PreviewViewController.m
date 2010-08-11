@@ -12,10 +12,12 @@
 @implementation PreviewViewController
 @synthesize titleString;
 @synthesize isbnString;
+@synthesize readString;
+@synthesize copiesString;
 
 //TODO: download of summary missing paragraphs this may be applicable generally
 //TODO: elipsis at end of summary apply this to bookwindow also
-//TODO: number of copies, read
+//TODO: change to selected book reflected
 
 - (void)awakeFromNib{
     //register as observer
@@ -23,13 +25,14 @@
 		      forKeyPath:@"selectedObjects"
 			 options:NSKeyValueObservingOptionInitial //send message immediately
 			 context:NULL];
-
 }
 
 - (void)dealloc{
     [super dealloc];
     [titleString release];
     [isbnString release];
+    [readString release];
+    [copiesString release];
 }
 
 - (void)updateTitleString:(NSString*)titleStr fullTitle:(NSString*)fullTitleStr author:(NSString*)authorStr{
@@ -90,6 +93,56 @@
     [imageCoverReflection setImage:img];
 }
 
+- (void)updateReadStatus:(NSNumber*)isRead{
+    //isRead acts as a nullable bool
+
+    NSAttributedString* read = nil;
+    NSColor* color = nil;
+
+    if(isRead == nil){
+	read = [[NSAttributedString alloc] initWithString:@""];
+	[self setReadString:read];
+	[read release];
+	return;
+    }
+
+    NSMutableParagraphStyle* paraStyle = [[NSMutableParagraphStyle alloc] init];
+    [paraStyle setAlignment:NSRightTextAlignment];
+
+    if([isRead boolValue])
+	color = [NSColor colorWithCalibratedRed:0.0f green:0.5f blue:0.0f alpha:1.0f];
+    else
+	color = [NSColor colorWithCalibratedRed:0.7f green:0.0f blue:0.0f alpha:1.0f];
+
+    NSDictionary* attrib = [NSDictionary dictionaryWithObjectsAndKeys:
+					    paraStyle, NSParagraphStyleAttributeName,
+					    color, NSForegroundColorAttributeName, nil];
+    if([isRead boolValue])
+	read = [[NSAttributedString alloc] initWithString:@"Read" attributes:attrib];
+    else
+	read = [[NSAttributedString alloc] initWithString:@"Unread" attributes:attrib];
+
+    [self setReadString:read];
+    [read release];
+    [paraStyle release];
+}
+
+- (void)updateCopiesCount:(NSInteger)count{
+
+    NSString* retString = nil;
+
+    if(count == 0)
+	retString = @"No copies owned";
+    else if(count == 1)
+	retString = @"1 copy owned";
+    else if(count > 1)
+	retString = [NSString stringWithFormat:@"%d copies owned", count];
+    else
+	retString = @"";
+
+    [self setCopiesString:retString];
+}
+
 
 // Delegate methods ////////////////////////////////////////////////////////////
 
@@ -106,6 +159,8 @@
 			  fullTitle:[selectedBook titleLong]
 			     author:[selectedBook authorText]];
 	    [self updateISBN10:[selectedBook isbn10] ISBN13:[selectedBook isbn13]];
+	    [self updateReadStatus:[selectedBook read]];
+	    [self updateCopiesCount:[[selectedBook noOfCopies] integerValue]];
 
 	    NSImage* img = [selectedBook coverImage];
 	    if(img == nil)
@@ -118,6 +173,8 @@
 			     author:@""];
 	    [self updateISBN10:@"" ISBN13:@""];
 	    [self updateCoverImage:nil];
+	    [self updateReadStatus:nil];
+	    [self updateCopiesCount:-1];
 
 	}else if([[arrayController selectedObjects] count] > 1){
 	    [self updateTitleString:@"Multiple Selection"
@@ -125,7 +182,11 @@
 			     author:@""];
 	    [self updateISBN10:@"" ISBN13:@""];
 	    [self updateCoverImage:nil];
+	    [self updateReadStatus:nil];
+	    [self updateCopiesCount:-1];
 	}
+
+	return;
     }
 }
 
