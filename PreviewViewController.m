@@ -96,6 +96,9 @@
 
 - (void)updateSummaryString:(NSString*)summaryStr{
 
+    if(summaryStr == nil)
+	return;
+
     NSColor* color = [NSColor colorWithCalibratedRed:0.5f green:0.5f blue:0.5f alpha:1.0f];
 
     NSFont* font = [NSFont fontWithName:@"Helvetica" size:12.0];
