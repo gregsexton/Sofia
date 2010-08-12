@@ -14,9 +14,8 @@
 @synthesize isbnString;
 @synthesize readString;
 @synthesize copiesString;
+@synthesize summaryString;
 
-//TODO: download of summary missing paragraphs this may be applicable generally
-//TODO: elipsis at end of summary apply this to bookwindow also
 //TODO: change to selected book reflected
 
 - (void)awakeFromNib{
@@ -95,6 +94,27 @@
     [imageCoverReflection setImage:img];
 }
 
+- (void)updateSummaryString:(NSString*)summaryStr{
+
+    NSColor* color = [NSColor colorWithCalibratedRed:0.5f green:0.5f blue:0.5f alpha:1.0f];
+
+    NSFont* font = [NSFont fontWithName:@"Helvetica" size:12.0];
+
+    NSMutableParagraphStyle* paraStyle = [[NSMutableParagraphStyle alloc] init];
+    [paraStyle setAlignment:NSJustifiedTextAlignment];
+
+    NSDictionary* summaryAttrib = [NSDictionary dictionaryWithObjectsAndKeys:
+							paraStyle, NSParagraphStyleAttributeName,
+							font,  NSFontAttributeName,
+							color, NSForegroundColorAttributeName, nil];
+
+    NSAttributedString* summary = [[NSAttributedString alloc] initWithString:summaryStr 
+								  attributes:summaryAttrib];
+    [self setSummaryString:summary];
+    [summary release];
+    [paraStyle release];
+}
+
 - (void)updateReadStatus:(NSNumber*)isRead{
     //isRead acts as a nullable bool
 
@@ -163,6 +183,7 @@
 	    [self updateISBN10:[selectedBook isbn10] ISBN13:[selectedBook isbn13]];
 	    [self updateReadStatus:[selectedBook read]];
 	    [self updateCopiesCount:[[selectedBook noOfCopies] integerValue]];
+	    [self updateSummaryString:[selectedBook summary]];
 
 	    NSImage* img = [selectedBook coverImage];
 	    if(img == nil)
@@ -177,6 +198,7 @@
 	    [self updateCoverImage:nil];
 	    [self updateReadStatus:nil];
 	    [self updateCopiesCount:-1];
+	    [self updateSummaryString:@""];
 
 	}else if([[arrayController selectedObjects] count] > 1){
 	    [self updateTitleString:@"Multiple Selection"
@@ -186,6 +208,7 @@
 	    [self updateCoverImage:nil];
 	    [self updateReadStatus:nil];
 	    [self updateCopiesCount:-1];
+	    [self updateSummaryString:@""];
 	}
 
 	return;

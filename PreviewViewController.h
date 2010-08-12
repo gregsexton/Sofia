@@ -18,12 +18,14 @@
 
     NSAttributedString* titleString;
     NSAttributedString* readString;
+    NSAttributedString* summaryString;
     NSString* isbnString;
     NSString* copiesString;
 }
 
 @property (nonatomic, assign) NSAttributedString* titleString;
 @property (nonatomic, assign) NSAttributedString* readString;
+@property (nonatomic, assign) NSAttributedString* summaryString;
 @property (nonatomic, assign) NSString* isbnString;
 @property (nonatomic, assign) NSString* copiesString;
 
@@ -31,6 +33,7 @@
 - (void)updateCoverImage:(NSImage*)img;
 - (void)updateISBN10:(NSString*)isbn10 ISBN13:(NSString*)isbn13;
 - (void)updateReadStatus:(NSNumber*)isRead;
+- (void)updateSummaryString:(NSString*)summaryStr;
 - (void)updateTitleString:(NSString*)titleStr fullTitle:(NSString*)fullTitleStr author:(NSString*)authorStr;
 
 @end
