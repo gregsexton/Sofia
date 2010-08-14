@@ -49,6 +49,7 @@
 		37AF727F120CAAC8007A7C85 /* PreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF727E120CAAC8007A7C85 /* PreviewView.m */; };
 		37AF72A1120D7D8E007A7C85 /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF72A0120D7D8E007A7C85 /* PreviewViewController.m */; };
 		37AF72EE120DB8CA007A7C85 /* ReflectionImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF72ED120DB8CA007A7C85 /* ReflectionImageView.m */; };
+		37AF75E91216CFBB007A7C85 /* PreviewSplitViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF75E81216CFBB007A7C85 /* PreviewSplitViewDelegate.m */; };
 		37BAF501114D69D000F95C41 /* list.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FD114D69D000F95C41 /* list.m */; };
 		37BAF502114D69D000F95C41 /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FF114D69D000F95C41 /* Library.m */; };
 		37BAF94511566BA700F95C41 /* BooksTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF94411566BA700F95C41 /* BooksTableView.m */; };
@@ -168,6 +169,8 @@
 		37AF72A0120D7D8E007A7C85 /* PreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewViewController.m; sourceTree = "<group>"; };
 		37AF72EC120DB8CA007A7C85 /* ReflectionImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReflectionImageView.h; sourceTree = "<group>"; };
 		37AF72ED120DB8CA007A7C85 /* ReflectionImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReflectionImageView.m; sourceTree = "<group>"; };
+		37AF75E71216CFBB007A7C85 /* PreviewSplitViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewSplitViewDelegate.h; sourceTree = "<group>"; };
+		37AF75E81216CFBB007A7C85 /* PreviewSplitViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewSplitViewDelegate.m; sourceTree = "<group>"; };
 		37BAF4FC114D69D000F95C41 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
 		37BAF4FD114D69D000F95C41 /* list.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = list.m; sourceTree = "<group>"; };
 		37BAF4FE114D69D000F95C41 /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
@@ -408,6 +411,8 @@
 			children = (
 				37AF6DD411FA298B007A7C85 /* OverviewSplitViewDelegate.h */,
 				37AF6DD511FA298B007A7C85 /* OverviewSplitViewDelegate.m */,
+				37AF75E71216CFBB007A7C85 /* PreviewSplitViewDelegate.h */,
+				37AF75E81216CFBB007A7C85 /* PreviewSplitViewDelegate.m */,
 			);
 			name = Delegates;
 			sourceTree = "<group>";
@@ -691,6 +696,7 @@
 				37AF727F120CAAC8007A7C85 /* PreviewView.m in Sources */,
 				37AF72A1120D7D8E007A7C85 /* PreviewViewController.m in Sources */,
 				37AF72EE120DB8CA007A7C85 /* ReflectionImageView.m in Sources */,
+				37AF75E91216CFBB007A7C85 /* PreviewSplitViewDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
