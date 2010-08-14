@@ -37,6 +37,8 @@
 		      forKeyPath:@"selectedObjects"
 			 options:NSKeyValueObservingOptionInitial //send message immediately
 			 context:NULL];
+
+    _previewViewWidth = 300.0; //default width
 }
 
 - (void)dealloc{
@@ -181,6 +183,37 @@
     [self setCopiesString:retString];
 }
 
+- (IBAction)toggleOpenClosePreviewView:(id)sender{
+
+//    NSButton* toggleCollapseButton = sender;
+//    [[toggleCollapseButton cell] setHighlightsBy:NSPushInCellMask];
+//    [[toggleCollapseButton cell] setShowsStateBy:NSContentsCellMask];
+
+    if(previewView.frame.size.width == 0.0){
+
+	NSRect previewRect = previewView.frame;
+	previewRect.size.width = _previewViewWidth;
+
+	[NSAnimationContext beginGrouping];
+	    [[previewView animator] setFrame:previewRect];
+	    [[overviewView animator] setFrameSize:NSMakeSize(overviewView.frame.size.width - _previewViewWidth,
+							     overviewView.frame.size.height)];
+	[NSAnimationContext endGrouping];
+
+    }else{
+
+	NSRect previewRect = previewView.frame;
+	_previewViewWidth = previewRect.size.width;
+	previewRect.size.width = 0.0;
+	[NSAnimationContext beginGrouping];
+	    [[previewView animator] setFrame:previewRect];
+	    [[overviewView animator] setFrameSize:NSMakeSize(overviewView.frame.size.width + _previewViewWidth,
+							     overviewView.frame.size.height)];
+	[NSAnimationContext endGrouping];
+    }
+
+    [previewSplitView adjustSubviews];
+}
 
 // Delegate methods ////////////////////////////////////////////////////////////
 

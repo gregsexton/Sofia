@@ -29,11 +29,17 @@
     IBOutlet NSImageView* imageCover;
     IBOutlet NSImageView* imageCoverReflection;
 
+    IBOutlet NSSplitView* previewSplitView;
+    IBOutlet NSView* previewView;
+    IBOutlet NSView* overviewView;
+
     NSAttributedString* titleString;
     NSAttributedString* readString;
     NSAttributedString* summaryString;
     NSString* isbnString;
     NSString* copiesString;
+
+    CGFloat _previewViewWidth;
 }
 
 @property (nonatomic, assign) NSAttributedString* titleString;
@@ -48,5 +54,6 @@
 - (void)updateReadStatus:(NSNumber*)isRead;
 - (void)updateSummaryString:(NSString*)summaryStr;
 - (void)updateTitleString:(NSString*)titleStr fullTitle:(NSString*)fullTitleStr author:(NSString*)authorStr;
+- (IBAction)toggleOpenClosePreviewView:(id)sender;
 
 @end

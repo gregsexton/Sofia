@@ -50,4 +50,12 @@
     return YES;
 }
 
+- (BOOL)splitView:(NSSplitView *)splitView canCollapseSubview:(NSView *)subview{
+
+    if(subview == [[splitView subviews] objectAtIndex:1])
+	return YES;
+
+    return NO;
+}
+
 @end
