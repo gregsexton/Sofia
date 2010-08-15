@@ -189,6 +189,14 @@
 //    [[toggleCollapseButton cell] setHighlightsBy:NSPushInCellMask];
 //    [[toggleCollapseButton cell] setShowsStateBy:NSContentsCellMask];
 
+//    NSLog(@"previewSplitView: %f", previewSplitView.frame.size.width);
+//    NSLog(@"previewView: %f", previewView.frame.size.width);
+//    NSLog(@"overviewView: %f\n", overviewView.frame.size.width);
+//
+//    NSLog(@"previewSplitView: %f", previewSplitView.bounds.size.width);
+//    NSLog(@"previewView: %f", previewView.bounds.size.width);
+//    NSLog(@"overviewView: %f\n", overviewView.bounds.size.width);
+
     if(previewView.frame.size.width == 0.0){
 
 	NSRect previewRect = previewView.frame;
