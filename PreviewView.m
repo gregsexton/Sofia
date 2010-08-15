@@ -31,10 +31,42 @@
 
 - (void)drawRect:(NSRect)dirtyRect {
     
+    [super drawRect:dirtyRect];
+
     //draw custom background colour
     //TODO: change when app loses focus
     [[NSColor colorWithCalibratedRed:0.867f green:0.891f blue:0.914f alpha:1.0f] setFill];
     NSRectFill(dirtyRect);
+
+    if(![self inLiveResize]){
+	[self positionSubviews];
+    }
+}
+
+- (void)viewDidEndLiveResize{
+    [super viewDidEndLiveResize];
+    [self positionSubviews];
+}
+
+- (void)positionSubviews{
+
+    CGFloat width = self.frame.size.width;
+    CGFloat height = self.frame.size.height;
+
+    CGFloat imageY = height - 20 - 178;
+    [imageCover setFrame:NSMakeRect((width-169)/2, imageY, 169, 178)];
+    [imageCoverReflection setFrame:NSMakeRect((width-169)/2, imageY-178, 169, 178)];
+
+    CGFloat titleH = (0.19 * height) > 150 ? 150 : (0.19 * height);
+    CGFloat titleY = imageY - 60 - titleH;
+    [titleTextField setFrame:NSMakeRect(20, titleY, width - 20-20, titleH)]; 
+
+    CGFloat isbnY = titleY - 8 - 13;
+    [isbnTextField setFrame:NSMakeRect(20, isbnY, width - 20-20, 13)];
+
+    CGFloat summaryH = isbnY - 8 - 36;
+    [summaryScrollView setFrame:NSMakeRect(20, 36, width - 20-20, summaryH)]; //resizing this is very expensive
+									      //this is set in interface builder not to resize
 }
 
 @end
