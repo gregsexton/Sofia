@@ -33,6 +33,9 @@
     IBOutlet NSView* previewView;
     IBOutlet NSView* overviewView;
 
+    IBOutlet NSButton* previewToggleButton;
+    IBOutlet NSMenuItem* previewMenuItem;
+
     NSAttributedString* titleString;
     NSAttributedString* readString;
     NSAttributedString* summaryString;

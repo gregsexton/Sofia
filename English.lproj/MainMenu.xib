@@ -21,8 +21,8 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="296"/>
 			<integer value="546"/>
+			<integer value="296"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1805,7 +1805,7 @@
 							<reference key="NSSuperview" ref="1040090277"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="364602195">
-								<int key="NSCellFlags">67239424</int>
+								<int key="NSCellFlags">-2080244224</int>
 								<int key="NSCellFlags2">134217728</int>
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="189518655"/>
@@ -1814,7 +1814,7 @@
 								<int key="NSButtonFlags2">163</int>
 								<object class="NSCustomResource" key="NSNormalImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">NSSlideshowTemplate</string>
+									<string key="NSResourceName">NSRevealFreestandingTemplate</string>
 								</object>
 								<string key="NSAlternateContents"/>
 								<string type="base64-UTF8" key="NSKeyEquivalent">IA</string>
@@ -3545,6 +3545,22 @@
 						<reference key="destination" ref="391113726"/>
 					</object>
 					<int key="connectionID">1028</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">previewToggleButton</string>
+						<reference key="source" ref="741713859"/>
+						<reference key="destination" ref="530546349"/>
+					</object>
+					<int key="connectionID">1029</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">previewMenuItem</string>
+						<reference key="source" ref="741713859"/>
+						<reference key="destination" ref="558365234"/>
+					</object>
+					<int key="connectionID">1030</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -5382,7 +5398,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1028</int>
+			<int key="maxID">1030</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -5533,7 +5549,9 @@
 							<string>imageCover</string>
 							<string>imageCoverReflection</string>
 							<string>overviewView</string>
+							<string>previewMenuItem</string>
 							<string>previewSplitView</string>
+							<string>previewToggleButton</string>
 							<string>previewView</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -5542,7 +5560,9 @@
 							<string>NSImageView</string>
 							<string>NSImageView</string>
 							<string>NSView</string>
+							<string>NSMenuItem</string>
 							<string>NSSplitView</string>
+							<string>NSButton</string>
 							<string>NSView</string>
 						</object>
 					</object>
@@ -6644,7 +6664,7 @@
 				<string>NSMenuCheckmark</string>
 				<string>NSMenuMixedState</string>
 				<string>NSRemoveTemplate</string>
-				<string>NSSlideshowTemplate</string>
+				<string>NSRevealFreestandingTemplate</string>
 				<string>NSSwitch</string>
 				<string>NSToolbarCustomizeToolbarItemImage</string>
 				<string>importarrow</string>
@@ -6658,7 +6678,7 @@
 				<string>{9, 8}</string>
 				<string>{7, 2}</string>
 				<string>{8, 8}</string>
-				<string>{17, 14}</string>
+				<string>{14, 14}</string>
 				<string>{15, 15}</string>
 				<string>{32, 32}</string>
 				<string>{9, 13}</string>

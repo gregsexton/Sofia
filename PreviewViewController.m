@@ -39,6 +39,17 @@
 			 context:NULL];
 
     _previewViewWidth = 300.0; //default width
+
+    [[previewToggleButton cell] setHighlightsBy:NSPushInCellMask];
+    [[previewToggleButton cell] setShowsStateBy:NSContentsCellMask];
+
+    if(previewView.frame.size.width > 0){
+	[[previewToggleButton cell] setState:NSOnState];
+	[previewMenuItem setState:NSOnState];
+    }else{
+	[[previewToggleButton cell] setState:NSOffState];
+	[previewMenuItem setState:NSOffState];
+    }
 }
 
 - (void)dealloc{
@@ -185,19 +196,10 @@
 
 - (IBAction)toggleOpenClosePreviewView:(id)sender{
 
-//    NSButton* toggleCollapseButton = sender;
-//    [[toggleCollapseButton cell] setHighlightsBy:NSPushInCellMask];
-//    [[toggleCollapseButton cell] setShowsStateBy:NSContentsCellMask];
+    if(previewView.frame.size.width == 0.0){		//open
 
-//    NSLog(@"previewSplitView: %f", previewSplitView.frame.size.width);
-//    NSLog(@"previewView: %f", previewView.frame.size.width);
-//    NSLog(@"overviewView: %f\n", overviewView.frame.size.width);
-//
-//    NSLog(@"previewSplitView: %f", previewSplitView.bounds.size.width);
-//    NSLog(@"previewView: %f", previewView.bounds.size.width);
-//    NSLog(@"overviewView: %f\n", overviewView.bounds.size.width);
-
-    if(previewView.frame.size.width == 0.0){
+	[[previewToggleButton cell] setState:NSOnState];
+	[previewMenuItem setState:NSOnState];
 
 	NSRect previewRect = previewView.frame;
 	previewRect.size.width = _previewViewWidth;
@@ -208,7 +210,10 @@
 							     overviewView.frame.size.height)];
 	[NSAnimationContext endGrouping];
 
-    }else{
+    }else{						//collapse
+
+	[[previewToggleButton cell] setState:NSOffState];
+	[previewMenuItem setState:NSOffState];
 
 	NSRect previewRect = previewView.frame;
 	_previewViewWidth = previewRect.size.width;
