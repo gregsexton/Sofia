@@ -87,7 +87,9 @@
     CGContextFillRect(viewContext, NSRectToCGRect(scaledRect));
 
     CGContextRestoreGState(viewContext);
+
     CGImageRelease(alphaMask);
+    CGContextRelease(maskContext);
 }
 
 - (void)drawGradientInContext:(CGContextRef)context{

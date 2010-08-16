@@ -23,10 +23,34 @@
 
 
 @implementation PreviewView
+@synthesize backgroundColor;
 
 - (id)initWithFrame:(NSRect)frame {
-    self = [super initWithFrame:frame];
+
+    if(self = [super initWithFrame:frame]){
+	[self setBackgroundColor:[NSColor colorWithCalibratedRed:0.867f green:0.891f blue:0.914f alpha:1.0f]];
+    }
+
     return self;
+}
+
+- (void)awakeFromNib{
+
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+					     selector:@selector(windowKeyChange)
+						 name:NSWindowDidResignKeyNotification
+					       object:[self window]];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+					     selector:@selector(windowKeyChange)
+						 name:NSWindowDidBecomeKeyNotification
+					       object:[self window]];
+
+}
+
+- (void)dealloc{
+    [backgroundColor release];
+    [super dealloc];
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
@@ -34,8 +58,7 @@
     [super drawRect:dirtyRect];
 
     //draw custom background colour
-    //TODO: change when app loses focus
-    [[NSColor colorWithCalibratedRed:0.867f green:0.891f blue:0.914f alpha:1.0f] setFill];
+    [backgroundColor setFill];
     NSRectFill(dirtyRect);
 
     if(![self inLiveResize]){
@@ -67,6 +90,14 @@
     CGFloat summaryH = isbnY - 8 - 36;
     [summaryScrollView setFrame:NSMakeRect(20, 36, width - 20-20, summaryH)]; //resizing this is very expensive
 									      //this is set in interface builder not to resize
+}
+
+- (void)windowKeyChange{
+
+    if([[self window] isKeyWindow])
+	[self setBackgroundColor:[NSColor colorWithCalibratedRed:0.867f green:0.891f blue:0.914f alpha:1.0f]];
+    else
+	[self setBackgroundColor:[NSColor controlHighlightColor]];
 }
 
 @end

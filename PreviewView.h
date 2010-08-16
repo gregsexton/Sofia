@@ -30,8 +30,11 @@
     IBOutlet NSTextField* isbnTextField;
     IBOutlet NSScrollView* summaryScrollView;
 
+    NSColor* backgroundColor;
 }
+@property (nonatomic, retain) NSColor* backgroundColor;
 
 - (void)positionSubviews;
+- (void)windowKeyChange;
 
 @end
