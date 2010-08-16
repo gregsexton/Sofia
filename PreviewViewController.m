@@ -29,14 +29,17 @@
 @synthesize copiesString;
 @synthesize summaryString;
 
-//TODO: change to selected book reflected
-
 - (void)awakeFromNib{
-    //register as observer
+    //register as observer for selection changes and object changes
     [arrayController addObserver:self
 		      forKeyPath:@"selectedObjects"
 			 options:NSKeyValueObservingOptionInitial //send message immediately
 			 context:NULL];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+					     selector:@selector(managedObjectsDidChange:)
+						 name:NSManagedObjectContextObjectsDidChangeNotification
+					       object:nil];
 
     _previewViewWidth = 300.0; //default width
 
@@ -194,6 +197,45 @@
     [self setCopiesString:retString];
 }
 
+- (void)updateComponents{
+
+    if([[arrayController selectedObjects] count] == 1){
+	book* selectedBook = [[arrayController selectedObjects] objectAtIndex:0];
+	[self updateTitleString:[selectedBook title]
+		      fullTitle:[selectedBook titleLong]
+			 author:[selectedBook authorText]];
+	[self updateISBN10:[selectedBook isbn10] ISBN13:[selectedBook isbn13]];
+	[self updateReadStatus:[selectedBook read]];
+	[self updateCopiesCount:[[selectedBook noOfCopies] integerValue]];
+	[self updateSummaryString:[selectedBook summary]];
+
+	NSImage* img = [selectedBook coverImage];
+	if(img == nil)
+	    img = [NSImage imageNamed:@"missing.png"];
+	[self updateCoverImage:img];
+
+    }else if([[arrayController selectedObjects] count] == 0){
+	[self updateTitleString:@"No Selection"
+		      fullTitle:@""
+			 author:@""];
+	[self updateISBN10:@"" ISBN13:@""];
+	[self updateCoverImage:nil];
+	[self updateReadStatus:nil];
+	[self updateCopiesCount:-1];
+	[self updateSummaryString:@""];
+
+    }else if([[arrayController selectedObjects] count] > 1){
+	[self updateTitleString:@"Multiple Selection"
+		      fullTitle:@""
+			 author:@""];
+	[self updateISBN10:@"" ISBN13:@""];
+	[self updateCoverImage:nil];
+	[self updateReadStatus:nil];
+	[self updateCopiesCount:-1];
+	[self updateSummaryString:@""];
+    }
+}
+
 - (IBAction)toggleOpenClosePreviewView:(id)sender{
 
     if(previewView.frame.size.width == 0.0){		//open
@@ -237,44 +279,13 @@
 
     if([keyPath isEqualToString:@"selectedObjects"]){
 
-	if([[arrayController selectedObjects] count] == 1){
-	    book* selectedBook = [[arrayController selectedObjects] objectAtIndex:0];
-	    [self updateTitleString:[selectedBook title]
-			  fullTitle:[selectedBook titleLong]
-			     author:[selectedBook authorText]];
-	    [self updateISBN10:[selectedBook isbn10] ISBN13:[selectedBook isbn13]];
-	    [self updateReadStatus:[selectedBook read]];
-	    [self updateCopiesCount:[[selectedBook noOfCopies] integerValue]];
-	    [self updateSummaryString:[selectedBook summary]];
-
-	    NSImage* img = [selectedBook coverImage];
-	    if(img == nil)
-		img = [NSImage imageNamed:@"missing.png"];
-	    [self updateCoverImage:img];
-
-	}else if([[arrayController selectedObjects] count] == 0){
-	    [self updateTitleString:@"No Selection"
-			  fullTitle:@""
-			     author:@""];
-	    [self updateISBN10:@"" ISBN13:@""];
-	    [self updateCoverImage:nil];
-	    [self updateReadStatus:nil];
-	    [self updateCopiesCount:-1];
-	    [self updateSummaryString:@""];
-
-	}else if([[arrayController selectedObjects] count] > 1){
-	    [self updateTitleString:@"Multiple Selection"
-			  fullTitle:@""
-			     author:@""];
-	    [self updateISBN10:@"" ISBN13:@""];
-	    [self updateCoverImage:nil];
-	    [self updateReadStatus:nil];
-	    [self updateCopiesCount:-1];
-	    [self updateSummaryString:@""];
-	}
-
-	return;
+	[self updateComponents];
     }
+}
+
+- (void)managedObjectsDidChange:(NSNotification*)notification{
+
+    [self updateComponents];
 }
 
 @end

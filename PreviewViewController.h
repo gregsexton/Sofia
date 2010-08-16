@@ -57,6 +57,7 @@
 - (void)updateReadStatus:(NSNumber*)isRead;
 - (void)updateSummaryString:(NSString*)summaryStr;
 - (void)updateTitleString:(NSString*)titleStr fullTitle:(NSString*)fullTitleStr author:(NSString*)authorStr;
+- (void)managedObjectsDidChange:(NSNotification*)notification;
 - (IBAction)toggleOpenClosePreviewView:(id)sender;
 
 @end
