@@ -88,8 +88,7 @@
     [isbnTextField setFrame:NSMakeRect(20, isbnY, width - 20-20, 13)];
 
     CGFloat summaryH = isbnY - 8 - 36;
-    [summaryScrollView setFrame:NSMakeRect(20, 36, width - 20-20, summaryH)]; //resizing this is very expensive
-									      //this is set in interface builder not to resize
+    [summaryScrollView setFrame:NSMakeRect(20, 36, width - 20-20, summaryH)]; 
 }
 
 - (void)windowKeyChange{
