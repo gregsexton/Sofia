@@ -120,7 +120,6 @@
 
 - (void)updateCoverImage:(NSImage*)img{
     [imageCover setImage:img];
-    [imageCoverReflection setImage:img];
 }
 
 - (void)updateSummaryString:(NSString*)summaryStr{

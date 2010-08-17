@@ -26,25 +26,42 @@
 
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
-    if(self){
-    }
     return self;
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
-    //TODO: draw the original image in this rect as well as the reflection so as to 
-    //use just one imageview instead of two equally sized/aligned imageviews
+
+    CGFloat height = self.bounds.size.height;
+    CGFloat width = self.bounds.size.width;
+
+    NSRect imageRect = NSMakeRect(0, height/3, width, height*2/3);
+    NSRect reflectionRect = NSMakeRect(0, 0, width, height*2/3);
+
+    NSRect scaledRect = [self getScaledRectFrom:imageRect using:[[self image] size]];
+    [[self image] drawInRect:scaledRect
+		    fromRect:NSZeroRect 
+		   operation:NSCompositeCopy 
+		    fraction:1.0];
+
+    [self drawReflectionInRect:reflectionRect translateY:-(height/3)];
+
+}
+
+- (void)drawReflectionInRect:(NSRect)rect translateY:(CGFloat)yTranslation{
+    //translateY necessary as changing the rect.origin screws up the contexts
+    //manually translate instead
 
     //Create a grayscale context for the mask
     CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceGray();
     CGContextRef maskContext = CGBitmapContextCreate(NULL,
-						     self.bounds.size.width,
-						     self.bounds.size.height,
+						     rect.size.width,
+						     rect.size.height,
 						     8,
-						     self.bounds.size.width,
+						     rect.size.width,
 						     colorspace,
 						     0);
     CGColorSpaceRelease(colorspace);
+    CGContextTranslateCTM(maskContext, 0, yTranslation);
 
     //Switch to the mask for drawing
     NSGraphicsContext *maskGraphicsContext = [NSGraphicsContext graphicsContextWithGraphicsPort:maskContext 
@@ -54,8 +71,8 @@
 
     //Draw mask
     [[NSColor blackColor] setFill];
-    CGContextFillRect(maskContext, NSRectToCGRect(dirtyRect));
-    [self drawGradientInContext:maskContext];
+    CGContextFillRect(maskContext, NSRectToCGRect(rect));
+    [self drawGradientInContext:maskContext withHeight:rect.size.height];
 
     //Switch back to the window's context
     [NSGraphicsContext restoreGraphicsState];
@@ -66,17 +83,18 @@
     //Draw a transparent background in the view
     CGContextRef viewContext = [[NSGraphicsContext currentContext] graphicsPort];
     [[NSColor colorWithCalibratedRed:0 green:0 blue:0. alpha:0.0f] setFill];
-    CGContextFillRect(viewContext, NSRectToCGRect(dirtyRect));
+    CGContextFillRect(viewContext, NSRectToCGRect(rect));
 
     //Draw the image, clipped by the mask
     CGContextSaveGState(viewContext);
-    CGContextClipToMask(viewContext, NSRectToCGRect(self.bounds), alphaMask);
+    CGContextClipToMask(viewContext, NSRectToCGRect(rect), alphaMask);
     //Draw the image, flipped vertically
-    CGAffineTransform flipVertical = CGAffineTransformMake(1, 0, 0, -1, 0, self.bounds.size.height);
+    CGAffineTransform flipVertical = CGAffineTransformMake(1, 0, 0, -1, 0, rect.size.height);
+    CGContextTranslateCTM(viewContext, 0, yTranslation);
     CGContextConcatCTM(viewContext, flipVertical);
 
     //draw proportional image
-    NSRect scaledRect = [self getScaledRectFrom:dirtyRect using:[[self image] size]];
+    NSRect scaledRect = [self getScaledRectFrom:rect using:[[self image] size]];
     [[self image] drawInRect:scaledRect
 		    fromRect:NSZeroRect 
 		   operation:NSCompositeCopy 
@@ -92,7 +110,7 @@
     CGContextRelease(maskContext);
 }
 
-- (void)drawGradientInContext:(CGContextRef)context{
+- (void)drawGradientInContext:(CGContextRef)context withHeight:(CGFloat)height{
 
     CGGradientRef gradient;
     CGColorSpaceRef colorspace;
@@ -108,9 +126,9 @@
     
     CGPoint startPoint, endPoint;
     startPoint.x = 0.0;
-    startPoint.y = self.bounds.size.height;
+    startPoint.y = height;
     endPoint.x = 0.0;
-    endPoint.y = self.bounds.size.height*2/3;
+    endPoint.y = height*2/3;
     CGContextDrawLinearGradient(context, gradient, startPoint, endPoint, 0);
     CGGradientRelease(gradient);
 }

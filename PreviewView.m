@@ -76,12 +76,11 @@
     CGFloat width = self.frame.size.width;
     CGFloat height = self.frame.size.height;
 
-    CGFloat imageY = height - 20 - 178;
-    [imageCover setFrame:NSMakeRect((width-169)/2, imageY, 169, 178)];
-    [imageCoverReflection setFrame:NSMakeRect((width-169)/2, imageY-178, 169, 178)];
+    CGFloat imageY = height - 20 - 238;
+    [imageCover setFrame:NSMakeRect((width-225)/2, imageY, 225, 238)];
 
     CGFloat titleH = (0.19 * height) > 150 ? 150 : (0.19 * height);
-    CGFloat titleY = imageY - 60 - titleH;
+    CGFloat titleY = imageY - titleH + 20;
     [titleTextField setFrame:NSMakeRect(20, titleY, width - 20-20, titleH)]; 
 
     CGFloat isbnY = titleY - 8 - 13;

@@ -25,7 +25,6 @@
 @interface PreviewView : NSView {
 
     IBOutlet NSImageView* imageCover;
-    IBOutlet NSImageView* imageCoverReflection;
     IBOutlet NSTextField* titleTextField;
     IBOutlet NSTextField* isbnTextField;
     IBOutlet NSScrollView* summaryScrollView;

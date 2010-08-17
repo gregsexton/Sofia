@@ -27,7 +27,6 @@
 
     IBOutlet NSArrayController* arrayController;
     IBOutlet NSImageView* imageCover;
-    IBOutlet NSImageView* imageCoverReflection;
 
     IBOutlet NSSplitView* previewSplitView;
     IBOutlet NSView* previewView;

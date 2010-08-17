@@ -26,7 +26,8 @@
 
 }
 
-- (void)drawGradientInContext:(CGContextRef)context;
+- (void)drawReflectionInRect:(NSRect)rect translateY:(CGFloat)yTranslation;
+- (void)drawGradientInContext:(CGContextRef)context withHeight:(CGFloat)height;
 - (NSRect)getScaledRectFrom:(NSRect)srcRect using:(NSSize)size;
 
 @end
