@@ -46,6 +46,10 @@
 		37AF704B12048044007A7C85 /* ExternalLinkEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37AF704A12048044007A7C85 /* ExternalLinkEditor.xib */; };
 		37AF705D12049F87007A7C85 /* ExternalLinkEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF705C12049F87007A7C85 /* ExternalLinkEditorController.m */; };
 		37AF712112075B11007A7C85 /* VerticallyCenteredTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF712012075B11007A7C85 /* VerticallyCenteredTextField.m */; };
+		37AF727F120CAAC8007A7C85 /* PreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF727E120CAAC8007A7C85 /* PreviewView.m */; };
+		37AF72A1120D7D8E007A7C85 /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF72A0120D7D8E007A7C85 /* PreviewViewController.m */; };
+		37AF72EE120DB8CA007A7C85 /* ReflectionImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF72ED120DB8CA007A7C85 /* ReflectionImageView.m */; };
+		37AF75E91216CFBB007A7C85 /* PreviewSplitViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF75E81216CFBB007A7C85 /* PreviewSplitViewDelegate.m */; };
 		37BAF501114D69D000F95C41 /* list.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FD114D69D000F95C41 /* list.m */; };
 		37BAF502114D69D000F95C41 /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FF114D69D000F95C41 /* Library.m */; };
 		37BAF94511566BA700F95C41 /* BooksTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF94411566BA700F95C41 /* BooksTableView.m */; };
@@ -159,6 +163,14 @@
 		37AF705C12049F87007A7C85 /* ExternalLinkEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExternalLinkEditorController.m; sourceTree = "<group>"; };
 		37AF711F12075B11007A7C85 /* VerticallyCenteredTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerticallyCenteredTextField.h; sourceTree = "<group>"; };
 		37AF712012075B11007A7C85 /* VerticallyCenteredTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerticallyCenteredTextField.m; sourceTree = "<group>"; };
+		37AF727D120CAAC8007A7C85 /* PreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewView.h; sourceTree = "<group>"; };
+		37AF727E120CAAC8007A7C85 /* PreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewView.m; sourceTree = "<group>"; };
+		37AF729F120D7D8E007A7C85 /* PreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewViewController.h; sourceTree = "<group>"; };
+		37AF72A0120D7D8E007A7C85 /* PreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewViewController.m; sourceTree = "<group>"; };
+		37AF72EC120DB8CA007A7C85 /* ReflectionImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReflectionImageView.h; sourceTree = "<group>"; };
+		37AF72ED120DB8CA007A7C85 /* ReflectionImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReflectionImageView.m; sourceTree = "<group>"; };
+		37AF75E71216CFBB007A7C85 /* PreviewSplitViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewSplitViewDelegate.h; sourceTree = "<group>"; };
+		37AF75E81216CFBB007A7C85 /* PreviewSplitViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewSplitViewDelegate.m; sourceTree = "<group>"; };
 		37BAF4FC114D69D000F95C41 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
 		37BAF4FD114D69D000F95C41 /* list.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = list.m; sourceTree = "<group>"; };
 		37BAF4FE114D69D000F95C41 /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
@@ -399,6 +411,8 @@
 			children = (
 				37AF6DD411FA298B007A7C85 /* OverviewSplitViewDelegate.h */,
 				37AF6DD511FA298B007A7C85 /* OverviewSplitViewDelegate.m */,
+				37AF75E71216CFBB007A7C85 /* PreviewSplitViewDelegate.h */,
+				37AF75E81216CFBB007A7C85 /* PreviewSplitViewDelegate.m */,
 			);
 			name = Delegates;
 			sourceTree = "<group>";
@@ -435,6 +449,10 @@
 				3745148511B70B85001C7960 /* BooksImageBrowserView.m */,
 				37AF711F12075B11007A7C85 /* VerticallyCenteredTextField.h */,
 				37AF712012075B11007A7C85 /* VerticallyCenteredTextField.m */,
+				37AF727D120CAAC8007A7C85 /* PreviewView.h */,
+				37AF727E120CAAC8007A7C85 /* PreviewView.m */,
+				37AF72EC120DB8CA007A7C85 /* ReflectionImageView.h */,
+				37AF72ED120DB8CA007A7C85 /* ReflectionImageView.m */,
 			);
 			name = "Cocoa Extensions";
 			sourceTree = "<group>";
@@ -477,6 +495,8 @@
 				3735A79F11C6DBEF00DD7461 /* ImportBooksController.m */,
 				37AF705B12049F87007A7C85 /* ExternalLinkEditorController.h */,
 				37AF705C12049F87007A7C85 /* ExternalLinkEditorController.m */,
+				37AF729F120D7D8E007A7C85 /* PreviewViewController.h */,
+				37AF72A0120D7D8E007A7C85 /* PreviewViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -673,6 +693,10 @@
 				37AF6DD611FA298B007A7C85 /* OverviewSplitViewDelegate.m in Sources */,
 				37AF705D12049F87007A7C85 /* ExternalLinkEditorController.m in Sources */,
 				37AF712112075B11007A7C85 /* VerticallyCenteredTextField.m in Sources */,
+				37AF727F120CAAC8007A7C85 /* PreviewView.m in Sources */,
+				37AF72A1120D7D8E007A7C85 /* PreviewViewController.m in Sources */,
+				37AF72EE120DB8CA007A7C85 /* ReflectionImageView.m in Sources */,
+				37AF75E91216CFBB007A7C85 /* PreviewSplitViewDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -761,10 +785,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../gdata-objectivec-client-read-only/Source/build/Debug\"",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
@@ -775,10 +796,7 @@
 				GCC_VERSION = 4.2;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/google-toolbox-for-mac-read-only/TigerGcov\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = Sofia;
 			};
 			name = Debug;
@@ -788,10 +806,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../gdata-objectivec-client-read-only/Source/build/Debug\"",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = books_Prefix.pch;
@@ -799,10 +814,7 @@
 				GCC_VERSION = 4.2;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/google-toolbox-for-mac-read-only/TigerGcov\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = Sofia;
 			};
 			name = Release;
