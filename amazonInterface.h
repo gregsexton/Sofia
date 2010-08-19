@@ -49,5 +49,5 @@ typedef enum {pNone,
 
 - (BOOL)searchISBN:(NSString*)isbn;
 - (BOOL)searchForDetailsWithISBN:(NSString*)isbn;
-- (NSString*)getTableOfContentsFromURL:(NSURL*)url;
+- (NSAttributedString*)getTableOfContentsFromURL:(NSURL*)url;
 @end

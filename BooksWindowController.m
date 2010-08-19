@@ -203,8 +203,10 @@
     [img_cover setImage:[amazon frontCover]];
 
     BOOL downloadTOC = [[NSUserDefaults standardUserDefaults] boolForKey:@"download_toc"];
-    if(downloadTOC)
-	[amazon getTableOfContentsFromURL:[amazon amazonLink]];
+    if(downloadTOC){
+	[txt_toc setString:@""]; //no setString method that accepts NSAttributedString
+	[txt_toc insertText:[amazon getTableOfContentsFromURL:[amazon amazonLink]]];
+    }
 
     [amazon release];
 

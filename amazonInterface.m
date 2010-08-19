@@ -73,7 +73,7 @@
     return [parser parse]; //returns false if unsuccessful in parsing.
 }
 
-- (NSString*)getTableOfContentsFromURL:(NSURL*)url{
+- (NSAttributedString*)getTableOfContentsFromURL:(NSURL*)url{
     //NOTE: this method uses a very 'hackish' algorithm as the toc
     //isn't exposed in the amazon api. It is liable to break at
     //any moment. Designed to take self.amazonLink as the parameter.
@@ -104,8 +104,10 @@
     if([tocCaptures count] <= 0)
 	return nil;
     NSString* toc = [[tocCaptures objectAtIndex:0] objectAtIndex:1];
+    NSData* tocData = [toc dataUsingEncoding:NSUTF8StringEncoding];
+    NSAttributedString* tocReturn = [[NSAttributedString alloc] initWithHTML:tocData documentAttributes:NULL];
 
-    return toc;
+    return [tocReturn autorelease];
 }
 
 //// NSXMLParserDelegate Methods /////////////////////////////////////////////////////////////

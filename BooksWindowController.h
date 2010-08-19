@@ -58,6 +58,8 @@
     IBOutlet NSTextField    *txt_awards;
     IBOutlet NSTextField    *txt_urls;
 
+    IBOutlet NSTextView	    *txt_toc;
+
     IBOutlet NSButton	    *btn_search;
     IBOutlet NSButton 	    *btn_clear;
     IBOutlet NSButton 	    *btn_save;
