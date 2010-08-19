@@ -20,14 +20,20 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "RegexKitLite.h"
 
-typedef enum {pNone, pLargeImage, pImageURL, pTotalResults} amazonProperties;
+typedef enum {pNone,
+	      pLargeImage, 
+	      pImageURL, 
+	      pTotalResults,
+	      pDetailsPage} amazonProperties;
 
 @interface amazonInterface : NSObject <NSXMLParserDelegate>{
 
     NSString* accessKey;
     NSString* secretAccessKey;
 
+    NSURL*	amazonLink;
     NSString*	imageURL;
     NSImage*	frontCover;
 
@@ -36,11 +42,12 @@ typedef enum {pNone, pLargeImage, pImageURL, pTotalResults} amazonProperties;
     BOOL successfullyFoundBook; 
 }
 
-@property (nonatomic,copy) NSString* imageURL;
-@property (nonatomic,copy) NSImage* frontCover;
-@property (nonatomic) BOOL successfullyFoundBook;
+@property (nonatomic,copy) NSString*	imageURL;
+@property (nonatomic,copy) NSImage*	frontCover;
+@property (nonatomic,copy) NSURL*	amazonLink;
+@property (nonatomic)	   BOOL		successfullyFoundBook;
 
 - (BOOL)searchISBN:(NSString*)isbn;
-- (BOOL)searchForImagesWithISBN:(NSString*)isbn;
-- (BOOL)processImagesWithUrl:(NSURL*)url;
+- (BOOL)searchForDetailsWithISBN:(NSString*)isbn;
+- (NSString*)getTableOfContentsFromURL:(NSURL*)url;
 @end

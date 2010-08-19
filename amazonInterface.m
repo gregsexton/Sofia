@@ -28,6 +28,7 @@
 @synthesize imageURL;
 @synthesize frontCover;
 @synthesize successfullyFoundBook;
+@synthesize amazonLink;
 
 - (id)init{
     self = [super init];
@@ -48,32 +49,68 @@
     
 - (BOOL)searchISBN:(NSString*)isbn{
 
-    return [self searchForImagesWithISBN:isbn];
-	
+    BOOL returnVal = [self searchForDetailsWithISBN:isbn];
+
+    return returnVal;
 }   
 
-- (BOOL)searchForImagesWithISBN:(NSString*)isbn{
-
+- (BOOL)searchForDetailsWithISBN:(NSString*)isbn{
     SignedAwsSearchRequest *req = [[[SignedAwsSearchRequest alloc] initWithAccessKeyId:accessKey secretAccessKey:secretAccessKey] autorelease];
 
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:@"ItemSearch"           forKey:@"Operation"];
     [params setValue:@"Books"                forKey:@"SearchIndex"];
-    [params setValue:@"Images"               forKey:@"ResponseGroup"];
+    [params setValue:@"Large"		     forKey:@"ResponseGroup"]; //large includes just about everything (read: kitchen sink)
     [params setValue:isbn		     forKey:@"Keywords"];
     
     NSString *urlString = [req searchUrlForParameterDictionary:params];
     //NSLog(@"request URL: %@", urlString);
-    
-    return [self processImagesWithUrl:[[[NSURL alloc] initWithString:urlString] autorelease]];
-}
+    NSURL* url = [[[NSURL alloc] initWithString:urlString] autorelease];
 
-- (BOOL)processImagesWithUrl:(NSURL*)url{
-    NSXMLParser *parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
+    NSXMLParser *parser = [[[NSXMLParser alloc] initWithContentsOfURL:url] autorelease];
     [parser setDelegate:self];
 
     return [parser parse]; //returns false if unsuccessful in parsing.
 }
+
+- (NSString*)getTableOfContentsFromURL:(NSURL*)url{
+    //NOTE: this method uses a very 'hackish' algorithm as the toc
+    //isn't exposed in the amazon api. It is liable to break at
+    //any moment. Designed to take self.amazonLink as the parameter.
+
+    NSString* detailsPage = [NSString stringWithContentsOfURL:url 
+						     encoding:NSASCIIStringEncoding
+							error:NULL];
+    if(!detailsPage)
+	return nil;
+
+    NSString *regexString   = @"<a href=\"(.*)\">See Complete Table of Contents</a>";
+    NSArray  *capturesArray = [detailsPage arrayOfCaptureComponentsMatchedByRegex:regexString];
+
+    if([capturesArray count] <= 0)
+	return nil;
+    NSString* tocUrlString = [[capturesArray objectAtIndex:0] objectAtIndex:1];
+    NSURL* tocUrl = [[NSURL alloc] initWithString:tocUrlString];
+
+    NSString* tocPage = [NSString stringWithContentsOfURL:tocUrl 
+						 encoding:NSASCIIStringEncoding 
+						    error:NULL];
+    if(!tocPage)
+	return nil;
+
+    regexString = @"(?s:<b class=\"h1\">Table of Contents</b>.*?<div class=\"content\">(.*?)</div>)";
+    NSArray* tocCaptures = [tocPage arrayOfCaptureComponentsMatchedByRegex:regexString];
+
+    if([tocCaptures count] <= 0)
+	return nil;
+    NSString* toc = [[tocCaptures objectAtIndex:0] objectAtIndex:1];
+
+    NSLog(@"toc: %@", toc);
+
+    return toc;
+}
+
+//// NSXMLParserDelegate Methods /////////////////////////////////////////////////////////////
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName 
 					namespaceURI:(NSString *)namespaceURI 
@@ -92,6 +129,11 @@
     if([elementName isEqualToString:@"TotalResults"]){
 	currentProperty = pTotalResults;
         return;
+    }
+
+    if([elementName isEqualToString:@"DetailPageURL"]){
+	currentProperty = pDetailsPage;
+	return;
     }
 
     currentProperty = pNone;
@@ -122,6 +164,13 @@
 	    [self setSuccessfullyFoundBook:true];
 	else
 	    [self setSuccessfullyFoundBook:false];
+    }
+
+    if(currentProperty == pDetailsPage){
+	//NSLog(@"Details url: %@", currentStringValue);
+	NSURL* url = [[NSURL alloc] initWithString:currentStringValue];
+	[self setAmazonLink:url];
+	[url release];
     }
 
     [currentStringValue release];

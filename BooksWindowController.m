@@ -202,6 +202,8 @@
     [img_summary_cover setImage:[amazon frontCover]];
     [img_cover setImage:[amazon frontCover]];
 
+    [amazon getTableOfContentsFromURL:[amazon amazonLink]];
+
     [amazon release];
 
     return true;
@@ -381,6 +383,7 @@
 
 - (NSFetchRequest*)entity:(NSString*)entity existsWithName:(NSString*)entityName{
     NSError *error;
+    //TODO: stip ' characters from this and any other instances -- real world haskell produces this bug.
     NSString *predicate = [[NSString alloc] initWithFormat:@"name MATCHES '%@'", entityName];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:entity inManagedObjectContext:managedObjectContext]];
