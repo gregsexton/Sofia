@@ -105,8 +105,6 @@
 	return nil;
     NSString* toc = [[tocCaptures objectAtIndex:0] objectAtIndex:1];
 
-    NSLog(@"toc: %@", toc);
-
     return toc;
 }
 

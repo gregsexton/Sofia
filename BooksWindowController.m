@@ -202,7 +202,9 @@
     [img_summary_cover setImage:[amazon frontCover]];
     [img_cover setImage:[amazon frontCover]];
 
-    [amazon getTableOfContentsFromURL:[amazon amazonLink]];
+    BOOL downloadTOC = [[NSUserDefaults standardUserDefaults] boolForKey:@"download_toc"];
+    if(downloadTOC)
+	[amazon getTableOfContentsFromURL:[amazon amazonLink]];
 
     [amazon release];
 
