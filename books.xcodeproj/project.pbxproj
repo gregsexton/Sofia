@@ -18,7 +18,6 @@
 		3735A98911C946F500DD7461 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 374516C311C54A52001C7960 /* RegexKitLite.m */; };
 		3735A9D011C94AF700DD7461 /* isbnExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 374516E711C54F81001C7960 /* isbnExtractor.m */; };
 		37365594101CCC3C00709C8F /* BooksWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37365593101CCC3C00709C8F /* BooksWindowController.m */; };
-		3737514A1054219700718317 /* database.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 373751491054219600718317 /* database.xcdatamodel */; };
 		3737514E105426BF00718317 /* isbndbInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 3737514D105426BF00718317 /* isbndbInterface.m */; };
 		373752C0105EB4FF00718317 /* Detail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 373752BF105EB4FF00718317 /* Detail.xib */; };
 		373752C6105EB6D500718317 /* SofiaApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 373752C5105EB6D500718317 /* SofiaApplication.m */; };
@@ -50,6 +49,7 @@
 		37AF72A1120D7D8E007A7C85 /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF72A0120D7D8E007A7C85 /* PreviewViewController.m */; };
 		37AF72EE120DB8CA007A7C85 /* ReflectionImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF72ED120DB8CA007A7C85 /* ReflectionImageView.m */; };
 		37AF75E91216CFBB007A7C85 /* PreviewSplitViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF75E81216CFBB007A7C85 /* PreviewSplitViewDelegate.m */; };
+		37AF7A43121FEFE5007A7C85 /* database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 37AF7A42121FEFE5007A7C85 /* database.xcdatamodeld */; };
 		37BAF501114D69D000F95C41 /* list.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FD114D69D000F95C41 /* list.m */; };
 		37BAF502114D69D000F95C41 /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FF114D69D000F95C41 /* Library.m */; };
 		37BAF94511566BA700F95C41 /* BooksTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF94411566BA700F95C41 /* BooksTableView.m */; };
@@ -171,6 +171,7 @@
 		37AF72ED120DB8CA007A7C85 /* ReflectionImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReflectionImageView.m; sourceTree = "<group>"; };
 		37AF75E71216CFBB007A7C85 /* PreviewSplitViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewSplitViewDelegate.h; sourceTree = "<group>"; };
 		37AF75E81216CFBB007A7C85 /* PreviewSplitViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewSplitViewDelegate.m; sourceTree = "<group>"; };
+		37AF7A44121FEFE5007A7C85 /* database 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "database 2.xcdatamodel"; sourceTree = "<group>"; };
 		37BAF4FC114D69D000F95C41 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
 		37BAF4FD114D69D000F95C41 /* list.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = list.m; sourceTree = "<group>"; };
 		37BAF4FE114D69D000F95C41 /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
@@ -318,7 +319,7 @@
 				37D7073210B5D7FE0004F441 /* AuthorDetail.xib */,
 				37D7099D10C1D8400004F441 /* SubjectDetail.xib */,
 				37BAFC931162510C00F95C41 /* PredicateEditor.xib */,
-				373751491054219600718317 /* database.xcdatamodel */,
+				37AF7A42121FEFE5007A7C85 /* database.xcdatamodeld */,
 				3735A79B11C6DB5E00DD7461 /* ImportBooks.xib */,
 				37AF704A12048044007A7C85 /* ExternalLinkEditor.xib */,
 			);
@@ -658,7 +659,7 @@
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				37365594101CCC3C00709C8F /* BooksWindowController.m in Sources */,
-				3737514A1054219700718317 /* database.xcdatamodel in Sources */,
+				37AF7A43121FEFE5007A7C85 /* database.xcdatamodeld in Sources */,
 				3737514E105426BF00718317 /* isbndbInterface.m in Sources */,
 				373752C6105EB6D500718317 /* SofiaApplication.m in Sources */,
 				376D413D10B21B4C00242DF7 /* author.m in Sources */,
@@ -880,6 +881,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		37AF7A42121FEFE5007A7C85 /* database.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				373751491054219600718317 /* database.xcdatamodel */,
+				37AF7A44121FEFE5007A7C85 /* database 2.xcdatamodel */,
+			);
+			currentVersion = 37AF7A44121FEFE5007A7C85 /* database 2.xcdatamodel */;
+			path = database.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
 }

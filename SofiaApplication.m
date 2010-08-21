@@ -98,11 +98,16 @@
 				attributes:nil
 				     error:NULL];
     }
+
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+	[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+	[NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+    
     
 #ifdef CONFIGURATION_Debug
     url = [NSURL fileURLWithPath: [applicationSupportFolder stringByAppendingPathComponent: @"Sofia.xml"]];
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
-    if (![persistentStoreCoordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:nil error:&error]){
+    if (![persistentStoreCoordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:options error:&error]){
         [[NSApplication sharedApplication] presentError:error];
     }    
 #endif
@@ -110,7 +115,7 @@
 #ifdef CONFIGURATION_Release
     url = [NSURL fileURLWithPath: [applicationSupportFolder stringByAppendingPathComponent: @"Sofia"]];
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
-    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error]){
+    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error]){
         [[NSApplication sharedApplication] presentError:error];
     }    
 #endif

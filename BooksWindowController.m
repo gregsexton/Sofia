@@ -21,6 +21,8 @@
 
 #import "BooksWindowController.h"
 
+//TODO: TOC formatting. Save the format? Remove formatting at the download stage?
+
 @implementation BooksWindowController
 
 @synthesize obj;
@@ -101,6 +103,7 @@
 	[obj setUrls:		    [txt_urls stringValue]];
 	[obj setNoOfCopies:	    [txt_noOfCopies stringValue]];
 	[obj setCoverImage:	    [img_summary_cover image]];
+	[obj setToc:		    [txt_toc string]];
     }
 }
 
@@ -174,6 +177,10 @@
 	    NSImage* img = [obj coverImage];
 	    [img_summary_cover setImage:img];
 	    [img_cover setImage:img];
+	}
+	if([obj toc] != nil){
+	    [txt_toc setString:@""]; //no setString method that accepts NSAttributedString
+	    [txt_toc insertText:[obj toc]];
 	}
 
 	[self updateSummaryTabView];

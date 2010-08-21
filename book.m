@@ -54,5 +54,6 @@
 @dynamic subjects;
 @dynamic authors;
 @dynamic library;
+@dynamic toc;
 
 @end
