@@ -218,6 +218,13 @@
 	}
     }
 
+    [txt_title addItemWithObjectValue:[amazon bookTitle]];
+    [txt_author addItemWithObjectValue:[amazon bookAuthorsText]];
+    [txt_publisher addItemWithObjectValue:[amazon bookPublisher]];
+    [txt_physicalDescrip addItemWithObjectValue:[amazon bookPhysicalDescrip]];
+    [txt_edition setStringValue:[amazon bookEdition]];
+    //TODO: summary
+
     [amazon release];
 
     return true;
@@ -243,7 +250,10 @@
     //programmatically set ui elements
     [txt_isbn10 setStringValue:[isbndb bookISBN10]];
     [txt_isbn13 setStringValue:[isbndb bookISBN13]];
-    [txt_edition setStringValue:[isbndb bookEdition]];
+
+    if([[txt_edition stringValue] isEqualToString:@""])
+	[txt_edition setStringValue:[isbndb bookEdition]];
+
     [txt_dewey setStringValue:[isbndb bookDewey]];
     [txt_deweyNormal setStringValue:[isbndb bookDeweyNormalized]];
     [txt_lccNumber setStringValue:[isbndb bookLCCNumber]];
@@ -255,17 +265,11 @@
     [txt_urls setStringValue:[isbndb bookUrls]];
 
     [txt_title addItemWithObjectValue:[isbndb bookTitle]];
-    [txt_title selectItemAtIndex:0];
     [txt_titleLong addItemWithObjectValue:[isbndb bookTitleLong]];
-    [txt_titleLong selectItemAtIndex:0];
     [txt_publisher addItemWithObjectValue:[isbndb bookPublisher]];
-    [txt_publisher selectItemAtIndex:0];
     [txt_author addItemWithObjectValue:[isbndb bookAuthorsText]];
-    [txt_author selectItemAtIndex:0];
     [txt_subject addItemWithObjectValue:[isbndb bookSubjectText]];
-    [txt_subject selectItemAtIndex:0];
     [txt_physicalDescrip addItemWithObjectValue:[isbndb bookPhysicalDescrip]];
-    [txt_physicalDescrip selectItemAtIndex:0];
 
     [self updateAuthorsAndSubjectsFromISBNDb:isbndb];
     
@@ -469,17 +473,18 @@
 				       contextInfo:nil];
     
     [self clearAllFields];
-    if ([self updateUIFromISBNDbWithISBN:searchedISBN]) {
+    if([self updateUIFromAmazonWithISBN:searchedISBN]){
 	[txt_title selectItemAtIndex:0];
-	[txt_titleLong selectItemAtIndex:0];
 	[txt_author selectItemAtIndex:0];
-	[txt_subject selectItemAtIndex:0];
 	[txt_publisher selectItemAtIndex:0];
 	[txt_physicalDescrip selectItemAtIndex:0];
     }
-
-    [self updateUIFromAmazonWithISBN:searchedISBN];
     
+    if([self updateUIFromISBNDbWithISBN:searchedISBN]){
+	[txt_titleLong selectItemAtIndex:0];
+	[txt_subject selectItemAtIndex:0];
+    }
+
     //lastly update the summary tab
     [self updateSummaryTabView];
 
