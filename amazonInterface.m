@@ -29,6 +29,14 @@
 @synthesize frontCover;
 @synthesize successfullyFoundBook;
 @synthesize amazonLink;
+@synthesize bookISBN10;
+@synthesize bookISBN13;
+@synthesize bookTitle;
+@synthesize bookAuthorsText;
+@synthesize bookPublisher;
+@synthesize bookEdition;
+@synthesize bookPhysicalDescrip;
+@synthesize bookSummary;
 
 - (id)init{
     self = [super init];
@@ -36,21 +44,25 @@
     accessKey = [[NSUserDefaults standardUserDefaults] objectForKey:@"amazon_accessKey"];
     secretAccessKey = [[NSUserDefaults standardUserDefaults] objectForKey:@"amazon_secretAccessKey"];
 
-    imageURL = @"";
-    successfullyFoundBook = false; //assume the worst
+    bookAuthors = [[NSMutableArray alloc] initWithCapacity:5]; //not many books have more than 5 authors
+    dimensions = [[NSMutableArray alloc] initWithCapacity:3]; //length x width x height
     return self;
 }
 
 - (void)dealloc{
     if(currentStringValue)
 	[currentStringValue release];
+    [bookAuthors release];
     [super dealloc];
 }
     
 - (BOOL)searchISBN:(NSString*)isbn{
 
-    BOOL returnVal = [self searchForDetailsWithISBN:isbn];
+    imageURL = @"";
+    successfullyFoundBook = false; //assume the worst
+    _ItemAttributes = false;
 
+    BOOL returnVal = [self searchForDetailsWithISBN:isbn];
     return returnVal;
 }   
 
@@ -84,7 +96,7 @@
     if(!detailsPage)
 	return nil;
 
-    NSString *regexString   = @"<a href=\"(.*)\">See Complete Table of Contents</a>";
+    NSString *regexString = @"<a href=\"(.*)\">See Complete Table of Contents</a>";
     NSArray  *capturesArray = [detailsPage arrayOfCaptureComponentsMatchedByRegex:regexString];
 
     if([capturesArray count] <= 0)
@@ -95,6 +107,7 @@
     NSString* tocPage = [NSString stringWithContentsOfURL:tocUrl 
 						 encoding:NSASCIIStringEncoding 
 						    error:NULL];
+    [tocUrl release];
     if(!tocPage)
 	return nil;
 
@@ -136,6 +149,65 @@
 	return;
     }
 
+    if([elementName isEqualToString:@"ItemAttributes"]){
+	_ItemAttributes = true;
+    }
+
+    if(_ItemAttributes){
+	if([elementName isEqualToString:@"ISBN"]){
+	    currentProperty = pISBN10;
+	    return;
+	}
+	if([elementName isEqualToString:@"EAN"]){
+	    currentProperty = pISBN13;
+	    return;
+	}
+	if([elementName isEqualToString:@"Title"]){
+	    currentProperty = pTitleAmazon;
+	    return;
+	}
+	if([elementName isEqualToString:@"Author"]){
+	    currentProperty = pAuthorAmazon;
+	    return;
+	}
+	if([elementName isEqualToString:@"Publisher"]){
+	    currentProperty = pPublisherAmazon;
+	    return;
+	}
+	if([elementName isEqualToString:@"Edition"]){
+	    currentProperty = pEdition;
+	    return;
+	}
+	if([elementName isEqualToString:@"PublicationDate"]){
+	    currentProperty = pPubDate;
+	    return;
+	}
+	if([elementName isEqualToString:@"Binding"]){
+	    currentProperty = pBinding;
+	    return;
+	}
+	if([elementName isEqualToString:@"NumberOfPages"]){
+	    currentProperty = pNoPages;
+	    return;
+	}
+	if([elementName isEqualToString:@"Height"]){
+	    currentProperty = pHeight;
+	    return;
+	}
+	if([elementName isEqualToString:@"Length"]){
+	    currentProperty = pLength;
+	    return;
+	}
+	if([elementName isEqualToString:@"Width"]){
+	    currentProperty = pWidth;
+	    return;
+	}
+	if([elementName isEqualToString:@"Weight"]){
+	    currentProperty = pWeight;
+	    return;
+	}
+    }
+
     currentProperty = pNone;
 }
 
@@ -151,6 +223,10 @@
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName 
 				      namespaceURI:(NSString *)namespaceURI 
 				     qualifiedName:(NSString *)qName {
+
+    if([elementName isEqualToString:@"ItemAttributes"]){
+	_ItemAttributes = false;
+    }
 
     if(currentProperty == pImageURL){
 	if([imageURL isEqualToString:@""]){ //only capture first result, FIXME
@@ -173,6 +249,65 @@
 	[url release];
     }
 
+    if(_ItemAttributes){
+	if(currentProperty == pISBN10){
+	    [self setBookISBN10:currentStringValue];
+	}
+	if(currentProperty == pISBN13){
+	    [self setBookISBN13:currentStringValue];
+	}
+	if(currentProperty == pTitleAmazon){
+	    [self setBookTitle:currentStringValue];
+	}
+	if(currentProperty == pAuthorAmazon){
+	    [bookAuthors addObject:currentStringValue];
+	    [self setBookAuthorsText:[NSString stringFromArray:bookAuthors withCombiner:@"and"]];
+	}
+	if(currentProperty == pPublisherAmazon){
+	    [self setBookPublisher:currentStringValue];
+	}
+	if(currentProperty == pEdition){
+	    [self setBookEdition:currentStringValue];
+	}
+	if(currentProperty == pPubDate){
+	    [self setBookEdition:[NSString stringWithFormat:@"%@ %@", bookEdition, currentStringValue]];
+	}
+	if(currentProperty == pBinding){
+	    [self setBookPhysicalDescrip:currentStringValue];
+	}
+	if(currentProperty == pNoPages){
+	    [self setBookPhysicalDescrip:[NSString stringWithFormat:@"%@, %@ pages;", bookPhysicalDescrip, currentStringValue]];
+	}
+
+	if(currentProperty == pHeight){
+	    [dimensions addObject:[NSString stringWithFormat:@"%.1fcm", [currentStringValue doubleValue]*HUNDREDTH_INCH_TO_CM]];
+	    if([dimensions count] == 3)
+		[self setBookPhysicalDescrip:[NSString stringWithFormat:@"%@ (%@)", 
+							    bookPhysicalDescrip,
+							    [NSString interleaveArray:dimensions with:@" x "]]];
+	}
+	if(currentProperty == pLength){
+	    [dimensions addObject:[NSString stringWithFormat:@"%.1fcm", [currentStringValue doubleValue]*HUNDREDTH_INCH_TO_CM]];
+	    if([dimensions count] == 3)
+		[self setBookPhysicalDescrip:[NSString stringWithFormat:@"%@ (%@)", 
+							    bookPhysicalDescrip,
+							    [NSString interleaveArray:dimensions with:@" x "]]];
+	}
+	if(currentProperty == pWidth){
+	    [dimensions addObject:[NSString stringWithFormat:@"%.1fcm", [currentStringValue doubleValue]*HUNDREDTH_INCH_TO_CM]];
+	    if([dimensions count] == 3)
+		[self setBookPhysicalDescrip:[NSString stringWithFormat:@"%@ (%@)", 
+							    bookPhysicalDescrip,
+							    [NSString interleaveArray:dimensions with:@" x "]]];
+	}
+
+	if(currentProperty == pWeight){
+	    [self setBookPhysicalDescrip:[NSString stringWithFormat:@"%@ %.1f kilos ", bookPhysicalDescrip,
+										       [currentStringValue doubleValue]*HUNDREDTH_POUND_TO_KG]];
+	}
+    }
+
+    currentProperty = pNone;
     [currentStringValue release];
     currentStringValue = nil;
     return;

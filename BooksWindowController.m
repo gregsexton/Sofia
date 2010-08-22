@@ -200,7 +200,7 @@
     if(![amazon successfullyFoundBook]){
 	[isbnSearchErrors addObject:@"Amazon"];
 	[self displayErrorMessage:[NSString stringWithFormat:@"No results found for this ISBN on %@.", 
-							    [self stringFromArrayWithCombiners:isbnSearchErrors]]];
+							    [NSString stringFromArray:isbnSearchErrors withCombiner:@"or"]]];
 	[amazon release];
 	return false;
     }
@@ -232,7 +232,7 @@
     if(![isbndb successfullyFoundBook]){
 	[isbnSearchErrors addObject:@"ISBNDb"];
 	[self displayErrorMessage:[NSString stringWithFormat:@"No results found for this ISBN on %@.", 
-							    [self stringFromArrayWithCombiners:isbnSearchErrors]]];
+							    [NSString stringFromArray:isbnSearchErrors withCombiner:@"or"]]];
 	[isbndb release];
 	return false;
     }
@@ -439,27 +439,6 @@
     }
     [request release];
     return false;
-}
-
-- (NSString*)stringFromArrayWithCombiners:(NSArray*)array{
-    //this function returns a string of the form "foo, bar and foobar"
-    //from the array ["foo", "bar", "foobar"]
-
-    if([array count] <= 0)
-	return @"";
-    if([array count] == 1)
-	return [array objectAtIndex:0];
-
-    NSString* buildUp = [array objectAtIndex:0];
-
-    for(int i=1; i < [array count]-1; i++){
-	buildUp = [NSString stringWithFormat:@"%@, %@", buildUp, [array objectAtIndex:i]];
-    }
-
-    buildUp = [NSString stringWithFormat:@"%@ or %@", buildUp, [array lastObject]];
-
-    return buildUp;
-
 }
 
 - (IBAction) searchClicked:(id)sender {

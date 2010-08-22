@@ -50,6 +50,7 @@
 		37AF72EE120DB8CA007A7C85 /* ReflectionImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF72ED120DB8CA007A7C85 /* ReflectionImageView.m */; };
 		37AF75E91216CFBB007A7C85 /* PreviewSplitViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF75E81216CFBB007A7C85 /* PreviewSplitViewDelegate.m */; };
 		37AF7A43121FEFE5007A7C85 /* database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 37AF7A42121FEFE5007A7C85 /* database.xcdatamodeld */; };
+		37AF7A9E122172B5007A7C85 /* NSString+Sofia.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF7A9D122172B5007A7C85 /* NSString+Sofia.m */; };
 		37BAF501114D69D000F95C41 /* list.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FD114D69D000F95C41 /* list.m */; };
 		37BAF502114D69D000F95C41 /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FF114D69D000F95C41 /* Library.m */; };
 		37BAF94511566BA700F95C41 /* BooksTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF94411566BA700F95C41 /* BooksTableView.m */; };
@@ -172,6 +173,8 @@
 		37AF75E71216CFBB007A7C85 /* PreviewSplitViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewSplitViewDelegate.h; sourceTree = "<group>"; };
 		37AF75E81216CFBB007A7C85 /* PreviewSplitViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewSplitViewDelegate.m; sourceTree = "<group>"; };
 		37AF7A44121FEFE5007A7C85 /* database 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "database 2.xcdatamodel"; sourceTree = "<group>"; };
+		37AF7A9C122172B5007A7C85 /* NSString+Sofia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Sofia.h"; sourceTree = "<group>"; };
+		37AF7A9D122172B5007A7C85 /* NSString+Sofia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Sofia.m"; sourceTree = "<group>"; };
 		37BAF4FC114D69D000F95C41 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
 		37BAF4FD114D69D000F95C41 /* list.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = list.m; sourceTree = "<group>"; };
 		37BAF4FE114D69D000F95C41 /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
@@ -294,6 +297,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				37AF7A9A12217295007A7C85 /* Categories */,
 				37AF6DD311FA296A007A7C85 /* Delegates */,
 				3735AAF111CEBDDA00DD7461 /* Protocols */,
 				3745170D11C56D8B001C7960 /* Unit Tests */,
@@ -416,6 +420,15 @@
 				37AF75E81216CFBB007A7C85 /* PreviewSplitViewDelegate.m */,
 			);
 			name = Delegates;
+			sourceTree = "<group>";
+		};
+		37AF7A9A12217295007A7C85 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				37AF7A9C122172B5007A7C85 /* NSString+Sofia.h */,
+				37AF7A9D122172B5007A7C85 /* NSString+Sofia.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		37BAFB72115C07FA00F95C41 /* NSMangedObject Subclasses */ = {
@@ -698,6 +711,7 @@
 				37AF72A1120D7D8E007A7C85 /* PreviewViewController.m in Sources */,
 				37AF72EE120DB8CA007A7C85 /* ReflectionImageView.m in Sources */,
 				37AF75E91216CFBB007A7C85 /* PreviewSplitViewDelegate.m in Sources */,
+				37AF7A9E122172B5007A7C85 /* NSString+Sofia.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

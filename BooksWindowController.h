@@ -33,6 +33,7 @@
 #import "isbndbInterface.h"
 #import "AuthorsWindowController.h"
 #import "SubjectWindowController.h"
+#import "NSString+Sofia.h"
 
 @interface BooksWindowController : NSObjectController <AuthorsWindowControllerDelegate, SubjectWindowControllerDelegate> {
     IBOutlet NSTextField *txt_search;
@@ -125,7 +126,6 @@
 - (NSFetchRequest*) authorExistsWithName:(NSString*)authorName;
 - (NSFetchRequest*) subjectExistsWithName:(NSString*)subjectName;
 - (NSFetchRequest*)entity:(NSString*)entity existsWithName:(NSString*)entityName;
-- (NSString*)stringFromArrayWithCombiners:(NSArray*)array;
 - (id)   initWithManagedObject:(book*)object withSearch:(BOOL)withSearch;
 - (void) clearAllFields;
 - (void) displayManagedAuthorsWithSelectedAuthor:(author*)authorObj;
