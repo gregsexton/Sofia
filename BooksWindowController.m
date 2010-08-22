@@ -88,19 +88,19 @@
 	[obj setIsbn13:	    	    [txt_isbn13 stringValue]];
 	[obj setAuthorText: 	    [txt_author stringValue]];
 	[obj setSubjectText:	    [txt_subject stringValue]];
-	[obj setAwards:		    [txt_awards stringValue]];
+	[obj setAwards:		    [txt_awards string]];
 	[obj setDewey:		    [txt_dewey stringValue]];
 	[obj setDewey_normalised:   [txt_deweyNormal stringValue]];
 	[obj setEdition:	    [txt_edition stringValue]];
 	[obj setLanguage:	    [txt_language stringValue]];
 	[obj setLccNumber:	    [txt_lccNumber stringValue]];
-	[obj setNotes:		    [txt_notes stringValue]];
+	[obj setNotes:		    [txt_notes string]];
 	[obj setPhysicalDescription:[txt_physicalDescrip stringValue]];
 	[obj setPublisherText:	    [txt_publisher stringValue]];
-	[obj setSummary:	    [txt_summary stringValue]];
+	[obj setSummary:	    [txt_summary string]];
 	[obj setTitle:		    [txt_title stringValue]];
 	[obj setTitleLong:	    [txt_titleLong stringValue]];
-	[obj setUrls:		    [txt_urls stringValue]];
+	[obj setUrls:		    [txt_urls string]];
 	[obj setNoOfCopies:	    [txt_noOfCopies stringValue]];
 	[obj setCoverImage:	    [img_summary_cover image]];
 	[obj setToc:		    [txt_toc string]];
@@ -132,16 +132,16 @@
 	}
 
 	if([obj summary] != nil){
-	    [txt_summary setStringValue:[obj summary]];
+	    [txt_summary setString:[obj summary]];
 	}
 	if([obj notes] != nil){
-	    [txt_notes setStringValue:[obj notes]];
+	    [txt_notes setString:[obj notes]];
 	}
 	if([obj awards] != nil){
-	    [txt_awards setStringValue:[obj awards]];
+	    [txt_awards setString:[obj awards]];
 	}
 	if([obj urls] != nil){
-	    [txt_urls setStringValue:[obj urls]];
+	    [txt_urls setString:[obj urls]];
 	}
 	if([obj noOfCopies] != nil){
 	    [txt_noOfCopies setIntValue:[[obj noOfCopies] intValue]];
@@ -259,10 +259,10 @@
     [txt_lccNumber setStringValue:[isbndb bookLCCNumber]];
     [txt_language setStringValue:[isbndb bookLanguage]];
 
-    [txt_summary setStringValue:[isbndb bookSummary]];
-    [txt_notes setStringValue:[isbndb bookNotes]];
-    [txt_awards setStringValue:[isbndb bookAwards]];
-    [txt_urls setStringValue:[isbndb bookUrls]];
+    [txt_summary setString:[isbndb bookSummary]];
+    [txt_notes setString:[isbndb bookNotes]];
+    [txt_awards setString:[isbndb bookAwards]];
+    [txt_urls setString:[isbndb bookUrls]];
 
     [txt_title addItemWithObjectValue:[isbndb bookTitle]];
     [txt_titleLong addItemWithObjectValue:[isbndb bookTitleLong]];
@@ -324,10 +324,10 @@
     [txt_language setStringValue:@""];
     [txt_noOfCopies setStringValue:@"1"];
 
-    [txt_summary setStringValue:@""];
-    [txt_notes setStringValue:@""];
-    [txt_awards setStringValue:@""];
-    [txt_urls setStringValue:@""];
+    [txt_summary setString:@""];
+    [txt_notes setString:@""];
+    [txt_awards setString:@""];
+    [txt_urls setString:@""];
 
     [txt_title removeAllItems];
     [txt_title setStringValue:@""];
@@ -357,7 +357,7 @@
     [lbl_summary_lccNumber	    setStringValue:[txt_lccNumber stringValue]];
     [lbl_summary_language   	    setStringValue:[txt_language stringValue]];
     [lbl_summary_noOfCopies 	    setStringValue:[txt_noOfCopies stringValue]];
-    [lbl_summary_summary    	    setStringValue:[txt_summary stringValue]];
+    [lbl_summary_summary    	    setStringValue:[txt_summary string]];
     
     [lbl_summary_title		    setStringValue:[txt_title stringValue]];
     [lbl_summary_titleLong	    setStringValue:[txt_titleLong stringValue]];

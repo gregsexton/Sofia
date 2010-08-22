@@ -54,10 +54,10 @@
     IBOutlet NSTextField    *txt_noOfCopies;
     IBOutlet NSStepper	    *step_noOfCopies;
 
-    IBOutlet NSTextField    *txt_summary;
-    IBOutlet NSTextField    *txt_notes;
-    IBOutlet NSTextField    *txt_awards;
-    IBOutlet NSTextField    *txt_urls;
+    IBOutlet NSTextView     *txt_summary;
+    IBOutlet NSTextView     *txt_notes;
+    IBOutlet NSTextView     *txt_awards;
+    IBOutlet NSTextView     *txt_urls;
 
     IBOutlet NSTextView	    *txt_toc;
 
