@@ -211,8 +211,11 @@
 
     BOOL downloadTOC = [[NSUserDefaults standardUserDefaults] boolForKey:@"download_toc"];
     if(downloadTOC){
-	[txt_toc setString:@""]; //no setString method that accepts NSAttributedString
-	[txt_toc insertText:[amazon getTableOfContentsFromURL:[amazon amazonLink]]];
+	NSAttributedString* toc = [amazon getTableOfContentsFromURL:[amazon amazonLink]];
+	if(toc){
+	    [txt_toc setString:@""]; //no setString method that accepts NSAttributedString
+	    [txt_toc insertText:toc];
+	}
     }
 
     [amazon release];
