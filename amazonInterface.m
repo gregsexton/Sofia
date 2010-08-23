@@ -61,8 +61,13 @@
     imageURL = @"";
     successfullyFoundBook = false; //assume the worst
     _ItemAttributes = false;
+    _EditorialReview = false;
 
     BOOL returnVal = [self searchForDetailsWithISBN:isbn];
+
+    if(asin)
+	returnVal = returnVal && [self searchForEditorialReviewWithASIN:asin];
+
     return returnVal;
 }   
 
@@ -74,6 +79,24 @@
     [params setValue:@"Books"                forKey:@"SearchIndex"];
     [params setValue:@"Large"		     forKey:@"ResponseGroup"]; //large includes just about everything (read: kitchen sink)
     [params setValue:isbn		     forKey:@"Keywords"];
+    
+    NSString *urlString = [req searchUrlForParameterDictionary:params];
+    //NSLog(@"request URL: %@", urlString);
+    NSURL* url = [[[NSURL alloc] initWithString:urlString] autorelease];
+
+    NSXMLParser *parser = [[[NSXMLParser alloc] initWithContentsOfURL:url] autorelease];
+    [parser setDelegate:self];
+
+    return [parser parse]; //returns false if unsuccessful in parsing.
+}
+
+- (BOOL)searchForEditorialReviewWithASIN:(NSString*)theASIN{
+    SignedAwsSearchRequest *req = [[[SignedAwsSearchRequest alloc] initWithAccessKeyId:accessKey secretAccessKey:secretAccessKey] autorelease];
+
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:@"ItemLookup"           forKey:@"Operation"];
+    [params setValue:theASIN		     forKey:@"ItemId"];
+    [params setValue:@"EditorialReview"	     forKey:@"ResponseGroup"]; //large includes just about everything (read: kitchen sink)
     
     NSString *urlString = [req searchUrlForParameterDictionary:params];
     //NSLog(@"request URL: %@", urlString);
@@ -149,8 +172,9 @@
 	return;
     }
 
-    if([elementName isEqualToString:@"ItemAttributes"]){
-	_ItemAttributes = true;
+    if([elementName isEqualToString:@"ASIN"]){
+	currentProperty = pASIN;
+	return;
     }
 
     if(_ItemAttributes){
@@ -208,6 +232,21 @@
 	}
     }
 
+    if(_EditorialReview){
+	if([elementName isEqualToString:@"Content"]){
+	    currentProperty = pEditorialContent;
+	    return;
+	}
+    }
+
+    if([elementName isEqualToString:@"ItemAttributes"]){
+	_ItemAttributes = true;
+    }
+
+    if([elementName isEqualToString:@"EditorialReview"]){
+	_EditorialReview = true;
+    }
+
     currentProperty = pNone;
 }
 
@@ -226,6 +265,10 @@
 
     if([elementName isEqualToString:@"ItemAttributes"]){
 	_ItemAttributes = false;
+    }
+
+    if([elementName isEqualToString:@"EditorialReview"]){
+	_EditorialReview = false;
     }
 
     if(currentProperty == pImageURL){
@@ -247,6 +290,11 @@
 	NSURL* url = [[NSURL alloc] initWithString:currentStringValue];
 	[self setAmazonLink:url];
 	[url release];
+    }
+
+    if(currentProperty == pASIN){
+	if(asin == nil)
+	    asin = currentStringValue;
     }
 
     if(_ItemAttributes){
@@ -304,6 +352,14 @@
 	if(currentProperty == pWeight){
 	    [self setBookPhysicalDescrip:[NSString stringWithFormat:@"%@ %.1f kilos ", bookPhysicalDescrip,
 										       [currentStringValue doubleValue]*HUNDREDTH_POUND_TO_KG]];
+	}
+    }
+
+    if(_EditorialReview){
+	if(currentProperty == pEditorialContent){
+	    NSData* strData = [currentStringValue dataUsingEncoding:NSUTF8StringEncoding];
+	    NSAttributedString* temp = [[NSAttributedString alloc] initWithHTML:strData documentAttributes:NULL];
+	    [self setBookSummary:[temp string]];
 	}
     }
 

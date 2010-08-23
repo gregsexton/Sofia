@@ -40,7 +40,9 @@ typedef enum {pNone,
 	      pHeight,
 	      pLength,
 	      pWidth,
-	      pWeight } amazonProperties;
+	      pWeight,
+	      pASIN,
+	      pEditorialContent} amazonProperties;
 
 #define HUNDREDTH_INCH_TO_CM 0.0254
 #define HUNDREDTH_POUND_TO_KG 0.00453592
@@ -65,9 +67,11 @@ typedef enum {pNone,
 
     NSMutableArray* bookAuthors;
     NSMutableArray* dimensions;
+    NSString*	    asin;
 
     amazonProperties currentProperty;
     BOOL _ItemAttributes;
+    BOOL _EditorialReview;
 
     NSMutableString* currentStringValue;
     BOOL successfullyFoundBook; 
@@ -88,5 +92,6 @@ typedef enum {pNone,
 
 - (BOOL)searchISBN:(NSString*)isbn;
 - (BOOL)searchForDetailsWithISBN:(NSString*)isbn;
+- (BOOL)searchForEditorialReviewWithASIN:(NSString*)asin;
 - (NSAttributedString*)getTableOfContentsFromURL:(NSURL*)url;
 @end

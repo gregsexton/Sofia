@@ -223,7 +223,8 @@
     [txt_publisher addItemWithObjectValue:[amazon bookPublisher]];
     [txt_physicalDescrip addItemWithObjectValue:[amazon bookPhysicalDescrip]];
     [txt_edition setStringValue:[amazon bookEdition]];
-    //TODO: summary
+    if([amazon bookSummary])
+	[txt_summary setString:[amazon bookSummary]];
 
     [amazon release];
 
@@ -259,7 +260,12 @@
     [txt_lccNumber setStringValue:[isbndb bookLCCNumber]];
     [txt_language setStringValue:[isbndb bookLanguage]];
 
-    [txt_summary setString:[isbndb bookSummary]];
+    if([[txt_summary string] isEqualToString:@""]){
+	[txt_summary setString:[isbndb bookSummary]];
+    }else{
+	[txt_summary setString:[NSString stringWithFormat:@"%@\n\n%@", [txt_summary string], [isbndb bookSummary]]];
+    }
+
     [txt_notes setString:[isbndb bookNotes]];
     [txt_awards setString:[isbndb bookAwards]];
     [txt_urls setString:[isbndb bookUrls]];
