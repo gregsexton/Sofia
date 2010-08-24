@@ -40,7 +40,7 @@
     //setup preferences
     AccessKeyViewController *accessKeys = [[AccessKeyViewController alloc] initWithNibName:@"Preferences_AccessKeys" bundle:nil];
     GeneralViewController *general = [[GeneralViewController alloc] initWithNibName:@"Preferences_General" bundle:nil];
-    [[MBPreferencesController sharedController] setModules:[NSArray arrayWithObjects:accessKeys, nil]];
+    [[MBPreferencesController sharedController] setModules:[NSArray arrayWithObjects:general,accessKeys, nil]];
     [accessKeys release];
     [general release];
 
@@ -98,11 +98,16 @@
 				attributes:nil
 				     error:NULL];
     }
+
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+	[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+	[NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+    
     
 #ifdef CONFIGURATION_Debug
     url = [NSURL fileURLWithPath: [applicationSupportFolder stringByAppendingPathComponent: @"Sofia.xml"]];
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
-    if (![persistentStoreCoordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:nil error:&error]){
+    if (![persistentStoreCoordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:options error:&error]){
         [[NSApplication sharedApplication] presentError:error];
     }    
 #endif
@@ -110,7 +115,7 @@
 #ifdef CONFIGURATION_Release
     url = [NSURL fileURLWithPath: [applicationSupportFolder stringByAppendingPathComponent: @"Sofia"]];
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
-    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error]){
+    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error]){
         [[NSApplication sharedApplication] presentError:error];
     }    
 #endif

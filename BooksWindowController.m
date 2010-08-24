@@ -21,6 +21,8 @@
 
 #import "BooksWindowController.h"
 
+//TODO: TOC formatting. Save the format? Remove formatting at the download stage?
+
 @implementation BooksWindowController
 
 @synthesize obj;
@@ -86,21 +88,22 @@
 	[obj setIsbn13:	    	    [txt_isbn13 stringValue]];
 	[obj setAuthorText: 	    [txt_author stringValue]];
 	[obj setSubjectText:	    [txt_subject stringValue]];
-	[obj setAwards:		    [txt_awards stringValue]];
+	[obj setAwards:		    [txt_awards string]];
 	[obj setDewey:		    [txt_dewey stringValue]];
 	[obj setDewey_normalised:   [txt_deweyNormal stringValue]];
 	[obj setEdition:	    [txt_edition stringValue]];
 	[obj setLanguage:	    [txt_language stringValue]];
 	[obj setLccNumber:	    [txt_lccNumber stringValue]];
-	[obj setNotes:		    [txt_notes stringValue]];
+	[obj setNotes:		    [txt_notes string]];
 	[obj setPhysicalDescription:[txt_physicalDescrip stringValue]];
 	[obj setPublisherText:	    [txt_publisher stringValue]];
-	[obj setSummary:	    [txt_summary stringValue]];
+	[obj setSummary:	    [txt_summary string]];
 	[obj setTitle:		    [txt_title stringValue]];
 	[obj setTitleLong:	    [txt_titleLong stringValue]];
-	[obj setUrls:		    [txt_urls stringValue]];
+	[obj setUrls:		    [txt_urls string]];
 	[obj setNoOfCopies:	    [txt_noOfCopies stringValue]];
 	[obj setCoverImage:	    [img_summary_cover image]];
+	[obj setToc:		    [txt_toc string]];
     }
 }
 
@@ -129,16 +132,16 @@
 	}
 
 	if([obj summary] != nil){
-	    [txt_summary setStringValue:[obj summary]];
+	    [txt_summary setString:[obj summary]];
 	}
 	if([obj notes] != nil){
-	    [txt_notes setStringValue:[obj notes]];
+	    [txt_notes setString:[obj notes]];
 	}
 	if([obj awards] != nil){
-	    [txt_awards setStringValue:[obj awards]];
+	    [txt_awards setString:[obj awards]];
 	}
 	if([obj urls] != nil){
-	    [txt_urls setStringValue:[obj urls]];
+	    [txt_urls setString:[obj urls]];
 	}
 	if([obj noOfCopies] != nil){
 	    [txt_noOfCopies setIntValue:[[obj noOfCopies] intValue]];
@@ -175,6 +178,10 @@
 	    [img_summary_cover setImage:img];
 	    [img_cover setImage:img];
 	}
+	if([obj toc] != nil){
+	    [txt_toc setString:@""]; //no setString method that accepts NSAttributedString
+	    [txt_toc insertText:[obj toc]];
+	}
 
 	[self updateSummaryTabView];
     }
@@ -193,7 +200,7 @@
     if(![amazon successfullyFoundBook]){
 	[isbnSearchErrors addObject:@"Amazon"];
 	[self displayErrorMessage:[NSString stringWithFormat:@"No results found for this ISBN on %@.", 
-							    [self stringFromArrayWithCombiners:isbnSearchErrors]]];
+							    [NSString stringFromArray:isbnSearchErrors withCombiner:@"or"]]];
 	[amazon release];
 	return false;
     }
@@ -201,6 +208,23 @@
     //NSLog([amazon imageURL]);
     [img_summary_cover setImage:[amazon frontCover]];
     [img_cover setImage:[amazon frontCover]];
+
+    BOOL downloadTOC = [[NSUserDefaults standardUserDefaults] boolForKey:@"download_toc"];
+    if(downloadTOC){
+	NSAttributedString* toc = [amazon getTableOfContentsFromURL:[amazon amazonLink]];
+	if(toc){
+	    [txt_toc setString:@""]; //no setString method that accepts NSAttributedString
+	    [txt_toc insertText:toc];
+	}
+    }
+
+    [txt_title addItemWithObjectValue:[amazon bookTitle]];
+    [txt_author addItemWithObjectValue:[amazon bookAuthorsText]];
+    [txt_publisher addItemWithObjectValue:[amazon bookPublisher]];
+    [txt_physicalDescrip addItemWithObjectValue:[amazon bookPhysicalDescrip]];
+    [txt_edition setStringValue:[amazon bookEdition]];
+    if([amazon bookSummary])
+	[txt_summary setString:[amazon bookSummary]];
 
     [amazon release];
 
@@ -219,7 +243,7 @@
     if(![isbndb successfullyFoundBook]){
 	[isbnSearchErrors addObject:@"ISBNDb"];
 	[self displayErrorMessage:[NSString stringWithFormat:@"No results found for this ISBN on %@.", 
-							    [self stringFromArrayWithCombiners:isbnSearchErrors]]];
+							    [NSString stringFromArray:isbnSearchErrors withCombiner:@"or"]]];
 	[isbndb release];
 	return false;
     }
@@ -227,29 +251,31 @@
     //programmatically set ui elements
     [txt_isbn10 setStringValue:[isbndb bookISBN10]];
     [txt_isbn13 setStringValue:[isbndb bookISBN13]];
-    [txt_edition setStringValue:[isbndb bookEdition]];
+
+    if([[txt_edition stringValue] isEqualToString:@""])
+	[txt_edition setStringValue:[isbndb bookEdition]];
+
     [txt_dewey setStringValue:[isbndb bookDewey]];
     [txt_deweyNormal setStringValue:[isbndb bookDeweyNormalized]];
     [txt_lccNumber setStringValue:[isbndb bookLCCNumber]];
     [txt_language setStringValue:[isbndb bookLanguage]];
 
-    [txt_summary setStringValue:[isbndb bookSummary]];
-    [txt_notes setStringValue:[isbndb bookNotes]];
-    [txt_awards setStringValue:[isbndb bookAwards]];
-    [txt_urls setStringValue:[isbndb bookUrls]];
+    if([[txt_summary string] isEqualToString:@""]){
+	[txt_summary setString:[isbndb bookSummary]];
+    }else{
+	[txt_summary setString:[NSString stringWithFormat:@"%@\n\n%@", [txt_summary string], [isbndb bookSummary]]];
+    }
+
+    [txt_notes setString:[isbndb bookNotes]];
+    [txt_awards setString:[isbndb bookAwards]];
+    [txt_urls setString:[isbndb bookUrls]];
 
     [txt_title addItemWithObjectValue:[isbndb bookTitle]];
-    [txt_title selectItemAtIndex:0];
     [txt_titleLong addItemWithObjectValue:[isbndb bookTitleLong]];
-    [txt_titleLong selectItemAtIndex:0];
     [txt_publisher addItemWithObjectValue:[isbndb bookPublisher]];
-    [txt_publisher selectItemAtIndex:0];
     [txt_author addItemWithObjectValue:[isbndb bookAuthorsText]];
-    [txt_author selectItemAtIndex:0];
     [txt_subject addItemWithObjectValue:[isbndb bookSubjectText]];
-    [txt_subject selectItemAtIndex:0];
     [txt_physicalDescrip addItemWithObjectValue:[isbndb bookPhysicalDescrip]];
-    [txt_physicalDescrip selectItemAtIndex:0];
 
     [self updateAuthorsAndSubjectsFromISBNDb:isbndb];
     
@@ -304,10 +330,10 @@
     [txt_language setStringValue:@""];
     [txt_noOfCopies setStringValue:@"1"];
 
-    [txt_summary setStringValue:@""];
-    [txt_notes setStringValue:@""];
-    [txt_awards setStringValue:@""];
-    [txt_urls setStringValue:@""];
+    [txt_summary setString:@""];
+    [txt_notes setString:@""];
+    [txt_awards setString:@""];
+    [txt_urls setString:@""];
 
     [txt_title removeAllItems];
     [txt_title setStringValue:@""];
@@ -337,7 +363,7 @@
     [lbl_summary_lccNumber	    setStringValue:[txt_lccNumber stringValue]];
     [lbl_summary_language   	    setStringValue:[txt_language stringValue]];
     [lbl_summary_noOfCopies 	    setStringValue:[txt_noOfCopies stringValue]];
-    [lbl_summary_summary    	    setStringValue:[txt_summary stringValue]];
+    [lbl_summary_summary    	    setStringValue:[txt_summary string]];
     
     [lbl_summary_title		    setStringValue:[txt_title stringValue]];
     [lbl_summary_titleLong	    setStringValue:[txt_titleLong stringValue]];
@@ -381,6 +407,7 @@
 
 - (NSFetchRequest*)entity:(NSString*)entity existsWithName:(NSString*)entityName{
     NSError *error;
+    //TODO: stip ' characters from this and any other instances -- real world haskell produces this bug.
     NSString *predicate = [[NSString alloc] initWithFormat:@"name MATCHES '%@'", entityName];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:entity inManagedObjectContext:managedObjectContext]];
@@ -427,27 +454,6 @@
     return false;
 }
 
-- (NSString*)stringFromArrayWithCombiners:(NSArray*)array{
-    //this function returns a string of the form "foo, bar and foobar"
-    //from the array ["foo", "bar", "foobar"]
-
-    if([array count] <= 0)
-	return @"";
-    if([array count] == 1)
-	return [array objectAtIndex:0];
-
-    NSString* buildUp = [array objectAtIndex:0];
-
-    for(int i=1; i < [array count]-1; i++){
-	buildUp = [NSString stringWithFormat:@"%@, %@", buildUp, [array objectAtIndex:i]];
-    }
-
-    buildUp = [NSString stringWithFormat:@"%@ or %@", buildUp, [array lastObject]];
-
-    return buildUp;
-
-}
-
 - (IBAction) searchClicked:(id)sender {
     [self removeErrorMessage:self];
     [isbnSearchErrors removeAllObjects];
@@ -473,17 +479,18 @@
 				       contextInfo:nil];
     
     [self clearAllFields];
-    if ([self updateUIFromISBNDbWithISBN:searchedISBN]) {
+    if([self updateUIFromAmazonWithISBN:searchedISBN]){
 	[txt_title selectItemAtIndex:0];
-	[txt_titleLong selectItemAtIndex:0];
 	[txt_author selectItemAtIndex:0];
-	[txt_subject selectItemAtIndex:0];
 	[txt_publisher selectItemAtIndex:0];
 	[txt_physicalDescrip selectItemAtIndex:0];
     }
-
-    [self updateUIFromAmazonWithISBN:searchedISBN];
     
+    if([self updateUIFromISBNDbWithISBN:searchedISBN]){
+	[txt_titleLong selectItemAtIndex:0];
+	[txt_subject selectItemAtIndex:0];
+    }
+
     //lastly update the summary tab
     [self updateSummaryTabView];
 

@@ -56,6 +56,7 @@
 @property (nonatomic, retain) NSSet* subjects;
 @property (nonatomic, retain) NSSet* authors;
 @property (nonatomic, retain) Library * library;
+@property (nonatomic, retain) NSString * toc;
 
 @end
 
