@@ -532,9 +532,18 @@
 
 ///////////////////////    DELEGATE METHODS   //////////////////////////////////////////////////////////////////////////
 
-- (BOOL)tabView:(NSTabView *)tabView shouldSelectTabViewItem:(NSTabViewItem *)tabViewItem{
+- (BOOL)tabView:(NSTabView*)tabView shouldSelectTabViewItem:(NSTabViewItem*)tabViewItem{
     [self updateSummaryTabView];
     return true;
+}
+
+- (void)tabView:(NSTabView*)tabView didSelectTabViewItem:(NSTabViewItem*)tabViewItem{
+
+    if([[tabViewItem identifier] isEqualToString:@"similartab"]){
+
+	//TODO: use isbn10 if no isbn13
+	[similarBooksController setISBN:[txt_isbn13 stringValue]];
+    }
 }
 
 - (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)flag{
