@@ -29,6 +29,8 @@
 - (void)awakeFromNib{
     [tableView setDelegate:self];
     [tableView setDataSource:self];
+    [tableView setDoubleAction:@selector(doubleClickAction:)];
+    [tableView setTarget:self];
 
     //appearance
     [tableView setRowHeight:150];
@@ -36,11 +38,17 @@
 
     titles = [[NSMutableArray alloc] initWithCapacity:5];
     images = [[NSMutableArray alloc] initWithCapacity:5];
+    isbns = [[NSMutableArray alloc] initWithCapacity:5];
+    urls = [[NSMutableArray alloc] initWithCapacity:5];
 }
 
 - (void)dealloc{
     if(amazonASINs)
 	[amazonASINs release];
+    [titles release];
+    [images release];
+    [isbns release];
+    [urls release];
 
     [super dealloc];
 }
@@ -80,12 +88,22 @@
 
 	[titles addObject:textData];
 	[images addObject:image];
+	[isbns  addObject:[amazon bookISBN13]?[amazon bookISBN13]:@""];
+	[urls	addObject:[amazon amazonLink]?[amazon amazonLink]:[NSURL URLWithString:@"http://www.amazon.co.uk"]];
 
 	[amazon release];
     }
 
     [tableView reloadData];
 }
+
+- (IBAction)doubleClickAction:(id)sender{
+
+    //TODO: check if book is in library and display it instead.
+    //may need to extract methods to do this?
+
+    [[NSWorkspace sharedWorkspace] openURL:[urls objectAtIndex:[tableView selectedRow]]];
+} 
 
 - (id)tableView:(NSTableView*)aTableView objectValueForTableColumn:(NSTableColumn*)aTableColumn 
 	    row:(NSInteger)rowIndex{

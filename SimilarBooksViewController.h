@@ -32,9 +32,12 @@
 
     NSMutableArray* titles;
     NSMutableArray* images;
+    NSMutableArray* isbns;
+    NSMutableArray* urls;
 
 }
 
 - (void)setASINs:(NSArray*)asins;
 - (void)setISBN:(NSString*)isbn;
+- (IBAction)doubleClickAction:(id)sender;
 @end
