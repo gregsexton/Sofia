@@ -29,6 +29,11 @@
 - (void)awakeFromNib{
     [tableView setDelegate:self];
     [tableView setDataSource:self];
+
+    //appearance
+    [tableView setRowHeight:150];
+    //[tableView setIntercellSpacing:NSMakeSize(3.0, 20.0)];
+
     titles = [[NSMutableArray alloc] initWithCapacity:5];
     images = [[NSMutableArray alloc] initWithCapacity:5];
 }
@@ -66,8 +71,16 @@
     for(NSString* asin in amazonASINs){
 	amazonInterface* amazon = [[amazonInterface alloc] init];
 	[amazon searchASIN:asin];
-	[titles addObject:[amazon bookTitle]?[amazon bookTitle]:@""];
-	[images addObject:[amazon frontCover]?[amazon frontCover]:[NSImage imageNamed:@"missing.png"]];
+
+	NSString* textData = [NSString stringWithFormat:@"%@\n\n%@",
+				[amazon bookTitle]?[amazon bookTitle]:@"",
+				[amazon bookSummary]?[amazon bookSummary]:@""];
+
+	NSImage* image = [amazon frontCover]?[amazon frontCover]:[NSImage imageNamed:@"missing.png"];
+
+	[titles addObject:textData];
+	[images addObject:image];
+
 	[amazon release];
     }
 
