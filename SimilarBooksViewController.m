@@ -20,6 +20,7 @@
 //
 
 #import "SimilarBooksViewController.h"
+#import "BooksWindowController.h"
 
 
 @implementation SimilarBooksViewController
@@ -99,10 +100,27 @@
 
 - (IBAction)doubleClickAction:(id)sender{
 
-    //TODO: check if book is in library and display it instead.
-    //may need to extract methods to do this?
+    NSUInteger rowIndex = [tableView selectedRow];
 
-    [[NSWorkspace sharedWorkspace] openURL:[urls objectAtIndex:[tableView selectedRow]]];
+    book* bookObj = [bookWinController bookInLibraryWithISBN:[isbns objectAtIndex:rowIndex]];
+    if(bookObj){
+	int alertReturn;
+	alertReturn = NSRunInformationalAlertPanel(@"This book is already in your library.",
+						   @"Would you like to display it in Sofia or continue on to the web page?",
+						   @"Continue",
+						   @"Display",
+						   nil);
+	if (alertReturn == NSAlertAlternateReturn){
+	    BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:bookObj
+											 withSearch:NO];
+	    if (![NSBundle loadNibNamed:@"Detail" owner:[detailWin autorelease]]) {
+		NSLog(@"Error loading Nib!");
+	    }
+	    return;
+	}
+    }
+
+    [[NSWorkspace sharedWorkspace] openURL:[urls objectAtIndex:rowIndex]];
 } 
 
 - (id)tableView:(NSTableView*)aTableView objectValueForTableColumn:(NSTableColumn*)aTableColumn 

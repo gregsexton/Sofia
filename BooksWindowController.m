@@ -423,7 +423,7 @@
     }
 }
 
-- (BOOL)bookExistsInLibraryWithISBN:(NSString*)searchedISBN{ //has possible side effects
+- (book*)bookInLibraryWithISBN:(NSString*)searchedISBN{
     //could use [self entity:existsWithName:] ?
     NSError *error;
     NSString *predicate = [[NSString alloc] initWithFormat:@"isbn10 MATCHES '%@' OR isbn13 MATCHES '%@'",
@@ -434,7 +434,18 @@
     [request setPredicate:[NSPredicate predicateWithFormat:predicate]];
     [predicate release];
     if([managedObjectContext countForFetchRequest:request error:&error] > 0){
-        //[[NSApplication sharedApplication] presentError:error];
+	book* bookObj = [[managedObjectContext executeFetchRequest:request error:NULL] objectAtIndex:0];
+	[request release];
+	return bookObj;
+    }else{
+	[request release];
+	return nil;
+    }
+}
+
+- (BOOL)bookExistsInLibraryWithISBN:(NSString*)searchedISBN{ //NOTE: has possible side effects
+    book* bookObj = [self bookInLibraryWithISBN:searchedISBN];
+    if(bookObj){
 	int alertReturn;
 	alertReturn = NSRunInformationalAlertPanel(@"Duplicate Entry",
 						   @"A book with this ISBN number is already in your library.",
@@ -444,13 +455,11 @@
 	if (alertReturn == NSAlertAlternateReturn){
 	    [managedObjectContext deleteObject:obj];
 	    //get hold of existing object and update UI.
-	    [self setObj:[[managedObjectContext executeFetchRequest:request error:&error] objectAtIndex:0]];
+	    [self setObj:bookObj];
 	    [self updateUIFromManagedObject];
 	}
-	[request release];
 	return true;
     }
-    [request release];
     return false;
 }
 

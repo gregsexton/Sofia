@@ -21,11 +21,14 @@
 
 #import <Cocoa/Cocoa.h>
 #import "amazonInterface.h"
+#import "book.h"
+@class BooksWindowController;
 
 
 @interface SimilarBooksViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource> {
 
     IBOutlet NSTableView* tableView;
+    IBOutlet BooksWindowController* bookWinController;
 
     NSString* similarToISBN;
     NSArray* amazonASINs;

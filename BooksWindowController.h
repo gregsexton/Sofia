@@ -128,6 +128,7 @@
 - (NSFetchRequest*) authorExistsWithName:(NSString*)authorName;
 - (NSFetchRequest*) subjectExistsWithName:(NSString*)subjectName;
 - (NSFetchRequest*)entity:(NSString*)entity existsWithName:(NSString*)entityName;
+- (book*)bookInLibraryWithISBN:(NSString*)searchedISBN;
 - (id)   initWithManagedObject:(book*)object withSearch:(BOOL)withSearch;
 - (void) clearAllFields;
 - (void) displayManagedAuthorsWithSelectedAuthor:(author*)authorObj;
