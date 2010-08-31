@@ -29,6 +29,7 @@
 
     IBOutlet NSTableView* tableView;
     IBOutlet BooksWindowController* bookWinController;
+    IBOutlet NSProgressIndicator* progIndicator;
 
     NSString* similarToISBN;
     NSArray* amazonASINs;

@@ -60,12 +60,24 @@
 	return;
     }else{
 
-	similarToISBN = isbn;
+	//this uses Grand Central Dispatch to download the details
+	//in a seperate thread so as not to lock the main thread. 
+	dispatch_queue_t q_default;
+	q_default = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 
-	amazonInterface* amazon = [[amazonInterface alloc] init];
-	NSArray* similarASINs = [amazon similarBooksToISBN:isbn];
-	[self setASINs:similarASINs];
-	[amazon release];
+	dispatch_async(q_default, ^{
+	    [progIndicator setUsesThreadedAnimation:YES];
+	    [progIndicator startAnimation:self];
+
+	    similarToISBN = isbn;
+
+	    amazonInterface* amazon = [[amazonInterface alloc] init];
+	    NSArray* similarASINs = [amazon similarBooksToISBN:isbn];
+	    [self setASINs:similarASINs];
+	    [amazon release];
+
+	    [progIndicator stopAnimation:self];
+	});
     }
 }
 
