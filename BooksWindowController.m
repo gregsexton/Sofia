@@ -554,6 +554,8 @@
     }
 
     if([[tabViewItem identifier] isEqualToString:@"reviewstab"]){
+	//TODO: use isbn10 if no isbn13
+	[reviewsController setISBN:[txt_isbn13 stringValue]];
     }
 }
 

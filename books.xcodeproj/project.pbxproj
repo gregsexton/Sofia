@@ -54,6 +54,7 @@
 		37AF7BB4122465E4007A7C85 /* SimilarBooksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF7BB3122465E4007A7C85 /* SimilarBooksViewController.m */; };
 		37AF7CD2122FC4B9007A7C85 /* NoExpansionTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF7CD1122FC4B9007A7C85 /* NoExpansionTextFieldCell.m */; };
 		37AF7CFE122FD831007A7C85 /* BookReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF7CFD122FD831007A7C85 /* BookReview.m */; };
+		37AF7D62122FF5AF007A7C85 /* ReviewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF7D61122FF5AF007A7C85 /* ReviewsViewController.m */; };
 		37BAF501114D69D000F95C41 /* list.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FD114D69D000F95C41 /* list.m */; };
 		37BAF502114D69D000F95C41 /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FF114D69D000F95C41 /* Library.m */; };
 		37BAF94511566BA700F95C41 /* BooksTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF94411566BA700F95C41 /* BooksTableView.m */; };
@@ -184,6 +185,8 @@
 		37AF7CD1122FC4B9007A7C85 /* NoExpansionTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoExpansionTextFieldCell.m; sourceTree = "<group>"; };
 		37AF7CFC122FD831007A7C85 /* BookReview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookReview.h; sourceTree = "<group>"; };
 		37AF7CFD122FD831007A7C85 /* BookReview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookReview.m; sourceTree = "<group>"; };
+		37AF7D60122FF5AF007A7C85 /* ReviewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReviewsViewController.h; sourceTree = "<group>"; };
+		37AF7D61122FF5AF007A7C85 /* ReviewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewsViewController.m; sourceTree = "<group>"; };
 		37BAF4FC114D69D000F95C41 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
 		37BAF4FD114D69D000F95C41 /* list.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = list.m; sourceTree = "<group>"; };
 		37BAF4FE114D69D000F95C41 /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
@@ -526,6 +529,8 @@
 				37AF72A0120D7D8E007A7C85 /* PreviewViewController.m */,
 				37AF7BB2122465E4007A7C85 /* SimilarBooksViewController.h */,
 				37AF7BB3122465E4007A7C85 /* SimilarBooksViewController.m */,
+				37AF7D60122FF5AF007A7C85 /* ReviewsViewController.h */,
+				37AF7D61122FF5AF007A7C85 /* ReviewsViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -730,6 +735,7 @@
 				37AF7BB4122465E4007A7C85 /* SimilarBooksViewController.m in Sources */,
 				37AF7CD2122FC4B9007A7C85 /* NoExpansionTextFieldCell.m in Sources */,
 				37AF7CFE122FD831007A7C85 /* BookReview.m in Sources */,
+				37AF7D62122FF5AF007A7C85 /* ReviewsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
