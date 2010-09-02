@@ -28,10 +28,10 @@
 
     IBOutlet NSTableView* tableView;
     IBOutlet NSProgressIndicator* progIndicator;
+    IBOutlet NSTextField* averageRatingLabel;
 
     NSString*	reviewsForISBN;
     NSArray*	amazonReviews;
-    double	averageReviewRating;
 }
 @property (nonatomic,retain) NSArray*	amazonReviews;
 

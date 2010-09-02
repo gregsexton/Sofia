@@ -25,6 +25,8 @@
 @implementation ReviewsViewController
 @synthesize amazonReviews;
 
+//TODO: error handling what if book not found or isbn incorrect, no internet connection?
+
 - (void)awakeFromNib{
     [tableView setDelegate:self];
     [tableView setDataSource:self];
@@ -36,14 +38,26 @@
     if([reviewsForISBN isEqualToString:isbn]){
 	return;
     }else{
-	reviewsForISBN = isbn;
+	//this uses Grand Central Dispatch to download the details
+	//in a seperate thread so as not to lock the main thread. 
+	dispatch_queue_t q_default;
+	q_default = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 
-	amazonInterface* amazon = [[amazonInterface alloc] init];
-	[amazon searchISBN:isbn];
-	[self setAmazonReviews:[amazon bookReviews]];
-	[amazon release];
+	dispatch_async(q_default, ^{
+	    [progIndicator setUsesThreadedAnimation:YES];
+	    [progIndicator startAnimation:self];
 
-	[tableView reloadData];
+	    reviewsForISBN = isbn;
+
+	    amazonInterface* amazon = [[amazonInterface alloc] init];
+	    [amazon searchISBN:isbn];
+	    [self setAmazonReviews:[amazon bookReviews]];
+
+	    [progIndicator stopAnimation:self];
+	    [averageRatingLabel setStringValue:[NSString stringWithFormat:@"Average rating: %f", [amazon bookAverageRating]]];
+	    [tableView reloadData];
+	    [amazon release];
+	});
     }
 }
 
