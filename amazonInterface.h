@@ -67,11 +67,13 @@ typedef enum {pNone,
 
     NSMutableArray* bookAuthors;
     NSMutableArray* dimensions;
+    NSMutableArray* similarProductASINs;
     NSString*	    asin;
 
     amazonProperties currentProperty;
     BOOL _ItemAttributes;
     BOOL _EditorialReview;
+    BOOL _SimilarProducts;
 
     NSMutableString* currentStringValue;
     BOOL successfullyFoundBook; 
@@ -90,8 +92,12 @@ typedef enum {pNone,
 @property (nonatomic,copy) NSString*	bookSummary;
 @property (nonatomic)	   BOOL		successfullyFoundBook;
 
-- (BOOL)searchISBN:(NSString*)isbn;
+- (BOOL)parseAmazonDataWithParamaters:(NSDictionary*)params;
+- (BOOL)searchASIN:(NSString*)theAsin;
+- (BOOL)searchForDetailsWithASIN:(NSString*)theASIN;
 - (BOOL)searchForDetailsWithISBN:(NSString*)isbn;
 - (BOOL)searchForEditorialReviewWithASIN:(NSString*)asin;
+- (BOOL)searchISBN:(NSString*)isbn;
+- (NSArray*)similarBooksToISBN:(NSString*)isbn;
 - (NSAttributedString*)getTableOfContentsFromURL:(NSURL*)url;
 @end

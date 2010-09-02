@@ -46,6 +46,7 @@
 
     bookAuthors = [[NSMutableArray alloc] initWithCapacity:5]; //not many books have more than 5 authors
     dimensions = [[NSMutableArray alloc] initWithCapacity:3]; //length x width x height
+    similarProductASINs = [[NSMutableArray alloc] initWithCapacity:5]; //5 is arbitrary
     return self;
 }
 
@@ -53,6 +54,8 @@
     if(currentStringValue)
 	[currentStringValue release];
     [bookAuthors release];
+    [dimensions release];
+    [similarProductASINs release];
     [super dealloc];
 }
     
@@ -62,6 +65,7 @@
     successfullyFoundBook = false; //assume the worst
     _ItemAttributes = false;
     _EditorialReview = false;
+    _SimilarProducts = false;
 
     BOOL returnVal = [self searchForDetailsWithISBN:isbn];
 
@@ -71,8 +75,26 @@
     return returnVal;
 }   
 
+- (BOOL)searchASIN:(NSString*)theAsin{
+    imageURL = @"";
+    successfullyFoundBook = false; //assume the worst
+    _ItemAttributes = false;
+    _EditorialReview = false;
+    _SimilarProducts = false;
+
+    BOOL returnVal = [self searchForDetailsWithASIN:theAsin];
+    returnVal = returnVal && [self searchForEditorialReviewWithASIN:theAsin];
+
+    return returnVal;
+}
+
+- (NSArray*)similarBooksToISBN:(NSString*)isbn{
+
+    [self searchISBN:isbn];
+    return similarProductASINs;
+}
+
 - (BOOL)searchForDetailsWithISBN:(NSString*)isbn{
-    SignedAwsSearchRequest *req = [[[SignedAwsSearchRequest alloc] initWithAccessKeyId:accessKey secretAccessKey:secretAccessKey] autorelease];
 
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:@"ItemSearch"           forKey:@"Operation"];
@@ -80,32 +102,26 @@
     [params setValue:@"Large"		     forKey:@"ResponseGroup"]; //large includes just about everything (read: kitchen sink)
     [params setValue:isbn		     forKey:@"Keywords"];
     
-    NSString *urlString = [req searchUrlForParameterDictionary:params];
-    //NSLog(@"request URL: %@", urlString);
-    NSURL* url = [[[NSURL alloc] initWithString:urlString] autorelease];
+    return [self parseAmazonDataWithParamaters:params];
+}
 
-    NSXMLParser *parser = [[[NSXMLParser alloc] initWithContentsOfURL:url] autorelease];
-    [parser setDelegate:self];
-
-    return [parser parse]; //returns false if unsuccessful in parsing.
+- (BOOL)searchForDetailsWithASIN:(NSString*)theASIN{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:@"ItemLookup"           forKey:@"Operation"];
+    [params setValue:theASIN		     forKey:@"ItemId"];
+    [params setValue:@"Large"		     forKey:@"ResponseGroup"]; 
+    
+    return [self parseAmazonDataWithParamaters:params];
 }
 
 - (BOOL)searchForEditorialReviewWithASIN:(NSString*)theASIN{
-    SignedAwsSearchRequest *req = [[[SignedAwsSearchRequest alloc] initWithAccessKeyId:accessKey secretAccessKey:secretAccessKey] autorelease];
 
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:@"ItemLookup"           forKey:@"Operation"];
     [params setValue:theASIN		     forKey:@"ItemId"];
-    [params setValue:@"EditorialReview"	     forKey:@"ResponseGroup"]; //large includes just about everything (read: kitchen sink)
+    [params setValue:@"EditorialReview"	     forKey:@"ResponseGroup"];
     
-    NSString *urlString = [req searchUrlForParameterDictionary:params];
-    //NSLog(@"request URL: %@", urlString);
-    NSURL* url = [[[NSURL alloc] initWithString:urlString] autorelease];
-
-    NSXMLParser *parser = [[[NSXMLParser alloc] initWithContentsOfURL:url] autorelease];
-    [parser setDelegate:self];
-
-    return [parser parse]; //returns false if unsuccessful in parsing.
+    return [self parseAmazonDataWithParamaters:params];
 }
 
 - (NSAttributedString*)getTableOfContentsFromURL:(NSURL*)url{
@@ -144,6 +160,19 @@
     NSAttributedString* tocReturn = [[NSAttributedString alloc] initWithHTML:tocData documentAttributes:NULL];
 
     return [tocReturn autorelease];
+}
+
+- (BOOL)parseAmazonDataWithParamaters:(NSDictionary*)params{
+    SignedAwsSearchRequest *req = [[[SignedAwsSearchRequest alloc] initWithAccessKeyId:accessKey secretAccessKey:secretAccessKey] autorelease];
+
+    NSString *urlString = [req searchUrlForParameterDictionary:params];
+//NSLog(@"request URL: %@", urlString);
+    NSURL* url = [[[NSURL alloc] initWithString:urlString] autorelease];
+
+    NSXMLParser *parser = [[[NSXMLParser alloc] initWithContentsOfURL:url] autorelease];
+    [parser setDelegate:self];
+
+    return [parser parse]; //returns false if unsuccessful in parsing.
 }
 
 //// NSXMLParserDelegate Methods /////////////////////////////////////////////////////////////
@@ -239,12 +268,22 @@
 	}
     }
 
+    if(_SimilarProducts){
+	if([elementName isEqualToString:@"ASIN"]){
+	    currentProperty = pASIN;
+	}
+    }
+
     if([elementName isEqualToString:@"ItemAttributes"]){
 	_ItemAttributes = true;
     }
 
     if([elementName isEqualToString:@"EditorialReview"]){
 	_EditorialReview = true;
+    }
+
+    if([elementName isEqualToString:@"SimilarProducts"]){
+	_SimilarProducts = true;
     }
 
     currentProperty = pNone;
@@ -269,6 +308,10 @@
 
     if([elementName isEqualToString:@"EditorialReview"]){
 	_EditorialReview = false;
+    }
+
+    if([elementName isEqualToString:@"SimilarProducts"]){
+	_SimilarProducts = false;
     }
 
     if(currentProperty == pImageURL){
@@ -360,6 +403,13 @@
 	    NSData* strData = [currentStringValue dataUsingEncoding:NSUTF8StringEncoding];
 	    NSAttributedString* temp = [[NSAttributedString alloc] initWithHTML:strData documentAttributes:NULL];
 	    [self setBookSummary:[temp string]];
+	}
+    }
+
+    if(_SimilarProducts){
+	if(currentProperty == pASIN){
+	    if(![similarProductASINs containsObject:currentStringValue])
+		[similarProductASINs addObject:currentStringValue];
 	}
     }
 
