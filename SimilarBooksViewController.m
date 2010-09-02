@@ -157,7 +157,18 @@
     if(!amazonASINs)
 	return 0;
     else
-	return [amazonASINs count];
+	return [titles count]; //titles chosen arbitrarily; do not use amazonASINs, during downloading the tableview
+			       //tries to show more rows than it has information for.
+}
+
+- (NSString *)tableView:(NSTableView *)aTableView
+	 toolTipForCell:(NSCell*)aCell
+		   rect:(NSRectPointer)rect
+	    tableColumn:(NSTableColumn*)aTableColumn
+		    row:(NSInteger)row
+	  mouseLocation:(NSPoint)mouseLocation{
+
+    return @"";
 }
 
 @end

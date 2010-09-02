@@ -52,6 +52,7 @@
 		37AF7A43121FEFE5007A7C85 /* database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 37AF7A42121FEFE5007A7C85 /* database.xcdatamodeld */; };
 		37AF7A9E122172B5007A7C85 /* NSString+Sofia.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF7A9D122172B5007A7C85 /* NSString+Sofia.m */; };
 		37AF7BB4122465E4007A7C85 /* SimilarBooksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF7BB3122465E4007A7C85 /* SimilarBooksViewController.m */; };
+		37AF7CD2122FC4B9007A7C85 /* NoExpansionTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF7CD1122FC4B9007A7C85 /* NoExpansionTextFieldCell.m */; };
 		37BAF501114D69D000F95C41 /* list.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FD114D69D000F95C41 /* list.m */; };
 		37BAF502114D69D000F95C41 /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FF114D69D000F95C41 /* Library.m */; };
 		37BAF94511566BA700F95C41 /* BooksTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF94411566BA700F95C41 /* BooksTableView.m */; };
@@ -178,6 +179,8 @@
 		37AF7A9D122172B5007A7C85 /* NSString+Sofia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Sofia.m"; sourceTree = "<group>"; };
 		37AF7BB2122465E4007A7C85 /* SimilarBooksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimilarBooksViewController.h; sourceTree = "<group>"; };
 		37AF7BB3122465E4007A7C85 /* SimilarBooksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimilarBooksViewController.m; sourceTree = "<group>"; };
+		37AF7CD0122FC4B9007A7C85 /* NoExpansionTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoExpansionTextFieldCell.h; sourceTree = "<group>"; };
+		37AF7CD1122FC4B9007A7C85 /* NoExpansionTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoExpansionTextFieldCell.m; sourceTree = "<group>"; };
 		37BAF4FC114D69D000F95C41 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
 		37BAF4FD114D69D000F95C41 /* list.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = list.m; sourceTree = "<group>"; };
 		37BAF4FE114D69D000F95C41 /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
@@ -470,6 +473,8 @@
 				37AF727E120CAAC8007A7C85 /* PreviewView.m */,
 				37AF72EC120DB8CA007A7C85 /* ReflectionImageView.h */,
 				37AF72ED120DB8CA007A7C85 /* ReflectionImageView.m */,
+				37AF7CD0122FC4B9007A7C85 /* NoExpansionTextFieldCell.h */,
+				37AF7CD1122FC4B9007A7C85 /* NoExpansionTextFieldCell.m */,
 			);
 			name = "Cocoa Extensions";
 			sourceTree = "<group>";
@@ -718,6 +723,7 @@
 				37AF75E91216CFBB007A7C85 /* PreviewSplitViewDelegate.m in Sources */,
 				37AF7A9E122172B5007A7C85 /* NSString+Sofia.m in Sources */,
 				37AF7BB4122465E4007A7C85 /* SimilarBooksViewController.m in Sources */,
+				37AF7CD2122FC4B9007A7C85 /* NoExpansionTextFieldCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
