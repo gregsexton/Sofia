@@ -549,9 +549,11 @@
 - (void)tabView:(NSTabView*)tabView didSelectTabViewItem:(NSTabViewItem*)tabViewItem{
 
     if([[tabViewItem identifier] isEqualToString:@"similartab"]){
-
 	//TODO: use isbn10 if no isbn13
 	[similarBooksController setISBN:[txt_isbn13 stringValue]];
+    }
+
+    if([[tabViewItem identifier] isEqualToString:@"reviewstab"]){
     }
 }
 

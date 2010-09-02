@@ -1,5 +1,5 @@
 //
-// NSString+Sofia.h
+// BookReview.m
 //
 // Copyright 2010 Greg Sexton
 //
@@ -19,13 +19,27 @@
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import <Cocoa/Cocoa.h>
+#import "BookReview.h"
 
 
-@interface NSString (Sofia) 
+@implementation BookReview
 
-+ (NSString*)stringFromArray:(NSArray*)array withCombiner:(NSString*)combiner;
-+ (NSString*)interleaveArray:(NSArray*)array with:(NSString*)interleave;
-- (NSString*)paragraphFormatAndStripHTML;
+@synthesize rating;
+@synthesize helpfulVotes;
+@synthesize totalVotes;
+@synthesize date;
+@synthesize summary;
+@synthesize content;
+
+
+- (NSString*)description{
+    return [NSString stringWithFormat:@"Rating: %f, %d of %d helpful, %@, %@; %@",
+					rating,
+					helpfulVotes,
+					totalVotes,
+					date,
+					summary,
+					content];
+}
 
 @end

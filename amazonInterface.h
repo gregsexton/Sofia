@@ -22,6 +22,7 @@
 #import <Cocoa/Cocoa.h>
 #import "RegexKitLite.h"
 #import "NSString+Sofia.h"
+#import "BookReview.h"
 
 typedef enum {pNone,
 	      pLargeImage, 
@@ -42,7 +43,14 @@ typedef enum {pNone,
 	      pWidth,
 	      pWeight,
 	      pASIN,
-	      pEditorialContent} amazonProperties;
+	      pEditorialContent,
+	      pReviewRating,
+	      pReviewHelpfulVotes,
+	      pReviewTotalVotes,
+	      pReviewDate,
+	      pReviewSummary,
+	      pReviewContent,
+	      pReviewAverageRating } amazonProperties;
 
 #define HUNDREDTH_INCH_TO_CM 0.0254
 #define HUNDREDTH_POUND_TO_KG 0.00453592
@@ -65,6 +73,9 @@ typedef enum {pNone,
     NSString*	    bookPhysicalDescrip;
     NSString*	    bookSummary;
 
+    NSMutableArray* bookReviews;
+    double	    bookAverageRating;
+
     NSMutableArray* bookAuthors;
     NSMutableArray* dimensions;
     NSMutableArray* similarProductASINs;
@@ -73,9 +84,11 @@ typedef enum {pNone,
     amazonProperties currentProperty;
     BOOL _ItemAttributes;
     BOOL _EditorialReview;
+    BOOL _CustomerReviews;
     BOOL _SimilarProducts;
 
     NSMutableString* currentStringValue;
+    BookReview* currentReview;
     BOOL successfullyFoundBook; 
 }
 
@@ -90,7 +103,9 @@ typedef enum {pNone,
 @property (nonatomic,copy) NSString*	bookEdition;
 @property (nonatomic,copy) NSString*	bookPhysicalDescrip;
 @property (nonatomic,copy) NSString*	bookSummary;
+@property (nonatomic,retain) NSArray*	bookReviews;
 @property (nonatomic)	   BOOL		successfullyFoundBook;
+@property (nonatomic)	   double	bookAverageRating;
 
 - (BOOL)parseAmazonDataWithParamaters:(NSDictionary*)params;
 - (BOOL)searchASIN:(NSString*)theAsin;

@@ -63,4 +63,18 @@
     return buildUp;
 }
 
+- (NSString*)paragraphFormatAndStripHTML{
+    //Uses NSAttributedString to format using the HTML elements
+    //and extracts a string from this. 
+    //NOTE: could be quite slow in a loop
+
+    NSData* strData = [self dataUsingEncoding:NSUTF8StringEncoding];
+    NSAttributedString* temp = [[NSAttributedString alloc] initWithHTML:strData documentAttributes:NULL];
+    NSString* retVal = [[temp string] retain];
+
+    [temp release];
+    temp = nil;
+
+    return [retVal autorelease];
+}
 @end

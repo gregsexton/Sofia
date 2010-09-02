@@ -37,6 +37,8 @@
 @synthesize bookEdition;
 @synthesize bookPhysicalDescrip;
 @synthesize bookSummary;
+@synthesize bookAverageRating;
+@synthesize bookReviews;
 
 - (id)init{
     self = [super init];
@@ -47,15 +49,19 @@
     bookAuthors = [[NSMutableArray alloc] initWithCapacity:5]; //not many books have more than 5 authors
     dimensions = [[NSMutableArray alloc] initWithCapacity:3]; //length x width x height
     similarProductASINs = [[NSMutableArray alloc] initWithCapacity:5]; //5 is arbitrary
+    bookReviews = [[NSMutableArray alloc] initWithCapacity:5]; //5 is an arbitrary guess
     return self;
 }
 
 - (void)dealloc{
     if(currentStringValue)
 	[currentStringValue release];
+    if(currentReview)
+	[currentReview release];
     [bookAuthors release];
     [dimensions release];
     [similarProductASINs release];
+    [bookReviews release];
     [super dealloc];
 }
     
@@ -65,6 +71,7 @@
     successfullyFoundBook = false; //assume the worst
     _ItemAttributes = false;
     _EditorialReview = false;
+    _CustomerReviews = false;
     _SimilarProducts = false;
 
     BOOL returnVal = [self searchForDetailsWithISBN:isbn];
@@ -80,6 +87,7 @@
     successfullyFoundBook = false; //assume the worst
     _ItemAttributes = false;
     _EditorialReview = false;
+    _CustomerReviews = false;
     _SimilarProducts = false;
 
     BOOL returnVal = [self searchForDetailsWithASIN:theAsin];
@@ -261,6 +269,40 @@
 	}
     }
 
+    if(_CustomerReviews){
+	if([elementName isEqualToString:@"Review"]){
+	    currentReview = [[BookReview alloc] init];
+	}
+	if([elementName isEqualToString:@"Rating"]){
+	    currentProperty = pReviewRating;
+	    return;
+	}
+	if([elementName isEqualToString:@"HelpfulVotes"]){
+	    currentProperty = pReviewHelpfulVotes;
+	    return;
+	}
+	if([elementName isEqualToString:@"TotalVotes"]){
+	    currentProperty = pReviewTotalVotes;
+	    return;
+	}
+	if([elementName isEqualToString:@"Date"]){
+	    currentProperty = pReviewDate;
+	    return;
+	}
+	if([elementName isEqualToString:@"Summary"]){
+	    currentProperty = pReviewSummary;
+	    return;
+	}
+	if([elementName isEqualToString:@"Content"]){
+	    currentProperty = pReviewContent;
+	    return;
+	}
+	if([elementName isEqualToString:@"AverageRating"]){
+	    currentProperty = pReviewAverageRating;
+	    return;
+	}
+    }
+
     if(_EditorialReview){
 	if([elementName isEqualToString:@"Content"]){
 	    currentProperty = pEditorialContent;
@@ -271,6 +313,7 @@
     if(_SimilarProducts){
 	if([elementName isEqualToString:@"ASIN"]){
 	    currentProperty = pASIN;
+	    return;
 	}
     }
 
@@ -280,6 +323,10 @@
 
     if([elementName isEqualToString:@"EditorialReview"]){
 	_EditorialReview = true;
+    }
+
+    if([elementName isEqualToString:@"CustomerReviews"]){
+	_CustomerReviews = true;
     }
 
     if([elementName isEqualToString:@"SimilarProducts"]){
@@ -308,6 +355,10 @@
 
     if([elementName isEqualToString:@"EditorialReview"]){
 	_EditorialReview = false;
+    }
+
+    if([elementName isEqualToString:@"CustomerReviews"]){
+	_CustomerReviews = false;
     }
 
     if([elementName isEqualToString:@"SimilarProducts"]){
@@ -398,11 +449,39 @@
 	}
     }
 
+    if(_CustomerReviews){
+	//TODO: this only gets the first page, get them all!!
+	if([elementName isEqualToString:@"Review"]){
+	    [bookReviews addObject:currentReview];
+	    [currentReview release];
+	    currentReview = nil;
+	}
+	if(currentProperty == pReviewRating){
+	    currentReview.rating = [currentStringValue doubleValue];
+	}
+	if(currentProperty == pReviewHelpfulVotes){
+	    currentReview.helpfulVotes = [currentStringValue integerValue];
+	}
+	if(currentProperty == pReviewTotalVotes){
+	    currentReview.totalVotes = [currentStringValue integerValue];
+	}
+	if(currentProperty == pReviewDate){
+	    currentReview.date = currentStringValue;
+	}
+	if(currentProperty == pReviewSummary){
+	    currentReview.summary = currentStringValue;
+	}
+	if(currentProperty == pReviewContent){
+	    currentReview.content = [currentStringValue paragraphFormatAndStripHTML];
+	}
+	if(currentProperty == pReviewAverageRating){
+	    bookAverageRating = [currentStringValue doubleValue];
+	}
+    }
+
     if(_EditorialReview){
 	if(currentProperty == pEditorialContent){
-	    NSData* strData = [currentStringValue dataUsingEncoding:NSUTF8StringEncoding];
-	    NSAttributedString* temp = [[NSAttributedString alloc] initWithHTML:strData documentAttributes:NULL];
-	    [self setBookSummary:[temp string]];
+	    [self setBookSummary:[currentStringValue paragraphFormatAndStripHTML]];
 	}
     }
 
@@ -414,8 +493,10 @@
     }
 
     currentProperty = pNone;
-    [currentStringValue release];
-    currentStringValue = nil;
+    if(currentStringValue){
+	[currentStringValue release];
+	currentStringValue = nil;
+    }
     return;
 }
 
