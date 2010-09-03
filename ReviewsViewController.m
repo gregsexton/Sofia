@@ -72,7 +72,7 @@
     }
 
     if([[aTableColumn identifier] isEqualToString:@"reviewRatingCol"]){
-	return [NSString stringWithFormat:@"%f", [[amazonReviews objectAtIndex:rowIndex] rating]];
+	return [NSNumber numberWithDouble:[[amazonReviews objectAtIndex:rowIndex] rating]];
     }
 
     if([[aTableColumn identifier] isEqualToString:@"reviewDetailsCol"]){
