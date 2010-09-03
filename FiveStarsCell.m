@@ -75,8 +75,15 @@
     NSRect tintRect = imgRect;
     tintRect.origin.x += x;
     tintRect.origin.y += y;
+
     tintRect.size.width = tintRect.size.width/5 * [[self objectValue] doubleValue]; //[self objectValue] should be NSNumber
     [[NSColor colorWithCalibratedRed:1.0f green:0.47f blue:0.0f alpha:1.0f] setFill];
+    CGContextFillRect(viewContext, NSRectToCGRect(tintRect));
+
+    //draw the rest in black
+    tintRect.origin.x += tintRect.size.width;
+    tintRect.size.width = imgWidth - tintRect.size.width;
+    [[NSColor colorWithCalibratedRed:0.0f green:0.0f blue:0.0f alpha:0.5f] setFill];
     CGContextFillRect(viewContext, NSRectToCGRect(tintRect));
 
     CGContextRestoreGState(viewContext);
