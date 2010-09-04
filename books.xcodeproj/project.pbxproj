@@ -56,7 +56,7 @@
 		37AF7CFE122FD831007A7C85 /* BookReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF7CFD122FD831007A7C85 /* BookReview.m */; };
 		37AF7D62122FF5AF007A7C85 /* ReviewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF7D61122FF5AF007A7C85 /* ReviewsViewController.m */; };
 		37AF7D9B12311223007A7C85 /* FiveStarsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF7D9A12311223007A7C85 /* FiveStarsCell.m */; };
-		37AF7F041231A60E007A7C85 /* stars.tif in Resources */ = {isa = PBXBuildFile; fileRef = 37AF7F031231A60E007A7C85 /* stars.tif */; };
+		37AF7F311231BE60007A7C85 /* stars.tif in Resources */ = {isa = PBXBuildFile; fileRef = 37AF7F301231BE60007A7C85 /* stars.tif */; };
 		37BAF501114D69D000F95C41 /* list.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FD114D69D000F95C41 /* list.m */; };
 		37BAF502114D69D000F95C41 /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FF114D69D000F95C41 /* Library.m */; };
 		37BAF94511566BA700F95C41 /* BooksTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF94411566BA700F95C41 /* BooksTableView.m */; };
@@ -191,7 +191,7 @@
 		37AF7D61122FF5AF007A7C85 /* ReviewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReviewsViewController.m; sourceTree = "<group>"; };
 		37AF7D9912311223007A7C85 /* FiveStarsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiveStarsCell.h; sourceTree = "<group>"; };
 		37AF7D9A12311223007A7C85 /* FiveStarsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiveStarsCell.m; sourceTree = "<group>"; };
-		37AF7F031231A60E007A7C85 /* stars.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = stars.tif; sourceTree = "<group>"; };
+		37AF7F301231BE60007A7C85 /* stars.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = stars.tif; sourceTree = "<group>"; };
 		37BAF4FC114D69D000F95C41 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
 		37BAF4FD114D69D000F95C41 /* list.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = list.m; sourceTree = "<group>"; };
 		37BAF4FE114D69D000F95C41 /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
@@ -497,7 +497,7 @@
 		37BAFBB7115C14C700F95C41 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				37AF7F031231A60E007A7C85 /* stars.tif */,
+				37AF7F301231BE60007A7C85 /* stars.tif */,
 				37970AF811DAA847003A9D0D /* missing.png */,
 				37970AB011D920CA003A9D0D /* importarrow.png */,
 				37BAFBDD115C1D1500F95C41 /* shopping2.tif */,
@@ -677,7 +677,7 @@
 				37970AB111D920CA003A9D0D /* importarrow.png in Resources */,
 				37970AF911DAA847003A9D0D /* missing.png in Resources */,
 				37AF704B12048044007A7C85 /* ExternalLinkEditor.xib in Resources */,
-				37AF7F041231A60E007A7C85 /* stars.tif in Resources */,
+				37AF7F311231BE60007A7C85 /* stars.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

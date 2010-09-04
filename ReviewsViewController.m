@@ -30,7 +30,6 @@
 - (void)awakeFromNib{
     [tableView setDelegate:self];
     [tableView setDataSource:self];
-    [tableView setRowHeight:150]; //TODO: adjust height based on review
 }
 
 - (void)setISBN:(NSString*)isbn{
@@ -61,6 +60,19 @@
     }
 }
 
+- (NSString*)bookReviewContentForRow:(NSInteger)rowIndex{
+    BookReview* review = [amazonReviews objectAtIndex:rowIndex];
+    return [NSString stringWithFormat:@"%d of %d found this review helpful.\n%@\n\n%@",
+				      review.helpfulVotes,
+				      review.totalVotes,
+				      review.summary,
+				      review.content];
+}
+
+
+///////////////////////    DELEGATE METHODS   //////////////////////////////////////////////////////////////////////////
+
+
 - (id)tableView:(NSTableView*)aTableView objectValueForTableColumn:(NSTableColumn*)aTableColumn 
 	    row:(NSInteger)rowIndex{
     
@@ -76,12 +88,7 @@
     }
 
     if([[aTableColumn identifier] isEqualToString:@"reviewDetailsCol"]){
-	BookReview* review = [amazonReviews objectAtIndex:rowIndex];
-	return [NSString stringWithFormat:@"%d of %d found this review helpful.\n%@\n\n%@",
-					  review.helpfulVotes,
-					  review.totalVotes,
-					  review.summary,
-					  review.content];
+	return [self bookReviewContentForRow:rowIndex];
     }
 
     return nil;
@@ -95,4 +102,19 @@
 	return [amazonReviews count]; 
 }
 
+- (CGFloat)tableView:(NSTableView *)aTableView heightOfRow:(NSInteger)rowIndex{
+    // get column width
+    NSTableColumn *tabCol = [[tableView tableColumns] objectAtIndex:1];
+    float width = [tabCol width];
+
+    NSRect r = NSMakeRect(0,0,width,1000.0);
+    NSCell *cell = [tabCol dataCellForRow:rowIndex];
+
+    NSString* content = [self bookReviewContentForRow:rowIndex];
+    [cell setObjectValue:content];
+    float height = [cell cellSizeForBounds:r].height;
+    if (height <= 0) 
+	height = 16.0; // Ensure miniumum height is 16.0
+    return height;
+}
 @end
