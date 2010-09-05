@@ -60,13 +60,37 @@
     }
 }
 
-- (NSString*)bookReviewContentForRow:(NSInteger)rowIndex{
+- (NSAttributedString*)bookReviewContentForRow:(NSInteger)rowIndex{
     BookReview* review = [amazonReviews objectAtIndex:rowIndex];
-    return [NSString stringWithFormat:@"%d of %d found this review helpful.\n%@\n\n%@",
-				      review.helpfulVotes,
-				      review.totalVotes,
-				      review.summary,
-				      review.content];
+
+    NSFont* font = [NSFont fontWithName:@"Lucida Grande" size:10.0];
+    NSDictionary* helpfulAttrib = [NSDictionary dictionaryWithObjectsAndKeys: font, NSFontAttributeName, nil];
+
+    font = [NSFont fontWithName:@"LucidaGrande-Bold" size:13.0];
+    NSDictionary* summaryAttrib = [NSDictionary dictionaryWithObjectsAndKeys: font, NSFontAttributeName, nil];
+
+    font = [NSFont fontWithName:@"Lucida Grande" size:13.0];
+    NSDictionary* contentAttrib = [NSDictionary dictionaryWithObjectsAndKeys: font, NSFontAttributeName, nil];
+
+    NSAttributedString* helpfulVotes = [[NSAttributedString alloc] 
+					    initWithString:[NSString stringWithFormat:@"%d of %d found this review helpful.\n",
+										      review.helpfulVotes,
+										      review.totalVotes]
+									   attributes:helpfulAttrib];
+    NSAttributedString* summary = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n\n", review.summary] 
+								  attributes:summaryAttrib];
+    NSAttributedString* content = [[NSAttributedString alloc] initWithString:review.content
+								  attributes:contentAttrib];
+
+    NSMutableAttributedString* finalString = [[NSMutableAttributedString alloc] initWithAttributedString:helpfulVotes];
+    [finalString appendAttributedString:summary];
+    [finalString appendAttributedString:content];
+
+    [helpfulVotes release];
+    [summary release];
+    [content release];
+
+    return [finalString autorelease];
 }
 
 
@@ -103,6 +127,7 @@
 }
 
 - (CGFloat)tableView:(NSTableView *)aTableView heightOfRow:(NSInteger)rowIndex{
+    // TODO: cache these sizes?
     // get column width
     NSTableColumn *tabCol = [[tableView tableColumns] objectAtIndex:1];
     float width = [tabCol width];
@@ -110,7 +135,7 @@
     NSRect r = NSMakeRect(0,0,width,1000.0);
     NSCell *cell = [tabCol dataCellForRow:rowIndex];
 
-    NSString* content = [self bookReviewContentForRow:rowIndex];
+    NSAttributedString* content = [self bookReviewContentForRow:rowIndex];
     [cell setObjectValue:content];
     float height = [cell cellSizeForBounds:r].height;
     if (height <= 0) 
