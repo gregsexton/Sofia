@@ -32,6 +32,7 @@
 
     NSString*	reviewsForISBN;
     NSArray*	amazonReviews;
+    NSMutableArray* rowHeights;
 }
 @property (nonatomic,retain) NSArray*	amazonReviews;
 

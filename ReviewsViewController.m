@@ -30,6 +30,13 @@
 - (void)awakeFromNib{
     [tableView setDelegate:self];
     [tableView setDataSource:self];
+    
+    rowHeights = [[NSMutableArray alloc] initWithCapacity:5]; //5 chosen as seems sensible
+}
+
+- (void)dealloc{
+    [rowHeights release];
+    [super dealloc];
 }
 
 - (void)setISBN:(NSString*)isbn{
@@ -127,19 +134,24 @@
 }
 
 - (CGFloat)tableView:(NSTableView *)aTableView heightOfRow:(NSInteger)rowIndex{
-    // TODO: cache these sizes?
-    // get column width
-    NSTableColumn *tabCol = [[tableView tableColumns] objectAtIndex:1];
-    float width = [tabCol width];
+    if(rowIndex < [rowHeights count]){ //is already calculated and cached
+	return [[rowHeights objectAtIndex:rowIndex] floatValue];
+    }else{
+	// get column width
+	NSTableColumn *tabCol = [[tableView tableColumns] objectAtIndex:1];
+	float width = [tabCol width];
 
-    NSRect r = NSMakeRect(0,0,width,1000.0);
-    NSCell *cell = [tabCol dataCellForRow:rowIndex];
+	NSRect r = NSMakeRect(0,0,width,1000.0);
+	NSCell *cell = [tabCol dataCellForRow:rowIndex];
 
-    NSAttributedString* content = [self bookReviewContentForRow:rowIndex];
-    [cell setObjectValue:content];
-    float height = [cell cellSizeForBounds:r].height;
-    if (height <= 0) 
-	height = 16.0; // Ensure miniumum height is 16.0
-    return height;
+	NSAttributedString* content = [self bookReviewContentForRow:rowIndex];
+	[cell setObjectValue:content];
+	float height = [cell cellSizeForBounds:r].height;
+	if (height <= 0) 
+	    height = 16.0; // ensure miniumum height is 16.0
+
+	[rowHeights insertObject:[NSNumber numberWithFloat:height] atIndex:rowIndex]; //cache
+	return height;
+    }
 }
 @end
