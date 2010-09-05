@@ -57,6 +57,7 @@
 		37AF7D62122FF5AF007A7C85 /* ReviewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF7D61122FF5AF007A7C85 /* ReviewsViewController.m */; };
 		37AF7D9B12311223007A7C85 /* FiveStarsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF7D9A12311223007A7C85 /* FiveStarsCell.m */; };
 		37AF7F311231BE60007A7C85 /* stars.tif in Resources */ = {isa = PBXBuildFile; fileRef = 37AF7F301231BE60007A7C85 /* stars.tif */; };
+		37AF7F6D12341D36007A7C85 /* FiveStars.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF7F6C12341D36007A7C85 /* FiveStars.m */; };
 		37BAF501114D69D000F95C41 /* list.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FD114D69D000F95C41 /* list.m */; };
 		37BAF502114D69D000F95C41 /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FF114D69D000F95C41 /* Library.m */; };
 		37BAF94511566BA700F95C41 /* BooksTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF94411566BA700F95C41 /* BooksTableView.m */; };
@@ -192,6 +193,8 @@
 		37AF7D9912311223007A7C85 /* FiveStarsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiveStarsCell.h; sourceTree = "<group>"; };
 		37AF7D9A12311223007A7C85 /* FiveStarsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiveStarsCell.m; sourceTree = "<group>"; };
 		37AF7F301231BE60007A7C85 /* stars.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = stars.tif; sourceTree = "<group>"; };
+		37AF7F6B12341D36007A7C85 /* FiveStars.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiveStars.h; sourceTree = "<group>"; };
+		37AF7F6C12341D36007A7C85 /* FiveStars.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiveStars.m; sourceTree = "<group>"; };
 		37BAF4FC114D69D000F95C41 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
 		37BAF4FD114D69D000F95C41 /* list.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = list.m; sourceTree = "<group>"; };
 		37BAF4FE114D69D000F95C41 /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
@@ -490,6 +493,8 @@
 				37AF7CD1122FC4B9007A7C85 /* NoExpansionTextFieldCell.m */,
 				37AF7D9912311223007A7C85 /* FiveStarsCell.h */,
 				37AF7D9A12311223007A7C85 /* FiveStarsCell.m */,
+				37AF7F6B12341D36007A7C85 /* FiveStars.h */,
+				37AF7F6C12341D36007A7C85 /* FiveStars.m */,
 			);
 			name = "Cocoa Extensions";
 			sourceTree = "<group>";
@@ -746,6 +751,7 @@
 				37AF7CFE122FD831007A7C85 /* BookReview.m in Sources */,
 				37AF7D62122FF5AF007A7C85 /* ReviewsViewController.m in Sources */,
 				37AF7D9B12311223007A7C85 /* FiveStarsCell.m in Sources */,
+				37AF7F6D12341D36007A7C85 /* FiveStars.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

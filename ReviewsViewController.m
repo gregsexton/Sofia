@@ -60,7 +60,7 @@
 	    [self setAmazonReviews:[amazon bookReviews]];
 
 	    [progIndicator stopAnimation:self];
-	    [averageRatingLabel setStringValue:[NSString stringWithFormat:@"Average rating: %f", [amazon bookAverageRating]]];
+	    [averageRating setObjectValue:[NSNumber numberWithDouble:[amazon bookAverageRating]]];
 	    [tableView reloadData];
 	    [amazon release];
 	});

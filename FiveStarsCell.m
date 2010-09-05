@@ -53,14 +53,14 @@
 
     //Switch to the mask for drawing
     NSGraphicsContext* maskGraphicsContext = [NSGraphicsContext graphicsContextWithGraphicsPort:maskContext 
-											flipped:YES];
+											flipped:[controlView isFlipped]];
     [NSGraphicsContext saveGraphicsState];
     [NSGraphicsContext setCurrentContext:maskGraphicsContext];
 
     //Draw mask
     [[NSColor blackColor] set];
     NSRectFill(NSMakeRect(0,0,width,height));
-    [img drawInRect:imgRect fromRect:NSZeroRect operation:NSCompositeCopy fraction:1.0 respectFlipped:YES hints:nil];
+    [img drawInRect:imgRect fromRect:NSZeroRect operation:NSCompositeCopy fraction:1.0 respectFlipped:[controlView isFlipped] hints:nil];
 
     //Switch back to the window's context
     [NSGraphicsContext restoreGraphicsState];

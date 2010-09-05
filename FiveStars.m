@@ -1,5 +1,5 @@
 //
-// ReviewsViewController.h
+// FiveStars.m
 //
 // Copyright 2010 Greg Sexton
 //
@@ -19,24 +19,18 @@
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "amazonInterface.h"
-#import "BookReview.h"
 #import "FiveStars.h"
 
 
-@interface ReviewsViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource> {
+@implementation FiveStars
 
-    IBOutlet NSTableView* tableView;
-    IBOutlet NSProgressIndicator* progIndicator;
-    IBOutlet FiveStars* averageRating;
-
-    NSString*	reviewsForISBN;
-    NSArray*	amazonReviews;
-    NSMutableArray* rowHeights;
+- (void)awakeFromNib{
+    [self setCell:[[FiveStarsCell alloc] init]];
 }
-@property (nonatomic,retain) NSArray*	amazonReviews;
 
-- (void)setISBN:(NSString*)isbn;
+- (void)dealloc{
+    [[self cell] release];
+    [super dealloc];
+}
 
 @end
