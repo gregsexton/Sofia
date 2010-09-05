@@ -154,4 +154,8 @@
 	return height;
     }
 }
+
+- (BOOL)tableView:(NSTableView *)aTableView shouldSelectRow:(NSInteger)rowIndex{
+    return NO; //disable selection
+}
 @end
