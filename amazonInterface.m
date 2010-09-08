@@ -62,17 +62,14 @@
     [dimensions release];
     [similarProductASINs release];
     [bookReviews release];
+    if(asin)
+	[asin release];
     [super dealloc];
 }
     
 - (BOOL)searchISBN:(NSString*)isbn{
-
     imageURL = @"";
     successfullyFoundBook = false; //assume the worst
-    _ItemAttributes = false;
-    _EditorialReview = false;
-    _CustomerReviews = false;
-    _SimilarProducts = false;
 
     BOOL returnVal = [self searchForDetailsWithISBN:isbn];
 
@@ -85,10 +82,6 @@
 - (BOOL)searchASIN:(NSString*)theAsin{
     imageURL = @"";
     successfullyFoundBook = false; //assume the worst
-    _ItemAttributes = false;
-    _EditorialReview = false;
-    _CustomerReviews = false;
-    _SimilarProducts = false;
 
     BOOL returnVal = [self searchForDetailsWithASIN:theAsin];
     returnVal = returnVal && [self searchForEditorialReviewWithASIN:theAsin];
@@ -100,6 +93,19 @@
 
     [self searchISBN:isbn];
     return similarProductASINs;
+}
+
+- (NSArray*)allReviewsForISBN:(NSString*)isbn{
+    BOOL returnVal = [self searchForDetailsWithISBN:isbn];
+    if(!returnVal)
+	return nil;
+
+    [bookReviews removeAllObjects]; //start with a clean slate
+    for(int i=1; i<=numberOfReviewPages; i++){
+	[self searchForCustomerReviewsWithASIN:asin 
+				      withPage:[NSString stringWithFormat:@"%d", i]];
+    }
+    return bookReviews;
 }
 
 - (BOOL)searchForDetailsWithISBN:(NSString*)isbn{
@@ -128,6 +134,17 @@
     [params setValue:@"ItemLookup"           forKey:@"Operation"];
     [params setValue:theASIN		     forKey:@"ItemId"];
     [params setValue:@"EditorialReview"	     forKey:@"ResponseGroup"];
+    
+    return [self parseAmazonDataWithParamaters:params];
+}
+
+- (BOOL)searchForCustomerReviewsWithASIN:(NSString*)theASIN withPage:(NSString*)pageNumber{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:@"ItemLookup"           forKey:@"Operation"];
+    [params setValue:@"Reviews"		     forKey:@"ResponseGroup"];
+    [params setValue:@"-HelpfulVotes"	     forKey:@"ReviewSort"];
+    [params setValue:pageNumber		     forKey:@"ReviewPage"];
+    [params setValue:theASIN		     forKey:@"ItemId"];
     
     return [self parseAmazonDataWithParamaters:params];
 }
@@ -171,6 +188,12 @@
 }
 
 - (BOOL)parseAmazonDataWithParamaters:(NSDictionary*)params{
+    //reset sections
+    _ItemAttributes = false;
+    _EditorialReview = false;
+    _CustomerReviews = false;
+    _SimilarProducts = false;
+
     SignedAwsSearchRequest *req = [[[SignedAwsSearchRequest alloc] initWithAccessKeyId:accessKey secretAccessKey:secretAccessKey] autorelease];
 
     NSString *urlString = [req searchUrlForParameterDictionary:params];
@@ -201,6 +224,11 @@
 
     if([elementName isEqualToString:@"TotalResults"]){
 	currentProperty = pTotalResults;
+        return;
+    }
+
+    if([elementName isEqualToString:@"TotalReviewPages"]){
+	currentProperty = pTotalReviewPages;
         return;
     }
 
@@ -379,6 +407,10 @@
 	    [self setSuccessfullyFoundBook:false];
     }
 
+    if(currentProperty == pTotalReviewPages){
+	numberOfReviewPages = [currentStringValue intValue];
+    }
+
     if(currentProperty == pDetailsPage){
 	//NSLog(@"Details url: %@", currentStringValue);
 	NSURL* url = [[NSURL alloc] initWithString:currentStringValue];
@@ -388,7 +420,7 @@
 
     if(currentProperty == pASIN){
 	if(asin == nil)
-	    asin = currentStringValue;
+	    asin = [currentStringValue retain];
     }
 
     if(_ItemAttributes){

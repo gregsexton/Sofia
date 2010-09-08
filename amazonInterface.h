@@ -50,7 +50,8 @@ typedef enum {pNone,
 	      pReviewDate,
 	      pReviewSummary,
 	      pReviewContent,
-	      pReviewAverageRating } amazonProperties;
+	      pReviewAverageRating,
+	      pTotalReviewPages} amazonProperties;
 
 #define HUNDREDTH_INCH_TO_CM 0.0254
 #define HUNDREDTH_POUND_TO_KG 0.00453592
@@ -75,6 +76,7 @@ typedef enum {pNone,
 
     NSMutableArray* bookReviews;
     double	    bookAverageRating;
+    int		    numberOfReviewPages;
 
     NSMutableArray* bookAuthors;
     NSMutableArray* dimensions;
@@ -109,10 +111,12 @@ typedef enum {pNone,
 
 - (BOOL)parseAmazonDataWithParamaters:(NSDictionary*)params;
 - (BOOL)searchASIN:(NSString*)theAsin;
+- (BOOL)searchForCustomerReviewsWithASIN:(NSString*)theASIN withPage:(NSString*)pageNumber;
 - (BOOL)searchForDetailsWithASIN:(NSString*)theASIN;
 - (BOOL)searchForDetailsWithISBN:(NSString*)isbn;
 - (BOOL)searchForEditorialReviewWithASIN:(NSString*)asin;
 - (BOOL)searchISBN:(NSString*)isbn;
+- (NSArray*)allReviewsForISBN:(NSString*)isbn;
 - (NSArray*)similarBooksToISBN:(NSString*)isbn;
 - (NSAttributedString*)getTableOfContentsFromURL:(NSURL*)url;
 @end

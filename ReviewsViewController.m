@@ -56,7 +56,8 @@
 	    reviewsForISBN = isbn;
 
 	    amazonInterface* amazon = [[amazonInterface alloc] init];
-	    [amazon searchISBN:isbn];
+	    //[amazon searchISBN:isbn];
+	    [amazon allReviewsForISBN:isbn];
 	    [self setAmazonReviews:[amazon bookReviews]];
 
 	    [progIndicator stopAnimation:self];
