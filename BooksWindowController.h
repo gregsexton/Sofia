@@ -35,6 +35,7 @@
 #import "SubjectWindowController.h"
 #import "NSString+Sofia.h"
 #import "SimilarBooksViewController.h"
+#import "ReviewsViewController.h"
 
 @interface BooksWindowController : NSObjectController <AuthorsWindowControllerDelegate, SubjectWindowControllerDelegate> {
     IBOutlet NSTextField *txt_search;
@@ -97,6 +98,7 @@
     IBOutlet NSArrayController	*authorsArrayController;
     IBOutlet NSArrayController	*subjectsArrayController;
     IBOutlet SimilarBooksViewController *similarBooksController;
+    IBOutlet ReviewsViewController *reviewsController;
 
     IBOutlet NSTextField    *errorLabel;
     NSMutableArray	    *isbnSearchErrors;

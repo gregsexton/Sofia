@@ -1,5 +1,5 @@
 //
-// NSString+Sofia.h
+// FiveStars.h
 //
 // Copyright 2010 Greg Sexton
 //
@@ -20,12 +20,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "FiveStarsCell.h"
 
 
-@interface NSString (Sofia) 
+@interface FiveStars : NSControl {
 
-+ (NSString*)stringFromArray:(NSArray*)array withCombiner:(NSString*)combiner;
-+ (NSString*)interleaveArray:(NSArray*)array with:(NSString*)interleave;
-- (NSString*)paragraphFormatAndStripHTML;
+}
 
 @end

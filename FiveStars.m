@@ -1,5 +1,5 @@
 //
-// NSString+Sofia.h
+// FiveStars.m
 //
 // Copyright 2010 Greg Sexton
 //
@@ -19,13 +19,18 @@
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import <Cocoa/Cocoa.h>
+#import "FiveStars.h"
 
 
-@interface NSString (Sofia) 
+@implementation FiveStars
 
-+ (NSString*)stringFromArray:(NSArray*)array withCombiner:(NSString*)combiner;
-+ (NSString*)interleaveArray:(NSArray*)array with:(NSString*)interleave;
-- (NSString*)paragraphFormatAndStripHTML;
+- (void)awakeFromNib{
+    [self setCell:[[FiveStarsCell alloc] init]];
+}
+
+- (void)dealloc{
+    [[self cell] release];
+    [super dealloc];
+}
 
 @end

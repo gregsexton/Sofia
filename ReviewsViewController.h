@@ -1,5 +1,5 @@
 //
-// NSString+Sofia.h
+// ReviewsViewController.h
 //
 // Copyright 2010 Greg Sexton
 //
@@ -20,12 +20,23 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "amazonInterface.h"
+#import "BookReview.h"
+#import "FiveStars.h"
 
 
-@interface NSString (Sofia) 
+@interface ReviewsViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource> {
 
-+ (NSString*)stringFromArray:(NSArray*)array withCombiner:(NSString*)combiner;
-+ (NSString*)interleaveArray:(NSArray*)array with:(NSString*)interleave;
-- (NSString*)paragraphFormatAndStripHTML;
+    IBOutlet NSTableView* tableView;
+    IBOutlet NSProgressIndicator* progIndicator;
+    IBOutlet FiveStars* averageRating;
+
+    NSString*	reviewsForISBN;
+    NSArray*	amazonReviews;
+    NSMutableArray* rowHeights;
+}
+@property (nonatomic,retain) NSArray*	amazonReviews;
+
+- (void)setISBN:(NSString*)isbn;
 
 @end

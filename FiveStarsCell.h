@@ -1,5 +1,5 @@
 //
-// NSString+Sofia.h
+// FiveStarsCell.h
 //
 // Copyright 2010 Greg Sexton
 //
@@ -22,10 +22,8 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface NSString (Sofia) 
+@interface FiveStarsCell : NSActionCell {
 
-+ (NSString*)stringFromArray:(NSArray*)array withCombiner:(NSString*)combiner;
-+ (NSString*)interleaveArray:(NSArray*)array with:(NSString*)interleave;
-- (NSString*)paragraphFormatAndStripHTML;
+}
 
 @end

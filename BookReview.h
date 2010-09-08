@@ -1,5 +1,5 @@
 //
-// NSString+Sofia.h
+// BookReview.h
 //
 // Copyright 2010 Greg Sexton
 //
@@ -22,10 +22,21 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface NSString (Sofia) 
+@interface BookReview : NSObject {
 
-+ (NSString*)stringFromArray:(NSArray*)array withCombiner:(NSString*)combiner;
-+ (NSString*)interleaveArray:(NSArray*)array with:(NSString*)interleave;
-- (NSString*)paragraphFormatAndStripHTML;
+    double	rating;
+    NSUInteger	helpfulVotes;
+    NSUInteger	totalVotes;
+    NSString*	date;
+    NSString*	summary;
+    NSString*	content;
+}
+
+@property (assign,nonatomic) double	 rating;
+@property (assign,nonatomic) NSUInteger helpfulVotes;
+@property (assign,nonatomic) NSUInteger totalVotes;
+@property (copy,nonatomic)   NSString*	 date;
+@property (copy,nonatomic)   NSString*	 summary;
+@property (copy,nonatomic)   NSString*	 content;
 
 @end
