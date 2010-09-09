@@ -1,11 +1,10 @@
 * Advanced find
-* TOC and more from Amazon.
-* Grab stuff from Google also.
+* Grab stuff from Google. 
 * Coverflow view
-* Finish tabs in detail window.
+* Finish ownership tab.
     * Easy highlighting of owners
     * Easily show books from different owners
-* Search by book name and isbn
+* Search by book name as well as ISBN.
 * Multiple image selection from amazon also drop custom image
 * Multiple images for a book
 * Expose detail windows?
