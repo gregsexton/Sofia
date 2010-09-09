@@ -58,6 +58,9 @@
 		37AF7D9B12311223007A7C85 /* FiveStarsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF7D9A12311223007A7C85 /* FiveStarsCell.m */; };
 		37AF7F311231BE60007A7C85 /* stars.tif in Resources */ = {isa = PBXBuildFile; fileRef = 37AF7F301231BE60007A7C85 /* stars.tif */; };
 		37AF7F6D12341D36007A7C85 /* FiveStars.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF7F6C12341D36007A7C85 /* FiveStars.m */; };
+		37AF7FFA123989B9007A7C85 /* BooksCoverflowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF7FF9123989B9007A7C85 /* BooksCoverflowController.m */; };
+		37AF800612399331007A7C85 /* GSCoverflow.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF800512399331007A7C85 /* GSCoverflow.m */; };
+		37AF80151239981D007A7C85 /* GSCoverflowItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF80141239981D007A7C85 /* GSCoverflowItem.m */; };
 		37BAF501114D69D000F95C41 /* list.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FD114D69D000F95C41 /* list.m */; };
 		37BAF502114D69D000F95C41 /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF4FF114D69D000F95C41 /* Library.m */; };
 		37BAF94511566BA700F95C41 /* BooksTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BAF94411566BA700F95C41 /* BooksTableView.m */; };
@@ -195,6 +198,14 @@
 		37AF7F301231BE60007A7C85 /* stars.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = stars.tif; sourceTree = "<group>"; };
 		37AF7F6B12341D36007A7C85 /* FiveStars.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiveStars.h; sourceTree = "<group>"; };
 		37AF7F6C12341D36007A7C85 /* FiveStars.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiveStars.m; sourceTree = "<group>"; };
+		37AF7FF8123989B9007A7C85 /* BooksCoverflowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooksCoverflowController.h; sourceTree = "<group>"; };
+		37AF7FF9123989B9007A7C85 /* BooksCoverflowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BooksCoverflowController.m; sourceTree = "<group>"; };
+		37AF800412399331007A7C85 /* GSCoverflow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSCoverflow.h; sourceTree = "<group>"; };
+		37AF800512399331007A7C85 /* GSCoverflow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSCoverflow.m; sourceTree = "<group>"; };
+		37AF800812399525007A7C85 /* GSCoverflowDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSCoverflowDataSource.h; sourceTree = "<group>"; };
+		37AF800912399532007A7C85 /* GSCoverflowDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSCoverflowDelegate.h; sourceTree = "<group>"; };
+		37AF80131239981D007A7C85 /* GSCoverflowItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSCoverflowItem.h; sourceTree = "<group>"; };
+		37AF80141239981D007A7C85 /* GSCoverflowItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSCoverflowItem.m; sourceTree = "<group>"; };
 		37BAF4FC114D69D000F95C41 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
 		37BAF4FD114D69D000F95C41 /* list.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = list.m; sourceTree = "<group>"; };
 		37BAF4FE114D69D000F95C41 /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
@@ -269,6 +280,8 @@
 				374516E711C54F81001C7960 /* isbnExtractor.m */,
 				37AF7CFC122FD831007A7C85 /* BookReview.h */,
 				37AF7CFD122FD831007A7C85 /* BookReview.m */,
+				37AF80131239981D007A7C85 /* GSCoverflowItem.h */,
+				37AF80141239981D007A7C85 /* GSCoverflowItem.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -369,6 +382,8 @@
 				37FF4FB211E8ACDA001B8ECC /* AuthorsWindowControllerDelegate.h */,
 				37FF4FB311E8ACEA001B8ECC /* SubjectWindowControllerDelegate.h */,
 				37FF506411EB8838001B8ECC /* ImportBooksControllerDelegate.h */,
+				37AF800812399525007A7C85 /* GSCoverflowDataSource.h */,
+				37AF800912399532007A7C85 /* GSCoverflowDelegate.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -495,6 +510,8 @@
 				37AF7D9A12311223007A7C85 /* FiveStarsCell.m */,
 				37AF7F6B12341D36007A7C85 /* FiveStars.h */,
 				37AF7F6C12341D36007A7C85 /* FiveStars.m */,
+				37AF800412399331007A7C85 /* GSCoverflow.h */,
+				37AF800512399331007A7C85 /* GSCoverflow.m */,
 			);
 			name = "Cocoa Extensions";
 			sourceTree = "<group>";
@@ -528,12 +545,14 @@
 				37D709A310C1D8E50004F441 /* SubjectWindowController.m */,
 				37BAFC961162516900F95C41 /* PredicateEditorWindowController.h */,
 				37BAFC971162516900F95C41 /* PredicateEditorWindowController.m */,
+				374515C011C19092001C7960 /* BooksMainViewController.h */,
+				374515C111C19092001C7960 /* BooksMainViewController.m */,
 				3745158E11C025BC001C7960 /* BooksTableViewController.h */,
 				3745158F11C025BC001C7960 /* BooksTableViewController.m */,
 				3745159A11C0283A001C7960 /* BooksImageBrowserController.h */,
 				3745159B11C0283A001C7960 /* BooksImageBrowserController.m */,
-				374515C011C19092001C7960 /* BooksMainViewController.h */,
-				374515C111C19092001C7960 /* BooksMainViewController.m */,
+				37AF7FF8123989B9007A7C85 /* BooksCoverflowController.h */,
+				37AF7FF9123989B9007A7C85 /* BooksCoverflowController.m */,
 				3735A79E11C6DBEF00DD7461 /* ImportBooksController.h */,
 				3735A79F11C6DBEF00DD7461 /* ImportBooksController.m */,
 				37AF705B12049F87007A7C85 /* ExternalLinkEditorController.h */,
@@ -752,6 +771,9 @@
 				37AF7D62122FF5AF007A7C85 /* ReviewsViewController.m in Sources */,
 				37AF7D9B12311223007A7C85 /* FiveStarsCell.m in Sources */,
 				37AF7F6D12341D36007A7C85 /* FiveStars.m in Sources */,
+				37AF7FFA123989B9007A7C85 /* BooksCoverflowController.m in Sources */,
+				37AF800612399331007A7C85 /* GSCoverflow.m in Sources */,
+				37AF80151239981D007A7C85 /* GSCoverflowItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

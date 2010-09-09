@@ -1,0 +1,43 @@
+//
+// GSCoverflow.m
+//
+// Copyright 2010 Greg Sexton
+//
+// This file is part of Sofia.
+// 
+// Sofia is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// Sofia is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+// 
+// You should have received a copy of the GNU Lesser General Public License
+// along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+#import "GSCoverflow.h"
+
+
+@implementation GSCoverflow
+@synthesize delegate;
+@synthesize dataSource;
+
+- (id)initWithFrame:(NSRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Initialization code here.
+    }
+    return self;
+}
+
+- (void)drawRect:(NSRect)dirtyRect {
+    //draw background
+    [[NSColor blackColor] setFill];
+    NSRectFill(dirtyRect);
+}
+
+@end

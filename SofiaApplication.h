@@ -39,6 +39,7 @@
 //used to save the current view for app restart
 #define LIST_VIEW @"listView"
 #define IMAGE_VIEW @"imageView"
+#define COVER_VIEW @"coverflowView"
 
 @interface SofiaApplication : NSObject <BooksWindowControllerDelegate, ImportBooksControllerDelegate> {
 	
@@ -56,6 +57,7 @@
 	IBOutlet NSView* mainView;
 	IBOutlet NSView* mainTableView; //this includes the scrollview
 	IBOutlet NSView* mainImagesView;
+	IBOutlet NSView* mainCoverflowView;
 	NSView* currentView;
 	
 	NSPersistentStoreCoordinator *persistentStoreCoordinator;
@@ -81,6 +83,7 @@
 - (IBAction) removeBookAction:(id)sender;
 - (IBAction) saveAction:sender;
 - (IBAction) search:(id)sender;
+- (IBAction)changeToCoverflowView:(id)sender;
 - (void) changeMainViewFor:(NSView*)viewToChangeTo;
 - (void) updateSummaryText;
 
