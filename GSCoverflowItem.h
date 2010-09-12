@@ -21,9 +21,23 @@
 
 #import <Cocoa/Cocoa.h>
 
-
+//TODO: turn this into an implementable protocol
 @interface GSCoverflowItem : NSObject {
 
+    NSString*	    imageUID;		    //represents the id of the image in the cache
+    CGImageRef	    imageRepresentation;    //the acutal image data
+    NSString*	    imageTitle;
+    NSString*	    imageSubtitle;
+    NSUInteger	    imageVersion;	    //increment the version to instruct not to use the cache
+
 }
+
+@property(nonatomic,assign) NSString*	    imageUID;
+@property(nonatomic,assign) CGImageRef	    imageRepresentation;
+@property(nonatomic,assign) NSString*	    imageTitle;
+@property(nonatomic,assign) NSString*	    imageSubtitle;
+@property(nonatomic,assign) NSUInteger	    imageVersion;
+
+- (id)initWithUID:(NSString*)uid representation:(CGImageRef)rep title:(NSString*)title subtitle:(NSString*)subtitle;
 
 @end

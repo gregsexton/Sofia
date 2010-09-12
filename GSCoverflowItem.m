@@ -23,5 +23,23 @@
 
 
 @implementation GSCoverflowItem
+@synthesize imageUID;
+@synthesize imageRepresentation;
+@synthesize imageTitle;
+@synthesize imageSubtitle;
+@synthesize imageVersion;
+
+
+- (id)initWithUID:(NSString*)uid representation:(CGImageRef)rep title:(NSString*)title subtitle:(NSString*)subtitle{
+    self = [super init];
+    if(self){
+	[self setImageUID:uid];
+	[self setImageRepresentation:rep];
+	[self setImageTitle:title];
+	[self setImageSubtitle:subtitle];
+	[self setImageVersion:0];
+    }
+    return self;
+}
 
 @end

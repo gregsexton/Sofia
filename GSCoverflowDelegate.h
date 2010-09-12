@@ -20,9 +20,16 @@
 //
 
 #import <Cocoa/Cocoa.h>
+@class GSCoverflow;
 
 
 @protocol GSCoverflowDelegate
 
+@optional
+
+- (void)coverflow:(GSCoverflow*)aCoverflow cellWasDoubleClickedAtIndex:(NSUInteger)index;
+- (void)coverflow:(GSCoverflow*)aCoverflow cellWasRightClickedAtIndex:(NSUInteger)index withEvent:(NSEvent*)event;
+- (void)coverflowSelectionDidChange:(GSCoverflow*)aCoverflow;
+- (void)coverflow:(GSCoverflow*)aCoverflow backgroundWasRightClickedWithEvent:(NSEvent*)event;
 
 @end

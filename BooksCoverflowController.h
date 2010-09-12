@@ -21,9 +21,13 @@
 
 #import <Cocoa/Cocoa.h>
 #import "BooksMainViewController.h"
+#import "GSCoverflow.h"
+#import "GSCoverflowItem.h"
 
 
-@interface BooksCoverflowController : BooksMainViewController {
+@interface BooksCoverflowController : BooksMainViewController <GSCoverflowDelegate, GSCoverflowDataSource> {
+
+    IBOutlet GSCoverflow* coverflow;
 
 }
 

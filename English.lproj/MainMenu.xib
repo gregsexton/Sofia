@@ -2399,88 +2399,88 @@
 				<bytes key="NSScrollAmts">QSAAAEEgAABBmAAAQZgAAA</bytes>
 			</object>
 			<object class="NSViewController" id="1026236607"/>
-			<object class="NSScrollView" id="16372279">
+			<object class="NSScrollView" id="366972232">
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="NSClipView" id="662720780">
-						<reference key="NSNextResponder" ref="16372279"/>
+					<object class="NSClipView" id="1054771255">
+						<reference key="NSNextResponder" ref="366972232"/>
 						<int key="NSvFlags">2304</int>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="NSCustomView" id="806198059">
-								<reference key="NSNextResponder" ref="662720780"/>
+							<object class="NSCustomView" id="442288853">
+								<reference key="NSNextResponder" ref="1054771255"/>
 								<int key="NSvFlags">274</int>
 								<object class="NSMutableArray" key="NSSubviews">
 									<bool key="EncodedWithXMLCoder">YES</bool>
-									<object class="NSSplitView" id="853892026">
-										<reference key="NSNextResponder" ref="806198059"/>
+									<object class="NSSplitView" id="422389669">
+										<reference key="NSNextResponder" ref="442288853"/>
 										<int key="NSvFlags">274</int>
 										<object class="NSMutableArray" key="NSSubviews">
 											<bool key="EncodedWithXMLCoder">YES</bool>
-											<object class="NSCustomView" id="396854922">
-												<reference key="NSNextResponder" ref="853892026"/>
+											<object class="NSCustomView" id="884630729">
+												<reference key="NSNextResponder" ref="422389669"/>
 												<int key="NSvFlags">256</int>
 												<string key="NSFrameSize">{844, 259}</string>
-												<reference key="NSSuperview" ref="853892026"/>
+												<reference key="NSSuperview" ref="422389669"/>
 												<string key="NSClassName">GSCoverflow</string>
 											</object>
-											<object class="NSCustomView" id="300657349">
-												<reference key="NSNextResponder" ref="853892026"/>
+											<object class="NSCustomView" id="19259763">
+												<reference key="NSNextResponder" ref="422389669"/>
 												<int key="NSvFlags">256</int>
 												<string key="NSFrame">{{0, 268}, {844, 354}}</string>
-												<reference key="NSSuperview" ref="853892026"/>
+												<reference key="NSSuperview" ref="422389669"/>
 												<string key="NSClassName">NSView</string>
 											</object>
 										</object>
 										<string key="NSFrameSize">{844, 622}</string>
-										<reference key="NSSuperview" ref="806198059"/>
+										<reference key="NSSuperview" ref="442288853"/>
 										<string key="NSAutosaveName">coverflowSplit</string>
 									</object>
 								</object>
 								<string key="NSFrameSize">{844, 622}</string>
-								<reference key="NSSuperview" ref="662720780"/>
+								<reference key="NSSuperview" ref="1054771255"/>
 								<string key="NSClassName">NSView</string>
 							</object>
 						</object>
 						<string key="NSFrameSize">{844, 622}</string>
-						<reference key="NSSuperview" ref="16372279"/>
-						<reference key="NSNextKeyView" ref="806198059"/>
-						<reference key="NSDocView" ref="806198059"/>
+						<reference key="NSSuperview" ref="366972232"/>
+						<reference key="NSNextKeyView" ref="442288853"/>
+						<reference key="NSDocView" ref="442288853"/>
 						<reference key="NSBGColor" ref="462189453"/>
 						<int key="NScvFlags">4</int>
 					</object>
-					<object class="NSScroller" id="55420435">
-						<reference key="NSNextResponder" ref="16372279"/>
+					<object class="NSScroller" id="527094447">
+						<reference key="NSNextResponder" ref="366972232"/>
 						<int key="NSvFlags">-2147483392</int>
 						<string key="NSFrame">{{751, 0}, {15, 523}}</string>
-						<reference key="NSSuperview" ref="16372279"/>
-						<reference key="NSTarget" ref="16372279"/>
+						<reference key="NSSuperview" ref="366972232"/>
+						<reference key="NSTarget" ref="366972232"/>
 						<string key="NSAction">_doScroller:</string>
 						<double key="NSCurValue">1</double>
 						<double key="NSPercent">0.9981308411214953</double>
 					</object>
-					<object class="NSScroller" id="555196853">
-						<reference key="NSNextResponder" ref="16372279"/>
+					<object class="NSScroller" id="819243591">
+						<reference key="NSNextResponder" ref="366972232"/>
 						<int key="NSvFlags">-2147483392</int>
 						<string key="NSFrame">{{0, 523}, {751, 15}}</string>
-						<reference key="NSSuperview" ref="16372279"/>
+						<reference key="NSSuperview" ref="366972232"/>
 						<int key="NSsFlags">1</int>
-						<reference key="NSTarget" ref="16372279"/>
+						<reference key="NSTarget" ref="366972232"/>
 						<string key="NSAction">_doScroller:</string>
 						<double key="NSPercent">0.99867899603698806</double>
 					</object>
 				</object>
 				<string key="NSFrameSize">{844, 622}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSNextKeyView" ref="662720780"/>
+				<reference key="NSNextKeyView" ref="1054771255"/>
 				<int key="NSsFlags">560</int>
-				<reference key="NSVScroller" ref="55420435"/>
-				<reference key="NSHScroller" ref="555196853"/>
-				<reference key="NSContentView" ref="662720780"/>
+				<reference key="NSVScroller" ref="527094447"/>
+				<reference key="NSHScroller" ref="819243591"/>
+				<reference key="NSContentView" ref="1054771255"/>
 			</object>
-			<object class="NSViewController" id="84806594"/>
+			<object class="NSViewController" id="836878637"/>
 			<object class="NSUserDefaultsController" id="636923527">
 				<bool key="NSSharedInstance">YES</bool>
 			</object>
@@ -3605,7 +3605,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">mainCoverflowView</string>
 						<reference key="source" ref="145402063"/>
-						<reference key="destination" ref="16372279"/>
+						<reference key="destination" ref="366972232"/>
 					</object>
 					<int key="connectionID">1038</int>
 				</object>
@@ -3620,7 +3620,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">application</string>
-						<reference key="source" ref="84806594"/>
+						<reference key="source" ref="836878637"/>
 						<reference key="destination" ref="145402063"/>
 					</object>
 					<int key="connectionID">1041</int>
@@ -3628,7 +3628,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">arrayController</string>
-						<reference key="source" ref="84806594"/>
+						<reference key="source" ref="836878637"/>
 						<reference key="destination" ref="440274433"/>
 					</object>
 					<int key="connectionID">1042</int>
@@ -3636,7 +3636,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">sideBar</string>
-						<reference key="source" ref="84806594"/>
+						<reference key="source" ref="836878637"/>
 						<reference key="destination" ref="956318075"/>
 					</object>
 					<int key="connectionID">1043</int>
@@ -3644,10 +3644,18 @@
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">view</string>
-						<reference key="source" ref="84806594"/>
-						<reference key="destination" ref="16372279"/>
+						<reference key="source" ref="836878637"/>
+						<reference key="destination" ref="366972232"/>
 					</object>
 					<int key="connectionID">1044</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">coverflow</string>
+						<reference key="source" ref="836878637"/>
+						<reference key="destination" ref="884630729"/>
+					</object>
+					<int key="connectionID">1045</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -4891,61 +4899,61 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1031</int>
-						<reference key="object" ref="16372279"/>
+						<reference key="object" ref="366972232"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="55420435"/>
-							<reference ref="555196853"/>
-							<reference ref="806198059"/>
+							<reference ref="527094447"/>
+							<reference ref="819243591"/>
+							<reference ref="442288853"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Scroll View (Coverflow View)</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1032</int>
-						<reference key="object" ref="55420435"/>
-						<reference key="parent" ref="16372279"/>
+						<reference key="object" ref="527094447"/>
+						<reference key="parent" ref="366972232"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1033</int>
-						<reference key="object" ref="555196853"/>
-						<reference key="parent" ref="16372279"/>
+						<reference key="object" ref="819243591"/>
+						<reference key="parent" ref="366972232"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1034</int>
-						<reference key="object" ref="806198059"/>
+						<reference key="object" ref="442288853"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="853892026"/>
+							<reference ref="422389669"/>
 						</object>
-						<reference key="parent" ref="16372279"/>
+						<reference key="parent" ref="366972232"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1035</int>
-						<reference key="object" ref="853892026"/>
+						<reference key="object" ref="422389669"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="396854922"/>
-							<reference ref="300657349"/>
+							<reference ref="884630729"/>
+							<reference ref="19259763"/>
 						</object>
-						<reference key="parent" ref="806198059"/>
+						<reference key="parent" ref="442288853"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1036</int>
-						<reference key="object" ref="396854922"/>
+						<reference key="object" ref="884630729"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 						</object>
-						<reference key="parent" ref="853892026"/>
+						<reference key="parent" ref="422389669"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1037</int>
-						<reference key="object" ref="300657349"/>
-						<reference key="parent" ref="853892026"/>
+						<reference key="object" ref="19259763"/>
+						<reference key="parent" ref="422389669"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1040</int>
-						<reference key="object" ref="84806594"/>
+						<reference key="object" ref="836878637"/>
 						<reference key="parent" ref="0"/>
 					</object>
 				</object>
@@ -5545,7 +5553,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1044</int>
+			<int key="maxID">1045</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -5553,6 +5561,10 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">BooksCoverflowController</string>
 					<string key="superclassName">BooksMainViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">coverflow</string>
+						<string key="NS.object.0">GSCoverflow</string>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">BooksCoverflowController.h</string>
@@ -5649,6 +5661,19 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">GSCoverflow</string>
 					<string key="superclassName">NSView</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>dataSource</string>
+							<string>delegate</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+						</object>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">GSCoverflow.h</string>

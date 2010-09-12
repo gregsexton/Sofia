@@ -24,4 +24,49 @@
 
 @implementation BooksCoverflowController
 
+- (void)awakeFromNib{
+
+    [coverflow setDelegate:self];
+    [coverflow setDataSource:self];
+    [coverflow reloadData];
+
+    //register as an observer to keep the data up to date.
+    [arrayController addObserver:self
+		      forKeyPath:@"arrangedObjects"
+			 options:NSKeyValueObservingOptionInitial //send message immediately
+			 context:NULL];
+}
+
+///////////////////////    DELEGATE METHODS   ///////////////////////////////////////////////////
+
+- (NSUInteger)numberOfItemsInCoverflow:(GSCoverflow*)aCoverflow{
+    NSUInteger count = [[arrayController arrangedObjects] count];
+    return count;
+}
+
+- (id)coverflow:(GSCoverflow*)aCoverflow itemAtIndex:(NSUInteger)index{
+    book* theBook = [[arrayController arrangedObjects] objectAtIndex:index];
+    NSImage* img = [theBook coverImage];
+    if(img == nil) //use default image
+	img = [NSImage imageNamed:@"missing.png"];
+
+    CGImageRef imgRep = [img CGImageForProposedRect:nil context:nil hints:nil];
+    GSCoverflowItem* item = [[GSCoverflowItem alloc] initWithUID:[theBook title]
+						  representation:imgRep
+							   title:[theBook title]
+							subtitle:[theBook authorText]];
+
+    return [item autorelease];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath 
+		      ofObject:(id)object 
+			change:(NSDictionary *)change 
+		       context:(void *)context{
+    //this works nicely but will it be efficient enough for a large book collection?
+    if([keyPath isEqualToString:@"arrangedObjects"]){
+	[coverflow reloadData];
+    }
+}
+
 @end

@@ -20,9 +20,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
+@class GSCoverflow;
 
 
 @protocol GSCoverflowDataSource
 
+- (NSUInteger)numberOfItemsInCoverflow:(GSCoverflow*)aCoverflow;
+- (id)coverflow:(GSCoverflow*)aCoverflow itemAtIndex:(NSUInteger)index; //should return a GSCoverflowItem or child of
 
 @end

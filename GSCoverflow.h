@@ -22,6 +22,7 @@
 #import <Cocoa/Cocoa.h>
 #import "GSCoverflowDelegate.h"
 #import "GSCoverflowDataSource.h"
+#import "GSCoverflowItem.h"
 
 
 @interface GSCoverflow : NSView {
@@ -33,5 +34,8 @@
 
 @property (nonatomic,assign) id <GSCoverflowDelegate> delegate;
 @property (nonatomic,assign) id <GSCoverflowDataSource> dataSource;
+
+- (void)reloadData;
+- (CALayer*)layerForGSCoverflowItem:(GSCoverflowItem*)item;
 
 @end
