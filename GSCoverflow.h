@@ -23,6 +23,7 @@
 #import "GSCoverflowDelegate.h"
 #import "GSCoverflowDataSource.h"
 #import "GSCoverflowItem.h"
+#import <Math.h>
 
 
 @interface GSCoverflow : NSView {
@@ -47,6 +48,9 @@
 - (void)reloadData;
 - (CGRect)scaleRect:(CGRect)rect toWithinHeight:(CGFloat)height;
 
+- (CATransform3D)leftHandImageTransformWithHeight:(CGFloat)height width:(CGFloat)width;
+- (CATransform3D)rightHandImageTransformWithHeight:(CGFloat)height width:(CGFloat)width;
+- (CATransform3D)identityTransform;
 
 - (IBAction)moveOneItemLeft:(id)sender;
 - (IBAction)moveOneItemRight:(id)sender;

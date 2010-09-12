@@ -34,7 +34,7 @@
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-	_focusedItemIndex = 0;
+	_focusedItemIndex = 8;
 	_maximumImageHeight = ((frame.size.height/5)*4) - 50;
     }
     return self;
@@ -119,29 +119,34 @@
     focused.anchorPoint = CGPointMake(0.5,0.0);
     focused.position = CGPointMake(NSMidX([self bounds]), yPosition);
     focused.zPosition = 0;
+    focused.transform = [self identityTransform];
 
     CGFloat xDelta = 70;
 
     //adjust layers to the left of focused layer
-    newXPosition = NSMidX([self bounds]) - (focused.bounds.size.width*1.25);
+    newXPosition = NSMidX([self bounds]) - (_maximumImageHeight/8)*7;
     newZPosition = -1;
     for(int i=_focusedItemIndex-1; i>=0; i--){
 	CALayer* layer = [_cachedLayers objectAtIndex:i];
 	layer.anchorPoint = CGPointMake(0.0,0.0);
 	layer.position = CGPointMake(newXPosition, yPosition + yDelta);
 	layer.zPosition = newZPosition;
+	layer.transform = [self leftHandImageTransformWithHeight:layer.bounds.size.height 
+							   width:layer.bounds.size.width];
 	newXPosition -= xDelta;
 	newZPosition--;
     }
 
     //adjust layers to the right of focused layer
-    newXPosition = NSMidX([self bounds]) + (focused.bounds.size.width*1.25);
+    newXPosition = NSMidX([self bounds]) + (_maximumImageHeight/8)*7;
     newZPosition = -1;
     for(int i=_focusedItemIndex+1; i<[_cachedLayers count]; i++){
 	CALayer* layer = [_cachedLayers objectAtIndex:i];
 	layer.anchorPoint = CGPointMake(1.0,0.0);
 	layer.position = CGPointMake(newXPosition, yPosition + yDelta);
 	layer.zPosition = newZPosition;
+	layer.transform = [self rightHandImageTransformWithHeight:layer.bounds.size.height 
+							    width:layer.bounds.size.width];
 	newXPosition += xDelta;
 	newZPosition--;
     }
@@ -169,6 +174,38 @@
 
     CGRect retRect = CGRectMake(0.0f, 0.0f, (height/rect.size.height) * rect.size.width, height);
     return retRect;
+}
+
+- (CATransform3D)leftHandImageTransformWithHeight:(CGFloat)height width:(CGFloat)width{
+    CATransform3D transform;
+    transform.m11 = 1; transform.m12 = height/(8*width); transform.m13 = 0; transform.m14 = 1/(4*width);
+    transform.m21 = 0; transform.m22 = 1; transform.m23 = 0; transform.m24 = 0;
+    transform.m31 = 0; transform.m32 = 0; transform.m33 = 1; transform.m34 = 0;
+    transform.m41 = 0; transform.m42 = 0; transform.m43 = 0; transform.m44 = 1;
+
+    return transform;
+
+}
+
+- (CATransform3D)rightHandImageTransformWithHeight:(CGFloat)height width:(CGFloat)width{
+    CATransform3D transform;
+/*    transform.m11 = 1; transform.m12 = 0; transform.m13 = 0; transform.m14 = 0;*/
+    transform.m11 = 1; transform.m12 = -height/(8*width); transform.m13 = 0; transform.m14 = -1/(4*width);
+    transform.m21 = 0; transform.m22 = 1; transform.m23 = 0; transform.m24 = 0;
+    transform.m31 = 0; transform.m32 = 0; transform.m33 = 1; transform.m34 = 0;
+    transform.m41 = 0; transform.m42 = 0; transform.m43 = 0; transform.m44 = 1;
+
+    return transform;
+}
+
+- (CATransform3D)identityTransform{
+    CATransform3D transform;
+    transform.m11 = 1; transform.m12 = 0; transform.m13 = 0; transform.m14 = 0;
+    transform.m21 = 0; transform.m22 = 1; transform.m23 = 0; transform.m24 = 0;
+    transform.m31 = 0; transform.m32 = 0; transform.m33 = 1; transform.m34 = 0;
+    transform.m41 = 0; transform.m42 = 0; transform.m43 = 0; transform.m44 = 1;
+
+    return transform;
 }
 
 ///////////////////    EVENT HANDLING METHODS   //////////////////////////////////////////////////
