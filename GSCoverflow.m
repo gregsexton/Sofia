@@ -26,10 +26,16 @@
 @synthesize delegate;
 @synthesize dataSource;
 
+//TODO: handle resizing
+//TODO: implement image versions
+//TODO: call delegate
+//TODO: what if delegate/datasource is nil or doesn't implement method?
+
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code here.
+	_focusedItemIndex = 0;
+	_maximumImageHeight = ((frame.size.height/5)*4) - 50;
     }
     return self;
 }
@@ -43,32 +49,146 @@
     layer.backgroundColor = black;
     [self setLayer:layer];
     [self setWantsLayer:YES];
+
+    [self reloadData];
+}
+
+- (void)dealloc{
+    if(_cachedLayers)
+	[_cachedLayers release];
+    [super dealloc];
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
+    //NOTE: layer hosting view. Do not do any custom drawing here.
+    //Instead, draw to the view's layer hierarchy.
+    [self adjustCachedLayersWithAnimation:NO];
 }
 
 - (void)reloadData{
     if([dataSource numberOfItemsInCoverflow:self] > 0){
-	GSCoverflowItem* item = [dataSource coverflow:self itemAtIndex:0];
-	NSLog(@"%@", item.imageTitle);
-	CALayer* first = [self layerForGSCoverflowItem:item];
-	[self.layer addSublayer:first];
+	[self deleteCachedLayers]; //TODO: use versions!
+	_cachedLayers = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
 
-	item = [dataSource coverflow:self itemAtIndex:1];
-	NSLog(@"%@", item.imageTitle);
-	CALayer* second = [self layerForGSCoverflowItem:item];
-	second.position = CGPointMake(self.bounds.origin.x+140.0f, self.bounds.origin.y+105.0f);
-	[self.layer addSublayer:second];
+	for(int i=0; i<[dataSource numberOfItemsInCoverflow:self]; i++){
+
+	    GSCoverflowItem* item = [dataSource coverflow:self itemAtIndex:i];
+	    CALayer* itemLayer = [self layerForGSCoverflowItem:item];
+	    [_cachedLayers addObject:itemLayer];
+	    [self.layer addSublayer:itemLayer];
+
+	}
+
+	[self adjustCachedLayersWithAnimation:NO];
     }
 }
+
+- (void)deleteCachedLayers{
+    if(_cachedLayers){
+	for(CALayer* layer in _cachedLayers){
+	    [layer removeFromSuperlayer];
+	}
+	[_cachedLayers release];
+    }
+}
+
 
 - (CALayer*)layerForGSCoverflowItem:(GSCoverflowItem*)item{
     CALayer* retLayer = [CALayer layer];
     retLayer.contents = (id)item.imageRepresentation;
-    retLayer.bounds = CGRectMake(0.0f, 0.0f, 280.0f, 210.0f);
-    retLayer.position = CGPointMake(NSMidX([self bounds]), NSMidY([self bounds]));
+    retLayer.bounds = CGRectMake(0.0f, 0.0f,
+				CGImageGetWidth(item.imageRepresentation), 
+				CGImageGetHeight(item.imageRepresentation));
     return retLayer;
 }    
+
+- (void)adjustCachedLayersWithAnimation:(BOOL)animate{
+    [self adjustLayerBoundsWithAnimation:animate];
+    [self adjustLayerPositionsWithAnimation:animate];
+}
+
+- (void)adjustLayerPositionsWithAnimation:(BOOL)animate{
+    //NOTE: do not call this method instead call adjustCachedLayersWithAnimation:
+
+    CGFloat newXPosition, newZPosition;
+    CGFloat yPosition = self.bounds.size.height / 5;
+    CGFloat yDelta = _maximumImageHeight / 20;
+
+    //adjust focused layer
+    CALayer* focused = [_cachedLayers objectAtIndex:_focusedItemIndex];
+    focused.anchorPoint = CGPointMake(0.5,0.0);
+    focused.position = CGPointMake(NSMidX([self bounds]), yPosition);
+    focused.zPosition = 0;
+
+    CGFloat xDelta = 70;
+
+    //adjust layers to the left of focused layer
+    newXPosition = NSMidX([self bounds]) - (focused.bounds.size.width*1.25);
+    newZPosition = -1;
+    for(int i=_focusedItemIndex-1; i>=0; i--){
+	CALayer* layer = [_cachedLayers objectAtIndex:i];
+	layer.anchorPoint = CGPointMake(0.0,0.0);
+	layer.position = CGPointMake(newXPosition, yPosition + yDelta);
+	layer.zPosition = newZPosition;
+	newXPosition -= xDelta;
+	newZPosition--;
+    }
+
+    //adjust layers to the right of focused layer
+    newXPosition = NSMidX([self bounds]) + (focused.bounds.size.width*1.25);
+    newZPosition = -1;
+    for(int i=_focusedItemIndex+1; i<[_cachedLayers count]; i++){
+	CALayer* layer = [_cachedLayers objectAtIndex:i];
+	layer.anchorPoint = CGPointMake(1.0,0.0);
+	layer.position = CGPointMake(newXPosition, yPosition + yDelta);
+	layer.zPosition = newZPosition;
+	newXPosition += xDelta;
+	newZPosition--;
+    }
+}
+
+- (void)adjustLayerBoundsWithAnimation:(BOOL)animate{
+    //NOTE: do not call this method instead call adjustCachedLayersWithAnimation:
+
+    CGFloat smallerHeight = _maximumImageHeight - (_maximumImageHeight/10);
+
+    //adjust all layers
+    for(int i=0; i<[_cachedLayers count]; i++){
+
+	CALayer* layer = [_cachedLayers objectAtIndex:i];
+	layer.bounds = [self scaleRect:layer.bounds toWithinHeight:smallerHeight];
+    }
+
+    //adjust focused layer
+    CALayer* focused = [_cachedLayers objectAtIndex:_focusedItemIndex];
+    focused.bounds = [self scaleRect:focused.bounds toWithinHeight:_maximumImageHeight];
+
+}
+
+- (CGRect)scaleRect:(CGRect)rect toWithinHeight:(CGFloat)height{
+
+    CGRect retRect = CGRectMake(0.0f, 0.0f, (height/rect.size.height) * rect.size.width, height);
+    return retRect;
+}
+
+///////////////////    EVENT HANDLING METHODS   //////////////////////////////////////////////////
+
+- (void)keyDown:(NSEvent *)theEvent{
+    NSLog(@"Key down!");
+}
+
+- (IBAction)moveOneItemLeft:(id)sender{
+    if(_focusedItemIndex > 0){
+	_focusedItemIndex--;
+	[self adjustCachedLayersWithAnimation:YES];
+    }
+}
+
+- (IBAction)moveOneItemRight:(id)sender{
+    if(_focusedItemIndex < [_cachedLayers count]-1){
+	_focusedItemIndex++;
+	[self adjustCachedLayersWithAnimation:YES];
+    }
+}
 
 @end

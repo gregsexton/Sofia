@@ -30,12 +30,24 @@
     id <GSCoverflowDelegate> delegate;
     id <GSCoverflowDataSource> dataSource;
 
+    NSUInteger _focusedItemIndex;
+    NSMutableArray* _cachedLayers;
+    CGFloat _maximumImageHeight;
+
 }
 
 @property (nonatomic,assign) id <GSCoverflowDelegate> delegate;
 @property (nonatomic,assign) id <GSCoverflowDataSource> dataSource;
 
-- (void)reloadData;
 - (CALayer*)layerForGSCoverflowItem:(GSCoverflowItem*)item;
+- (void)adjustCachedLayersWithAnimation:(BOOL)animate;
+- (void)adjustLayerPositionsWithAnimation:(BOOL)animate;
+- (void)adjustLayerBoundsWithAnimation:(BOOL)animate;
+- (void)deleteCachedLayers;
+- (void)reloadData;
+- (CGRect)scaleRect:(CGRect)rect toWithinHeight:(CGFloat)height;
 
+
+- (IBAction)moveOneItemLeft:(id)sender;
+- (IBAction)moveOneItemRight:(id)sender;
 @end
