@@ -23,7 +23,6 @@
 #import "GSCoverflowDelegate.h"
 #import "GSCoverflowDataSource.h"
 #import "GSCoverflowItem.h"
-#import <Math.h>
 
 
 @interface GSCoverflow : NSView {
@@ -33,6 +32,7 @@
 
     NSUInteger _focusedItemIndex;
     NSMutableArray* _cachedLayers;
+    NSMutableArray* _cachedReflectionLayers;
     CGFloat _maximumImageHeight;
 
 }
@@ -41,16 +41,20 @@
 @property (nonatomic,assign) id <GSCoverflowDataSource> dataSource;
 
 - (CALayer*)layerForGSCoverflowItem:(GSCoverflowItem*)item;
+- (CALayer*)reflectionLayerForGSCoverflowItem:(GSCoverflowItem*)item;
+- (CGRect)scaleRect:(CGRect)rect toWithinHeight:(CGFloat)height;
 - (void)adjustCachedLayersWithAnimation:(BOOL)animate;
-- (void)adjustLayerPositionsWithAnimation:(BOOL)animate;
 - (void)adjustLayerBoundsWithAnimation:(BOOL)animate;
+- (void)adjustLayerPositionsWithAnimation:(BOOL)animate;
 - (void)deleteCachedLayers;
 - (void)reloadData;
-- (CGRect)scaleRect:(CGRect)rect toWithinHeight:(CGFloat)height;
 
-- (CATransform3D)leftHandImageTransformWithHeight:(CGFloat)height width:(CGFloat)width;
-- (CATransform3D)rightHandImageTransformWithHeight:(CGFloat)height width:(CGFloat)width;
+- (CATransform3D)identityReflectionTransform;
 - (CATransform3D)identityTransform;
+- (CATransform3D)leftHandImageTransformWithHeight:(CGFloat)height width:(CGFloat)width;
+- (CATransform3D)leftHandReflectionTransformWithHeight:(CGFloat)height width:(CGFloat)width;
+- (CATransform3D)rightHandImageTransformWithHeight:(CGFloat)height width:(CGFloat)width;
+- (CATransform3D)rightHandReflectionTransformWithHeight:(CGFloat)height width:(CGFloat)width;
 
 - (IBAction)moveOneItemLeft:(id)sender;
 - (IBAction)moveOneItemRight:(id)sender;
