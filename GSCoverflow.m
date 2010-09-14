@@ -217,6 +217,7 @@
 	CALayer* layerReflected = [_cachedReflectionLayers objectAtIndex:i];
 	layer.bounds = [self scaleRect:layer.bounds toWithinHeight:smallerHeight];
 	layerReflected.bounds = [self scaleRect:layerReflected.bounds toWithinHeight:smallerHeight];
+
     }
 
     //adjust focused layer
@@ -224,7 +225,9 @@
     CALayer* focusedReflected = [_cachedReflectionLayers objectAtIndex:_focusedItemIndex];
     focused.bounds = [self scaleRect:focused.bounds toWithinHeight:_maximumImageHeight];
     focusedReflected.bounds = [self scaleRect:focusedReflected.bounds toWithinHeight:_maximumImageHeight];
-
+    for(CALayer* subLayer in focusedReflected.sublayers){
+	subLayer.bounds = focusedReflected.bounds;
+    }
 }
 
 - (CGRect)scaleRect:(CGRect)rect toWithinHeight:(CGFloat)height{
