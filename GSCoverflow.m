@@ -30,9 +30,13 @@
 //TODO: implement image versions
 //TODO: call delegate
 //TODO: what if delegate/datasource is nil or doesn't implement method?
-//TODO: base everything on width rather than height to remove rendering issues
 //TODO: event handling
-//TODO: reflections
+//TODO: simplify/refactor code -- reflection as sublayer of bigger layer?
+//TODO: vignette
+//TODO: maximum width for images == max height
+//TODO: refactor out magic numbers
+//TODO: book title subtitle
+//TODO: scroll bar
 
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
@@ -231,7 +235,9 @@
 
 - (CATransform3D)leftHandImageTransformWithHeight:(CGFloat)height width:(CGFloat)width{
     CATransform3D transform;
-    transform.m11 = 1; transform.m12 = height/(8*width); transform.m13 = 0; transform.m14 = 1/(4*width);
+    CGFloat alpha = 0.25;
+    CGFloat gamma = (height - (width*tan(alpha)));
+    transform.m11 = 1; transform.m12 = tan(alpha)/2; transform.m13 = 0; transform.m14 = ((height/gamma)-1)/width;
     transform.m21 = 0; transform.m22 = 1; transform.m23 = 0; transform.m24 = 0;
     transform.m31 = 0; transform.m32 = 0; transform.m33 = 1; transform.m34 = 0;
     transform.m41 = 0; transform.m42 = 0; transform.m43 = 0; transform.m44 = 1;
@@ -248,12 +254,9 @@
 }
 
 - (CATransform3D)rightHandImageTransformWithHeight:(CGFloat)height width:(CGFloat)width{
-    CATransform3D transform;
-/*    transform.m11 = 1; transform.m12 = 0; transform.m13 = 0; transform.m14 = 0;*/
-    transform.m11 = 1; transform.m12 = -height/(8*width); transform.m13 = 0; transform.m14 = -1/(4*width);
-    transform.m21 = 0; transform.m22 = 1; transform.m23 = 0; transform.m24 = 0;
-    transform.m31 = 0; transform.m32 = 0; transform.m33 = 1; transform.m34 = 0;
-    transform.m41 = 0; transform.m42 = 0; transform.m43 = 0; transform.m44 = 1;
+    CATransform3D transform = [self leftHandImageTransformWithHeight:height width:width];
+    transform.m12 *= -1;
+    transform.m14 *= -1;
 
     return transform;
 }

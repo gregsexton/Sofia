@@ -23,7 +23,7 @@
 #import "GSCoverflowDelegate.h"
 #import "GSCoverflowDataSource.h"
 #import "GSCoverflowItem.h"
-
+#import <math.h>
 
 @interface GSCoverflow : NSView {
 
