@@ -26,22 +26,22 @@
 @synthesize delegate;
 @synthesize dataSource;
 
-//TODO: handle resizing
 //TODO: implement image versions
 //TODO: call delegate
 //TODO: what if delegate/datasource is nil or doesn't implement method?
 //TODO: event handling
-//TODO: simplify/refactor code -- reflection as sublayer of bigger layer?
+//TODO: simplify/refactor code(!!) -- reflection as sublayer of bigger layer?
 //TODO: vignette
-//TODO: maximum width for images == max height
-//TODO: refactor out magic numbers
-//TODO: book title subtitle
+//TODO: maximum width for images (== max height?)
+//TODO: refactor out magic numbers, define _maximumImageHeight as macro?
+//TODO: book title and subtitle
 //TODO: scroll bar
+//TODO: animation timing
 
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-	_focusedItemIndex = 8;
+	_focusedItemIndex = 0;
 	_maximumImageHeight = ((frame.size.height/5)*4) - 50;
     }
     return self;
@@ -56,6 +56,7 @@
     layer.backgroundColor = black;
     [self setLayer:layer];
     [self setWantsLayer:YES];
+    self.layer.layoutManager = self; //take control of layout myself
 
     [self reloadData];
 }
@@ -118,6 +119,7 @@
     retLayer.bounds = CGRectMake(0.0f, 0.0f,
 				CGImageGetWidth(item.imageRepresentation), 
 				CGImageGetHeight(item.imageRepresentation));
+
     return retLayer;
 }    
 
@@ -162,7 +164,7 @@
     focused.transform = [self identityTransform];
     focusedReflected.transform = [self identityReflectionTransform];
 
-    CGFloat xDelta = 70;
+    CGFloat xDelta = _maximumImageHeight/6;
 
     //adjust layers to the left of focused layer and reflections
     newXPosition = NSMidX([self bounds]) - (_maximumImageHeight/8)*7;
@@ -217,6 +219,9 @@
 	CALayer* layerReflected = [_cachedReflectionLayers objectAtIndex:i];
 	layer.bounds = [self scaleRect:layer.bounds toWithinHeight:smallerHeight];
 	layerReflected.bounds = [self scaleRect:layerReflected.bounds toWithinHeight:smallerHeight];
+	for(CALayer* subLayer in layerReflected.sublayers){ //should only be one sublayer
+	    subLayer.bounds = layerReflected.bounds;
+	}
 
     }
 
@@ -235,6 +240,8 @@
     CGRect retRect = CGRectMake(0.0f, 0.0f, (height/rect.size.height) * rect.size.width, height);
     return retRect;
 }
+
+///////////////////    TRANSFORM METHODS     /////////////////////////////////////////////////////
 
 - (CATransform3D)leftHandImageTransformWithHeight:(CGFloat)height width:(CGFloat)width{
     CATransform3D transform;
@@ -306,6 +313,14 @@
 	_focusedItemIndex++;
 	[self adjustCachedLayersWithAnimation:YES];
     }
+}
+
+///////////////////    CALayoutManager Protocol Methods    ///////////////////////////////////////
+
+- (void)invalidateLayoutOfLayer:(CALayer *)layer{
+    //TODO: only change stuff if the superlayer has been resized!
+    _maximumImageHeight = ((self.frame.size.height/5)*4) - 50; //TODO: unnecessary global constant?
+    [self adjustCachedLayersWithAnimation:NO];
 }
 
 @end

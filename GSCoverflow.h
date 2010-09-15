@@ -20,6 +20,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <QuartzCore/QuartzCore.h>
 #import "GSCoverflowDelegate.h"
 #import "GSCoverflowDataSource.h"
 #import "GSCoverflowItem.h"
@@ -30,9 +31,10 @@
     id <GSCoverflowDelegate> delegate;
     id <GSCoverflowDataSource> dataSource;
 
-    NSUInteger _focusedItemIndex;
     NSMutableArray* _cachedLayers;
     NSMutableArray* _cachedReflectionLayers;
+
+    NSUInteger _focusedItemIndex;
     CGFloat _maximumImageHeight;
 
 }
