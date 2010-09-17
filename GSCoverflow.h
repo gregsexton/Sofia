@@ -26,6 +26,14 @@
 #import "GSCoverflowItem.h"
 #import <math.h>
 
+//positioning constants
+#define MAXIMUM_IMAGE_HEIGHT (((self.frame.size.height/5.0)*4)-50)
+#define SMALLER_IMAGE_HEIGHT_OFFSET (MAXIMUM_IMAGE_HEIGHT/10.0)
+#define IMAGE_Y_POSITION_SCALE_FACTOR (1.0/5.0)
+#define IMAGE_Y_POSITION_OFFSET (0)
+#define STACKED_IMAGE_SPACING (MAXIMUM_IMAGE_HEIGHT / 6.0)
+#define FOCUSED_IMAGE_SPACING ((MAXIMUM_IMAGE_HEIGHT/8.0)*7)
+
 @interface GSCoverflow : NSView {
 
     id <GSCoverflowDelegate> delegate;
@@ -35,7 +43,6 @@
     NSMutableArray* _cachedReflectionLayers;
 
     NSUInteger _focusedItemIndex;
-    CGFloat _maximumImageHeight;
 
 }
 

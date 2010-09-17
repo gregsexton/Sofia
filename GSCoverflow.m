@@ -42,7 +42,6 @@
     self = [super initWithFrame:frame];
     if (self) {
 	_focusedItemIndex = 0;
-	_maximumImageHeight = ((frame.size.height/5)*4) - 50;
     }
     return self;
 }
@@ -50,13 +49,16 @@
 - (void)awakeFromNib{
 
     CGFloat values[4] = {0.0, 0.0, 0.0, 1.0};
-    CGColorRef black = CGColorCreate(CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB), values);
+    CGColorSpaceRef rgbSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
+    CGColorRef black = CGColorCreate(rgbSpace, values);
     
     CALayer *layer = [CALayer layer];
     layer.backgroundColor = black;
     [self setLayer:layer];
     [self setWantsLayer:YES];
     self.layer.layoutManager = self; //take control of layout myself
+    CGColorSpaceRelease(rgbSpace);
+    CGColorRelease(black);
 
     [self reloadData];
 }
@@ -67,12 +69,6 @@
     if(_cachedReflectionLayers)
 	[_cachedReflectionLayers release];
     [super dealloc];
-}
-
-- (void)drawRect:(NSRect)dirtyRect {
-    //NOTE: layer hosting view. Do not do any custom drawing here.
-    //Instead, draw to the view's layer hierarchy.
-    [self adjustCachedLayersWithAnimation:NO];
 }
 
 - (void)reloadData{
@@ -119,7 +115,6 @@
     retLayer.bounds = CGRectMake(0.0f, 0.0f,
 				CGImageGetWidth(item.imageRepresentation), 
 				CGImageGetHeight(item.imageRepresentation));
-
     return retLayer;
 }    
 
@@ -128,7 +123,8 @@
     CALayer* subLayer = [CALayer layer];
 
     CGFloat values[4] = {0.0, 0.0, 0.0, 0.7};
-    CGColorRef dark = CGColorCreate(CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB), values);
+    CGColorSpaceRef rgbSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
+    CGColorRef dark = CGColorCreate(rgbSpace, values);
     subLayer.backgroundColor = dark;
 
     subLayer.bounds = retLayer.bounds;
@@ -137,6 +133,8 @@
     subLayer.autoresizingMask = kCALayerWidthSizable | kCALayerHeightSizable; //autoresize sublayer when super is resized
     [retLayer addSublayer:subLayer];
 
+    CGColorSpaceRelease(rgbSpace);
+    CGColorRelease(dark);
     return retLayer;
 }
 
@@ -149,8 +147,8 @@
     //NOTE: do not call this method instead call adjustCachedLayersWithAnimation:
 
     CGFloat newXPosition, newZPosition;
-    CGFloat yPosition = self.bounds.size.height / 5;
-    CGFloat yDelta = _maximumImageHeight / 20;
+    CGFloat yPosition = self.bounds.size.height * IMAGE_Y_POSITION_SCALE_FACTOR + IMAGE_Y_POSITION_OFFSET;
+    CGFloat yDelta = SMALLER_IMAGE_HEIGHT_OFFSET / 2.0;
 
     //adjust focused layer and reflection
     CALayer* focused = [_cachedLayers objectAtIndex:_focusedItemIndex];
@@ -164,10 +162,10 @@
     focused.transform = [self identityTransform];
     focusedReflected.transform = [self identityReflectionTransform];
 
-    CGFloat xDelta = _maximumImageHeight/6;
+    CGFloat xDelta = STACKED_IMAGE_SPACING;
 
     //adjust layers to the left of focused layer and reflections
-    newXPosition = NSMidX([self bounds]) - (_maximumImageHeight/8)*7;
+    newXPosition = NSMidX([self bounds]) - FOCUSED_IMAGE_SPACING;
     newZPosition = -1;
     for(int i=_focusedItemIndex-1; i>=0; i--){
 	CALayer* layer = [_cachedLayers objectAtIndex:i];
@@ -187,7 +185,7 @@
     }
 
     //adjust layers to the right of focused layer and reflections
-    newXPosition = NSMidX([self bounds]) + (_maximumImageHeight/8)*7;
+    newXPosition = NSMidX([self bounds]) + FOCUSED_IMAGE_SPACING;
     newZPosition = -1;
     for(int i=_focusedItemIndex+1; i<[_cachedLayers count]; i++){
 	CALayer* layer = [_cachedLayers objectAtIndex:i];
@@ -210,7 +208,7 @@
 - (void)adjustLayerBoundsWithAnimation:(BOOL)animate{
     //NOTE: do not call this method instead call adjustCachedLayersWithAnimation:
 
-    CGFloat smallerHeight = _maximumImageHeight - (_maximumImageHeight/10);
+    CGFloat smallerHeight = MAXIMUM_IMAGE_HEIGHT - SMALLER_IMAGE_HEIGHT_OFFSET;
 
     //adjust all layers
     for(int i=0; i<[_cachedLayers count]; i++){
@@ -228,8 +226,8 @@
     //adjust focused layer
     CALayer* focused = [_cachedLayers objectAtIndex:_focusedItemIndex];
     CALayer* focusedReflected = [_cachedReflectionLayers objectAtIndex:_focusedItemIndex];
-    focused.bounds = [self scaleRect:focused.bounds toWithinHeight:_maximumImageHeight];
-    focusedReflected.bounds = [self scaleRect:focusedReflected.bounds toWithinHeight:_maximumImageHeight];
+    focused.bounds = [self scaleRect:focused.bounds toWithinHeight:MAXIMUM_IMAGE_HEIGHT];
+    focusedReflected.bounds = [self scaleRect:focusedReflected.bounds toWithinHeight:MAXIMUM_IMAGE_HEIGHT];
     for(CALayer* subLayer in focusedReflected.sublayers){
 	subLayer.bounds = focusedReflected.bounds;
     }
@@ -318,8 +316,7 @@
 ///////////////////    CALayoutManager Protocol Methods    ///////////////////////////////////////
 
 - (void)invalidateLayoutOfLayer:(CALayer *)layer{
-    //TODO: only change stuff if the superlayer has been resized!
-    _maximumImageHeight = ((self.frame.size.height/5)*4) - 50; //TODO: unnecessary global constant?
+    //TODO: only change stuff if the root layer has been resized!
     [self adjustCachedLayersWithAnimation:NO];
 }
 
