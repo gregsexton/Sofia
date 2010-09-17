@@ -53,8 +53,8 @@
 - (CALayer*)reflectionLayerForGSCoverflowItem:(GSCoverflowItem*)item;
 - (CGRect)scaleRect:(CGRect)rect toWithinHeight:(CGFloat)height;
 - (void)adjustCachedLayersWithAnimation:(BOOL)animate;
-- (void)adjustLayerBoundsWithAnimation:(BOOL)animate;
-- (void)adjustLayerPositionsWithAnimation:(BOOL)animate;
+- (void)adjustLayerBoundsWithAnimation;
+- (void)adjustLayerPositionsWithAnimation;
 - (void)deleteCachedLayers;
 - (void)reloadData;
 - (void)moveLayer:(CALayer*)layer to:(CGPoint)position anchoredAt:(CGPoint)anchor zPosition:(CGFloat)zPos transform:(CATransform3D)transform;

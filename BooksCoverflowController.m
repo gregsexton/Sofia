@@ -69,4 +69,25 @@
     }
 }
 
+- (void)coverflow:(GSCoverflow*)aCoverflow cellWasDoubleClickedAtIndex:(NSUInteger)index{
+    book *obj = [[arrayController arrangedObjects] objectAtIndex:index];
+
+    [self openDetailWindowForBook:obj];
+}
+
+- (void)coverflowSelectionDidChange:(GSCoverflow*)aCoverflow{
+    //let the arraycontroller know
+    [arrayController setSelectionIndex:[coverflow selectionIndex]];
+}
+
+
+- (void)coverflow:(GSCoverflow*)aCoverflow cellWasRightClickedAtIndex:(NSUInteger)index
+	withEvent:(NSEvent*)event{
+
+    book *obj = [[arrayController arrangedObjects] objectAtIndex:index];
+    NSMenu* menu = [self menuForBook:obj];
+
+    [NSMenu popUpContextMenu:menu withEvent:event forView:aCoverflow];
+}
+
 @end

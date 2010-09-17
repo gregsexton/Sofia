@@ -23,7 +23,7 @@
 @class GSCoverflow;
 
 
-@protocol GSCoverflowDelegate
+@protocol GSCoverflowDelegate <NSObject>
 
 @optional
 

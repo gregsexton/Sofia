@@ -29,13 +29,11 @@
 //TODO: implement image versions
 //TODO: call delegate
 //TODO: what if delegate/datasource is nil or doesn't implement method?
-//TODO: event handling
 //TODO: simplify/refactor code(!!) -- reflection as sublayer of bigger layer?
 //TODO: vignette
 //TODO: maximum width for images (== max height?)
 //TODO: book title and subtitle
 //TODO: scroll bar
-//TODO: animation timing
 //TODO: drag and drop
 
 - (id)initWithFrame:(NSRect)frame {
@@ -144,14 +142,17 @@
     //transaction, and are committed automatically when the
     //thread's run-loop next iterates."
     //
-    //seting the global timing here should take effect for all animations
-    [CATransaction setAnimationDuration:1.0f];
-    [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithControlPoints:0.15 :0.8 :0.2 :0.95]];
-    [self adjustLayerBoundsWithAnimation:animate];
-    [self adjustLayerPositionsWithAnimation:animate];
+    //seting the global timing here takes effect for all animations
+    if(animate){
+	[CATransaction setAnimationDuration:1.0f];
+	[CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithControlPoints:0.15 :0.8 :0.2 :0.95]];
+    }	//else use standard animiation settings
+
+    [self adjustLayerBoundsWithAnimation];
+    [self adjustLayerPositionsWithAnimation];
 }
 
-- (void)adjustLayerPositionsWithAnimation:(BOOL)animate{
+- (void)adjustLayerPositionsWithAnimation{
     //NOTE: do not call this method instead call adjustCachedLayersWithAnimation:
 
     CGFloat newXPosition, newZPosition;
@@ -229,7 +230,7 @@
 
 }
 
-- (void)adjustLayerBoundsWithAnimation:(BOOL)animate{
+- (void)adjustLayerBoundsWithAnimation{
     //NOTE: do not call this method instead call adjustCachedLayersWithAnimation:
 
     CGFloat smallerHeight = MAXIMUM_IMAGE_HEIGHT - SMALLER_IMAGE_HEIGHT_OFFSET;
@@ -329,22 +330,76 @@
 	if(index >= 0 && index < [_cachedLayers count]){
 	    _focusedItemIndex = index;
 	    [self adjustCachedLayersWithAnimation:YES];
-	    //TODO: notify delegate selection changed
+
+	    if([[self delegate] respondsToSelector:@selector(coverflowSelectionDidChange:)])
+		[[self delegate] coverflowSelectionDidChange:self];
 	}
     }
 }
 
 //TODO: handle these events:
 //keys left and right
-//click on layer
-//scroll mouse
 //click scroll bar left or right
-//background right clicked
-//layer right clicked
-//layer double clicked
+
+- (NSUInteger)itemIndexForLocationInWindow:(NSPoint)eventLocation{
+    //returns NSNotFound if location is not in the view or is not a valid item layer
+    NSPoint localPoint = [self convertPoint:eventLocation fromView:nil];
+
+    CALayer* clickedLayer = [self.layer hitTest:NSPointToCGPoint(localPoint)];
+    if(!clickedLayer)
+	return NSNotFound;
+
+    NSUInteger index = [_cachedLayers indexOfObjectIdenticalTo:clickedLayer];
+    if(index == NSNotFound)
+	return NSNotFound;
+
+    return index;
+}
+
+- (void)mouseDown:(NSEvent *)theEvent{
+    //handles single and double clicks
+    //NSLog(@"Mouse down. \n%@", theEvent);
+
+    NSUInteger index = [self itemIndexForLocationInWindow:[theEvent locationInWindow]];
+    if(index == NSNotFound)
+	return;
+
+    [self setSelectionIndex:index];
+
+    if([theEvent clickCount] == 2){
+	if([[self delegate] respondsToSelector:@selector(coverflow:cellWasDoubleClickedAtIndex:)]){
+	    [[self delegate] coverflow:self cellWasDoubleClickedAtIndex:index];
+	}
+    }
+
+}
+
+- (void)rightMouseDown:(NSEvent *)theEvent{
+    //NSLog(@"Right mouse down. \n%@", theEvent);
+
+    NSUInteger index = [self itemIndexForLocationInWindow:[theEvent locationInWindow]];
+    if(index == NSNotFound){
+	//background right clicked -- inform delegate
+	if([[self delegate] respondsToSelector:@selector(coverflow:backgroundWasRightClickedWithEvent:)])
+	    [[self delegate] coverflow:self backgroundWasRightClickedWithEvent:theEvent]; 
+    }else{
+	//item was right clicked -- inform delegate
+	if([[self delegate] respondsToSelector:@selector(coverflow:cellWasRightClickedAtIndex:withEvent:)])
+	    [[self delegate] coverflow:self cellWasRightClickedAtIndex:index withEvent:theEvent]; 
+    }
+}
+
+- (void)scrollWheel:(NSEvent *)theEvent{
+    //NSLog(@"Scroll wheel. \n%@", theEvent);
+
+    CGFloat scrollByF = [theEvent deltaX] + [theEvent deltaY];
+    NSInteger scrollBy = roundf(scrollByF); //implict cast
+
+    [self setSelectionIndex:[self selectionIndex]-scrollBy];
+}
 
 - (void)keyDown:(NSEvent *)theEvent{
-    NSLog(@"Key down!");
+    NSLog(@"Key down!\n%@", theEvent);
 }
 
 - (IBAction)moveOneItemLeft:(id)sender{

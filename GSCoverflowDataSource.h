@@ -23,7 +23,7 @@
 @class GSCoverflow;
 
 
-@protocol GSCoverflowDataSource
+@protocol GSCoverflowDataSource <NSObject>
 
 - (NSUInteger)numberOfItemsInCoverflow:(GSCoverflow*)aCoverflow;
 - (id)coverflow:(GSCoverflow*)aCoverflow itemAtIndex:(NSUInteger)index; //should return a GSCoverflowItem or child of
