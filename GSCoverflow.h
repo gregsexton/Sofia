@@ -32,7 +32,7 @@
 #define IMAGE_Y_POSITION_SCALE_FACTOR (1.0/5.0)
 #define IMAGE_Y_POSITION_OFFSET (0)
 #define STACKED_IMAGE_SPACING (MAXIMUM_IMAGE_HEIGHT / 6.0)
-#define FOCUSED_IMAGE_SPACING ((MAXIMUM_IMAGE_HEIGHT/8.0)*7)
+#define FOCUSED_IMAGE_SPACING ((MAXIMUM_IMAGE_HEIGHT/8.0)*9)
 
 @interface GSCoverflow : NSView {
 
@@ -66,6 +66,8 @@
 - (CATransform3D)rightHandImageTransformWithHeight:(CGFloat)height width:(CGFloat)width;
 - (CATransform3D)rightHandReflectionTransformWithHeight:(CGFloat)height width:(CGFloat)width;
 
+- (NSUInteger)selectionIndex;
+- (void)setSelectionIndex:(NSUInteger)index;
 - (IBAction)moveOneItemLeft:(id)sender;
 - (IBAction)moveOneItemRight:(id)sender;
 @end

@@ -33,10 +33,10 @@
 //TODO: simplify/refactor code(!!) -- reflection as sublayer of bigger layer?
 //TODO: vignette
 //TODO: maximum width for images (== max height?)
-//TODO: refactor out magic numbers, define _maximumImageHeight as macro?
 //TODO: book title and subtitle
 //TODO: scroll bar
 //TODO: animation timing
+//TODO: drag and drop
 
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
@@ -139,6 +139,14 @@
 }
 
 - (void)adjustCachedLayersWithAnimation:(BOOL)animate{
+    //"Implicit transactions are created automatically when the
+    //layer tree is modified by a thread without an active
+    //transaction, and are committed automatically when the
+    //thread's run-loop next iterates."
+    //
+    //seting the global timing here should take effect for all animations
+    [CATransaction setAnimationDuration:1.0f];
+    [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithControlPoints:0.15 :0.8 :0.2 :0.95]];
     [self adjustLayerBoundsWithAnimation:animate];
     [self adjustLayerPositionsWithAnimation:animate];
 }
@@ -311,22 +319,40 @@
 
 ///////////////////    EVENT HANDLING METHODS   //////////////////////////////////////////////////
 
+- (NSUInteger)selectionIndex{
+    return _focusedItemIndex;
+}
+
+- (void)setSelectionIndex:(NSUInteger)index{
+    //does nothing if the index is out of bounds
+    if([_cachedLayers count] > 0){
+	if(index >= 0 && index < [_cachedLayers count]){
+	    _focusedItemIndex = index;
+	    [self adjustCachedLayersWithAnimation:YES];
+	    //TODO: notify delegate selection changed
+	}
+    }
+}
+
+//TODO: handle these events:
+//keys left and right
+//click on layer
+//scroll mouse
+//click scroll bar left or right
+//background right clicked
+//layer right clicked
+//layer double clicked
+
 - (void)keyDown:(NSEvent *)theEvent{
     NSLog(@"Key down!");
 }
 
 - (IBAction)moveOneItemLeft:(id)sender{
-    if(_focusedItemIndex > 0){
-	_focusedItemIndex--;
-	[self adjustCachedLayersWithAnimation:YES];
-    }
+    [self setSelectionIndex:[self selectionIndex]-1];
 }
 
 - (IBAction)moveOneItemRight:(id)sender{
-    if(_focusedItemIndex < [_cachedLayers count]-1){
-	_focusedItemIndex++;
-	[self adjustCachedLayersWithAnimation:YES];
-    }
+    [self setSelectionIndex:[self selectionIndex]+1];
 }
 
 ///////////////////    CALayoutManager Protocol Methods    ///////////////////////////////////////
