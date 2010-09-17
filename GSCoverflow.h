@@ -57,6 +57,7 @@
 - (void)adjustLayerPositionsWithAnimation:(BOOL)animate;
 - (void)deleteCachedLayers;
 - (void)reloadData;
+- (void)moveLayer:(CALayer*)layer to:(CGPoint)position anchoredAt:(CGPoint)anchor zPosition:(CGFloat)zPos transform:(CATransform3D)transform;
 
 - (CATransform3D)identityReflectionTransform;
 - (CATransform3D)identityTransform;

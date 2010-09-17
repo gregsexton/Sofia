@@ -143,7 +143,7 @@
     [self adjustLayerPositionsWithAnimation:animate];
 }
 
-- (void)adjustLayerPositionsWithAnimation:(BOOL)animate{ //TODO: refactor!
+- (void)adjustLayerPositionsWithAnimation:(BOOL)animate{
     //NOTE: do not call this method instead call adjustCachedLayersWithAnimation:
 
     CGFloat newXPosition, newZPosition;
@@ -153,14 +153,14 @@
     //adjust focused layer and reflection
     CALayer* focused = [_cachedLayers objectAtIndex:_focusedItemIndex];
     CALayer* focusedReflected = [_cachedReflectionLayers objectAtIndex:_focusedItemIndex];
-    focused.anchorPoint = CGPointMake(0.5,0.0);
-    focusedReflected.anchorPoint = CGPointMake(0.5,0.0);
-    focused.position = CGPointMake(NSMidX([self bounds]), yPosition);
-    focusedReflected.position = CGPointMake(NSMidX([self bounds]), yPosition);
-    focused.zPosition = 0;
-    focusedReflected.zPosition = 0;
-    focused.transform = [self identityTransform];
-    focusedReflected.transform = [self identityReflectionTransform];
+    [self moveLayer:focused to:CGPointMake(NSMidX([self bounds]), yPosition)
+	 anchoredAt:CGPointMake(0.5,0.0)
+	  zPosition:0
+	  transform:[self identityTransform]];
+    [self moveLayer:focusedReflected to:CGPointMake(NSMidX([self bounds]), yPosition)
+	 anchoredAt:CGPointMake(0.5,0.0)
+	  zPosition:0
+	  transform:[self identityReflectionTransform]];
 
     CGFloat xDelta = STACKED_IMAGE_SPACING;
 
@@ -170,16 +170,18 @@
     for(int i=_focusedItemIndex-1; i>=0; i--){
 	CALayer* layer = [_cachedLayers objectAtIndex:i];
 	CALayer* layerReflected = [_cachedReflectionLayers objectAtIndex:i];
-	layer.anchorPoint = CGPointMake(0.0,0.0);
-	layerReflected.anchorPoint = CGPointMake(0.0,0.0);
-	layer.position = CGPointMake(newXPosition, yPosition + yDelta);
-	layerReflected.position = CGPointMake(newXPosition, yPosition + yDelta);
-	layer.zPosition = newZPosition;
-	layerReflected.zPosition = newZPosition;
-	layer.transform = [self leftHandImageTransformWithHeight:layer.bounds.size.height 
-							   width:layer.bounds.size.width];
-	layerReflected.transform = [self leftHandReflectionTransformWithHeight:layerReflected.bounds.size.height 
-									 width:layerReflected.bounds.size.width];
+
+	[self moveLayer:layer to:CGPointMake(newXPosition, yPosition + yDelta)
+	     anchoredAt:CGPointMake(0.0,0.0)
+	      zPosition:newZPosition
+	      transform:[self leftHandImageTransformWithHeight:layer.bounds.size.height 
+							 width:layer.bounds.size.width]];
+
+	[self moveLayer:layerReflected to:CGPointMake(newXPosition, yPosition + yDelta)
+	     anchoredAt:CGPointMake(0.0,0.0)
+	      zPosition:newZPosition
+	      transform:[self leftHandReflectionTransformWithHeight:layerReflected.bounds.size.height 
+							      width:layerReflected.bounds.size.width]];
 	newXPosition -= xDelta;
 	newZPosition--;
     }
@@ -190,19 +192,33 @@
     for(int i=_focusedItemIndex+1; i<[_cachedLayers count]; i++){
 	CALayer* layer = [_cachedLayers objectAtIndex:i];
 	CALayer* layerReflected = [_cachedReflectionLayers objectAtIndex:i];
-	layer.anchorPoint = CGPointMake(1.0,0.0);
-	layerReflected.anchorPoint = CGPointMake(1.0,0.0);
-	layer.position = CGPointMake(newXPosition, yPosition + yDelta);
-	layerReflected.position = CGPointMake(newXPosition, yPosition + yDelta);
-	layer.zPosition = newZPosition;
-	layerReflected.zPosition = newZPosition;
-	layer.transform = [self rightHandImageTransformWithHeight:layer.bounds.size.height 
-							    width:layer.bounds.size.width];
-	layerReflected.transform = [self rightHandReflectionTransformWithHeight:layerReflected.bounds.size.height 
-									  width:layerReflected.bounds.size.width];
+
+	[self moveLayer:layer to:CGPointMake(newXPosition, yPosition + yDelta)
+	     anchoredAt:CGPointMake(1.0,0.0)
+	      zPosition:newZPosition
+	      transform:[self rightHandImageTransformWithHeight:layer.bounds.size.height 
+							  width:layer.bounds.size.width]];
+
+	[self moveLayer:layerReflected to:CGPointMake(newXPosition, yPosition + yDelta)
+	     anchoredAt:CGPointMake(1.0,0.0)
+	      zPosition:newZPosition
+	      transform:[self rightHandReflectionTransformWithHeight:layerReflected.bounds.size.height 
+							       width:layerReflected.bounds.size.width]];
 	newXPosition += xDelta;
 	newZPosition--;
     }
+}
+
+- (void)moveLayer:(CALayer*)layer to:(CGPoint)position
+       anchoredAt:(CGPoint)anchor zPosition:(CGFloat)zPos
+	transform:(CATransform3D)transform{
+    //small helper function to aid readability
+
+    layer.anchorPoint = anchor;
+    layer.position = position;
+    layer.zPosition = zPos;
+    layer.transform = transform;
+
 }
 
 - (void)adjustLayerBoundsWithAnimation:(BOOL)animate{
