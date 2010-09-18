@@ -364,14 +364,13 @@
     if(index == NSNotFound)
 	return;
 
-    [self setSelectionIndex:index];
-
-    if([theEvent clickCount] == 2){
+    if([theEvent clickCount] == 2 && [self selectionIndex] == index){
 	if([[self delegate] respondsToSelector:@selector(coverflow:cellWasDoubleClickedAtIndex:)]){
 	    [[self delegate] coverflow:self cellWasDoubleClickedAtIndex:index];
 	}
     }
 
+    [self setSelectionIndex:index];
 }
 
 - (void)rightMouseDown:(NSEvent *)theEvent{
