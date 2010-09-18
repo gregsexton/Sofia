@@ -86,8 +86,15 @@
 	    [_cachedReflectionLayers addObject:itemReflectedLayer];
 	    [self.layer addSublayer:itemReflectedLayer];
 
-	    [_cachedTitles addObject:item.imageTitle];
-	    [_cachedSubtitles addObject:item.imageSubtitle];
+	    if(item.imageTitle)
+		[_cachedTitles addObject:item.imageTitle];
+	    else
+		[_cachedTitles addObject:@""];
+
+	    if(item.imageSubtitle)
+		[_cachedSubtitles addObject:item.imageSubtitle];
+	    else
+		[_cachedSubtitles addObject:@""];
 	}
 
 	[self adjustCachedLayersWithAnimation:NO];
