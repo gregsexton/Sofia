@@ -33,6 +33,7 @@
 #define IMAGE_Y_POSITION_OFFSET (0)
 #define STACKED_IMAGE_SPACING (MAXIMUM_IMAGE_HEIGHT / 6.0)
 #define FOCUSED_IMAGE_SPACING ((MAXIMUM_IMAGE_HEIGHT/8.0)*9)
+#define TITLE_Y_POSITION (self.frame.size.height/10.0)
 
 @interface GSCoverflow : NSView {
 
@@ -41,6 +42,10 @@
 
     NSMutableArray* _cachedLayers;
     NSMutableArray* _cachedReflectionLayers;
+    NSMutableArray* _cachedTitles;
+    NSMutableArray* _cachedSubtitles;
+
+    CATextLayer* _titleLayer;
 
     NSUInteger _focusedItemIndex;
 
@@ -53,11 +58,12 @@
 - (CALayer*)reflectionLayerForGSCoverflowItem:(GSCoverflowItem*)item;
 - (CGRect)scaleRect:(CGRect)rect toWithinHeight:(CGFloat)height;
 - (void)adjustCachedLayersWithAnimation:(BOOL)animate;
-- (void)adjustLayerBoundsWithAnimation;
-- (void)adjustLayerPositionsWithAnimation;
-- (void)deleteCachedLayers;
-- (void)reloadData;
+- (void)adjustLayerBounds;
+- (void)adjustLayerPositions;
+- (void)deleteCache;
 - (void)moveLayer:(CALayer*)layer to:(CGPoint)position anchoredAt:(CGPoint)anchor zPosition:(CGFloat)zPos transform:(CATransform3D)transform;
+- (void)reloadData;
+- (void)updateTitleLayer;
 
 - (CATransform3D)identityReflectionTransform;
 - (CATransform3D)identityTransform;

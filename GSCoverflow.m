@@ -27,14 +27,13 @@
 @synthesize dataSource;
 
 //TODO: implement image versions
-//TODO: call delegate
-//TODO: what if delegate/datasource is nil or doesn't implement method?
+//TODO: what if datasource is nil or doesn't implement method?
 //TODO: simplify/refactor code(!!) -- reflection as sublayer of bigger layer?
 //TODO: vignette
 //TODO: maximum width for images (== max height?)
-//TODO: book title and subtitle
 //TODO: scroll bar
 //TODO: drag and drop
+//TODO: focused item index out of bounds error
 
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
@@ -62,18 +61,19 @@
 }
 
 - (void)dealloc{
-    if(_cachedLayers)
-	[_cachedLayers release];
-    if(_cachedReflectionLayers)
-	[_cachedReflectionLayers release];
+    [self deleteCache];
+    if(_titleLayer)
+	[_titleLayer release];
     [super dealloc];
 }
 
 - (void)reloadData{
     if([dataSource numberOfItemsInCoverflow:self] > 0){
-	[self deleteCachedLayers]; //TODO: use versions!
+	[self deleteCache]; //TODO: use versions!
 	_cachedLayers = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
 	_cachedReflectionLayers = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
+	_cachedTitles = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
+	_cachedSubtitles = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
 
 	for(int i=0; i<[dataSource numberOfItemsInCoverflow:self]; i++){
 
@@ -85,24 +85,37 @@
 	    CALayer* itemReflectedLayer = [self reflectionLayerForGSCoverflowItem:item];
 	    [_cachedReflectionLayers addObject:itemReflectedLayer];
 	    [self.layer addSublayer:itemReflectedLayer];
+
+	    [_cachedTitles addObject:item.imageTitle];
+	    [_cachedSubtitles addObject:item.imageSubtitle];
 	}
 
 	[self adjustCachedLayersWithAnimation:NO];
     }
 }
 
-- (void)deleteCachedLayers{
+- (void)deleteCache{
     if(_cachedLayers){
 	for(CALayer* layer in _cachedLayers){
 	    [layer removeFromSuperlayer];
 	}
 	[_cachedLayers release];
+	_cachedLayers = nil;
     }
     if(_cachedReflectionLayers){
 	for(CALayer* layer in _cachedReflectionLayers){
 	    [layer removeFromSuperlayer];
 	}
 	[_cachedReflectionLayers release];
+	_cachedReflectionLayers = nil;
+    }
+    if(_cachedTitles){
+	[_cachedTitles release];
+	_cachedTitles = nil;
+    }
+    if(_cachedSubtitles){
+	[_cachedSubtitles release];
+	_cachedSubtitles = nil;
     }
 }
 
@@ -148,11 +161,51 @@
 	[CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithControlPoints:0.15 :0.8 :0.2 :0.95]];
     }	//else use standard animiation settings
 
-    [self adjustLayerBoundsWithAnimation];
-    [self adjustLayerPositionsWithAnimation];
+    [self adjustLayerBounds];
+    [self adjustLayerPositions];
+    [self updateTitleLayer];
 }
 
-- (void)adjustLayerPositionsWithAnimation{
+- (void)updateTitleLayer{
+    if(!_titleLayer){ //create title layer if necessary
+
+	CGFloat values[4] = {1.0, 1.0, 1.0, 1.0};
+	CGColorSpaceRef rgbSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
+	CGColorRef white = CGColorCreate(rgbSpace, values);
+
+	_titleLayer = [[CATextLayer layer] retain];
+	_titleLayer.anchorPoint = CGPointMake(0.5,0.5);
+	_titleLayer.zPosition = 100;
+	_titleLayer.foregroundColor = white;
+	_titleLayer.font = [NSFont fontWithName:@"LucidaGrande-Bold" size:12.0];
+	_titleLayer.fontSize = 12.0f;
+	_titleLayer.alignmentMode = kCAAlignmentCenter;
+
+	//disable animating the properties of the layer.
+	NSMutableDictionary *actions = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+					   [NSNull null], @"onOrderIn",
+					   [NSNull null], @"onOrderOut",
+					   [NSNull null], @"contents",
+					   [NSNull null], @"position",
+					   [NSNull null], @"bounds", nil];
+	_titleLayer.actions = actions;
+	[actions release];
+	
+	[self.layer addSublayer:_titleLayer];
+
+	CGColorSpaceRelease(rgbSpace);
+	CGColorRelease(white);
+    }
+
+    _titleLayer.string = [NSString stringWithFormat:@"%@\n%@", 
+						    [_cachedTitles objectAtIndex:_focusedItemIndex],
+						    [_cachedSubtitles objectAtIndex:_focusedItemIndex]];
+    CGSize preferredSize = [_titleLayer preferredFrameSize];
+    _titleLayer.frame = CGRectMake(0.0f, 0.0f, preferredSize.width, preferredSize.height);
+    _titleLayer.position = CGPointMake(NSMidX([self bounds]), TITLE_Y_POSITION);
+}
+
+- (void)adjustLayerPositions{
     //NOTE: do not call this method instead call adjustCachedLayersWithAnimation:
 
     CGFloat newXPosition, newZPosition;
@@ -230,7 +283,7 @@
 
 }
 
-- (void)adjustLayerBoundsWithAnimation{
+- (void)adjustLayerBounds{
     //NOTE: do not call this method instead call adjustCachedLayersWithAnimation:
 
     CGFloat smallerHeight = MAXIMUM_IMAGE_HEIGHT - SMALLER_IMAGE_HEIGHT_OFFSET;
