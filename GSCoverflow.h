@@ -64,6 +64,8 @@
 - (void)moveLayer:(CALayer*)layer to:(CGPoint)position anchoredAt:(CGPoint)anchor zPosition:(CGFloat)zPos transform:(CATransform3D)transform;
 - (void)reloadData;
 - (void)updateTitleLayer;
+- (void)adjustFadeLayers;
+- (void)adjustFadeSublayerOf:(CALayer*)layer toOpacity:(CGFloat)opacity;
 
 - (CATransform3D)identityReflectionTransform;
 - (CATransform3D)identityTransform;

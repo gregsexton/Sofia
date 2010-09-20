@@ -29,7 +29,6 @@
 //TODO: implement image versions
 //TODO: what if datasource is nil or doesn't implement method?
 //TODO: simplify/refactor code(!!) -- reflection as sublayer of bigger layer?
-//TODO: vignette
 //TODO: maximum width for images (== max height?)
 //TODO: scroll bar
 //TODO: drag and drop
@@ -133,6 +132,24 @@
     retLayer.bounds = CGRectMake(0.0f, 0.0f,
 				CGImageGetWidth(item.imageRepresentation), 
 				CGImageGetHeight(item.imageRepresentation));
+
+    CALayer* fadeSublayer = [CALayer layer];
+
+    CGFloat values[4] = {0.0, 0.0, 0.0, 1.0}; 
+    CGColorSpaceRef rgbSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
+    CGColorRef fade = CGColorCreate(rgbSpace, values);
+
+    fadeSublayer.backgroundColor = fade;
+    fadeSublayer.opacity = 0.0; //initialy transparent
+    fadeSublayer.bounds = retLayer.bounds;
+    fadeSublayer.anchorPoint = CGPointMake(0.0, 0.0);
+    fadeSublayer.position = CGPointMake(0,0);
+    fadeSublayer.autoresizingMask = kCALayerWidthSizable | kCALayerHeightSizable; //autoresize sublayer when super is resized
+    fadeSublayer.name = @"fade";
+    [retLayer addSublayer:fadeSublayer];
+
+    CGColorSpaceRelease(rgbSpace);
+    CGColorRelease(fade);
     return retLayer;
 }    
 
@@ -143,8 +160,8 @@
     CGFloat values[4] = {0.0, 0.0, 0.0, 0.7};
     CGColorSpaceRef rgbSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
     CGColorRef dark = CGColorCreate(rgbSpace, values);
-    subLayer.backgroundColor = dark;
 
+    subLayer.backgroundColor = dark;
     subLayer.bounds = retLayer.bounds;
     subLayer.anchorPoint = CGPointMake(0.0, 0.0);
     subLayer.position = CGPointMake(0,0);
@@ -171,6 +188,43 @@
     [self adjustLayerBounds];
     [self adjustLayerPositions];
     [self updateTitleLayer];
+    [self adjustFadeLayers];
+}
+
+- (void)adjustFadeLayers{
+    CGFloat noOfImages = ((self.bounds.size.width/2)-FOCUSED_IMAGE_SPACING)/STACKED_IMAGE_SPACING;
+    CGFloat opacity = 0.0;
+    for(int i=_focusedItemIndex; i<[_cachedLayers count]; i++){
+	[self adjustFadeSublayerOf:[_cachedLayers objectAtIndex:i] toOpacity:opacity];
+	[self adjustFadeSublayerOf:[_cachedReflectionLayers objectAtIndex:i] toOpacity:opacity];
+	if(i >= _focusedItemIndex + noOfImages - 10)
+	    opacity += 0.1;
+    }
+
+    opacity = 0.0;
+    for(int i=_focusedItemIndex-1; i>=0; i--){
+	[self adjustFadeSublayerOf:[_cachedLayers objectAtIndex:i] toOpacity:opacity];
+	[self adjustFadeSublayerOf:[_cachedReflectionLayers objectAtIndex:i] toOpacity:opacity];
+	if(i < _focusedItemIndex - (noOfImages - 10))
+	    opacity += 0.1;
+    }
+}
+
+- (void)adjustFadeSublayerOf:(CALayer*)layer toOpacity:(CGFloat)opacity{
+    if(opacity < 0.0)
+	opacity = 0.0;
+    if(opacity > 1.0)
+	opacity = 1.0;
+    for(CALayer* sublayer in layer.sublayers){
+	if([sublayer.name isEqualToString:@"fade"]){
+	    sublayer.opacity = opacity;
+	}
+    }
+
+    if(opacity == 1.0)
+	layer.opacity = 0.0;
+    else
+	layer.opacity = 1.0;
 }
 
 - (void)updateTitleLayer{
@@ -302,7 +356,11 @@
 	CALayer* layerReflected = [_cachedReflectionLayers objectAtIndex:i];
 	layer.bounds = [self scaleRect:layer.bounds toWithinHeight:smallerHeight];
 	layerReflected.bounds = [self scaleRect:layerReflected.bounds toWithinHeight:smallerHeight];
-	for(CALayer* subLayer in layerReflected.sublayers){ //should only be one sublayer
+
+	for(CALayer* subLayer in layer.sublayers){
+	    subLayer.bounds = layer.bounds;
+	}
+	for(CALayer* subLayer in layerReflected.sublayers){
 	    subLayer.bounds = layerReflected.bounds;
 	}
 
@@ -313,6 +371,10 @@
     CALayer* focusedReflected = [_cachedReflectionLayers objectAtIndex:_focusedItemIndex];
     focused.bounds = [self scaleRect:focused.bounds toWithinHeight:MAXIMUM_IMAGE_HEIGHT];
     focusedReflected.bounds = [self scaleRect:focusedReflected.bounds toWithinHeight:MAXIMUM_IMAGE_HEIGHT];
+
+    for(CALayer* subLayer in focused.sublayers){
+	subLayer.bounds = focused.bounds;
+    }
     for(CALayer* subLayer in focusedReflected.sublayers){
 	subLayer.bounds = focusedReflected.bounds;
     }
@@ -410,8 +472,12 @@
 	return NSNotFound;
 
     NSUInteger index = [_cachedLayers indexOfObjectIdenticalTo:clickedLayer];
-    if(index == NSNotFound)
-	return NSNotFound;
+    if(index == NSNotFound){
+	//check superlayer -- the returned layer may be the fade layer for vignetting
+	index = [_cachedLayers indexOfObjectIdenticalTo:clickedLayer.superlayer];
+	if(index == NSNotFound)
+	    return NSNotFound;
+    }
 
     return index;
 }
