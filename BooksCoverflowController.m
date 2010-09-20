@@ -35,6 +35,10 @@
 		      forKeyPath:@"arrangedObjects"
 			 options:NSKeyValueObservingOptionInitial //send message immediately
 			 context:NULL];
+    [arrayController addObserver:self
+		      forKeyPath:@"selectedObjects"
+			 options:NSKeyValueObservingOptionInitial //send message immediately
+			 context:NULL];
 }
 
 ///////////////////////    DELEGATE METHODS   ///////////////////////////////////////////////////
@@ -66,6 +70,9 @@
     //this works nicely but will it be efficient enough for a large book collection?
     if([keyPath isEqualToString:@"arrangedObjects"]){
 	[coverflow reloadData];
+    }
+    if([keyPath isEqualToString:@"selectedObjects"]){
+	[coverflow setSelectionIndex:[arrayController selectionIndex]];
     }
 }
 

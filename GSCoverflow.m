@@ -32,7 +32,6 @@
 //TODO: maximum width for images (== max height?)
 //TODO: scroll bar
 //TODO: drag and drop
-//TODO: focused item index out of bounds error
 
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
@@ -95,6 +94,9 @@
 	    else
 		[_cachedSubtitles addObject:@""];
 	}
+
+	if(_focusedItemIndex >= [_cachedLayers count]) //don't let this exceed the array bounds
+	    _focusedItemIndex = [_cachedLayers count] - 1; 
 
 	[self adjustCachedLayersWithAnimation:NO];
     }
