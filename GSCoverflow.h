@@ -27,13 +27,19 @@
 #import <math.h>
 
 //positioning constants
-#define MAXIMUM_IMAGE_HEIGHT (((self.frame.size.height/5.0)*4)-50)
+#define MAXIMUM_IMAGE_HEIGHT (self.frame.size.height-85-20)
 #define SMALLER_IMAGE_HEIGHT_OFFSET (MAXIMUM_IMAGE_HEIGHT/10.0)
-#define IMAGE_Y_POSITION_SCALE_FACTOR (1.0/5.0)
-#define IMAGE_Y_POSITION_OFFSET (0)
+#define IMAGE_Y_POSITION_SCALE_FACTOR (0.0)
+#define IMAGE_Y_POSITION_OFFSET (self.frame.size.height - MAXIMUM_IMAGE_HEIGHT - 20)
 #define STACKED_IMAGE_SPACING (MAXIMUM_IMAGE_HEIGHT / 6.0)
 #define FOCUSED_IMAGE_SPACING ((MAXIMUM_IMAGE_HEIGHT/8.0)*9)
-#define TITLE_Y_POSITION (self.frame.size.height/10.0)
+//text layer height at current font size is 29.0
+#define TITLE_Y_POSITION (55.0)
+
+#define SCROLLBAR_WIDTH (self.bounds.size.width-200)
+#define SCROLLBAR_HEIGHT (15.0)
+#define SCROLLBAR_Y_POSITION (20.0)
+#define SCROLL_BUBBLE_MIN_WIDTH (20.0)
 
 @interface GSCoverflow : NSView {
 
@@ -46,6 +52,7 @@
     NSMutableArray* _cachedSubtitles;
 
     CATextLayer* _titleLayer;
+    CALayer*	 _scrollLayer;
 
     NSUInteger _focusedItemIndex;
 
@@ -63,6 +70,7 @@
 - (void)deleteCache;
 - (void)moveLayer:(CALayer*)layer to:(CGPoint)position anchoredAt:(CGPoint)anchor zPosition:(CGFloat)zPos transform:(CATransform3D)transform;
 - (void)reloadData;
+- (void)updateScrollLayer;
 - (void)updateTitleLayer;
 - (void)adjustFadeLayers;
 - (void)adjustFadeSublayerOf:(CALayer*)layer toOpacity:(CGFloat)opacity;

@@ -60,6 +60,8 @@
 
 - (void)dealloc{
     [self deleteCache];
+    if(_scrollLayer)
+	[_scrollLayer release];
     if(_titleLayer)
 	[_titleLayer release];
     [super dealloc];
@@ -185,15 +187,17 @@
     if(animate){
 	[CATransaction setAnimationDuration:1.0f];
 	[CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithControlPoints:0.15 :0.8 :0.2 :0.95]];
-    }	//else use standard animiation settings
+    }	//else use standard animation settings
 
     [self adjustLayerBounds];
     [self adjustLayerPositions];
     [self updateTitleLayer];
     [self adjustFadeLayers];
+    [self updateScrollLayer];
 }
 
 - (void)adjustFadeLayers{
+    //NOTE: do not call this method instead call adjustCachedLayersWithAnimation:
     CGFloat noOfImages = ((self.bounds.size.width/2)-FOCUSED_IMAGE_SPACING)/STACKED_IMAGE_SPACING;
     CGFloat opacity = 0.0;
     for(int i=_focusedItemIndex; i<[_cachedLayers count]; i++){
@@ -230,6 +234,7 @@
 }
 
 - (void)updateTitleLayer{
+    //NOTE: do not call this method instead call adjustCachedLayersWithAnimation:
     if(!_titleLayer){ //create title layer if necessary
 
 	CGFloat values[4] = {1.0, 1.0, 1.0, 1.0};
@@ -267,6 +272,67 @@
     _titleLayer.frame = CGRectMake(0.0f, 0.0f, preferredSize.width, preferredSize.height);
     _titleLayer.position = CGPointMake(NSMidX([self bounds]), TITLE_Y_POSITION);
 }
+
+- (void)updateScrollLayer{
+    //NOTE: do not call this method instead call adjustCachedLayersWithAnimation:
+ 
+    if(!_scrollLayer){
+	CGFloat lightValues[4] = {1.0, 1.0, 1.0, 0.2};
+	CGFloat whiteValues[4] = {1.0, 1.0, 1.0, 1.0};
+	CGFloat blackValues[4] = {0.0, 0.0, 0.0, 1.0};
+	CGColorSpaceRef rgbSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
+	CGColorRef light = CGColorCreate(rgbSpace, lightValues);
+	CGColorRef black = CGColorCreate(rgbSpace, blackValues);
+	CGColorRef white = CGColorCreate(rgbSpace, whiteValues);
+
+	_scrollLayer = [[CALayer layer] retain];
+	_scrollLayer.anchorPoint = CGPointMake(0.5, 0.5);
+	_scrollLayer.zPosition = 100;
+	_scrollLayer.cornerRadius = SCROLLBAR_HEIGHT/2.0;
+	_scrollLayer.backgroundColor = light;
+	_scrollLayer.borderColor = white;
+	_scrollLayer.borderWidth = 0.5;
+
+	CALayer* scrollBubble = [CALayer layer];
+	scrollBubble.anchorPoint = CGPointMake(0.0, 0.0);
+	scrollBubble.cornerRadius = SCROLLBAR_HEIGHT/2.0;
+	scrollBubble.backgroundColor = black;
+	scrollBubble.borderColor = white;
+	scrollBubble.borderWidth = 0.5;
+	scrollBubble.name = @"bubble";
+
+	[_scrollLayer addSublayer:scrollBubble];
+	[self.layer addSublayer:_scrollLayer];
+	CGColorSpaceRelease(rgbSpace);
+	CGColorRelease(light);
+	CGColorRelease(white);
+	CGColorRelease(black);
+
+    }
+
+    _scrollLayer.frame = CGRectMake(0.0f, 0.0f, SCROLLBAR_WIDTH, SCROLLBAR_HEIGHT);
+    _scrollLayer.position = CGPointMake(NSMidX([self bounds]), SCROLLBAR_Y_POSITION);
+
+    //adjust sublayers
+    for(CALayer* sublayer in _scrollLayer.sublayers){
+	if([sublayer.name isEqualToString:@"bubble"]){
+
+	    CGFloat width = SCROLLBAR_WIDTH/(float)[_cachedLayers count];
+	    CGFloat finalWidth = width < SCROLL_BUBBLE_MIN_WIDTH ? SCROLL_BUBBLE_MIN_WIDTH : width;
+	    CGFloat xPos = SCROLLBAR_WIDTH/(float)[_cachedLayers count];
+	    xPos *= _focusedItemIndex;
+
+	    //if using SCROLL_BUBBLE_MIN_WIDTH adjust x position to not run off end
+	    if(finalWidth > width){
+		xPos -= ((finalWidth-width)/(float)[_cachedLayers count] * _focusedItemIndex);
+	    }
+
+	    sublayer.frame = CGRectMake(0.0f, 0.0f, finalWidth, SCROLLBAR_HEIGHT);
+	    sublayer.position = CGPointMake(xPos, 0.0);
+	}
+    }
+}
+
 
 - (void)adjustLayerPositions{
     //NOTE: do not call this method instead call adjustCachedLayersWithAnimation:
