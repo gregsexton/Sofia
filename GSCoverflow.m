@@ -37,6 +37,9 @@
     self = [super initWithFrame:frame];
     if (self) {
 	_focusedItemIndex = 0;
+	//these get created when they are first updated
+	_titleLayer = nil;
+	_scrollLayer = nil;
     }
     return self;
 }
@@ -259,11 +262,13 @@
 	_titleLayer.actions = actions;
 	[actions release];
 	
-	[self.layer addSublayer:_titleLayer];
-
 	CGColorSpaceRelease(rgbSpace);
 	CGColorRelease(white);
     }
+    if(!_titleLayer.superlayer){
+	[self.layer addSublayer:_titleLayer];
+    }
+
 
     _titleLayer.string = [NSString stringWithFormat:@"%@\n%@", 
 						    [_cachedTitles objectAtIndex:_focusedItemIndex],
@@ -302,12 +307,14 @@
 	scrollBubble.name = @"bubble";
 
 	[_scrollLayer addSublayer:scrollBubble];
-	[self.layer addSublayer:_scrollLayer];
 	CGColorSpaceRelease(rgbSpace);
 	CGColorRelease(light);
 	CGColorRelease(white);
 	CGColorRelease(black);
 
+    }
+    if(!_scrollLayer.superlayer){
+	[self.layer addSublayer:_scrollLayer];
     }
 
     _scrollLayer.frame = CGRectMake(0.0f, 0.0f, SCROLLBAR_WIDTH, SCROLLBAR_HEIGHT);

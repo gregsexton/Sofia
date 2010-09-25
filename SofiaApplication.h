@@ -70,20 +70,20 @@
 - (NSManagedObjectModel *)managedObjectModel;
 - (NSManagedObjectContext *)managedObjectContext;
 
-- (IBAction) aboutClickAction:(id)sender;
-- (IBAction) addBookAction:(id)sender;
-- (IBAction) addRemoveClickAction:(id)sender;
-- (IBAction) changeToImagesView:(id)sender;
-- (IBAction) changeToListView:(id)sender;
-- (IBAction) changeViewClickAction:(id)sender;
-- (IBAction) displayPreferencesClickAction:(id)sender;
-- (IBAction) importBooks:(id)sender;
-- (IBAction) manageAuthorsClickAction:(id)sender;
-- (IBAction) manageSubjectsClickAction:(id)sender;
-- (IBAction) removeBookAction:(id)sender;
-- (IBAction) saveAction:sender;
-- (IBAction) search:(id)sender;
+- (IBAction)aboutClickAction:(id)sender;
+- (IBAction)addBookAction:(id)sender;
+- (IBAction)addRemoveClickAction:(id)sender;
 - (IBAction)changeToCoverflowView:(id)sender;
+- (IBAction)changeToImagesView:(id)sender;
+- (IBAction)changeToListView:(id)sender;
+- (IBAction)changeViewClickAction:(id)sender;
+- (IBAction)displayPreferencesClickAction:(id)sender;
+- (IBAction)importBooks:(id)sender;
+- (IBAction)manageAuthorsClickAction:(id)sender;
+- (IBAction)manageSubjectsClickAction:(id)sender;
+- (IBAction)removeBookAction:(id)sender;
+- (IBAction)saveAction:sender;
+- (IBAction)search:(id)sender;
 - (void) changeMainViewFor:(NSView*)viewToChangeTo;
 - (void) updateSummaryText;
 
