@@ -33,6 +33,7 @@
 #import "ImportBooksController.h"
 #import "BooksWindowControllerDelegate.h"
 #import "ImportBooksControllerDelegate.h"
+@class BooksCoverflowController;
 @class BooksTableView;
 @class SidebarOutlineView;
 
@@ -54,6 +55,7 @@
 
 	IBOutlet BooksTableView *tableView;
 	IBOutlet BooksImageBrowserView *imagesView;
+	IBOutlet BooksCoverflowController *coverflowController;
 	IBOutlet NSView* mainView;
 	IBOutlet NSView* mainTableView; //this includes the scrollview
 	IBOutlet NSView* mainImagesView;

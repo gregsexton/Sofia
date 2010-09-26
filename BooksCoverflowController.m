@@ -41,6 +41,18 @@
 			 context:NULL];
 }
 
+- (void)addAndRepositionTableView{
+    //this method needs to be called if the tableview has been
+    //added to a different view hierarchy e.g when switching view
+    if([mainTableView superview] != tableViewSuper){
+	NSRect rect = [tableViewSuper frame];
+	rect.origin.x = 0;
+	rect.origin.y = 0;
+	[mainTableView setFrame:rect];
+	[tableViewSuper addSubview:mainTableView];
+    }
+}
+
 ///////////////////////    DELEGATE METHODS   ///////////////////////////////////////////////////
 
 - (NSUInteger)numberOfItemsInCoverflow:(GSCoverflow*)aCoverflow{

@@ -22,6 +22,7 @@
 #import "SofiaApplication.h"
 #import "SidebarOutlineView.h"
 #import "BooksTableView.h"
+#import "BooksCoverflowController.h"
 
 @implementation SofiaApplication
 
@@ -314,6 +315,7 @@
     [zoomSlider setHidden:true];
     [changeViewButtons setSelectedSegment:2];
     [[NSUserDefaults standardUserDefaults] setObject:COVER_VIEW forKey:@"currentView"];
+    [coverflowController addAndRepositionTableView];
 }
 
 - (void)changeMainViewFor:(NSView*)viewToChangeTo{
