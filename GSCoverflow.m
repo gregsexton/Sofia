@@ -28,7 +28,6 @@
 
 //TODO: implement image versions
 //TODO: what if datasource is nil or doesn't implement method?
-//TODO: simplify/refactor code(!!) -- reflection as sublayer of bigger layer?
 //TODO: maximum width for images (== max height?)
 //TODO: scroll bar
 //TODO: drag and drop
@@ -40,6 +39,7 @@
 	//these get created when they are first updated
 	_titleLayer = nil;
 	_scrollLayer = nil;
+	_bubbleClicked = NO;
     }
     return self;
 }
@@ -261,7 +261,7 @@
 					   [NSNull null], @"bounds", nil];
 	_titleLayer.actions = actions;
 	[actions release];
-	
+
 	CGColorSpaceRelease(rgbSpace);
 	CGColorRelease(white);
     }
@@ -317,6 +317,11 @@
 	[self.layer addSublayer:_scrollLayer];
     }
 
+    //temporarily disable custom animation timing
+    [CATransaction begin];
+    [CATransaction setAnimationDuration:0.25f];
+    [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault]];
+
     _scrollLayer.frame = CGRectMake(0.0f, 0.0f, SCROLLBAR_WIDTH, SCROLLBAR_HEIGHT);
     _scrollLayer.position = CGPointMake(NSMidX([self bounds]), SCROLLBAR_Y_POSITION);
 
@@ -324,6 +329,7 @@
     for(CALayer* sublayer in _scrollLayer.sublayers){
 	if([sublayer.name isEqualToString:@"bubble"]){
 
+	    //NOTE: a change here may need to be reflected in mouseDragged
 	    CGFloat width = SCROLLBAR_WIDTH/(float)[_cachedLayers count];
 	    CGFloat finalWidth = width < SCROLL_BUBBLE_MIN_WIDTH ? SCROLL_BUBBLE_MIN_WIDTH : width;
 	    CGFloat xPos = SCROLLBAR_WIDTH/(float)[_cachedLayers count];
@@ -338,6 +344,8 @@
 	    sublayer.position = CGPointMake(xPos, 0.0);
 	}
     }
+
+    [CATransaction commit];
 }
 
 
@@ -537,12 +545,20 @@
 //TODO: handle these events:
 //keys left and right
 //click scroll bar left or right
-
-- (NSUInteger)itemIndexForLocationInWindow:(NSPoint)eventLocation{
-    //returns NSNotFound if location is not in the view or is not a valid item layer
+- (CALayer*)layerForLocationInWindow:(NSPoint)eventLocation{
     NSPoint localPoint = [self convertPoint:eventLocation fromView:nil];
 
     CALayer* clickedLayer = [self.layer hitTest:NSPointToCGPoint(localPoint)];
+    if(!clickedLayer)
+	return nil;
+    else
+	return clickedLayer;
+}
+
+- (NSUInteger)itemIndexForLocationInWindow:(NSPoint)eventLocation{
+    //returns NSNotFound if location is not in the view or is not a valid item layer
+
+    CALayer* clickedLayer = [self layerForLocationInWindow:eventLocation];
     if(!clickedLayer)
 	return NSNotFound;
 
@@ -561,6 +577,14 @@
     //handles single and double clicks
     //NSLog(@"Mouse down. \n%@", theEvent);
 
+    CALayer* clickedLayer = [self layerForLocationInWindow:[theEvent locationInWindow]];
+    if(clickedLayer && [clickedLayer.name isEqualToString:@"bubble"]){
+	_bubbleClicked = YES;
+	return;
+    }else{
+	_bubbleClicked = NO;
+    }
+
     NSUInteger index = [self itemIndexForLocationInWindow:[theEvent locationInWindow]];
     if(index == NSNotFound)
 	return;
@@ -574,6 +598,27 @@
     [self setSelectionIndex:index];
 }
 
+- (void)mouseDragged:(NSEvent *)theEvent{
+    //detect drag on the scrollbar bubble
+    //NSLog(@"Mouse dragged: %d:%f", [theEvent eventNumber], [theEvent locationInWindow].x);
+ 
+    //detect if it is the bubble
+    if(!_bubbleClicked)
+	return;
+
+    //work out x co-ord relative to the scrollbar
+    NSPoint eventLocation = [theEvent locationInWindow];
+    NSPoint localPoint = [self convertPoint:eventLocation fromView:nil];
+    CGFloat relativeXCoord = localPoint.x - (self.bounds.size.width-SCROLLBAR_WIDTH)/2.0;
+
+    //reverse the index from this
+    //NOTE: a change here may need to be reflected in updateScrollLayer
+    CGFloat xPos = SCROLLBAR_WIDTH/(float)[_cachedLayers count];
+    NSUInteger newFocusedIndex = relativeXCoord/xPos;
+
+    [self setSelectionIndex:newFocusedIndex];
+}
+
 - (void)rightMouseDown:(NSEvent *)theEvent{
     //NSLog(@"Right mouse down. \n%@", theEvent);
 
@@ -581,11 +626,11 @@
     if(index == NSNotFound){
 	//background right clicked -- inform delegate
 	if([[self delegate] respondsToSelector:@selector(coverflow:backgroundWasRightClickedWithEvent:)])
-	    [[self delegate] coverflow:self backgroundWasRightClickedWithEvent:theEvent]; 
+	    [[self delegate] coverflow:self backgroundWasRightClickedWithEvent:theEvent];
     }else{
 	//item was right clicked -- inform delegate
 	if([[self delegate] respondsToSelector:@selector(coverflow:cellWasRightClickedAtIndex:withEvent:)])
-	    [[self delegate] coverflow:self cellWasRightClickedAtIndex:index withEvent:theEvent]; 
+	    [[self delegate] coverflow:self cellWasRightClickedAtIndex:index withEvent:theEvent];
     }
 }
 

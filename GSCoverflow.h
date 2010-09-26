@@ -53,6 +53,7 @@
 
     CATextLayer* _titleLayer;
     CALayer*	 _scrollLayer;
+    BOOL	 _bubbleClicked;
 
     NSUInteger _focusedItemIndex;
 
