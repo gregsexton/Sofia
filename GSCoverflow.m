@@ -29,8 +29,8 @@
 //TODO: implement image versions
 //TODO: what if datasource is nil or doesn't implement method?
 //TODO: maximum width for images (== max height?)
-//TODO: scroll bar
 //TODO: drag and drop
+//TODO: only allows selecting one item
 
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
@@ -39,7 +39,8 @@
 	//these get created when they are first updated
 	_titleLayer = nil;
 	_scrollLayer = nil;
-	_bubbleClicked = NO;
+	_bubbleDragged = NO;
+	_focusedDragged = NO;
     }
     return self;
 }
@@ -274,8 +275,8 @@
 						    [_cachedTitles objectAtIndex:_focusedItemIndex],
 						    [_cachedSubtitles objectAtIndex:_focusedItemIndex]];
     CGSize preferredSize = [_titleLayer preferredFrameSize];
-    _titleLayer.frame = CGRectMake(0.0f, 0.0f, preferredSize.width, preferredSize.height);
-    _titleLayer.position = CGPointMake(NSMidX([self bounds]), TITLE_Y_POSITION);
+    _titleLayer.frame = CGRectMake(0.0f, 0.0f, round(preferredSize.width), round(preferredSize.height));
+    _titleLayer.position = CGPointMake(round(NSMidX([self bounds])), round(TITLE_Y_POSITION));
 }
 
 - (void)updateScrollLayer{
@@ -542,9 +543,13 @@
     }
 }
 
+- (CALayer*)focusedLayer{
+    return [_cachedLayers objectAtIndex:[self selectionIndex]];
+}
+
 //TODO: handle these events:
 //keys left and right
-//click scroll bar left or right
+
 - (CALayer*)layerForLocationInWindow:(NSPoint)eventLocation{
     NSPoint localPoint = [self convertPoint:eventLocation fromView:nil];
 
@@ -573,23 +578,57 @@
     return index;
 }
 
+- (void)focusedItemDragged:(CALayer*)clickedLayer withEvent:(NSEvent*)theEvent{
+    NSSize dragOffset = NSMakeSize(0.0, 0.0);
+    NSPasteboard* pboard = [NSPasteboard pasteboardWithName:NSDragPboard];
+    NSImage* dragImage = [[[NSImage alloc] initWithCGImage:(CGImageRef)[clickedLayer contents]
+						      size:NSSizeFromCGSize(clickedLayer.bounds.size)] autorelease];
+    [dragImage lockFocus]; //draw self into self at 50% opacity
+    [dragImage drawAtPoint:NSZeroPoint fromRect:NSZeroRect operation:NSCompositeCopy fraction:0.5];
+    [dragImage unlockFocus];
+
+    CGPoint focusPosition = [clickedLayer position];
+    focusPosition.x -= clickedLayer.bounds.size.width/2.0; //adjust for anchor point
+    NSPoint localPoint = NSPointFromCGPoint(focusPosition);
+
+    if([[self dataSource] respondsToSelector:@selector(coverflow:writeItemsAtIndexes:toPasteboard:)]){
+	//currently does not make use of return value
+	[[self dataSource] coverflow:self
+		 writeItemsAtIndexes:[NSIndexSet indexSetWithIndex:[self selectionIndex]]
+			toPasteboard:pboard];
+    }
+    
+    [self dragImage:dragImage at:localPoint
+			  offset:dragOffset //ignored parameter
+			   event:theEvent
+		      pasteboard:pboard
+			  source:self
+		       slideBack:YES];
+}
+
 - (void)mouseDown:(NSEvent *)theEvent{
     //handles single and double clicks
     //NSLog(@"Mouse down. \n%@", theEvent);
 
     CALayer* clickedLayer = [self layerForLocationInWindow:[theEvent locationInWindow]];
     if(clickedLayer && [clickedLayer.name isEqualToString:@"bubble"]){
-	_bubbleClicked = YES;
+	_bubbleDragged = YES;
+	_focusedDragged = NO;
 	return;
     }else{
-	_bubbleClicked = NO;
+	_bubbleDragged = NO;
     }
 
     NSUInteger index = [self itemIndexForLocationInWindow:[theEvent locationInWindow]];
     if(index == NSNotFound)
 	return;
 
-    if([theEvent clickCount] == 2 && [self selectionIndex] == index){
+    if([theEvent clickCount] == 1 && [self selectionIndex] == index) //drag on focused item
+	_focusedDragged = YES;
+    else
+	_focusedDragged = NO;
+
+    if([theEvent clickCount] == 2 && [self selectionIndex] == index){ //double click on focused item
 	if([[self delegate] respondsToSelector:@selector(coverflow:cellWasDoubleClickedAtIndex:)]){
 	    [[self delegate] coverflow:self cellWasDoubleClickedAtIndex:index];
 	}
@@ -602,21 +641,23 @@
     //detect drag on the scrollbar bubble
     //NSLog(@"Mouse dragged: %d:%f", [theEvent eventNumber], [theEvent locationInWindow].x);
  
-    //detect if it is the bubble
-    if(!_bubbleClicked)
-	return;
+    if(_bubbleDragged){
+	//work out x co-ord relative to the scrollbar
+	NSPoint eventLocation = [theEvent locationInWindow];
+	NSPoint localPoint = [self convertPoint:eventLocation fromView:nil];
+	CGFloat relativeXCoord = localPoint.x - (self.bounds.size.width-SCROLLBAR_WIDTH)/2.0;
 
-    //work out x co-ord relative to the scrollbar
-    NSPoint eventLocation = [theEvent locationInWindow];
-    NSPoint localPoint = [self convertPoint:eventLocation fromView:nil];
-    CGFloat relativeXCoord = localPoint.x - (self.bounds.size.width-SCROLLBAR_WIDTH)/2.0;
+	//reverse the index from this
+	//NOTE: a change here may need to be reflected in updateScrollLayer
+	CGFloat xPos = SCROLLBAR_WIDTH/(float)[_cachedLayers count];
+	NSUInteger newFocusedIndex = relativeXCoord/xPos;
 
-    //reverse the index from this
-    //NOTE: a change here may need to be reflected in updateScrollLayer
-    CGFloat xPos = SCROLLBAR_WIDTH/(float)[_cachedLayers count];
-    NSUInteger newFocusedIndex = relativeXCoord/xPos;
+	[self setSelectionIndex:newFocusedIndex];
+    }
 
-    [self setSelectionIndex:newFocusedIndex];
+    if(_focusedDragged){
+	[self focusedItemDragged:[self focusedLayer] withEvent:theEvent];
+    }
 }
 
 - (void)rightMouseDown:(NSEvent *)theEvent{

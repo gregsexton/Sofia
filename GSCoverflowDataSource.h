@@ -28,4 +28,8 @@
 - (NSUInteger)numberOfItemsInCoverflow:(GSCoverflow*)aCoverflow;
 - (id)coverflow:(GSCoverflow*)aCoverflow itemAtIndex:(NSUInteger)index; //should return a GSCoverflowItem or child of
 
+@optional
+
+- (NSUInteger)coverflow:(GSCoverflow*)aCoverflow writeItemsAtIndexes:(NSIndexSet*)itemIndexes toPasteboard:(NSPasteboard*)pasteboard;
+
 @end

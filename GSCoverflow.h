@@ -53,7 +53,8 @@
 
     CATextLayer* _titleLayer;
     CALayer*	 _scrollLayer;
-    BOOL	 _bubbleClicked;
+    BOOL	 _bubbleDragged;
+    BOOL	 _focusedDragged;
 
     NSUInteger _focusedItemIndex;
 
@@ -85,6 +86,7 @@
 
 - (NSUInteger)selectionIndex;
 - (void)setSelectionIndex:(NSUInteger)index;
+- (void)focusedItemDragged:(CALayer*)clickedLayer withEvent:(NSEvent*)theEvent;
 - (IBAction)moveOneItemLeft:(id)sender;
 - (IBAction)moveOneItemRight:(id)sender;
 @end

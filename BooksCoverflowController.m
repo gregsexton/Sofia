@@ -109,4 +109,12 @@
     [NSMenu popUpContextMenu:menu withEvent:event forView:aCoverflow];
 }
 
+- (NSUInteger)coverflow:(GSCoverflow*)aCoverflow writeItemsAtIndexes:(NSIndexSet*)itemIndexes
+	   toPasteboard:(NSPasteboard*)pasteboard{
+
+    [self writeBooksWithIndexes:itemIndexes toPasteboard:pasteboard];
+    return [itemIndexes count];
+}
+    
+
 @end
