@@ -29,7 +29,6 @@
 //TODO: implement image versions
 //TODO: what if datasource is nil or doesn't implement method?
 //TODO: maximum width for images (== max height?)
-//TODO: drag and drop
 //TODO: only allows selecting one item
 
 - (id)initWithFrame:(NSRect)frame {
@@ -547,9 +546,6 @@
     return [_cachedLayers objectAtIndex:[self selectionIndex]];
 }
 
-//TODO: handle these events:
-//keys left and right
-
 - (CALayer*)layerForLocationInWindow:(NSPoint)eventLocation{
     NSPoint localPoint = [self convertPoint:eventLocation fromView:nil];
 
@@ -685,7 +681,33 @@
 }
 
 - (void)keyDown:(NSEvent *)theEvent{
-    NSLog(@"Key down!\n%@", theEvent);
+    //NSLog(@"Key down!\n%@", theEvent);
+
+    if([theEvent modifierFlags] & NSNumericPadKeyMask) { // arrow keys have this mask
+        NSString *theArrow = [theEvent charactersIgnoringModifiers];
+        if([theArrow length] == 0)
+            return;            // reject dead keys
+        if([theArrow length] == 1) {
+	    switch([theArrow characterAtIndex:0]){
+		case NSUpArrowFunctionKey:
+		case NSLeftArrowFunctionKey:
+		    [self moveOneItemLeft:self];
+		    return;
+		case NSDownArrowFunctionKey:
+		case NSRightArrowFunctionKey:
+		   [self moveOneItemRight:self];
+		   return;
+		default:
+		   [super keyDown:theEvent];
+		   return;
+	    }
+	}
+    }
+    [super keyDown:theEvent];
+}
+
+- (BOOL)acceptsFirstResponder{
+    return YES; //the view will not handle key events without this
 }
 
 - (IBAction)moveOneItemLeft:(id)sender{
