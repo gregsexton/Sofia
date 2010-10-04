@@ -27,7 +27,6 @@
 @synthesize dataSource;
 
 //TODO: implement image versions
-//TODO: what if datasource is nil or doesn't implement method?
 //TODO: maximum width for images (== max height?)
 //TODO: only allows selecting one item
 
@@ -71,7 +70,7 @@
 }
 
 - (void)reloadData{
-    if([dataSource numberOfItemsInCoverflow:self] > 0){
+    if(dataSource != nil && [dataSource numberOfItemsInCoverflow:self] > 0){
 	[self deleteCache]; //TODO: use versions!
 	_cachedLayers = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
 	_cachedReflectionLayers = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
@@ -418,14 +417,38 @@
 - (void)moveLayer:(CALayer*)layer to:(CGPoint)position
        anchoredAt:(CGPoint)anchor zPosition:(CGFloat)zPos
 	transform:(CATransform3D)transform{
-    //small helper function to aid readability
-
-    layer.anchorPoint = anchor;
-    layer.position = position;
-    layer.zPosition = zPos;
-    layer.transform = transform;
-
+    //small helper function to aid readability also with optimization 
+    
+    if([self isOnscreen:layer.position] || [self isOnscreen:position]){
+	layer.anchorPoint = anchor;
+	layer.position = position;
+	layer.zPosition = zPos;
+	layer.transform = transform;
+    }else{
+	[CATransaction begin];
+	//[CATransaction setAnimationDuration:0.00f];
+	[CATransaction setValue:(id)kCFBooleanTrue
+			 forKey:kCATransactionDisableActions];
+	
+	    layer.anchorPoint = anchor;
+	    layer.position = position;
+	    layer.zPosition = zPos;
+	    layer.transform = transform;
+	[CATransaction commit];
+    }
 }
+
+- (BOOL)isOnscreen:(CGPoint)pos{
+
+    CGFloat x = self.bounds.origin.x;
+    CGFloat y = self.bounds.origin.y;
+    CGFloat h = self.bounds.size.height;
+    CGFloat w = self.bounds.size.width;
+
+    return pos.x >= x && pos.x <= x+w 
+	&& pos.y >= y && pos.y <= y+h;
+}
+
 
 - (void)adjustLayerBounds{
     //NOTE: do not call this method instead call adjustCachedLayersWithAnimation:
@@ -531,6 +554,7 @@
 
 - (void)setSelectionIndex:(NSUInteger)index{
     //does nothing if the index is out of bounds
+    //TODO: if scrolling by 'large' amount break into stages to make it smoother?
     if([_cachedLayers count] > 0){
 	if(index >= 0 && index < [_cachedLayers count]){
 	    _focusedItemIndex = index;
@@ -721,7 +745,6 @@
 ///////////////////    CALayoutManager Protocol Methods    ///////////////////////////////////////
 
 - (void)invalidateLayoutOfLayer:(CALayer *)layer{
-    //TODO: only change stuff if the root layer has been resized!
     NSSize newSize = self.bounds.size;
     if(newSize.width != _currentViewSize.width || newSize.height != _currentViewSize.height){
 	_currentViewSize = self.bounds.size;

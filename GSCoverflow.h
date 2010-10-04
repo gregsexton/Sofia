@@ -65,6 +65,7 @@
 @property (nonatomic,assign) id <GSCoverflowDelegate> delegate;
 @property (nonatomic,assign) id <GSCoverflowDataSource> dataSource;
 
+- (BOOL)isOnscreen:(CGPoint)pos;
 - (CALayer*)layerForGSCoverflowItem:(GSCoverflowItem*)item;
 - (CALayer*)reflectionLayerForGSCoverflowItem:(GSCoverflowItem*)item;
 - (CGRect)scaleRect:(CGRect)rect toWithinHeight:(CGFloat)height;
