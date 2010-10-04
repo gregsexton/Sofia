@@ -58,6 +58,8 @@
 
     NSUInteger _focusedItemIndex;
 
+    NSSize	_currentViewSize;
+
 }
 
 @property (nonatomic,assign) id <GSCoverflowDelegate> delegate;

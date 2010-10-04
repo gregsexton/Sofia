@@ -319,7 +319,7 @@
 
     //temporarily disable custom animation timing
     [CATransaction begin];
-    [CATransaction setAnimationDuration:0.25f];
+    [CATransaction setAnimationDuration:0.00f];
     [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault]];
 
     _scrollLayer.frame = CGRectMake(0.0f, 0.0f, SCROLLBAR_WIDTH, SCROLLBAR_HEIGHT);
@@ -722,7 +722,11 @@
 
 - (void)invalidateLayoutOfLayer:(CALayer *)layer{
     //TODO: only change stuff if the root layer has been resized!
-    [self adjustCachedLayersWithAnimation:NO];
+    NSSize newSize = self.bounds.size;
+    if(newSize.width != _currentViewSize.width || newSize.height != _currentViewSize.height){
+	_currentViewSize = self.bounds.size;
+	[self adjustCachedLayersWithAnimation:NO];
+    }
 }
 
 @end
