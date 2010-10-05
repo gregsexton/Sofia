@@ -27,7 +27,6 @@
 @synthesize dataSource;
 
 //TODO: implement image versions
-//TODO: maximum width for images (== max height?)
 //TODO: only allows selecting one item
 
 - (id)initWithFrame:(NSRect)frame {
@@ -460,8 +459,8 @@
 
 	CALayer* layer = [_cachedLayers objectAtIndex:i];
 	CALayer* layerReflected = [_cachedReflectionLayers objectAtIndex:i];
-	layer.bounds = [self scaleRect:layer.bounds toWithinHeight:smallerHeight];
-	layerReflected.bounds = [self scaleRect:layerReflected.bounds toWithinHeight:smallerHeight];
+	layer.bounds = [self scaleRect:layer.bounds toWithin:smallerHeight];
+	layerReflected.bounds = [self scaleRect:layerReflected.bounds toWithin:smallerHeight];
 
 	for(CALayer* subLayer in layer.sublayers){
 	    subLayer.bounds = layer.bounds;
@@ -475,8 +474,8 @@
     //adjust focused layer
     CALayer* focused = [_cachedLayers objectAtIndex:_focusedItemIndex];
     CALayer* focusedReflected = [_cachedReflectionLayers objectAtIndex:_focusedItemIndex];
-    focused.bounds = [self scaleRect:focused.bounds toWithinHeight:MAXIMUM_IMAGE_HEIGHT];
-    focusedReflected.bounds = [self scaleRect:focusedReflected.bounds toWithinHeight:MAXIMUM_IMAGE_HEIGHT];
+    focused.bounds = [self scaleRect:focused.bounds toWithin:MAXIMUM_IMAGE_HEIGHT];
+    focusedReflected.bounds = [self scaleRect:focusedReflected.bounds toWithin:MAXIMUM_IMAGE_HEIGHT];
 
     for(CALayer* subLayer in focused.sublayers){
 	subLayer.bounds = focused.bounds;
@@ -486,9 +485,16 @@
     }
 }
 
-- (CGRect)scaleRect:(CGRect)rect toWithinHeight:(CGFloat)height{
+- (CGRect)scaleRect:(CGRect)rect toWithin:(CGFloat)length{
+    //returns a rect, with largest dimension scaled to fit within length
 
-    CGRect retRect = CGRectMake(0.0f, 0.0f, (height/rect.size.height) * rect.size.width, height);
+    CGRect retRect;
+
+    if(rect.size.height > rect.size.width)
+	retRect = CGRectMake(0.0f, 0.0f, (length/rect.size.height) * rect.size.width, length);
+    else
+	retRect = CGRectMake(0.0f, 0.0f, length, (length/rect.size.width) * rect.size.height);
+
     return retRect;
 }
 

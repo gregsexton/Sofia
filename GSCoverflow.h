@@ -68,7 +68,7 @@
 - (BOOL)isOnscreen:(CGPoint)pos;
 - (CALayer*)layerForGSCoverflowItem:(GSCoverflowItem*)item;
 - (CALayer*)reflectionLayerForGSCoverflowItem:(GSCoverflowItem*)item;
-- (CGRect)scaleRect:(CGRect)rect toWithinHeight:(CGFloat)height;
+- (CGRect)scaleRect:(CGRect)rect toWithin:(CGFloat)length;
 - (void)adjustCachedLayersWithAnimation:(BOOL)animate;
 - (void)adjustLayerBounds;
 - (void)adjustLayerPositions;
