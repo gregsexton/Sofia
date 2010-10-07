@@ -28,6 +28,7 @@
 
 //TODO: implement image versions
 //TODO: only allows selecting one item
+//TODO: sort out blurry text
 
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
@@ -272,8 +273,19 @@
 						    [_cachedTitles objectAtIndex:_focusedItemIndex],
 						    [_cachedSubtitles objectAtIndex:_focusedItemIndex]];
     CGSize preferredSize = [_titleLayer preferredFrameSize];
+    //ensure that text sits on a pixel boundary otherwise it will blur
+    preferredSize.width = [self isEven:preferredSize.width] ? preferredSize.width : preferredSize.width + 1;
+    preferredSize.height = [self isEven:preferredSize.height] ? preferredSize.height : preferredSize.height + 1;
+
     _titleLayer.frame = CGRectMake(0.0f, 0.0f, round(preferredSize.width), round(preferredSize.height));
     _titleLayer.position = CGPointMake(round(NSMidX([self bounds])), round(TITLE_Y_POSITION));
+}
+
+- (BOOL)isEven:(CGFloat)n{
+    int quotient = (int)(n/2.0);
+    int remainder = n - (quotient*2.0);
+
+    return remainder == 0;
 }
 
 - (void)updateScrollLayer{

@@ -79,6 +79,7 @@
 - (void)updateTitleLayer;
 - (void)adjustFadeLayers;
 - (void)adjustFadeSublayerOf:(CALayer*)layer toOpacity:(CGFloat)opacity;
+- (BOOL)isEven:(CGFloat)n;
 
 - (CATransform3D)identityReflectionTransform;
 - (CATransform3D)identityTransform;
