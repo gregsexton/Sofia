@@ -33,12 +33,14 @@
 #import "ImportBooksController.h"
 #import "BooksWindowControllerDelegate.h"
 #import "ImportBooksControllerDelegate.h"
+@class BooksCoverflowController;
 @class BooksTableView;
 @class SidebarOutlineView;
 
 //used to save the current view for app restart
 #define LIST_VIEW @"listView"
 #define IMAGE_VIEW @"imageView"
+#define COVER_VIEW @"coverflowView"
 
 @interface SofiaApplication : NSObject <BooksWindowControllerDelegate, ImportBooksControllerDelegate> {
 	
@@ -53,9 +55,11 @@
 
 	IBOutlet BooksTableView *tableView;
 	IBOutlet BooksImageBrowserView *imagesView;
+	IBOutlet BooksCoverflowController *coverflowController;
 	IBOutlet NSView* mainView;
 	IBOutlet NSView* mainTableView; //this includes the scrollview
 	IBOutlet NSView* mainImagesView;
+	IBOutlet NSView* mainCoverflowView;
 	NSView* currentView;
 	
 	NSPersistentStoreCoordinator *persistentStoreCoordinator;
@@ -68,19 +72,20 @@
 - (NSManagedObjectModel *)managedObjectModel;
 - (NSManagedObjectContext *)managedObjectContext;
 
-- (IBAction) aboutClickAction:(id)sender;
-- (IBAction) addBookAction:(id)sender;
-- (IBAction) addRemoveClickAction:(id)sender;
-- (IBAction) changeToImagesView:(id)sender;
-- (IBAction) changeToListView:(id)sender;
-- (IBAction) changeViewClickAction:(id)sender;
-- (IBAction) displayPreferencesClickAction:(id)sender;
-- (IBAction) importBooks:(id)sender;
-- (IBAction) manageAuthorsClickAction:(id)sender;
-- (IBAction) manageSubjectsClickAction:(id)sender;
-- (IBAction) removeBookAction:(id)sender;
-- (IBAction) saveAction:sender;
-- (IBAction) search:(id)sender;
+- (IBAction)aboutClickAction:(id)sender;
+- (IBAction)addBookAction:(id)sender;
+- (IBAction)addRemoveClickAction:(id)sender;
+- (IBAction)changeToCoverflowView:(id)sender;
+- (IBAction)changeToImagesView:(id)sender;
+- (IBAction)changeToListView:(id)sender;
+- (IBAction)changeViewClickAction:(id)sender;
+- (IBAction)displayPreferencesClickAction:(id)sender;
+- (IBAction)importBooks:(id)sender;
+- (IBAction)manageAuthorsClickAction:(id)sender;
+- (IBAction)manageSubjectsClickAction:(id)sender;
+- (IBAction)removeBookAction:(id)sender;
+- (IBAction)saveAction:sender;
+- (IBAction)search:(id)sender;
 - (void) changeMainViewFor:(NSView*)viewToChangeTo;
 - (void) updateSummaryText;
 

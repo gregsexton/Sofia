@@ -22,6 +22,7 @@
 #import "SofiaApplication.h"
 #import "SidebarOutlineView.h"
 #import "BooksTableView.h"
+#import "BooksCoverflowController.h"
 
 @implementation SofiaApplication
 
@@ -36,6 +37,8 @@
 	[self changeToListView:self];
     else if([view isEqualToString:IMAGE_VIEW])
 	[self changeToImagesView:self];
+    else if([view isEqualToString:COVER_VIEW])
+	[self changeToCoverflowView:self];
     
     //setup preferences
     AccessKeyViewController *accessKeys = [[AccessKeyViewController alloc] initWithNibName:@"Preferences_AccessKeys" bundle:nil];
@@ -283,7 +286,7 @@
     }else if([changeViewButtons selectedSegment] == 1){
 	[self changeToImagesView:self];
     }else if([changeViewButtons selectedSegment] == 2){
-	//TODO
+	[self changeToCoverflowView:self];
     }else{
 	//serious error!
     }
@@ -305,6 +308,14 @@
 	       byExtendingSelection:NO];
     [imagesView scrollIndexToVisible:[arrayController selectionIndex]];
     [[NSUserDefaults standardUserDefaults] setObject:IMAGE_VIEW forKey:@"currentView"];
+}
+
+- (IBAction)changeToCoverflowView:(id)sender{
+    [self changeMainViewFor:mainCoverflowView];
+    [zoomSlider setHidden:true];
+    [changeViewButtons setSelectedSegment:2];
+    [[NSUserDefaults standardUserDefaults] setObject:COVER_VIEW forKey:@"currentView"];
+    [coverflowController addAndRepositionTableView];
 }
 
 - (void)changeMainViewFor:(NSView*)viewToChangeTo{
