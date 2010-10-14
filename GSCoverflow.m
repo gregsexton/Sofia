@@ -27,8 +27,6 @@
 @synthesize dataSource;
 
 //TODO: implement image versions
-//TODO: only allows selecting one item
-//TODO: sort out blurry text
 
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
@@ -437,7 +435,6 @@
 	layer.transform = transform;
     }else{
 	[CATransaction begin];
-	//[CATransaction setAnimationDuration:0.00f];
 	[CATransaction setValue:(id)kCFBooleanTrue
 			 forKey:kCATransactionDisableActions];
 	
@@ -572,7 +569,6 @@
 
 - (void)setSelectionIndex:(NSUInteger)index{
     //does nothing if the index is out of bounds
-    //TODO: if scrolling by 'large' amount break into stages to make it smoother?
     if([_cachedLayers count] > 0){
 	if(index >= 0 && index < [_cachedLayers count]){
 	    _focusedItemIndex = index;

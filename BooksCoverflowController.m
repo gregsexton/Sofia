@@ -84,7 +84,9 @@
 	[coverflow reloadData];
     }
     if([keyPath isEqualToString:@"selectedObjects"]){
-	[coverflow setSelectionIndex:[arrayController selectionIndex]];
+	if([coverflow selectionIndex] != [arrayController selectionIndex]){
+	    [coverflow setSelectionIndex:[arrayController selectionIndex]];
+	}
     }
 }
 
