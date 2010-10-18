@@ -254,12 +254,12 @@
 	totalPred = [sideBar getPredicateForSelectedItem];
     }else{
 	NSArray* predicates = [NSArray arrayWithObjects:
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"title contains[cd] '%@'", searchVal]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"authorText contains[cd] '%@'", searchVal]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"publisherText contains[cd] '%@'", searchVal]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"subjectText contains[cd] '%@'", searchVal]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn10 contains[cd] '%@'", searchVal]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn13 contains[cd] '%@'", searchVal]], nil];
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"title contains[cd] '%@'", [searchVal escapeSingleQuote]]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"authorText contains[cd] '%@'", [searchVal escapeSingleQuote]]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"publisherText contains[cd] '%@'", [searchVal escapeSingleQuote]]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"subjectText contains[cd] '%@'", [searchVal escapeSingleQuote]]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn10 contains[cd] '%@'", [searchVal escapeSingleQuote]]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn13 contains[cd] '%@'", [searchVal escapeSingleQuote]]], nil];
 	NSPredicate* searchPred = [NSCompoundPredicate orPredicateWithSubpredicates:predicates];
 
 	NSArray* searchAndCurrentFilter = [NSArray arrayWithObjects:searchPred, [sideBar getPredicateForSelectedItem], nil];

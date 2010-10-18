@@ -27,5 +27,6 @@
 + (NSString*)stringFromArray:(NSArray*)array withCombiner:(NSString*)combiner;
 + (NSString*)interleaveArray:(NSArray*)array with:(NSString*)interleave;
 - (NSString*)paragraphFormatAndStripHTML;
+- (NSString*)escapeSingleQuote;
 
 @end

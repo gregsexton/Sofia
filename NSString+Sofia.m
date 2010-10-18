@@ -77,4 +77,10 @@
 
     return [retVal autorelease];
 }
+
+- (NSString*)escapeSingleQuote{
+    return [self stringByReplacingOccurrencesOfString:@"'"
+					   withString:@"\\'"];
+}
+
 @end

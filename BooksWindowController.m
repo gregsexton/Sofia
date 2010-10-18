@@ -408,7 +408,7 @@
 - (NSFetchRequest*)entity:(NSString*)entity existsWithName:(NSString*)entityName{
     NSError *error;
     //TODO: stip ' characters from this and any other instances -- real world haskell produces this bug.
-    NSString *predicate = [[NSString alloc] initWithFormat:@"name MATCHES '%@'", entityName];
+    NSString *predicate = [[NSString alloc] initWithFormat:@"name MATCHES '%@'", [entityName escapeSingleQuote]];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:entity inManagedObjectContext:managedObjectContext]];
     [request setPredicate:[NSPredicate predicateWithFormat:predicate]];
@@ -427,8 +427,8 @@
     //could use [self entity:existsWithName:] ?
     NSError *error;
     NSString *predicate = [[NSString alloc] initWithFormat:@"isbn10 MATCHES '%@' OR isbn13 MATCHES '%@'",
-							   searchedISBN,
-							   searchedISBN];
+							   [searchedISBN escapeSingleQuote],
+							   [searchedISBN escapeSingleQuote]];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"book" inManagedObjectContext:managedObjectContext]];
     [request setPredicate:[NSPredicate predicateWithFormat:predicate]];
