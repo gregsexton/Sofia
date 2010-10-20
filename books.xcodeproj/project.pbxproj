@@ -22,6 +22,7 @@
 		373752C0105EB4FF00718317 /* Detail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 373752BF105EB4FF00718317 /* Detail.xib */; };
 		373752C6105EB6D500718317 /* SofiaApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 373752C5105EB6D500718317 /* SofiaApplication.m */; };
 		3737550E106839A700718317 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 3737550D106839A700718317 /* Credits.html */; };
+		374360D2126F8C6F00F5711A /* missing_coverflow.png in Resources */ = {isa = PBXBuildFile; fileRef = 374360D1126F8C6F00F5711A /* missing_coverflow.png */; };
 		3745147F11B70B2A001C7960 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3745147E11B70B2A001C7960 /* Quartz.framework */; };
 		3745148611B70B85001C7960 /* BooksImageBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3745148511B70B85001C7960 /* BooksImageBrowserView.m */; };
 		3745159011C025BC001C7960 /* BooksTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3745158F11C025BC001C7960 /* BooksTableViewController.m */; };
@@ -127,6 +128,7 @@
 		373752C4105EB6D500718317 /* SofiaApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SofiaApplication.h; sourceTree = "<group>"; };
 		373752C5105EB6D500718317 /* SofiaApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SofiaApplication.m; sourceTree = "<group>"; };
 		3737550D106839A700718317 /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
+		374360D1126F8C6F00F5711A /* missing_coverflow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = missing_coverflow.png; sourceTree = "<group>"; };
 		3745147E11B70B2A001C7960 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		3745148411B70B85001C7960 /* BooksImageBrowserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooksImageBrowserView.h; sourceTree = "<group>"; };
 		3745148511B70B85001C7960 /* BooksImageBrowserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BooksImageBrowserView.m; sourceTree = "<group>"; };
@@ -523,6 +525,7 @@
 		37BAFBB7115C14C700F95C41 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				374360D1126F8C6F00F5711A /* missing_coverflow.png */,
 				37AF7F301231BE60007A7C85 /* stars.tif */,
 				37970AF811DAA847003A9D0D /* missing.png */,
 				37970AB011D920CA003A9D0D /* importarrow.png */,
@@ -707,6 +710,7 @@
 				37970AF911DAA847003A9D0D /* missing.png in Resources */,
 				37AF704B12048044007A7C85 /* ExternalLinkEditor.xib in Resources */,
 				37AF7F311231BE60007A7C85 /* stars.tif in Resources */,
+				374360D2126F8C6F00F5711A /* missing_coverflow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

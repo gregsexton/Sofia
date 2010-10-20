@@ -64,7 +64,7 @@
     book* theBook = [[arrayController arrangedObjects] objectAtIndex:index];
     NSImage* img = [theBook coverImage];
     if(img == nil) //use default image
-	img = [NSImage imageNamed:@"missing.png"]; //TODO: change to be more coverflowy?
+	img = [NSImage imageNamed:@"missing_coverflow.png"];
 
     CGImageRef imgRep = [img CGImageForProposedRect:nil context:nil hints:nil];
     GSCoverflowItem* item = [[GSCoverflowItem alloc] initWithUID:[theBook title]
