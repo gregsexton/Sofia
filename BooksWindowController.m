@@ -407,7 +407,6 @@
 
 - (NSFetchRequest*)entity:(NSString*)entity existsWithName:(NSString*)entityName{
     NSError *error;
-    //TODO: stip ' characters from this and any other instances -- real world haskell produces this bug.
     NSString *predicate = [[NSString alloc] initWithFormat:@"name MATCHES '%@'", [entityName escapeSingleQuote]];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:entity inManagedObjectContext:managedObjectContext]];
@@ -549,13 +548,19 @@
 - (void)tabView:(NSTabView*)tabView didSelectTabViewItem:(NSTabViewItem*)tabViewItem{
 
     if([[tabViewItem identifier] isEqualToString:@"similartab"]){
-	//TODO: use isbn10 if no isbn13
-	[similarBooksController setISBN:[txt_isbn13 stringValue]];
+
+	if([[txt_isbn13 stringValue] isEqualToString:@""])
+	    [similarBooksController setISBN:[txt_isbn10 stringValue]];
+	else
+	    [similarBooksController setISBN:[txt_isbn13 stringValue]];
     }
 
     if([[tabViewItem identifier] isEqualToString:@"reviewstab"]){
-	//TODO: use isbn10 if no isbn13
-	[reviewsController setISBN:[txt_isbn13 stringValue]];
+
+	if([[txt_isbn13 stringValue] isEqualToString:@""])
+	    [reviewsController setISBN:[txt_isbn10 stringValue]];
+	else
+	    [reviewsController setISBN:[txt_isbn13 stringValue]];
     }
 }
 
