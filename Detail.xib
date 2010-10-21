@@ -3,15 +3,15 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
 		<string key="IBDocument.SystemVersion">10F569</string>
-		<string key="IBDocument.InterfaceBuilderVersion">762</string>
+		<string key="IBDocument.InterfaceBuilderVersion">804</string>
 		<string key="IBDocument.AppKitVersion">1038.29</string>
 		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">762</string>
+			<string key="NS.object.0">804</string>
 		</object>
 		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
-			<integer value="434"/>
+			<integer value="4"/>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -185,7 +185,7 @@
 								<object class="NSTabViewItem" id="670430723">
 									<string key="NSIdentifier">summary</string>
 									<object class="NSView" key="NSView" id="14031021">
-										<nil key="NSNextResponder"/>
+										<reference key="NSNextResponder" ref="317962420"/>
 										<int key="NSvFlags">256</int>
 										<array class="NSMutableArray" key="NSSubviews">
 											<object class="NSImageView" id="403684829">
@@ -743,6 +743,7 @@
 											</object>
 										</array>
 										<string key="NSFrame">{{10, 33}, {635, 518}}</string>
+										<reference key="NSSuperview" ref="317962420"/>
 										<int key="NSViewLayerContentsRedrawPolicy">2</int>
 									</object>
 									<string key="NSLabel">Summary</string>
@@ -2595,7 +2596,7 @@
 								<object class="NSTabViewItem" id="33883446">
 									<string key="NSIdentifier">extra</string>
 									<object class="NSView" key="NSView" id="845864177">
-										<reference key="NSNextResponder" ref="317962420"/>
+										<nil key="NSNextResponder"/>
 										<int key="NSvFlags">256</int>
 										<array class="NSMutableArray" key="NSSubviews">
 											<object class="NSTabView" id="322143360">
@@ -3098,7 +3099,6 @@
 											</object>
 										</array>
 										<string key="NSFrame">{{10, 33}, {635, 518}}</string>
-										<reference key="NSSuperview" ref="317962420"/>
 										<int key="NSViewLayerContentsRedrawPolicy">2</int>
 									</object>
 									<string key="NSLabel">Extra</string>
@@ -3157,13 +3157,13 @@
 									<reference key="NSTabView" ref="317962420"/>
 								</object>
 							</array>
-							<reference key="NSSelectedTabViewItem" ref="33883446"/>
+							<reference key="NSSelectedTabViewItem" ref="670430723"/>
 							<reference key="NSFont" ref="85247258"/>
 							<int key="NSTvFlags">0</int>
 							<bool key="NSAllowTruncatedLabels">YES</bool>
 							<bool key="NSDrawsBackground">YES</bool>
 							<array class="NSMutableArray" key="NSSubviews">
-								<reference ref="845864177"/>
+								<reference ref="14031021"/>
 							</array>
 						</object>
 						<object class="NSButton" id="95542696">
@@ -3250,7 +3250,7 @@
 								<bool key="NSDrawsBackground">YES</bool>
 								<object class="NSColor" key="NSBackgroundColor">
 									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MSAwLjQwMDAwMDAwNiAwLjQwMDAwMDAwNgA</bytes>
+									<bytes key="NSRGB">MSAwLjY1ODkwMTU2NzcgMC42Njk3NTUwNDk0AA</bytes>
 								</object>
 								<reference key="NSTextColor" ref="116652056"/>
 							</object>
@@ -6274,6 +6274,40 @@
 						<string key="saveClicked:">id</string>
 						<string key="searchClicked:">id</string>
 					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="addAuthorClicked:">
+							<string key="name">addAuthorClicked:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="addSubjectClicked:">
+							<string key="name">addSubjectClicked:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="cancelClicked:">
+							<string key="name">cancelClicked:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="clearClicked:">
+							<string key="name">clearClicked:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="copiesValueChanged:">
+							<string key="name">copiesValueChanged:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="removeErrorMessage:">
+							<string key="name">removeErrorMessage:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="saveClicked:">
+							<string key="name">saveClicked:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="searchClicked:">
+							<string key="name">searchClicked:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="authorsArrayController">NSArrayController</string>
 						<string key="authorsTableView">NSTableView</string>
@@ -6329,6 +6363,220 @@
 						<string key="txt_urls">NSTextView</string>
 						<string key="window">NSWindow</string>
 					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="authorsArrayController">
+							<string key="name">authorsArrayController</string>
+							<string key="candidateClassName">NSArrayController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="authorsTableView">
+							<string key="name">authorsTableView</string>
+							<string key="candidateClassName">NSTableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="btn_cancel">
+							<string key="name">btn_cancel</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="btn_clear">
+							<string key="name">btn_clear</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="btn_save">
+							<string key="name">btn_save</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="btn_search">
+							<string key="name">btn_search</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="delegate">
+							<string key="name">delegate</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="errorLabel">
+							<string key="name">errorLabel</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="img_cover">
+							<string key="name">img_cover</string>
+							<string key="candidateClassName">NSImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="img_summary_cover">
+							<string key="name">img_summary_cover</string>
+							<string key="candidateClassName">NSImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lbl_summary_author">
+							<string key="name">lbl_summary_author</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lbl_summary_dewey">
+							<string key="name">lbl_summary_dewey</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lbl_summary_deweyNormal">
+							<string key="name">lbl_summary_deweyNormal</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lbl_summary_edition">
+							<string key="name">lbl_summary_edition</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lbl_summary_isbn10">
+							<string key="name">lbl_summary_isbn10</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lbl_summary_isbn13">
+							<string key="name">lbl_summary_isbn13</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lbl_summary_language">
+							<string key="name">lbl_summary_language</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lbl_summary_lccNumber">
+							<string key="name">lbl_summary_lccNumber</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lbl_summary_noOfCopies">
+							<string key="name">lbl_summary_noOfCopies</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lbl_summary_physicalDescrip">
+							<string key="name">lbl_summary_physicalDescrip</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lbl_summary_publisher">
+							<string key="name">lbl_summary_publisher</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lbl_summary_subject">
+							<string key="name">lbl_summary_subject</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lbl_summary_summary">
+							<string key="name">lbl_summary_summary</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lbl_summary_title">
+							<string key="name">lbl_summary_title</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lbl_summary_titleLong">
+							<string key="name">lbl_summary_titleLong</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="progIndicator">
+							<string key="name">progIndicator</string>
+							<string key="candidateClassName">NSProgressIndicator</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="progressSheet">
+							<string key="name">progressSheet</string>
+							<string key="candidateClassName">NSPanel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="reviewsController">
+							<string key="name">reviewsController</string>
+							<string key="candidateClassName">ReviewsViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="similarBooksController">
+							<string key="name">similarBooksController</string>
+							<string key="candidateClassName">SimilarBooksViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="step_noOfCopies">
+							<string key="name">step_noOfCopies</string>
+							<string key="candidateClassName">NSStepper</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="subjectsArrayController">
+							<string key="name">subjectsArrayController</string>
+							<string key="candidateClassName">NSArrayController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="subjectsTableView">
+							<string key="name">subjectsTableView</string>
+							<string key="candidateClassName">NSTableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="txt_author">
+							<string key="name">txt_author</string>
+							<string key="candidateClassName">NSComboBox</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="txt_awards">
+							<string key="name">txt_awards</string>
+							<string key="candidateClassName">NSTextView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="txt_dewey">
+							<string key="name">txt_dewey</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="txt_deweyNormal">
+							<string key="name">txt_deweyNormal</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="txt_edition">
+							<string key="name">txt_edition</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="txt_isbn10">
+							<string key="name">txt_isbn10</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="txt_isbn13">
+							<string key="name">txt_isbn13</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="txt_language">
+							<string key="name">txt_language</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="txt_lccNumber">
+							<string key="name">txt_lccNumber</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="txt_noOfCopies">
+							<string key="name">txt_noOfCopies</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="txt_notes">
+							<string key="name">txt_notes</string>
+							<string key="candidateClassName">NSTextView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="txt_physicalDescrip">
+							<string key="name">txt_physicalDescrip</string>
+							<string key="candidateClassName">NSComboBox</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="txt_publisher">
+							<string key="name">txt_publisher</string>
+							<string key="candidateClassName">NSComboBox</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="txt_search">
+							<string key="name">txt_search</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="txt_subject">
+							<string key="name">txt_subject</string>
+							<string key="candidateClassName">NSComboBox</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="txt_summary">
+							<string key="name">txt_summary</string>
+							<string key="candidateClassName">NSTextView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="txt_title">
+							<string key="name">txt_title</string>
+							<string key="candidateClassName">NSComboBox</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="txt_titleLong">
+							<string key="name">txt_titleLong</string>
+							<string key="candidateClassName">NSComboBox</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="txt_toc">
+							<string key="name">txt_toc</string>
+							<string key="candidateClassName">NSTextView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="txt_urls">
+							<string key="name">txt_urls</string>
+							<string key="candidateClassName">NSTextView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="window">
+							<string key="name">window</string>
+							<string key="candidateClassName">NSWindow</string>
+						</object>
+					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">BooksWindowController.h</string>
@@ -6366,6 +6614,20 @@
 						<string key="progIndicator">NSProgressIndicator</string>
 						<string key="tableView">NSTableView</string>
 					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="averageRating">
+							<string key="name">averageRating</string>
+							<string key="candidateClassName">FiveStars</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="progIndicator">
+							<string key="name">progIndicator</string>
+							<string key="candidateClassName">NSProgressIndicator</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tableView">
+							<string key="name">tableView</string>
+							<string key="candidateClassName">NSTableView</string>
+						</object>
+					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">ReviewsViewController.h</string>
@@ -6378,10 +6640,31 @@
 						<string key="NS.key.0">doubleClickAction:</string>
 						<string key="NS.object.0">id</string>
 					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">doubleClickAction:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">doubleClickAction:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="bookWinController">BooksWindowController</string>
 						<string key="progIndicator">NSProgressIndicator</string>
 						<string key="tableView">NSTableView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="bookWinController">
+							<string key="name">bookWinController</string>
+							<string key="candidateClassName">BooksWindowController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="progIndicator">
+							<string key="name">progIndicator</string>
+							<string key="candidateClassName">NSProgressIndicator</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tableView">
+							<string key="name">tableView</string>
+							<string key="candidateClassName">NSTableView</string>
+						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
@@ -7069,6 +7352,13 @@
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">view</string>
 						<string key="NS.object.0">NSView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">view</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">view</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
