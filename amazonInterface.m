@@ -482,7 +482,6 @@
     }
 
     if(_CustomerReviews){
-	//TODO: this only gets the first page, get them all!!
 	if([elementName isEqualToString:@"Review"]){
 	    [bookReviews addObject:currentReview];
 	    [currentReview release];

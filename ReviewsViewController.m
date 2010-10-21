@@ -25,8 +25,6 @@
 @implementation ReviewsViewController
 @synthesize amazonReviews;
 
-//TODO: error handling what if book not found or isbn incorrect, no internet connection?
-
 - (void)awakeFromNib{
     [tableView setDelegate:self];
     [tableView setDataSource:self];

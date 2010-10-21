@@ -25,8 +25,6 @@
 
 @implementation SimilarBooksViewController
 
-//TODO: error handling what if book not found or isbn incorrect, no internet connection?
-
 - (void)awakeFromNib{
     [tableView setDelegate:self];
     [tableView setDataSource:self];
@@ -134,6 +132,9 @@
 
     [[NSWorkspace sharedWorkspace] openURL:[urls objectAtIndex:rowIndex]];
 } 
+
+
+///////////////////////    DELEGATE METHODS   //////////////////////////////////////////////////////////////////////////
 
 - (id)tableView:(NSTableView*)aTableView objectValueForTableColumn:(NSTableColumn*)aTableColumn 
 	    row:(NSInteger)rowIndex{
