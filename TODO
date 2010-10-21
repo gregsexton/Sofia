@@ -1,3 +1,11 @@
+v0.2.1
+------
+* Constrain coverflow split.
+* Preview view remembers width.
+* Fix layer-backed view rendering issues in detail window.
+
+Future
+------
 * Advanced find
 * Grab stuff from Google. 
 * Finish ownership tab.
