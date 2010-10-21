@@ -1,4 +1,4 @@
-Readme file for Sofia v0.1.0 for Mac OS X 10.6+, July 28, 2010.
+Readme file for Sofia v0.2.0 for Mac OS X 10.6+, October 21, 2010.
 
 Introduction 
 ------------
@@ -51,7 +51,7 @@ Features
 
 * Interface based on Apple's iTunes.
 
-* Book lists allowing custom collections of books.
+* Book lists allow custom collections of books.
 
 * Smart book lists that update automatically based on search
 criteria.
@@ -61,9 +61,13 @@ text.
 
 * Maintain a shopping list.
 
-* Browse your library using two different views. A list view to
-quickly view a lot of information easily or by cover artwork to
-visually identify a book.
+* Browse your library using three different views. 
+
+    - A list view to quickly view a lot of information easily.
+      
+    - A cover artwork view to visually identify a book.
+
+    - Combine the best of both views by using the Coverflow view.
 
 * Book information including cover artwork automatically
 downloaded and populated from the web for you.
@@ -73,6 +77,21 @@ you type.
 
 * Easily manage your authors and subjects and quickly view the
 books you own by a specific author or in a specific subject.
+
+* Easily view the books you own on external websites with a single
+click. Sofia comes with a collection of default websites and you
+can easily add your own.
+
+* Quickly view a summary of a book in the preview pane.
+
+* View a reference book's table of contents to see if it contains
+specific material you are interested in.
+
+* Instantly read reviews from the web about books you own or are
+considering buying, directly in Sofia.
+
+* Liked a book? Within Sofia you can simply view books that have
+been judged to be similar.
 
 
 Importing books into Sofia 
@@ -99,6 +118,16 @@ extract any ISBN numbers from it and start adding your book.
 
 Release Notes 
 -------------
+
+v0.2.0      * Contextual menu for books. Includes user editable 
+              'view book on' menu.
+            * Improved error reporting in Detail window.
+            * Preview pane.
+            * Enhanced Amazon download coverage. Enhancements
+              include: TOC, similar books and reviews.
+            * Custom for Sofia, open source, Coverflow view.
+            * Bug fixes and UI improvements.
+
 
 v0.1.0	    This is the first release of Sofia. Features include:
 	    * The ability to import book details by ISBN number,
