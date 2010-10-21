@@ -100,8 +100,9 @@
 	if(_focusedItemIndex >= [_cachedLayers count]) //don't let this exceed the array bounds
 	    _focusedItemIndex = [_cachedLayers count] - 1; 
 
-	[self adjustCachedLayersWithAnimation:NO];
     }
+
+    [self adjustCachedLayersWithAnimation:NO];
 }
 
 - (void)deleteCache{
@@ -268,8 +269,8 @@
 
 
     _titleLayer.string = [NSString stringWithFormat:@"%@\n%@", 
-						    [_cachedTitles objectAtIndex:_focusedItemIndex],
-						    [_cachedSubtitles objectAtIndex:_focusedItemIndex]];
+			   [_cachedTitles objectAtIndex:_focusedItemIndex]?  [_cachedTitles objectAtIndex:_focusedItemIndex]:@"",
+			   [_cachedSubtitles objectAtIndex:_focusedItemIndex]? [_cachedSubtitles objectAtIndex:_focusedItemIndex]:@""];
     CGSize preferredSize = [_titleLayer preferredFrameSize];
     //ensure that text sits on a pixel boundary otherwise it will blur
     preferredSize.width = [self isEven:preferredSize.width] ? preferredSize.width : preferredSize.width + 1;
