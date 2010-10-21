@@ -58,7 +58,9 @@
 	return false; //accessKey not valid or not set
     }else{
 	NSString *urlPrefix = [@"http://isbndb.com/api/books.xml?access_key=" stringByAppendingString:accessKey];
-	NSURL *detailsUrl = [[NSURL alloc] initWithString:[urlPrefix stringByAppendingString:[@"&results=details,texts,prices,subjects,marc,authors&index1=isbn&value1=" stringByAppendingString:isbn]]];
+	NSURL *detailsUrl = [[NSURL alloc] initWithString:[urlPrefix stringByAppendingString:[@"&results=details,texts,prices,subjects,marc,authors&index1=isbn&value1=" 
+												stringByAppendingString:isbn]]];
+	//NSLog(@"%@", [detailsUrl absoluteString]);
 
 	return [self processDetailsWithUrl:detailsUrl];
     }

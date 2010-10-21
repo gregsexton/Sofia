@@ -33,18 +33,20 @@
 
 - (IBAction) doubleClickAction:(id)sender {
 
+    book* obj = [self currentlySelectedBook];
+    [self openDetailWindowForBook:obj];
+} 
+
+- (book*)currentlySelectedBook{
     NSArray* selectedObjects = [arrayController selectedObjects];
 
     if([selectedObjects count] > 0){
 	book *obj = [selectedObjects objectAtIndex:0]; //use the first object if multiple are selected
-
-	BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj
-										     withSearch:NO];
-	if (![NSBundle loadNibNamed:@"Detail" owner:[detailWin autorelease]]) {
-	    NSLog(@"Error loading Nib!");
-	}
+	return obj;
     }
-} 
+
+    return nil;
+}
 
 // Delegate Methods //////////////////////////////////////////////////////
 
@@ -56,6 +58,5 @@
     [self writeBooksWithIndexes:rowIndexes toPasteboard:pboard];
     return true;
 }
-
 
 @end

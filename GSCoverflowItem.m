@@ -1,5 +1,5 @@
 //
-// book.m
+// GSCoverflowItem.m
 //
 // Copyright 2010 Greg Sexton
 //
@@ -19,41 +19,27 @@
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "book.h"
+#import "GSCoverflowItem.h"
 
-#import "Library.h"
-#import "author.h"
-#import "list.h"
-#import "subject.h"
 
-@implementation book 
+@implementation GSCoverflowItem
+@synthesize imageUID;
+@synthesize imageRepresentation;
+@synthesize imageTitle;
+@synthesize imageSubtitle;
+@synthesize imageVersion;
 
-@dynamic isbn13;
-@dynamic dewey_normalised;
-@dynamic title;
-@dynamic language;
-@dynamic summary;
-@dynamic isbn10;
-@dynamic authorText;
-@dynamic lccNumber;
-@dynamic awards;
-@dynamic edition;
-@dynamic noOfCopies;
-@dynamic read;
-@dynamic subjectText;
-@dynamic titleLong;
-@dynamic coverImage;
-@dynamic physicalDescription;
-@dynamic publisherText;
-@dynamic dewey;
-@dynamic urls;
-@dynamic notes;
-@dynamic dateAdded;
-@dynamic publisher;
-@dynamic lists;
-@dynamic subjects;
-@dynamic authors;
-@dynamic library;
-@dynamic toc;
+
+- (id)initWithUID:(NSString*)uid representation:(CGImageRef)rep title:(NSString*)title subtitle:(NSString*)subtitle{
+    self = [super init];
+    if(self){
+	[self setImageUID:uid];
+	[self setImageRepresentation:rep];
+	[self setImageTitle:title];
+	[self setImageSubtitle:subtitle];
+	[self setImageVersion:0];
+    }
+    return self;
+}
 
 @end

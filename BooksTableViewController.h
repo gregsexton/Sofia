@@ -33,5 +33,5 @@
 }
 
 - (IBAction)doubleClickAction:(id)sender;
-
+- (book*)currentlySelectedBook;
 @end

@@ -20,7 +20,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <GData/GDataBooks.h>
+/*#import <GData/GDataBooks.h>*/
+#import <QuartzCore/QuartzCore.h>
 #import "book.h"
 #import "author.h"
 #import "subject.h"
@@ -32,6 +33,9 @@
 #import "isbndbInterface.h"
 #import "AuthorsWindowController.h"
 #import "SubjectWindowController.h"
+#import "NSString+Sofia.h"
+#import "SimilarBooksViewController.h"
+#import "ReviewsViewController.h"
 
 @interface BooksWindowController : NSObjectController <AuthorsWindowControllerDelegate, SubjectWindowControllerDelegate> {
     IBOutlet NSTextField *txt_search;
@@ -52,10 +56,12 @@
     IBOutlet NSTextField    *txt_noOfCopies;
     IBOutlet NSStepper	    *step_noOfCopies;
 
-    IBOutlet NSTextField    *txt_summary;
-    IBOutlet NSTextField    *txt_notes;
-    IBOutlet NSTextField    *txt_awards;
-    IBOutlet NSTextField    *txt_urls;
+    IBOutlet NSTextView     *txt_summary;
+    IBOutlet NSTextView     *txt_notes;
+    IBOutlet NSTextView     *txt_awards;
+    IBOutlet NSTextView     *txt_urls;
+
+    IBOutlet NSTextView	    *txt_toc;
 
     IBOutlet NSButton	    *btn_search;
     IBOutlet NSButton 	    *btn_clear;
@@ -91,6 +97,11 @@
     IBOutlet NSTableView	*subjectsTableView;
     IBOutlet NSArrayController	*authorsArrayController;
     IBOutlet NSArrayController	*subjectsArrayController;
+    IBOutlet SimilarBooksViewController *similarBooksController;
+    IBOutlet ReviewsViewController *reviewsController;
+
+    IBOutlet NSTextField    *errorLabel;
+    NSMutableArray	    *isbnSearchErrors;
 
     book				*obj;
     author				*doubleClickedAuthor;
@@ -111,6 +122,7 @@
 - (IBAction) copiesValueChanged:(id)sender;
 - (IBAction) saveClicked:(id)sender;
 - (IBAction) searchClicked:(id)sender;
+- (IBAction)removeErrorMessage:(id)sender;
 
 - (BOOL) bookExistsInLibraryWithISBN:(NSString*)searchedISBN;
 - (BOOL) updateUIFromAmazonWithISBN:(NSString*)searchedISBN;
@@ -118,6 +130,7 @@
 - (NSFetchRequest*) authorExistsWithName:(NSString*)authorName;
 - (NSFetchRequest*) subjectExistsWithName:(NSString*)subjectName;
 - (NSFetchRequest*)entity:(NSString*)entity existsWithName:(NSString*)entityName;
+- (book*)bookInLibraryWithISBN:(NSString*)searchedISBN;
 - (id)   initWithManagedObject:(book*)object withSearch:(BOOL)withSearch;
 - (void) clearAllFields;
 - (void) displayManagedAuthorsWithSelectedAuthor:(author*)authorObj;
@@ -128,4 +141,5 @@
 - (void) updateManagedObjectFromUI;
 - (void) updateSummaryTabView;
 - (void) updateUIFromManagedObject;
+- (void) displayErrorMessage:(NSString*)error;
 @end

@@ -1,5 +1,5 @@
 //
-// book.m
+// PreviewView.h
 //
 // Copyright 2010 Greg Sexton
 //
@@ -19,41 +19,21 @@
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "book.h"
+#import <Cocoa/Cocoa.h>
 
-#import "Library.h"
-#import "author.h"
-#import "list.h"
-#import "subject.h"
 
-@implementation book 
+@interface PreviewView : NSView {
 
-@dynamic isbn13;
-@dynamic dewey_normalised;
-@dynamic title;
-@dynamic language;
-@dynamic summary;
-@dynamic isbn10;
-@dynamic authorText;
-@dynamic lccNumber;
-@dynamic awards;
-@dynamic edition;
-@dynamic noOfCopies;
-@dynamic read;
-@dynamic subjectText;
-@dynamic titleLong;
-@dynamic coverImage;
-@dynamic physicalDescription;
-@dynamic publisherText;
-@dynamic dewey;
-@dynamic urls;
-@dynamic notes;
-@dynamic dateAdded;
-@dynamic publisher;
-@dynamic lists;
-@dynamic subjects;
-@dynamic authors;
-@dynamic library;
-@dynamic toc;
+    IBOutlet NSImageView* imageCover;
+    IBOutlet NSTextField* titleTextField;
+    IBOutlet NSTextField* isbnTextField;
+    IBOutlet NSScrollView* summaryScrollView;
+
+    NSColor* backgroundColor;
+}
+@property (nonatomic, retain) NSColor* backgroundColor;
+
+- (void)positionSubviews;
+- (void)windowKeyChange;
 
 @end

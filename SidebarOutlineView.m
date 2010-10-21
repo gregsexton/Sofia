@@ -75,7 +75,7 @@
     //returns the request in order to get hold of the library
     //otherwise returns nil if the library cannot be found.
     NSError *error;
-    NSString *predicate = [[NSString alloc] initWithFormat:@"name MATCHES '%@'", libraryName];
+    NSString *predicate = [[NSString alloc] initWithFormat:@"name MATCHES '%@'", [libraryName escapeSingleQuote]];
 
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"Library" inManagedObjectContext:managedObjectContext]];
@@ -255,14 +255,14 @@
     currentlySelectedLibrary = bookLibrary; //default to bookLibrary, unless specified
 
     if([item isKindOfClass:[Library class]]){
-	predString = [[NSString alloc] initWithFormat:@"library.name MATCHES '%@'", [item name]];
+	predString = [[NSString alloc] initWithFormat:@"library.name MATCHES '%@'", [[item name] escapeSingleQuote]];
 
 	if([[item name] isEqualToString:SHOPPING_LIST_LIBRARY]){
 	    currentlySelectedLibrary = shoppingListLibrary;
 	}
 
     }else if([item isKindOfClass:[list class]]){
-	predString = [[NSString alloc] initWithFormat:@"ANY lists.name MATCHES '%@'", [item name]];
+	predString = [[NSString alloc] initWithFormat:@"ANY lists.name MATCHES '%@'", [[item name] escapeSingleQuote]];
 
     }else if([item isKindOfClass:[smartList class]]){
 	smartList* list = item;

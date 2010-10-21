@@ -22,6 +22,7 @@
 #import "SofiaApplication.h"
 #import "SidebarOutlineView.h"
 #import "BooksTableView.h"
+#import "BooksCoverflowController.h"
 
 @implementation SofiaApplication
 
@@ -36,11 +37,13 @@
 	[self changeToListView:self];
     else if([view isEqualToString:IMAGE_VIEW])
 	[self changeToImagesView:self];
+    else if([view isEqualToString:COVER_VIEW])
+	[self changeToCoverflowView:self];
     
     //setup preferences
     AccessKeyViewController *accessKeys = [[AccessKeyViewController alloc] initWithNibName:@"Preferences_AccessKeys" bundle:nil];
     GeneralViewController *general = [[GeneralViewController alloc] initWithNibName:@"Preferences_General" bundle:nil];
-    [[MBPreferencesController sharedController] setModules:[NSArray arrayWithObjects:general, accessKeys, nil]];
+    [[MBPreferencesController sharedController] setModules:[NSArray arrayWithObjects:general,accessKeys, nil]];
     [accessKeys release];
     [general release];
 
@@ -98,11 +101,16 @@
 				attributes:nil
 				     error:NULL];
     }
+
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+	[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+	[NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+    
     
 #ifdef CONFIGURATION_Debug
     url = [NSURL fileURLWithPath: [applicationSupportFolder stringByAppendingPathComponent: @"Sofia.xml"]];
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
-    if (![persistentStoreCoordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:nil error:&error]){
+    if (![persistentStoreCoordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:options error:&error]){
         [[NSApplication sharedApplication] presentError:error];
     }    
 #endif
@@ -110,7 +118,7 @@
 #ifdef CONFIGURATION_Release
     url = [NSURL fileURLWithPath: [applicationSupportFolder stringByAppendingPathComponent: @"Sofia"]];
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
-    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error]){
+    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error]){
         [[NSApplication sharedApplication] presentError:error];
     }    
 #endif
@@ -246,12 +254,12 @@
 	totalPred = [sideBar getPredicateForSelectedItem];
     }else{
 	NSArray* predicates = [NSArray arrayWithObjects:
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"title contains[cd] '%@'", searchVal]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"authorText contains[cd] '%@'", searchVal]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"publisherText contains[cd] '%@'", searchVal]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"subjectText contains[cd] '%@'", searchVal]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn10 contains[cd] '%@'", searchVal]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn13 contains[cd] '%@'", searchVal]], nil];
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"title contains[cd] '%@'", [searchVal escapeSingleQuote]]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"authorText contains[cd] '%@'", [searchVal escapeSingleQuote]]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"publisherText contains[cd] '%@'", [searchVal escapeSingleQuote]]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"subjectText contains[cd] '%@'", [searchVal escapeSingleQuote]]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn10 contains[cd] '%@'", [searchVal escapeSingleQuote]]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn13 contains[cd] '%@'", [searchVal escapeSingleQuote]]], nil];
 	NSPredicate* searchPred = [NSCompoundPredicate orPredicateWithSubpredicates:predicates];
 
 	NSArray* searchAndCurrentFilter = [NSArray arrayWithObjects:searchPred, [sideBar getPredicateForSelectedItem], nil];
@@ -278,7 +286,7 @@
     }else if([changeViewButtons selectedSegment] == 1){
 	[self changeToImagesView:self];
     }else if([changeViewButtons selectedSegment] == 2){
-	//TODO
+	[self changeToCoverflowView:self];
     }else{
 	//serious error!
     }
@@ -300,6 +308,14 @@
 	       byExtendingSelection:NO];
     [imagesView scrollIndexToVisible:[arrayController selectionIndex]];
     [[NSUserDefaults standardUserDefaults] setObject:IMAGE_VIEW forKey:@"currentView"];
+}
+
+- (IBAction)changeToCoverflowView:(id)sender{
+    [self changeMainViewFor:mainCoverflowView];
+    [zoomSlider setHidden:true];
+    [changeViewButtons setSelectedSegment:2];
+    [[NSUserDefaults standardUserDefaults] setObject:COVER_VIEW forKey:@"currentView"];
+    [coverflowController addAndRepositionTableView];
 }
 
 - (void)changeMainViewFor:(NSView*)viewToChangeTo{

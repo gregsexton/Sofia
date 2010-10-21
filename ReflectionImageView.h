@@ -1,5 +1,5 @@
 //
-// book.m
+// ReflectionImageView.h
 //
 // Copyright 2010 Greg Sexton
 //
@@ -19,41 +19,15 @@
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "book.h"
+#import <Cocoa/Cocoa.h>
 
-#import "Library.h"
-#import "author.h"
-#import "list.h"
-#import "subject.h"
 
-@implementation book 
+@interface ReflectionImageView : NSImageView {
 
-@dynamic isbn13;
-@dynamic dewey_normalised;
-@dynamic title;
-@dynamic language;
-@dynamic summary;
-@dynamic isbn10;
-@dynamic authorText;
-@dynamic lccNumber;
-@dynamic awards;
-@dynamic edition;
-@dynamic noOfCopies;
-@dynamic read;
-@dynamic subjectText;
-@dynamic titleLong;
-@dynamic coverImage;
-@dynamic physicalDescription;
-@dynamic publisherText;
-@dynamic dewey;
-@dynamic urls;
-@dynamic notes;
-@dynamic dateAdded;
-@dynamic publisher;
-@dynamic lists;
-@dynamic subjects;
-@dynamic authors;
-@dynamic library;
-@dynamic toc;
+}
+
+- (void)drawReflectionInRect:(NSRect)rect translateY:(CGFloat)yTranslation;
+- (void)drawGradientInContext:(CGContextRef)context withHeight:(CGFloat)height;
+- (NSRect)getScaledRectFrom:(NSRect)srcRect using:(NSSize)size;
 
 @end

@@ -22,6 +22,7 @@
 #import <Cocoa/Cocoa.h>
 #import "SidebarOutlineView.h"
 #import "SofiaApplication.h"
+#import "book.h"
 
 #define SofiaDragType @"SofiaDragType"
 
@@ -34,5 +35,13 @@
 
 - (void)removeSelectedItems;
 - (void)writeBooksWithIndexes:(NSIndexSet*)rowIndexes toPasteboard:(NSPasteboard*)pboard;
+- (void)openDetailWindowForBook:(book*)obj;
+
+- (NSMenu*)menuForBook:(book*)bookObj;
+- (NSMenu*)submenuViewBookOnForBook:(book*)bookObj;
+- (NSDictionary*)createDefaultViewBookOnMenuItems;
+- (NSString*)parseFormatString:(NSString*)formatString usingBook:(book*)bookObj;
+- (IBAction)menuOpenDetailWindowForBook:(id)sender;
+- (IBAction)menuOpenBrowserUrlForBook:(id)sender;
 
 @end

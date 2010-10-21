@@ -36,7 +36,16 @@
 	//pass on to next first responder if not going to handle it
 	[super keyDown:theEvent];
     }
+}
 
+- (NSMenu *)menuForEvent:(NSEvent *)theEvent{
+    //select the item right clicked on
+    NSPoint pt = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+    NSInteger row = [self rowAtPoint:pt];
+    [self selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
+
+    NSMenu* menu = [viewController menuForBook:[viewController currentlySelectedBook]];
+    return menu;
 }
 
 @end

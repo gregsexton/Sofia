@@ -1,5 +1,5 @@
 //
-// book.m
+// NoExpansionTextFieldCell.m
 //
 // Copyright 2010 Greg Sexton
 //
@@ -19,41 +19,15 @@
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "book.h"
+#import "NoExpansionTextFieldCell.h"
 
-#import "Library.h"
-#import "author.h"
-#import "list.h"
-#import "subject.h"
 
-@implementation book 
+@implementation NoExpansionTextFieldCell
 
-@dynamic isbn13;
-@dynamic dewey_normalised;
-@dynamic title;
-@dynamic language;
-@dynamic summary;
-@dynamic isbn10;
-@dynamic authorText;
-@dynamic lccNumber;
-@dynamic awards;
-@dynamic edition;
-@dynamic noOfCopies;
-@dynamic read;
-@dynamic subjectText;
-@dynamic titleLong;
-@dynamic coverImage;
-@dynamic physicalDescription;
-@dynamic publisherText;
-@dynamic dewey;
-@dynamic urls;
-@dynamic notes;
-@dynamic dateAdded;
-@dynamic publisher;
-@dynamic lists;
-@dynamic subjects;
-@dynamic authors;
-@dynamic library;
-@dynamic toc;
+- (NSRect)expansionFrameWithFrame:(NSRect)cellFrame inView:(NSView *)view{
+
+    return NSZeroRect;
+
+}
 
 @end
