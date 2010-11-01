@@ -22,3 +22,4 @@ Future
 * Sort by option in images view.
 * Click dock icon creates new window.
 * Quicklook
+* Display books that have an author/title/etc with a small edit distance.
