@@ -3,23 +3,23 @@ v0.2.1
 * Constrain coverflow split.
 * Preview view remembers width.
 * Fix layer-backed view rendering issues in detail window.
+* Click dock icon creates new window.
 
 Future
 ------
+* Multiple image selection from amazon also drop custom image
 * Multiple edits simultaneously.
+* Sort by option in images view.
+* Display books that have an author/title/etc with a small edit distance.
+* Export functionality.
 * Advanced find
-* Grab stuff from Google. 
+* Search by book name as well as ISBN.
+* Multiple images for a book
+* Grab stuff from Google. Particularly: book keywords.
+* Library statistics.
+* Reorder files into neater directories.
+* Quicklook
 * Finish ownership tab.
     * Easy highlighting of owners
     * Easily show books from different owners
-* Search by book name as well as ISBN.
-* Multiple image selection from amazon also drop custom image
-* Multiple images for a book
 * Expose detail windows?
-* Reorder files into neater directories.
-* Export functionality.
-* Library statistics.
-* Sort by option in images view.
-* Click dock icon creates new window.
-* Quicklook
-* Display books that have an author/title/etc with a small edit distance.
