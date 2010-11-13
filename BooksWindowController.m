@@ -523,7 +523,6 @@
 }
 
 - (IBAction) cancelClicked:(id)sender {
-    [managedObjectContext rollback];
     [window close];
 
     if([[self delegate] respondsToSelector:@selector(cancelClicked:)]){

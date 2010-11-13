@@ -4,7 +4,8 @@ v0.2.1
 * Preview view remembers width.
 * Fix layer-backed view rendering issues in detail window.
 * Click dock icon creates new window.
-* Sort out saving the library before being able to rollback!
+* Amazon have stopped issuing review content.
+    * Use google? Try and parse IFrame? Use webkit and display the IFrame?
 
 Future
 ------
