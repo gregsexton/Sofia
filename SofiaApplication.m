@@ -177,6 +177,10 @@
     return reply;
 }
 
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication{
+    return YES;
+}
+
 - (IBAction) saveAction:(id)sender {
 	
     NSError *error = nil;

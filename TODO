@@ -1,9 +1,7 @@
 v0.2.1
 ------
 * Fix layer-backed view rendering issues in detail window.
-* Click dock icon creates new window.
 * Periodic save of database.
-* Remove reviews tab temporarily.
 * TODOs
 
 Future
