@@ -1,7 +1,5 @@
 v0.2.1
 ------
-* Constrain coverflow split.
-* Preview view remembers width.
 * Fix layer-backed view rendering issues in detail window.
 * Click dock icon creates new window.
 * Periodic save of database.
