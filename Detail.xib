@@ -11,7 +11,7 @@
 			<string key="NS.object.0">804</string>
 		</object>
 		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
-			<integer value="4"/>
+			<integer value="434"/>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -185,7 +185,7 @@
 								<object class="NSTabViewItem" id="670430723">
 									<string key="NSIdentifier">summary</string>
 									<object class="NSView" key="NSView" id="14031021">
-										<reference key="NSNextResponder" ref="317962420"/>
+										<nil key="NSNextResponder"/>
 										<int key="NSvFlags">256</int>
 										<array class="NSMutableArray" key="NSSubviews">
 											<object class="NSImageView" id="403684829">
@@ -743,7 +743,6 @@
 											</object>
 										</array>
 										<string key="NSFrame">{{10, 33}, {635, 518}}</string>
-										<reference key="NSSuperview" ref="317962420"/>
 										<int key="NSViewLayerContentsRedrawPolicy">2</int>
 									</object>
 									<string key="NSLabel">Summary</string>
@@ -2596,7 +2595,7 @@
 								<object class="NSTabViewItem" id="33883446">
 									<string key="NSIdentifier">extra</string>
 									<object class="NSView" key="NSView" id="845864177">
-										<nil key="NSNextResponder"/>
+										<reference key="NSNextResponder" ref="317962420"/>
 										<int key="NSvFlags">256</int>
 										<array class="NSMutableArray" key="NSSubviews">
 											<object class="NSTabView" id="322143360">
@@ -2724,7 +2723,7 @@
 															<array class="NSMutableArray" key="NSSubviews">
 																<object class="NSScrollView" id="130751590">
 																	<reference key="NSNextResponder" ref="771518713"/>
-																	<int key="NSvFlags">268</int>
+																	<int key="NSvFlags">-2147483380</int>
 																	<array class="NSMutableArray" key="NSSubviews">
 																		<object class="NSClipView" id="264360472">
 																			<reference key="NSNextResponder" ref="130751590"/>
@@ -2886,7 +2885,7 @@
 																</object>
 																<object class="NSProgressIndicator" id="45079682">
 																	<reference key="NSNextResponder" ref="771518713"/>
-																	<int key="NSvFlags">1292</int>
+																	<int key="NSvFlags">-2147482356</int>
 																	<object class="NSPSMatrix" key="NSDrawMatrix"/>
 																	<string key="NSFrame">{{281, 219}, {32, 32}}</string>
 																	<reference key="NSSuperview" ref="771518713"/>
@@ -2896,7 +2895,7 @@
 																</object>
 																<object class="NSTextField" id="167322084">
 																	<reference key="NSNextResponder" ref="771518713"/>
-																	<int key="NSvFlags">268</int>
+																	<int key="NSvFlags">-2147483380</int>
 																	<string key="NSFrame">{{14, 450}, {101, 17}}</string>
 																	<reference key="NSSuperview" ref="771518713"/>
 																	<int key="NSViewLayerContentsRedrawPolicy">2</int>
@@ -2913,11 +2912,28 @@
 																</object>
 																<object class="NSCustomView" id="273883192">
 																	<reference key="NSNextResponder" ref="771518713"/>
-																	<int key="NSvFlags">268</int>
+																	<int key="NSvFlags">-2147483380</int>
 																	<string key="NSFrame">{{114, 447}, {78, 22}}</string>
 																	<reference key="NSSuperview" ref="771518713"/>
 																	<int key="NSViewLayerContentsRedrawPolicy">2</int>
 																	<string key="NSClassName">FiveStars</string>
+																</object>
+																<object class="NSTextField" id="885289692">
+																	<reference key="NSNextResponder" ref="771518713"/>
+																	<int key="NSvFlags">268</int>
+																	<string key="NSFrame">{{111, 219}, {374, 123}}</string>
+																	<reference key="NSSuperview" ref="771518713"/>
+																	<int key="NSViewLayerContentsRedrawPolicy">2</int>
+																	<bool key="NSEnabled">YES</bool>
+																	<object class="NSTextFieldCell" key="NSCell" id="234793072">
+																		<int key="NSCellFlags">67239424</int>
+																		<int key="NSCellFlags2">138412032</int>
+																		<string key="NSContents">The reviews feature is currently disabled due to unexpected changes Amazon have made to their service. A fix is in development and will be made available in the next release of Sofia.</string>
+																		<reference key="NSSupport" ref="85247258"/>
+																		<reference key="NSControlView" ref="885289692"/>
+																		<reference key="NSBackgroundColor" ref="655670657"/>
+																		<reference key="NSTextColor" ref="143833624"/>
+																	</object>
 																</object>
 															</array>
 															<string key="NSFrame">{{10, 33}, {595, 470}}</string>
@@ -3099,6 +3115,7 @@
 											</object>
 										</array>
 										<string key="NSFrame">{{10, 33}, {635, 518}}</string>
+										<reference key="NSSuperview" ref="317962420"/>
 										<int key="NSViewLayerContentsRedrawPolicy">2</int>
 									</object>
 									<string key="NSLabel">Extra</string>
@@ -3157,13 +3174,13 @@
 									<reference key="NSTabView" ref="317962420"/>
 								</object>
 							</array>
-							<reference key="NSSelectedTabViewItem" ref="670430723"/>
+							<reference key="NSSelectedTabViewItem" ref="33883446"/>
 							<reference key="NSFont" ref="85247258"/>
 							<int key="NSTvFlags">0</int>
 							<bool key="NSAllowTruncatedLabels">YES</bool>
 							<bool key="NSDrawsBackground">YES</bool>
 							<array class="NSMutableArray" key="NSSubviews">
-								<reference ref="14031021"/>
+								<reference ref="845864177"/>
 							</array>
 						</object>
 						<object class="NSButton" id="95542696">
@@ -5635,6 +5652,7 @@
 							<reference ref="45079682"/>
 							<reference ref="167322084"/>
 							<reference ref="273883192"/>
+							<reference ref="885289692"/>
 						</array>
 						<reference key="parent" ref="11436014"/>
 					</object>
@@ -5955,6 +5973,19 @@
 						<reference key="object" ref="273883192"/>
 						<reference key="parent" ref="771518713"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">517</int>
+						<reference key="object" ref="885289692"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="234793072"/>
+						</array>
+						<reference key="parent" ref="771518713"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">518</int>
+						<reference key="object" ref="234793072"/>
+						<reference key="parent" ref="885289692"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -6097,9 +6128,9 @@
 				<string key="297.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="298.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="299.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="3.IBEditorWindowLastContentRect">{{1055, 472}, {681, 658}}</string>
+				<string key="3.IBEditorWindowLastContentRect">{{996, 256}, {681, 658}}</string>
 				<string key="3.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="3.IBWindowTemplateEditedContentRect">{{1055, 472}, {681, 658}}</string>
+				<string key="3.IBWindowTemplateEditedContentRect">{{996, 256}, {681, 658}}</string>
 				<real value="1" key="3.NSWindowTemplate.visibleAtLaunch"/>
 				<string key="3.editorWindowContentRectSynchronizationRect">{{33, 99}, {480, 360}}</string>
 				<string key="3.windowTemplate.maxSize">{3.40282e+38, 3.40282e+38}</string>
@@ -6193,6 +6224,9 @@
 				<string key="49.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="490.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="492.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<object class="NSAffineTransform" key="492.IBViewBoundsToFrameTransform">
+					<bytes key="NSTransformStruct">P4AAAL+AAABBiAAAw90AAA</bytes>
+				</object>
 				<string key="493.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="494.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="495.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -6212,6 +6246,11 @@
 				<string key="514.CustomClassName">FiveStarsCell</string>
 				<string key="514.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="515.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="517.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<object class="NSAffineTransform" key="517.IBViewBoundsToFrameTransform">
+					<bytes key="NSTransformStruct">P4AAAL+AAABC9gAAw6oAAA</bytes>
+				</object>
+				<string key="518.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="55.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="56.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="57.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -6257,7 +6296,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">516</int>
+			<int key="maxID">518</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
