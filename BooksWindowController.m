@@ -528,11 +528,11 @@
 }
 
 - (IBAction) cancelClicked:(id)sender {
-    [window close];
-
     if([[self delegate] respondsToSelector:@selector(cancelClicked:)]){
 	[delegate cancelClicked:self];
     }
+
+    [window close];
 }
 
 - (IBAction) copiesValueChanged:(id)sender {

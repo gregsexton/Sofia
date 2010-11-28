@@ -215,8 +215,7 @@
 }
 
 - (IBAction) addBookAction:(id)sender {
-    BooksWindowController* detailWin = [self createBookAndOpenDetailWindow];
-    [detailWin setDelegate:self];
+    [self createBookAndOpenDetailWindow];
 }
 
 - (IBAction) removeBookAction:(id)sender {
@@ -364,6 +363,7 @@
     }
 
     [obj release];
+    [detailWin setDelegate:self];
     return [detailWin autorelease];
 }
 
@@ -377,6 +377,13 @@
 					//affect of keeping smart lists updated after adding a book
     [self updateSummaryText];
     [imagesView reloadData];
+}
+
+- (void) cancelClicked:(BooksWindowController*)booksWindowController{
+    //NOTE: this method should only be called as part of adding a book not viewing a book
+    [arrayController removeObject:[booksWindowController obj]];
+    [self saveAction:self];
+    [self updateSummaryText];
 }
 
 - (void)closeClickedOnImportBooksController:(ImportBooksController*)controller{
