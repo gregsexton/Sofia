@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
+		37106D5812A2C77B0008CF18 /* CoverflowSplitViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37106D5712A2C77B0008CF18 /* CoverflowSplitViewDelegate.m */; };
 		371182B210C454E200732634 /* SidebarOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 371182B110C454E200732634 /* SidebarOutlineView.m */; };
 		371855D51097C237006A363D /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 371855D41097C237006A363D /* icon.icns */; };
 		3735A79C11C6DB5E00DD7461 /* ImportBooks.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3735A79B11C6DB5E00DD7461 /* ImportBooks.xib */; };
@@ -108,6 +109,8 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* books_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = books_Prefix.pch; sourceTree = "<group>"; };
+		37106D5612A2C77B0008CF18 /* CoverflowSplitViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverflowSplitViewDelegate.h; sourceTree = "<group>"; };
+		37106D5712A2C77B0008CF18 /* CoverflowSplitViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverflowSplitViewDelegate.m; sourceTree = "<group>"; };
 		371182B010C454E200732634 /* SidebarOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarOutlineView.h; sourceTree = "<group>"; };
 		371182B110C454E200732634 /* SidebarOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarOutlineView.m; sourceTree = "<group>"; };
 		371855D41097C237006A363D /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = icon_design/icon.icns; sourceTree = "<group>"; };
@@ -461,6 +464,8 @@
 				37AF6DD511FA298B007A7C85 /* OverviewSplitViewDelegate.m */,
 				37AF75E71216CFBB007A7C85 /* PreviewSplitViewDelegate.h */,
 				37AF75E81216CFBB007A7C85 /* PreviewSplitViewDelegate.m */,
+				37106D5612A2C77B0008CF18 /* CoverflowSplitViewDelegate.h */,
+				37106D5712A2C77B0008CF18 /* CoverflowSplitViewDelegate.m */,
 			);
 			name = Delegates;
 			sourceTree = "<group>";
@@ -783,6 +788,7 @@
 				37AF7FFA123989B9007A7C85 /* BooksCoverflowController.m in Sources */,
 				37AF800612399331007A7C85 /* GSCoverflow.m in Sources */,
 				37AF80151239981D007A7C85 /* GSCoverflowItem.m in Sources */,
+				37106D5812A2C77B0008CF18 /* CoverflowSplitViewDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
