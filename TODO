@@ -1,7 +1,6 @@
 v0.2.1
 ------
 * Fix layer-backed view rendering issues in detail window.
-* Periodic save of database.
 * TODOs
 
 Future

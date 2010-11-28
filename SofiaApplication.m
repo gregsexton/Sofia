@@ -52,6 +52,13 @@
     [arrayController fetchWithRequest:nil merge:NO error:&error];
     [self updateSummaryText];
 
+    //setup periodic save timer
+    [NSTimer scheduledTimerWithTimeInterval:FIVE_MINUTES
+                                     target:self
+                                   selector:@selector(saveAction:)
+                                   userInfo:nil
+                                    repeats:YES];
+
 }
 
 - (void) dealloc {
@@ -70,7 +77,6 @@
     return [basePath stringByAppendingPathComponent:@"Sofia"];
 }
 
-
 - (NSManagedObjectModel*)managedObjectModel {
 	
     if (managedObjectModel != nil) {
@@ -80,7 +86,6 @@
     managedObjectModel = [[NSManagedObjectModel mergedModelFromBundles:nil] retain];    
     return managedObjectModel;
 }
-
 
 - (NSPersistentStoreCoordinator *) persistentStoreCoordinator {
 	
@@ -126,7 +131,6 @@
     return persistentStoreCoordinator;
 }
 
-
 - (NSManagedObjectContext *) managedObjectContext {
 	
     if (managedObjectContext != nil) {
@@ -144,11 +148,9 @@
     return managedObjectContext;
 }
 
-
 - (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window {
     return [[self managedObjectContext] undoManager];
 }
-
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
 	
@@ -182,13 +184,11 @@
 }
 
 - (IBAction) saveAction:(id)sender {
-	
     NSError *error = nil;
-    if (![[self managedObjectContext] save:&error]) {
+    if ([managedObjectContext hasChanges] && ![[self managedObjectContext] save:&error]) {
         [[NSApplication sharedApplication] presentError:error];
     }
 }
-
 
 - (IBAction) manageAuthorsClickAction:(id)sender {
 	AuthorsWindowController *detailWin = [[AuthorsWindowController alloc] initWithManagedObjectContext:managedObjectContext];
