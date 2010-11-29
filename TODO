@@ -1,13 +1,8 @@
-v0.2.1
-------
-* Fix layer-backed view rendering issues in detail window.
-* TODOs
-
 Future
 ------
+* Reduce memory usage.
 * Amazon have stopped issuing review content.
     * Use google? Try and parse IFrame? Use webkit and display the IFrame?
-* Reduce memory usage.
 * Multiple image selection from amazon also drop custom image
 * Multiple edits simultaneously.
 * Sort by option in images view.

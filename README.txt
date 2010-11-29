@@ -119,6 +119,13 @@ extract any ISBN numbers from it and start adding your book.
 Release Notes 
 -------------
 
+v0.2.1      * Bug fix and small improvements release.
+            * Database periodically saved every 5 minutes.
+            * Sofia quits on closing the last window.
+            * UI improvements.
+            * Improved database resiliance.
+            * Reviews feature disabled until next release.
+
 v0.2.0      * Contextual menu for books. Includes user editable 
               'view book on' menu.
             * Improved error reporting in Detail window.
