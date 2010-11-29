@@ -100,6 +100,8 @@
 	if(_focusedItemIndex >= [_cachedLayers count]) //don't let this exceed the array bounds
 	    _focusedItemIndex = [_cachedLayers count] - 1; 
 
+    }else{
+        [self deleteCache]; //remove layers if there are no items
     }
 
     [self adjustCachedLayersWithAnimation:NO];

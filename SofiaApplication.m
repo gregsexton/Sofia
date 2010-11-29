@@ -52,6 +52,13 @@
     [arrayController fetchWithRequest:nil merge:NO error:&error];
     [self updateSummaryText];
 
+    //setup periodic save timer
+    [NSTimer scheduledTimerWithTimeInterval:FIVE_MINUTES
+                                     target:self
+                                   selector:@selector(saveAction:)
+                                   userInfo:nil
+                                    repeats:YES];
+
 }
 
 - (void) dealloc {
@@ -70,7 +77,6 @@
     return [basePath stringByAppendingPathComponent:@"Sofia"];
 }
 
-
 - (NSManagedObjectModel*)managedObjectModel {
 	
     if (managedObjectModel != nil) {
@@ -80,7 +86,6 @@
     managedObjectModel = [[NSManagedObjectModel mergedModelFromBundles:nil] retain];    
     return managedObjectModel;
 }
-
 
 - (NSPersistentStoreCoordinator *) persistentStoreCoordinator {
 	
@@ -126,7 +131,6 @@
     return persistentStoreCoordinator;
 }
 
-
 - (NSManagedObjectContext *) managedObjectContext {
 	
     if (managedObjectContext != nil) {
@@ -144,11 +148,9 @@
     return managedObjectContext;
 }
 
-
 - (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window {
     return [[self managedObjectContext] undoManager];
 }
-
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
 	
@@ -177,14 +179,16 @@
     return reply;
 }
 
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication{
+    return YES;
+}
+
 - (IBAction) saveAction:(id)sender {
-	
     NSError *error = nil;
-    if (![[self managedObjectContext] save:&error]) {
+    if ([managedObjectContext hasChanges] && ![[self managedObjectContext] save:&error]) {
         [[NSApplication sharedApplication] presentError:error];
     }
 }
-
 
 - (IBAction) manageAuthorsClickAction:(id)sender {
 	AuthorsWindowController *detailWin = [[AuthorsWindowController alloc] initWithManagedObjectContext:managedObjectContext];
@@ -211,8 +215,7 @@
 }
 
 - (IBAction) addBookAction:(id)sender {
-    BooksWindowController* detailWin = [self createBookAndOpenDetailWindow];
-    [detailWin setDelegate:self];
+    [self createBookAndOpenDetailWindow];
 }
 
 - (IBAction) removeBookAction:(id)sender {
@@ -360,6 +363,7 @@
     }
 
     [obj release];
+    [detailWin setDelegate:self];
     return [detailWin autorelease];
 }
 
@@ -373,6 +377,13 @@
 					//affect of keeping smart lists updated after adding a book
     [self updateSummaryText];
     [imagesView reloadData];
+}
+
+- (void) cancelClicked:(BooksWindowController*)booksWindowController{
+    //NOTE: this method should only be called as part of adding a book not viewing a book
+    [arrayController removeObject:[booksWindowController obj]];
+    [self saveAction:self];
+    [self updateSummaryText];
 }
 
 - (void)closeClickedOnImportBooksController:(ImportBooksController*)controller{

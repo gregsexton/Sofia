@@ -41,6 +41,7 @@
 #define LIST_VIEW @"listView"
 #define IMAGE_VIEW @"imageView"
 #define COVER_VIEW @"coverflowView"
+#define FIVE_MINUTES (60*5)
 
 @interface SofiaApplication : NSObject <BooksWindowControllerDelegate, ImportBooksControllerDelegate> {
 	

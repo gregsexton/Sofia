@@ -444,7 +444,9 @@
 	    [self setBookEdition:currentStringValue];
 	}
 	if(currentProperty == pPubDate){
-	    [self setBookEdition:[NSString stringWithFormat:@"%@ %@", bookEdition, currentStringValue]];
+	    [self setBookEdition:[NSString stringWithFormat:@"%@ %@", 
+                                                             bookEdition ? bookEdition : @"",
+                                                             currentStringValue]];
 	}
 	if(currentProperty == pBinding){
 	    [self setBookPhysicalDescrip:currentStringValue];

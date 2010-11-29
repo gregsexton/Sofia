@@ -59,4 +59,6 @@
 - (void)managedObjectsDidChange:(NSNotification*)notification;
 - (IBAction)toggleOpenClosePreviewView:(id)sender;
 
+- (CGFloat)previewViewWidth;
+- (void)setPreviewViewWidth:(CGFloat)width;
 @end

@@ -218,11 +218,16 @@
 	}
     }
 
-    [txt_title addItemWithObjectValue:[amazon bookTitle]];
-    [txt_author addItemWithObjectValue:[amazon bookAuthorsText]];
-    [txt_publisher addItemWithObjectValue:[amazon bookPublisher]];
-    [txt_physicalDescrip addItemWithObjectValue:[amazon bookPhysicalDescrip]];
-    [txt_edition setStringValue:[amazon bookEdition]];
+    if([amazon bookTitle])
+        [txt_title addItemWithObjectValue:[amazon bookTitle]];
+    if([amazon bookAuthorsText])
+        [txt_author addItemWithObjectValue:[amazon bookAuthorsText]];
+    if([amazon bookPublisher])
+        [txt_publisher addItemWithObjectValue:[amazon bookPublisher]];
+    if([amazon bookPhysicalDescrip])
+        [txt_physicalDescrip addItemWithObjectValue:[amazon bookPhysicalDescrip]];
+    if([amazon bookEdition])
+        [txt_edition setStringValue:[amazon bookEdition]];
     if([amazon bookSummary])
 	[txt_summary setString:[amazon bookSummary]];
 
@@ -488,15 +493,15 @@
     
     [self clearAllFields];
     if([self updateUIFromAmazonWithISBN:searchedISBN]){
-	[txt_title selectItemAtIndex:0];
-	[txt_author selectItemAtIndex:0];
-	[txt_publisher selectItemAtIndex:0];
-	[txt_physicalDescrip selectItemAtIndex:0];
+        [self selectFirstItemInComboBox:txt_title];
+        [self selectFirstItemInComboBox:txt_author];
+        [self selectFirstItemInComboBox:txt_publisher];
+        [self selectFirstItemInComboBox:txt_physicalDescrip];
     }
     
     if([self updateUIFromISBNDbWithISBN:searchedISBN]){
-	[txt_titleLong selectItemAtIndex:0];
-	[txt_subject selectItemAtIndex:0];
+        [self selectFirstItemInComboBox:txt_titleLong];
+        [self selectFirstItemInComboBox:txt_subject];
     }
 
     //lastly update the summary tab
@@ -523,12 +528,11 @@
 }
 
 - (IBAction) cancelClicked:(id)sender {
-    [managedObjectContext rollback];
-    [window close];
-
     if([[self delegate] respondsToSelector:@selector(cancelClicked:)]){
 	[delegate cancelClicked:self];
     }
+
+    [window close];
 }
 
 - (IBAction) copiesValueChanged:(id)sender {
@@ -536,6 +540,11 @@
 
     [step_noOfCopies setIntValue:theValue];
     [txt_noOfCopies setIntValue:theValue];
+}
+
+- (void) selectFirstItemInComboBox:(NSComboBox*)combo{
+    if([combo numberOfItems] > 0)
+        [combo selectItemAtIndex:0];
 }
 
 ///////////////////////    DELEGATE METHODS   //////////////////////////////////////////////////////////////////////////

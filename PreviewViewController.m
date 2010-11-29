@@ -41,7 +41,9 @@
 						 name:NSManagedObjectContextObjectsDidChangeNotification
 					       object:nil];
 
-    _previewViewWidth = 300.0; //default width
+    _previewViewWidth = [[NSUserDefaults standardUserDefaults] doubleForKey:@"previewViewWidth"];
+    if(_previewViewWidth == 0) 
+        [self setPreviewViewWidth:300.0];
 
     [[previewToggleButton cell] setHighlightsBy:NSPushInCellMask];
     [[previewToggleButton cell] setShowsStateBy:NSContentsCellMask];
@@ -243,11 +245,11 @@
 	[previewMenuItem setState:NSOnState];
 
 	NSRect previewRect = previewView.frame;
-	previewRect.size.width = _previewViewWidth;
+	previewRect.size.width = [self previewViewWidth];
 
 	[NSAnimationContext beginGrouping];
 	    [[previewView animator] setFrame:previewRect];
-	    [[overviewView animator] setFrameSize:NSMakeSize(overviewView.frame.size.width - _previewViewWidth,
+	    [[overviewView animator] setFrameSize:NSMakeSize(overviewView.frame.size.width - [self previewViewWidth],
 							     overviewView.frame.size.height)];
 	[NSAnimationContext endGrouping];
 
@@ -257,16 +259,25 @@
 	[previewMenuItem setState:NSOffState];
 
 	NSRect previewRect = previewView.frame;
-	_previewViewWidth = previewRect.size.width;
+        [self setPreviewViewWidth:previewRect.size.width];
 	previewRect.size.width = 0.0;
 	[NSAnimationContext beginGrouping];
 	    [[previewView animator] setFrame:previewRect];
-	    [[overviewView animator] setFrameSize:NSMakeSize(overviewView.frame.size.width + _previewViewWidth,
+	    [[overviewView animator] setFrameSize:NSMakeSize(overviewView.frame.size.width + [self previewViewWidth],
 							     overviewView.frame.size.height)];
 	[NSAnimationContext endGrouping];
     }
 
     [previewSplitView adjustSubviews];
+}
+
+- (CGFloat)previewViewWidth{
+    return _previewViewWidth;
+}
+
+- (void)setPreviewViewWidth:(CGFloat)width{
+    _previewViewWidth = width;
+    [[NSUserDefaults standardUserDefaults] setDouble:width forKey:@"previewViewWidth"];
 }
 
 // Delegate methods ////////////////////////////////////////////////////////////
