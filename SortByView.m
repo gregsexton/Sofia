@@ -33,6 +33,10 @@
 - (void)drawRect:(NSRect)dirtyRect {
     [[NSColor colorWithCalibratedRed:0.90f green:0.90f blue:0.90f alpha:1.0f] setFill];
     NSRectFill(dirtyRect);
+
+    NSRect bottomBorder = NSMakeRect(0,0,self.bounds.size.width,1);
+    [[NSColor lightGrayColor] setFill];
+    NSRectFill(bottomBorder);
 }
 
 @end
