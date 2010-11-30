@@ -67,7 +67,7 @@
        [NSSortDescriptor sortDescriptorWithKey:@"subjectText"   ascending:YES], @"Subject",
        [NSSortDescriptor sortDescriptorWithKey:@"title"         ascending:YES], @"Title", nil] retain];
 
-    [self setSortByOptions:[_sortDescriptors allKeys]];
+    [self setSortByOptions:[[_sortDescriptors allKeys] sortedArrayUsingSelector:@selector(compare:)]];
 }
 
 // Delegate Methods //////////////////////////////////////////////////////
@@ -132,13 +132,17 @@
 
 - (IBAction)sortSelectionChanged:(id)sender{
 
-    //TODO: reverse order if clicked again
-
     NSPopUpButton* btn = (NSPopUpButton*)sender;
-    //no check -- guaranteed to be there as popup button was built from dictionary.
-    NSSortDescriptor* sortDesc = [_sortDescriptors objectForKey:[btn titleOfSelectedItem]];
 
-    [arrayController setSortDescriptors:[NSArray arrayWithObject:sortDesc]];
+    //no check -- guaranteed to be there as popup button was built from dictionary.
+    NSSortDescriptor* newSortDesc = [_sortDescriptors objectForKey:[btn titleOfSelectedItem]];
+    NSSortDescriptor* currentDesc = [[arrayController sortDescriptors] objectAtIndex:0];
+
+    if(currentDesc.key == newSortDesc.key){
+        newSortDesc = [currentDesc reversedSortDescriptor];
+    }
+
+    [arrayController setSortDescriptors:[NSArray arrayWithObject:newSortDesc]];
 }
 
 @end
