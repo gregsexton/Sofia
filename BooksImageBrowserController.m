@@ -24,6 +24,7 @@
 
 @implementation BooksImageBrowserController
 @synthesize imageZoomLevel;
+@synthesize sortByOptions;
 
 - (void)awakeFromNib {
     [browserView setDelegate:self];
@@ -38,6 +39,14 @@
 
     float zoom = [[NSUserDefaults standardUserDefaults] floatForKey:@"imageViewZoomLevel"];
     [self setImageZoomLevel:zoom];
+
+    [self createSortByOptions];
+}
+
+- (void)dealloc{
+    if(_sortDescriptors)
+        [_sortDescriptors release];
+    [super dealloc];
 }
 
 - (void)setImageZoomLevel:(float)newValue { //custom setter
@@ -46,6 +55,20 @@
     [[NSUserDefaults standardUserDefaults] setFloat:newValue forKey:@"imageViewZoomLevel"];
 }
 
+- (void)createSortByOptions{
+    //this dictionary corresponds to the available sort options
+    _sortDescriptors = [[NSDictionary dictionaryWithObjectsAndKeys:
+       [NSSortDescriptor sortDescriptorWithKey:@"authorText"    ascending:YES], @"Author",
+       [NSSortDescriptor sortDescriptorWithKey:@"edition"       ascending:YES], @"Edition",
+       [NSSortDescriptor sortDescriptorWithKey:@"isbn10"        ascending:YES], @"ISBN 10",
+       [NSSortDescriptor sortDescriptorWithKey:@"isbn13"        ascending:YES], @"ISBN 13",
+       [NSSortDescriptor sortDescriptorWithKey:@"publisherText" ascending:YES], @"Publisher",
+       [NSSortDescriptor sortDescriptorWithKey:@"read"          ascending:YES], @"Read",
+       [NSSortDescriptor sortDescriptorWithKey:@"subjectText"   ascending:YES], @"Subject",
+       [NSSortDescriptor sortDescriptorWithKey:@"title"         ascending:YES], @"Title", nil] retain];
+
+    [self setSortByOptions:[_sortDescriptors allKeys]];
+}
 
 // Delegate Methods //////////////////////////////////////////////////////
 
@@ -102,6 +125,20 @@
 
     [self writeBooksWithIndexes:itemIndexes toPasteboard:pasteboard];
     return [itemIndexes count];
+}
+
+
+// Delegate Methods //////////////////////////////////////////////////////
+
+- (IBAction)sortSelectionChanged:(id)sender{
+
+    //TODO: reverse order if clicked again
+
+    NSPopUpButton* btn = (NSPopUpButton*)sender;
+    //no check -- guaranteed to be there as popup button was built from dictionary.
+    NSSortDescriptor* sortDesc = [_sortDescriptors objectForKey:[btn titleOfSelectedItem]];
+
+    [arrayController setSortDescriptors:[NSArray arrayWithObject:sortDesc]];
 }
 
 @end

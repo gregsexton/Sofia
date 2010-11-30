@@ -31,8 +31,14 @@
 
     IBOutlet BooksImageBrowserView* browserView;
 
+    NSArray* sortByOptions;
+    NSDictionary* _sortDescriptors;
+
     float imageZoomLevel;
 }
 @property (nonatomic) float imageZoomLevel;
+@property (nonatomic, assign) NSArray* sortByOptions;
 
+- (void)createSortByOptions;
+- (IBAction)sortSelectionChanged:(id)sender;
 @end
