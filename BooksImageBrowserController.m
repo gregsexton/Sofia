@@ -24,6 +24,7 @@
 
 @implementation BooksImageBrowserController
 @synthesize imageZoomLevel;
+@synthesize sortByOptions;
 
 - (void)awakeFromNib {
     [browserView setDelegate:self];
@@ -36,8 +37,22 @@
 			 options:NSKeyValueObservingOptionInitial //send message immediately
 			 context:NULL];
 
+    [arrayController addObserver:self
+		      forKeyPath:@"sortDescriptors"
+			 options:NSKeyValueObservingOptionInitial //send message immediately
+			 context:NULL];
+
     float zoom = [[NSUserDefaults standardUserDefaults] floatForKey:@"imageViewZoomLevel"];
     [self setImageZoomLevel:zoom];
+
+    [self createSortByOptions];
+    [self updateSortPopupSelection];
+}
+
+- (void)dealloc{
+    if(_sortDescriptors)
+        [_sortDescriptors release];
+    [super dealloc];
 }
 
 - (void)setImageZoomLevel:(float)newValue { //custom setter
@@ -46,6 +61,30 @@
     [[NSUserDefaults standardUserDefaults] setFloat:newValue forKey:@"imageViewZoomLevel"];
 }
 
+- (void)createSortByOptions{
+    //this dictionary corresponds to the available sort options
+    _sortDescriptors = [[NSDictionary dictionaryWithObjectsAndKeys:
+       [NSSortDescriptor sortDescriptorWithKey:@"authorText"    ascending:YES], @"Author",
+       [NSSortDescriptor sortDescriptorWithKey:@"edition"       ascending:YES], @"Edition",
+       [NSSortDescriptor sortDescriptorWithKey:@"isbn10"        ascending:YES], @"ISBN 10",
+       [NSSortDescriptor sortDescriptorWithKey:@"isbn13"        ascending:YES], @"ISBN 13",
+       [NSSortDescriptor sortDescriptorWithKey:@"publisherText" ascending:YES], @"Publisher",
+       [NSSortDescriptor sortDescriptorWithKey:@"read"          ascending:YES], @"Read",
+       [NSSortDescriptor sortDescriptorWithKey:@"subjectText"   ascending:YES], @"Subject",
+       [NSSortDescriptor sortDescriptorWithKey:@"title"         ascending:YES], @"Title", nil] retain];
+
+    [self setSortByOptions:[[_sortDescriptors allKeys] sortedArrayUsingSelector:@selector(compare:)]];
+}
+
+- (void)updateSortPopupSelection{
+    NSString* newKey = [[[arrayController sortDescriptors] objectAtIndex:0] key];
+
+    for(NSString* dictKey in [_sortDescriptors allKeys]){
+        if([newKey isEqualToString:[[_sortDescriptors objectForKey:dictKey] key]]){
+            [sortPopup selectItemWithTitle:dictKey];
+        }
+    }
+}
 
 // Delegate Methods //////////////////////////////////////////////////////
 
@@ -89,6 +128,10 @@
     if([keyPath isEqualToString:@"arrangedObjects"]){
 	[browserView reloadData];
     }
+
+    if([keyPath isEqualToString:@"sortDescriptors"]){
+        [self updateSortPopupSelection];
+    }
 }
 
 - (void)imageBrowserSelectionDidChange:(IKImageBrowserView *) aBrowser{
@@ -102,6 +145,24 @@
 
     [self writeBooksWithIndexes:itemIndexes toPasteboard:pasteboard];
     return [itemIndexes count];
+}
+
+
+// Action Methods ////////////////////////////////////////////////////////
+
+- (IBAction)sortSelectionChanged:(id)sender{
+
+    NSPopUpButton* btn = (NSPopUpButton*)sender;
+
+    //no check -- guaranteed to be there as popup button was built from dictionary.
+    NSSortDescriptor* newSortDesc = [_sortDescriptors objectForKey:[btn titleOfSelectedItem]];
+    NSSortDescriptor* currentDesc = [[arrayController sortDescriptors] objectAtIndex:0];
+
+    if([currentDesc.key isEqualToString:newSortDesc.key]){
+        newSortDesc = [currentDesc reversedSortDescriptor];
+    }
+
+    [arrayController setSortDescriptors:[NSArray arrayWithObject:newSortDesc]];
 }
 
 @end

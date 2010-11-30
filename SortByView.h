@@ -1,5 +1,5 @@
 //
-// BooksImageBrowserController.h
+// SortByView.h
 //
 // Copyright 2010 Greg Sexton
 //
@@ -19,28 +19,11 @@
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import <Quartz/Quartz.h>
 #import <Cocoa/Cocoa.h>
-#import "book.h"
-#import "BooksWindowController.h"
-#import "BooksImageBrowserView.h"
-#import "BooksMainViewController.h"
 
 
-@interface BooksImageBrowserController : BooksMainViewController {
+@interface SortByView : NSView {
 
-    IBOutlet BooksImageBrowserView* browserView;
-    IBOutlet NSPopUpButton* sortPopup;
-
-    NSArray* sortByOptions;
-    NSDictionary* _sortDescriptors;
-
-    float imageZoomLevel;
 }
-@property (nonatomic) float imageZoomLevel;
-@property (nonatomic, assign) NSArray* sortByOptions;
 
-- (IBAction)sortSelectionChanged:(id)sender;
-- (void)createSortByOptions;
-- (void)updateSortPopupSelection;
 @end
