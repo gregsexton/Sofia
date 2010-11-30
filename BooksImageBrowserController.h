@@ -30,6 +30,7 @@
 @interface BooksImageBrowserController : BooksMainViewController {
 
     IBOutlet BooksImageBrowserView* browserView;
+    IBOutlet NSPopUpButton* sortPopup;
 
     NSArray* sortByOptions;
     NSDictionary* _sortDescriptors;
@@ -39,6 +40,7 @@
 @property (nonatomic) float imageZoomLevel;
 @property (nonatomic, assign) NSArray* sortByOptions;
 
-- (void)createSortByOptions;
 - (IBAction)sortSelectionChanged:(id)sender;
+- (void)createSortByOptions;
+- (void)updateSortPopupSelection;
 @end

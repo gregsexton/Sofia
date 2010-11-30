@@ -37,10 +37,16 @@
 			 options:NSKeyValueObservingOptionInitial //send message immediately
 			 context:NULL];
 
+    [arrayController addObserver:self
+		      forKeyPath:@"sortDescriptors"
+			 options:NSKeyValueObservingOptionInitial //send message immediately
+			 context:NULL];
+
     float zoom = [[NSUserDefaults standardUserDefaults] floatForKey:@"imageViewZoomLevel"];
     [self setImageZoomLevel:zoom];
 
     [self createSortByOptions];
+    [self updateSortPopupSelection];
 }
 
 - (void)dealloc{
@@ -68,6 +74,16 @@
        [NSSortDescriptor sortDescriptorWithKey:@"title"         ascending:YES], @"Title", nil] retain];
 
     [self setSortByOptions:[[_sortDescriptors allKeys] sortedArrayUsingSelector:@selector(compare:)]];
+}
+
+- (void)updateSortPopupSelection{
+    NSString* newKey = [[[arrayController sortDescriptors] objectAtIndex:0] key];
+
+    for(NSString* dictKey in [_sortDescriptors allKeys]){
+        if([newKey isEqualToString:[[_sortDescriptors objectForKey:dictKey] key]]){
+            [sortPopup selectItemWithTitle:dictKey];
+        }
+    }
 }
 
 // Delegate Methods //////////////////////////////////////////////////////
@@ -112,6 +128,10 @@
     if([keyPath isEqualToString:@"arrangedObjects"]){
 	[browserView reloadData];
     }
+
+    if([keyPath isEqualToString:@"sortDescriptors"]){
+        [self updateSortPopupSelection];
+    }
 }
 
 - (void)imageBrowserSelectionDidChange:(IKImageBrowserView *) aBrowser{
@@ -128,7 +148,7 @@
 }
 
 
-// Delegate Methods //////////////////////////////////////////////////////
+// Action Methods ////////////////////////////////////////////////////////
 
 - (IBAction)sortSelectionChanged:(id)sender{
 
@@ -138,7 +158,7 @@
     NSSortDescriptor* newSortDesc = [_sortDescriptors objectForKey:[btn titleOfSelectedItem]];
     NSSortDescriptor* currentDesc = [[arrayController sortDescriptors] objectAtIndex:0];
 
-    if(currentDesc.key == newSortDesc.key){
+    if([currentDesc.key isEqualToString:newSortDesc.key]){
         newSortDesc = [currentDesc reversedSortDescriptor];
     }
 
