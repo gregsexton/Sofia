@@ -27,7 +27,7 @@
 #import "BooksMainViewController.h"
 
 
-@interface BooksImageBrowserController : BooksMainViewController {
+@interface BooksImageBrowserController : BooksMainViewController <BooksWindowControllerDelegate>{
 
     IBOutlet BooksImageBrowserView* browserView;
     IBOutlet NSPopUpButton* sortPopup;
@@ -36,6 +36,7 @@
     NSDictionary* _sortDescriptors;
 
     float imageZoomLevel;
+    NSUInteger _currentVersion;
 }
 @property (nonatomic) float imageZoomLevel;
 @property (nonatomic, assign) NSArray* sortByOptions;

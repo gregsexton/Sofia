@@ -26,7 +26,7 @@
 
 #define SofiaDragType @"SofiaDragType"
 
-@interface BooksMainViewController : NSViewController {
+@interface BooksMainViewController : NSViewController <BooksWindowControllerDelegate>{
 
     IBOutlet NSArrayController *arrayController;
     IBOutlet SidebarOutlineView* sideBar;

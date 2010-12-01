@@ -56,6 +56,8 @@
 - (void)openDetailWindowForBook:(book*)obj{
     BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj
 										 withSearch:NO];
+    [detailWin setDelegate:self];
+
     if (![NSBundle loadNibNamed:@"Detail" owner:[detailWin autorelease]]) {
 	NSLog(@"Error loading Nib!");
     }
@@ -165,6 +167,13 @@
     if (![NSBundle loadNibNamed:@"ExternalLinkEditor" owner:self]) {
 	NSLog(@"Error loading Nib!");
     }
+}
+
+// delegate methods ////////////////////////////////////////////////////
+
+//delegate method performed by booksWindowController.
+- (void)saveClicked:(BooksWindowController*)booksWindowController {
+    //default behaviour does nothing. this is more a placeholder to be overridden
 }
 
 @end

@@ -11,7 +11,7 @@
 			<string key="NS.object.0">804</string>
 		</object>
 		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
-			<integer value="4"/>
+			<integer value="38"/>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -137,7 +137,7 @@
 								<object class="NSTabViewItem" id="670430723">
 									<string key="NSIdentifier">summary</string>
 									<object class="NSView" key="NSView" id="14031021">
-										<reference key="NSNextResponder" ref="317962420"/>
+										<nil key="NSNextResponder"/>
 										<int key="NSvFlags">256</int>
 										<array class="NSMutableArray" key="NSSubviews">
 											<object class="NSImageView" id="403684829">
@@ -156,8 +156,12 @@
 												<int key="NSViewLayerContentsRedrawPolicy">2</int>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSImageCell" key="NSCell" id="992735742">
-													<int key="NSCellFlags">130560</int>
-													<int key="NSCellFlags2">33554432</int>
+													<int key="NSCellFlags">270663168</int>
+													<int key="NSCellFlags2">32768</int>
+													<object class="NSCustomResource" key="NSContents" id="168224662">
+														<string key="NSClassName">NSImage</string>
+														<string key="NSResourceName">missing</string>
+													</object>
 													<int key="NSAlign">0</int>
 													<int key="NSScale">0</int>
 													<int key="NSStyle">2</int>
@@ -695,7 +699,6 @@
 											</object>
 										</array>
 										<string key="NSFrame">{{10, 33}, {635, 518}}</string>
-										<reference key="NSSuperview" ref="317962420"/>
 										<int key="NSViewLayerContentsRedrawPolicy">2</int>
 									</object>
 									<string key="NSLabel">Summary</string>
@@ -3077,7 +3080,7 @@
 								<object class="NSTabViewItem" id="458638850">
 									<string key="NSIdentifier">cover</string>
 									<object class="NSView" key="NSView" id="679881611">
-										<nil key="NSNextResponder"/>
+										<reference key="NSNextResponder" ref="317962420"/>
 										<int key="NSvFlags">256</int>
 										<array class="NSMutableArray" key="NSSubviews">
 											<object class="NSImageView" id="801347640">
@@ -3098,6 +3101,7 @@
 												<object class="NSImageCell" key="NSCell" id="1068359313">
 													<int key="NSCellFlags">130560</int>
 													<int key="NSCellFlags2">33554432</int>
+													<reference key="NSContents" ref="168224662"/>
 													<int key="NSAlign">0</int>
 													<int key="NSScale">0</int>
 													<int key="NSStyle">2</int>
@@ -3107,6 +3111,7 @@
 											</object>
 										</array>
 										<string key="NSFrame">{{10, 33}, {635, 518}}</string>
+										<reference key="NSSuperview" ref="317962420"/>
 										<int key="NSViewLayerContentsRedrawPolicy">2</int>
 									</object>
 									<string key="NSLabel">Cover</string>
@@ -3126,13 +3131,13 @@
 									<reference key="NSTabView" ref="317962420"/>
 								</object>
 							</array>
-							<reference key="NSSelectedTabViewItem" ref="670430723"/>
+							<reference key="NSSelectedTabViewItem" ref="458638850"/>
 							<reference key="NSFont" ref="85247258"/>
 							<int key="NSTvFlags">0</int>
 							<bool key="NSAllowTruncatedLabels">YES</bool>
 							<bool key="NSDrawsBackground">YES</bool>
 							<array class="NSMutableArray" key="NSSubviews">
-								<reference ref="14031021"/>
+								<reference ref="679881611"/>
 							</array>
 						</object>
 						<object class="NSButton" id="95542696">
@@ -7400,10 +7405,10 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<string key="IBDocument.LastKnownRelativeProjectPath">books.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">NSSwitch</string>
-			<string key="NS.object.0">{15, 15}</string>
-		</object>
+		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="NSSwitch">{15, 15}</string>
+			<string key="missing">{393, 542}</string>
+		</dictionary>
 	</data>
 	<classes>
 		<class name="IBCustomCell">

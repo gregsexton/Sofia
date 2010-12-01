@@ -117,6 +117,11 @@
     [self writeBooksWithIndexes:itemIndexes toPasteboard:pasteboard];
     return [itemIndexes count];
 }
-    
+
+//delegate method performed by booksWindowController.
+- (void)saveClicked:(BooksWindowController*)booksWindowController {
+    //it is possible that the image has changed so need to force an update
+    [coverflow reloadData];
+}
 
 @end

@@ -41,10 +41,11 @@
     NSImage* image;
     NSString* imageID;
     NSString* imageSub;
+    NSUInteger version;
     
 }
 
-- (id)initWithImage:(NSImage*)anImage imageID:(NSString*)anImageID subtitle:(NSString*)aSubtitle;
+- (id)initWithImage:(NSImage*)anImage imageID:(NSString*)anImageID subtitle:(NSString*)aSubtitle version:(NSUInteger)aVersion;
 - (NSString *)imageUID;
 - (NSString *)imageRepresentationType;
 - (id)imageRepresentation;

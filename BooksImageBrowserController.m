@@ -4,17 +4,17 @@
 // Copyright 2010 Greg Sexton
 //
 // This file is part of Sofia.
-// 
+//
 // Sofia is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Sofia is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
@@ -47,6 +47,8 @@
 
     [self createSortByOptions];
     [self updateSortPopupSelection];
+
+    _currentVersion = 1; //gets incremented each time a book's image is _potentially_ updated.
 }
 
 - (void)dealloc{
@@ -88,7 +90,7 @@
 
 // Delegate Methods //////////////////////////////////////////////////////
 
-- (NSUInteger)numberOfItemsInImageBrowser:(IKImageBrowserView *) aBrowser{	
+- (NSUInteger)numberOfItemsInImageBrowser:(IKImageBrowserView *) aBrowser{
     NSUInteger count = [[arrayController arrangedObjects] count];
     return count;
 }
@@ -98,9 +100,10 @@
     NSImage* img = [theBook coverImage];
     if(img == nil) //use default image
 	img = [NSImage imageNamed:@"missing.png"];
-    BooksImageBrowserItem* item = [[BooksImageBrowserItem alloc] initWithImage:img 
-								       imageID:[theBook title] 
-								      subtitle:[theBook authorText]];
+    BooksImageBrowserItem* item = [[BooksImageBrowserItem alloc] initWithImage:img
+								       imageID:[theBook title]
+								      subtitle:[theBook authorText]
+                                                                       version:_currentVersion];
     return [item autorelease];
 }
 
@@ -110,7 +113,7 @@
     [self openDetailWindowForBook:obj];
 }
 
-- (void) imageBrowser:(IKImageBrowserView *)aBrowser cellWasRightClickedAtIndex:(NSUInteger)index 
+- (void) imageBrowser:(IKImageBrowserView *)aBrowser cellWasRightClickedAtIndex:(NSUInteger)index
 	    withEvent:(NSEvent *)event{
 
     book *obj = [[arrayController arrangedObjects] objectAtIndex:index];
@@ -120,12 +123,13 @@
 
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath 
-		      ofObject:(id)object 
-			change:(NSDictionary *)change 
+- (void)observeValueForKeyPath:(NSString *)keyPath
+		      ofObject:(id)object
+			change:(NSDictionary *)change
 		       context:(void *)context{
     //this works nicely but will it be efficient enough for a large book collection?
     if([keyPath isEqualToString:@"arrangedObjects"]){
+        _currentVersion++;
 	[browserView reloadData];
     }
 
@@ -139,14 +143,20 @@
     [arrayController setSelectionIndexes:[browserView selectionIndexes]];
 }
 
-- (NSUInteger)imageBrowser:(IKImageBrowserView *)aBrowser 
-       writeItemsAtIndexes:(NSIndexSet *)itemIndexes 
+- (NSUInteger)imageBrowser:(IKImageBrowserView *)aBrowser
+       writeItemsAtIndexes:(NSIndexSet *)itemIndexes
 	      toPasteboard:(NSPasteboard *)pasteboard{
 
     [self writeBooksWithIndexes:itemIndexes toPasteboard:pasteboard];
     return [itemIndexes count];
 }
 
+//delegate method performed by booksWindowController.
+- (void)saveClicked:(BooksWindowController*)booksWindowController {
+    //it is possible that the image has changed so need to force a version update
+    _currentVersion++;          //TODO: this is crappy...
+    [browserView reloadData];
+}
 
 // Action Methods ////////////////////////////////////////////////////////
 

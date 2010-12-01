@@ -26,7 +26,8 @@
 @synthesize delegate;
 @synthesize dataSource;
 
-//TODO: implement image versions
+//TODO: implement image versions -- when this is done, changing the image in the detail window
+//                                  will require the controller to force an update of the version
 
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
