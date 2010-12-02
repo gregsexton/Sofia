@@ -11,7 +11,7 @@
 			<string key="NS.object.0">804</string>
 		</object>
 		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
-			<integer value="38"/>
+			<integer value="3"/>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -137,7 +137,7 @@
 								<object class="NSTabViewItem" id="670430723">
 									<string key="NSIdentifier">summary</string>
 									<object class="NSView" key="NSView" id="14031021">
-										<nil key="NSNextResponder"/>
+										<reference key="NSNextResponder" ref="317962420"/>
 										<int key="NSvFlags">256</int>
 										<array class="NSMutableArray" key="NSSubviews">
 											<object class="NSImageView" id="403684829">
@@ -158,7 +158,7 @@
 												<object class="NSImageCell" key="NSCell" id="992735742">
 													<int key="NSCellFlags">270663168</int>
 													<int key="NSCellFlags2">32768</int>
-													<object class="NSCustomResource" key="NSContents" id="168224662">
+													<object class="NSCustomResource" key="NSContents" id="153669762">
 														<string key="NSClassName">NSImage</string>
 														<string key="NSResourceName">missing</string>
 													</object>
@@ -699,6 +699,7 @@
 											</object>
 										</array>
 										<string key="NSFrame">{{10, 33}, {635, 518}}</string>
+										<reference key="NSSuperview" ref="317962420"/>
 										<int key="NSViewLayerContentsRedrawPolicy">2</int>
 									</object>
 									<string key="NSLabel">Summary</string>
@@ -3080,7 +3081,7 @@
 								<object class="NSTabViewItem" id="458638850">
 									<string key="NSIdentifier">cover</string>
 									<object class="NSView" key="NSView" id="679881611">
-										<reference key="NSNextResponder" ref="317962420"/>
+										<nil key="NSNextResponder"/>
 										<int key="NSvFlags">256</int>
 										<array class="NSMutableArray" key="NSSubviews">
 											<object class="NSImageView" id="801347640">
@@ -3101,7 +3102,7 @@
 												<object class="NSImageCell" key="NSCell" id="1068359313">
 													<int key="NSCellFlags">130560</int>
 													<int key="NSCellFlags2">33554432</int>
-													<reference key="NSContents" ref="168224662"/>
+													<reference key="NSContents" ref="153669762"/>
 													<int key="NSAlign">0</int>
 													<int key="NSScale">0</int>
 													<int key="NSStyle">2</int>
@@ -3111,33 +3112,20 @@
 											</object>
 										</array>
 										<string key="NSFrame">{{10, 33}, {635, 518}}</string>
-										<reference key="NSSuperview" ref="317962420"/>
 										<int key="NSViewLayerContentsRedrawPolicy">2</int>
 									</object>
 									<string key="NSLabel">Cover</string>
 									<reference key="NSColor" ref="655670657"/>
 									<reference key="NSTabView" ref="317962420"/>
 								</object>
-								<object class="NSTabViewItem" id="669871657">
-									<string key="NSIdentifier">ownership</string>
-									<object class="NSView" key="NSView" id="471041016">
-										<nil key="NSNextResponder"/>
-										<int key="NSvFlags">256</int>
-										<string key="NSFrame">{{10, 33}, {635, 518}}</string>
-										<int key="NSViewLayerContentsRedrawPolicy">2</int>
-									</object>
-									<string key="NSLabel">Ownership</string>
-									<reference key="NSColor" ref="655670657"/>
-									<reference key="NSTabView" ref="317962420"/>
-								</object>
 							</array>
-							<reference key="NSSelectedTabViewItem" ref="458638850"/>
+							<reference key="NSSelectedTabViewItem" ref="670430723"/>
 							<reference key="NSFont" ref="85247258"/>
 							<int key="NSTvFlags">0</int>
 							<bool key="NSAllowTruncatedLabels">YES</bool>
 							<bool key="NSDrawsBackground">YES</bool>
 							<array class="NSMutableArray" key="NSSubviews">
-								<reference ref="679881611"/>
+								<reference ref="14031021"/>
 							</array>
 						</object>
 						<object class="NSButton" id="95542696">
@@ -4269,7 +4257,6 @@
 							<reference ref="1039331548"/>
 							<reference ref="33883446"/>
 							<reference ref="458638850"/>
-							<reference ref="669871657"/>
 							<reference ref="670430723"/>
 						</array>
 						<reference key="parent" ref="179581509"/>
@@ -4937,19 +4924,6 @@
 							<reference ref="1035873093"/>
 						</array>
 						<reference key="parent" ref="670430723"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">194</int>
-						<reference key="object" ref="669871657"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="471041016"/>
-						</array>
-						<reference key="parent" ref="317962420"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">195</int>
-						<reference key="object" ref="471041016"/>
-						<reference key="parent" ref="669871657"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">197</int>
@@ -5994,8 +5968,6 @@
 				<string key="19.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="192.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="193.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="194.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="195.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="197.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="198.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="199.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -6256,7 +6228,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">518</int>
+			<int key="maxID">520</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
