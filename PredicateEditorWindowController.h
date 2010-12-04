@@ -23,22 +23,27 @@
 #import "smartList.h"
 #import "PredicateEditorWindowControllerDelegate.h"
 
+#define PRED_NOT_IN_SHOPPING_LIST @"NOT library.name MATCHES 'Shopping List'"
 
 @interface PredicateEditorWindowController : NSObject {
 
-    IBOutlet NSWindow*				window;
-    IBOutlet NSPredicateEditor*			predicateEditor;
+    IBOutlet NSWindow*		    window;
+    IBOutlet NSPredicateEditor*	    predicateEditor;
 
     id<PredicateEditorWindowControllerDelegate> delegate;
     NSPredicate*				predicate;
     smartList*					listToTransferTo;
+
+    NSInteger   includeItemsFromShoppingList;
 }
 
 @property (nonatomic, assign) id<PredicateEditorWindowControllerDelegate> delegate;
+@property (nonatomic) NSInteger includeItemsFromShoppingList;
 
 - (id)initWithSmartList:(smartList*)list;
 - (IBAction)okClicked:(id)sender;
 - (IBAction)cancelClicked:(id)sender;
+- (NSPredicate*)parsePredicateAndSetFlags:(NSString*)predStr;
 
 @end
 

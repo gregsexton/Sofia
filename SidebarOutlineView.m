@@ -65,13 +65,13 @@
     }
 }
 
-- (void) dealloc{
+- (void)dealloc{
     [bookLibrary release];
     [shoppingListLibrary release];
     [super dealloc];
 }
 
-- (NSFetchRequest*) libraryExistsWithName:(NSString*)libraryName{
+- (NSFetchRequest*)libraryExistsWithName:(NSString*)libraryName{
     //returns the request in order to get hold of the library
     //otherwise returns nil if the library cannot be found.
     NSError *error;
@@ -241,7 +241,7 @@
     }
 }
 
-- (void) beginEditingCurrentlySelectedItem{
+- (void)beginEditingCurrentlySelectedItem{
     [self editColumn:0
 		 row:[self selectedRow]
 	   withEvent:nil
