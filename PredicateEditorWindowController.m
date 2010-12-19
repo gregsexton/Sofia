@@ -25,6 +25,8 @@
 @implementation PredicateEditorWindowController
 @synthesize delegate;
 @synthesize includeItemsFromShoppingList;
+@synthesize lists;
+@synthesize smartLists;
 
 //TODO: convert noOfCopies to an integer
 
@@ -40,11 +42,29 @@
 - (void)dealloc{
     if(predicate)
         [predicate release];
+    if(lists)
+        [lists release];
+    if(smartLists)
+        [smartLists release];
+
     [super dealloc];
 }
 
 - (void)awakeFromNib {
     [window makeKeyAndOrderFront:self];
+
+    //add ListEditorRowTemplate -- has to be done programatically as need to pass lists/smartLists to it.
+    ListEditorRowTemplate* leRowTemplate = [[ListEditorRowTemplate alloc] init];
+    [leRowTemplate setLists:[self lists]];
+    [leRowTemplate setSmartLists:[self smartLists]];
+
+    NSArray* templates = [predicateEditor rowTemplates];
+    templates = [templates arrayByAddingObject:leRowTemplate];
+    [predicateEditor setRowTemplates:templates];
+
+    [leRowTemplate release];
+
+    [predicateEditor setObjectValue:predicate];
 }
 
 - (NSPredicate*)parsePredicateAndSetFlags:(NSString*)predStr{ //has side effects
@@ -107,7 +127,7 @@
 //http://www.codecollector.net/view/CB180CA1-407A-45D6-BACD-5AD156BC1CE7
 @implementation BoolEditorRowTemplate
 
--(NSPopUpButton *)keypathPopUp {
+- (NSPopUpButton *)keypathPopUp {
     if(!keypathPopUp){
 	NSMenu *keypathMenu = [[[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"ReadMenu"] autorelease];
 
@@ -124,7 +144,7 @@
     return keypathPopUp;
 }
 
--(NSPopUpButton *)boolPopUp {
+- (NSPopUpButton *)boolPopUp {
     if(!boolPopUp){
 	NSMenu *boolMenu = [[[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"bool menu"] autorelease];
 
@@ -148,7 +168,7 @@
     return boolPopUp;
 }
 
--(void)dealloc {
+- (void)dealloc {
 
     [keypathPopUp release];
     [boolPopUp release];
@@ -166,26 +186,214 @@
     return 0;
 }
 
--(NSArray *)templateViews{
+- (NSArray *)templateViews{
     NSArray *newViews = [NSArray arrayWithObjects:[self keypathPopUp], [self boolPopUp], nil];
 
     return newViews;
 }
 
--(void) setPredicate:(NSPredicate *)predicate{
+- (void) setPredicate:(NSPredicate *)predicate{
     // Sets the Yes/No popup when a predicate is set on the template.
     id rightValue = [[(NSComparisonPredicate *)predicate rightExpression] constantValue];
     if([rightValue isKindOfClass:[NSNumber class]])
 	[[self boolPopUp] selectItemWithTag:[rightValue integerValue]];
 }
 
--(NSPredicate *)predicateWithSubpredicates:(NSArray *) subpredicates{
+- (NSPredicate *)predicateWithSubpredicates:(NSArray *) subpredicates{
     NSPredicate *newPredicate = [NSComparisonPredicate predicateWithLeftExpression:[[[self keypathPopUp] selectedItem] representedObject]
 								   rightExpression:[[[self boolPopUp] selectedItem] representedObject]
 									  modifier:NSDirectPredicateModifier
 									      type:NSEqualToPredicateOperatorType
 									   options:0];
     return newPredicate;
+}
+
+@end
+
+@implementation ListEditorRowTemplate
+@synthesize lists;
+@synthesize smartLists;
+
+- (void)dealloc {
+
+    [keypathPopUp release];
+    [listPopUp release];
+    [boolPopUp release];
+    if(lists)
+        [lists release];
+    if(smartLists)
+        [smartLists release];
+
+    [super dealloc];
+}
+
+- (id)copyWithZone:(NSZone *)zone{
+    return [self retain];
+}
+
+- (NSPopUpButton *)keypathPopUp {
+    if(!keypathPopUp){
+	NSMenu *keypathMenu = [[[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"ListKeypathMenu"] autorelease];
+
+	NSMenuItem *menuItem = [[[NSMenuItem alloc] initWithTitle:@"Booklist" action:nil keyEquivalent:@""] autorelease];
+	[menuItem setEnabled:YES];
+
+	[keypathMenu addItem:menuItem];
+
+	keypathPopUp = [[NSPopUpButton alloc] initWithFrame:NSZeroRect pullsDown:NO];
+	[keypathPopUp setMenu:keypathMenu];
+    }
+
+    return keypathPopUp;
+}
+
+- (NSPopUpButton*)boolPopUp{
+    if(!boolPopUp){
+	NSMenu *boolMenu = [[[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"bool menu"] autorelease];
+
+	NSMenuItem *yesItem = [[[NSMenuItem alloc] initWithTitle:@"is" action:nil keyEquivalent:@""] autorelease];
+	[yesItem setRepresentedObject:[NSNumber numberWithBool:YES]];
+	[yesItem setEnabled:YES];
+	[yesItem setTag:1];
+
+	NSMenuItem *noItem = [[[NSMenuItem alloc] initWithTitle:@"is not" action:nil keyEquivalent:@""] autorelease];
+	[noItem setRepresentedObject:[NSNumber numberWithBool:NO]];
+	[noItem setEnabled:YES];
+	[noItem setTag:0];
+
+	[boolMenu addItem:yesItem];
+	[boolMenu addItem:noItem];
+
+	boolPopUp = [[NSPopUpButton alloc] initWithFrame:NSZeroRect pullsDown:NO];
+	[boolPopUp setMenu:boolMenu];
+    }
+
+    return boolPopUp;
+}
+
+- (NSPopUpButton *)listPopUp{
+    if(!listPopUp){
+	NSMenu *listMenu = [[[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"list menu"] autorelease];
+
+        for(list* lst in [self lists]){
+            NSMenuItem *listItem = [[[NSMenuItem alloc] initWithTitle:[lst name] action:nil keyEquivalent:@""] autorelease];
+            [listItem setRepresentedObject:[NSExpression expressionForConstantValue:[lst name]]];
+            [listItem setEnabled:YES];
+            [listItem setTag:1];
+
+            [listMenu addItem:listItem];
+        }
+
+        for(smartList* lst in [self smartLists]){
+            NSMenuItem *listItem = [[[NSMenuItem alloc] initWithTitle:[lst name] action:nil keyEquivalent:@""] autorelease];
+            [listItem setRepresentedObject:[NSPredicate predicateWithFormat:[lst filter]]];
+            [listItem setEnabled:YES];
+            [listItem setTag:1];
+
+            [listMenu addItem:listItem];
+        }
+
+	listPopUp = [[NSPopUpButton alloc] initWithFrame:NSZeroRect pullsDown:NO];
+	[listPopUp setMenu:listMenu];
+    }
+
+    return listPopUp;
+}
+
+- (NSPredicate *)predicateWithSubpredicates:(NSArray *) subpredicates{
+
+    BOOL inverse = ![[[[self boolPopUp] selectedItem] representedObject] boolValue];
+
+    if([[[[self listPopUp] selectedItem] representedObject] isKindOfClass:[NSPredicate class]]){ //smart list is selected
+        NSPredicate* pred = [[[self listPopUp] selectedItem] representedObject];
+
+        if(inverse){
+            return [NSCompoundPredicate notPredicateWithSubpredicate:pred];
+        }else{
+            return pred;
+        }
+    }else{
+        NSPredicate* pred = [NSComparisonPredicate predicateWithLeftExpression:[NSExpression expressionForKeyPath:@"lists.name"]
+                                                               rightExpression:[[[self listPopUp] selectedItem] representedObject]
+                                                                      modifier:NSAnyPredicateModifier
+                                                                          type:NSLikePredicateOperatorType
+                                                                       options:0];
+        if(inverse){
+            return [NSCompoundPredicate notPredicateWithSubpredicate:pred];
+        }else{
+            return pred;
+        }
+    }
+}
+
+- (double)matchForPredicate:(NSPredicate *)predicate{ //return 1 if can display for pred
+
+NSLog(@"I'm seeing '%@'.", [predicate predicateFormat]);
+
+    NSPredicate* pred = predicate;
+
+    //if a smart list is chosen and then edited independently
+    //it is possible for the 'TRUEPREDICATE' of the smart list
+    //to become 'trapped' as it is won't be stripped by the PredicateEditorWindowController
+    //TODO: is there a solution?
+
+    if([pred isKindOfClass:[NSCompoundPredicate class]]){
+        if([(NSCompoundPredicate*)pred compoundPredicateType] == NSNotPredicateType){
+            pred = [[(NSCompoundPredicate*)pred subpredicates] objectAtIndex:0];
+NSLog(@"Extracted: '%@'", [pred predicateFormat]);
+        }else{
+            return 0;
+        }
+    }
+
+    if([pred isKindOfClass:[NSComparisonPredicate class]]){
+        if([[[(NSComparisonPredicate*)pred leftExpression] keyPath] isEqualToString:@"lists.name"]){
+            return 1;
+        }
+    }
+
+    if([pred isKindOfClass:[NSCompoundPredicate class]]){
+        for(smartList* lst in [self smartLists]){
+            NSPredicate* testPred = [NSPredicate predicateWithFormat:[lst filter]];
+            if([[testPred predicateFormat] isEqualToString:[pred predicateFormat]])
+                return 1;
+        }
+    }
+
+    return 0;
+}
+
+- (void)setPredicate:(NSPredicate *)predicate{
+
+    NSPredicate* pred = predicate;
+
+    if([pred isKindOfClass:[NSCompoundPredicate class]]){
+        [[self boolPopUp] selectItemWithTag:0];
+        pred = [[(NSCompoundPredicate*)pred subpredicates] objectAtIndex:0];
+NSLog(@"Extracted: '%@'", [pred predicateFormat]);
+    }else{
+        [[self boolPopUp] selectItemWithTag:1];
+    }
+        
+    if([pred isKindOfClass:[NSComparisonPredicate class]]){
+        NSString* rightValue = [[(NSComparisonPredicate *)pred rightExpression] constantValue];
+        if([rightValue isKindOfClass:[NSString class]])
+            [[self listPopUp] selectItemWithTitle:rightValue];
+    }
+
+    if([pred isKindOfClass:[NSCompoundPredicate class]]){
+        for(smartList* lst in [self smartLists]){
+            NSPredicate* testPred = [NSPredicate predicateWithFormat:[lst filter]];
+            if([[testPred predicateFormat] isEqualToString:[pred predicateFormat]])
+                [[self listPopUp] selectItemWithTitle:[lst name]];
+        }
+    }
+}
+
+- (NSArray *)templateViews{
+    NSArray *newViews = [NSArray arrayWithObjects:[self keypathPopUp], [self boolPopUp], [self listPopUp], nil];
+
+    return newViews;
 }
 
 @end

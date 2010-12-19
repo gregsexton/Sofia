@@ -22,6 +22,7 @@
 #import <Cocoa/Cocoa.h>
 #import "smartList.h"
 #import "PredicateEditorWindowControllerDelegate.h"
+#import "list.h"
 
 #define PRED_NOT_IN_SHOPPING_LIST @"NOT library.name MATCHES 'Shopping List'"
 
@@ -35,10 +36,15 @@
     smartList*					listToTransferTo;
 
     NSInteger   includeItemsFromShoppingList;
+
+    NSArray* smartLists;
+    NSArray* lists;
 }
 
 @property (nonatomic, assign) id<PredicateEditorWindowControllerDelegate> delegate;
 @property (nonatomic) NSInteger includeItemsFromShoppingList;
+@property (nonatomic, retain) NSArray* smartLists;
+@property (nonatomic, retain) NSArray* lists;
 
 - (id)initWithSmartList:(smartList*)list;
 - (IBAction)okClicked:(id)sender;
@@ -49,11 +55,29 @@
 
 //custom row for bool values
 @interface BoolEditorRowTemplate : NSPredicateEditorRowTemplate{
-	NSPopUpButton *keypathPopUp;
-	NSPopUpButton *boolPopUp;
+    NSPopUpButton *keypathPopUp;
+    NSPopUpButton *boolPopUp;
 }
 
--(NSPopUpButton *)keypathPopUp;
--(NSPopUpButton *)boolPopUp;
+- (NSPopUpButton *)keypathPopUp;
+- (NSPopUpButton *)boolPopUp;
+
+@end
+
+//custom row for book lists
+@interface ListEditorRowTemplate : NSPredicateEditorRowTemplate <NSCopying>{
+    NSPopUpButton *keypathPopUp;
+    NSPopUpButton *listPopUp;
+    NSPopUpButton *boolPopUp;
+
+    NSArray* smartLists;
+    NSArray* lists;
+}
+@property (nonatomic, retain) NSArray* smartLists;
+@property (nonatomic, retain) NSArray* lists;
+
+- (NSPopUpButton *)keypathPopUp;
+- (NSPopUpButton *)listPopUp;
+- (NSPopUpButton*)boolPopUp;
 
 @end

@@ -68,6 +68,10 @@
 - (void)dealloc{
     [bookLibrary release];
     [shoppingListLibrary release];
+    if(bookLists)
+        [bookLists release];
+    if(smartBookLists)
+        [smartBookLists release];
     [super dealloc];
 }
 
@@ -285,6 +289,8 @@
 	smartList* list = item;
 	PredicateEditorWindowController *predWin = [[PredicateEditorWindowController alloc] initWithSmartList:list];
 	[predWin setDelegate:self];
+        [predWin setLists:[self getBookLists]];
+        [predWin setSmartLists:[self getSmartBookLists]];
 	if (![NSBundle loadNibNamed:@"PredicateEditor" owner:predWin]) {
 	    NSLog(@"Error loading Nib!");
 	}

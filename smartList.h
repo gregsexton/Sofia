@@ -21,7 +21,6 @@
 
 #import <CoreData/CoreData.h>
 
-
 @interface smartList :  NSManagedObject  
 {
 }
