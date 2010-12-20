@@ -328,8 +328,6 @@
 
 - (double)matchForPredicate:(NSPredicate *)predicate{ //return 1 if can display for pred
 
-NSLog(@"I'm seeing '%@'.", [predicate predicateFormat]);
-
     NSPredicate* pred = predicate;
 
     //if a smart list is chosen and then edited independently
@@ -340,7 +338,6 @@ NSLog(@"I'm seeing '%@'.", [predicate predicateFormat]);
     if([pred isKindOfClass:[NSCompoundPredicate class]]){
         if([(NSCompoundPredicate*)pred compoundPredicateType] == NSNotPredicateType){
             pred = [[(NSCompoundPredicate*)pred subpredicates] objectAtIndex:0];
-NSLog(@"Extracted: '%@'", [pred predicateFormat]);
         }else{
             return 0;
         }
@@ -370,7 +367,6 @@ NSLog(@"Extracted: '%@'", [pred predicateFormat]);
     if([pred isKindOfClass:[NSCompoundPredicate class]]){
         [[self boolPopUp] selectItemWithTag:0];
         pred = [[(NSCompoundPredicate*)pred subpredicates] objectAtIndex:0];
-NSLog(@"Extracted: '%@'", [pred predicateFormat]);
     }else{
         [[self boolPopUp] selectItemWithTag:1];
     }
