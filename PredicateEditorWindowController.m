@@ -90,6 +90,7 @@
         }
     }
 
+NSLog(@"OPENING PREDICATE: %@", subPred);
     return [NSPredicate predicateWithFormat:subPred];
 }
 
@@ -112,8 +113,7 @@
         [[self delegate] predicateEditingDidFinish:[NSPredicate predicateWithFormat:pred]];
     }
 
-    NSLog(@"%@", pred);
-
+NSLog(@"SAVING PREDICATE: %@", pred);
     [listToTransferTo setFilter:pred];
     [window close];
 }
@@ -123,6 +123,7 @@
 }
 @end
 
+//custom row for bool values
 //The basis for the following class code was found on
 //http://www.codecollector.net/view/CB180CA1-407A-45D6-BACD-5AD156BC1CE7
 @implementation BoolEditorRowTemplate
@@ -210,6 +211,7 @@
 
 @end
 
+//custom row for book lists
 @implementation ListEditorRowTemplate
 @synthesize lists;
 @synthesize smartLists;
@@ -370,7 +372,7 @@
     }else{
         [[self boolPopUp] selectItemWithTag:1];
     }
-        
+
     if([pred isKindOfClass:[NSComparisonPredicate class]]){
         NSString* rightValue = [[(NSComparisonPredicate *)pred rightExpression] constantValue];
         if([rightValue isKindOfClass:[NSString class]])
@@ -390,6 +392,276 @@
     NSArray *newViews = [NSArray arrayWithObjects:[self keypathPopUp], [self boolPopUp], [self listPopUp], nil];
 
     return newViews;
+}
+
+@end
+
+
+@implementation DateEditorRowTemplate
+
+- (void)dealloc {
+    [keypathPopUp release];
+    [boolPopUp release];
+    [quantityTextField release];
+    [timeFramePopUp release];
+    [super dealloc];
+}
+
+- (NSPopUpButton *)keypathPopUp {
+    if(!keypathPopUp){
+	NSMenu *keypathMenu = [[[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"DateKeypathMenu"] autorelease];
+
+	NSMenuItem *menuItem = [[[NSMenuItem alloc] initWithTitle:@"Date Added" action:nil keyEquivalent:@""] autorelease];
+	[menuItem setRepresentedObject:@"dateAdded"];
+	[menuItem setEnabled:YES];
+
+	[keypathMenu addItem:menuItem];
+
+	keypathPopUp = [[NSPopUpButton alloc] initWithFrame:NSZeroRect pullsDown:NO];
+	[keypathPopUp setMenu:keypathMenu];
+    }
+
+    return keypathPopUp;
+}
+
+- (NSPopUpButton*)boolPopUp{
+    if(!boolPopUp){
+	NSMenu *boolMenu = [[[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"bool menu"] autorelease];
+
+	NSMenuItem *yesItem = [[[NSMenuItem alloc] initWithTitle:@"is in the last" action:nil keyEquivalent:@""] autorelease];
+	[yesItem setRepresentedObject:[NSNumber numberWithBool:YES]];
+	[yesItem setEnabled:YES];
+	[yesItem setTag:1];
+
+	NSMenuItem *noItem = [[[NSMenuItem alloc] initWithTitle:@"is not in the last" action:nil keyEquivalent:@""] autorelease];
+	[noItem setRepresentedObject:[NSNumber numberWithBool:NO]];
+	[noItem setEnabled:YES];
+	[noItem setTag:0];
+
+	[boolMenu addItem:yesItem];
+	[boolMenu addItem:noItem];
+
+	boolPopUp = [[NSPopUpButton alloc] initWithFrame:NSZeroRect pullsDown:NO];
+	[boolPopUp setMenu:boolMenu];
+    }
+
+    return boolPopUp;
+}
+
+- (NSTextField *)quantityTextField {
+    if(!quantityTextField){
+        //18 seems to be the right height -- trial and error; where is this in the docs??
+        quantityTextField = [[NSTextField alloc] initWithFrame:NSMakeRect(0,0,30,18)];
+    }
+
+    return quantityTextField;
+}
+
+- (NSPopUpButton *)timeFramePopUp {
+    if(!timeFramePopUp){
+	NSMenu *timeFrameMenu = [[[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"TimeFrameMenu"] autorelease];
+
+	NSMenuItem *daysMenuItem = [[[NSMenuItem alloc] initWithTitle:@"Days" action:nil keyEquivalent:@""] autorelease];
+        [daysMenuItem setRepresentedObject:[NSNumber numberWithUnsignedInteger:SECS_IN_A_DAY]];
+	[daysMenuItem setEnabled:YES];
+	[daysMenuItem setTag:timeFrameDays];
+
+	NSMenuItem *weeksMenuItem = [[[NSMenuItem alloc] initWithTitle:@"Weeks" action:nil keyEquivalent:@""] autorelease];
+	[weeksMenuItem setRepresentedObject:[NSNumber numberWithUnsignedInteger:SECS_IN_A_WEEK]];
+	[weeksMenuItem setEnabled:YES];
+	[weeksMenuItem setTag:timeFrameWeeks];
+
+	NSMenuItem *monthsMenuItem = [[[NSMenuItem alloc] initWithTitle:@"Months" action:nil keyEquivalent:@""] autorelease];
+	[monthsMenuItem setRepresentedObject:[NSNumber numberWithUnsignedInteger:SECS_IN_A_MONTH]]; //1 month defined as 4 weeks
+	[monthsMenuItem setEnabled:YES];
+	[monthsMenuItem setTag:timeFrameMonths];
+
+	[timeFrameMenu addItem:daysMenuItem];
+	[timeFrameMenu addItem:weeksMenuItem];
+	[timeFrameMenu addItem:monthsMenuItem];
+
+	timeFramePopUp = [[NSPopUpButton alloc] initWithFrame:NSZeroRect pullsDown:NO];
+	[timeFramePopUp setMenu:timeFrameMenu];
+    }
+
+    return timeFramePopUp;
+}
+
+- (NSPredicate *)predicateWithSubpredicates:(NSArray *)subpredicates{
+
+    NSInteger quantity = [[self quantityTextField] integerValue];
+    NSUInteger timePeriod = [[[[self timeFramePopUp] selectedItem] representedObject] unsignedIntegerValue];
+    NSUInteger timeInterval = quantity * timePeriod;
+
+    NSPredicate* pred = [NSPredicate predicateWithFormat:@"%K > CAST(CAST(now(), 'NSNumber') - %d, 'NSDate')",
+                                                         [[[self keypathPopUp] selectedItem] representedObject],
+                                                         timeInterval];
+
+    BOOL inverse = ![[[[self boolPopUp] selectedItem] representedObject] boolValue];
+    if(inverse){
+        return [NSCompoundPredicate notPredicateWithSubpredicate:pred];
+    }else{
+        return pred;
+    }
+}
+
+- (double)matchForPredicate:(NSPredicate *)predicate{ //return 1 if can display for pred
+
+    NSPredicate* pred = predicate;
+
+    if([pred isKindOfClass:[NSCompoundPredicate class]]){
+        if([(NSCompoundPredicate*)pred compoundPredicateType] == NSNotPredicateType){
+            pred = [[(NSCompoundPredicate*)pred subpredicates] objectAtIndex:0];
+        }else{
+            return 0;
+        }
+    }
+
+    //only if pred matches: (dateAdded > CAST(CAST(now(), "NSNumber") - 7257600, "NSDate"))
+    if([pred isKindOfClass:[NSComparisonPredicate class]]){
+        NSComparisonPredicate* compPred = (NSComparisonPredicate*)pred;
+        if([[[compPred leftExpression] keyPath] isEqualToString:@"dateAdded"]){ //dateAdded >
+
+            if([[compPred rightExpression] expressionType] == NSFunctionExpressionType &&
+                    [[[compPred rightExpression] function] isEqualToString:@"castObject:toType:"]){
+
+                NSExpression* firstArg = [[[compPred rightExpression] arguments] objectAtIndex:0];
+
+                if([firstArg expressionType] == NSFunctionExpressionType &&
+                        [[firstArg function] isEqualToString:@"from:subtract:"]){
+
+                    NSExpression* firstFirstArg = [[firstArg arguments] objectAtIndex:0];
+
+                    if([firstFirstArg expressionType] == NSFunctionExpressionType &&
+                            [[firstFirstArg function] isEqualToString:@"castObject:toType:"]){
+
+                        NSExpression* firstFirstFirstArg = [[firstFirstArg arguments] objectAtIndex:0];
+
+                        if([firstFirstFirstArg expressionType] == NSFunctionExpressionType &&
+                                [[firstFirstFirstArg function] isEqualToString:@"now"]){
+
+                            return 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+- (void)setPredicate:(NSPredicate *)predicate{
+
+    NSPredicate* pred = predicate;
+
+    if([pred isKindOfClass:[NSCompoundPredicate class]]){
+        [[self boolPopUp] selectItemWithTag:0];
+        pred = [[(NSCompoundPredicate*)pred subpredicates] objectAtIndex:0];
+    }else{
+        [[self boolPopUp] selectItemWithTag:1];
+    }
+
+    [self setQuantityTextFieldFromPredicate:pred];
+    [self setTimeFramePopUpFromPredicate:pred];
+
+}
+
+- (void)setQuantityTextFieldFromPredicate:(NSPredicate*)pred{
+
+    NSInteger timeInterval = [self timeIntervalFromPredicate:pred];
+    [[self quantityTextField] setIntegerValue:[self reverseEngineerQuantityFrom:timeInterval]];
+}
+
+- (void)setTimeFramePopUpFromPredicate:(NSPredicate*)pred{
+
+    NSInteger timeInterval = [self timeIntervalFromPredicate:pred];
+    [[self timeFramePopUp] selectItemWithTag:[self reverseEngineerTimeFrameFrom:timeInterval]];
+}
+
+- (NSInteger)timeIntervalFromPredicate:(NSPredicate*)pred{
+    //only if pred matches: (dateAdded > CAST(CAST(now(), "NSNumber") - 7257600, "NSDate"))
+    if([pred isKindOfClass:[NSComparisonPredicate class]]){
+        NSComparisonPredicate* compPred = (NSComparisonPredicate*)pred;
+        if([[[compPred leftExpression] keyPath] isEqualToString:@"dateAdded"]){
+
+            if([[compPred rightExpression] expressionType] == NSFunctionExpressionType &&
+                    [[[compPred rightExpression] function] isEqualToString:@"castObject:toType:"]){
+
+                NSExpression* firstArg = [[[compPred rightExpression] arguments] objectAtIndex:0];
+
+                if([firstArg expressionType] == NSFunctionExpressionType &&
+                        [[firstArg function] isEqualToString:@"from:subtract:"]){
+
+                    NSExpression* secondFirstArg = [[firstArg arguments] objectAtIndex:1];
+
+                    if([secondFirstArg expressionType] == NSConstantValueExpressionType){
+
+                        NSInteger timeInterval = [[secondFirstArg constantValue] integerValue];
+                        return timeInterval;
+                    }
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+- (NSInteger)reverseEngineerQuantityFrom:(NSInteger)timeInterval{
+    //reverse engineer the time period from a number -- probabilistic
+
+    //NOTE: the logic in this method is identical to reverseEngineerTimeFrameFrom:
+    //a change made here should be reflected there.
+    double days = timeInterval / SECS_IN_A_DAY;
+    double weeks = timeInterval / SECS_IN_A_WEEK;
+    double months = timeInterval / SECS_IN_A_MONTH;
+
+    if(weeks >= 1){
+        if(months >= 1 && [self isIntegral:months]){
+            return (NSInteger)months;
+
+        }else if([self isIntegral:weeks]){
+            return (NSInteger)weeks;
+        }
+    }
+
+    return (NSInteger)days;
+}
+
+- (timeFrame)reverseEngineerTimeFrameFrom:(NSInteger)timeInterval{
+    //reverse engineer the time period from a number -- probabilistic
+
+    //NOTE: the logic in this method is identical to reverseEngineerQuantityFrom:
+    //a change made here should be reflected there.
+    double weeks = timeInterval / SECS_IN_A_WEEK;
+    double months = timeInterval / SECS_IN_A_MONTH;
+
+    if(weeks >= 1){
+        if(months >= 1 && [self isIntegral:months]){
+            return timeFrameMonths;
+
+        }else if([self isIntegral:weeks]){
+            return timeFrameWeeks;
+        }
+    }
+
+    return timeFrameDays;
+}
+
+- (NSArray *)templateViews{
+    NSArray *newViews = [NSArray arrayWithObjects:[self keypathPopUp],
+                                                  [self boolPopUp],
+                                                  [self quantityTextField],
+                                                  [self timeFramePopUp], nil];
+
+    return newViews;
+}
+
+- (BOOL)isIntegral:(double)x{
+
+    return round(x) == x;
+
 }
 
 @end
