@@ -19,6 +19,9 @@
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+//TODO: this class acts as the view and the controller performing all logic for anything to do with
+//libraries, lists or smart lists. Extract a controller class
+
 #import "SidebarOutlineView.h"
 
 @implementation SidebarOutlineView
