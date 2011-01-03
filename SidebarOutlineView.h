@@ -57,6 +57,8 @@
 
 - (IBAction)addListAction:(id)sender;
 - (IBAction)addSmartListAction:(id)sender;
+- (IBAction)applyFilterToCurrentView:(id)sender;
+- (IBAction)removeFilterFromCurrentView:(id)sender;
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item;
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item;

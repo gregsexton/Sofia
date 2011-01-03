@@ -20,7 +20,7 @@
 //
 
 //TODO: this class acts as the view and the controller performing all logic for anything to do with
-//libraries, lists or smart lists. Extract a controller class
+//libraries, lists or smart lists as well as predicates for filtering. Extract a controller class!
 
 #import "SidebarOutlineView.h"
 
@@ -121,6 +121,14 @@
     [self reloadData];
     [self setSelectedItem:obj];
     [self beginEditingCurrentlySelectedItem];
+}
+
+- (IBAction)applyFilterToCurrentView:(id)sender{
+    NSLog(@"applyFilterToCurrentView");
+}
+
+- (IBAction)removeFilterFromCurrentView:(id)sender{
+    NSLog(@"removeFilterFromCurrentView");
 }
 
 - (NSUInteger)numberOfBookLists{
@@ -255,6 +263,20 @@
 	      select:YES];
 }
 
+- (void)editCurrentlySelectedSmartList{
+    id item = [self selectedItem];
+    if([item isKindOfClass:[smartList class]]){
+	smartList* list = item;
+	PredicateEditorWindowController *predWin = [[PredicateEditorWindowController alloc] initWithSmartList:list];
+	[predWin setDelegate:self];
+        [predWin setLists:[self getBookLists]];
+        [predWin setSmartLists:[self getSmartBookLists]];
+	if (![NSBundle loadNibNamed:@"PredicateEditor" owner:predWin]) {
+	    NSLog(@"Error loading Nib!");
+	}
+    }
+}
+
 - (NSPredicate*)getPredicateForSelectedItem{
     id item = [self selectedItem];
     NSString *predString = nil;
@@ -284,20 +306,6 @@
     }
 
     return nil;
-}
-
-- (void)editCurrentlySelectedSmartList{
-    id item = [self selectedItem];
-    if([item isKindOfClass:[smartList class]]){
-	smartList* list = item;
-	PredicateEditorWindowController *predWin = [[PredicateEditorWindowController alloc] initWithSmartList:list];
-	[predWin setDelegate:self];
-        [predWin setLists:[self getBookLists]];
-        [predWin setSmartLists:[self getSmartBookLists]];
-	if (![NSBundle loadNibNamed:@"PredicateEditor" owner:predWin]) {
-	    NSLog(@"Error loading Nib!");
-	}
-    }
 }
 
 - (void)updateFilterPredicateWith:(NSPredicate*)predicate{
