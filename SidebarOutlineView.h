@@ -50,10 +50,15 @@
     NSArray* bookLists;
     NSArray* smartBookLists;
 
+    //NOTE: this is used for filtering and is not an accurate reflection of the current selected predicate
+    //invariant: if selectedPredicate is not nil then a filter is being applied
+    NSPredicate* selectedPredicate;
+
 }
 
 @property (nonatomic, copy) NSArray* bookLists;
 @property (nonatomic, copy) NSArray* smartBookLists;
+@property (nonatomic, retain) NSPredicate* selectedPredicate;
 
 - (IBAction)addListAction:(id)sender;
 - (IBAction)addSmartListAction:(id)sender;
@@ -69,6 +74,8 @@
 - (BOOL)listOrSmartlistAlreadyNamed:(NSString*)name notIncluding:(NSManagedObject*)obj;
 - (Library*)selectedLibrary;
 - (NSArray*)getAllManagedObjectsWithEntityName:(NSString*)entityName sortDescriptorKey:(NSString*)sortKey;
+- (NSArray*)getBookLists;
+- (NSArray*)getSmartBookLists;
 - (NSFetchRequest*)libraryExistsWithName:(NSString*)libraryName;
 - (NSPredicate*)getPredicateForSelectedItem;
 - (NSUInteger)numberOfBookLists;
@@ -79,6 +86,7 @@
 - (void)beginEditingCurrentlySelectedItem;
 - (void)editCurrentlySelectedSmartList;
 - (void)moveBook:(book*)theBook toLibrary:(Library*)theLibrary andSave:(BOOL)save;
+- (void)removeCurrentFilter;
 - (void)setSelectedItem:(id)item;
 - (void)updateFilterPredicateWith:(NSPredicate*)predicate;
 @end

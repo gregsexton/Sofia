@@ -39,6 +39,14 @@
     return self;
 }
 
+- (id)init{
+    if(self = [super init]){
+        //default starting predicate
+        predicate = [[NSPredicate predicateWithFormat:@"title MATCHES ''"] retain];
+    }
+    return self;
+}
+
 - (void)dealloc{
     if(predicate)
         [predicate release];
@@ -113,14 +121,22 @@ NSLog(@"OPENING PREDICATE: %@", subPred);
         [[self delegate] predicateEditingDidFinish:[NSPredicate predicateWithFormat:pred]];
     }
 
-NSLog(@"SAVING PREDICATE: %@", pred);
-    [listToTransferTo setFilter:pred];
+    if(listToTransferTo){
+        NSLog(@"SAVING PREDICATE: %@", pred);
+        [listToTransferTo setFilter:pred];
+    }
     [window close];
 }
 
 - (IBAction)cancelClicked:(id)sender {
+    //let delegate know
+    if([[self delegate] respondsToSelector:@selector(predicateEditingWasCancelled)]){
+        [[self delegate] predicateEditingWasCancelled];
+    }
+
     [window close];
 }
+
 @end
 
 //custom row for bool values

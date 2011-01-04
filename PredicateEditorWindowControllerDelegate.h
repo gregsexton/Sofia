@@ -27,5 +27,6 @@
 @optional
 
 - (void)predicateEditingDidFinish:(NSPredicate*)predicate;
+- (void)predicateEditingWasCancelled;
 
 @end
