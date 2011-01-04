@@ -353,6 +353,8 @@
         NSPredicate* oldPred = [[self selectedPredicate] copy];
         [self setSelectedPredicate:nil];
         [self updateFilterPredicateWith:oldPred];
+
+        [removeFilterMenuItem setEnabled:NO];
     }
 }
 
@@ -575,7 +577,7 @@
     //invariant: if selectedPredicate is not nil then a filter is being applied
     if([self selectedPredicate]){
         //TODO: display banner
-        //TODO: enable menu item
+        [removeFilterMenuItem setEnabled:YES];
     }
 
     [self updateFilterPredicateWith:predicate];

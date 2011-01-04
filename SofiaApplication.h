@@ -67,6 +67,8 @@
 	NSManagedObjectModel *managedObjectModel;
 	NSManagedObjectContext *managedObjectContext;
 
+        IBOutlet NSMenu* viewMenu;
+
 }
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator;

@@ -53,6 +53,7 @@
     //NOTE: this is used for filtering and is not an accurate reflection of the current selected predicate
     //invariant: if selectedPredicate is not nil then a filter is being applied
     NSPredicate* selectedPredicate;
+    IBOutlet NSMenuItem* removeFilterMenuItem;
 
 }
 

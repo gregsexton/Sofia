@@ -59,6 +59,9 @@
                                    userInfo:nil
                                     repeats:YES];
 
+    //disable auto enabling items (for remove filter) in view menu
+    [viewMenu setAutoenablesItems:NO];
+
 }
 
 - (void) dealloc {
