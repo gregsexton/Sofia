@@ -1,7 +1,7 @@
 //
 // SofiaApplication.h
 //
-// Copyright 2010 Greg Sexton
+// Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
 // 
@@ -36,6 +36,8 @@
 @class BooksCoverflowController;
 @class BooksTableView;
 @class SidebarOutlineView;
+
+#define FILTER_NOTIFICATION_VIEW_HEIGHT 20
 
 //used to save the current view for app restart
 #define LIST_VIEW @"listView"
@@ -89,8 +91,10 @@
 - (IBAction)removeBookAction:(id)sender;
 - (IBAction)saveAction:sender;
 - (IBAction)search:(id)sender;
-- (void) changeMainViewFor:(NSView*)viewToChangeTo;
-- (void) updateSummaryText;
+- (void)changeMainViewFor:(NSView*)viewToChangeTo;
+- (void)hideFilterNotificationView;
+- (void)revealFilterNotificationView;
+- (void)updateSummaryText;
 
 - (BooksWindowController*) createBookAndOpenDetailWindow;
 @end

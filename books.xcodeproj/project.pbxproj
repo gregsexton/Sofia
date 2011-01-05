@@ -43,6 +43,7 @@
 		376D414010B21B4C00242DF7 /* person.m in Sources */ = {isa = PBXBuildFile; fileRef = 376D413C10B21B4C00242DF7 /* person.m */; };
 		378AE28612A4582700047F23 /* SortByView.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AE28512A4582700047F23 /* SortByView.m */; };
 		378AE56612D281C900047F23 /* filter.png in Resources */ = {isa = PBXBuildFile; fileRef = 378AE56512D281C900047F23 /* filter.png */; };
+		378AE5AA12D5148D00047F23 /* FilterNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AE5A912D5148D00047F23 /* FilterNotificationView.m */; };
 		37970AB111D920CA003A9D0D /* importarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 37970AB011D920CA003A9D0D /* importarrow.png */; };
 		37970AF911DAA847003A9D0D /* missing.png in Resources */ = {isa = PBXBuildFile; fileRef = 37970AF811DAA847003A9D0D /* missing.png */; };
 		37AF6DD611FA298B007A7C85 /* OverviewSplitViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF6DD511FA298B007A7C85 /* OverviewSplitViewDelegate.m */; };
@@ -176,6 +177,8 @@
 		378AE28412A4582700047F23 /* SortByView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortByView.h; sourceTree = "<group>"; };
 		378AE28512A4582700047F23 /* SortByView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortByView.m; sourceTree = "<group>"; };
 		378AE56512D281C900047F23 /* filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter.png; sourceTree = "<group>"; };
+		378AE5A812D5148D00047F23 /* FilterNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterNotificationView.h; sourceTree = "<group>"; };
+		378AE5A912D5148D00047F23 /* FilterNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterNotificationView.m; sourceTree = "<group>"; };
 		37970AB011D920CA003A9D0D /* importarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = importarrow.png; sourceTree = "<group>"; };
 		37970AF811DAA847003A9D0D /* missing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = missing.png; sourceTree = "<group>"; };
 		37AF6DD411FA298B007A7C85 /* OverviewSplitViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverviewSplitViewDelegate.h; sourceTree = "<group>"; };
@@ -530,6 +533,8 @@
 				37AF800512399331007A7C85 /* GSCoverflow.m */,
 				378AE28412A4582700047F23 /* SortByView.h */,
 				378AE28512A4582700047F23 /* SortByView.m */,
+				378AE5A812D5148D00047F23 /* FilterNotificationView.h */,
+				378AE5A912D5148D00047F23 /* FilterNotificationView.m */,
 			);
 			name = "Cocoa Extensions";
 			sourceTree = "<group>";
@@ -799,6 +804,7 @@
 				37AF80151239981D007A7C85 /* GSCoverflowItem.m in Sources */,
 				37106D5812A2C77B0008CF18 /* CoverflowSplitViewDelegate.m in Sources */,
 				378AE28612A4582700047F23 /* SortByView.m in Sources */,
+				378AE5AA12D5148D00047F23 /* FilterNotificationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

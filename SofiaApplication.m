@@ -1,7 +1,7 @@
 //
 // SofiaApplication.m
 //
-// Copyright 2010 Greg Sexton
+// Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
 // 
@@ -370,6 +370,19 @@
     return [detailWin autorelease];
 }
 
+- (void)revealFilterNotificationView{
+    NSRect frame = [mainView frame];
+    frame.size.height -= FILTER_NOTIFICATION_VIEW_HEIGHT;
+
+    [[mainView animator] setFrame:frame];
+}
+
+- (void)hideFilterNotificationView{
+    NSRect frame = [mainView frame];
+    frame.size.height += FILTER_NOTIFICATION_VIEW_HEIGHT;
+
+    [[mainView animator] setFrame:frame];
+}
 
 /////////////Delegate Methods/////////////////////////////////////////////////////////////////////
 

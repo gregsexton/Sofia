@@ -1,5 +1,5 @@
 //
-// SubjectWindowControllerDelegate.h
+// FilterNotificationView.m
 //
 // Copyright 2011 Greg Sexton
 //
@@ -19,13 +19,25 @@
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import <Cocoa/Cocoa.h>
+#import "FilterNotificationView.h"
 
 
-@protocol SubjectWindowControllerDelegate <NSObject>
+@implementation FilterNotificationView
 
-@optional
+- (id)initWithFrame:(NSRect)frame {
+    if(self = [super initWithFrame:frame]){
+    }
+    return self;
+}
 
-- (void)savedWithSubjectSelection:(subject*)selectedSubject;
+- (void)drawRect:(NSRect)dirtyRect {
+    [[NSColor colorWithCalibratedRed:0.94f green:0.69f blue:0.25f alpha:1.0f] setFill]; //orange
+
+    NSRectFill(dirtyRect);
+
+    NSRect bottomBorder = NSMakeRect(0,0,self.bounds.size.width,1);
+    [[NSColor darkGrayColor] setFill];
+    NSRectFill(bottomBorder);
+}
 
 @end

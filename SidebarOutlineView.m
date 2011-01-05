@@ -1,7 +1,7 @@
 //
 // SidebarOutlineView.m
 //
-// Copyright 2010 Greg Sexton
+// Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
 // 
@@ -354,6 +354,7 @@
         [self setSelectedPredicate:nil];
         [self updateFilterPredicateWith:oldPred];
 
+        [application hideFilterNotificationView];
         [removeFilterMenuItem setEnabled:NO];
     }
 }
@@ -576,7 +577,8 @@
 - (void)predicateEditingDidFinish:(NSPredicate*)predicate{
     //invariant: if selectedPredicate is not nil then a filter is being applied
     if([self selectedPredicate]){
-        //TODO: display banner
+        //filter being applied
+        [application revealFilterNotificationView];
         [removeFilterMenuItem setEnabled:YES];
     }
 
