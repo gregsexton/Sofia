@@ -59,6 +59,8 @@
 	IBOutlet BooksTableView *tableView;
 	IBOutlet BooksImageBrowserView *imagesView;
 	IBOutlet BooksCoverflowController *coverflowController;
+
+        IBOutlet NSView* mainViewContainerView;
 	IBOutlet NSView* mainView;
 	IBOutlet NSView* mainTableView; //this includes the scrollview
 	IBOutlet NSView* mainImagesView;

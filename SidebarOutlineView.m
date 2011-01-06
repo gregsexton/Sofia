@@ -126,6 +126,8 @@
 
 - (IBAction)applyFilterToCurrentView:(id)sender{
 
+    [self removeCurrentFilter]; //does nothing if no filter applied
+
     //invariant: if selectedPredicate is not nil then a filter is being applied
     [self setSelectedPredicate:[self getPredicateForSelectedItem]];
 

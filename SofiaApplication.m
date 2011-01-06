@@ -372,16 +372,24 @@
 
 - (void)revealFilterNotificationView{
     NSRect frame = [mainView frame];
-    frame.size.height -= FILTER_NOTIFICATION_VIEW_HEIGHT;
+    NSRect containerFrame = [mainViewContainerView frame];
 
-    [[mainView animator] setFrame:frame];
+    if(frame.size.height == containerFrame.size.height){
+
+        frame.size.height -= FILTER_NOTIFICATION_VIEW_HEIGHT;
+        [[mainView animator] setFrame:frame];
+    }
 }
 
 - (void)hideFilterNotificationView{
     NSRect frame = [mainView frame];
-    frame.size.height += FILTER_NOTIFICATION_VIEW_HEIGHT;
+    NSRect containerFrame = [mainViewContainerView frame];
 
-    [[mainView animator] setFrame:frame];
+    if(frame.size.height == containerFrame.size.height - FILTER_NOTIFICATION_VIEW_HEIGHT){
+
+        frame.size.height += FILTER_NOTIFICATION_VIEW_HEIGHT;
+        [[mainView animator] setFrame:frame];
+    }
 }
 
 /////////////Delegate Methods/////////////////////////////////////////////////////////////////////
