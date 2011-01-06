@@ -35,6 +35,7 @@
 
     IBOutlet NSWindow*		    window;
     IBOutlet NSPredicateEditor*	    predicateEditor;
+    IBOutlet NSButton*              includeShoppingListBtn;
 
     id<PredicateEditorWindowControllerDelegate> delegate;
     NSPredicate*				predicate;

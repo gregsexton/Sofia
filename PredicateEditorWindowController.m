@@ -40,9 +40,13 @@
 }
 
 - (id)init{
+    //this constructor was designed for a temporary predicate i.e a filter
     if(self = [super init]){
         //default starting predicate
         predicate = [[NSPredicate predicateWithFormat:@"title MATCHES ''"] retain];
+
+        self.includeItemsFromShoppingList = NSOnState;
+        listToTransferTo = nil;
     }
     return self;
 }
@@ -73,6 +77,10 @@
     [leRowTemplate release];
 
     [predicateEditor setObjectValue:predicate];
+
+    if(!listToTransferTo){
+        [includeShoppingListBtn setHidden:YES];
+    }
 }
 
 - (NSPredicate*)parsePredicateAndSetFlags:(NSString*)predStr{ //has side effects
