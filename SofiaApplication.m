@@ -259,13 +259,16 @@
     if([searchVal isEqualToString:@""]){
 	totalPred = [sideBar getPredicateForSelectedItem];
     }else{
+        [sideBar removeCurrentFilter]; //does nothing if no filter applied
+
+        NSString* escapedSearchVal = [searchVal escapeSingleQuote];
 	NSArray* predicates = [NSArray arrayWithObjects:
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"title contains[cd] '%@'", [searchVal escapeSingleQuote]]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"authorText contains[cd] '%@'", [searchVal escapeSingleQuote]]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"publisherText contains[cd] '%@'", [searchVal escapeSingleQuote]]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"subjectText contains[cd] '%@'", [searchVal escapeSingleQuote]]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn10 contains[cd] '%@'", [searchVal escapeSingleQuote]]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn13 contains[cd] '%@'", [searchVal escapeSingleQuote]]], nil];
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"title contains[cd] '%@'",         escapedSearchVal]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"authorText contains[cd] '%@'",    escapedSearchVal]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"publisherText contains[cd] '%@'", escapedSearchVal]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"subjectText contains[cd] '%@'",   escapedSearchVal]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn10 contains[cd] '%@'",        escapedSearchVal]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn13 contains[cd] '%@'",        escapedSearchVal]], nil];
 	NSPredicate* searchPred = [NSCompoundPredicate orPredicateWithSubpredicates:predicates];
 
 	NSArray* searchAndCurrentFilter = [NSArray arrayWithObjects:searchPred, [sideBar getPredicateForSelectedItem], nil];
