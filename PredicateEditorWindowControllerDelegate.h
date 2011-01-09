@@ -1,7 +1,7 @@
 //
 // PredicateEditorWindowControllerDelegate.h
 //
-// Copyright 2010 Greg Sexton
+// Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
 // 
@@ -27,5 +27,6 @@
 @optional
 
 - (void)predicateEditingDidFinish:(NSPredicate*)predicate;
+- (void)predicateEditingWasCancelled;
 
 @end

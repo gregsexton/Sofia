@@ -1,7 +1,7 @@
 //
 // SofiaApplication.h
 //
-// Copyright 2010 Greg Sexton
+// Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
 // 
@@ -37,6 +37,8 @@
 @class BooksTableView;
 @class SidebarOutlineView;
 
+#define FILTER_NOTIFICATION_VIEW_HEIGHT 20
+
 //used to save the current view for app restart
 #define LIST_VIEW @"listView"
 #define IMAGE_VIEW @"imageView"
@@ -57,6 +59,8 @@
 	IBOutlet BooksTableView *tableView;
 	IBOutlet BooksImageBrowserView *imagesView;
 	IBOutlet BooksCoverflowController *coverflowController;
+
+        IBOutlet NSView* mainViewContainerView;
 	IBOutlet NSView* mainView;
 	IBOutlet NSView* mainTableView; //this includes the scrollview
 	IBOutlet NSView* mainImagesView;
@@ -66,6 +70,8 @@
 	NSPersistentStoreCoordinator *persistentStoreCoordinator;
 	NSManagedObjectModel *managedObjectModel;
 	NSManagedObjectContext *managedObjectContext;
+
+        IBOutlet NSMenu* viewMenu;
 
 }
 
@@ -87,8 +93,10 @@
 - (IBAction)removeBookAction:(id)sender;
 - (IBAction)saveAction:sender;
 - (IBAction)search:(id)sender;
-- (void) changeMainViewFor:(NSView*)viewToChangeTo;
-- (void) updateSummaryText;
+- (void)changeMainViewFor:(NSView*)viewToChangeTo;
+- (void)hideFilterNotificationView;
+- (void)revealFilterNotificationView;
+- (void)updateSummaryText;
 
 - (BooksWindowController*) createBookAndOpenDetailWindow;
 @end

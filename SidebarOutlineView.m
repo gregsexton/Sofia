@@ -1,7 +1,7 @@
 //
 // SidebarOutlineView.m
 //
-// Copyright 2010 Greg Sexton
+// Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
 // 
@@ -20,13 +20,14 @@
 //
 
 //TODO: this class acts as the view and the controller performing all logic for anything to do with
-//libraries, lists or smart lists. Extract a controller class
+//libraries, lists or smart lists as well as predicates for filtering. Extract a controller class!
 
 #import "SidebarOutlineView.h"
 
 @implementation SidebarOutlineView
 @synthesize bookLists;
 @synthesize smartBookLists;
+@synthesize selectedPredicate;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -121,6 +122,26 @@
     [self reloadData];
     [self setSelectedItem:obj];
     [self beginEditingCurrentlySelectedItem];
+}
+
+- (IBAction)applyFilterToCurrentView:(id)sender{
+
+    [self removeCurrentFilter]; //does nothing if no filter applied
+
+    //invariant: if selectedPredicate is not nil then a filter is being applied
+    [self setSelectedPredicate:[self getPredicateForSelectedItem]];
+
+    PredicateEditorWindowController *predWin = [[PredicateEditorWindowController alloc] init];
+    [predWin setDelegate:self];
+    [predWin setLists:[self getBookLists]];
+    [predWin setSmartLists:[self getSmartBookLists]];
+    if (![NSBundle loadNibNamed:@"PredicateEditor" owner:predWin]) {
+        NSLog(@"Error loading Nib!");
+    }
+}
+
+- (IBAction)removeFilterFromCurrentView:(id)sender{
+    [self removeCurrentFilter];
 }
 
 - (NSUInteger)numberOfBookLists{
@@ -255,6 +276,20 @@
 	      select:YES];
 }
 
+- (void)editCurrentlySelectedSmartList{
+    id item = [self selectedItem];
+    if([item isKindOfClass:[smartList class]]){
+	smartList* list = item;
+	PredicateEditorWindowController *predWin = [[PredicateEditorWindowController alloc] initWithSmartList:list];
+	[predWin setDelegate:self];
+        [predWin setLists:[self getBookLists]];
+        [predWin setSmartLists:[self getSmartBookLists]];
+	if (![NSBundle loadNibNamed:@"PredicateEditor" owner:predWin]) {
+	    NSLog(@"Error loading Nib!");
+	}
+    }
+}
+
 - (NSPredicate*)getPredicateForSelectedItem{
     id item = [self selectedItem];
     NSString *predString = nil;
@@ -286,23 +321,18 @@
     return nil;
 }
 
-- (void)editCurrentlySelectedSmartList{
-    id item = [self selectedItem];
-    if([item isKindOfClass:[smartList class]]){
-	smartList* list = item;
-	PredicateEditorWindowController *predWin = [[PredicateEditorWindowController alloc] initWithSmartList:list];
-	[predWin setDelegate:self];
-        [predWin setLists:[self getBookLists]];
-        [predWin setSmartLists:[self getSmartBookLists]];
-	if (![NSBundle loadNibNamed:@"PredicateEditor" owner:predWin]) {
-	    NSLog(@"Error loading Nib!");
-	}
-    }
-}
-
 - (void)updateFilterPredicateWith:(NSPredicate*)predicate{
 
-    [arrayController setFilterPredicate:predicate];
+    NSPredicate* pred = predicate;
+
+    //invariant: if selectedPredicate is not nil then a filter is being applied
+    if([self selectedPredicate]){
+        //apply the filter AND the current predicate
+        NSArray* preds = [NSArray arrayWithObjects:pred, [self selectedPredicate], nil];
+        pred = [NSCompoundPredicate andPredicateWithSubpredicates:preds];
+    }
+
+    [arrayController setFilterPredicate:pred];
     [application updateSummaryText];
     [searchField setStringValue:@""]; //clear out anything in search
 
@@ -315,6 +345,19 @@
     id item = [self selectedItem];
     if([item isKindOfClass:[list class]]){
 	[self addBook:obj toList:item andSave:false];
+    }
+}
+
+- (void)removeCurrentFilter{
+    //does nothing if no filter applied
+    if([self selectedPredicate]){
+        //filter applied
+        NSPredicate* oldPred = [[self selectedPredicate] copy];
+        [self setSelectedPredicate:nil];
+        [self updateFilterPredicateWith:oldPred];
+
+        [application hideFilterNotificationView];
+        [removeFilterMenuItem setEnabled:NO];
     }
 }
 
@@ -524,14 +567,28 @@
 
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification{
 
+    [self removeCurrentFilter];
+
     NSPredicate* predicate = [self getPredicateForSelectedItem];
     [self updateFilterPredicateWith:predicate];
 
 }
 
-//delegate for PredicateEditorWindowController.
+//delegate methods for PredicateEditorWindowController.
+
 - (void)predicateEditingDidFinish:(NSPredicate*)predicate{
+    //invariant: if selectedPredicate is not nil then a filter is being applied
+    if([self selectedPredicate]){
+        //filter being applied
+        [application revealFilterNotificationView];
+        [removeFilterMenuItem setEnabled:YES];
+    }
+
     [self updateFilterPredicateWith:predicate];
+}
+
+- (void)predicateEditingWasCancelled{
+    [self removeCurrentFilter];
 }
 
 //delegates for drag and drop

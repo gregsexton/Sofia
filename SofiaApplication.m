@@ -1,7 +1,7 @@
 //
 // SofiaApplication.m
 //
-// Copyright 2010 Greg Sexton
+// Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
 // 
@@ -58,6 +58,9 @@
                                    selector:@selector(saveAction:)
                                    userInfo:nil
                                     repeats:YES];
+
+    //disable auto enabling items (for remove filter) in view menu
+    [viewMenu setAutoenablesItems:NO];
 
 }
 
@@ -256,13 +259,16 @@
     if([searchVal isEqualToString:@""]){
 	totalPred = [sideBar getPredicateForSelectedItem];
     }else{
+        [sideBar removeCurrentFilter]; //does nothing if no filter applied
+
+        NSString* escapedSearchVal = [searchVal escapeSingleQuote];
 	NSArray* predicates = [NSArray arrayWithObjects:
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"title contains[cd] '%@'", [searchVal escapeSingleQuote]]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"authorText contains[cd] '%@'", [searchVal escapeSingleQuote]]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"publisherText contains[cd] '%@'", [searchVal escapeSingleQuote]]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"subjectText contains[cd] '%@'", [searchVal escapeSingleQuote]]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn10 contains[cd] '%@'", [searchVal escapeSingleQuote]]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn13 contains[cd] '%@'", [searchVal escapeSingleQuote]]], nil];
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"title contains[cd] '%@'",         escapedSearchVal]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"authorText contains[cd] '%@'",    escapedSearchVal]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"publisherText contains[cd] '%@'", escapedSearchVal]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"subjectText contains[cd] '%@'",   escapedSearchVal]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn10 contains[cd] '%@'",        escapedSearchVal]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn13 contains[cd] '%@'",        escapedSearchVal]], nil];
 	NSPredicate* searchPred = [NSCompoundPredicate orPredicateWithSubpredicates:predicates];
 
 	NSArray* searchAndCurrentFilter = [NSArray arrayWithObjects:searchPred, [sideBar getPredicateForSelectedItem], nil];
@@ -367,6 +373,27 @@
     return [detailWin autorelease];
 }
 
+- (void)revealFilterNotificationView{
+    NSRect frame = [mainView frame];
+    NSRect containerFrame = [mainViewContainerView frame];
+
+    if(frame.size.height == containerFrame.size.height){
+
+        frame.size.height -= FILTER_NOTIFICATION_VIEW_HEIGHT;
+        [[mainView animator] setFrame:frame];
+    }
+}
+
+- (void)hideFilterNotificationView{
+    NSRect frame = [mainView frame];
+    NSRect containerFrame = [mainViewContainerView frame];
+
+    if(frame.size.height == containerFrame.size.height - FILTER_NOTIFICATION_VIEW_HEIGHT){
+
+        frame.size.height += FILTER_NOTIFICATION_VIEW_HEIGHT;
+        [[mainView animator] setFrame:frame];
+    }
+}
 
 /////////////Delegate Methods/////////////////////////////////////////////////////////////////////
 

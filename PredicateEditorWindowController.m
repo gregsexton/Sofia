@@ -1,20 +1,20 @@
 //
 // PredicateEditorWindowController.m
 //
-// Copyright 2010 Greg Sexton
+// Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
-//
+// 
 // Sofia is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-//
+// 
 // Sofia is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-//
+// 
 // You should have received a copy of the GNU Lesser General Public License
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
@@ -35,6 +35,18 @@
         //unwrap predicate -- wrapped in the okClicked method
         predicate = [[self parsePredicateAndSetFlags:[list filter]] retain];
         listToTransferTo = list;
+    }
+    return self;
+}
+
+- (id)init{
+    //this constructor was designed for a temporary predicate i.e a filter
+    if(self = [super init]){
+        //default starting predicate
+        predicate = [[NSPredicate predicateWithFormat:@"title MATCHES ''"] retain];
+
+        self.includeItemsFromShoppingList = NSOnState;
+        listToTransferTo = nil;
     }
     return self;
 }
@@ -65,6 +77,10 @@
     [leRowTemplate release];
 
     [predicateEditor setObjectValue:predicate];
+
+    if(!listToTransferTo){
+        [includeShoppingListBtn setHidden:YES];
+    }
 }
 
 - (NSPredicate*)parsePredicateAndSetFlags:(NSString*)predStr{ //has side effects
@@ -113,14 +129,22 @@ NSLog(@"OPENING PREDICATE: %@", subPred);
         [[self delegate] predicateEditingDidFinish:[NSPredicate predicateWithFormat:pred]];
     }
 
-NSLog(@"SAVING PREDICATE: %@", pred);
-    [listToTransferTo setFilter:pred];
+    if(listToTransferTo){
+        NSLog(@"SAVING PREDICATE: %@", pred);
+        [listToTransferTo setFilter:pred];
+    }
     [window close];
 }
 
 - (IBAction)cancelClicked:(id)sender {
+    //let delegate know
+    if([[self delegate] respondsToSelector:@selector(predicateEditingWasCancelled)]){
+        [[self delegate] predicateEditingWasCancelled];
+    }
+
     [window close];
 }
+
 @end
 
 //custom row for bool values

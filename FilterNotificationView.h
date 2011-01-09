@@ -1,5 +1,5 @@
 //
-// SubjectWindowControllerDelegate.h
+// FilterNotificationView.h
 //
 // Copyright 2011 Greg Sexton
 //
@@ -22,10 +22,8 @@
 #import <Cocoa/Cocoa.h>
 
 
-@protocol SubjectWindowControllerDelegate <NSObject>
+@interface FilterNotificationView : NSView {
 
-@optional
-
-- (void)savedWithSubjectSelection:(subject*)selectedSubject;
+}
 
 @end
