@@ -76,16 +76,17 @@
 	_cachedTitles = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
 	_cachedSubtitles = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
 
+	if(_focusedItemIndex >= [dataSource numberOfItemsInCoverflow:self]) //don't let this exceed the array bounds
+	    _focusedItemIndex = [dataSource numberOfItemsInCoverflow:self] - 1; 
+
 	for(int i=0; i<[dataSource numberOfItemsInCoverflow:self]; i++){
 
 	    GSCoverflowItem* item = [dataSource coverflow:self itemAtIndex:i];
 	    CALayer* itemLayer = [self layerForGSCoverflowItem:item];
 	    [_cachedLayers addObject:itemLayer];
-	    [self.layer addSublayer:itemLayer];
 
 	    CALayer* itemReflectedLayer = [self reflectionLayerForGSCoverflowItem:item];
 	    [_cachedReflectionLayers addObject:itemReflectedLayer];
-	    [self.layer addSublayer:itemReflectedLayer];
 
 	    if(item.imageTitle)
 		[_cachedTitles addObject:item.imageTitle];
@@ -96,10 +97,12 @@
 		[_cachedSubtitles addObject:item.imageSubtitle];
 	    else
 		[_cachedSubtitles addObject:@""];
-	}
 
-	if(_focusedItemIndex >= [_cachedLayers count]) //don't let this exceed the array bounds
-	    _focusedItemIndex = [_cachedLayers count] - 1; 
+            //these need to be last as calling addSublayer invokes invalidateLayoutOfLayer
+            //which in turn requires that caches are fully built
+	    [self.layer addSublayer:itemLayer];
+	    [self.layer addSublayer:itemReflectedLayer];
+	}
 
     }else{
         [self deleteCache]; //remove layers if there are no items
