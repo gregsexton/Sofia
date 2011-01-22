@@ -22,7 +22,7 @@
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<integer value="296"/>
-			<integer value="544"/>
+			<integer value="782"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -702,6 +702,32 @@
 									<reference key="NSMixedImage" ref="502551668"/>
 								</object>
 								<object class="NSMenuItem" id="823638758">
+									<reference key="NSMenu" ref="466310130"/>
+									<bool key="NSIsDisabled">YES</bool>
+									<bool key="NSIsSeparator">YES</bool>
+									<string key="NSTitle"/>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
+								<object class="NSMenuItem" id="698731279">
+									<reference key="NSMenu" ref="466310130"/>
+									<string key="NSTitle">Books Without an Author</string>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
+								<object class="NSMenuItem" id="440284991">
+									<reference key="NSMenu" ref="466310130"/>
+									<string key="NSTitle">Books Without a Subject</string>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
+								<object class="NSMenuItem" id="75105265">
 									<reference key="NSMenu" ref="466310130"/>
 									<bool key="NSIsDisabled">YES</bool>
 									<bool key="NSIsSeparator">YES</bool>
@@ -2634,6 +2660,7 @@
 								</object>
 								<string key="NSFrameSize">{913, 679}</string>
 								<reference key="NSSuperview" ref="425127920"/>
+								<reference key="NSNextKeyView" ref="514714555"/>
 								<reference key="NSDocView" ref="514714555"/>
 								<reference key="NSBGColor" ref="462189453"/>
 								<int key="NScvFlags">6</int>
@@ -2661,6 +2688,7 @@
 						</object>
 						<string key="NSFrameSize">{913, 679}</string>
 						<reference key="NSSuperview" ref="965120006"/>
+						<reference key="NSNextKeyView" ref="63528431"/>
 						<int key="NSsFlags">560</int>
 						<reference key="NSVScroller" ref="742114945"/>
 						<reference key="NSHScroller" ref="576139653"/>
@@ -4049,6 +4077,22 @@
 					</object>
 					<int key="connectionID">1102</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showBooksWithoutAnAuthor:</string>
+						<reference key="source" ref="956318075"/>
+						<reference key="destination" ref="698731279"/>
+					</object>
+					<int key="connectionID">1106</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showBooksWithoutASubject:</string>
+						<reference key="source" ref="956318075"/>
+						<reference key="destination" ref="440284991"/>
+					</object>
+					<int key="connectionID">1107</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -4505,6 +4549,9 @@
 							<reference ref="805663796"/>
 							<reference ref="136160411"/>
 							<reference ref="662862619"/>
+							<reference ref="698731279"/>
+							<reference ref="75105265"/>
+							<reference ref="440284991"/>
 						</object>
 						<reference key="parent" ref="586577488"/>
 					</object>
@@ -5555,6 +5602,21 @@
 						<reference key="object" ref="71959967"/>
 						<reference key="parent" ref="816724054"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1103</int>
+						<reference key="object" ref="698731279"/>
+						<reference key="parent" ref="466310130"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1104</int>
+						<reference key="object" ref="75105265"/>
+						<reference key="parent" ref="466310130"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1105</int>
+						<reference key="object" ref="440284991"/>
+						<reference key="parent" ref="466310130"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -5617,6 +5679,9 @@
 					<string>1099.IBPluginDependency</string>
 					<string>1099.IBViewBoundsToFrameTransform</string>
 					<string>1100.IBPluginDependency</string>
+					<string>1103.IBPluginDependency</string>
+					<string>1104.IBPluginDependency</string>
+					<string>1105.IBPluginDependency</string>
 					<string>111.IBPluginDependency</string>
 					<string>111.ImportedFromIB2</string>
 					<string>129.IBPluginDependency</string>
@@ -5913,7 +5978,7 @@
 					<string>{{894, 136}, {913, 699}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<object class="NSAffineTransform"/>
-					<string>{{1596, 414}, {140, 23}}</string>
+					<string>{{1484, 423}, {140, 23}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>{{596, 852}, {216, 23}}</string>
@@ -5964,6 +6029,9 @@
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
@@ -6010,7 +6078,7 @@
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{1431, 194}, {240, 243}}</string>
+					<string>{{1319, 203}, {240, 243}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>{{187, 434}, {243, 243}}</string>
@@ -6056,17 +6124,17 @@
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{1525, 314}, {205, 123}}</string>
+					<string>{{1413, 323}, {205, 123}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>{{525, 802}, {197, 73}}</string>
-					<string>{{1602, 443}, {333, 20}}</string>
+					<string>{{1212, 446}, {333, 20}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>{74, 862}</string>
 					<string>{{6, 978}, {478, 20}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{1753, 250}, {231, 193}}</string>
+					<string>{{1363, 203}, {258, 243}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{475, 832}, {234, 43}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -6183,7 +6251,7 @@
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{1389, 234}, {200, 203}}</string>
+					<string>{{1277, 243}, {200, 203}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>{{145, 474}, {199, 203}}</string>
@@ -6256,7 +6324,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1102</int>
+			<int key="maxID">1107</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -6769,9 +6837,13 @@
 							<string>addSmartListAction:</string>
 							<string>applyFilterToCurrentView:</string>
 							<string>removeFilterFromCurrentView:</string>
+							<string>showBooksWithoutASubject:</string>
+							<string>showBooksWithoutAnAuthor:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -6786,6 +6858,8 @@
 							<string>addSmartListAction:</string>
 							<string>applyFilterToCurrentView:</string>
 							<string>removeFilterFromCurrentView:</string>
+							<string>showBooksWithoutASubject:</string>
+							<string>showBooksWithoutAnAuthor:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -6803,6 +6877,14 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">removeFilterFromCurrentView:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">showBooksWithoutASubject:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">showBooksWithoutAnAuthor:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>

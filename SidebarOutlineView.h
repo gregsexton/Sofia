@@ -65,6 +65,8 @@
 - (IBAction)addSmartListAction:(id)sender;
 - (IBAction)applyFilterToCurrentView:(id)sender;
 - (IBAction)removeFilterFromCurrentView:(id)sender;
+- (IBAction)showBooksWithoutASubject:(id)sender;
+- (IBAction)showBooksWithoutAnAuthor:(id)sender;
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item;
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item;
@@ -89,5 +91,7 @@
 - (void)moveBook:(book*)theBook toLibrary:(Library*)theLibrary andSave:(BOOL)save;
 - (void)removeCurrentFilter;
 - (void)setSelectedItem:(id)item;
+- (void)setupToApplyFilter;
 - (void)updateFilterPredicateWith:(NSPredicate*)predicate;
+
 @end

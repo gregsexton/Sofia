@@ -47,31 +47,31 @@
 
 @interface SofiaApplication : NSObject <BooksWindowControllerDelegate, ImportBooksControllerDelegate> {
 	
-	IBOutlet NSWindow *window;
-	IBOutlet NSTextField *summaryText;
-	IBOutlet NSArrayController *arrayController;
-	IBOutlet NSApplication *theApplication;
-	IBOutlet NSSegmentedControl *addRemoveButtons;
-	IBOutlet NSSegmentedControl *changeViewButtons;
-	IBOutlet SidebarOutlineView *sideBar;
-	IBOutlet NSSlider *zoomSlider;
+	IBOutlet NSWindow                 *window;
+	IBOutlet NSTextField              *summaryText;
+	IBOutlet NSArrayController        *arrayController;
+	IBOutlet NSApplication            *theApplication;
+	IBOutlet NSSegmentedControl       *addRemoveButtons;
+	IBOutlet NSSegmentedControl       *changeViewButtons;
+	IBOutlet SidebarOutlineView       *sideBar;
+	IBOutlet NSSlider                 *zoomSlider;
 
-	IBOutlet BooksTableView *tableView;
-	IBOutlet BooksImageBrowserView *imagesView;
+	IBOutlet BooksTableView           *tableView;
+	IBOutlet BooksImageBrowserView    *imagesView;
 	IBOutlet BooksCoverflowController *coverflowController;
 
-        IBOutlet NSView* mainViewContainerView;
-	IBOutlet NSView* mainView;
-	IBOutlet NSView* mainTableView; //this includes the scrollview
-	IBOutlet NSView* mainImagesView;
-	IBOutlet NSView* mainCoverflowView;
-	NSView* currentView;
-	
-	NSPersistentStoreCoordinator *persistentStoreCoordinator;
-	NSManagedObjectModel *managedObjectModel;
-	NSManagedObjectContext *managedObjectContext;
+        IBOutlet NSView                   *mainViewContainerView;
+	IBOutlet NSView                   *mainView;
+	IBOutlet NSView                   *mainTableView; //this includes the scrollview
+	IBOutlet NSView                   *mainImagesView;
+	IBOutlet NSView                   *mainCoverflowView;
+	NSView                            *currentView;
 
-        IBOutlet NSMenu* viewMenu;
+	NSPersistentStoreCoordinator      *persistentStoreCoordinator;
+	NSManagedObjectModel              *managedObjectModel;
+	NSManagedObjectContext            *managedObjectContext;
+
+        IBOutlet NSMenu                   *viewMenu;
 
 }
 

@@ -4,17 +4,17 @@
 // Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
-// 
+//
 // Sofia is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Sofia is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
@@ -115,7 +115,7 @@
     //TODO: hold option key and click for this
     NSManagedObjectModel *managedObjectModel = [application managedObjectModel];
 
-    smartList* obj = [[smartList alloc] initWithEntity:[[managedObjectModel entitiesByName] objectForKey:@"smartList"] 
+    smartList* obj = [[smartList alloc] initWithEntity:[[managedObjectModel entitiesByName] objectForKey:@"smartList"]
 			insertIntoManagedObjectContext:managedObjectContext];
 
     [application saveAction:self];
@@ -126,10 +126,8 @@
 
 - (IBAction)applyFilterToCurrentView:(id)sender{
 
-    [self removeCurrentFilter]; //does nothing if no filter applied
-
-    //invariant: if selectedPredicate is not nil then a filter is being applied
-    [self setSelectedPredicate:[self getPredicateForSelectedItem]];
+    [self setupToApplyFilter];
+    //display predicate editor, delegate method handles applying filter
 
     PredicateEditorWindowController *predWin = [[PredicateEditorWindowController alloc] init];
     [predWin setDelegate:self];
@@ -142,6 +140,28 @@
 
 - (IBAction)removeFilterFromCurrentView:(id)sender{
     [self removeCurrentFilter];
+}
+
+- (IBAction)showBooksWithoutAnAuthor:(id)sender{
+    [self setSelectedItem:bookLibrary];
+    [self setupToApplyFilter];
+
+    [self predicateEditingDidFinish:[NSPredicate predicateWithFormat:@"authors.@count == 0"]];
+}
+
+- (IBAction)showBooksWithoutASubject:(id)sender{
+    [self setSelectedItem:bookLibrary];
+    [self setupToApplyFilter];
+
+    [self predicateEditingDidFinish:[NSPredicate predicateWithFormat:@"subjects.@count == 0"]];
+}
+
+- (void)setupToApplyFilter{
+
+    [self removeCurrentFilter]; //does nothing if no filter applied
+
+    //invariant: if selectedPredicate is not nil then a filter is being applied
+    [self setSelectedPredicate:[self getPredicateForSelectedItem]];
 }
 
 - (NSUInteger)numberOfBookLists{
@@ -180,7 +200,7 @@
     [request setEntity:[NSEntityDescription entityForName:entityName inManagedObjectContext:managedObjectContext]];
 
     NSArray* objects = [managedObjectContext executeFetchRequest:request error:&error];
-    NSSortDescriptor* descriptor = [[[NSSortDescriptor alloc] initWithKey:sortKey 
+    NSSortDescriptor* descriptor = [[[NSSortDescriptor alloc] initWithKey:sortKey
 								ascending:YES] autorelease];
     objects = [objects sortedArrayUsingDescriptors:[NSArray arrayWithObject:descriptor]];
 
@@ -424,7 +444,7 @@
 	[(ImageAndTextCell*)cell setImage:[NSImage imageNamed:@"list.tif"]];
 
     }else if([item isKindOfClass:[smartList class]]){
-	
+
 	[(ImageAndTextCell*)cell setImage:[NSImage imageNamed:@"smartlist.tif"]];
 
     }else if([item isKindOfClass:[Library class]]){
@@ -593,9 +613,9 @@
 
 //delegates for drag and drop
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView 
-	 acceptDrop:(id < NSDraggingInfo >)info 
-	       item:(id)item 
+- (BOOL)outlineView:(NSOutlineView *)outlineView
+	 acceptDrop:(id < NSDraggingInfo >)info
+	       item:(id)item
 	 childIndex:(NSInteger)index{
 
 
@@ -627,9 +647,9 @@
     return YES;
 }
 
-- (NSDragOperation)outlineView:(NSOutlineView *)outlineView 
-		  validateDrop:(id < NSDraggingInfo >)info 
-		  proposedItem:(id)item 
+- (NSDragOperation)outlineView:(NSOutlineView *)outlineView
+		  validateDrop:(id < NSDraggingInfo >)info
+		  proposedItem:(id)item
 	    proposedChildIndex:(NSInteger)index{
 
     if([self selectedItem] == item){
@@ -695,17 +715,17 @@
     if([item isKindOfClass:[list class]]){
 	return true; //everything is valid
     }
-    
+
     if([item isKindOfClass:[smartList class]]){
 	return true; //everything valid for now
     }
-    
+
     if([title isEqualToString:@"Rename"]){
 	return false;
     }else if([title isEqualToString:@"Delete"]){
 	return false;
     }
-    
+
     //shouldn't get here...
     return true;
 }
