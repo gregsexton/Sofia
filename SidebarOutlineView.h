@@ -89,6 +89,7 @@
 - (void)beginEditingCurrentlySelectedItem;
 - (void)editCurrentlySelectedSmartList;
 - (void)moveBook:(book*)theBook toLibrary:(Library*)theLibrary andSave:(BOOL)save;
+- (void)programaticallyApplyFilterToCurrentView:(NSPredicate*)predicate;
 - (void)removeCurrentFilter;
 - (void)setSelectedItem:(id)item;
 - (void)setupToApplyFilter;

@@ -144,22 +144,21 @@
 
 - (IBAction)showBooksWithoutAnAuthor:(id)sender{
     [self setSelectedItem:bookLibrary];
-    [self setupToApplyFilter];
-
-    [self predicateEditingDidFinish:[NSPredicate predicateWithFormat:@"authors.@count == 0"]];
+    [self programaticallyApplyFilterToCurrentView:[NSPredicate predicateWithFormat:@"authors.@count == 0"]];
 }
 
 - (IBAction)showBooksWithoutASubject:(id)sender{
     [self setSelectedItem:bookLibrary];
-    [self setupToApplyFilter];
+    [self programaticallyApplyFilterToCurrentView:[NSPredicate predicateWithFormat:@"subjects.@count == 0"]];
+}
 
-    [self predicateEditingDidFinish:[NSPredicate predicateWithFormat:@"subjects.@count == 0"]];
+- (void)programaticallyApplyFilterToCurrentView:(NSPredicate*)predicate{
+    [self setupToApplyFilter];
+    [self predicateEditingDidFinish:predicate];
 }
 
 - (void)setupToApplyFilter{
-
     [self removeCurrentFilter]; //does nothing if no filter applied
-
     //invariant: if selectedPredicate is not nil then a filter is being applied
     [self setSelectedPredicate:[self getPredicateForSelectedItem]];
 }
