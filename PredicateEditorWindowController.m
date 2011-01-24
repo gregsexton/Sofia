@@ -420,7 +420,7 @@ NSLog(@"OPENING PREDICATE: %@", subPred);
 
 @end
 
-
+//custom row for friendly date ranges
 @implementation DateEditorRowTemplate
 
 - (void)dealloc {
