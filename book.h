@@ -39,8 +39,9 @@
 @property (nonatomic, retain) NSString * authorText;
 @property (nonatomic, retain) NSString * lccNumber;
 @property (nonatomic, retain) NSString * awards;
+@property (nonatomic, retain) NSString * toc;
 @property (nonatomic, retain) NSString * edition;
-@property (nonatomic, retain) NSString * noOfCopies;
+@property (nonatomic, retain) NSDecimalNumber * noOfCopies;
 @property (nonatomic, retain) NSNumber * read;
 @property (nonatomic, retain) NSString * subjectText;
 @property (nonatomic, retain) NSString * titleLong;
@@ -56,7 +57,6 @@
 @property (nonatomic, retain) NSSet* subjects;
 @property (nonatomic, retain) NSSet* authors;
 @property (nonatomic, retain) Library * library;
-@property (nonatomic, retain) NSString * toc;
 
 @end
 

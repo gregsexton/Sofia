@@ -101,9 +101,9 @@
 	[obj setTitle:               [txt_title           stringValue]];
 	[obj setTitleLong:           [txt_titleLong       stringValue]];
 	[obj setUrls:                [txt_urls            string]];
-	[obj setNoOfCopies:          [txt_noOfCopies      stringValue]];
 	[obj setCoverImage:	     [img_summary_cover   image]];
 	[obj setToc:		     [txt_toc             string]];
+        [obj setNoOfCopies:          (NSDecimalNumber*)[NSDecimalNumber     numberWithInteger:[txt_noOfCopies integerValue]]];
     }
 }
 
