@@ -32,8 +32,6 @@
     NSManagedObject *newObject;
     NSEntityDescription *sourceInstanceEntity = [sInstance entity];
     
-NSLog(@"%@", [sourceInstanceEntity name]);
-
     if([[sourceInstanceEntity name] isEqualToString:@"book"]){
 
         newObject = [NSEntityDescription insertNewObjectForEntityForName:@"book"
@@ -49,11 +47,7 @@ NSLog(@"%@", [sourceInstanceEntity name]);
             NSString *key = [allKeys objectAtIndex:i];
             id value = [sInstance valueForKey:key];
 
-NSLog(@"%@", key);
-
             if([key isEqualToString:@"noOfCopies"]){
-
-NSLog(@"%@", (NSString*)value);
 
                 [newObject setValue:[NSDecimalNumber numberWithInteger:[(NSString*)value integerValue]]
                              forKey:key];
