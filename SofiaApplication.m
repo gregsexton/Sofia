@@ -47,9 +47,6 @@
     [accessKeys release];
     [general release];
 
-    //guarantee loaded before updating summary text. This works better than observing.
-    NSError *error;
-    [arrayController fetchWithRequest:nil merge:NO error:&error];
     [self updateSummaryText];
 
     //setup periodic save timer
@@ -348,7 +345,14 @@
 }
 
 - (void) updateSummaryText {
-    int count = [[arrayController arrangedObjects] count];
+
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"book" inManagedObjectContext:managedObjectContext]];
+    [request setPredicate:[arrayController filterPredicate]];
+
+    NSError *err;
+    NSUInteger count = [managedObjectContext countForFetchRequest:request error:&err];
+
     if(count == 0){
 	[summaryText setStringValue:@"Empty"];
     }else if(count == 1){
