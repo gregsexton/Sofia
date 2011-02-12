@@ -68,8 +68,8 @@
     [leRowTemplate setLists:[self lists]];
     [leRowTemplate setSmartLists:[self smartLists]];
 
-    NSArray* templates = [predicateEditor rowTemplates];
-    templates = [templates arrayByAddingObject:leRowTemplate];
+    NSMutableArray* templates = [[predicateEditor rowTemplates] mutableCopy];
+    [templates insertObject:leRowTemplate atIndex:2];
     [predicateEditor setRowTemplates:templates];
 
     [leRowTemplate release];
