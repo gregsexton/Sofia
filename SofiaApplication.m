@@ -1,7 +1,7 @@
 //
 // SofiaApplication.m
 //
-// Copyright 2010 Greg Sexton
+// Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
 // 
@@ -59,6 +59,8 @@
                                    userInfo:nil
                                     repeats:YES];
 
+    //disable auto enabling items (for remove filter) in view menu
+    [viewMenu setAutoenablesItems:NO];
 }
 
 - (void) dealloc {
@@ -66,6 +68,12 @@
     [managedObjectContext release], managedObjectContext = nil;
     [persistentStoreCoordinator release], persistentStoreCoordinator = nil;
     [managedObjectModel release], managedObjectModel = nil;
+
+    if(revealFilterAnimation)
+        [revealFilterAnimation release];
+    if(hideFilterAnimation)
+        [hideFilterAnimation release];
+
     [super dealloc];
 }
 
@@ -256,13 +264,16 @@
     if([searchVal isEqualToString:@""]){
 	totalPred = [sideBar getPredicateForSelectedItem];
     }else{
+        [sideBar removeCurrentFilter]; //does nothing if no filter applied
+
+        NSString* escapedSearchVal = [searchVal escapeSingleQuote];
 	NSArray* predicates = [NSArray arrayWithObjects:
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"title contains[cd] '%@'", [searchVal escapeSingleQuote]]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"authorText contains[cd] '%@'", [searchVal escapeSingleQuote]]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"publisherText contains[cd] '%@'", [searchVal escapeSingleQuote]]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"subjectText contains[cd] '%@'", [searchVal escapeSingleQuote]]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn10 contains[cd] '%@'", [searchVal escapeSingleQuote]]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn13 contains[cd] '%@'", [searchVal escapeSingleQuote]]], nil];
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"title contains[cd] '%@'",         escapedSearchVal]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"authorText contains[cd] '%@'",    escapedSearchVal]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"publisherText contains[cd] '%@'", escapedSearchVal]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"subjectText contains[cd] '%@'",   escapedSearchVal]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn10 contains[cd] '%@'",        escapedSearchVal]],
+	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn13 contains[cd] '%@'",        escapedSearchVal]], nil];
 	NSPredicate* searchPred = [NSCompoundPredicate orPredicateWithSubpredicates:predicates];
 
 	NSArray* searchAndCurrentFilter = [NSArray arrayWithObjects:searchPred, [sideBar getPredicateForSelectedItem], nil];
@@ -367,11 +378,91 @@
     return [detailWin autorelease];
 }
 
+- (NSViewAnimation*)revealFilterAnimation{
+    if(!revealFilterAnimation){
+        NSRect frame = [mainViewContainerView bounds];
+        NSMutableDictionary* mainViewDict = [NSMutableDictionary dictionaryWithCapacity:3];
+ 
+        // Specify which view to modify.
+        [mainViewDict setObject:mainView forKey:NSViewAnimationTargetKey];
+
+        // Specify the starting position of the view.
+        [mainViewDict setObject:[NSValue valueWithRect:frame]
+                         forKey:NSViewAnimationStartFrameKey];
+ 
+        // Change the ending position of the view.
+        frame.size.height -= FILTER_NOTIFICATION_VIEW_HEIGHT;
+ 
+        [mainViewDict setObject:[NSValue valueWithRect:frame]
+                         forKey:NSViewAnimationEndFrameKey];
+
+        revealFilterAnimation = [[NSViewAnimation alloc] initWithViewAnimations:[NSArray arrayWithObject:mainViewDict]];
+        [revealFilterAnimation setDuration:0.25];
+    }
+
+    return revealFilterAnimation;
+}
+
+- (NSViewAnimation*)hideFilterAnimation{
+    if(!hideFilterAnimation){
+        NSRect frame = [mainViewContainerView bounds];
+        frame.size.height -= FILTER_NOTIFICATION_VIEW_HEIGHT;
+
+        NSMutableDictionary* mainViewDict = [NSMutableDictionary dictionaryWithCapacity:3];
+ 
+        // Specify which view to modify.
+        [mainViewDict setObject:mainView forKey:NSViewAnimationTargetKey];
+
+        // Specify the starting position of the view.
+        [mainViewDict setObject:[NSValue valueWithRect:frame]
+                         forKey:NSViewAnimationStartFrameKey];
+ 
+        // Change the ending position of the view.
+        frame.size.height += FILTER_NOTIFICATION_VIEW_HEIGHT;
+ 
+        [mainViewDict setObject:[NSValue valueWithRect:frame]
+                         forKey:NSViewAnimationEndFrameKey];
+
+        hideFilterAnimation = [[NSViewAnimation alloc] initWithViewAnimations:[NSArray arrayWithObject:mainViewDict]];
+        [hideFilterAnimation setDuration:0.25];
+    }
+
+    return hideFilterAnimation;
+}
+
+- (void)revealFilterNotificationView{
+    NSViewAnimation* hideAnim = [self hideFilterAnimation];
+    NSViewAnimation* revealAnim = [self revealFilterAnimation];
+
+    if([hideAnim isAnimating]){
+        [revealAnim startWhenAnimation:hideAnim reachesProgress:1.0];
+    }else{
+        [hideAnim   clearStartAnimation];
+        [hideAnim   clearStopAnimation];
+        [revealAnim clearStartAnimation];
+        [revealAnim clearStopAnimation];
+        [revealAnim startAnimation];
+    }
+}
+
+- (void)hideFilterNotificationView{
+    NSViewAnimation* revealAnim = [self revealFilterAnimation];
+    NSViewAnimation* hideAnim = [self hideFilterAnimation];
+
+    if([revealAnim isAnimating]){
+        [hideAnim startWhenAnimation:revealAnim reachesProgress:1.0];
+    }else{
+        [revealAnim clearStartAnimation];
+        [revealAnim clearStopAnimation];
+        [hideAnim   clearStartAnimation];
+        [hideAnim   clearStopAnimation];
+        [hideAnim   startAnimation];
+    }
+}
 
 /////////////Delegate Methods/////////////////////////////////////////////////////////////////////
 
-
-//delegate method performed by booksWindowController.
+//delegate methods performed by BooksWindowController.
 - (void)saveClicked:(BooksWindowController*)booksWindowController {
     [arrayController rearrangeObjects]; //sort the newly added book this also has the side
 					//affect of keeping smart lists updated after adding a book
@@ -379,13 +470,14 @@
     [imagesView reloadData];
 }
 
-- (void) cancelClicked:(BooksWindowController*)booksWindowController{
+- (void)cancelClicked:(BooksWindowController*)booksWindowController{
     //NOTE: this method should only be called as part of adding a book not viewing a book
     [arrayController removeObject:[booksWindowController obj]];
     [self saveAction:self];
     [self updateSummaryText];
 }
 
+//delegate methods performed by ImportBooksController.
 - (void)closeClickedOnImportBooksController:(ImportBooksController*)controller{
     //released here as a new autorelease pool is created for this
     //modal window and the object is released early. Here is the

@@ -1,7 +1,7 @@
 //
 // book.m
 //
-// Copyright 2010 Greg Sexton
+// Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
 // 
@@ -37,6 +37,7 @@
 @dynamic authorText;
 @dynamic lccNumber;
 @dynamic awards;
+@dynamic toc;
 @dynamic edition;
 @dynamic noOfCopies;
 @dynamic read;
@@ -54,6 +55,5 @@
 @dynamic subjects;
 @dynamic authors;
 @dynamic library;
-@dynamic toc;
 
 @end

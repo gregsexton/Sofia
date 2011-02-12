@@ -1,7 +1,7 @@
 //
 // SofiaApplication.h
 //
-// Copyright 2010 Greg Sexton
+// Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
 // 
@@ -37,6 +37,8 @@
 @class BooksTableView;
 @class SidebarOutlineView;
 
+#define FILTER_NOTIFICATION_VIEW_HEIGHT 20
+
 //used to save the current view for app restart
 #define LIST_VIEW @"listView"
 #define IMAGE_VIEW @"imageView"
@@ -45,27 +47,34 @@
 
 @interface SofiaApplication : NSObject <BooksWindowControllerDelegate, ImportBooksControllerDelegate> {
 	
-	IBOutlet NSWindow *window;
-	IBOutlet NSTextField *summaryText;
-	IBOutlet NSArrayController *arrayController;
-	IBOutlet NSApplication *theApplication;
-	IBOutlet NSSegmentedControl *addRemoveButtons;
-	IBOutlet NSSegmentedControl *changeViewButtons;
-	IBOutlet SidebarOutlineView *sideBar;
-	IBOutlet NSSlider *zoomSlider;
+	IBOutlet NSWindow                 *window;
+	IBOutlet NSTextField              *summaryText;
+	IBOutlet NSArrayController        *arrayController;
+	IBOutlet NSApplication            *theApplication;
+	IBOutlet NSSegmentedControl       *addRemoveButtons;
+	IBOutlet NSSegmentedControl       *changeViewButtons;
+	IBOutlet SidebarOutlineView       *sideBar;
+	IBOutlet NSSlider                 *zoomSlider;
 
-	IBOutlet BooksTableView *tableView;
-	IBOutlet BooksImageBrowserView *imagesView;
+	IBOutlet BooksTableView           *tableView;
+	IBOutlet BooksImageBrowserView    *imagesView;
 	IBOutlet BooksCoverflowController *coverflowController;
-	IBOutlet NSView* mainView;
-	IBOutlet NSView* mainTableView; //this includes the scrollview
-	IBOutlet NSView* mainImagesView;
-	IBOutlet NSView* mainCoverflowView;
-	NSView* currentView;
-	
-	NSPersistentStoreCoordinator *persistentStoreCoordinator;
-	NSManagedObjectModel *managedObjectModel;
-	NSManagedObjectContext *managedObjectContext;
+
+        IBOutlet NSView                   *mainViewContainerView;
+	IBOutlet NSView                   *mainView;
+	IBOutlet NSView                   *mainTableView; //this includes the scrollview
+	IBOutlet NSView                   *mainImagesView;
+	IBOutlet NSView                   *mainCoverflowView;
+	NSView                            *currentView;
+
+	NSPersistentStoreCoordinator      *persistentStoreCoordinator;
+	NSManagedObjectModel              *managedObjectModel;
+	NSManagedObjectContext            *managedObjectContext;
+
+        NSViewAnimation                   *revealFilterAnimation;
+        NSViewAnimation                   *hideFilterAnimation;
+
+        IBOutlet NSMenu                   *viewMenu;
 
 }
 
@@ -87,8 +96,12 @@
 - (IBAction)removeBookAction:(id)sender;
 - (IBAction)saveAction:sender;
 - (IBAction)search:(id)sender;
-- (void) changeMainViewFor:(NSView*)viewToChangeTo;
-- (void) updateSummaryText;
+- (NSViewAnimation*)hideFilterAnimation;
+- (NSViewAnimation*)revealFilterAnimation;
+- (void)changeMainViewFor:(NSView*)viewToChangeTo;
+- (void)hideFilterNotificationView;
+- (void)revealFilterNotificationView;
+- (void)updateSummaryText;
 
 - (BooksWindowController*) createBookAndOpenDetailWindow;
 @end

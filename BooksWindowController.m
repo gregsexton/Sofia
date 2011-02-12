@@ -1,7 +1,7 @@
 //
 // BooksWindowController.m
 //
-// Copyright 2010 Greg Sexton
+// Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
 // 
@@ -84,26 +84,26 @@
 
 - (void) updateManagedObjectFromUI {
     if (obj != nil){
-	[obj setIsbn10:		    [txt_isbn10 stringValue]];
-	[obj setIsbn13:	    	    [txt_isbn13 stringValue]];
-	[obj setAuthorText: 	    [txt_author stringValue]];
-	[obj setSubjectText:	    [txt_subject stringValue]];
-	[obj setAwards:		    [txt_awards string]];
-	[obj setDewey:		    [txt_dewey stringValue]];
-	[obj setDewey_normalised:   [txt_deweyNormal stringValue]];
-	[obj setEdition:	    [txt_edition stringValue]];
-	[obj setLanguage:	    [txt_language stringValue]];
-	[obj setLccNumber:	    [txt_lccNumber stringValue]];
-	[obj setNotes:		    [txt_notes string]];
-	[obj setPhysicalDescription:[txt_physicalDescrip stringValue]];
-	[obj setPublisherText:	    [txt_publisher stringValue]];
-	[obj setSummary:	    [txt_summary string]];
-	[obj setTitle:		    [txt_title stringValue]];
-	[obj setTitleLong:	    [txt_titleLong stringValue]];
-	[obj setUrls:		    [txt_urls string]];
-	[obj setNoOfCopies:	    [txt_noOfCopies stringValue]];
-	[obj setCoverImage:	    [img_summary_cover image]];
-	[obj setToc:		    [txt_toc string]];
+	[obj setIsbn10:              [txt_isbn10          stringValue]];
+	[obj setIsbn13:              [txt_isbn13          stringValue]];
+	[obj setAuthorText:          [txt_author          stringValue]];
+	[obj setSubjectText:         [txt_subject         stringValue]];
+	[obj setAwards:              [txt_awards          string]];
+	[obj setDewey:               [txt_dewey           stringValue]];
+	[obj setDewey_normalised:    [txt_deweyNormal     stringValue]];
+	[obj setEdition:             [txt_edition         stringValue]];
+	[obj setLanguage:            [txt_language        stringValue]];
+	[obj setLccNumber:           [txt_lccNumber       stringValue]];
+	[obj setNotes:               [txt_notes           string]];
+	[obj setPhysicalDescription: [txt_physicalDescrip stringValue]];
+	[obj setPublisherText:       [txt_publisher       stringValue]];
+	[obj setSummary:             [txt_summary         string]];
+	[obj setTitle:               [txt_title           stringValue]];
+	[obj setTitleLong:           [txt_titleLong       stringValue]];
+	[obj setUrls:                [txt_urls            string]];
+	[obj setCoverImage:	     [img_summary_cover   image]];
+	[obj setToc:		     [txt_toc             string]];
+        [obj setNoOfCopies:          (NSDecimalNumber*)[NSDecimalNumber     numberWithInteger:[txt_noOfCopies integerValue]]];
     }
 }
 
@@ -326,32 +326,32 @@
 }
 
 - (void) clearAllFields {
-    [txt_isbn10 setStringValue:@""];
-    [txt_isbn13 setStringValue:@""];
-    [txt_edition setStringValue:@""];
-    [txt_dewey setStringValue:@""];
-    [txt_deweyNormal setStringValue:@""];
-    [txt_lccNumber setStringValue:@""];
-    [txt_language setStringValue:@""];
-    [txt_noOfCopies setStringValue:@"1"];
+    [txt_isbn10             setStringValue:@""];
+    [txt_isbn13             setStringValue:@""];
+    [txt_edition            setStringValue:@""];
+    [txt_dewey              setStringValue:@""];
+    [txt_deweyNormal        setStringValue:@""];
+    [txt_lccNumber          setStringValue:@""];
+    [txt_language           setStringValue:@""];
+    [txt_noOfCopies         setStringValue:@"1"];
 
-    [txt_summary setString:@""];
-    [txt_notes setString:@""];
-    [txt_awards setString:@""];
-    [txt_urls setString:@""];
+    [txt_summary            setString:@""];
+    [txt_notes              setString:@""];
+    [txt_awards             setString:@""];
+    [txt_urls               setString:@""];
 
-    [txt_title removeAllItems];
-    [txt_title setStringValue:@""];
-    [txt_titleLong removeAllItems];
-    [txt_titleLong setStringValue:@""];
-    [txt_publisher removeAllItems];
-    [txt_publisher setStringValue:@""];
-    [txt_author removeAllItems];
-    [txt_author setStringValue:@""];
-    [txt_subject removeAllItems];
-    [txt_subject setStringValue:@""];
-    [txt_physicalDescrip removeAllItems];
-    [txt_physicalDescrip setStringValue:@""];
+    [txt_title              removeAllItems];
+    [txt_title              setStringValue:@""];
+    [txt_titleLong          removeAllItems];
+    [txt_titleLong          setStringValue:@""];
+    [txt_publisher          removeAllItems];
+    [txt_publisher          setStringValue:@""];
+    [txt_author             removeAllItems];
+    [txt_author             setStringValue:@""];
+    [txt_subject            removeAllItems];
+    [txt_subject            setStringValue:@""];
+    [txt_physicalDescrip    removeAllItems];
+    [txt_physicalDescrip    setStringValue:@""];
 
     [img_summary_cover setImage:nil];
     [img_cover setImage:nil];
@@ -360,21 +360,21 @@
 }
 
 - (void) updateSummaryTabView{
-    [lbl_summary_isbn10		    setStringValue:[txt_isbn10 stringValue]];
-    [lbl_summary_isbn13	    	    setStringValue:[txt_isbn13 stringValue]];
-    [lbl_summary_edition    	    setStringValue:[txt_edition stringValue]];
-    [lbl_summary_dewey		    setStringValue:[txt_dewey stringValue]];
-    [lbl_summary_deweyNormal	    setStringValue:[txt_deweyNormal stringValue]];
-    [lbl_summary_lccNumber	    setStringValue:[txt_lccNumber stringValue]];
-    [lbl_summary_language   	    setStringValue:[txt_language stringValue]];
-    [lbl_summary_noOfCopies 	    setStringValue:[txt_noOfCopies stringValue]];
-    [lbl_summary_summary    	    setStringValue:[txt_summary string]];
-    
-    [lbl_summary_title		    setStringValue:[txt_title stringValue]];
-    [lbl_summary_titleLong	    setStringValue:[txt_titleLong stringValue]];
-    [lbl_summary_author		    setStringValue:[txt_author stringValue]];
-    [lbl_summary_publisher	    setStringValue:[txt_publisher stringValue]];
-    [lbl_summary_subject	    setStringValue:[txt_subject stringValue]];
+    [lbl_summary_isbn10		    setStringValue:[txt_isbn10          stringValue]];
+    [lbl_summary_isbn13	    	    setStringValue:[txt_isbn13          stringValue]];
+    [lbl_summary_edition    	    setStringValue:[txt_edition         stringValue]];
+    [lbl_summary_dewey		    setStringValue:[txt_dewey           stringValue]];
+    [lbl_summary_deweyNormal	    setStringValue:[txt_deweyNormal     stringValue]];
+    [lbl_summary_lccNumber	    setStringValue:[txt_lccNumber       stringValue]];
+    [lbl_summary_language   	    setStringValue:[txt_language        stringValue]];
+    [lbl_summary_noOfCopies 	    setStringValue:[txt_noOfCopies      stringValue]];
+    [lbl_summary_summary    	    setStringValue:[txt_summary         string]];
+
+    [lbl_summary_title		    setStringValue:[txt_title           stringValue]];
+    [lbl_summary_titleLong	    setStringValue:[txt_titleLong       stringValue]];
+    [lbl_summary_author		    setStringValue:[txt_author          stringValue]];
+    [lbl_summary_publisher	    setStringValue:[txt_publisher       stringValue]];
+    [lbl_summary_subject	    setStringValue:[txt_subject         stringValue]];
     [lbl_summary_physicalDescrip    setStringValue:[txt_physicalDescrip stringValue]];
 }
 

@@ -1,7 +1,7 @@
 //
 // GSCoverflow.m
 //
-// Copyright 2010 Greg Sexton
+// Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
 // 
@@ -76,16 +76,17 @@
 	_cachedTitles = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
 	_cachedSubtitles = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
 
+	if(_focusedItemIndex >= [dataSource numberOfItemsInCoverflow:self]) //don't let this exceed the array bounds
+	    _focusedItemIndex = [dataSource numberOfItemsInCoverflow:self] - 1; 
+
 	for(int i=0; i<[dataSource numberOfItemsInCoverflow:self]; i++){
 
 	    GSCoverflowItem* item = [dataSource coverflow:self itemAtIndex:i];
 	    CALayer* itemLayer = [self layerForGSCoverflowItem:item];
 	    [_cachedLayers addObject:itemLayer];
-	    [self.layer addSublayer:itemLayer];
 
 	    CALayer* itemReflectedLayer = [self reflectionLayerForGSCoverflowItem:item];
 	    [_cachedReflectionLayers addObject:itemReflectedLayer];
-	    [self.layer addSublayer:itemReflectedLayer];
 
 	    if(item.imageTitle)
 		[_cachedTitles addObject:item.imageTitle];
@@ -96,10 +97,12 @@
 		[_cachedSubtitles addObject:item.imageSubtitle];
 	    else
 		[_cachedSubtitles addObject:@""];
-	}
 
-	if(_focusedItemIndex >= [_cachedLayers count]) //don't let this exceed the array bounds
-	    _focusedItemIndex = [_cachedLayers count] - 1; 
+            //these need to be last as calling addSublayer invokes invalidateLayoutOfLayer
+            //which in turn requires that caches are fully built
+	    [self.layer addSublayer:itemLayer];
+	    [self.layer addSublayer:itemReflectedLayer];
+	}
 
     }else{
         [self deleteCache]; //remove layers if there are no items
@@ -132,7 +135,6 @@
 	_cachedSubtitles = nil;
     }
 }
-
 
 - (CALayer*)layerForGSCoverflowItem:(GSCoverflowItem*)item{
     CALayer* retLayer = [CALayer layer];
@@ -360,7 +362,6 @@
     [CATransaction commit];
 }
 
-
 - (void)adjustLayerPositions{
     //NOTE: do not call this method instead call adjustCachedLayersWithAnimation:
 
@@ -460,7 +461,6 @@
     return pos.x >= x && pos.x <= x+w 
 	&& pos.y >= y && pos.y <= y+h;
 }
-
 
 - (void)adjustLayerBounds{
     //NOTE: do not call this method instead call adjustCachedLayersWithAnimation:

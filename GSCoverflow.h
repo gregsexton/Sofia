@@ -1,7 +1,7 @@
 //
 // GSCoverflow.h
 //
-// Copyright 2010 Greg Sexton
+// Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
 // 
@@ -43,7 +43,7 @@
 
 @interface GSCoverflow : NSView {
 
-    id <GSCoverflowDelegate> delegate;
+    id <GSCoverflowDelegate>   delegate;
     id <GSCoverflowDataSource> dataSource;
 
     NSMutableArray* _cachedLayers;
@@ -51,14 +51,14 @@
     NSMutableArray* _cachedTitles;
     NSMutableArray* _cachedSubtitles;
 
-    CATextLayer* _titleLayer;
-    CALayer*	 _scrollLayer;
-    BOOL	 _bubbleDragged;
-    BOOL	 _focusedDragged;
+    CATextLayer*    _titleLayer;
+    CALayer*        _scrollLayer;
+    BOOL            _bubbleDragged;
+    BOOL            _focusedDragged;
 
-    NSUInteger _focusedItemIndex;
+    NSUInteger      _focusedItemIndex;
 
-    NSSize	_currentViewSize;
+    NSSize          _currentViewSize;
 
 }
 

@@ -42,6 +42,8 @@
 		376D413E10B21B4C00242DF7 /* subject.m in Sources */ = {isa = PBXBuildFile; fileRef = 376D413810B21B4C00242DF7 /* subject.m */; };
 		376D414010B21B4C00242DF7 /* person.m in Sources */ = {isa = PBXBuildFile; fileRef = 376D413C10B21B4C00242DF7 /* person.m */; };
 		378AE28612A4582700047F23 /* SortByView.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AE28512A4582700047F23 /* SortByView.m */; };
+		378AE56612D281C900047F23 /* filter.png in Resources */ = {isa = PBXBuildFile; fileRef = 378AE56512D281C900047F23 /* filter.png */; };
+		378AE5AA12D5148D00047F23 /* FilterNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AE5A912D5148D00047F23 /* FilterNotificationView.m */; };
 		37970AB111D920CA003A9D0D /* importarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 37970AB011D920CA003A9D0D /* importarrow.png */; };
 		37970AF911DAA847003A9D0D /* missing.png in Resources */ = {isa = PBXBuildFile; fileRef = 37970AF811DAA847003A9D0D /* missing.png */; };
 		37AF6DD611FA298B007A7C85 /* OverviewSplitViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF6DD511FA298B007A7C85 /* OverviewSplitViewDelegate.m */; };
@@ -85,6 +87,8 @@
 		37D7096310C1BFFB0004F441 /* GeneralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D7096210C1BFFB0004F441 /* GeneralViewController.m */; };
 		37D7099E10C1D8400004F441 /* SubjectDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D7099D10C1D8400004F441 /* SubjectDetail.xib */; };
 		37D709A410C1D8E50004F441 /* SubjectWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D709A310C1D8E50004F441 /* SubjectWindowController.m */; };
+		37D8003212EF705000F49E11 /* database 3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 37D8003112EF705000F49E11 /* database 3.xcmappingmodel */; };
+		37D8005C12F36C6900F49E11 /* Version2To3EntityMigrationPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8005B12F36C6900F49E11 /* Version2To3EntityMigrationPolicy.m */; };
 		37F36B0E124027340012D62E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F36B0D124027340012D62E /* QuartzCore.framework */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -174,6 +178,9 @@
 		376D413C10B21B4C00242DF7 /* person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = person.m; sourceTree = "<group>"; };
 		378AE28412A4582700047F23 /* SortByView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortByView.h; sourceTree = "<group>"; };
 		378AE28512A4582700047F23 /* SortByView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortByView.m; sourceTree = "<group>"; };
+		378AE56512D281C900047F23 /* filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter.png; sourceTree = "<group>"; };
+		378AE5A812D5148D00047F23 /* FilterNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterNotificationView.h; sourceTree = "<group>"; };
+		378AE5A912D5148D00047F23 /* FilterNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterNotificationView.m; sourceTree = "<group>"; };
 		37970AB011D920CA003A9D0D /* importarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = importarrow.png; sourceTree = "<group>"; };
 		37970AF811DAA847003A9D0D /* missing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = missing.png; sourceTree = "<group>"; };
 		37AF6DD411FA298B007A7C85 /* OverviewSplitViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverviewSplitViewDelegate.h; sourceTree = "<group>"; };
@@ -247,6 +254,10 @@
 		37D7099D10C1D8400004F441 /* SubjectDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubjectDetail.xib; sourceTree = "<group>"; };
 		37D709A210C1D8E50004F441 /* SubjectWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubjectWindowController.h; sourceTree = "<group>"; };
 		37D709A310C1D8E50004F441 /* SubjectWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubjectWindowController.m; sourceTree = "<group>"; };
+		37D8002812EF594C00F49E11 /* database 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "database 3.xcdatamodel"; sourceTree = "<group>"; };
+		37D8003112EF705000F49E11 /* database 3.xcmappingmodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcmappingmodel; path = "database 3.xcmappingmodel"; sourceTree = "<group>"; };
+		37D8005A12F36C6900F49E11 /* Version2To3EntityMigrationPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version2To3EntityMigrationPolicy.h; sourceTree = "<group>"; };
+		37D8005B12F36C6900F49E11 /* Version2To3EntityMigrationPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Version2To3EntityMigrationPolicy.m; sourceTree = "<group>"; };
 		37F36B0D124027340012D62E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		37FF4F4311E7CC07001B8ECC /* PredicateEditorWindowControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PredicateEditorWindowControllerDelegate.h; sourceTree = "<group>"; };
 		37FF4FB211E8ACDA001B8ECC /* AuthorsWindowControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorsWindowControllerDelegate.h; sourceTree = "<group>"; };
@@ -344,6 +355,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				37D8005912F36C1D00F49E11 /* Migration Policies */,
 				37AF7A9A12217295007A7C85 /* Categories */,
 				37AF6DD311FA296A007A7C85 /* Delegates */,
 				3735AAF111CEBDDA00DD7461 /* Protocols */,
@@ -371,6 +383,7 @@
 				37D7099D10C1D8400004F441 /* SubjectDetail.xib */,
 				37BAFC931162510C00F95C41 /* PredicateEditor.xib */,
 				37AF7A42121FEFE5007A7C85 /* database.xcdatamodeld */,
+				37D8003112EF705000F49E11 /* database 3.xcmappingmodel */,
 				3735A79B11C6DB5E00DD7461 /* ImportBooks.xib */,
 				37AF704A12048044007A7C85 /* ExternalLinkEditor.xib */,
 			);
@@ -528,6 +541,8 @@
 				37AF800512399331007A7C85 /* GSCoverflow.m */,
 				378AE28412A4582700047F23 /* SortByView.h */,
 				378AE28512A4582700047F23 /* SortByView.m */,
+				378AE5A812D5148D00047F23 /* FilterNotificationView.h */,
+				378AE5A912D5148D00047F23 /* FilterNotificationView.m */,
 			);
 			name = "Cocoa Extensions";
 			sourceTree = "<group>";
@@ -535,6 +550,7 @@
 		37BAFBB7115C14C700F95C41 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				378AE56512D281C900047F23 /* filter.png */,
 				374360D1126F8C6F00F5711A /* missing_coverflow.png */,
 				37AF7F301231BE60007A7C85 /* stars.tif */,
 				37970AF811DAA847003A9D0D /* missing.png */,
@@ -602,6 +618,15 @@
 				37D7096210C1BFFB0004F441 /* GeneralViewController.m */,
 			);
 			name = "Preference Pane Controllers";
+			sourceTree = "<group>";
+		};
+		37D8005912F36C1D00F49E11 /* Migration Policies */ = {
+			isa = PBXGroup;
+			children = (
+				37D8005A12F36C6900F49E11 /* Version2To3EntityMigrationPolicy.h */,
+				37D8005B12F36C6900F49E11 /* Version2To3EntityMigrationPolicy.m */,
+			);
+			name = "Migration Policies";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -721,6 +746,7 @@
 				37AF704B12048044007A7C85 /* ExternalLinkEditor.xib in Resources */,
 				37AF7F311231BE60007A7C85 /* stars.tif in Resources */,
 				374360D2126F8C6F00F5711A /* missing_coverflow.png in Resources */,
+				378AE56612D281C900047F23 /* filter.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -795,6 +821,9 @@
 				37AF80151239981D007A7C85 /* GSCoverflowItem.m in Sources */,
 				37106D5812A2C77B0008CF18 /* CoverflowSplitViewDelegate.m in Sources */,
 				378AE28612A4582700047F23 /* SortByView.m in Sources */,
+				378AE5AA12D5148D00047F23 /* FilterNotificationView.m in Sources */,
+				37D8003212EF705000F49E11 /* database 3.xcmappingmodel in Sources */,
+				37D8005C12F36C6900F49E11 /* Version2To3EntityMigrationPolicy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -985,8 +1014,9 @@
 			children = (
 				373751491054219600718317 /* database.xcdatamodel */,
 				37AF7A44121FEFE5007A7C85 /* database 2.xcdatamodel */,
+				37D8002812EF594C00F49E11 /* database 3.xcdatamodel */,
 			);
-			currentVersion = 37AF7A44121FEFE5007A7C85 /* database 2.xcdatamodel */;
+			currentVersion = 37D8002812EF594C00F49E11 /* database 3.xcdatamodel */;
 			path = database.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
