@@ -28,8 +28,6 @@
 @synthesize lists;
 @synthesize smartLists;
 
-//TODO: convert noOfCopies to an integer
-
 - (id)initWithSmartList:(smartList*)list{
     if(self = [super init]){
         //unwrap predicate -- wrapped in the okClicked method

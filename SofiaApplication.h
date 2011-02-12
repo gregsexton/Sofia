@@ -71,6 +71,9 @@
 	NSManagedObjectModel              *managedObjectModel;
 	NSManagedObjectContext            *managedObjectContext;
 
+        NSViewAnimation                   *revealFilterAnimation;
+        NSViewAnimation                   *hideFilterAnimation;
+
         IBOutlet NSMenu                   *viewMenu;
 
 }
@@ -93,6 +96,8 @@
 - (IBAction)removeBookAction:(id)sender;
 - (IBAction)saveAction:sender;
 - (IBAction)search:(id)sender;
+- (NSViewAnimation*)hideFilterAnimation;
+- (NSViewAnimation*)revealFilterAnimation;
 - (void)changeMainViewFor:(NSView*)viewToChangeTo;
 - (void)hideFilterNotificationView;
 - (void)revealFilterNotificationView;

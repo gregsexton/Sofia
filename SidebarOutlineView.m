@@ -371,7 +371,7 @@
     //does nothing if no filter applied
     if([self selectedPredicate]){
         //filter applied
-        NSPredicate* oldPred = [[self selectedPredicate] copy];
+        NSPredicate* oldPred = [[self selectedPredicate] copy]; //TODO: memory leak?
         [self setSelectedPredicate:nil];
         [self updateFilterPredicateWith:oldPred];
 

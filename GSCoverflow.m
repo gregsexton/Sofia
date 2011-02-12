@@ -136,7 +136,6 @@
     }
 }
 
-
 - (CALayer*)layerForGSCoverflowItem:(GSCoverflowItem*)item{
     CALayer* retLayer = [CALayer layer];
     retLayer.contents = (id)item.imageRepresentation;
@@ -363,7 +362,6 @@
     [CATransaction commit];
 }
 
-
 - (void)adjustLayerPositions{
     //NOTE: do not call this method instead call adjustCachedLayersWithAnimation:
 
@@ -463,7 +461,6 @@
     return pos.x >= x && pos.x <= x+w 
 	&& pos.y >= y && pos.y <= y+h;
 }
-
 
 - (void)adjustLayerBounds{
     //NOTE: do not call this method instead call adjustCachedLayersWithAnimation:
