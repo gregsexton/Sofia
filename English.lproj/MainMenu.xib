@@ -21,6 +21,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="549"/>
 			<integer value="296"/>
 			<integer value="782"/>
 		</object>
@@ -1440,14 +1441,9 @@
 																			</object>
 																			<double key="NSIntercellSpacingWidth">3</double>
 																			<double key="NSIntercellSpacingHeight">0.0</double>
-																			<object class="NSColor" key="NSBackgroundColor">
-																				<int key="NSColorSpace">6</int>
-																				<string key="NSCatalogName">System</string>
-																				<string key="NSColorName">_sourceListBackgroundColor</string>
-																				<object class="NSColor" key="NSColor">
-																					<int key="NSColorSpace">1</int>
-																					<bytes key="NSRGB">MC44MzkyMTU2OTU5IDAuODY2NjY2Njc0NiAwLjg5ODAzOTIyMTgAA</bytes>
-																				</object>
+																			<object class="NSColor" key="NSBackgroundColor" id="304947174">
+																				<int key="NSColorSpace">1</int>
+																				<bytes key="NSRGB">MC43Njg2NTk4ODk3IDAuODAzNzkzNDMwMyAwLjg1MjM4ODkxODQAA</bytes>
 																			</object>
 																			<object class="NSColor" key="NSGridColor" id="235439211">
 																				<int key="NSColorSpace">6</int>
@@ -1477,10 +1473,7 @@
 																	<reference key="NSSuperview" ref="174631416"/>
 																	<reference key="NSNextKeyView" ref="956318075"/>
 																	<reference key="NSDocView" ref="956318075"/>
-																	<object class="NSColor" key="NSBGColor">
-																		<int key="NSColorSpace">1</int>
-																		<bytes key="NSRGB">MC43Njg2NTk4ODk3IDAuODAzNzkzNDMwMyAwLjg1MjM4ODkxODQAA</bytes>
-																	</object>
+																	<reference key="NSBGColor" ref="304947174"/>
 																	<int key="NScvFlags">4</int>
 																</object>
 																<object class="NSScroller" id="412208264">
@@ -2009,6 +2002,7 @@
 					<string key="NSEntityName">book</string>
 				</object>
 				<bool key="_NSIsUsingManagedProxy">YES</bool>
+				<bool key="_NSUsesLazyFetching">YES</bool>
 				<bool key="NSAvoidsEmptySelection">YES</bool>
 				<bool key="NSPreservesSelection">YES</bool>
 				<bool key="NSSelectsInsertedObjects">YES</bool>
@@ -2029,7 +2023,7 @@
 				<string key="NSClassName">CoverflowSplitViewDelegate</string>
 			</object>
 			<object class="NSScrollView" id="758308659">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">4370</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2354,6 +2348,7 @@
 					<reference ref="429878103"/>
 				</object>
 				<string key="NSFrameSize">{957, 717}</string>
+				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="316095046"/>
 				<int key="NSsFlags">560</int>
 				<reference key="NSVScroller" ref="992909148"/>
@@ -6155,9 +6150,9 @@
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{869, 568}, {1158, 743}}</string>
+					<string>{{943, 568}, {1158, 743}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{869, 568}, {1158, 743}}</string>
+					<string>{{943, 568}, {1158, 743}}</string>
 					<integer value="1"/>
 					<string>{196, 240}</string>
 					<string>{{202, 428}, {480, 270}}</string>

@@ -62,9 +62,9 @@
 
 - (void) dealloc {
 	
-    [managedObjectContext release], managedObjectContext = nil;
+    [managedObjectContext       release], managedObjectContext = nil;
     [persistentStoreCoordinator release], persistentStoreCoordinator = nil;
-    [managedObjectModel release], managedObjectModel = nil;
+    [managedObjectModel         release], managedObjectModel = nil;
 
     if(revealFilterAnimation)
         [revealFilterAnimation release];
