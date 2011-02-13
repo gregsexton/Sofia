@@ -118,11 +118,12 @@
     
     
 #ifdef CONFIGURATION_Debug
-    url = [NSURL fileURLWithPath: [applicationSupportFolder stringByAppendingPathComponent: @"Sofia.xml"]];
+    url = [NSURL fileURLWithPath: [applicationSupportFolder stringByAppendingPathComponent: @"Sofia-debug"]];
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
-    if (![persistentStoreCoordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:options error:&error]){
+    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error]){
         [[NSApplication sharedApplication] presentError:error];
     }    
+    [window setTitle:@"!!!!!!! DEBUG DEBUG DEBUG !!!!!!!"];
 #endif
 
 #ifdef CONFIGURATION_Release
@@ -352,6 +353,8 @@
 
     NSError *err;
     NSUInteger count = [managedObjectContext countForFetchRequest:request error:&err];
+
+    [request release];
 
     if(count == 0){
 	[summaryText setStringValue:@"Empty"];

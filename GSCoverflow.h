@@ -65,11 +65,15 @@
 @property (nonatomic,assign) id <GSCoverflowDelegate> delegate;
 @property (nonatomic,assign) id <GSCoverflowDataSource> dataSource;
 
+- (BOOL)isEven:(CGFloat)n;
 - (BOOL)isOnscreen:(CGPoint)pos;
 - (CALayer*)layerForGSCoverflowItem:(GSCoverflowItem*)item;
 - (CALayer*)reflectionLayerForGSCoverflowItem:(GSCoverflowItem*)item;
 - (CGRect)scaleRect:(CGRect)rect toWithin:(CGFloat)length;
+- (void)addContentsToVisibleLayers;
 - (void)adjustCachedLayersWithAnimation:(BOOL)animate;
+- (void)adjustFadeLayers;
+- (void)adjustFadeSublayerOf:(CALayer*)layer toOpacity:(CGFloat)opacity;
 - (void)adjustLayerBounds;
 - (void)adjustLayerPositions;
 - (void)deleteCache;
@@ -77,9 +81,6 @@
 - (void)reloadData;
 - (void)updateScrollLayer;
 - (void)updateTitleLayer;
-- (void)adjustFadeLayers;
-- (void)adjustFadeSublayerOf:(CALayer*)layer toOpacity:(CGFloat)opacity;
-- (BOOL)isEven:(CGFloat)n;
 
 - (CATransform3D)identityReflectionTransform;
 - (CATransform3D)identityTransform;

@@ -71,10 +71,10 @@
 - (void)reloadData{
     if(dataSource != nil && [dataSource numberOfItemsInCoverflow:self] > 0){
 	[self deleteCache]; //TODO: use versions!
-	_cachedLayers = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
+	_cachedLayers           = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
 	_cachedReflectionLayers = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
-	_cachedTitles = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
-	_cachedSubtitles = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
+	_cachedTitles           = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
+	_cachedSubtitles        = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
 
 	if(_focusedItemIndex >= [dataSource numberOfItemsInCoverflow:self]) //don't let this exceed the array bounds
 	    _focusedItemIndex = [dataSource numberOfItemsInCoverflow:self] - 1; 
@@ -138,7 +138,6 @@
 
 - (CALayer*)layerForGSCoverflowItem:(GSCoverflowItem*)item{
     CALayer* retLayer = [CALayer layer];
-    retLayer.contents = (id)item.imageRepresentation;
     retLayer.bounds = CGRectMake(0.0f, 0.0f,
 				CGImageGetWidth(item.imageRepresentation), 
 				CGImageGetHeight(item.imageRepresentation));
@@ -200,6 +199,8 @@
     [self updateTitleLayer];
     [self adjustFadeLayers];
     [self updateScrollLayer];
+
+    [self addContentsToVisibleLayers]; //also removes contents from invisible layers.
 }
 
 - (void)adjustFadeLayers{
@@ -283,13 +284,6 @@
 
     _titleLayer.frame = CGRectMake(0.0f, 0.0f, round(preferredSize.width), round(preferredSize.height));
     _titleLayer.position = CGPointMake(round(NSMidX([self bounds])), round(TITLE_Y_POSITION));
-}
-
-- (BOOL)isEven:(CGFloat)n{
-    int quotient = (int)(n/2.0);
-    int remainder = n - (quotient*2.0);
-
-    return remainder == 0;
 }
 
 - (void)updateScrollLayer{
@@ -451,17 +445,6 @@
     }
 }
 
-- (BOOL)isOnscreen:(CGPoint)pos{
-
-    CGFloat x = self.bounds.origin.x;
-    CGFloat y = self.bounds.origin.y;
-    CGFloat h = self.bounds.size.height;
-    CGFloat w = self.bounds.size.width;
-
-    return pos.x >= x && pos.x <= x+w 
-	&& pos.y >= y && pos.y <= y+h;
-}
-
 - (void)adjustLayerBounds{
     //NOTE: do not call this method instead call adjustCachedLayersWithAnimation:
 
@@ -496,6 +479,44 @@
     for(CALayer* subLayer in focusedReflected.sublayers){
 	subLayer.bounds = focusedReflected.bounds;
     }
+}
+
+- (void)addContentsToVisibleLayers{
+    //TODO: probably want to give more than just the visible layers contents
+
+    for(int i=0; i<[_cachedLayers count]; i++){
+
+	CALayer* layer          = [_cachedLayers objectAtIndex:i];
+	CALayer* layerReflected = [_cachedReflectionLayers objectAtIndex:i];
+
+        if([self isOnscreen:layer.position]){
+            if(layer.contents == nil){
+                GSCoverflowItem* item   = [dataSource coverflow:self itemAtIndex:i];
+                layer.contents          = (id)item.imageRepresentation;
+                layerReflected.contents = (id)item.imageRepresentation;
+            }
+        }else{
+            layer.contents = nil;
+        }
+    }
+}
+
+- (BOOL)isEven:(CGFloat)n{
+    int quotient = (int)(n/2.0);
+    int remainder = n - (quotient*2.0);
+
+    return remainder == 0;
+}
+
+- (BOOL)isOnscreen:(CGPoint)pos{
+
+    CGFloat x = self.bounds.origin.x;
+    CGFloat y = self.bounds.origin.y;
+    CGFloat h = self.bounds.size.height;
+    CGFloat w = self.bounds.size.width;
+
+    return pos.x >= x && pos.x <= x+w 
+	&& pos.y >= y && pos.y <= y+h;
 }
 
 - (CGRect)scaleRect:(CGRect)rect toWithin:(CGFloat)length{
