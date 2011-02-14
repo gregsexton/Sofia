@@ -75,6 +75,7 @@
         NSFileManager* fileManager = [[NSFileManager alloc] init];
         NSError* error;
         [fileManager removeItemAtPath:imgPath error:&error];
+        [fileManager release];
     }
 
     if(image){

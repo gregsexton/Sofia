@@ -71,6 +71,7 @@
     NSMutableArray* templates = [[predicateEditor rowTemplates] mutableCopy];
     [templates insertObject:leRowTemplate atIndex:2];
     [predicateEditor setRowTemplates:templates];
+    [templates release];
 
     [leRowTemplate release];
 
