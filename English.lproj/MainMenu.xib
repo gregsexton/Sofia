@@ -23,7 +23,7 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<integer value="549"/>
 			<integer value="296"/>
-			<integer value="544"/>
+			<integer value="782"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1441,9 +1441,14 @@
 																			</object>
 																			<double key="NSIntercellSpacingWidth">3</double>
 																			<double key="NSIntercellSpacingHeight">0.0</double>
-																			<object class="NSColor" key="NSBackgroundColor" id="873483466">
-																				<int key="NSColorSpace">1</int>
-																				<bytes key="NSRGB">MC43Njg2NTk4ODk3IDAuODAzNzkzNDMwMyAwLjg1MjM4ODkxODQAA</bytes>
+																			<object class="NSColor" key="NSBackgroundColor">
+																				<int key="NSColorSpace">6</int>
+																				<string key="NSCatalogName">System</string>
+																				<string key="NSColorName">_sourceListBackgroundColor</string>
+																				<object class="NSColor" key="NSColor">
+																					<int key="NSColorSpace">1</int>
+																					<bytes key="NSRGB">MC44MzkyMTU2OTU5IDAuODY2NjY2Njc0NiAwLjg5ODAzOTIyMTgAA</bytes>
+																				</object>
 																			</object>
 																			<object class="NSColor" key="NSGridColor" id="235439211">
 																				<int key="NSColorSpace">6</int>
@@ -1465,7 +1470,7 @@
 																			<bool key="NSAllowsTypeSelect">YES</bool>
 																			<int key="NSTableViewSelectionHighlightStyle">1</int>
 																			<int key="NSTableViewDraggingDestinationStyle">1</int>
-																			<float key="NSOutlineViewIndentationPerLevelKey">23</float>
+																			<float key="NSOutlineViewIndentationPerLevelKey">14</float>
 																			<bool key="NSOutlineViewAutosaveExpandedItemsKey">YES</bool>
 																		</object>
 																	</object>
@@ -1473,7 +1478,10 @@
 																	<reference key="NSSuperview" ref="174631416"/>
 																	<reference key="NSNextKeyView" ref="956318075"/>
 																	<reference key="NSDocView" ref="956318075"/>
-																	<reference key="NSBGColor" ref="873483466"/>
+																	<object class="NSColor" key="NSBGColor">
+																		<int key="NSColorSpace">1</int>
+																		<bytes key="NSRGB">MC43Njg2NTk4ODk3IDAuODAzNzkzNDMwMyAwLjg1MjM4ODkxODQAA</bytes>
+																	</object>
 																	<int key="NScvFlags">4</int>
 																</object>
 																<object class="NSScroller" id="412208264">
