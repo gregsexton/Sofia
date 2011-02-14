@@ -486,6 +486,8 @@
 
     for(int i=0; i<[_cachedLayers count]; i++){
 
+        NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+
 	CALayer* layer          = [_cachedLayers objectAtIndex:i];
 	CALayer* layerReflected = [_cachedReflectionLayers objectAtIndex:i];
 
@@ -497,7 +499,10 @@
             }
         }else{
             layer.contents = nil;
+            layerReflected.contents = nil;
         }
+
+        [pool drain];
     }
 }
 

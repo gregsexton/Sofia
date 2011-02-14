@@ -30,33 +30,37 @@
 {
 }
 
-@property (nonatomic, retain) NSString * isbn13;
-@property (nonatomic, retain) NSString * dewey_normalised;
-@property (nonatomic, retain) NSString * title;
-@property (nonatomic, retain) NSString * language;
-@property (nonatomic, retain) NSString * summary;
-@property (nonatomic, retain) NSString * isbn10;
-@property (nonatomic, retain) NSString * authorText;
-@property (nonatomic, retain) NSString * lccNumber;
-@property (nonatomic, retain) NSString * awards;
-@property (nonatomic, retain) NSString * toc;
-@property (nonatomic, retain) NSString * edition;
-@property (nonatomic, retain) NSDecimalNumber * noOfCopies;
-@property (nonatomic, retain) NSNumber * read;
-@property (nonatomic, retain) NSString * subjectText;
-@property (nonatomic, retain) NSString * titleLong;
-@property (nonatomic, retain) id coverImage;
-@property (nonatomic, retain) NSString * physicalDescription;
-@property (nonatomic, retain) NSString * publisherText;
-@property (nonatomic, retain) NSString * dewey;
-@property (nonatomic, retain) NSString * urls;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSDate * dateAdded;
-@property (nonatomic, retain) NSManagedObject * publisher;
-@property (nonatomic, retain) NSSet* lists;
-@property (nonatomic, retain) NSSet* subjects;
-@property (nonatomic, retain) NSSet* authors;
-@property (nonatomic, retain) Library * library;
+@property (nonatomic, retain) NSString        *isbn13;
+@property (nonatomic, retain) NSString        *dewey_normalised;
+@property (nonatomic, retain) NSString        *title;
+@property (nonatomic, retain) NSString        *language;
+@property (nonatomic, retain) NSString        *summary;
+@property (nonatomic, retain) NSString        *isbn10;
+@property (nonatomic, retain) NSString        *authorText;
+@property (nonatomic, retain) NSString        *lccNumber;
+@property (nonatomic, retain) NSString        *awards;
+@property (nonatomic, retain) NSString        *toc;
+@property (nonatomic, retain) NSString        *edition;
+@property (nonatomic, retain) NSDecimalNumber *noOfCopies;
+@property (nonatomic, retain) NSNumber        *read;
+@property (nonatomic, retain) NSString        *subjectText;
+@property (nonatomic, retain) NSString        *titleLong;
+@property (nonatomic, retain) NSString        *coverImage;
+@property (nonatomic, retain) NSString        *physicalDescription;
+@property (nonatomic, retain) NSString        *publisherText;
+@property (nonatomic, retain) NSString        *dewey;
+@property (nonatomic, retain) NSString        *urls;
+@property (nonatomic, retain) NSString        *notes;
+@property (nonatomic, retain) NSDate          *dateAdded;
+@property (nonatomic, retain) NSManagedObject *publisher;
+@property (nonatomic, retain) NSSet           *lists;
+@property (nonatomic, retain) NSSet           *subjects;
+@property (nonatomic, retain) NSSet           *authors;
+@property (nonatomic, retain) Library         *library;
+
+- (NSImage*)coverImageImage;
+- (void)setCoverImageImage:(NSImage*)image;
+- (NSString*)applicationSupportFolder;
 
 @end
 

@@ -210,7 +210,7 @@
 	[self updateCopiesCount:[[selectedBook noOfCopies] integerValue]];
 	[self updateSummaryString:[selectedBook summary]];
 
-	NSImage* img = [selectedBook coverImage];
+	NSImage* img = [selectedBook coverImageImage];
 	if(img == nil)
 	    img = [NSImage imageNamed:@"missing.png"];
 	[self updateCoverImage:img];

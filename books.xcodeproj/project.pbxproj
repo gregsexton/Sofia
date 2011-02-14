@@ -89,6 +89,8 @@
 		37D709A410C1D8E50004F441 /* SubjectWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D709A310C1D8E50004F441 /* SubjectWindowController.m */; };
 		37D8003212EF705000F49E11 /* database 3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 37D8003112EF705000F49E11 /* database 3.xcmappingmodel */; };
 		37D8005C12F36C6900F49E11 /* Version2To3EntityMigrationPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8005B12F36C6900F49E11 /* Version2To3EntityMigrationPolicy.m */; };
+		37D801B013083E3300F49E11 /* database4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 37D801AF13083E3300F49E11 /* database4.xcmappingmodel */; };
+		37D801C11308595900F49E11 /* Version3To4EntityMigrationPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D801C01308595900F49E11 /* Version3To4EntityMigrationPolicy.m */; };
 		37F36B0E124027340012D62E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F36B0D124027340012D62E /* QuartzCore.framework */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -258,6 +260,10 @@
 		37D8003112EF705000F49E11 /* database 3.xcmappingmodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcmappingmodel; path = "database 3.xcmappingmodel"; sourceTree = "<group>"; };
 		37D8005A12F36C6900F49E11 /* Version2To3EntityMigrationPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version2To3EntityMigrationPolicy.h; sourceTree = "<group>"; };
 		37D8005B12F36C6900F49E11 /* Version2To3EntityMigrationPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Version2To3EntityMigrationPolicy.m; sourceTree = "<group>"; };
+		37D801AA13083DAF00F49E11 /* database 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "database 4.xcdatamodel"; sourceTree = "<group>"; };
+		37D801AF13083E3300F49E11 /* database4.xcmappingmodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcmappingmodel; path = database4.xcmappingmodel; sourceTree = "<group>"; };
+		37D801BF1308595900F49E11 /* Version3To4EntityMigrationPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version3To4EntityMigrationPolicy.h; sourceTree = "<group>"; };
+		37D801C01308595900F49E11 /* Version3To4EntityMigrationPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Version3To4EntityMigrationPolicy.m; sourceTree = "<group>"; };
 		37F36B0D124027340012D62E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		37FF4F4311E7CC07001B8ECC /* PredicateEditorWindowControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PredicateEditorWindowControllerDelegate.h; sourceTree = "<group>"; };
 		37FF4FB211E8ACDA001B8ECC /* AuthorsWindowControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorsWindowControllerDelegate.h; sourceTree = "<group>"; };
@@ -383,7 +389,6 @@
 				37D7099D10C1D8400004F441 /* SubjectDetail.xib */,
 				37BAFC931162510C00F95C41 /* PredicateEditor.xib */,
 				37AF7A42121FEFE5007A7C85 /* database.xcdatamodeld */,
-				37D8003112EF705000F49E11 /* database 3.xcmappingmodel */,
 				3735A79B11C6DB5E00DD7461 /* ImportBooks.xib */,
 				37AF704A12048044007A7C85 /* ExternalLinkEditor.xib */,
 			);
@@ -625,6 +630,10 @@
 			children = (
 				37D8005A12F36C6900F49E11 /* Version2To3EntityMigrationPolicy.h */,
 				37D8005B12F36C6900F49E11 /* Version2To3EntityMigrationPolicy.m */,
+				37D8003112EF705000F49E11 /* database 3.xcmappingmodel */,
+				37D801BF1308595900F49E11 /* Version3To4EntityMigrationPolicy.h */,
+				37D801C01308595900F49E11 /* Version3To4EntityMigrationPolicy.m */,
+				37D801AF13083E3300F49E11 /* database4.xcmappingmodel */,
 			);
 			name = "Migration Policies";
 			sourceTree = "<group>";
@@ -824,6 +833,8 @@
 				378AE5AA12D5148D00047F23 /* FilterNotificationView.m in Sources */,
 				37D8003212EF705000F49E11 /* database 3.xcmappingmodel in Sources */,
 				37D8005C12F36C6900F49E11 /* Version2To3EntityMigrationPolicy.m in Sources */,
+				37D801B013083E3300F49E11 /* database4.xcmappingmodel in Sources */,
+				37D801C11308595900F49E11 /* Version3To4EntityMigrationPolicy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1015,8 +1026,9 @@
 				373751491054219600718317 /* database.xcdatamodel */,
 				37AF7A44121FEFE5007A7C85 /* database 2.xcdatamodel */,
 				37D8002812EF594C00F49E11 /* database 3.xcdatamodel */,
+				37D801AA13083DAF00F49E11 /* database 4.xcdatamodel */,
 			);
-			currentVersion = 37D8002812EF594C00F49E11 /* database 3.xcdatamodel */;
+			currentVersion = 37D801AA13083DAF00F49E11 /* database 4.xcdatamodel */;
 			path = database.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

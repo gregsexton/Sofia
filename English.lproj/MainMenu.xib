@@ -23,7 +23,7 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<integer value="549"/>
 			<integer value="296"/>
-			<integer value="782"/>
+			<integer value="544"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1441,7 +1441,7 @@
 																			</object>
 																			<double key="NSIntercellSpacingWidth">3</double>
 																			<double key="NSIntercellSpacingHeight">0.0</double>
-																			<object class="NSColor" key="NSBackgroundColor" id="304947174">
+																			<object class="NSColor" key="NSBackgroundColor" id="873483466">
 																				<int key="NSColorSpace">1</int>
 																				<bytes key="NSRGB">MC43Njg2NTk4ODk3IDAuODAzNzkzNDMwMyAwLjg1MjM4ODkxODQAA</bytes>
 																			</object>
@@ -1473,7 +1473,7 @@
 																	<reference key="NSSuperview" ref="174631416"/>
 																	<reference key="NSNextKeyView" ref="956318075"/>
 																	<reference key="NSDocView" ref="956318075"/>
-																	<reference key="NSBGColor" ref="304947174"/>
+																	<reference key="NSBGColor" ref="873483466"/>
 																	<int key="NScvFlags">4</int>
 																</object>
 																<object class="NSScroller" id="412208264">
