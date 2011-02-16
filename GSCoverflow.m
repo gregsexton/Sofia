@@ -56,6 +56,9 @@
     CGColorSpaceRelease(rgbSpace);
     CGColorRelease(black);
 
+    [self.layer addSublayer:[self leftFadeLayer]];
+    [self.layer addSublayer:[self rightFadeLayer]];
+
     [self reloadData];
 }
 
@@ -65,12 +68,19 @@
 	[_scrollLayer release];
     if(_titleLayer)
 	[_titleLayer release];
+
+    if(_leftFadeLayer)
+        [_leftFadeLayer release];
+    if(_rightFadeLayer)
+        [_rightFadeLayer release];
+
     [super dealloc];
 }
 
 - (void)reloadData{
+    [self deleteCache]; //TODO: use versions!
+
     if(dataSource != nil && [dataSource numberOfItemsInCoverflow:self] > 0){
-	[self deleteCache]; //TODO: use versions!
 	_cachedLayers           = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
 	_cachedReflectionLayers = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
 	_cachedTitles           = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
@@ -103,9 +113,6 @@
 	    [self.layer addSublayer:itemLayer];
 	    [self.layer addSublayer:itemReflectedLayer];
 	}
-
-    }else{
-        [self deleteCache]; //remove layers if there are no items
     }
 
     [self adjustCachedLayersWithAnimation:NO];
@@ -141,24 +148,6 @@
     retLayer.bounds = CGRectMake(0.0f, 0.0f,
 				CGImageGetWidth(item.imageRepresentation), 
 				CGImageGetHeight(item.imageRepresentation));
-
-    CALayer* fadeSublayer = [CALayer layer];
-
-    CGFloat values[4] = {0.0, 0.0, 0.0, 1.0}; 
-    CGColorSpaceRef rgbSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
-    CGColorRef fade = CGColorCreate(rgbSpace, values);
-
-    fadeSublayer.backgroundColor = fade;
-    fadeSublayer.opacity = 0.0; //initialy transparent
-    fadeSublayer.bounds = retLayer.bounds;
-    fadeSublayer.anchorPoint = CGPointMake(0.0, 0.0);
-    fadeSublayer.position = CGPointMake(0,0);
-    fadeSublayer.autoresizingMask = kCALayerWidthSizable | kCALayerHeightSizable; //autoresize sublayer when super is resized
-    fadeSublayer.name = @"fade";
-    [retLayer addSublayer:fadeSublayer];
-
-    CGColorSpaceRelease(rgbSpace);
-    CGColorRelease(fade);
     return retLayer;
 }    
 
@@ -182,6 +171,54 @@
     return retLayer;
 }
 
+- (GSNoHitGradientLayer*)fadeLayer{
+    GSNoHitGradientLayer* fadeLayer = [[GSNoHitGradientLayer alloc] init];
+    fadeLayer.bounds = CGRectMake(0, 0,
+                                  self.bounds.size.width/2.0,
+                                  self.bounds.size.height);
+    fadeLayer.anchorPoint = CGPointMake(0.0,0.0);
+
+    CGColorSpaceRef rgbSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
+
+    CGFloat tValues[4] = {0.0, 0.0, 0.0, 0.0}; 
+    CGColorRef transparent = CGColorCreate(rgbSpace, tValues);
+
+    CGFloat oValues[4] = {0.0, 0.0, 0.0, 1.0}; 
+    CGColorRef opaque = CGColorCreate(rgbSpace, oValues);
+
+    NSArray* colors = [NSArray arrayWithObjects:(id)transparent,(id)opaque,nil];
+    CGColorSpaceRelease(rgbSpace);
+    CGColorRelease(transparent);
+    CGColorRelease(opaque);
+
+    fadeLayer.colors = colors;
+
+    return [fadeLayer autorelease];
+}
+
+- (GSNoHitGradientLayer*)leftFadeLayer{
+    if(!_leftFadeLayer){
+
+        _leftFadeLayer            = [[self fadeLayer] retain];
+        _leftFadeLayer.position   = CGPointMake(NSMidX([self bounds]), 0);
+        _leftFadeLayer.startPoint = CGPointMake(0.0,0.5);
+        _leftFadeLayer.endPoint   = CGPointMake(1.0,0.5);
+    }
+
+    return _leftFadeLayer;
+}
+
+- (GSNoHitGradientLayer*)rightFadeLayer{
+    if(!_rightFadeLayer){
+        _rightFadeLayer            = [[self fadeLayer] retain];
+        _rightFadeLayer.position   = CGPointMake(0, 0);
+        _rightFadeLayer.startPoint = CGPointMake(1.0,0.5);
+        _rightFadeLayer.endPoint   = CGPointMake(0.0,0.5);
+    }
+
+    return _rightFadeLayer;
+}
+
 - (void)adjustCachedLayersWithAnimation:(BOOL)animate{
     //"Implicit transactions are created automatically when the
     //layer tree is modified by a thread without an active
@@ -197,47 +234,9 @@
     [self adjustLayerBounds];
     [self adjustLayerPositions];
     [self updateTitleLayer];
-    [self adjustFadeLayers];
     [self updateScrollLayer];
 
     [self addContentsToVisibleLayers]; //also removes contents from invisible layers.
-}
-
-- (void)adjustFadeLayers{
-    //NOTE: do not call this method instead call adjustCachedLayersWithAnimation:
-    CGFloat noOfImages = ((self.bounds.size.width/2)-FOCUSED_IMAGE_SPACING)/STACKED_IMAGE_SPACING;
-    CGFloat opacity = 0.0;
-    for(int i=_focusedItemIndex; i<[_cachedLayers count]; i++){
-	[self adjustFadeSublayerOf:[_cachedLayers objectAtIndex:i] toOpacity:opacity];
-	[self adjustFadeSublayerOf:[_cachedReflectionLayers objectAtIndex:i] toOpacity:opacity];
-	if(i >= _focusedItemIndex + noOfImages - 10)
-	    opacity += 0.1;
-    }
-
-    opacity = 0.0;
-    for(int i=_focusedItemIndex-1; i>=0; i--){
-	[self adjustFadeSublayerOf:[_cachedLayers objectAtIndex:i] toOpacity:opacity];
-	[self adjustFadeSublayerOf:[_cachedReflectionLayers objectAtIndex:i] toOpacity:opacity];
-	if(i < _focusedItemIndex - (noOfImages - 10))
-	    opacity += 0.1;
-    }
-}
-
-- (void)adjustFadeSublayerOf:(CALayer*)layer toOpacity:(CGFloat)opacity{
-    if(opacity < 0.0)
-	opacity = 0.0;
-    if(opacity > 1.0)
-	opacity = 1.0;
-    for(CALayer* sublayer in layer.sublayers){
-	if([sublayer.name isEqualToString:@"fade"]){
-	    sublayer.opacity = opacity;
-	}
-    }
-
-    if(opacity == 1.0)
-	layer.opacity = 0.0;
-    else
-	layer.opacity = 1.0;
 }
 
 - (void)updateTitleLayer{
@@ -429,18 +428,18 @@
     
     if([self isOnscreen:layer.position] || [self isOnscreen:position]){
 	layer.anchorPoint = anchor;
-	layer.position = position;
-	layer.zPosition = zPos;
-	layer.transform = transform;
+	layer.position    = position;
+	layer.zPosition   = zPos;
+	layer.transform   = transform;
     }else{
 	[CATransaction begin];
 	[CATransaction setValue:(id)kCFBooleanTrue
 			 forKey:kCATransactionDisableActions];
 	
 	    layer.anchorPoint = anchor;
-	    layer.position = position;
-	    layer.zPosition = zPos;
-	    layer.transform = transform;
+	    layer.position    = position;
+	    layer.zPosition   = zPos;
+	    layer.transform   = transform;
 	[CATransaction commit];
     }
 }
@@ -484,9 +483,9 @@
 - (void)addContentsToVisibleLayers{
     //TODO: probably want to give more than just the visible layers contents
 
-    for(int i=0; i<[_cachedLayers count]; i++){
+    NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 
-        NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+    for(int i=0; i<[_cachedLayers count]; i++){
 
 	CALayer* layer          = [_cachedLayers objectAtIndex:i];
 	CALayer* layerReflected = [_cachedReflectionLayers objectAtIndex:i];
@@ -501,9 +500,9 @@
             layer.contents = nil;
             layerReflected.contents = nil;
         }
-
-        [pool drain];
     }
+
+    [pool drain];
 }
 
 - (BOOL)isEven:(CGFloat)n{
@@ -631,15 +630,7 @@
     if(!clickedLayer)
 	return NSNotFound;
 
-    NSUInteger index = [_cachedLayers indexOfObjectIdenticalTo:clickedLayer];
-    if(index == NSNotFound){
-	//check superlayer -- the returned layer may be the fade layer for vignetting
-	index = [_cachedLayers indexOfObjectIdenticalTo:clickedLayer.superlayer];
-	if(index == NSNotFound)
-	    return NSNotFound;
-    }
-
-    return index;
+    return [_cachedLayers indexOfObjectIdenticalTo:clickedLayer];
 }
 
 - (void)focusedItemDragged:(CALayer*)clickedLayer withEvent:(NSEvent*)theEvent{
@@ -794,6 +785,15 @@
 	_currentViewSize = self.bounds.size;
 	[self adjustCachedLayersWithAnimation:NO];
     }
+}
+
+@end
+
+@implementation GSNoHitGradientLayer
+//Simple override. Does not respond to hit testing.
+
+- (BOOL)containsPoint:(CGPoint)thePoint{
+    return NO;
 }
 
 @end

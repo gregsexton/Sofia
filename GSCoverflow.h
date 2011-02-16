@@ -41,24 +41,28 @@
 #define SCROLLBAR_Y_POSITION (20.0)
 #define SCROLL_BUBBLE_MIN_WIDTH (20.0)
 
+@interface GSNoHitGradientLayer : CAGradientLayer {} @end
+
 @interface GSCoverflow : NSView {
 
     id <GSCoverflowDelegate>   delegate;
     id <GSCoverflowDataSource> dataSource;
 
-    NSMutableArray* _cachedLayers;
-    NSMutableArray* _cachedReflectionLayers;
-    NSMutableArray* _cachedTitles;
-    NSMutableArray* _cachedSubtitles;
+    NSMutableArray*       _cachedLayers;
+    NSMutableArray*       _cachedReflectionLayers;
+    NSMutableArray*       _cachedTitles;
+    NSMutableArray*       _cachedSubtitles;
 
-    CATextLayer*    _titleLayer;
-    CALayer*        _scrollLayer;
-    BOOL            _bubbleDragged;
-    BOOL            _focusedDragged;
+    CATextLayer*          _titleLayer;
+    CALayer*              _scrollLayer;
+    GSNoHitGradientLayer* _leftFadeLayer;
+    GSNoHitGradientLayer* _rightFadeLayer;
+    BOOL                  _bubbleDragged;
+    BOOL                  _focusedDragged;
 
-    NSUInteger      _focusedItemIndex;
+    NSUInteger            _focusedItemIndex;
 
-    NSSize          _currentViewSize;
+    NSSize                _currentViewSize;
 
 }
 
@@ -69,11 +73,11 @@
 - (BOOL)isOnscreen:(CGPoint)pos;
 - (CALayer*)layerForGSCoverflowItem:(GSCoverflowItem*)item;
 - (CALayer*)reflectionLayerForGSCoverflowItem:(GSCoverflowItem*)item;
+- (GSNoHitGradientLayer*)leftFadeLayer;
+- (GSNoHitGradientLayer*)rightFadeLayer;
 - (CGRect)scaleRect:(CGRect)rect toWithin:(CGFloat)length;
 - (void)addContentsToVisibleLayers;
 - (void)adjustCachedLayersWithAnimation:(BOOL)animate;
-- (void)adjustFadeLayers;
-- (void)adjustFadeSublayerOf:(CALayer*)layer toOpacity:(CGFloat)opacity;
 - (void)adjustLayerBounds;
 - (void)adjustLayerPositions;
 - (void)deleteCache;
