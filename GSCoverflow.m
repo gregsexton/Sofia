@@ -148,6 +148,15 @@
     retLayer.bounds = CGRectMake(0.0f, 0.0f,
 				CGImageGetWidth(item.imageRepresentation), 
 				CGImageGetHeight(item.imageRepresentation));
+
+    CGColorSpaceRef rgbSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
+
+    CGFloat tValues[4] = {0.2, 0.2, 0.2, 1.0}; 
+    CGColorRef grey = CGColorCreate(rgbSpace, tValues);
+    retLayer.backgroundColor = grey;
+
+    CGColorRelease(grey);
+
     return retLayer;
 }    
 
@@ -481,8 +490,6 @@
 }
 
 - (void)addContentsToVisibleLayers{
-    //TODO: probably want to give more than just the visible layers contents
-
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 
     for(int i=0; i<[_cachedLayers count]; i++){
@@ -490,7 +497,12 @@
 	CALayer* layer          = [_cachedLayers objectAtIndex:i];
 	CALayer* layerReflected = [_cachedReflectionLayers objectAtIndex:i];
 
-        if([self isOnscreen:layer.position]){
+        //double buffering: this significantly reduces flicker
+        CGPoint left  = CGPointMake(layer.position.x + self.bounds.size.width/2.0,
+                                    layer.position.y);
+        CGPoint right = CGPointMake(layer.position.x - self.bounds.size.width/2.0,
+                                    layer.position.y);
+        if([self isOnscreen:left] || [self isOnscreen:right]){
             if(layer.contents == nil){
                 GSCoverflowItem* item   = [dataSource coverflow:self itemAtIndex:i];
                 layer.contents          = (id)item.imageRepresentation;
