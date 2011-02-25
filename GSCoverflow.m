@@ -182,9 +182,6 @@
 
 - (GSNoHitGradientLayer*)fadeLayer{
     GSNoHitGradientLayer* fadeLayer = [[GSNoHitGradientLayer alloc] init];
-    fadeLayer.bounds = CGRectMake(0, 0,
-                                  self.bounds.size.width/2.0,
-                                  self.bounds.size.height);
     fadeLayer.anchorPoint = CGPointMake(0.0,0.0);
 
     CGColorSpaceRef rgbSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
@@ -192,7 +189,7 @@
     CGFloat tValues[4] = {0.0, 0.0, 0.0, 0.0}; 
     CGColorRef transparent = CGColorCreate(rgbSpace, tValues);
 
-    CGFloat oValues[4] = {0.0, 0.0, 0.0, 1.0}; 
+    CGFloat oValues[4] = {0.0, 0.0, 0.0, 0.9}; 
     CGColorRef opaque = CGColorCreate(rgbSpace, oValues);
 
     NSArray* colors = [NSArray arrayWithObjects:(id)transparent,(id)opaque,nil];
@@ -207,25 +204,37 @@
 
 - (GSNoHitGradientLayer*)leftFadeLayer{
     if(!_leftFadeLayer){
-
-        _leftFadeLayer            = [[self fadeLayer] retain];
-        _leftFadeLayer.position   = CGPointMake(NSMidX([self bounds]), 0);
-        _leftFadeLayer.startPoint = CGPointMake(0.0,0.5);
-        _leftFadeLayer.endPoint   = CGPointMake(1.0,0.5);
+        _leftFadeLayer = [[self fadeLayer] retain];
+        [self adjustLeftFadeLayer];
     }
-
     return _leftFadeLayer;
 }
 
 - (GSNoHitGradientLayer*)rightFadeLayer{
     if(!_rightFadeLayer){
         _rightFadeLayer            = [[self fadeLayer] retain];
-        _rightFadeLayer.position   = CGPointMake(0, 0);
-        _rightFadeLayer.startPoint = CGPointMake(1.0,0.5);
-        _rightFadeLayer.endPoint   = CGPointMake(0.0,0.5);
+        [self adjustRightFadeLayer];
     }
-
     return _rightFadeLayer;
+}
+
+- (void)adjustLeftFadeLayer{
+    _rightFadeLayer.bounds = CGRectMake(0, 0,
+                                        self.bounds.size.width/2.0,
+                                        self.bounds.size.height);
+    _rightFadeLayer.position   = CGPointMake(0, 0);
+    _rightFadeLayer.startPoint = CGPointMake(1.0,0.5);
+    _rightFadeLayer.endPoint   = CGPointMake(0.0,0.5);
+}
+
+- (void)adjustRightFadeLayer{
+    CGFloat scrollBarWidth = 15.0;
+    _leftFadeLayer.bounds = CGRectMake(0, 0,
+                                       self.bounds.size.width/2.0 + scrollBarWidth,
+                                       self.bounds.size.height);
+    _leftFadeLayer.position   = CGPointMake(self.bounds.size.width/2.0, 0);
+    _leftFadeLayer.startPoint = CGPointMake(0.0,0.5);
+    _leftFadeLayer.endPoint   = CGPointMake(1.0,0.5);
 }
 
 - (void)adjustCachedLayersWithAnimation:(BOOL)animate{
@@ -244,6 +253,9 @@
     [self adjustLayerPositions];
     [self updateTitleLayer];
     [self updateScrollLayer];
+
+    [self adjustLeftFadeLayer];
+    [self adjustRightFadeLayer];
 
     [self addContentsToVisibleLayers]; //also removes contents from invisible layers.
 }
@@ -793,8 +805,11 @@
 
 - (void)invalidateLayoutOfLayer:(CALayer *)layer{
     NSSize newSize = self.bounds.size;
+    NSLog(@"newSize.width (bounds): %f", newSize.width);
+    NSLog(@"newSize.width (frame): %f", self.frame.size.width);
     if(newSize.width != _currentViewSize.width || newSize.height != _currentViewSize.height){
 	_currentViewSize = self.bounds.size;
+        NSLog(@"currentViewSize.width: %f", _currentViewSize.width);
 	[self adjustCachedLayersWithAnimation:NO];
     }
 }

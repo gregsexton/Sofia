@@ -73,13 +73,15 @@
 - (BOOL)isOnscreen:(CGPoint)pos;
 - (CALayer*)layerForGSCoverflowItem:(GSCoverflowItem*)item;
 - (CALayer*)reflectionLayerForGSCoverflowItem:(GSCoverflowItem*)item;
+- (CGRect)scaleRect:(CGRect)rect toWithin:(CGFloat)length;
 - (GSNoHitGradientLayer*)leftFadeLayer;
 - (GSNoHitGradientLayer*)rightFadeLayer;
-- (CGRect)scaleRect:(CGRect)rect toWithin:(CGFloat)length;
 - (void)addContentsToVisibleLayers;
 - (void)adjustCachedLayersWithAnimation:(BOOL)animate;
 - (void)adjustLayerBounds;
 - (void)adjustLayerPositions;
+- (void)adjustLeftFadeLayer;
+- (void)adjustRightFadeLayer;
 - (void)deleteCache;
 - (void)moveLayer:(CALayer*)layer to:(CGPoint)position anchoredAt:(CGPoint)anchor zPosition:(CGFloat)zPos transform:(CATransform3D)transform;
 - (void)reloadData;
