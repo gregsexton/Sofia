@@ -70,7 +70,7 @@
 @property (nonatomic,assign) id <GSCoverflowDataSource> dataSource;
 
 - (BOOL)isEven:(CGFloat)n;
-- (BOOL)isOnscreen:(CGPoint)pos;
+- (BOOL)isOnscreenFrom:(CGPoint)posFrom to:(CGPoint)posTo offset:(CGFloat)offset;
 - (CALayer*)layerForGSCoverflowItem:(GSCoverflowItem*)item;
 - (CALayer*)reflectionLayerForGSCoverflowItem:(GSCoverflowItem*)item;
 - (CGRect)scaleRect:(CGRect)rect toWithin:(CGFloat)length;

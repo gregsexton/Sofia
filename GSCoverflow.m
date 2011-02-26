@@ -445,9 +445,11 @@
 - (void)moveLayer:(CALayer*)layer to:(CGPoint)position
        anchoredAt:(CGPoint)anchor zPosition:(CGFloat)zPos
 	transform:(CATransform3D)transform{
-    //small helper function to aid readability also with optimization 
+    //small helper function to aid readability also includes optimization 
     
-    if([self isOnscreen:layer.position] || [self isOnscreen:position]){
+    CGFloat offset = lround(anchor.x) == 1 ? layer.bounds.size.width : -(layer.bounds.size.width);
+
+    if([self isOnscreenFrom:layer.position to:position offset:offset]){
 	layer.anchorPoint = anchor;
 	layer.position    = position;
 	layer.zPosition   = zPos;
@@ -473,10 +475,10 @@
     //adjust all layers
     for(int i=0; i<[_cachedLayers count]; i++){
 
-	CALayer* layer = [_cachedLayers objectAtIndex:i];
+	CALayer* layer          = [_cachedLayers objectAtIndex:i];
 	CALayer* layerReflected = [_cachedReflectionLayers objectAtIndex:i];
-	layer.bounds = [self scaleRect:layer.bounds toWithin:smallerHeight];
-	layerReflected.bounds = [self scaleRect:layerReflected.bounds toWithin:smallerHeight];
+	layer.bounds            = [self scaleRect:layer.bounds toWithin:smallerHeight];
+	layerReflected.bounds   = [self scaleRect:layerReflected.bounds toWithin:smallerHeight];
 
 	for(CALayer* subLayer in layer.sublayers){
 	    subLayer.bounds = layer.bounds;
@@ -514,7 +516,7 @@
                                     layer.position.y);
         CGPoint right = CGPointMake(layer.position.x - self.bounds.size.width/2.0,
                                     layer.position.y);
-        if([self isOnscreen:left] || [self isOnscreen:right]){
+        if([self isOnscreenFrom:left to:right offset:0]){
             if(layer.contents == nil){
                 GSCoverflowItem* item   = [dataSource coverflow:self itemAtIndex:i];
                 layer.contents          = (id)item.imageRepresentation;
@@ -536,15 +538,19 @@
     return remainder == 0;
 }
 
-- (BOOL)isOnscreen:(CGPoint)pos{
+- (BOOL)isOnscreenFrom:(CGPoint)posFrom to:(CGPoint)posTo offset:(CGFloat)offset{
+    //if the position is going to appear 'on screen' during the transition from
+    //posFrom to posTo: returns YES. An offset can be applied to shift the screen
+    //to the right, a negative offset shifts the screen to the left.
 
     CGFloat x = self.bounds.origin.x;
-    CGFloat y = self.bounds.origin.y;
-    CGFloat h = self.bounds.size.height;
     CGFloat w = self.bounds.size.width;
+    CGFloat screenLeft  = x + offset;
+    CGFloat screenRight = x + offset + w;
 
-    return pos.x >= x && pos.x <= x+w 
-	&& pos.y >= y && pos.y <= y+h;
+    return !((posFrom.x < screenLeft     && posTo.x < screenLeft) || 
+             (posFrom.x > screenRight && posTo.x > screenRight));
+
 }
 
 - (CGRect)scaleRect:(CGRect)rect toWithin:(CGFloat)length{
@@ -805,11 +811,8 @@
 
 - (void)invalidateLayoutOfLayer:(CALayer *)layer{
     NSSize newSize = self.bounds.size;
-    NSLog(@"newSize.width (bounds): %f", newSize.width);
-    NSLog(@"newSize.width (frame): %f", self.frame.size.width);
     if(newSize.width != _currentViewSize.width || newSize.height != _currentViewSize.height){
 	_currentViewSize = self.bounds.size;
-        NSLog(@"currentViewSize.width: %f", _currentViewSize.width);
 	[self adjustCachedLayersWithAnimation:NO];
     }
 }
