@@ -4,17 +4,17 @@
 // Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
-// 
+//
 // Sofia is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Sofia is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
@@ -47,7 +47,7 @@
     CGFloat values[4] = {0.0, 0.0, 0.0, 1.0};
     CGColorSpaceRef rgbSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
     CGColorRef black = CGColorCreate(rgbSpace, values);
-    
+
     CALayer *layer = [CALayer layer];
     layer.backgroundColor = black;
     [self setLayer:layer];
@@ -87,7 +87,7 @@
 	_cachedSubtitles        = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
 
 	if(_focusedItemIndex >= [dataSource numberOfItemsInCoverflow:self]) //don't let this exceed the array bounds
-	    _focusedItemIndex = [dataSource numberOfItemsInCoverflow:self] - 1; 
+	    _focusedItemIndex = [dataSource numberOfItemsInCoverflow:self] - 1;
 
 	for(int i=0; i<[dataSource numberOfItemsInCoverflow:self]; i++){
 
@@ -146,19 +146,19 @@
 - (CALayer*)layerForGSCoverflowItem:(GSCoverflowItem*)item{
     CALayer* retLayer = [CALayer layer];
     retLayer.bounds = CGRectMake(0.0f, 0.0f,
-				CGImageGetWidth(item.imageRepresentation), 
+				CGImageGetWidth(item.imageRepresentation),
 				CGImageGetHeight(item.imageRepresentation));
 
     CGColorSpaceRef rgbSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
 
-    CGFloat tValues[4] = {0.2, 0.2, 0.2, 1.0}; 
+    CGFloat tValues[4] = {0.2, 0.2, 0.2, 1.0};
     CGColorRef grey = CGColorCreate(rgbSpace, tValues);
     retLayer.backgroundColor = grey;
 
     CGColorRelease(grey);
 
     return retLayer;
-}    
+}
 
 - (CALayer*)reflectionLayerForGSCoverflowItem:(GSCoverflowItem*)item{
     CALayer* retLayer = [self layerForGSCoverflowItem:item];
@@ -186,10 +186,10 @@
 
     CGColorSpaceRef rgbSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
 
-    CGFloat tValues[4] = {0.0, 0.0, 0.0, 0.0}; 
+    CGFloat tValues[4] = {0.0, 0.0, 0.0, 0.0};
     CGColorRef transparent = CGColorCreate(rgbSpace, tValues);
 
-    CGFloat oValues[4] = {0.0, 0.0, 0.0, 0.9}; 
+    CGFloat oValues[4] = {0.0, 0.0, 0.0, 0.9};
     CGColorRef opaque = CGColorCreate(rgbSpace, oValues);
 
     NSArray* colors = [NSArray arrayWithObjects:(id)transparent,(id)opaque,nil];
@@ -294,7 +294,7 @@
     }
 
 
-    _titleLayer.string = [NSString stringWithFormat:@"%@\n%@", 
+    _titleLayer.string = [NSString stringWithFormat:@"%@\n%@",
 			   [_cachedTitles objectAtIndex:_focusedItemIndex]?  [_cachedTitles objectAtIndex:_focusedItemIndex]:@"",
 			   [_cachedSubtitles objectAtIndex:_focusedItemIndex]? [_cachedSubtitles objectAtIndex:_focusedItemIndex]:@""];
     CGSize preferredSize = [_titleLayer preferredFrameSize];
@@ -308,7 +308,7 @@
 
 - (void)updateScrollLayer{
     //NOTE: do not call this method instead call adjustCachedLayersWithAnimation:
- 
+
     if(!_scrollLayer){
 	CGFloat lightValues[4] = {1.0, 1.0, 1.0, 0.2};
 	CGFloat whiteValues[4] = {1.0, 1.0, 1.0, 1.0};
@@ -407,13 +407,13 @@
 	[self moveLayer:layer to:CGPointMake(newXPosition, yPosition + yDelta)
 	     anchoredAt:CGPointMake(0.0,0.0)
 	      zPosition:newZPosition
-	      transform:[self leftHandImageTransformWithHeight:layer.bounds.size.height 
+	      transform:[self leftHandImageTransformWithHeight:layer.bounds.size.height
 							 width:layer.bounds.size.width]];
 
 	[self moveLayer:layerReflected to:CGPointMake(newXPosition, yPosition + yDelta)
 	     anchoredAt:CGPointMake(0.0,0.0)
 	      zPosition:newZPosition
-	      transform:[self leftHandReflectionTransformWithHeight:layerReflected.bounds.size.height 
+	      transform:[self leftHandReflectionTransformWithHeight:layerReflected.bounds.size.height
 							      width:layerReflected.bounds.size.width]];
 	newXPosition -= xDelta;
 	newZPosition--;
@@ -429,13 +429,13 @@
 	[self moveLayer:layer to:CGPointMake(newXPosition, yPosition + yDelta)
 	     anchoredAt:CGPointMake(1.0,0.0)
 	      zPosition:newZPosition
-	      transform:[self rightHandImageTransformWithHeight:layer.bounds.size.height 
+	      transform:[self rightHandImageTransformWithHeight:layer.bounds.size.height
 							  width:layer.bounds.size.width]];
 
 	[self moveLayer:layerReflected to:CGPointMake(newXPosition, yPosition + yDelta)
 	     anchoredAt:CGPointMake(1.0,0.0)
 	      zPosition:newZPosition
-	      transform:[self rightHandReflectionTransformWithHeight:layerReflected.bounds.size.height 
+	      transform:[self rightHandReflectionTransformWithHeight:layerReflected.bounds.size.height
 							       width:layerReflected.bounds.size.width]];
 	newXPosition += xDelta;
 	newZPosition--;
@@ -445,8 +445,8 @@
 - (void)moveLayer:(CALayer*)layer to:(CGPoint)position
        anchoredAt:(CGPoint)anchor zPosition:(CGFloat)zPos
 	transform:(CATransform3D)transform{
-    //small helper function to aid readability also includes optimization 
-    
+    //small helper function to aid readability also includes optimization
+
     CGFloat offset = lround(anchor.x) == 1 ? layer.bounds.size.width : -(layer.bounds.size.width);
 
     if([self isOnscreenFrom:layer.position to:position offset:offset]){
@@ -458,7 +458,7 @@
 	[CATransaction begin];
 	[CATransaction setValue:(id)kCFBooleanTrue
 			 forKey:kCATransactionDisableActions];
-	
+
 	    layer.anchorPoint = anchor;
 	    layer.position    = position;
 	    layer.zPosition   = zPos;
@@ -548,7 +548,7 @@
     CGFloat screenLeft  = x + offset;
     CGFloat screenRight = x + offset + w;
 
-    return !((posFrom.x < screenLeft     && posTo.x < screenLeft) || 
+    return !((posFrom.x < screenLeft     && posTo.x < screenLeft) ||
              (posFrom.x > screenRight && posTo.x > screenRight));
 
 }
@@ -573,12 +573,11 @@
     CGFloat alpha = 0.25;
     CGFloat gamma = (height - (width*tan(alpha)));
     transform.m11 = 1; transform.m12 = tan(alpha)/2; transform.m13 = 0; transform.m14 = ((height/gamma)-1)/width;
-    transform.m21 = 0; transform.m22 = 1; transform.m23 = 0; transform.m24 = 0;
-    transform.m31 = 0; transform.m32 = 0; transform.m33 = 1; transform.m34 = 0;
-    transform.m41 = 0; transform.m42 = 0; transform.m43 = 0; transform.m44 = 1;
+    transform.m21 = 0; transform.m22 = 1;            transform.m23 = 0; transform.m24 = 0;
+    transform.m31 = 0; transform.m32 = 0;            transform.m33 = 1; transform.m34 = 0;
+    transform.m41 = 0; transform.m42 = 0;            transform.m43 = 0; transform.m44 = 1;
 
     return transform;
-
 }
 
 - (CATransform3D)leftHandReflectionTransformWithHeight:(CGFloat)height width:(CGFloat)width{
@@ -682,7 +681,7 @@
 		 writeItemsAtIndexes:[NSIndexSet indexSetWithIndex:[self selectionIndex]]
 			toPasteboard:pboard];
     }
-    
+
     [self dragImage:dragImage at:localPoint
 			  offset:dragOffset //ignored parameter
 			   event:theEvent
@@ -725,7 +724,7 @@
 - (void)mouseDragged:(NSEvent *)theEvent{
     //detect drag on the scrollbar bubble
     //NSLog(@"Mouse dragged: %d:%f", [theEvent eventNumber], [theEvent locationInWindow].x);
- 
+
     if(_bubbleDragged){
 	//work out x co-ord relative to the scrollbar
 	NSPoint eventLocation = [theEvent locationInWindow];
