@@ -47,9 +47,6 @@
     [accessKeys release];
     [general release];
 
-    //guarantee loaded before updating summary text. This works better than observing.
-    NSError *error;
-    [arrayController fetchWithRequest:nil merge:NO error:&error];
     [self updateSummaryText];
 
     //setup periodic save timer
@@ -65,9 +62,9 @@
 
 - (void) dealloc {
 	
-    [managedObjectContext release], managedObjectContext = nil;
+    [managedObjectContext       release], managedObjectContext = nil;
     [persistentStoreCoordinator release], persistentStoreCoordinator = nil;
-    [managedObjectModel release], managedObjectModel = nil;
+    [managedObjectModel         release], managedObjectModel = nil;
 
     if(revealFilterAnimation)
         [revealFilterAnimation release];
@@ -121,11 +118,12 @@
     
     
 #ifdef CONFIGURATION_Debug
-    url = [NSURL fileURLWithPath: [applicationSupportFolder stringByAppendingPathComponent: @"Sofia.xml"]];
+    url = [NSURL fileURLWithPath: [applicationSupportFolder stringByAppendingPathComponent: @"Sofia-debug"]];
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
-    if (![persistentStoreCoordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:options error:&error]){
+    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error]){
         [[NSApplication sharedApplication] presentError:error];
     }    
+    [window setTitle:@"!!!!!!! DEBUG DEBUG DEBUG !!!!!!!"];
 #endif
 
 #ifdef CONFIGURATION_Release
@@ -348,7 +346,16 @@
 }
 
 - (void) updateSummaryText {
-    int count = [[arrayController arrangedObjects] count];
+
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"book" inManagedObjectContext:managedObjectContext]];
+    [request setPredicate:[arrayController filterPredicate]];
+
+    NSError *err;
+    NSUInteger count = [managedObjectContext countForFetchRequest:request error:&err];
+
+    [request release];
+
     if(count == 0){
 	[summaryText setStringValue:@"Empty"];
     }else if(count == 1){

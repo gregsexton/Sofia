@@ -62,7 +62,7 @@
 
 - (id)coverflow:(GSCoverflow*)aCoverflow itemAtIndex:(NSUInteger)index{
     book* theBook = [[arrayController arrangedObjects] objectAtIndex:index];
-    NSImage* img = [theBook coverImage];
+    NSImage* img = [theBook coverImageImage];
     if(img == nil) //use default image
 	img = [NSImage imageNamed:@"missing_coverflow.png"];
 

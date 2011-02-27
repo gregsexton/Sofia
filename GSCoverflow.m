@@ -4,17 +4,17 @@
 // Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
-// 
+//
 // Sofia is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Sofia is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
@@ -47,7 +47,7 @@
     CGFloat values[4] = {0.0, 0.0, 0.0, 1.0};
     CGColorSpaceRef rgbSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
     CGColorRef black = CGColorCreate(rgbSpace, values);
-    
+
     CALayer *layer = [CALayer layer];
     layer.backgroundColor = black;
     [self setLayer:layer];
@@ -55,6 +55,9 @@
     self.layer.layoutManager = self; //take control of layout myself
     CGColorSpaceRelease(rgbSpace);
     CGColorRelease(black);
+
+    [self.layer addSublayer:[self leftFadeLayer]];
+    [self.layer addSublayer:[self rightFadeLayer]];
 
     [self reloadData];
 }
@@ -65,19 +68,26 @@
 	[_scrollLayer release];
     if(_titleLayer)
 	[_titleLayer release];
+
+    if(_leftFadeLayer)
+        [_leftFadeLayer release];
+    if(_rightFadeLayer)
+        [_rightFadeLayer release];
+
     [super dealloc];
 }
 
 - (void)reloadData{
+    [self deleteCache]; //TODO: use versions!
+
     if(dataSource != nil && [dataSource numberOfItemsInCoverflow:self] > 0){
-	[self deleteCache]; //TODO: use versions!
-	_cachedLayers = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
+	_cachedLayers           = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
 	_cachedReflectionLayers = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
-	_cachedTitles = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
-	_cachedSubtitles = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
+	_cachedTitles           = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
+	_cachedSubtitles        = [[NSMutableArray alloc] initWithCapacity:[dataSource numberOfItemsInCoverflow:self]];
 
 	if(_focusedItemIndex >= [dataSource numberOfItemsInCoverflow:self]) //don't let this exceed the array bounds
-	    _focusedItemIndex = [dataSource numberOfItemsInCoverflow:self] - 1; 
+	    _focusedItemIndex = [dataSource numberOfItemsInCoverflow:self] - 1;
 
 	for(int i=0; i<[dataSource numberOfItemsInCoverflow:self]; i++){
 
@@ -103,9 +113,6 @@
 	    [self.layer addSublayer:itemLayer];
 	    [self.layer addSublayer:itemReflectedLayer];
 	}
-
-    }else{
-        [self deleteCache]; //remove layers if there are no items
     }
 
     [self adjustCachedLayersWithAnimation:NO];
@@ -138,30 +145,20 @@
 
 - (CALayer*)layerForGSCoverflowItem:(GSCoverflowItem*)item{
     CALayer* retLayer = [CALayer layer];
-    retLayer.contents = (id)item.imageRepresentation;
     retLayer.bounds = CGRectMake(0.0f, 0.0f,
-				CGImageGetWidth(item.imageRepresentation), 
+				CGImageGetWidth(item.imageRepresentation),
 				CGImageGetHeight(item.imageRepresentation));
 
-    CALayer* fadeSublayer = [CALayer layer];
-
-    CGFloat values[4] = {0.0, 0.0, 0.0, 1.0}; 
     CGColorSpaceRef rgbSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
-    CGColorRef fade = CGColorCreate(rgbSpace, values);
 
-    fadeSublayer.backgroundColor = fade;
-    fadeSublayer.opacity = 0.0; //initialy transparent
-    fadeSublayer.bounds = retLayer.bounds;
-    fadeSublayer.anchorPoint = CGPointMake(0.0, 0.0);
-    fadeSublayer.position = CGPointMake(0,0);
-    fadeSublayer.autoresizingMask = kCALayerWidthSizable | kCALayerHeightSizable; //autoresize sublayer when super is resized
-    fadeSublayer.name = @"fade";
-    [retLayer addSublayer:fadeSublayer];
+    CGFloat tValues[4] = {0.2, 0.2, 0.2, 1.0};
+    CGColorRef grey = CGColorCreate(rgbSpace, tValues);
+    retLayer.backgroundColor = grey;
 
-    CGColorSpaceRelease(rgbSpace);
-    CGColorRelease(fade);
+    CGColorRelease(grey);
+
     return retLayer;
-}    
+}
 
 - (CALayer*)reflectionLayerForGSCoverflowItem:(GSCoverflowItem*)item{
     CALayer* retLayer = [self layerForGSCoverflowItem:item];
@@ -183,6 +180,63 @@
     return retLayer;
 }
 
+- (GSNoHitGradientLayer*)fadeLayer{
+    GSNoHitGradientLayer* fadeLayer = [[GSNoHitGradientLayer alloc] init];
+    fadeLayer.anchorPoint = CGPointMake(0.0,0.0);
+
+    CGColorSpaceRef rgbSpace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
+
+    CGFloat tValues[4] = {0.0, 0.0, 0.0, 0.0};
+    CGColorRef transparent = CGColorCreate(rgbSpace, tValues);
+
+    CGFloat oValues[4] = {0.0, 0.0, 0.0, 0.9};
+    CGColorRef opaque = CGColorCreate(rgbSpace, oValues);
+
+    NSArray* colors = [NSArray arrayWithObjects:(id)transparent,(id)opaque,nil];
+    CGColorSpaceRelease(rgbSpace);
+    CGColorRelease(transparent);
+    CGColorRelease(opaque);
+
+    fadeLayer.colors = colors;
+
+    return [fadeLayer autorelease];
+}
+
+- (GSNoHitGradientLayer*)leftFadeLayer{
+    if(!_leftFadeLayer){
+        _leftFadeLayer = [[self fadeLayer] retain];
+        [self adjustLeftFadeLayer];
+    }
+    return _leftFadeLayer;
+}
+
+- (GSNoHitGradientLayer*)rightFadeLayer{
+    if(!_rightFadeLayer){
+        _rightFadeLayer            = [[self fadeLayer] retain];
+        [self adjustRightFadeLayer];
+    }
+    return _rightFadeLayer;
+}
+
+- (void)adjustLeftFadeLayer{
+    _rightFadeLayer.bounds = CGRectMake(0, 0,
+                                        self.bounds.size.width/2.0,
+                                        self.bounds.size.height);
+    _rightFadeLayer.position   = CGPointMake(0, 0);
+    _rightFadeLayer.startPoint = CGPointMake(1.0,0.5);
+    _rightFadeLayer.endPoint   = CGPointMake(0.0,0.5);
+}
+
+- (void)adjustRightFadeLayer{
+    CGFloat scrollBarWidth = 15.0;
+    _leftFadeLayer.bounds = CGRectMake(0, 0,
+                                       self.bounds.size.width/2.0 + scrollBarWidth,
+                                       self.bounds.size.height);
+    _leftFadeLayer.position   = CGPointMake(self.bounds.size.width/2.0, 0);
+    _leftFadeLayer.startPoint = CGPointMake(0.0,0.5);
+    _leftFadeLayer.endPoint   = CGPointMake(1.0,0.5);
+}
+
 - (void)adjustCachedLayersWithAnimation:(BOOL)animate{
     //"Implicit transactions are created automatically when the
     //layer tree is modified by a thread without an active
@@ -198,45 +252,12 @@
     [self adjustLayerBounds];
     [self adjustLayerPositions];
     [self updateTitleLayer];
-    [self adjustFadeLayers];
     [self updateScrollLayer];
-}
 
-- (void)adjustFadeLayers{
-    //NOTE: do not call this method instead call adjustCachedLayersWithAnimation:
-    CGFloat noOfImages = ((self.bounds.size.width/2)-FOCUSED_IMAGE_SPACING)/STACKED_IMAGE_SPACING;
-    CGFloat opacity = 0.0;
-    for(int i=_focusedItemIndex; i<[_cachedLayers count]; i++){
-	[self adjustFadeSublayerOf:[_cachedLayers objectAtIndex:i] toOpacity:opacity];
-	[self adjustFadeSublayerOf:[_cachedReflectionLayers objectAtIndex:i] toOpacity:opacity];
-	if(i >= _focusedItemIndex + noOfImages - 10)
-	    opacity += 0.1;
-    }
+    [self adjustLeftFadeLayer];
+    [self adjustRightFadeLayer];
 
-    opacity = 0.0;
-    for(int i=_focusedItemIndex-1; i>=0; i--){
-	[self adjustFadeSublayerOf:[_cachedLayers objectAtIndex:i] toOpacity:opacity];
-	[self adjustFadeSublayerOf:[_cachedReflectionLayers objectAtIndex:i] toOpacity:opacity];
-	if(i < _focusedItemIndex - (noOfImages - 10))
-	    opacity += 0.1;
-    }
-}
-
-- (void)adjustFadeSublayerOf:(CALayer*)layer toOpacity:(CGFloat)opacity{
-    if(opacity < 0.0)
-	opacity = 0.0;
-    if(opacity > 1.0)
-	opacity = 1.0;
-    for(CALayer* sublayer in layer.sublayers){
-	if([sublayer.name isEqualToString:@"fade"]){
-	    sublayer.opacity = opacity;
-	}
-    }
-
-    if(opacity == 1.0)
-	layer.opacity = 0.0;
-    else
-	layer.opacity = 1.0;
+    [self addContentsToVisibleLayers]; //also removes contents from invisible layers.
 }
 
 - (void)updateTitleLayer{
@@ -273,7 +294,7 @@
     }
 
 
-    _titleLayer.string = [NSString stringWithFormat:@"%@\n%@", 
+    _titleLayer.string = [NSString stringWithFormat:@"%@\n%@",
 			   [_cachedTitles objectAtIndex:_focusedItemIndex]?  [_cachedTitles objectAtIndex:_focusedItemIndex]:@"",
 			   [_cachedSubtitles objectAtIndex:_focusedItemIndex]? [_cachedSubtitles objectAtIndex:_focusedItemIndex]:@""];
     CGSize preferredSize = [_titleLayer preferredFrameSize];
@@ -285,16 +306,9 @@
     _titleLayer.position = CGPointMake(round(NSMidX([self bounds])), round(TITLE_Y_POSITION));
 }
 
-- (BOOL)isEven:(CGFloat)n{
-    int quotient = (int)(n/2.0);
-    int remainder = n - (quotient*2.0);
-
-    return remainder == 0;
-}
-
 - (void)updateScrollLayer{
     //NOTE: do not call this method instead call adjustCachedLayersWithAnimation:
- 
+
     if(!_scrollLayer){
 	CGFloat lightValues[4] = {1.0, 1.0, 1.0, 0.2};
 	CGFloat whiteValues[4] = {1.0, 1.0, 1.0, 1.0};
@@ -393,13 +407,13 @@
 	[self moveLayer:layer to:CGPointMake(newXPosition, yPosition + yDelta)
 	     anchoredAt:CGPointMake(0.0,0.0)
 	      zPosition:newZPosition
-	      transform:[self leftHandImageTransformWithHeight:layer.bounds.size.height 
+	      transform:[self leftHandImageTransformWithHeight:layer.bounds.size.height
 							 width:layer.bounds.size.width]];
 
 	[self moveLayer:layerReflected to:CGPointMake(newXPosition, yPosition + yDelta)
 	     anchoredAt:CGPointMake(0.0,0.0)
 	      zPosition:newZPosition
-	      transform:[self leftHandReflectionTransformWithHeight:layerReflected.bounds.size.height 
+	      transform:[self leftHandReflectionTransformWithHeight:layerReflected.bounds.size.height
 							      width:layerReflected.bounds.size.width]];
 	newXPosition -= xDelta;
 	newZPosition--;
@@ -415,13 +429,13 @@
 	[self moveLayer:layer to:CGPointMake(newXPosition, yPosition + yDelta)
 	     anchoredAt:CGPointMake(1.0,0.0)
 	      zPosition:newZPosition
-	      transform:[self rightHandImageTransformWithHeight:layer.bounds.size.height 
+	      transform:[self rightHandImageTransformWithHeight:layer.bounds.size.height
 							  width:layer.bounds.size.width]];
 
 	[self moveLayer:layerReflected to:CGPointMake(newXPosition, yPosition + yDelta)
 	     anchoredAt:CGPointMake(1.0,0.0)
 	      zPosition:newZPosition
-	      transform:[self rightHandReflectionTransformWithHeight:layerReflected.bounds.size.height 
+	      transform:[self rightHandReflectionTransformWithHeight:layerReflected.bounds.size.height
 							       width:layerReflected.bounds.size.width]];
 	newXPosition += xDelta;
 	newZPosition--;
@@ -431,35 +445,26 @@
 - (void)moveLayer:(CALayer*)layer to:(CGPoint)position
        anchoredAt:(CGPoint)anchor zPosition:(CGFloat)zPos
 	transform:(CATransform3D)transform{
-    //small helper function to aid readability also with optimization 
-    
-    if([self isOnscreen:layer.position] || [self isOnscreen:position]){
+    //small helper function to aid readability also includes optimization
+
+    CGFloat offset = lround(anchor.x) == 1 ? layer.bounds.size.width : -(layer.bounds.size.width);
+
+    if([self isOnscreenFrom:layer.position to:position offset:offset]){
 	layer.anchorPoint = anchor;
-	layer.position = position;
-	layer.zPosition = zPos;
-	layer.transform = transform;
+	layer.position    = position;
+	layer.zPosition   = zPos;
+	layer.transform   = transform;
     }else{
 	[CATransaction begin];
 	[CATransaction setValue:(id)kCFBooleanTrue
 			 forKey:kCATransactionDisableActions];
-	
+
 	    layer.anchorPoint = anchor;
-	    layer.position = position;
-	    layer.zPosition = zPos;
-	    layer.transform = transform;
+	    layer.position    = position;
+	    layer.zPosition   = zPos;
+	    layer.transform   = transform;
 	[CATransaction commit];
     }
-}
-
-- (BOOL)isOnscreen:(CGPoint)pos{
-
-    CGFloat x = self.bounds.origin.x;
-    CGFloat y = self.bounds.origin.y;
-    CGFloat h = self.bounds.size.height;
-    CGFloat w = self.bounds.size.width;
-
-    return pos.x >= x && pos.x <= x+w 
-	&& pos.y >= y && pos.y <= y+h;
 }
 
 - (void)adjustLayerBounds{
@@ -470,10 +475,10 @@
     //adjust all layers
     for(int i=0; i<[_cachedLayers count]; i++){
 
-	CALayer* layer = [_cachedLayers objectAtIndex:i];
+	CALayer* layer          = [_cachedLayers objectAtIndex:i];
 	CALayer* layerReflected = [_cachedReflectionLayers objectAtIndex:i];
-	layer.bounds = [self scaleRect:layer.bounds toWithin:smallerHeight];
-	layerReflected.bounds = [self scaleRect:layerReflected.bounds toWithin:smallerHeight];
+	layer.bounds            = [self scaleRect:layer.bounds toWithin:smallerHeight];
+	layerReflected.bounds   = [self scaleRect:layerReflected.bounds toWithin:smallerHeight];
 
 	for(CALayer* subLayer in layer.sublayers){
 	    subLayer.bounds = layer.bounds;
@@ -498,6 +503,56 @@
     }
 }
 
+- (void)addContentsToVisibleLayers{
+    NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+
+    for(int i=0; i<[_cachedLayers count]; i++){
+
+	CALayer* layer          = [_cachedLayers objectAtIndex:i];
+	CALayer* layerReflected = [_cachedReflectionLayers objectAtIndex:i];
+
+        //double buffering: this significantly reduces flicker
+        CGPoint left  = CGPointMake(layer.position.x + self.bounds.size.width/2.0,
+                                    layer.position.y);
+        CGPoint right = CGPointMake(layer.position.x - self.bounds.size.width/2.0,
+                                    layer.position.y);
+        if([self isOnscreenFrom:left to:right offset:0]){
+            if(layer.contents == nil){
+                GSCoverflowItem* item   = [dataSource coverflow:self itemAtIndex:i];
+                layer.contents          = (id)item.imageRepresentation;
+                layerReflected.contents = (id)item.imageRepresentation;
+            }
+        }else{
+            layer.contents = nil;
+            layerReflected.contents = nil;
+        }
+    }
+
+    [pool drain];
+}
+
+- (BOOL)isEven:(CGFloat)n{
+    int quotient = (int)(n/2.0);
+    int remainder = n - (quotient*2.0);
+
+    return remainder == 0;
+}
+
+- (BOOL)isOnscreenFrom:(CGPoint)posFrom to:(CGPoint)posTo offset:(CGFloat)offset{
+    //if the position is going to appear 'on screen' during the transition from
+    //posFrom to posTo: returns YES. An offset can be applied to shift the screen
+    //to the right, a negative offset shifts the screen to the left.
+
+    CGFloat x = self.bounds.origin.x;
+    CGFloat w = self.bounds.size.width;
+    CGFloat screenLeft  = x + offset;
+    CGFloat screenRight = x + offset + w;
+
+    return !((posFrom.x < screenLeft     && posTo.x < screenLeft) ||
+             (posFrom.x > screenRight && posTo.x > screenRight));
+
+}
+
 - (CGRect)scaleRect:(CGRect)rect toWithin:(CGFloat)length{
     //returns a rect, with largest dimension scaled to fit within length
 
@@ -518,12 +573,11 @@
     CGFloat alpha = 0.25;
     CGFloat gamma = (height - (width*tan(alpha)));
     transform.m11 = 1; transform.m12 = tan(alpha)/2; transform.m13 = 0; transform.m14 = ((height/gamma)-1)/width;
-    transform.m21 = 0; transform.m22 = 1; transform.m23 = 0; transform.m24 = 0;
-    transform.m31 = 0; transform.m32 = 0; transform.m33 = 1; transform.m34 = 0;
-    transform.m41 = 0; transform.m42 = 0; transform.m43 = 0; transform.m44 = 1;
+    transform.m21 = 0; transform.m22 = 1;            transform.m23 = 0; transform.m24 = 0;
+    transform.m31 = 0; transform.m32 = 0;            transform.m33 = 1; transform.m34 = 0;
+    transform.m41 = 0; transform.m42 = 0;            transform.m43 = 0; transform.m44 = 1;
 
     return transform;
-
 }
 
 - (CATransform3D)leftHandReflectionTransformWithHeight:(CGFloat)height width:(CGFloat)width{
@@ -605,15 +659,7 @@
     if(!clickedLayer)
 	return NSNotFound;
 
-    NSUInteger index = [_cachedLayers indexOfObjectIdenticalTo:clickedLayer];
-    if(index == NSNotFound){
-	//check superlayer -- the returned layer may be the fade layer for vignetting
-	index = [_cachedLayers indexOfObjectIdenticalTo:clickedLayer.superlayer];
-	if(index == NSNotFound)
-	    return NSNotFound;
-    }
-
-    return index;
+    return [_cachedLayers indexOfObjectIdenticalTo:clickedLayer];
 }
 
 - (void)focusedItemDragged:(CALayer*)clickedLayer withEvent:(NSEvent*)theEvent{
@@ -635,7 +681,7 @@
 		 writeItemsAtIndexes:[NSIndexSet indexSetWithIndex:[self selectionIndex]]
 			toPasteboard:pboard];
     }
-    
+
     [self dragImage:dragImage at:localPoint
 			  offset:dragOffset //ignored parameter
 			   event:theEvent
@@ -678,7 +724,7 @@
 - (void)mouseDragged:(NSEvent *)theEvent{
     //detect drag on the scrollbar bubble
     //NSLog(@"Mouse dragged: %d:%f", [theEvent eventNumber], [theEvent locationInWindow].x);
- 
+
     if(_bubbleDragged){
 	//work out x co-ord relative to the scrollbar
 	NSPoint eventLocation = [theEvent locationInWindow];
@@ -768,6 +814,15 @@
 	_currentViewSize = self.bounds.size;
 	[self adjustCachedLayersWithAnimation:NO];
     }
+}
+
+@end
+
+@implementation GSNoHitGradientLayer
+//Simple override. Does not respond to hit testing.
+
+- (BOOL)containsPoint:(CGPoint)thePoint{
+    return NO;
 }
 
 @end

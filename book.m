@@ -56,4 +56,46 @@
 @dynamic authors;
 @dynamic library;
 
+- (NSImage*)coverImageImage{
+    NSString* imgPath = [self coverImage];
+
+    if(imgPath){
+        NSImage* img = [[NSImage alloc] initWithContentsOfFile:imgPath];
+        return [img autorelease];
+
+    }else{
+        return nil;
+    }
+}
+
+- (void)setCoverImageImage:(NSImage*)image{
+    NSString* imgPath = [self coverImage];
+    if(imgPath){
+        //delete old image
+        NSFileManager* fileManager = [[NSFileManager alloc] init];
+        NSError* error;
+        [fileManager removeItemAtPath:imgPath error:&error];
+        [fileManager release];
+    }
+
+    if(image){
+        //generate unique path
+        NSString* fileName = [NSString stringWithFormat:@"%@.tiff", [[NSProcessInfo processInfo] globallyUniqueString]];
+        NSString* filePath = [[self applicationSupportFolder] stringByAppendingPathComponent:fileName];
+
+        NSData* data = [image TIFFRepresentation];
+        [data writeToFile:filePath atomically:NO];
+
+        [self setCoverImage:filePath];
+    }
+}
+
+- (NSString*)applicationSupportFolder{
+    //Returns the support folder for the application
+	
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : NSTemporaryDirectory();
+    return [basePath stringByAppendingPathComponent:@"Sofia"];
+}
+
 @end

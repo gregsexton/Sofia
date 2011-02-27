@@ -101,7 +101,7 @@
 	[obj setTitle:               [txt_title           stringValue]];
 	[obj setTitleLong:           [txt_titleLong       stringValue]];
 	[obj setUrls:                [txt_urls            string]];
-	[obj setCoverImage:	     [img_summary_cover   image]];
+	[obj setCoverImageImage:     [img_summary_cover   image]];
 	[obj setToc:		     [txt_toc             string]];
         [obj setNoOfCopies:          (NSDecimalNumber*)[NSDecimalNumber     numberWithInteger:[txt_noOfCopies integerValue]]];
     }
@@ -173,8 +173,8 @@
 	    [txt_physicalDescrip selectItemAtIndex:0];
 	}
 
-	if([obj coverImage] != nil){
-	    NSImage* img = [obj coverImage];
+	if([obj coverImageImage] != nil){
+	    NSImage* img = [obj coverImageImage];
 	    [img_summary_cover setImage:img];
 	    [img_cover setImage:img];
 	}
