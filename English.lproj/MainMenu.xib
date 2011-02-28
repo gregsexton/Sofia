@@ -21,9 +21,9 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="549"/>
-			<integer value="782"/>
 			<integer value="296"/>
+			<integer value="782"/>
+			<integer value="549"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1441,9 +1441,14 @@
 																			</object>
 																			<double key="NSIntercellSpacingWidth">3</double>
 																			<double key="NSIntercellSpacingHeight">0.0</double>
-																			<object class="NSColor" key="NSBackgroundColor" id="216674717">
-																				<int key="NSColorSpace">1</int>
-																				<bytes key="NSRGB">MC43Njg2NTk4ODk3IDAuODAzNzkzNDMwMyAwLjg1MjM4ODkxODQAA</bytes>
+																			<object class="NSColor" key="NSBackgroundColor">
+																				<int key="NSColorSpace">6</int>
+																				<string key="NSCatalogName">System</string>
+																				<string key="NSColorName">_sourceListBackgroundColor</string>
+																				<object class="NSColor" key="NSColor">
+																					<int key="NSColorSpace">1</int>
+																					<bytes key="NSRGB">MC44MzkyMTU2OTU5IDAuODY2NjY2Njc0NiAwLjg5ODAzOTIyMTgAA</bytes>
+																				</object>
 																			</object>
 																			<object class="NSColor" key="NSGridColor" id="235439211">
 																				<int key="NSColorSpace">6</int>
@@ -1473,7 +1478,10 @@
 																	<reference key="NSSuperview" ref="174631416"/>
 																	<reference key="NSNextKeyView" ref="956318075"/>
 																	<reference key="NSDocView" ref="956318075"/>
-																	<reference key="NSBGColor" ref="216674717"/>
+																	<object class="NSColor" key="NSBGColor">
+																		<int key="NSColorSpace">1</int>
+																		<bytes key="NSRGB">MC43Njg2NTk4ODk3IDAuODAzNzkzNDMwMyAwLjg1MjM4ODkxODQAA</bytes>
+																	</object>
 																	<int key="NScvFlags">4</int>
 																</object>
 																<object class="NSScroller" id="412208264">
