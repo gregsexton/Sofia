@@ -54,12 +54,9 @@
 	    reviewsForISBN = isbn;
 
 	    amazonInterface* amazon = [[amazonInterface alloc] init];
-	    //[amazon searchISBN:isbn];
 	    [amazon allReviewsForISBN:isbn];
-	    [self setAmazonReviews:[amazon bookReviews]];
 
 	    [progIndicator stopAnimation:self];
-	    [averageRating setObjectValue:[NSNumber numberWithDouble:[amazon bookAverageRating]]];
 	    [tableView reloadData];
 	    [amazon release];
 	});

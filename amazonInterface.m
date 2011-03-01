@@ -37,8 +37,7 @@
 @synthesize bookEdition;
 @synthesize bookPhysicalDescrip;
 @synthesize bookSummary;
-@synthesize bookAverageRating;
-@synthesize bookReviews;
+@synthesize bookReviewIFrameURL;
 
 - (id)init{
     self = [super init];
@@ -49,19 +48,15 @@
     bookAuthors = [[NSMutableArray alloc] initWithCapacity:5]; //not many books have more than 5 authors
     dimensions = [[NSMutableArray alloc] initWithCapacity:3]; //length x width x height
     similarProductASINs = [[NSMutableArray alloc] initWithCapacity:5]; //5 is arbitrary
-    bookReviews = [[NSMutableArray alloc] initWithCapacity:5]; //5 is an arbitrary guess
     return self;
 }
 
 - (void)dealloc{
     if(currentStringValue)
 	[currentStringValue release];
-    if(currentReview)
-	[currentReview release];
     [bookAuthors release];
     [dimensions release];
     [similarProductASINs release];
-    [bookReviews release];
     if(asin)
 	[asin release];
     [super dealloc];
@@ -100,12 +95,9 @@
     if(!returnVal)
 	return nil;
 
-    [bookReviews removeAllObjects]; //start with a clean slate
-    for(int i=1; i<=numberOfReviewPages; i++){
-	[self searchForCustomerReviewsWithASIN:asin 
-				      withPage:[NSString stringWithFormat:@"%d", i]];
-    }
-    return bookReviews;
+    [self searchForCustomerReviewsWithASIN:asin 
+                                  withPage:[NSString stringWithFormat:@"%d", 1]];
+    return nil;
 }
 
 - (BOOL)searchForDetailsWithISBN:(NSString*)isbn{
@@ -141,10 +133,9 @@
 - (BOOL)searchForCustomerReviewsWithASIN:(NSString*)theASIN withPage:(NSString*)pageNumber{
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:@"ItemLookup"           forKey:@"Operation"];
-    [params setValue:@"Reviews"		     forKey:@"ResponseGroup"];
-    [params setValue:@"-HelpfulVotes"	     forKey:@"ReviewSort"];
-    [params setValue:pageNumber		     forKey:@"ReviewPage"];
     [params setValue:theASIN		     forKey:@"ItemId"];
+    [params setValue:@"Reviews"		     forKey:@"ResponseGroup"];
+    [params setValue:@"2010-11-01"           forKey:@"Version"];
     
     return [self parseAmazonDataWithParamaters:params];
 }
@@ -298,37 +289,10 @@
     }
 
     if(_CustomerReviews){
-	if([elementName isEqualToString:@"Review"]){
-	    currentReview = [[BookReview alloc] init];
-	}
-	if([elementName isEqualToString:@"Rating"]){
-	    currentProperty = pReviewRating;
-	    return;
-	}
-	if([elementName isEqualToString:@"HelpfulVotes"]){
-	    currentProperty = pReviewHelpfulVotes;
-	    return;
-	}
-	if([elementName isEqualToString:@"TotalVotes"]){
-	    currentProperty = pReviewTotalVotes;
-	    return;
-	}
-	if([elementName isEqualToString:@"Date"]){
-	    currentProperty = pReviewDate;
-	    return;
-	}
-	if([elementName isEqualToString:@"Summary"]){
-	    currentProperty = pReviewSummary;
-	    return;
-	}
-	if([elementName isEqualToString:@"Content"]){
-	    currentProperty = pReviewContent;
-	    return;
-	}
-	if([elementName isEqualToString:@"AverageRating"]){
-	    currentProperty = pReviewAverageRating;
-	    return;
-	}
+        if([elementName isEqualToString:@"IFrameURL"]){
+            currentProperty = pReviewsIFrameURL;
+            return;
+        }
     }
 
     if(_EditorialReview){
@@ -484,32 +448,10 @@
     }
 
     if(_CustomerReviews){
-	if([elementName isEqualToString:@"Review"]){
-	    [bookReviews addObject:currentReview];
-	    [currentReview release];
-	    currentReview = nil;
-	}
-	if(currentProperty == pReviewRating){
-	    currentReview.rating = [currentStringValue doubleValue];
-	}
-	if(currentProperty == pReviewHelpfulVotes){
-	    currentReview.helpfulVotes = [currentStringValue integerValue];
-	}
-	if(currentProperty == pReviewTotalVotes){
-	    currentReview.totalVotes = [currentStringValue integerValue];
-	}
-	if(currentProperty == pReviewDate){
-	    currentReview.date = currentStringValue;
-	}
-	if(currentProperty == pReviewSummary){
-	    currentReview.summary = currentStringValue;
-	}
-	if(currentProperty == pReviewContent){
-	    currentReview.content = [currentStringValue paragraphFormatAndStripHTML];
-	}
-	if(currentProperty == pReviewAverageRating){
-	    bookAverageRating = [currentStringValue doubleValue];
-	}
+        if(currentProperty == pReviewsIFrameURL){
+	    [self setBookReviewIFrameURL:currentStringValue];
+            //NSLog(@"IFrameURL: %@", currentStringValue);
+        }
     }
 
     if(_EditorialReview){

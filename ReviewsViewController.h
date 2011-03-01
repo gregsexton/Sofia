@@ -27,13 +27,13 @@
 
 @interface ReviewsViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource> {
 
-    IBOutlet NSTableView* tableView;
+    IBOutlet NSTableView*         tableView;
     IBOutlet NSProgressIndicator* progIndicator;
-    IBOutlet FiveStars* averageRating;
+    IBOutlet FiveStars*           averageRating;
 
-    NSString*	reviewsForISBN;
-    NSArray*	amazonReviews;
-    NSMutableArray* rowHeights;
+    NSString*                     reviewsForISBN;
+    NSArray*                      amazonReviews;
+    NSMutableArray*               rowHeights;
 }
 @property (nonatomic,retain) NSArray*	amazonReviews;
 
