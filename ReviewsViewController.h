@@ -20,6 +20,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <WebKit/WebKit.h>
 #import "amazonInterface.h"
 #import "BookReview.h"
 #import "FiveStars.h"
@@ -27,15 +28,11 @@
 
 @interface ReviewsViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource> {
 
-    IBOutlet NSTableView*         tableView;
+    IBOutlet WebView*             _webview;
     IBOutlet NSProgressIndicator* progIndicator;
-    IBOutlet FiveStars*           averageRating;
-
     NSString*                     reviewsForISBN;
-    NSArray*                      amazonReviews;
-    NSMutableArray*               rowHeights;
+
 }
-@property (nonatomic,retain) NSArray*	amazonReviews;
 
 - (void)setISBN:(NSString*)isbn;
 
