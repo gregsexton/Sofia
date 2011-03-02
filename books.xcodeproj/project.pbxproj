@@ -91,6 +91,7 @@
 		37D8005C12F36C6900F49E11 /* Version2To3EntityMigrationPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8005B12F36C6900F49E11 /* Version2To3EntityMigrationPolicy.m */; };
 		37D801B013083E3300F49E11 /* database4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 37D801AF13083E3300F49E11 /* database4.xcmappingmodel */; };
 		37D801C11308595900F49E11 /* Version3To4EntityMigrationPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D801C01308595900F49E11 /* Version3To4EntityMigrationPolicy.m */; };
+		37E4E040131D92ED00B196FF /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E4E03F131D92ED00B196FF /* WebKit.framework */; };
 		37F36B0E124027340012D62E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F36B0D124027340012D62E /* QuartzCore.framework */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -264,6 +265,7 @@
 		37D801AF13083E3300F49E11 /* database4.xcmappingmodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcmappingmodel; path = database4.xcmappingmodel; sourceTree = "<group>"; };
 		37D801BF1308595900F49E11 /* Version3To4EntityMigrationPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version3To4EntityMigrationPolicy.h; sourceTree = "<group>"; };
 		37D801C01308595900F49E11 /* Version3To4EntityMigrationPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Version3To4EntityMigrationPolicy.m; sourceTree = "<group>"; };
+		37E4E03F131D92ED00B196FF /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		37F36B0D124027340012D62E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		37FF4F4311E7CC07001B8ECC /* PredicateEditorWindowControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PredicateEditorWindowControllerDelegate.h; sourceTree = "<group>"; };
 		37FF4FB211E8ACDA001B8ECC /* AuthorsWindowControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorsWindowControllerDelegate.h; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				3745147F11B70B2A001C7960 /* Quartz.framework in Frameworks */,
 				37F36B0E124027340012D62E /* QuartzCore.framework in Frameworks */,
+				37E4E040131D92ED00B196FF /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +333,7 @@
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 				3745147E11B70B2A001C7960 /* Quartz.framework */,
 				37F36B0D124027340012D62E /* QuartzCore.framework */,
+				37E4E03F131D92ED00B196FF /* WebKit.framework */,
 			);
 			name = "Other Frameworks";
 			sourceTree = "<group>";
