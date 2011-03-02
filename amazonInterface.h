@@ -102,12 +102,12 @@ typedef enum {pNone,
 
 - (BOOL)parseAmazonDataWithParamaters:(NSDictionary*)params;
 - (BOOL)searchASIN:(NSString*)theAsin;
-- (BOOL)searchForCustomerReviewsWithASIN:(NSString*)theASIN withPage:(NSString*)pageNumber;
+- (BOOL)searchForCustomerReviewsWithASIN:(NSString*)theASIN;
 - (BOOL)searchForDetailsWithASIN:(NSString*)theASIN;
 - (BOOL)searchForDetailsWithISBN:(NSString*)isbn;
 - (BOOL)searchForEditorialReviewWithASIN:(NSString*)asin;
 - (BOOL)searchISBN:(NSString*)isbn;
-- (NSArray*)allReviewsForISBN:(NSString*)isbn;
+- (BOOL)allReviewsForISBN:(NSString*)isbn;
 - (NSArray*)similarBooksToISBN:(NSString*)isbn;
 - (NSAttributedString*)getTableOfContentsFromURL:(NSURL*)url;
 @end

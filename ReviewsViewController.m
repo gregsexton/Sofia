@@ -28,7 +28,6 @@
 }
 
 - (void)dealloc{
-
     [super dealloc];
 }
 
@@ -37,28 +36,19 @@
     if([reviewsForISBN isEqualToString:isbn]){
 	return;
     }else{
-	//this uses Grand Central Dispatch to download the details
-	//in a seperate thread so as not to lock the main thread. 
-	dispatch_queue_t q_default;
-	q_default = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        [progIndicator setUsesThreadedAnimation:YES];
+        [progIndicator startAnimation:self];
 
-	dispatch_async(q_default, ^{
-	    [progIndicator setUsesThreadedAnimation:YES];
-	    [progIndicator startAnimation:self];
+        reviewsForISBN = isbn;
 
-	    reviewsForISBN = isbn;
-
-	    amazonInterface* amazon = [[amazonInterface alloc] init];
-	    [amazon allReviewsForISBN:isbn];
-
+        amazonInterface* amazon = [[amazonInterface alloc] init];
+        if([amazon allReviewsForISBN:isbn]){
             NSURL* url = [NSURL URLWithString:[amazon bookReviewIFrameURL]];
-            NSLog(@"%@", [amazon bookReviewIFrameURL]);
             [[_webview mainFrame] loadRequest:[NSURLRequest requestWithURL:url]];
+            [amazon release];
+        }
 
-	    [amazon release];
-
-	    [progIndicator stopAnimation:self];
-	});
+        [progIndicator stopAnimation:self];
     }
 }
 

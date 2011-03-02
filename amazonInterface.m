@@ -4,17 +4,17 @@
 // Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
-// 
+//
 // Sofia is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Sofia is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
@@ -61,7 +61,7 @@
 	[asin release];
     [super dealloc];
 }
-    
+
 - (BOOL)searchISBN:(NSString*)isbn{
     imageURL = @"";
     successfullyFoundBook = false; //assume the worst
@@ -72,7 +72,7 @@
 	returnVal = returnVal && [self searchForEditorialReviewWithASIN:asin];
 
     return returnVal;
-}   
+}
 
 - (BOOL)searchASIN:(NSString*)theAsin{
     imageURL = @"";
@@ -90,14 +90,13 @@
     return similarProductASINs;
 }
 
-- (NSArray*)allReviewsForISBN:(NSString*)isbn{
+- (BOOL)allReviewsForISBN:(NSString*)isbn{
     BOOL returnVal = [self searchForDetailsWithISBN:isbn];
     if(!returnVal)
-	return nil;
+	return returnVal;
 
-    [self searchForCustomerReviewsWithASIN:asin 
-                                  withPage:[NSString stringWithFormat:@"%d", 1]];
-    return nil;
+    [self searchForCustomerReviewsWithASIN:asin];
+    return returnVal;
 }
 
 - (BOOL)searchForDetailsWithISBN:(NSString*)isbn{
@@ -107,7 +106,7 @@
     [params setValue:@"Books"                forKey:@"SearchIndex"];
     [params setValue:@"Large"		     forKey:@"ResponseGroup"]; //large includes just about everything (read: kitchen sink)
     [params setValue:isbn		     forKey:@"Keywords"];
-    
+
     return [self parseAmazonDataWithParamaters:params];
 }
 
@@ -115,8 +114,8 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:@"ItemLookup"           forKey:@"Operation"];
     [params setValue:theASIN		     forKey:@"ItemId"];
-    [params setValue:@"Large"		     forKey:@"ResponseGroup"]; 
-    
+    [params setValue:@"Large"		     forKey:@"ResponseGroup"];
+
     return [self parseAmazonDataWithParamaters:params];
 }
 
@@ -126,17 +125,18 @@
     [params setValue:@"ItemLookup"           forKey:@"Operation"];
     [params setValue:theASIN		     forKey:@"ItemId"];
     [params setValue:@"EditorialReview"	     forKey:@"ResponseGroup"];
-    
+
     return [self parseAmazonDataWithParamaters:params];
 }
 
-- (BOOL)searchForCustomerReviewsWithASIN:(NSString*)theASIN withPage:(NSString*)pageNumber{
+- (BOOL)searchForCustomerReviewsWithASIN:(NSString*)theASIN{
+
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:@"ItemLookup"           forKey:@"Operation"];
     [params setValue:theASIN		     forKey:@"ItemId"];
     [params setValue:@"Reviews"		     forKey:@"ResponseGroup"];
     [params setValue:@"2010-11-01"           forKey:@"Version"];
-    
+
     return [self parseAmazonDataWithParamaters:params];
 }
 
@@ -145,7 +145,7 @@
     //isn't exposed in the amazon api. It is liable to break at
     //any moment. Designed to take self.amazonLink as the parameter.
 
-    NSString* detailsPage = [NSString stringWithContentsOfURL:url 
+    NSString* detailsPage = [NSString stringWithContentsOfURL:url
 						     encoding:NSASCIIStringEncoding
 							error:NULL];
     if(!detailsPage)
@@ -159,8 +159,8 @@
     NSString* tocUrlString = [[capturesArray objectAtIndex:0] objectAtIndex:1];
     NSURL* tocUrl = [[NSURL alloc] initWithString:tocUrlString];
 
-    NSString* tocPage = [NSString stringWithContentsOfURL:tocUrl 
-						 encoding:NSASCIIStringEncoding 
+    NSString* tocPage = [NSString stringWithContentsOfURL:tocUrl
+						 encoding:NSASCIIStringEncoding
 						    error:NULL];
     [tocUrl release];
     if(!tocPage)
@@ -185,7 +185,8 @@
     _CustomerReviews = false;
     _SimilarProducts = false;
 
-    SignedAwsSearchRequest *req = [[[SignedAwsSearchRequest alloc] initWithAccessKeyId:accessKey secretAccessKey:secretAccessKey] autorelease];
+    SignedAwsSearchRequest *req = [[[SignedAwsSearchRequest alloc] initWithAccessKeyId:accessKey
+                                                                       secretAccessKey:secretAccessKey] autorelease];
 
     NSString *urlString = [req searchUrlForParameterDictionary:params];
 //NSLog(@"request URL: %@", urlString);
@@ -199,11 +200,11 @@
 
 //// NSXMLParserDelegate Methods /////////////////////////////////////////////////////////////
 
-- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName 
-					namespaceURI:(NSString *)namespaceURI 
-				       qualifiedName:(NSString *)qName 
+- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName
+					namespaceURI:(NSString *)namespaceURI
+				       qualifiedName:(NSString *)qName
 					  attributes:(NSDictionary *)attributeDict {
-	     
+
     if([elementName isEqualToString:@"LargeImage"]){
 	currentProperty = pLargeImage;
         return;
@@ -337,8 +338,8 @@
 
 }
 
-- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName 
-				      namespaceURI:(NSString *)namespaceURI 
+- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName
+				      namespaceURI:(NSString *)namespaceURI
 				     qualifiedName:(NSString *)qName {
 
     if([elementName isEqualToString:@"ItemAttributes"]){
@@ -408,7 +409,7 @@
 	    [self setBookEdition:currentStringValue];
 	}
 	if(currentProperty == pPubDate){
-	    [self setBookEdition:[NSString stringWithFormat:@"%@ %@", 
+	    [self setBookEdition:[NSString stringWithFormat:@"%@ %@",
                                                              bookEdition ? bookEdition : @"",
                                                              currentStringValue]];
 	}
@@ -422,21 +423,21 @@
 	if(currentProperty == pHeight){
 	    [dimensions addObject:[NSString stringWithFormat:@"%.1fcm", [currentStringValue doubleValue]*HUNDREDTH_INCH_TO_CM]];
 	    if([dimensions count] == 3)
-		[self setBookPhysicalDescrip:[NSString stringWithFormat:@"%@ (%@)", 
+		[self setBookPhysicalDescrip:[NSString stringWithFormat:@"%@ (%@)",
 							    bookPhysicalDescrip,
 							    [NSString interleaveArray:dimensions with:@" x "]]];
 	}
 	if(currentProperty == pLength){
 	    [dimensions addObject:[NSString stringWithFormat:@"%.1fcm", [currentStringValue doubleValue]*HUNDREDTH_INCH_TO_CM]];
 	    if([dimensions count] == 3)
-		[self setBookPhysicalDescrip:[NSString stringWithFormat:@"%@ (%@)", 
+		[self setBookPhysicalDescrip:[NSString stringWithFormat:@"%@ (%@)",
 							    bookPhysicalDescrip,
 							    [NSString interleaveArray:dimensions with:@" x "]]];
 	}
 	if(currentProperty == pWidth){
 	    [dimensions addObject:[NSString stringWithFormat:@"%.1fcm", [currentStringValue doubleValue]*HUNDREDTH_INCH_TO_CM]];
 	    if([dimensions count] == 3)
-		[self setBookPhysicalDescrip:[NSString stringWithFormat:@"%@ (%@)", 
+		[self setBookPhysicalDescrip:[NSString stringWithFormat:@"%@ (%@)",
 							    bookPhysicalDescrip,
 							    [NSString interleaveArray:dimensions with:@" x "]]];
 	}
