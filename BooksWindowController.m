@@ -4,17 +4,17 @@
 // Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
-// 
+//
 // Sofia is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Sofia is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
@@ -56,9 +56,9 @@
         [self updateSummaryTabView];
     }
     [authorsTableView setDoubleAction:@selector(doubleClickAuthorAction:)];
-    [authorsTableView setTarget:self]; 
+    [authorsTableView setTarget:self];
     [subjectsTableView setDoubleAction:@selector(doubleClickSubjectAction:)];
-    [subjectsTableView setTarget:self]; 
+    [subjectsTableView setTarget:self];
 }
 
 - (NSManagedObjectContext *)managedObjectContext{
@@ -178,7 +178,7 @@
 
     if(![amazon successfullyFoundBook]){
         [isbnSearchErrors addObject:@"Amazon"];
-        [self displayErrorMessage:[NSString stringWithFormat:@"No results found for this ISBN on %@.", 
+        [self displayErrorMessage:[NSString stringWithFormat:@"No results found for this ISBN on %@.",
                                                             [NSString stringFromArray:isbnSearchErrors withCombiner:@"or"]]];
         [amazon release];
         return false;
@@ -226,7 +226,7 @@
 
     if(![isbndb successfullyFoundBook]){
         [isbnSearchErrors addObject:@"ISBNDb"];
-        [self displayErrorMessage:[NSString stringWithFormat:@"No results found for this ISBN on %@.", 
+        [self displayErrorMessage:[NSString stringWithFormat:@"No results found for this ISBN on %@.",
                                                             [NSString stringFromArray:isbnSearchErrors withCombiner:@"or"]]];
         [isbndb release];
         return false;
@@ -262,7 +262,7 @@
     [txt_physicalDescrip addItemWithObjectValue:[isbndb bookPhysicalDescrip]];
 
     [self updateAuthorsAndSubjectsFromISBNDb:isbndb];
-    
+
     [isbndb release];
     return true;
 }
@@ -465,11 +465,11 @@
 
     [progIndicator setUsesThreadedAnimation:true];
     [progIndicator startAnimation:self];
-    [NSApp beginSheet:progressSheet modalForWindow:window 
-                                     modalDelegate:self 
-                                    didEndSelector:NULL 
+    [NSApp beginSheet:progressSheet modalForWindow:window
+                                     modalDelegate:self
+                                    didEndSelector:NULL
                                        contextInfo:nil];
-    
+
     [self clearAllFields];
     if([self updateUIFromAmazonWithISBN:searchedISBN]){
         [self selectFirstItemInComboBox:txt_title];
@@ -477,7 +477,7 @@
         [self selectFirstItemInComboBox:txt_publisher];
         [self selectFirstItemInComboBox:txt_physicalDescrip];
     }
-    
+
     if([self updateUIFromISBNDbWithISBN:searchedISBN]){
         [self selectFirstItemInComboBox:txt_titleLong];
         [self selectFirstItemInComboBox:txt_subject];
@@ -587,7 +587,7 @@
 
 - (void)displayManagedAuthorsWithSelectedAuthor:(author*)authorObj{
     AuthorsWindowController *detailWin = [[AuthorsWindowController alloc] initWithManagedObjectContext:managedObjectContext
-                                                                          selectedAuthor:authorObj 
+                                                                          selectedAuthor:authorObj
                                                                             selectButton:true];
     [detailWin setDelegate:self];
     if (![NSBundle loadNibNamed:@"AuthorDetail" owner:detailWin]) {
@@ -618,7 +618,7 @@
 
 - (void)displayManagedSubjectsWithSelectedSubject:(subject*)subjectObj{
     SubjectWindowController *detailWin = [[SubjectWindowController alloc] initWithManagedObjectContext:managedObjectContext
-                                                                          selectedSubject:subjectObj 
+                                                                          selectedSubject:subjectObj
                                                                              selectButton:true];
     [detailWin setDelegate:self];
     if (![NSBundle loadNibNamed:@"SubjectDetail" owner:detailWin]) {

@@ -27,12 +27,12 @@
 
 @interface SimilarBooksViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource> {
 
-    IBOutlet NSTableView* tableView;
+    IBOutlet NSTableView*           tableView;
     IBOutlet BooksWindowController* bookWinController;
-    IBOutlet NSProgressIndicator* progIndicator;
+    IBOutlet NSProgressIndicator*   progIndicator;
 
     NSString* similarToISBN;
-    NSArray* amazonASINs;
+    NSArray*  amazonASINs;
 
     NSMutableArray* titles;
     NSMutableArray* images;

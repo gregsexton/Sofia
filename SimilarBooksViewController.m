@@ -37,8 +37,8 @@
 
     titles = [[NSMutableArray alloc] initWithCapacity:5];
     images = [[NSMutableArray alloc] initWithCapacity:5];
-    isbns = [[NSMutableArray alloc] initWithCapacity:5];
-    urls = [[NSMutableArray alloc] initWithCapacity:5];
+    isbns  = [[NSMutableArray alloc] initWithCapacity:5];
+    urls   = [[NSMutableArray alloc] initWithCapacity:5];
 }
 
 - (void)dealloc{
