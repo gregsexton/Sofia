@@ -1,6 +1,6 @@
 /*
  Copyright (c) 2008 Matthew Ball - http://www.mattballdesign.com
- 
+
  Permission is hereby granted, free of charge, to any person
  obtaining a copy of this software and associated documentation
  files (the "Software"), to deal in the Software without
@@ -9,10 +9,10 @@
  copies of the Software, and to permit persons to whom the
  Software is furnished to do so, subject to the following
  conditions:
- 
+
  The above copyright notice and this permission notice shall be
  included in all copies or substantial portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -50,7 +50,7 @@ NSString *MBPreferencesSelectionAutosaveKey = @"MBPreferencesSelection";
 		[prefsWindow setShowsToolbarButton:NO];
 		self.window = prefsWindow;
 		[prefsWindow release];
-		
+
 		[self _setupToolbar];
 	}
 	return self;
@@ -138,13 +138,13 @@ static MBPreferencesController *sharedPreferencesController = nil;
 	for (id<MBPreferencesModule> module in self.modules) {
 		[identifiers addObject:[module identifier]];
 	}
-	
+
 	return identifiers;
 }
 
 - (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar *)toolbar
 {
-	// We start off with no items. 
+	// We start off with no items.
 	// Add them when we set the modules
 	return nil;
 }
@@ -152,12 +152,12 @@ static MBPreferencesController *sharedPreferencesController = nil;
 - (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
 {
 	id<MBPreferencesModule> module = [self moduleForIdentifier:itemIdentifier];
-	
+
 	NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
 	if (!module)
 		return [item autorelease];
-	
-	
+
+
 	[item setLabel:[module title]];
 	[item setImage:[module image]];
 	[item setTarget:self];
@@ -189,10 +189,10 @@ static MBPreferencesController *sharedPreferencesController = nil;
 		[_modules release];
 		_modules = nil;
 	}
-	
+
 	if (newModules != _modules) {
 		_modules = [newModules retain];
-		
+
 		// Reset the toolbar items
 		NSToolbar *toolbar = [self.window toolbar];
 		if (toolbar) {
@@ -201,28 +201,28 @@ static MBPreferencesController *sharedPreferencesController = nil;
 				[toolbar removeItemAtIndex:index];
 				index--;
 			}
-			
+
 			// Add the new items
 			for (id<MBPreferencesModule> module in self.modules) {
 				[toolbar insertItemWithItemIdentifier:[module identifier] atIndex:[[toolbar items] count]];
 			}
 		}
-		
+
 		// Change to the correct module
 		if ([self.modules count]) {
 			id<MBPreferencesModule> defaultModule = nil;
-			
+
 			// Check the autosave info
 			NSString *savedIdentifier = [[NSUserDefaults standardUserDefaults] stringForKey:MBPreferencesSelectionAutosaveKey];
 			defaultModule = [self moduleForIdentifier:savedIdentifier];
-			
+
 			if (!defaultModule) {
 				defaultModule = [self.modules objectAtIndex:0];
 			}
-			
+
 			[self _changeToModule:defaultModule];
 		}
-		
+
 	}
 }
 
@@ -230,36 +230,36 @@ static MBPreferencesController *sharedPreferencesController = nil;
 {
 	if (![sender isKindOfClass:[NSToolbarItem class]])
 		return;
-	
+
 	id<MBPreferencesModule> module = [self moduleForIdentifier:[sender itemIdentifier]];
 	if (!module)
 		return;
-	
+
 	[self _changeToModule:module];
 }
 
 - (void)_changeToModule:(id<MBPreferencesModule>)module
 {
 	[[_currentModule view] removeFromSuperview];
-	
+
 	NSView *newView = [module view];
-	
+
 	// Resize the window
 	NSRect newWindowFrame = [self.window frameRectForContentRect:[newView frame]];
 	newWindowFrame.origin = [self.window frame].origin;
 	newWindowFrame.origin.y -= newWindowFrame.size.height - [self.window frame].size.height;
 	[self.window setFrame:newWindowFrame display:YES animate:YES];
-	
+
 	[[self.window toolbar] setSelectedItemIdentifier:[module identifier]];
 	[self.window setTitle:[module title]];
-	
+
 	if ([(NSObject *)module respondsToSelector:@selector(willBeDisplayed)]) {
 		[module willBeDisplayed];
 	}
-	
+
 	_currentModule = module;
 	[[self.window contentView] addSubview:[_currentModule view]];
-	
+
 	// Autosave the selection
 	[[NSUserDefaults standardUserDefaults] setObject:[module identifier] forKey:MBPreferencesSelectionAutosaveKey];
 }
