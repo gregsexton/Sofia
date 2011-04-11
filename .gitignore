@@ -4,4 +4,6 @@ build/*
 books.xcodeproj/*.pbxuser
 books.xcodeproj/*.mode1v3
 books.xcodeproj/*.perspectivev3
+books.xcodeproj/xcuserdata/*
+books.xcodeproj/project.xcworkspace/xcuserdata/*
 tags
