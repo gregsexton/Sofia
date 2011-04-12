@@ -4,17 +4,17 @@
 // Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
-// 
+//
 // Sofia is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Sofia is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
@@ -27,7 +27,7 @@
 @implementation SofiaApplication
 
 - (void) awakeFromNib {
-    
+
     //setup the main view
     currentView = nil;
     NSString* view = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentView"];
@@ -39,7 +39,7 @@
 	[self changeToImagesView:self];
     else if([view isEqualToString:COVER_VIEW])
 	[self changeToCoverflowView:self];
-    
+
     //setup preferences
     AccessKeyViewController *accessKeys = [[AccessKeyViewController alloc] initWithNibName:@"Preferences_AccessKeys" bundle:nil];
     GeneralViewController *general = [[GeneralViewController alloc] initWithNibName:@"Preferences_General" bundle:nil];
@@ -61,7 +61,7 @@
 }
 
 - (void) dealloc {
-	
+
     [managedObjectContext       release], managedObjectContext = nil;
     [persistentStoreCoordinator release], persistentStoreCoordinator = nil;
     [managedObjectModel         release], managedObjectModel = nil;
@@ -76,37 +76,37 @@
 
 - (NSString*)applicationSupportFolder {
     //Returns the support folder for the application, used to store the Core Data store file.
-	
+
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
     NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : NSTemporaryDirectory();
     return [basePath stringByAppendingPathComponent:@"Sofia"];
 }
 
 - (NSManagedObjectModel*)managedObjectModel {
-	
+
     if (managedObjectModel != nil) {
         return managedObjectModel;
     }
-	
-    managedObjectModel = [[NSManagedObjectModel mergedModelFromBundles:nil] retain];    
+
+    managedObjectModel = [[NSManagedObjectModel mergedModelFromBundles:nil] retain];
     return managedObjectModel;
 }
 
 - (NSPersistentStoreCoordinator *) persistentStoreCoordinator {
-	
+
     if (persistentStoreCoordinator != nil) {
         return persistentStoreCoordinator;
     }
-	
+
     NSFileManager *fileManager;
     NSString *applicationSupportFolder = nil;
     NSURL *url;
     NSError *error;
-    
+
     fileManager = [NSFileManager defaultManager];
     applicationSupportFolder = [self applicationSupportFolder];
     if ( ![fileManager fileExistsAtPath:applicationSupportFolder isDirectory:NULL] ) {
-        [fileManager createDirectoryAtPath:applicationSupportFolder 
+        [fileManager createDirectoryAtPath:applicationSupportFolder
 	       withIntermediateDirectories:true
 				attributes:nil
 				     error:NULL];
@@ -115,14 +115,14 @@
     NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
 	[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
 	[NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
-    
-    
+
+
 #ifdef CONFIGURATION_Debug
     url = [NSURL fileURLWithPath: [applicationSupportFolder stringByAppendingPathComponent: @"Sofia-debug"]];
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
     if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error]){
         [[NSApplication sharedApplication] presentError:error];
-    }    
+    }
     [window setTitle:@"!!!!!!! DEBUG DEBUG DEBUG !!!!!!!"];
 #endif
 
@@ -131,18 +131,18 @@
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
     if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error]){
         [[NSApplication sharedApplication] presentError:error];
-    }    
+    }
 #endif
-	
+
     return persistentStoreCoordinator;
 }
 
 - (NSManagedObjectContext *) managedObjectContext {
-	
+
     if (managedObjectContext != nil) {
         return managedObjectContext;
     }
-	
+
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     if (coordinator != nil) {
         managedObjectContext = [[NSManagedObjectContext alloc] init];
@@ -150,7 +150,7 @@
 	//this line was suggested as fixing the EXC_BAD_ACCESS error, turns out I don't need it.
 	//[managedObjectContext setRetainsRegisteredObjects:YES];
     }
-    
+
     return managedObjectContext;
 }
 
@@ -159,22 +159,22 @@
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
-	
+
     NSError *error;
     int reply = NSTerminateNow;
-    
+
     if (managedObjectContext != nil) {
         if ([managedObjectContext commitEditing]) {
             if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
                 BOOL errorResult = [[NSApplication sharedApplication] presentError:error];
                 if (errorResult == YES) {
                     reply = NSTerminateCancel;
-                } 
+                }
                 else {
                     int alertReturn = NSRunAlertPanel(nil, @"Could not save changes while quitting. Quit anyway?",
 						      @"Quit anyway", @"Cancel", nil);
                     if (alertReturn == NSAlertAlternateReturn) {
-                        reply = NSTerminateCancel;	
+                        reply = NSTerminateCancel;
 		    }
                 }
             }
@@ -252,7 +252,7 @@
 - (IBAction) displayPreferencesClickAction:(id)sender{
 
     [[MBPreferencesController sharedController] showWindow:sender];
-}    
+}
 
 - (IBAction)search:(id)sender{
 
@@ -374,7 +374,7 @@
     //add to appropriate library
     [sideBar addToCurrentLibraryTheBook:obj];
 
-    BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj 
+    BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj
 										 withSearch:YES];
     if (![NSBundle loadNibNamed:@"Detail" owner:detailWin]) {
 	NSLog(@"Error loading Nib!");
@@ -389,17 +389,17 @@
     if(!revealFilterAnimation){
         NSRect frame = [mainViewContainerView bounds];
         NSMutableDictionary* mainViewDict = [NSMutableDictionary dictionaryWithCapacity:3];
- 
+
         // Specify which view to modify.
         [mainViewDict setObject:mainView forKey:NSViewAnimationTargetKey];
 
         // Specify the starting position of the view.
         [mainViewDict setObject:[NSValue valueWithRect:frame]
                          forKey:NSViewAnimationStartFrameKey];
- 
+
         // Change the ending position of the view.
         frame.size.height -= FILTER_NOTIFICATION_VIEW_HEIGHT;
- 
+
         [mainViewDict setObject:[NSValue valueWithRect:frame]
                          forKey:NSViewAnimationEndFrameKey];
 
@@ -416,17 +416,17 @@
         frame.size.height -= FILTER_NOTIFICATION_VIEW_HEIGHT;
 
         NSMutableDictionary* mainViewDict = [NSMutableDictionary dictionaryWithCapacity:3];
- 
+
         // Specify which view to modify.
         [mainViewDict setObject:mainView forKey:NSViewAnimationTargetKey];
 
         // Specify the starting position of the view.
         [mainViewDict setObject:[NSValue valueWithRect:frame]
                          forKey:NSViewAnimationStartFrameKey];
- 
+
         // Change the ending position of the view.
         frame.size.height += FILTER_NOTIFICATION_VIEW_HEIGHT;
- 
+
         [mainViewDict setObject:[NSValue valueWithRect:frame]
                          forKey:NSViewAnimationEndFrameKey];
 

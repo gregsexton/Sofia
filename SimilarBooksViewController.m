@@ -4,17 +4,17 @@
 // Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
-// 
+//
 // Sofia is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Sofia is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
@@ -59,7 +59,7 @@
     }else{
 
 	//this uses Grand Central Dispatch to download the details
-	//in a seperate thread so as not to lock the main thread. 
+	//in a seperate thread so as not to lock the main thread.
 	dispatch_queue_t q_default;
 	q_default = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 
@@ -131,14 +131,14 @@
     }
 
     [[NSWorkspace sharedWorkspace] openURL:[urls objectAtIndex:rowIndex]];
-} 
+}
 
 
 ///////////////////////    DELEGATE METHODS   //////////////////////////////////////////////////////////////////////////
 
-- (id)tableView:(NSTableView*)aTableView objectValueForTableColumn:(NSTableColumn*)aTableColumn 
+- (id)tableView:(NSTableView*)aTableView objectValueForTableColumn:(NSTableColumn*)aTableColumn
 	    row:(NSInteger)rowIndex{
-    
+
     if(!amazonASINs)
 	return nil;
 

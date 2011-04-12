@@ -133,7 +133,7 @@
     [predWin setDelegate:self];
     [predWin setLists:[self getBookLists]];
     [predWin setSmartLists:[self getSmartBookLists]];
-    if (![NSBundle loadNibNamed:@"PredicateEditor" owner:predWin]) {
+    if (![NSBundle loadNibNamed:@"PredicateEditor" owner:[predWin autorelease]]) {
         NSLog(@"Error loading Nib!");
     }
 }
@@ -303,7 +303,7 @@
 	[predWin setDelegate:self];
         [predWin setLists:[self getBookLists]];
         [predWin setSmartLists:[self getSmartBookLists]];
-	if (![NSBundle loadNibNamed:@"PredicateEditor" owner:predWin]) {
+	if (![NSBundle loadNibNamed:@"PredicateEditor" owner:[predWin autorelease]]) {
 	    NSLog(@"Error loading Nib!");
 	}
     }

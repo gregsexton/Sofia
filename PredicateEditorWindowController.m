@@ -29,7 +29,7 @@
 @synthesize smartLists;
 
 - (id)initWithSmartList:(smartList*)list{
-    if(self = [super init]){
+    if((self = [super init])){
         //unwrap predicate -- wrapped in the okClicked method
         predicate = [[self parsePredicateAndSetFlags:[list filter]] retain];
         listToTransferTo = list;
@@ -39,7 +39,7 @@
 
 - (id)init{
     //this constructor was designed for a temporary predicate i.e a filter
-    if(self = [super init]){
+    if((self = [super init])){
         //default starting predicate
         predicate = [[NSPredicate predicateWithFormat:@"title MATCHES ''"] retain];
 
@@ -50,6 +50,7 @@
 }
 
 - (void)dealloc{
+    NSLog(@"Got here. Pred");
     if(predicate)
         [predicate release];
     if(lists)
