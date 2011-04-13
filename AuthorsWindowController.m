@@ -26,6 +26,12 @@
 
 @implementation AuthorsWindowController
 @synthesize delegate;
+@synthesize bookArrayController;
+@synthesize bookTableView;
+@synthesize authorArrayController;
+@synthesize authorTableView;
+@synthesize saveButton;
+@synthesize managedObjectContext;
 
 - (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)coord {
     coordinator          = coord;
@@ -78,6 +84,13 @@
     [managedObjectContext release];
 
     [super dealloc];
+}
+
+- (void)loadWindow{
+    if (![NSBundle loadNibNamed:@"AuthorDetail" owner:self]) {
+        NSLog(@"Error loading Nib!");
+        return;
+    }
 }
 
 - (void)selectAndScrollToAuthor:(author*)authorObj{

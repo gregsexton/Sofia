@@ -590,10 +590,7 @@
                                                                                               selectedAuthor:authorObj
                                                                                                 selectButton:true];
     [detailWin setDelegate:self];
-    if (![NSBundle loadNibNamed:@"AuthorDetail" owner:detailWin]) {
-        NSLog(@"Error loading Nib!");
-        return;
-    }
+    [detailWin loadWindow];
     [[detailWin window] setDelegate:self];
 }
 

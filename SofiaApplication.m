@@ -197,12 +197,9 @@
 }
 
 - (IBAction) manageAuthorsClickAction:(id)sender {
-        AuthorsWindowController *detailWin = [[AuthorsWindowController alloc] initWithPersistentStoreCoordinator:[self persistentStoreCoordinator]];
-        if (![NSBundle loadNibNamed:@"AuthorDetail" owner:detailWin]) {
-            NSLog(@"Error loading Nib!");
-            return;
-        }
-        [[detailWin window] setDelegate:self];
+    AuthorsWindowController *detailWin = [[AuthorsWindowController alloc] initWithPersistentStoreCoordinator:[self persistentStoreCoordinator]];
+    [detailWin loadWindow];
+    [[detailWin window] setDelegate:self];
 }
 
 - (IBAction) manageSubjectsClickAction:(id)sender {

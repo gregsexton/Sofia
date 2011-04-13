@@ -26,12 +26,12 @@
 
 @interface AuthorsWindowController : NSWindowController{
 
-    IBOutlet NSArrayController*         bookArrayController;
-    IBOutlet NSTableView*               bookTableView;
-    IBOutlet NSArrayController*         authorArrayController;
-    IBOutlet NSTableView*               authorTableView;
-    IBOutlet NSButton*                  saveButton;
-    IBOutlet NSManagedObjectContext*    managedObjectContext;
+    NSArrayController*         bookArrayController;
+    NSTableView*               bookTableView;
+    NSArrayController*         authorArrayController;
+    NSTableView*               authorTableView;
+    NSButton*                  saveButton;
+    NSManagedObjectContext*    managedObjectContext;
 
     NSPersistentStoreCoordinator*       coordinator;
     author*                             initialSelection;
@@ -40,13 +40,20 @@
     id<AuthorsWindowControllerDelegate>	delegate;
 }
 @property (nonatomic, assign) id<AuthorsWindowControllerDelegate> delegate;
+@property (nonatomic, assign) IBOutlet NSArrayController*         bookArrayController;
+@property (nonatomic, assign) IBOutlet NSTableView*               bookTableView;
+@property (nonatomic, assign) IBOutlet NSArrayController*         authorArrayController;
+@property (nonatomic, assign) IBOutlet NSTableView*               authorTableView;
+@property (nonatomic, assign) IBOutlet NSButton*                  saveButton;
+@property (nonatomic, assign) IBOutlet NSManagedObjectContext*    managedObjectContext;
 
-- (IBAction)saveClicked:(id)sender;
+- (IBAction)addAuthorAction:(id)sender;
 - (IBAction)cancelClicked:(id)sender;
 - (IBAction)doubleClickBookAction:(id)sender;
-- (IBAction)addAuthorAction:(id)sender;
-- (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)context;
+- (IBAction)saveClicked:(id)sender;
 - (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)context selectedAuthor:(author*)authorInput selectButton:(BOOL)withSelect;
+- (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)context;
+- (void)loadWindow;
 - (void)saveManagedObjectContext:(NSManagedObjectContext*)context;
 - (void)selectAndScrollToAuthor:(author*)authorObj;
 @end
