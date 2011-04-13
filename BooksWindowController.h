@@ -37,7 +37,7 @@
 #import "SimilarBooksViewController.h"
 #import "ReviewsViewController.h"
 
-@interface BooksWindowController : NSObjectController <AuthorsWindowControllerDelegate, SubjectWindowControllerDelegate> {
+@interface BooksWindowController : NSObjectController <AuthorsWindowControllerDelegate, SubjectWindowControllerDelegate, NSWindowDelegate> {
     IBOutlet NSTextField *txt_search;
 
     IBOutlet NSTextField    *txt_isbn10;

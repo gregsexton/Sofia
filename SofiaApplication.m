@@ -197,15 +197,16 @@
 }
 
 - (IBAction) manageAuthorsClickAction:(id)sender {
-	AuthorsWindowController *detailWin = [[AuthorsWindowController alloc] initWithManagedObjectContext:managedObjectContext];
-	//[detailWin setDelegate:self];
-	if (![NSBundle loadNibNamed:@"AuthorDetail" owner:[detailWin autorelease]]) {
-	    NSLog(@"Error loading Nib!");
-	}
+        AuthorsWindowController *detailWin = [[AuthorsWindowController alloc] initWithPersistentStoreCoordinator:[self persistentStoreCoordinator]];
+        if (![NSBundle loadNibNamed:@"AuthorDetail" owner:detailWin]) {
+            NSLog(@"Error loading Nib!");
+            return;
+        }
+        [[detailWin window] setDelegate:self];
 }
 
 - (IBAction) manageSubjectsClickAction:(id)sender {
-	SubjectWindowController *detailWin = [[SubjectWindowController alloc] initWithManagedObjectContext:managedObjectContext];
+	SubjectWindowController *detailWin = [[SubjectWindowController alloc] initWithManagedObjectContext:[self managedObjectContext]];
 	//[detailWin setDelegate:self];
 	if (![NSBundle loadNibNamed:@"SubjectDetail" owner:[detailWin autorelease]]) {
 	    NSLog(@"Error loading Nib!");
@@ -490,6 +491,14 @@
     //modal window and the object is released early. Here is the
     //only sensible place to release.
     [controller release];
+}
+
+//NSWindowDelegate methods
+
+- (void)windowWillClose:(NSNotification*)notification{
+    //release controller, which should in turn release everything
+    NSWindow* win = [notification object];
+    [[win windowController] release];
 }
 
 @end

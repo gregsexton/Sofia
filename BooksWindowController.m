@@ -586,13 +586,15 @@
 }
 
 - (void)displayManagedAuthorsWithSelectedAuthor:(author*)authorObj{
-    AuthorsWindowController *detailWin = [[AuthorsWindowController alloc] initWithManagedObjectContext:managedObjectContext
-                                                                          selectedAuthor:authorObj
-                                                                            selectButton:true];
+    AuthorsWindowController *detailWin = [[AuthorsWindowController alloc] initWithPersistentStoreCoordinator:[managedObjectContext persistentStoreCoordinator]
+                                                                                              selectedAuthor:authorObj
+                                                                                                selectButton:true];
     [detailWin setDelegate:self];
     if (![NSBundle loadNibNamed:@"AuthorDetail" owner:detailWin]) {
         NSLog(@"Error loading Nib!");
+        return;
     }
+    [[detailWin window] setDelegate:self];
 }
 
 - (IBAction)addAuthorClicked:(id)sender{
@@ -618,8 +620,8 @@
 
 - (void)displayManagedSubjectsWithSelectedSubject:(subject*)subjectObj{
     SubjectWindowController *detailWin = [[SubjectWindowController alloc] initWithManagedObjectContext:managedObjectContext
-                                                                          selectedSubject:subjectObj
-                                                                             selectButton:true];
+                                                                                       selectedSubject:subjectObj
+                                                                                          selectButton:true];
     [detailWin setDelegate:self];
     if (![NSBundle loadNibNamed:@"SubjectDetail" owner:detailWin]) {
         NSLog(@"Error loading Nib!");
@@ -629,6 +631,14 @@
 - (IBAction)addSubjectClicked:(id)sender{
     doubleClickedSubject = nil; //just to make sure!
     [self displayManagedSubjectsWithSelectedSubject:nil];
+}
+
+//NSWindowDelegate methods
+
+- (void)windowWillClose:(NSNotification*)notification{
+    //release controller, which should in turn release everything
+    NSWindow* win = [notification object];
+    [[win windowController] release];
 }
 
 @end
