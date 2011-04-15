@@ -27,6 +27,8 @@
 @synthesize includeItemsFromShoppingList;
 @synthesize lists;
 @synthesize smartLists;
+@synthesize predicateEditor;
+@synthesize includeShoppingListBtn;
 
 - (id)initWithSmartList:(smartList*)list{
     if((self = [super init])){
@@ -160,16 +162,16 @@ NSLog(@"OPENING PREDICATE: %@", subPred);
 
 - (NSPopUpButton *)keypathPopUp {
     if(!keypathPopUp){
-	NSMenu *keypathMenu = [[[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"ReadMenu"] autorelease];
+        NSMenu *keypathMenu = [[[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"ReadMenu"] autorelease];
 
-	NSMenuItem *menuItem = [[[NSMenuItem alloc] initWithTitle:@"Is Read" action:nil keyEquivalent:@""] autorelease];
-	[menuItem setRepresentedObject:[NSExpression expressionForKeyPath:@"read"]];
-	[menuItem setEnabled:YES];
+        NSMenuItem *menuItem = [[[NSMenuItem alloc] initWithTitle:@"Is Read" action:nil keyEquivalent:@""] autorelease];
+        [menuItem setRepresentedObject:[NSExpression expressionForKeyPath:@"read"]];
+        [menuItem setEnabled:YES];
 
-	[keypathMenu addItem:menuItem];
+        [keypathMenu addItem:menuItem];
 
-	keypathPopUp = [[NSPopUpButton alloc] initWithFrame:NSZeroRect pullsDown:NO];
-	[keypathPopUp setMenu:keypathMenu];
+        keypathPopUp = [[NSPopUpButton alloc] initWithFrame:NSZeroRect pullsDown:NO];
+        [keypathPopUp setMenu:keypathMenu];
     }
 
     return keypathPopUp;
@@ -177,23 +179,23 @@ NSLog(@"OPENING PREDICATE: %@", subPred);
 
 - (NSPopUpButton *)boolPopUp {
     if(!boolPopUp){
-	NSMenu *boolMenu = [[[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"bool menu"] autorelease];
+        NSMenu *boolMenu = [[[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"bool menu"] autorelease];
 
-	NSMenuItem *yesItem = [[[NSMenuItem alloc] initWithTitle:@"Yes" action:nil keyEquivalent:@""] autorelease];
-	[yesItem setRepresentedObject:[NSExpression expressionForConstantValue:[NSNumber numberWithBool:YES]]];
-	[yesItem setEnabled:YES];
-	[yesItem setTag:1];
+        NSMenuItem *yesItem = [[[NSMenuItem alloc] initWithTitle:@"Yes" action:nil keyEquivalent:@""] autorelease];
+        [yesItem setRepresentedObject:[NSExpression expressionForConstantValue:[NSNumber numberWithBool:YES]]];
+        [yesItem setEnabled:YES];
+        [yesItem setTag:1];
 
-	NSMenuItem *noItem = [[[NSMenuItem alloc] initWithTitle:@"No" action:nil keyEquivalent:@""] autorelease];
-	[noItem setRepresentedObject:[NSExpression expressionForConstantValue:[NSNumber numberWithBool:NO]]];
-	[noItem setEnabled:YES];
-	[noItem setTag:0];
+        NSMenuItem *noItem = [[[NSMenuItem alloc] initWithTitle:@"No" action:nil keyEquivalent:@""] autorelease];
+        [noItem setRepresentedObject:[NSExpression expressionForConstantValue:[NSNumber numberWithBool:NO]]];
+        [noItem setEnabled:YES];
+        [noItem setTag:0];
 
-	[boolMenu addItem:yesItem];
-	[boolMenu addItem:noItem];
+        [boolMenu addItem:yesItem];
+        [boolMenu addItem:noItem];
 
-	boolPopUp = [[NSPopUpButton alloc] initWithFrame:NSZeroRect pullsDown:NO];
-	[boolPopUp setMenu:boolMenu];
+        boolPopUp = [[NSPopUpButton alloc] initWithFrame:NSZeroRect pullsDown:NO];
+        [boolPopUp setMenu:boolMenu];
     }
 
     return boolPopUp;
@@ -210,8 +212,8 @@ NSLog(@"OPENING PREDICATE: %@", subPred);
 - (double)matchForPredicate:(NSPredicate *)predicate{
     //this will work for now
     if([[predicate predicateFormat] isEqualToString:@"read == 1"] ||
-	    [[predicate predicateFormat] isEqualToString:@"read == 0"]){
-	return 1;
+            [[predicate predicateFormat] isEqualToString:@"read == 0"]){
+        return 1;
     }
 
     return 0;
@@ -227,15 +229,15 @@ NSLog(@"OPENING PREDICATE: %@", subPred);
     // Sets the Yes/No popup when a predicate is set on the template.
     id rightValue = [[(NSComparisonPredicate *)predicate rightExpression] constantValue];
     if([rightValue isKindOfClass:[NSNumber class]])
-	[[self boolPopUp] selectItemWithTag:[rightValue integerValue]];
+        [[self boolPopUp] selectItemWithTag:[rightValue integerValue]];
 }
 
 - (NSPredicate *)predicateWithSubpredicates:(NSArray *) subpredicates{
     NSPredicate *newPredicate = [NSComparisonPredicate predicateWithLeftExpression:[[[self keypathPopUp] selectedItem] representedObject]
-								   rightExpression:[[[self boolPopUp] selectedItem] representedObject]
-									  modifier:NSDirectPredicateModifier
-									      type:NSEqualToPredicateOperatorType
-									   options:0];
+                                                                   rightExpression:[[[self boolPopUp] selectedItem] representedObject]
+                                                                          modifier:NSDirectPredicateModifier
+                                                                              type:NSEqualToPredicateOperatorType
+                                                                           options:0];
     return newPredicate;
 }
 
@@ -265,15 +267,15 @@ NSLog(@"OPENING PREDICATE: %@", subPred);
 
 - (NSPopUpButton *)keypathPopUp {
     if(!keypathPopUp){
-	NSMenu *keypathMenu = [[[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"ListKeypathMenu"] autorelease];
+        NSMenu *keypathMenu = [[[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"ListKeypathMenu"] autorelease];
 
-	NSMenuItem *menuItem = [[[NSMenuItem alloc] initWithTitle:@"Booklist" action:nil keyEquivalent:@""] autorelease];
-	[menuItem setEnabled:YES];
+        NSMenuItem *menuItem = [[[NSMenuItem alloc] initWithTitle:@"Booklist" action:nil keyEquivalent:@""] autorelease];
+        [menuItem setEnabled:YES];
 
-	[keypathMenu addItem:menuItem];
+        [keypathMenu addItem:menuItem];
 
-	keypathPopUp = [[NSPopUpButton alloc] initWithFrame:NSZeroRect pullsDown:NO];
-	[keypathPopUp setMenu:keypathMenu];
+        keypathPopUp = [[NSPopUpButton alloc] initWithFrame:NSZeroRect pullsDown:NO];
+        [keypathPopUp setMenu:keypathMenu];
     }
 
     return keypathPopUp;
@@ -281,23 +283,23 @@ NSLog(@"OPENING PREDICATE: %@", subPred);
 
 - (NSPopUpButton*)boolPopUp{
     if(!boolPopUp){
-	NSMenu *boolMenu = [[[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"bool menu"] autorelease];
+        NSMenu *boolMenu = [[[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"bool menu"] autorelease];
 
-	NSMenuItem *yesItem = [[[NSMenuItem alloc] initWithTitle:@"is" action:nil keyEquivalent:@""] autorelease];
-	[yesItem setRepresentedObject:[NSNumber numberWithBool:YES]];
-	[yesItem setEnabled:YES];
-	[yesItem setTag:1];
+        NSMenuItem *yesItem = [[[NSMenuItem alloc] initWithTitle:@"is" action:nil keyEquivalent:@""] autorelease];
+        [yesItem setRepresentedObject:[NSNumber numberWithBool:YES]];
+        [yesItem setEnabled:YES];
+        [yesItem setTag:1];
 
-	NSMenuItem *noItem = [[[NSMenuItem alloc] initWithTitle:@"is not" action:nil keyEquivalent:@""] autorelease];
-	[noItem setRepresentedObject:[NSNumber numberWithBool:NO]];
-	[noItem setEnabled:YES];
-	[noItem setTag:0];
+        NSMenuItem *noItem = [[[NSMenuItem alloc] initWithTitle:@"is not" action:nil keyEquivalent:@""] autorelease];
+        [noItem setRepresentedObject:[NSNumber numberWithBool:NO]];
+        [noItem setEnabled:YES];
+        [noItem setTag:0];
 
-	[boolMenu addItem:yesItem];
-	[boolMenu addItem:noItem];
+        [boolMenu addItem:yesItem];
+        [boolMenu addItem:noItem];
 
-	boolPopUp = [[NSPopUpButton alloc] initWithFrame:NSZeroRect pullsDown:NO];
-	[boolPopUp setMenu:boolMenu];
+        boolPopUp = [[NSPopUpButton alloc] initWithFrame:NSZeroRect pullsDown:NO];
+        [boolPopUp setMenu:boolMenu];
     }
 
     return boolPopUp;
@@ -305,7 +307,7 @@ NSLog(@"OPENING PREDICATE: %@", subPred);
 
 - (NSPopUpButton *)listPopUp{
     if(!listPopUp){
-	NSMenu *listMenu = [[[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"list menu"] autorelease];
+        NSMenu *listMenu = [[[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"list menu"] autorelease];
 
         for(list* lst in [self lists]){
             NSMenuItem *listItem = [[[NSMenuItem alloc] initWithTitle:[lst name] action:nil keyEquivalent:@""] autorelease];
@@ -325,8 +327,8 @@ NSLog(@"OPENING PREDICATE: %@", subPred);
             [listMenu addItem:listItem];
         }
 
-	listPopUp = [[NSPopUpButton alloc] initWithFrame:NSZeroRect pullsDown:NO];
-	[listPopUp setMenu:listMenu];
+        listPopUp = [[NSPopUpButton alloc] initWithFrame:NSZeroRect pullsDown:NO];
+        [listPopUp setMenu:listMenu];
     }
 
     return listPopUp;
@@ -439,16 +441,16 @@ NSLog(@"OPENING PREDICATE: %@", subPred);
 
 - (NSPopUpButton *)keypathPopUp {
     if(!keypathPopUp){
-	NSMenu *keypathMenu = [[[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"DateKeypathMenu"] autorelease];
+        NSMenu *keypathMenu = [[[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"DateKeypathMenu"] autorelease];
 
-	NSMenuItem *menuItem = [[[NSMenuItem alloc] initWithTitle:@"Date Added" action:nil keyEquivalent:@""] autorelease];
-	[menuItem setRepresentedObject:@"dateAdded"];
-	[menuItem setEnabled:YES];
+        NSMenuItem *menuItem = [[[NSMenuItem alloc] initWithTitle:@"Date Added" action:nil keyEquivalent:@""] autorelease];
+        [menuItem setRepresentedObject:@"dateAdded"];
+        [menuItem setEnabled:YES];
 
-	[keypathMenu addItem:menuItem];
+        [keypathMenu addItem:menuItem];
 
-	keypathPopUp = [[NSPopUpButton alloc] initWithFrame:NSZeroRect pullsDown:NO];
-	[keypathPopUp setMenu:keypathMenu];
+        keypathPopUp = [[NSPopUpButton alloc] initWithFrame:NSZeroRect pullsDown:NO];
+        [keypathPopUp setMenu:keypathMenu];
     }
 
     return keypathPopUp;
@@ -456,23 +458,23 @@ NSLog(@"OPENING PREDICATE: %@", subPred);
 
 - (NSPopUpButton*)boolPopUp{
     if(!boolPopUp){
-	NSMenu *boolMenu = [[[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"bool menu"] autorelease];
+        NSMenu *boolMenu = [[[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"bool menu"] autorelease];
 
-	NSMenuItem *yesItem = [[[NSMenuItem alloc] initWithTitle:@"is in the last" action:nil keyEquivalent:@""] autorelease];
-	[yesItem setRepresentedObject:[NSNumber numberWithBool:YES]];
-	[yesItem setEnabled:YES];
-	[yesItem setTag:1];
+        NSMenuItem *yesItem = [[[NSMenuItem alloc] initWithTitle:@"is in the last" action:nil keyEquivalent:@""] autorelease];
+        [yesItem setRepresentedObject:[NSNumber numberWithBool:YES]];
+        [yesItem setEnabled:YES];
+        [yesItem setTag:1];
 
-	NSMenuItem *noItem = [[[NSMenuItem alloc] initWithTitle:@"is not in the last" action:nil keyEquivalent:@""] autorelease];
-	[noItem setRepresentedObject:[NSNumber numberWithBool:NO]];
-	[noItem setEnabled:YES];
-	[noItem setTag:0];
+        NSMenuItem *noItem = [[[NSMenuItem alloc] initWithTitle:@"is not in the last" action:nil keyEquivalent:@""] autorelease];
+        [noItem setRepresentedObject:[NSNumber numberWithBool:NO]];
+        [noItem setEnabled:YES];
+        [noItem setTag:0];
 
-	[boolMenu addItem:yesItem];
-	[boolMenu addItem:noItem];
+        [boolMenu addItem:yesItem];
+        [boolMenu addItem:noItem];
 
-	boolPopUp = [[NSPopUpButton alloc] initWithFrame:NSZeroRect pullsDown:NO];
-	[boolPopUp setMenu:boolMenu];
+        boolPopUp = [[NSPopUpButton alloc] initWithFrame:NSZeroRect pullsDown:NO];
+        [boolPopUp setMenu:boolMenu];
     }
 
     return boolPopUp;
@@ -489,29 +491,29 @@ NSLog(@"OPENING PREDICATE: %@", subPred);
 
 - (NSPopUpButton *)timeFramePopUp {
     if(!timeFramePopUp){
-	NSMenu *timeFrameMenu = [[[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"TimeFrameMenu"] autorelease];
+        NSMenu *timeFrameMenu = [[[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"TimeFrameMenu"] autorelease];
 
-	NSMenuItem *daysMenuItem = [[[NSMenuItem alloc] initWithTitle:@"Days" action:nil keyEquivalent:@""] autorelease];
+        NSMenuItem *daysMenuItem = [[[NSMenuItem alloc] initWithTitle:@"Days" action:nil keyEquivalent:@""] autorelease];
         [daysMenuItem setRepresentedObject:[NSNumber numberWithUnsignedInteger:SECS_IN_A_DAY]];
-	[daysMenuItem setEnabled:YES];
-	[daysMenuItem setTag:timeFrameDays];
+        [daysMenuItem setEnabled:YES];
+        [daysMenuItem setTag:timeFrameDays];
 
-	NSMenuItem *weeksMenuItem = [[[NSMenuItem alloc] initWithTitle:@"Weeks" action:nil keyEquivalent:@""] autorelease];
-	[weeksMenuItem setRepresentedObject:[NSNumber numberWithUnsignedInteger:SECS_IN_A_WEEK]];
-	[weeksMenuItem setEnabled:YES];
-	[weeksMenuItem setTag:timeFrameWeeks];
+        NSMenuItem *weeksMenuItem = [[[NSMenuItem alloc] initWithTitle:@"Weeks" action:nil keyEquivalent:@""] autorelease];
+        [weeksMenuItem setRepresentedObject:[NSNumber numberWithUnsignedInteger:SECS_IN_A_WEEK]];
+        [weeksMenuItem setEnabled:YES];
+        [weeksMenuItem setTag:timeFrameWeeks];
 
-	NSMenuItem *monthsMenuItem = [[[NSMenuItem alloc] initWithTitle:@"Months" action:nil keyEquivalent:@""] autorelease];
-	[monthsMenuItem setRepresentedObject:[NSNumber numberWithUnsignedInteger:SECS_IN_A_MONTH]]; //1 month defined as 4 weeks
-	[monthsMenuItem setEnabled:YES];
-	[monthsMenuItem setTag:timeFrameMonths];
+        NSMenuItem *monthsMenuItem = [[[NSMenuItem alloc] initWithTitle:@"Months" action:nil keyEquivalent:@""] autorelease];
+        [monthsMenuItem setRepresentedObject:[NSNumber numberWithUnsignedInteger:SECS_IN_A_MONTH]]; //1 month defined as 4 weeks
+        [monthsMenuItem setEnabled:YES];
+        [monthsMenuItem setTag:timeFrameMonths];
 
-	[timeFrameMenu addItem:daysMenuItem];
-	[timeFrameMenu addItem:weeksMenuItem];
-	[timeFrameMenu addItem:monthsMenuItem];
+        [timeFrameMenu addItem:daysMenuItem];
+        [timeFrameMenu addItem:weeksMenuItem];
+        [timeFrameMenu addItem:monthsMenuItem];
 
-	timeFramePopUp = [[NSPopUpButton alloc] initWithFrame:NSZeroRect pullsDown:NO];
-	[timeFramePopUp setMenu:timeFrameMenu];
+        timeFramePopUp = [[NSPopUpButton alloc] initWithFrame:NSZeroRect pullsDown:NO];
+        [timeFramePopUp setMenu:timeFrameMenu];
     }
 
     return timeFramePopUp;
