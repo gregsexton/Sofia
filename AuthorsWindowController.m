@@ -40,7 +40,7 @@
     return self;
 }
 
-- (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)coord 
+- (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)coord
                           selectedAuthor:(author*)authorInput
                             selectButton:(BOOL)withSelect{
     coordinator          = coord;
@@ -78,7 +78,6 @@
 }
 
 - (void)dealloc{
-    [[self window] release];
     [authorArrayController release];
     [bookArrayController release];
     [managedObjectContext release];

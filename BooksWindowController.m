@@ -616,13 +616,12 @@
 }
 
 - (void)displayManagedSubjectsWithSelectedSubject:(subject*)subjectObj{
-    SubjectWindowController *detailWin = [[SubjectWindowController alloc] initWithManagedObjectContext:managedObjectContext
-                                                                                       selectedSubject:subjectObj
-                                                                                          selectButton:true];
+    SubjectWindowController *detailWin = [[SubjectWindowController alloc] initWithPersistentStoreCoordinator:[managedObjectContext persistentStoreCoordinator]
+                                                                                             selectedSubject:subjectObj
+                                                                                                selectButton:true];
     [detailWin setDelegate:self];
-    if (![NSBundle loadNibNamed:@"SubjectDetail" owner:detailWin]) {
-        NSLog(@"Error loading Nib!");
-    }
+    [detailWin loadWindow];
+    [[detailWin window] setDelegate:self];
 }
 
 - (IBAction)addSubjectClicked:(id)sender{

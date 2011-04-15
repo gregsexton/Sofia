@@ -26,27 +26,37 @@
 @implementation SubjectWindowController
 @synthesize delegate;
 
-- (id)initWithManagedObjectContext:(NSManagedObjectContext*)context {
-    managedObjectContext = context;
+- (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)coord{
+    coordinator = coord;
     initialSelection = nil;
     useSelectButton = false;
     return self;
 }
 
-- (id)initWithManagedObjectContext:(NSManagedObjectContext*)context
-		   selectedSubject:(subject*)subjectInput
-		      selectButton:(BOOL)withSelect{
-    managedObjectContext = context;
+- (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)coord
+                         selectedSubject:(subject*)subjectInput
+                            selectButton:(BOOL)withSelect{
+    coordinator = coord;
     initialSelection = subjectInput;
     useSelectButton = withSelect;
     return self;
 }
 
+- (void)dealloc{
+    [managedObjectContext release];
+    [bookArrayController release];
+    [subjectArrayController release];
+
+    [super dealloc];
+}
+
 - (void)awakeFromNib {
-    [window makeKeyAndOrderFront:self];
+    [[self window] makeKeyAndOrderFront:self];
 
     [bookTableView setDoubleAction:@selector(doubleClickBookAction:)];
     [bookTableView setTarget:self];
+
+    [managedObjectContext setPersistentStoreCoordinator:coordinator];
 
     //guarantees loaded as next instruction doesn't execute until afterwards
     NSError *error;
@@ -57,45 +67,59 @@
     [bookTableView    setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:true]]];
 
     if(initialSelection != nil){
-	[self selectAndScrollToSubject:initialSelection];
+        [self selectAndScrollToSubject:initialSelection];
     }
 
     if(useSelectButton){
-	[saveButton setTitle:@"Select"];
+        [saveButton setTitle:@"Select"];
+    }
+}
+
+- (void)loadWindow{
+    if (![NSBundle loadNibNamed:@"SubjectDetail" owner:self]) {
+        NSLog(@"Error loading Nib!");
+        return;
     }
 }
 
 - (void)selectAndScrollToSubject:(subject*)subjectObj{
-    NSIndexSet *index = [NSIndexSet indexSetWithIndex:[[subjectArrayController arrangedObjects] indexOfObject:subjectObj]];
+    //linear search -- this is a hack and won't work for mulitple subjects with the same name FIXME
+    NSUInteger idx = NSNotFound;
+    NSUInteger count = 0;
+    for(subject* s in [subjectArrayController arrangedObjects]){
+        if([[s name] isEqualToString:[subjectObj name]]){
+            idx = count;
+            break;
+        }
+        count++;
+    }
+    if(idx == NSNotFound){
+        return;
+    }
+
+    NSIndexSet *index = [NSIndexSet indexSetWithIndex:idx];
     [subjectTableView selectRowIndexes:index byExtendingSelection:NO];
     [subjectTableView scrollRowToVisible:[index firstIndex]];
 }
 
-- (NSManagedObjectContext *)managedObjectContext{
-    if (managedObjectContext != nil) {
-        return managedObjectContext;
-    }
-    return nil;
-}
-
 - (void)beginEditingCurrentlySelectedItemInSubjectsTable{
     [subjectTableView editColumn:0
-			     row:[subjectTableView selectedRow]
-		       withEvent:nil
-			  select:YES];
+                             row:[subjectTableView selectedRow]
+                       withEvent:nil
+                          select:YES];
 }
 
 - (IBAction)saveClicked:(id)sender {
     [self saveManagedObjectContext:managedObjectContext];
     //let delegate know
     if([[self delegate] respondsToSelector:@selector(savedWithSubjectSelection:)]) {
-	[[self delegate] savedWithSubjectSelection:[[subjectArrayController selectedObjects] objectAtIndex:0]];
+        [[self delegate] savedWithSubjectSelection:[[subjectArrayController selectedObjects] objectAtIndex:0]];
     }
-    [window close];
+    [[self window] performClose:self];
 }
 
 - (IBAction)cancelClicked:(id)sender {
-    [window close];
+    [[self window] performClose:self];
 }
 
 - (void)saveManagedObjectContext:(NSManagedObjectContext*)context {
@@ -110,9 +134,9 @@
     book *obj = [[bookArrayController selectedObjects] objectAtIndex:0];
 
     BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj
-										 withSearch:false];
+                                                                                 withSearch:false];
     if (![NSBundle loadNibNamed:@"Detail" owner:[detailWin autorelease]]) {
-	NSLog(@"Error loading Nib!");
+        NSLog(@"Error loading Nib!");
     }
 }
 
@@ -132,10 +156,10 @@
     unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
 
     if (key == NSDeleteCharacter || key == NSBackspaceCharacter){
-	[subjectArrayController remove:self];
+        [subjectArrayController remove:self];
     }else{
-	//pass on to next first responder if not going to handle it
-	[super keyDown:theEvent];
+        //pass on to next first responder if not going to handle it
+        [super keyDown:theEvent];
     }
 }
 

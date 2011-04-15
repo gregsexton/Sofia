@@ -203,11 +203,9 @@
 }
 
 - (IBAction) manageSubjectsClickAction:(id)sender {
-	SubjectWindowController *detailWin = [[SubjectWindowController alloc] initWithManagedObjectContext:[self managedObjectContext]];
-	//[detailWin setDelegate:self];
-	if (![NSBundle loadNibNamed:@"SubjectDetail" owner:[detailWin autorelease]]) {
-	    NSLog(@"Error loading Nib!");
-	}
+    SubjectWindowController *detailWin = [[SubjectWindowController alloc] initWithPersistentStoreCoordinator:[self persistentStoreCoordinator]];
+    [detailWin loadWindow];
+    [[detailWin window] setDelegate:self];
 }
 
 - (IBAction) addRemoveClickAction:(id)sender {
