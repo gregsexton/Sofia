@@ -27,20 +27,26 @@
 
 
 @interface SubjectWindowController : NSWindowController {
-    IBOutlet NSManagedObjectContext*    managedObjectContext;
-    IBOutlet NSArrayController*         bookArrayController;
-    IBOutlet NSTableView*               bookTableView;
-    IBOutlet NSArrayController*         subjectArrayController;
-    IBOutlet NSTableView*               subjectTableView;
-    IBOutlet NSButton*                  saveButton;
+    NSManagedObjectContext*        managedObjectContext;
+    NSArrayController*             bookArrayController;
+    NSTableView*                   bookTableView;
+    NSArrayController*             subjectArrayController;
+    NSTableView*                   subjectTableView;
+    NSButton*                      saveButton;
 
-    subject*                            initialSelection;
-    BOOL                                useSelectButton;
-    NSPersistentStoreCoordinator*       coordinator;
+    subject*                       initialSelection;
+    BOOL                           useSelectButton;
+    NSPersistentStoreCoordinator*  coordinator;
 
     id<SubjectWindowControllerDelegate> delegate;
 }
 @property (nonatomic, assign) id<SubjectWindowControllerDelegate> delegate;
+@property (nonatomic, assign) IBOutlet NSManagedObjectContext* managedObjectContext;
+@property (nonatomic, assign) IBOutlet NSArrayController*      bookArrayController;
+@property (nonatomic, assign) IBOutlet NSTableView*            bookTableView;
+@property (nonatomic, assign) IBOutlet NSArrayController*      subjectArrayController;
+@property (nonatomic, assign) IBOutlet NSTableView*            subjectTableView;
+@property (nonatomic, assign) IBOutlet NSButton*               saveButton;
 
 - (IBAction)saveClicked:(id)sender;
 - (IBAction)cancelClicked:(id)sender;

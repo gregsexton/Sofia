@@ -25,6 +25,12 @@
 
 @implementation SubjectWindowController
 @synthesize delegate;
+@synthesize managedObjectContext;
+@synthesize bookArrayController;
+@synthesize bookTableView;
+@synthesize subjectArrayController;
+@synthesize subjectTableView;
+@synthesize saveButton;
 
 - (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)coord{
     coordinator = coord;
