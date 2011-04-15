@@ -31,9 +31,8 @@
 #define SECS_IN_A_WEEK 604800.0
 #define SECS_IN_A_MONTH 2419200.0
 
-@interface PredicateEditorWindowController : NSObject {
+@interface PredicateEditorWindowController : NSWindowController {
 
-    IBOutlet NSWindow*		    window;
     IBOutlet NSPredicateEditor*	    predicateEditor;
     IBOutlet NSButton*              includeShoppingListBtn;
 

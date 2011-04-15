@@ -49,8 +49,14 @@
     return self;
 }
 
+- (void)loadWindow{
+    if (![NSBundle loadNibNamed:@"PredicateEditor" owner:self]) {
+        NSLog(@"Error loading Nib!");
+        return;
+    }
+}
+
 - (void)dealloc{
-    NSLog(@"Got here. Pred");
     if(predicate)
         [predicate release];
     if(lists)
@@ -62,7 +68,7 @@
 }
 
 - (void)awakeFromNib {
-    [window makeKeyAndOrderFront:self];
+    [[self window] makeKeyAndOrderFront:self];
 
     //add ListEditorRowTemplate -- has to be done programatically as need to pass lists/smartLists to it.
     ListEditorRowTemplate* leRowTemplate = [[ListEditorRowTemplate alloc] init];
@@ -133,7 +139,7 @@ NSLog(@"OPENING PREDICATE: %@", subPred);
         NSLog(@"SAVING PREDICATE: %@", pred);
         [listToTransferTo setFilter:pred];
     }
-    [window close];
+    [[self window] close];
 }
 
 - (IBAction)cancelClicked:(id)sender {
@@ -142,7 +148,7 @@ NSLog(@"OPENING PREDICATE: %@", subPred);
         [[self delegate] predicateEditingWasCancelled];
     }
 
-    [window close];
+    [[self window] close];
 }
 
 @end

@@ -36,7 +36,9 @@
 #define BOOK_LIBRARY @"Books"
 #define SHOPPING_LIST_LIBRARY @"Shopping List"
 
-@interface SidebarOutlineView : NSOutlineView <NSOutlineViewDelegate, NSOutlineViewDataSource, PredicateEditorWindowControllerDelegate> {
+@interface SidebarOutlineView : NSOutlineView <NSOutlineViewDelegate,
+                                               NSOutlineViewDataSource,
+                                               PredicateEditorWindowControllerDelegate> {
 
     IBOutlet NSArrayController *arrayController;
     IBOutlet SofiaApplication *application;
