@@ -37,78 +37,80 @@
 #import "SimilarBooksViewController.h"
 #import "ReviewsViewController.h"
 
-@interface BooksWindowController : NSObjectController <AuthorsWindowControllerDelegate, SubjectWindowControllerDelegate, NSWindowDelegate> {
-    IBOutlet NSTextField *txt_search;
+@interface BooksWindowController : NSObjectController <AuthorsWindowControllerDelegate,
+                                                       SubjectWindowControllerDelegate,
+                                                       NSWindowDelegate> {
+    IBOutlet NSTextField*                txt_search;
 
-    IBOutlet NSTextField    *txt_isbn10;
-    IBOutlet NSTextField    *txt_isbn13;
-    IBOutlet NSComboBox	    *txt_title;
-    IBOutlet NSComboBox     *txt_titleLong;
-    IBOutlet NSComboBox     *txt_author;
-    IBOutlet NSComboBox     *txt_publisher;
-    IBOutlet NSComboBox	    *txt_subject;
-    IBOutlet NSTextField    *txt_edition;
-    IBOutlet NSComboBox     *txt_physicalDescrip;
-    IBOutlet NSTextField    *txt_dewey;
-    IBOutlet NSTextField    *txt_deweyNormal;
-    IBOutlet NSTextField    *txt_lccNumber;
-    IBOutlet NSTextField    *txt_language;
-    IBOutlet NSTextField    *txt_noOfCopies;
-    IBOutlet NSStepper	    *step_noOfCopies;
+    IBOutlet NSTextField*                txt_isbn10;
+    IBOutlet NSTextField*                txt_isbn13;
+    IBOutlet NSComboBox*                 txt_title;
+    IBOutlet NSComboBox*                 txt_titleLong;
+    IBOutlet NSComboBox*                 txt_author;
+    IBOutlet NSComboBox*                 txt_publisher;
+    IBOutlet NSComboBox*                 txt_subject;
+    IBOutlet NSTextField*                txt_edition;
+    IBOutlet NSComboBox*                 txt_physicalDescrip;
+    IBOutlet NSTextField*                txt_dewey;
+    IBOutlet NSTextField*                txt_deweyNormal;
+    IBOutlet NSTextField*                txt_lccNumber;
+    IBOutlet NSTextField*                txt_language;
+    IBOutlet NSTextField*                txt_noOfCopies;
+    IBOutlet NSStepper*                  step_noOfCopies;
 
-    IBOutlet NSTextView     *txt_summary;
-    IBOutlet NSTextView     *txt_notes;
-    IBOutlet NSTextView     *txt_awards;
-    IBOutlet NSTextView     *txt_urls;
+    IBOutlet NSTextView*                 txt_summary;
+    IBOutlet NSTextView*                 txt_notes;
+    IBOutlet NSTextView*                 txt_awards;
+    IBOutlet NSTextView*                 txt_urls;
 
-    IBOutlet NSTextView	    *txt_toc;
+    IBOutlet NSTextView*                 txt_toc;
 
-    IBOutlet NSButton	    *btn_search;
-    IBOutlet NSButton 	    *btn_clear;
-    IBOutlet NSButton 	    *btn_save;
-    IBOutlet NSButton 	    *btn_cancel;
+    IBOutlet NSButton*                   btn_search;
+    IBOutlet NSButton*                   btn_clear;
+    IBOutlet NSButton*                   btn_save;
+    IBOutlet NSButton*                   btn_cancel;
 
-    IBOutlet NSWindow	    *window;
-    IBOutlet NSPanel	    *progressSheet;
+    IBOutlet NSWindow*                   window;
+    IBOutlet NSPanel*                    progressSheet;
 
-    IBOutlet NSProgressIndicator *progIndicator;
+    IBOutlet NSProgressIndicator*        progIndicator;
 
     //for the summary tab
-    IBOutlet NSTextField    *lbl_summary_isbn10;
-    IBOutlet NSTextField    *lbl_summary_isbn13;
-    IBOutlet NSTextField    *lbl_summary_title;
-    IBOutlet NSTextField    *lbl_summary_titleLong;
-    IBOutlet NSTextField    *lbl_summary_author;
-    IBOutlet NSTextField    *lbl_summary_publisher;
-    IBOutlet NSTextField    *lbl_summary_subject;
-    IBOutlet NSTextField    *lbl_summary_edition;
-    IBOutlet NSTextField    *lbl_summary_physicalDescrip;
-    IBOutlet NSTextField    *lbl_summary_dewey;
-    IBOutlet NSTextField    *lbl_summary_deweyNormal;
-    IBOutlet NSTextField    *lbl_summary_lccNumber;
-    IBOutlet NSTextField    *lbl_summary_language;
-    IBOutlet NSTextField    *lbl_summary_noOfCopies;
-    IBOutlet NSTextField    *lbl_summary_summary;
+    IBOutlet NSTextField*                lbl_summary_isbn10;
+    IBOutlet NSTextField*                lbl_summary_isbn13;
+    IBOutlet NSTextField*                lbl_summary_title;
+    IBOutlet NSTextField*                lbl_summary_titleLong;
+    IBOutlet NSTextField*                lbl_summary_author;
+    IBOutlet NSTextField*                lbl_summary_publisher;
+    IBOutlet NSTextField*                lbl_summary_subject;
+    IBOutlet NSTextField*                lbl_summary_edition;
+    IBOutlet NSTextField*                lbl_summary_physicalDescrip;
+    IBOutlet NSTextField*                lbl_summary_dewey;
+    IBOutlet NSTextField*                lbl_summary_deweyNormal;
+    IBOutlet NSTextField*                lbl_summary_lccNumber;
+    IBOutlet NSTextField*                lbl_summary_language;
+    IBOutlet NSTextField*                lbl_summary_noOfCopies;
+    IBOutlet NSTextField*                lbl_summary_summary;
 
-    IBOutlet NSImageView    *img_summary_cover;
-    IBOutlet NSImageView    *img_cover;
+    IBOutlet NSImageView*                img_summary_cover;
+    IBOutlet NSImageView*                img_cover;
 
-    IBOutlet NSTableView	*authorsTableView;
-    IBOutlet NSTableView	*subjectsTableView;
-    IBOutlet NSArrayController	*authorsArrayController;
-    IBOutlet NSArrayController	*subjectsArrayController;
-    IBOutlet SimilarBooksViewController *similarBooksController;
-    IBOutlet ReviewsViewController *reviewsController;
+    IBOutlet NSTableView*                authorsTableView;
+    IBOutlet NSTableView*                subjectsTableView;
+    IBOutlet NSArrayController*          authorsArrayController;
+    IBOutlet NSArrayController*          subjectsArrayController;
+    IBOutlet SimilarBooksViewController* similarBooksController;
+    IBOutlet ReviewsViewController*      reviewsController;
 
-    IBOutlet NSTextField    *errorLabel;
-    NSMutableArray	    *isbnSearchErrors;
+    IBOutlet NSTextField*                errorLabel;
+    NSMutableArray*                      isbnSearchErrors;
 
-    book				*obj;
-    author				*doubleClickedAuthor;
-    subject				*doubleClickedSubject;
-    NSManagedObjectContext		*managedObjectContext;
-    id<BooksWindowControllerDelegate>   delegate;
-    BOOL				displaySearch;
+    book*                                obj;
+    author*                              doubleClickedAuthor;
+    subject*                             doubleClickedSubject;
+    NSManagedObjectContext*              managedObjectContext;
+    id<BooksWindowControllerDelegate>    delegate;
+    BOOL                                 displaySearch;
 }
 
 @property (nonatomic, assign) book *obj;
