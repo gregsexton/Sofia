@@ -164,9 +164,9 @@
 }
 
 - (void)menuEditViewBookOnItems{
-    if (![NSBundle loadNibNamed:@"ExternalLinkEditor" owner:self]) {
-	NSLog(@"Error loading Nib!");
-    }
+    ExternalLinkEditorController* control = [[ExternalLinkEditorController alloc] init];
+    [control loadWindow];
+    [[control window] setDelegate:application];
 }
 
 // delegate methods ////////////////////////////////////////////////////

@@ -22,6 +22,7 @@
 #import <Cocoa/Cocoa.h>
 #import "SidebarOutlineView.h"
 #import "SofiaApplication.h"
+#import "ExternalLinkEditorController.h"
 #import "book.h"
 
 #define SofiaDragType @"SofiaDragType"
