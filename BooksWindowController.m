@@ -29,6 +29,71 @@
 @synthesize delegate;
 @synthesize displaySearch;
 
+@synthesize txt_search;
+
+@synthesize txt_isbn10;
+@synthesize txt_isbn13;
+@synthesize txt_title;
+@synthesize txt_titleLong;
+@synthesize txt_author;
+@synthesize txt_publisher;
+@synthesize txt_subject;
+@synthesize txt_edition;
+@synthesize txt_physicalDescrip;
+@synthesize txt_dewey;
+@synthesize txt_deweyNormal;
+@synthesize txt_lccNumber;
+@synthesize txt_language;
+@synthesize txt_noOfCopies;
+@synthesize step_noOfCopies;
+
+@synthesize txt_summary;
+@synthesize txt_notes;
+@synthesize txt_awards;
+@synthesize txt_urls;
+
+@synthesize txt_toc;
+
+@synthesize btn_search;
+@synthesize btn_clear;
+@synthesize btn_save;
+@synthesize btn_cancel;
+
+//for the summary tab
+@synthesize lbl_summary_isbn10;
+@synthesize lbl_summary_isbn13;
+@synthesize lbl_summary_title;
+@synthesize lbl_summary_titleLong;
+@synthesize lbl_summary_author;
+@synthesize lbl_summary_publisher;
+@synthesize lbl_summary_subject;
+@synthesize lbl_summary_edition;
+@synthesize lbl_summary_physicalDescrip;
+@synthesize lbl_summary_dewey;
+@synthesize lbl_summary_deweyNormal;
+@synthesize lbl_summary_lccNumber;
+@synthesize lbl_summary_language;
+@synthesize lbl_summary_noOfCopies;
+@synthesize lbl_summary_summary;
+
+@synthesize img_summary_cover;
+@synthesize img_cover;
+
+@synthesize authorsTableView;
+@synthesize subjectsTableView;
+@synthesize progIndicator;
+
+//top level objects
+@synthesize managedObjectContext;
+@synthesize bookObjectController;
+@synthesize authorsArrayController;
+@synthesize subjectsArrayController;
+@synthesize similarBooksController;
+@synthesize reviewsController;
+@synthesize progressSheet;
+
+@synthesize errorLabel;
+
 - (id)initWithManagedObject:(book*)object withApp:(SofiaApplication*)app withSearch:(BOOL)withSearch{
     self = [super init];
     [self setObj:object];
