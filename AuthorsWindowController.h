@@ -22,37 +22,43 @@
 #import <Cocoa/Cocoa.h>
 #import "author.h"
 #import "AuthorsWindowControllerDelegate.h"
+@class SofiaApplication;
 
 
-@interface AuthorsWindowController : NSWindowController{
+@interface AuthorsWindowController : NSWindowController {
 
-    NSArrayController*         bookArrayController;
-    NSTableView*               bookTableView;
-    NSArrayController*         authorArrayController;
-    NSTableView*               authorTableView;
-    NSButton*                  saveButton;
-    NSManagedObjectContext*    managedObjectContext;
+    NSArrayController*            bookArrayController;
+    NSTableView*                  bookTableView;
+    NSArrayController*            authorArrayController;
+    NSTableView*                  authorTableView;
+    NSButton*                     saveButton;
+    NSManagedObjectContext*       managedObjectContext;
 
-    NSPersistentStoreCoordinator*       coordinator;
-    author*                             initialSelection;
-    BOOL			        useSelectButton;
+    SofiaApplication*             sofiaApplication;
+
+    NSPersistentStoreCoordinator* coordinator;
+    author*                       initialSelection;
+    BOOL			  useSelectButton;
 
     id<AuthorsWindowControllerDelegate>	delegate;
 }
 @property (nonatomic, assign) id<AuthorsWindowControllerDelegate> delegate;
-@property (nonatomic, assign) IBOutlet NSArrayController*         bookArrayController;
-@property (nonatomic, assign) IBOutlet NSTableView*               bookTableView;
-@property (nonatomic, assign) IBOutlet NSArrayController*         authorArrayController;
-@property (nonatomic, assign) IBOutlet NSTableView*               authorTableView;
-@property (nonatomic, assign) IBOutlet NSButton*                  saveButton;
-@property (nonatomic, assign) IBOutlet NSManagedObjectContext*    managedObjectContext;
+@property (nonatomic, assign) IBOutlet NSArrayController*      bookArrayController;
+@property (nonatomic, assign) IBOutlet NSTableView*            bookTableView;
+@property (nonatomic, assign) IBOutlet NSArrayController*      authorArrayController;
+@property (nonatomic, assign) IBOutlet NSTableView*            authorTableView;
+@property (nonatomic, assign) IBOutlet NSButton*               saveButton;
+@property (nonatomic, assign) IBOutlet NSManagedObjectContext* managedObjectContext;
 
 - (IBAction)addAuthorAction:(id)sender;
 - (IBAction)cancelClicked:(id)sender;
 - (IBAction)doubleClickBookAction:(id)sender;
 - (IBAction)saveClicked:(id)sender;
-- (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)context selectedAuthor:(author*)authorInput selectButton:(BOOL)withSelect;
-- (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)context;
+- (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)coord application:(SofiaApplication*)app;
+- (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)coord
+                             application:(SofiaApplication*)app
+                          selectedAuthor:(author*)authorInput
+                            selectButton:(BOOL)withSelect;
 - (void)loadWindow;
 - (void)saveManagedObjectContext:(NSManagedObjectContext*)context;
 - (void)selectAndScrollToAuthor:(author*)authorObj;

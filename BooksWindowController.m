@@ -29,46 +29,60 @@
 @synthesize delegate;
 @synthesize displaySearch;
 
-- (id)init {
+- (id)initWithManagedObject:(book*)object withApp:(SofiaApplication*)app withSearch:(BOOL)withSearch{
     self = [super init];
-    return self;
-}
-
-- (id)initWithManagedObject:(book*)object withSearch:(BOOL)withSearch{
-    self = [super init];
-    obj = [object retain];
-    managedObjectContext = [obj managedObjectContext];
-    displaySearch = !withSearch;
-    isbnSearchErrors = [[NSMutableArray alloc] initWithCapacity:2];
+    [self setObj:object];
+    displaySearch        = !withSearch;
+    sofiaApplication     = app;
+    isbnSearchErrors     = [[NSMutableArray alloc] initWithCapacity:2];
     return self;
 }
 
 - (void)dealloc{
-    [obj release];
+    NSLog(@"In BooksWindowController dealloc.");
     [isbnSearchErrors release];
+
+    //release retained properties
+    [obj release];
+
+    //release top level nib objects
+    [managedObjectContext    release];
+    [bookObjectController    release];
+    [authorsArrayController  release];
+    [subjectsArrayController release];
+    [similarBooksController  release];
+    [reviewsController       release];
+    [progressSheet           release];
+
     [super dealloc];
 }
 
 - (void)awakeFromNib {
-    [window makeKeyAndOrderFront:self];
+    [[self window] makeKeyAndOrderFront:self];
     if (obj != nil){
         [self updateUIFromManagedObject];
         [self updateSummaryTabView];
     }
+
+    [similarBooksController setApplication:sofiaApplication];
+    [bookObjectController setContent:[self obj]];
+    NSPersistentStoreCoordinator* coord = [[obj managedObjectContext] persistentStoreCoordinator];
+    [managedObjectContext setPersistentStoreCoordinator:coord];
+
     [authorsTableView setDoubleAction:@selector(doubleClickAuthorAction:)];
     [authorsTableView setTarget:self];
     [subjectsTableView setDoubleAction:@selector(doubleClickSubjectAction:)];
     [subjectsTableView setTarget:self];
 }
 
-- (NSManagedObjectContext *)managedObjectContext{
-    if (managedObjectContext != nil)
-        return managedObjectContext;
-    return nil;
+- (void)loadWindow{
+    if (![NSBundle loadNibNamed:@"Detail" owner:self]) {
+	NSLog(@"Error loading Nib!");
+        return;
+    }
 }
 
 - (void)saveManagedObjectContext:(NSManagedObjectContext*)context {
-
     NSError *error = nil;
     if (![context save:&error]) {
         [[NSApplication sharedApplication] presentError:error];
@@ -465,7 +479,7 @@
 
     [progIndicator setUsesThreadedAnimation:true];
     [progIndicator startAnimation:self];
-    [NSApp beginSheet:progressSheet modalForWindow:window
+    [NSApp beginSheet:progressSheet modalForWindow:[self window]
                                      modalDelegate:self
                                     didEndSelector:NULL
                                        contextInfo:nil];
@@ -494,7 +508,7 @@
 - (IBAction)saveClicked:(id)sender {
     [self updateManagedObjectFromUI];
     [self saveManagedObjectContext:managedObjectContext];
-    [window close];
+    [[self window] close];
 
     if([[self delegate] respondsToSelector:@selector(saveClicked:)]){
         [delegate saveClicked:self];
@@ -511,7 +525,7 @@
         [delegate cancelClicked:self];
     }
 
-    [window close];
+    [[self window] close];
 }
 
 - (IBAction)copiesValueChanged:(id)sender {
@@ -587,11 +601,12 @@
 
 - (void)displayManagedAuthorsWithSelectedAuthor:(author*)authorObj{
     AuthorsWindowController *detailWin = [[AuthorsWindowController alloc] initWithPersistentStoreCoordinator:[managedObjectContext persistentStoreCoordinator]
+                                                                                                 application:sofiaApplication
                                                                                               selectedAuthor:authorObj
                                                                                                 selectButton:true];
     [detailWin setDelegate:self];
     [detailWin loadWindow];
-    [[detailWin window] setDelegate:self];
+    [[detailWin window] setDelegate:sofiaApplication];
 }
 
 - (IBAction)addAuthorClicked:(id)sender{
@@ -617,24 +632,17 @@
 
 - (void)displayManagedSubjectsWithSelectedSubject:(subject*)subjectObj{
     SubjectWindowController *detailWin = [[SubjectWindowController alloc] initWithPersistentStoreCoordinator:[managedObjectContext persistentStoreCoordinator]
+                                                                                                     withApp:sofiaApplication
                                                                                              selectedSubject:subjectObj
                                                                                                 selectButton:true];
     [detailWin setDelegate:self];
     [detailWin loadWindow];
-    [[detailWin window] setDelegate:self];
+    [[detailWin window] setDelegate:sofiaApplication];
 }
 
 - (IBAction)addSubjectClicked:(id)sender{
     doubleClickedSubject = nil; //just to make sure!
     [self displayManagedSubjectsWithSelectedSubject:nil];
-}
-
-//NSWindowDelegate methods
-
-- (void)windowWillClose:(NSNotification*)notification{
-    //release controller, which should in turn release everything
-    NSWindow* win = [notification object];
-    [[win windowController] release];
 }
 
 @end

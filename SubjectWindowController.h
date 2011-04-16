@@ -24,6 +24,7 @@
 #import "book.h"
 #import "BooksWindowController.h"
 #import "SubjectWindowControllerDelegate.h"
+#import "SofiaApplication.h"
 
 
 @interface SubjectWindowController : NSWindowController {
@@ -33,6 +34,8 @@
     NSArrayController*             subjectArrayController;
     NSTableView*                   subjectTableView;
     NSButton*                      saveButton;
+
+    SofiaApplication*              sofiaApplication;
 
     subject*                       initialSelection;
     BOOL                           useSelectButton;
@@ -52,8 +55,11 @@
 - (IBAction)cancelClicked:(id)sender;
 - (IBAction)doubleClickBookAction:(id)sender;
 - (IBAction)addSubjectAction:(id)sender;
-- (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)context;
-- (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)context selectedSubject:(subject*)subjectInput selectButton:(BOOL)withSelect;
+- (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)coord withApp:(SofiaApplication*)app;
+- (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)coord
+                                 withApp:(SofiaApplication*)app
+                         selectedSubject:(subject*)subjectInput
+                            selectButton:(BOOL)withSelect;
 - (void)saveManagedObjectContext:(NSManagedObjectContext*)context;
 - (void)selectAndScrollToSubject:(subject*)subjectObj;
 

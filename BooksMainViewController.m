@@ -55,12 +55,12 @@
 
 - (void)openDetailWindowForBook:(book*)obj{
     BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj
+                                                                                    withApp:application
 										 withSearch:NO];
     [detailWin setDelegate:self];
-
-    if (![NSBundle loadNibNamed:@"Detail" owner:[detailWin autorelease]]) {
-	NSLog(@"Error loading Nib!");
-    }
+    [detailWin loadWindow];
+    //the application delegate will release the controller when the window closes.
+    [[detailWin window] setDelegate:application];
 }
 
 // menu methods ////////////////////////////////////////////////////////
@@ -166,6 +166,7 @@
 - (void)menuEditViewBookOnItems{
     ExternalLinkEditorController* control = [[ExternalLinkEditorController alloc] init];
     [control loadWindow];
+    //the application delegate will release the controller when the window closes.
     [[control window] setDelegate:application];
 }
 

@@ -197,13 +197,15 @@
 }
 
 - (IBAction) manageAuthorsClickAction:(id)sender {
-    AuthorsWindowController *detailWin = [[AuthorsWindowController alloc] initWithPersistentStoreCoordinator:[self persistentStoreCoordinator]];
+    AuthorsWindowController *detailWin = [[AuthorsWindowController alloc] initWithPersistentStoreCoordinator:[self persistentStoreCoordinator]
+                                                                                                 application:self];
     [detailWin loadWindow];
     [[detailWin window] setDelegate:self];
 }
 
 - (IBAction) manageSubjectsClickAction:(id)sender {
-    SubjectWindowController *detailWin = [[SubjectWindowController alloc] initWithPersistentStoreCoordinator:[self persistentStoreCoordinator]];
+    SubjectWindowController *detailWin = [[SubjectWindowController alloc] initWithPersistentStoreCoordinator:[self persistentStoreCoordinator]
+                                                                                                     withApp:self];
     [detailWin loadWindow];
     [[detailWin window] setDelegate:self];
 }
@@ -361,7 +363,7 @@
     }
 }
 
-- (BooksWindowController*) createBookAndOpenDetailWindow{
+- (BooksWindowController*)createBookAndOpenDetailWindow{
     book *obj = [[book alloc] initWithEntity:[[managedObjectModel entitiesByName] objectForKey:@"book"]
 						    insertIntoManagedObjectContext:managedObjectContext];
 
@@ -371,14 +373,16 @@
     [sideBar addToCurrentLibraryTheBook:obj];
 
     BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj
+                                                                                    withApp:self
 										 withSearch:YES];
-    if (![NSBundle loadNibNamed:@"Detail" owner:detailWin]) {
-	NSLog(@"Error loading Nib!");
-    }
+    [detailWin loadWindow];
+    [detailWin setDelegate:self];
+
+    //the delegate will release the controller when the window closes.
+    [[detailWin window] setDelegate:self];
 
     [obj release];
-    [detailWin setDelegate:self];
-    return [detailWin autorelease];
+    return detailWin;
 }
 
 - (NSViewAnimation*)revealFilterAnimation{
@@ -491,8 +495,10 @@
 //NSWindowDelegate methods
 
 - (void)windowWillClose:(NSNotification*)notification{
+    NSLog(@"windowWillClose -- SofiaApplication");
     //release controller, which should in turn release everything
     NSWindow* win = [notification object];
+    NSLog(@"About to release the controller for window: %@", [win title]);
     [[win windowController] release];
 }
 

@@ -24,6 +24,7 @@
 
 
 @implementation SimilarBooksViewController
+@synthesize application;
 
 - (void)awakeFromNib{
     [tableView setDelegate:self];
@@ -42,6 +43,7 @@
 }
 
 - (void)dealloc{
+    NSLog(@"In SimilarBooksViewController dealloc.");
     if(amazonASINs)
 	[amazonASINs release];
     [titles release];
@@ -122,10 +124,10 @@
 						   nil);
 	if (alertReturn == NSAlertAlternateReturn){
 	    BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:bookObj
+                                                                                            withApp:application
 											 withSearch:NO];
-	    if (![NSBundle loadNibNamed:@"Detail" owner:[detailWin autorelease]]) {
-		NSLog(@"Error loading Nib!");
-	    }
+            [detailWin loadWindow];
+            [[detailWin window] setDelegate:application];
 	    return;
 	}
     }

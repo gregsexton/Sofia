@@ -32,19 +32,23 @@
 @synthesize subjectTableView;
 @synthesize saveButton;
 
-- (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)coord{
-    coordinator = coord;
-    initialSelection = nil;
-    useSelectButton = false;
-    return self;
+- (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)coord
+                                 withApp:(SofiaApplication*)app{
+    return [self initWithPersistentStoreCoordinator:coord
+                                            withApp:app
+                                    selectedSubject:nil
+                                       selectButton:false];
 }
 
 - (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)coord
+                                 withApp:(SofiaApplication*)app
                          selectedSubject:(subject*)subjectInput
                             selectButton:(BOOL)withSelect{
-    coordinator = coord;
+    self = [super init];
+    coordinator      = coord;
     initialSelection = subjectInput;
-    useSelectButton = withSelect;
+    useSelectButton  = withSelect;
+    sofiaApplication = app;
     return self;
 }
 
@@ -140,10 +144,10 @@
     book *obj = [[bookArrayController selectedObjects] objectAtIndex:0];
 
     BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj
+                                                                                    withApp:sofiaApplication
                                                                                  withSearch:false];
-    if (![NSBundle loadNibNamed:@"Detail" owner:[detailWin autorelease]]) {
-        NSLog(@"Error loading Nib!");
-    }
+    [detailWin loadWindow];
+    [[detailWin window] setDelegate:sofiaApplication];
 }
 
 - (IBAction)addSubjectAction:(id)sender{
@@ -152,6 +156,7 @@
     [self selectAndScrollToSubject:subjectObj];
     [self beginEditingCurrentlySelectedItemInSubjectsTable];
 }
+
 @end
 
 

@@ -37,9 +37,8 @@
 #import "SimilarBooksViewController.h"
 #import "ReviewsViewController.h"
 
-@interface BooksWindowController : NSObjectController <AuthorsWindowControllerDelegate,
-                                                       SubjectWindowControllerDelegate,
-                                                       NSWindowDelegate> {
+@interface BooksWindowController : NSWindowController <AuthorsWindowControllerDelegate,
+                                                       SubjectWindowControllerDelegate> {
     IBOutlet NSTextField*                txt_search;
 
     IBOutlet NSTextField*                txt_isbn10;
@@ -70,11 +69,6 @@
     IBOutlet NSButton*                   btn_save;
     IBOutlet NSButton*                   btn_cancel;
 
-    IBOutlet NSWindow*                   window;
-    IBOutlet NSPanel*                    progressSheet;
-
-    IBOutlet NSProgressIndicator*        progIndicator;
-
     //for the summary tab
     IBOutlet NSTextField*                lbl_summary_isbn10;
     IBOutlet NSTextField*                lbl_summary_isbn13;
@@ -97,10 +91,16 @@
 
     IBOutlet NSTableView*                authorsTableView;
     IBOutlet NSTableView*                subjectsTableView;
+    IBOutlet NSProgressIndicator*        progIndicator;
+
+    //top level objects
+    IBOutlet NSManagedObjectContext*     managedObjectContext;
+    IBOutlet NSObjectController*         bookObjectController;
     IBOutlet NSArrayController*          authorsArrayController;
     IBOutlet NSArrayController*          subjectsArrayController;
     IBOutlet SimilarBooksViewController* similarBooksController;
     IBOutlet ReviewsViewController*      reviewsController;
+    IBOutlet NSPanel*                    progressSheet;
 
     IBOutlet NSTextField*                errorLabel;
     NSMutableArray*                      isbnSearchErrors;
@@ -108,12 +108,12 @@
     book*                                obj;
     author*                              doubleClickedAuthor;
     subject*                             doubleClickedSubject;
-    NSManagedObjectContext*              managedObjectContext;
+    SofiaApplication*                    sofiaApplication;
     id<BooksWindowControllerDelegate>    delegate;
     BOOL                                 displaySearch;
 }
 
-@property (nonatomic, assign) book *obj;
+@property (nonatomic, retain) book *obj;
 @property (nonatomic, assign) id delegate;
 @property (nonatomic) BOOL displaySearch;
 
@@ -133,7 +133,7 @@
 - (NSFetchRequest*)entity:(NSString*)entity existsWithName:(NSString*)entityName;
 - (NSFetchRequest*)subjectExistsWithName:(NSString*)subjectName;
 - (book*)bookInLibraryWithISBN:(NSString*)searchedISBN;
-- (id)initWithManagedObject:(book*)object withSearch:(BOOL)withSearch;
+- (id)initWithManagedObject:(book*)object withApp:(SofiaApplication*)app withSearch:(BOOL)withSearch;
 - (void)clearAllFields;
 - (void)displayErrorMessage:(NSString*)error;
 - (void)displayManagedAuthorsWithSelectedAuthor:(author*)authorObj;
