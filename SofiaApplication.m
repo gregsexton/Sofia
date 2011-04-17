@@ -492,10 +492,9 @@
 //NSWindowDelegate methods
 
 - (void)windowWillClose:(NSNotification*)notification{
-    NSLog(@"windowWillClose -- SofiaApplication");
     //release controller, which should in turn release everything
     NSWindow* win = [notification object];
-    NSLog(@"About to release the controller for window: %@", [win title]);
+    //NSLog(@"About to release the controller for window: %@", [win title]);
     [[win windowController] release];
 }
 

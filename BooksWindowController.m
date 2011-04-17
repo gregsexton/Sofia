@@ -104,7 +104,6 @@
 }
 
 - (void)dealloc{
-    NSLog(@"In BooksWindowController dealloc.");
     [isbnSearchErrors release];
 
     //release retained properties

@@ -62,7 +62,6 @@
 }
 
 - (void)dealloc{
-    NSLog(@"Dealloc. ImportBooksController.");
     [isbns release];
     [isbnsController release];
     [super dealloc];

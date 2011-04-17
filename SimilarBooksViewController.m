@@ -43,7 +43,6 @@
 }
 
 - (void)dealloc{
-    NSLog(@"In SimilarBooksViewController dealloc.");
     if(amazonASINs)
 	[amazonASINs release];
     [titles release];

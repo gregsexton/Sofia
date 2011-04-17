@@ -27,7 +27,6 @@
 @synthesize userDefaults;
 
 - (void)dealloc{
-    NSLog(@"Got here!!!");
     [dictController release];
     [userDefaults release];
 

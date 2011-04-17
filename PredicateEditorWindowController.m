@@ -114,7 +114,7 @@
         }
     }
 
-NSLog(@"OPENING PREDICATE: %@", subPred);
+    //NSLog(@"OPENING PREDICATE: %@", subPred);
     return [NSPredicate predicateWithFormat:subPred];
 }
 
@@ -138,7 +138,7 @@ NSLog(@"OPENING PREDICATE: %@", subPred);
     }
 
     if(listToTransferTo){
-        NSLog(@"SAVING PREDICATE: %@", pred);
+        //NSLog(@"SAVING PREDICATE: %@", pred);
         [listToTransferTo setFilter:pred];
     }
     [[self window] close];
