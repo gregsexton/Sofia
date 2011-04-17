@@ -28,6 +28,12 @@
 @synthesize windowToAttachTo;
 @synthesize delegate;
 
+//outlets
+@synthesize importSheet;
+@synthesize contentTextView;
+@synthesize urlTextField;
+@synthesize isbnsController;
+
 //TODO: drag and drop a file
 
 - (id)init{

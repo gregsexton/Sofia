@@ -27,22 +27,26 @@
 
 @interface ImportBooksController : NSWindowController <NSTextViewDelegate, BooksWindowControllerDelegate> {
 
-    NSWindow*			windowToAttachTo;
-    NSArray*			isbns;
+    NSWindow*                         windowToAttachTo;
+    NSArray*                          isbns;
 
-    IBOutlet NSPanel*		importSheet;
-    IBOutlet NSTextView*	contentTextView;
-    IBOutlet NSTextField*	urlTextField;
-    IBOutlet NSArrayController* isbnsController;
+    NSPanel*                          importSheet;
+    NSTextView*                       contentTextView;
+    NSTextField*                      urlTextField;
+    NSArrayController*                isbnsController;
 
-    SofiaApplication*		application;
-    NSUInteger			arrayCounter;
+    SofiaApplication*                 application;
+    NSUInteger                        arrayCounter;
     id<ImportBooksControllerDelegate> delegate;
 
 }
 @property (copy) NSArray* isbns;
 @property (assign) NSWindow* windowToAttachTo;
-@property (assign) id<ImportBooksControllerDelegate> delegate;
+@property (assign) id<ImportBooksControllerDelegate>      delegate;
+@property (nonatomic, assign) IBOutlet NSPanel*           importSheet;
+@property (nonatomic, assign) IBOutlet NSTextView*        contentTextView;
+@property (nonatomic, assign) IBOutlet NSTextField*       urlTextField;
+@property (nonatomic, assign) IBOutlet NSArrayController* isbnsController;
 
 - (IBAction)addWebsiteAction:(id)sender;
 - (IBAction)cancelAction:(id)sender;
