@@ -33,6 +33,7 @@
     IBOutlet NSPanel*		importSheet;
     IBOutlet NSTextView*	contentTextView;
     IBOutlet NSTextField*	urlTextField;
+    IBOutlet NSArrayController* isbnsController;
 
     SofiaApplication*		application;
     NSUInteger			arrayCounter;

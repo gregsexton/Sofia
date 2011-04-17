@@ -515,7 +515,7 @@
                                                    @"Display",
                                                    nil);
         if (alertReturn == NSAlertAlternateReturn){
-            [managedObjectContext deleteObject:obj];
+            [[obj managedObjectContext] deleteObject:obj];
             //get hold of existing object and update UI.
             [self setObj:bookObj];
             [self updateUIFromManagedObject];
@@ -572,7 +572,7 @@
 
 - (IBAction)saveClicked:(id)sender {
     [self updateManagedObjectFromUI];
-    [self saveManagedObjectContext:managedObjectContext];
+    [self saveManagedObjectContext:[obj managedObjectContext]];
     [[self window] close];
 
     if([[self delegate] respondsToSelector:@selector(saveClicked:)]){

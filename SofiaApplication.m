@@ -284,10 +284,7 @@
     ImportBooksController *importWin = [[ImportBooksController alloc] initWithSofiaApplication:self];
     [importWin setWindowToAttachTo:window];
     [importWin setDelegate:self];
-    if (![NSBundle loadNibNamed:@"ImportBooks" owner:importWin]) {
-	[importWin release];
-	NSLog(@"Error loading Nib!");
-    }
+    [importWin loadWindow];
 }
 
 - (IBAction)changeViewClickAction:(id)sender{

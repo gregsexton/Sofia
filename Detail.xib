@@ -3294,7 +3294,6 @@
 					<string>coverImage</string>
 				</array>
 				<bool key="NSEditable">YES</bool>
-				<bool key="NSAutomaticallyPreparesContent">YES</bool>
 				<object class="_NSManagedProxy" key="_NSManagedProxy">
 					<string key="NSEntityName">book</string>
 				</object>
@@ -3891,26 +3890,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: selection.title</string>
-						<reference key="source" ref="187867806"/>
-						<reference key="destination" ref="462327541"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="187867806"/>
-							<reference key="NSDestination" ref="462327541"/>
-							<string key="NSLabel">value: selection.title</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">selection.title</string>
-							<object class="NSDictionary" key="NSOptions">
-								<string key="NS.key.0">NSContinuouslyUpdatesValue</string>
-								<boolean value="YES" key="NS.object.0"/>
-							</object>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">387</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
 						<string key="label">hidden: displaySearch</string>
 						<reference key="source" ref="187867806"/>
 						<reference key="destination" ref="1001"/>
@@ -4068,22 +4047,6 @@
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">managedObjectContext: self</string>
-						<reference key="source" ref="462327541"/>
-						<reference key="destination" ref="275145310"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="462327541"/>
-							<reference key="NSDestination" ref="275145310"/>
-							<string key="NSLabel">managedObjectContext: self</string>
-							<string key="NSBinding">managedObjectContext</string>
-							<string key="NSKeyPath">self</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">525</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">managedObjectContext: self</string>
 						<reference key="source" ref="241700745"/>
 						<reference key="destination" ref="275145310"/>
 						<object class="NSNibBindingConnector" key="connector">
@@ -4128,6 +4091,26 @@
 						<reference key="destination" ref="462327541"/>
 					</object>
 					<int key="connectionID">529</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: selection.title</string>
+						<reference key="source" ref="187867806"/>
+						<reference key="destination" ref="462327541"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="187867806"/>
+							<reference key="NSDestination" ref="462327541"/>
+							<string key="NSLabel">value: selection.title</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">selection.title</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSContinuouslyUpdatesValue</string>
+								<boolean value="YES" key="NS.object.0"/>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">537</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -6087,7 +6070,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">529</int>
+			<int key="maxID">537</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
