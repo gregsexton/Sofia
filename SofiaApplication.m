@@ -200,14 +200,14 @@
     AuthorsWindowController *detailWin = [[AuthorsWindowController alloc] initWithPersistentStoreCoordinator:[self persistentStoreCoordinator]
                                                                                                  application:self];
     [detailWin loadWindow];
-    [[detailWin window] setDelegate:self];
+    [[detailWin window] setDelegate:self]; //this is not a leak -- application releases the controller
 }
 
 - (IBAction) manageSubjectsClickAction:(id)sender {
     SubjectWindowController *detailWin = [[SubjectWindowController alloc] initWithPersistentStoreCoordinator:[self persistentStoreCoordinator]
                                                                                                      withApp:self];
     [detailWin loadWindow];
-    [[detailWin window] setDelegate:self];
+    [[detailWin window] setDelegate:self]; //this is not a leak -- application releases the controller
 }
 
 - (IBAction) addRemoveClickAction:(id)sender {

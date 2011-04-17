@@ -167,7 +167,7 @@
     ExternalLinkEditorController* control = [[ExternalLinkEditorController alloc] init];
     [control loadWindow];
     //the application delegate will release the controller when the window closes.
-    [[control window] setDelegate:application];
+    [[control window] setDelegate:application]; //this is not a leak -- application releases the controller
 }
 
 // delegate methods ////////////////////////////////////////////////////

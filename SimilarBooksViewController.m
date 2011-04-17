@@ -127,7 +127,7 @@
 											 withSearch:NO];
             [detailWin loadWindow];
             [[detailWin window] setDelegate:application];
-	    return;
+	    return; //this is not a leak -- application releases the controller
 	}
     }
 

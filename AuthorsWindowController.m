@@ -151,7 +151,7 @@
                                                                                     withApp:sofiaApplication
 										 withSearch:false];
     [detailWin loadWindow];
-    [[detailWin window] setDelegate:sofiaApplication];
+    [[detailWin window] setDelegate:sofiaApplication]; //this is not a leak -- application releases the controller
 }
 
 - (IBAction)addAuthorAction:(id)sender{

@@ -155,6 +155,7 @@
     CGColorRef grey = CGColorCreate(rgbSpace, tValues);
     retLayer.backgroundColor = grey;
 
+    CGColorSpaceRelease(rgbSpace);
     CGColorRelease(grey);
 
     return retLayer;
