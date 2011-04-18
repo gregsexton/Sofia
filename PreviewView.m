@@ -24,6 +24,10 @@
 
 @implementation PreviewView
 @synthesize backgroundColor;
+@synthesize imageCover;
+@synthesize titleTextField;
+@synthesize isbnTextField;
+@synthesize summaryScrollView;
 
 - (id)initWithFrame:(NSRect)frame {
 

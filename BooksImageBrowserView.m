@@ -24,6 +24,7 @@
 
 
 @implementation BooksImageBrowserView
+@synthesize viewController;
 
 - (void)awakeFromNib {
 

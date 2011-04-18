@@ -25,6 +25,23 @@
 #import "BooksCoverflowController.h"
 
 @implementation SofiaApplication
+@synthesize window;
+@synthesize summaryText;
+@synthesize arrayController;
+@synthesize theApplication;
+@synthesize addRemoveButtons;
+@synthesize changeViewButtons;
+@synthesize sideBar;
+@synthesize zoomSlider;
+@synthesize tableView;
+@synthesize imagesView;
+@synthesize coverflowController;
+@synthesize mainViewContainerView;
+@synthesize mainView;
+@synthesize mainTableView; //this includes the scrollview
+@synthesize mainImagesView;
+@synthesize mainCoverflowView;
+@synthesize viewMenu;
 
 - (void) awakeFromNib {
 

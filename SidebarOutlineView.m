@@ -29,6 +29,12 @@
 @synthesize smartBookLists;
 @synthesize selectedPredicate;
 
+//Outlets
+@synthesize arrayController;
+@synthesize application;
+@synthesize searchField;
+@synthesize removeFilterMenuItem;
+
 - (void)awakeFromNib {
     [super awakeFromNib];
 

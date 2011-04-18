@@ -23,6 +23,8 @@
 
 
 @implementation ReviewsViewController
+@synthesize _webview;
+@synthesize progIndicator;
 
 - (void)awakeFromNib{
 }

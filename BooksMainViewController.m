@@ -23,6 +23,9 @@
 
 
 @implementation BooksMainViewController
+@synthesize arrayController;
+@synthesize sideBar;
+@synthesize application;
 
 - (void)removeSelectedItems{
     id item = [sideBar selectedItem];

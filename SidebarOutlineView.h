@@ -40,9 +40,9 @@
                                                NSOutlineViewDataSource,
                                                PredicateEditorWindowControllerDelegate> {
 
-    IBOutlet NSArrayController *arrayController;
-    IBOutlet SofiaApplication *application;
-    IBOutlet NSSearchField *searchField;
+    NSArrayController *arrayController;
+    SofiaApplication *application;
+    NSSearchField *searchField;
 
     Library* bookLibrary;
     Library* shoppingListLibrary;
@@ -55,13 +55,19 @@
     //NOTE: this is used for filtering and is not an accurate reflection of the current selected predicate
     //invariant: if selectedPredicate is not nil then a filter is being applied
     NSPredicate* selectedPredicate;
-    IBOutlet NSMenuItem* removeFilterMenuItem;
+    NSMenuItem* removeFilterMenuItem;
 
 }
 
 @property (nonatomic, copy) NSArray* bookLists;
 @property (nonatomic, copy) NSArray* smartBookLists;
 @property (nonatomic, retain) NSPredicate* selectedPredicate;
+
+//IBOutlets:
+@property (nonatomic, assign) IBOutlet NSArrayController *arrayController;
+@property (nonatomic, assign) IBOutlet SofiaApplication *application;
+@property (nonatomic, assign) IBOutlet NSSearchField *searchField;
+@property (nonatomic, assign) IBOutlet NSMenuItem* removeFilterMenuItem;
 
 - (IBAction)addListAction:(id)sender;
 - (IBAction)addSmartListAction:(id)sender;

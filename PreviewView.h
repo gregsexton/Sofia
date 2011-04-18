@@ -24,14 +24,19 @@
 
 @interface PreviewView : NSView {
 
-    IBOutlet NSImageView* imageCover;
-    IBOutlet NSTextField* titleTextField;
-    IBOutlet NSTextField* isbnTextField;
-    IBOutlet NSScrollView* summaryScrollView;
+    NSImageView* imageCover;
+    NSTextField* titleTextField;
+    NSTextField* isbnTextField;
+    NSScrollView* summaryScrollView;
 
     NSColor* backgroundColor;
 }
 @property (nonatomic, retain) NSColor* backgroundColor;
+//IBOutlets
+@property (nonatomic, assign) IBOutlet NSImageView* imageCover;
+@property (nonatomic, assign) IBOutlet NSTextField* titleTextField;
+@property (nonatomic, assign) IBOutlet NSTextField* isbnTextField;
+@property (nonatomic, assign) IBOutlet NSScrollView* summaryScrollView;
 
 - (void)positionSubviews;
 - (void)windowKeyChange;

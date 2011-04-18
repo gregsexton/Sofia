@@ -47,36 +47,56 @@
 
 @interface SofiaApplication : NSObject <BooksWindowControllerDelegate, ImportBooksControllerDelegate, NSWindowDelegate> {
 
-	IBOutlet NSWindow                 *window;
-	IBOutlet NSTextField              *summaryText;
-	IBOutlet NSArrayController        *arrayController;
-	IBOutlet NSApplication            *theApplication;
-	IBOutlet NSSegmentedControl       *addRemoveButtons;
-	IBOutlet NSSegmentedControl       *changeViewButtons;
-	IBOutlet SidebarOutlineView       *sideBar;
-	IBOutlet NSSlider                 *zoomSlider;
+	NSWindow                     *window;
+	NSTextField                  *summaryText;
+	NSArrayController            *arrayController;
+	NSApplication                *theApplication;
+	NSSegmentedControl           *addRemoveButtons;
+	NSSegmentedControl           *changeViewButtons;
+	SidebarOutlineView           *sideBar;
+	NSSlider                     *zoomSlider;
 
-	IBOutlet BooksTableView           *tableView;
-	IBOutlet BooksImageBrowserView    *imagesView;
-	IBOutlet BooksCoverflowController *coverflowController;
+	BooksTableView               *tableView;
+	BooksImageBrowserView        *imagesView;
+	BooksCoverflowController     *coverflowController;
 
-        IBOutlet NSView                   *mainViewContainerView;
-	IBOutlet NSView                   *mainView;
-	IBOutlet NSView                   *mainTableView; //this includes the scrollview
-	IBOutlet NSView                   *mainImagesView;
-	IBOutlet NSView                   *mainCoverflowView;
-	NSView                            *currentView;
+        NSView                       *mainViewContainerView;
+	NSView                       *mainView;
+	NSView                       *mainTableView; //this includes the scrollview
+	NSView                       *mainImagesView;
+	NSView                       *mainCoverflowView;
+	NSView                       *currentView;
 
-	NSPersistentStoreCoordinator      *persistentStoreCoordinator;
-	NSManagedObjectModel              *managedObjectModel;
-	NSManagedObjectContext            *managedObjectContext;
+	NSPersistentStoreCoordinator *persistentStoreCoordinator;
+	NSManagedObjectModel         *managedObjectModel;
+	NSManagedObjectContext       *managedObjectContext;
 
-        NSViewAnimation                   *revealFilterAnimation;
-        NSViewAnimation                   *hideFilterAnimation;
+        NSViewAnimation              *revealFilterAnimation;
+        NSViewAnimation              *hideFilterAnimation;
 
-        IBOutlet NSMenu                   *viewMenu;
+        NSMenu                       *viewMenu;
 
 }
+
+@property (nonatomic, assign) IBOutlet NSWindow                 *window;
+@property (nonatomic, assign) IBOutlet NSTextField              *summaryText;
+@property (nonatomic, assign) IBOutlet NSArrayController        *arrayController;
+@property (nonatomic, assign) IBOutlet NSApplication            *theApplication;
+@property (nonatomic, assign) IBOutlet NSSegmentedControl       *addRemoveButtons;
+@property (nonatomic, assign) IBOutlet NSSegmentedControl       *changeViewButtons;
+@property (nonatomic, assign) IBOutlet SidebarOutlineView       *sideBar;
+@property (nonatomic, assign) IBOutlet NSSlider                 *zoomSlider;
+
+@property (nonatomic, assign) IBOutlet BooksTableView           *tableView;
+@property (nonatomic, assign) IBOutlet BooksImageBrowserView    *imagesView;
+@property (nonatomic, assign) IBOutlet BooksCoverflowController *coverflowController;
+
+@property (nonatomic, assign) IBOutlet NSView                   *mainViewContainerView;
+@property (nonatomic, assign) IBOutlet NSView                   *mainView;
+@property (nonatomic, assign) IBOutlet NSView                   *mainTableView; //this includes the scrollview
+@property (nonatomic, assign) IBOutlet NSView                   *mainImagesView;
+@property (nonatomic, assign) IBOutlet NSView                   *mainCoverflowView;
+@property (nonatomic, assign) IBOutlet NSMenu                   *viewMenu;
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator;
 - (NSManagedObjectModel *)managedObjectModel;

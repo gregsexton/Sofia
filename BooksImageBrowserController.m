@@ -26,6 +26,10 @@
 @synthesize imageZoomLevel;
 @synthesize sortByOptions;
 
+//IBOutlets
+@synthesize browserView;
+@synthesize sortPopup;
+
 - (void)awakeFromNib {
     [browserView setDelegate:self];
     [browserView setDataSource:self];

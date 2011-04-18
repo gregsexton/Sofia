@@ -29,6 +29,15 @@
 @synthesize copiesString;
 @synthesize summaryString;
 
+//outlets
+@synthesize arrayController;
+@synthesize imageCover;
+@synthesize previewSplitView;
+@synthesize previewView;
+@synthesize overviewView;
+@synthesize previewToggleButton;
+@synthesize previewMenuItem;
+
 - (void)awakeFromNib{
     //register as observer for selection changes and object changes
     [arrayController addObserver:self

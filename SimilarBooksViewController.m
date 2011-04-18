@@ -26,6 +26,11 @@
 @implementation SimilarBooksViewController
 @synthesize application;
 
+//IBOutlets
+@synthesize tableView;
+@synthesize bookWinController;
+@synthesize progIndicator;
+
 - (void)awakeFromNib{
     [tableView setDelegate:self];
     [tableView setDataSource:self];
