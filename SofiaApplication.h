@@ -45,7 +45,9 @@
 #define COVER_VIEW @"coverflowView"
 #define FIVE_MINUTES (60*5)
 
-@interface SofiaApplication : NSObject <BooksWindowControllerDelegate, ImportBooksControllerDelegate, NSWindowDelegate> {
+@interface SofiaApplication : NSObject <BooksWindowControllerDelegate,
+                                        ImportBooksControllerDelegate,
+                                        NSWindowDelegate> {
 
 	NSWindow                     *window;
 	NSTextField                  *summaryText;

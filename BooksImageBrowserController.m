@@ -157,6 +157,7 @@
 
 //delegate method performed by booksWindowController.
 - (void)saveClicked:(BooksWindowController*)booksWindowController {
+    [super saveClicked:booksWindowController]; //this should be called first.
     //it is possible that the image has changed so need to force a version update
     _currentVersion++;          //TODO: this is crappy...
     [browserView reloadData];

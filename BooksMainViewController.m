@@ -177,7 +177,8 @@
 
 //delegate method performed by booksWindowController.
 - (void)saveClicked:(BooksWindowController*)booksWindowController {
-    //default behaviour does nothing. this is more a placeholder to be overridden
+    //this updates the current filter, be sure to call this if overriding.
+    [sideBar refreshCurrentFilter];
 }
 
 @end

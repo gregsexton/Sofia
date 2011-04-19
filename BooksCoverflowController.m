@@ -123,6 +123,7 @@
 
 //delegate method performed by booksWindowController.
 - (void)saveClicked:(BooksWindowController*)booksWindowController {
+    [super saveClicked:booksWindowController]; //this should be called first.
     //it is possible that the image has changed so need to force an update
     [coverflow reloadData];
 }

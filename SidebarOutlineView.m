@@ -361,16 +361,6 @@
 
 }
 
-- (void)addToCurrentLibraryTheBook:(book*)obj{
-    Library *lib = [self selectedLibrary];
-    [lib addBooksObject:obj];
-
-    id item = [self selectedItem];
-    if([item isKindOfClass:[list class]]){
-	[self addBook:obj toList:item andSave:false];
-    }
-}
-
 - (void)removeCurrentFilter{
     //does nothing if no filter applied
     if([self selectedPredicate]){
@@ -381,6 +371,21 @@
 
         [application hideFilterNotificationView];
         [removeFilterMenuItem setEnabled:NO];
+    }
+}
+
+- (void)refreshCurrentFilter{
+    [managedObjectContext processPendingChanges];
+    [arrayController fetch:self];
+}
+
+- (void)addToCurrentLibraryTheBook:(book*)obj{
+    Library *lib = [self selectedLibrary];
+    [lib addBooksObject:obj];
+
+    id item = [self selectedItem];
+    if([item isKindOfClass:[list class]]){
+	[self addBook:obj toList:item andSave:false];
     }
 }
 
@@ -635,9 +640,7 @@
 
 	    [self moveBook:theBook toLibrary:item andSave:false];
 
-	    //refresh the filter
-	    [managedObjectContext processPendingChanges];
-	    [arrayController fetch:self];
+            [self refreshCurrentFilter];
 
 	}else if([item isKindOfClass:[list class]]){
 
