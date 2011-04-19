@@ -4,17 +4,17 @@
 // Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
-// 
+//
 // Sofia is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Sofia is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
@@ -28,7 +28,7 @@
 
     extract = [[isbnExtractor alloc] initWithContent:@"hello"];
     extract2 = [[isbnExtractor alloc] initWithContent:@"blah blah blah 0201558025 this is some text too"];
-    extract3 = [[isbnExtractor alloc] initWithContent:@"0201558025, blah blah this is 978-1933988276 and also 9780521427067. This is not an isbn: 01234567891011."];
+    extract3 = [[isbnExtractor alloc] initWithContent:@"0201558025, blah blah this is 978-1933988276 and also 978052142706x. This is not an isbn: 01234567891011."];
     extract4 = [[isbnExtractor alloc] initWithContent:@"9780521427061 0201558025 0201558025 9780521427067 0201558025."];
 
 }
@@ -36,6 +36,9 @@
 - (void) tearDown{
 
     [extract release];
+    [extract2 release];
+    [extract3 release];
+    [extract4 release];
 
 }
 
@@ -67,14 +70,14 @@
 
     GHAssertEqualObjects([arr3 objectAtIndex:1], @"9781933988276", [arr3 description]);
     GHAssertEqualObjects([arr3 objectAtIndex:0], @"0201558025", [arr3 description]);
-    GHAssertEqualObjects([arr3 objectAtIndex:2], @"9780521427067", [arr3 description]);
+    GHAssertEqualObjects([arr3 objectAtIndex:2], @"978052142706x", [arr3 description]);
 }
 
 -(void) testNoDuplicates{
     NSArray* arr = [extract4 discoveredISBNsWithoutDups];
     GHAssertNotNil(arr, @"Object created.");
     GHAssertEquals([arr count], (NSUInteger)3,  [arr description]);
-    
+
     //test that they get sorted
     GHAssertEqualObjects([arr objectAtIndex:0], @"0201558025", [arr description]);
 }
