@@ -29,6 +29,12 @@
 @synthesize smartBookLists;
 @synthesize selectedPredicate;
 
+//Outlets
+@synthesize arrayController;
+@synthesize application;
+@synthesize searchField;
+@synthesize removeFilterMenuItem;
+
 - (void)awakeFromNib {
     [super awakeFromNib];
 
@@ -133,9 +139,8 @@
     [predWin setDelegate:self];
     [predWin setLists:[self getBookLists]];
     [predWin setSmartLists:[self getSmartBookLists]];
-    if (![NSBundle loadNibNamed:@"PredicateEditor" owner:predWin]) {
-        NSLog(@"Error loading Nib!");
-    }
+    [predWin loadWindow];
+    [[predWin window] setDelegate:application];
 }
 
 - (IBAction)removeFilterFromCurrentView:(id)sender{
@@ -303,9 +308,8 @@
 	[predWin setDelegate:self];
         [predWin setLists:[self getBookLists]];
         [predWin setSmartLists:[self getSmartBookLists]];
-	if (![NSBundle loadNibNamed:@"PredicateEditor" owner:predWin]) {
-	    NSLog(@"Error loading Nib!");
-	}
+        [predWin loadWindow];
+        [[predWin window] setDelegate:application];
     }
 }
 

@@ -23,6 +23,8 @@
 
 
 @implementation ReviewsViewController
+@synthesize _webview;
+@synthesize progIndicator;
 
 - (void)awakeFromNib{
 }
@@ -45,8 +47,8 @@
         if([amazon allReviewsForISBN:isbn]){
             NSURL* url = [NSURL URLWithString:[amazon bookReviewIFrameURL]];
             [[_webview mainFrame] loadRequest:[NSURLRequest requestWithURL:url]];
-            [amazon release];
         }
+        [amazon release];
 
         [progIndicator stopAnimation:self];
     }

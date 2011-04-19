@@ -27,11 +27,14 @@
 
 @interface BooksCoverflowController : BooksMainViewController <GSCoverflowDelegate, GSCoverflowDataSource> {
 
-    IBOutlet GSCoverflow*   coverflow;
-    IBOutlet NSView*	    mainTableView; //this includes the scrollview
-    IBOutlet NSView*	    tableViewSuper;
+    GSCoverflow* coverflow;
+    NSView*      mainTableView; //this includes the scrollview
+    NSView*      tableViewSuper;
 
 }
+@property (nonatomic, assign) IBOutlet GSCoverflow* coverflow;
+@property (nonatomic, assign) IBOutlet NSView*      mainTableView; //this includes the scrollview
+@property (nonatomic, assign) IBOutlet NSView*      tableViewSuper;
 
 - (void)addAndRepositionTableView;
 

@@ -25,15 +25,15 @@
 
 @interface PreviewViewController : NSViewController {
 
-    IBOutlet NSArrayController* arrayController;
-    IBOutlet NSImageView* imageCover;
+    NSArrayController* arrayController;
+    NSImageView* imageCover;
 
-    IBOutlet NSSplitView* previewSplitView;
-    IBOutlet NSView* previewView;
-    IBOutlet NSView* overviewView;
+    NSSplitView* previewSplitView;
+    NSView* previewView;
+    NSView* overviewView;
 
-    IBOutlet NSButton* previewToggleButton;
-    IBOutlet NSMenuItem* previewMenuItem;
+    NSButton* previewToggleButton;
+    NSMenuItem* previewMenuItem;
 
     NSAttributedString* titleString;
     NSAttributedString* readString;
@@ -49,6 +49,15 @@
 @property (nonatomic, assign) NSAttributedString* summaryString;
 @property (nonatomic, assign) NSString* isbnString;
 @property (nonatomic, assign) NSString* copiesString;
+
+//IBOutlets:
+@property (nonatomic, assign) IBOutlet NSArrayController* arrayController;
+@property (nonatomic, assign) IBOutlet NSImageView* imageCover;
+@property (nonatomic, assign) IBOutlet NSSplitView* previewSplitView;
+@property (nonatomic, assign) IBOutlet NSView* previewView;
+@property (nonatomic, assign) IBOutlet NSView* overviewView;
+@property (nonatomic, assign) IBOutlet NSButton* previewToggleButton;
+@property (nonatomic, assign) IBOutlet NSMenuItem* previewMenuItem;
 
 - (void)updateCopiesCount:(NSInteger)count;
 - (void)updateCoverImage:(NSImage*)img;

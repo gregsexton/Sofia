@@ -31,15 +31,14 @@
 #define SECS_IN_A_WEEK 604800.0
 #define SECS_IN_A_MONTH 2419200.0
 
-@interface PredicateEditorWindowController : NSObject {
+@interface PredicateEditorWindowController : NSWindowController {
 
-    IBOutlet NSWindow*		    window;
-    IBOutlet NSPredicateEditor*	    predicateEditor;
-    IBOutlet NSButton*              includeShoppingListBtn;
+    NSPredicateEditor*      predicateEditor;
+    NSButton*              includeShoppingListBtn;
 
     id<PredicateEditorWindowControllerDelegate> delegate;
-    NSPredicate*				predicate;
-    smartList*					listToTransferTo;
+    NSPredicate*                                predicate;
+    smartList*                                  listToTransferTo;
 
     NSInteger   includeItemsFromShoppingList;
 
@@ -51,6 +50,9 @@
 @property (nonatomic) NSInteger includeItemsFromShoppingList;
 @property (nonatomic, retain) NSArray* smartLists;
 @property (nonatomic, retain) NSArray* lists;
+
+@property (nonatomic, assign) IBOutlet NSPredicateEditor* predicateEditor;
+@property (nonatomic, assign) IBOutlet NSButton* includeShoppingListBtn;
 
 - (id)initWithSmartList:(smartList*)list;
 - (IBAction)okClicked:(id)sender;

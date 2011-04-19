@@ -24,8 +24,9 @@
 
 @interface BooksTableView : NSTableView {
 
-    IBOutlet BooksTableViewController* viewController;
+    BooksTableViewController* viewController;
 
 }
+@property (nonatomic, assign) IBOutlet BooksTableViewController* viewController;
 
 @end

@@ -4,17 +4,17 @@
 // Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
-// 
+//
 // Sofia is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Sofia is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
@@ -29,46 +29,124 @@
 @synthesize delegate;
 @synthesize displaySearch;
 
-- (id)init {
-    self = [super init];
-    return self;
-}
+@synthesize txt_search;
 
-- (id)initWithManagedObject:(book*)object withSearch:(BOOL)withSearch{
+@synthesize txt_isbn10;
+@synthesize txt_isbn13;
+@synthesize txt_title;
+@synthesize txt_titleLong;
+@synthesize txt_author;
+@synthesize txt_publisher;
+@synthesize txt_subject;
+@synthesize txt_edition;
+@synthesize txt_physicalDescrip;
+@synthesize txt_dewey;
+@synthesize txt_deweyNormal;
+@synthesize txt_lccNumber;
+@synthesize txt_language;
+@synthesize txt_noOfCopies;
+@synthesize step_noOfCopies;
+
+@synthesize txt_summary;
+@synthesize txt_notes;
+@synthesize txt_awards;
+@synthesize txt_urls;
+
+@synthesize txt_toc;
+
+@synthesize btn_search;
+@synthesize btn_clear;
+@synthesize btn_save;
+@synthesize btn_cancel;
+
+//for the summary tab
+@synthesize lbl_summary_isbn10;
+@synthesize lbl_summary_isbn13;
+@synthesize lbl_summary_title;
+@synthesize lbl_summary_titleLong;
+@synthesize lbl_summary_author;
+@synthesize lbl_summary_publisher;
+@synthesize lbl_summary_subject;
+@synthesize lbl_summary_edition;
+@synthesize lbl_summary_physicalDescrip;
+@synthesize lbl_summary_dewey;
+@synthesize lbl_summary_deweyNormal;
+@synthesize lbl_summary_lccNumber;
+@synthesize lbl_summary_language;
+@synthesize lbl_summary_noOfCopies;
+@synthesize lbl_summary_summary;
+
+@synthesize img_summary_cover;
+@synthesize img_cover;
+
+@synthesize authorsTableView;
+@synthesize subjectsTableView;
+@synthesize progIndicator;
+
+//top level objects
+@synthesize managedObjectContext;
+@synthesize bookObjectController;
+@synthesize authorsArrayController;
+@synthesize subjectsArrayController;
+@synthesize similarBooksController;
+@synthesize reviewsController;
+@synthesize progressSheet;
+
+@synthesize errorLabel;
+
+- (id)initWithManagedObject:(book*)object withApp:(SofiaApplication*)app withSearch:(BOOL)withSearch{
     self = [super init];
-    obj = [object retain];
-    managedObjectContext = [obj managedObjectContext];
-    displaySearch = !withSearch;
-    isbnSearchErrors = [[NSMutableArray alloc] initWithCapacity:2];
+    [self setObj:object];
+    displaySearch        = !withSearch;
+    sofiaApplication     = app;
+    isbnSearchErrors     = [[NSMutableArray alloc] initWithCapacity:2];
     return self;
 }
 
 - (void)dealloc{
-    [obj release];
     [isbnSearchErrors release];
+
+    //release retained properties
+    [obj release];
+
+    //release top level nib objects
+    [managedObjectContext    release];
+    [bookObjectController    release];
+    [authorsArrayController  release];
+    [subjectsArrayController release];
+    [similarBooksController  release];
+    [reviewsController       release];
+    [progressSheet           release];
+
     [super dealloc];
 }
 
 - (void)awakeFromNib {
-    [window makeKeyAndOrderFront:self];
+    [[self window] makeKeyAndOrderFront:self];
     if (obj != nil){
         [self updateUIFromManagedObject];
         [self updateSummaryTabView];
     }
+
+    [similarBooksController setApplication:sofiaApplication];
+    [bookObjectController setContent:[self obj]];
+    NSPersistentStoreCoordinator* coord = [[obj managedObjectContext] persistentStoreCoordinator];
+    [managedObjectContext setPersistentStoreCoordinator:coord];
+
     [authorsTableView setDoubleAction:@selector(doubleClickAuthorAction:)];
-    [authorsTableView setTarget:self]; 
+    [authorsTableView setTarget:self];
     [subjectsTableView setDoubleAction:@selector(doubleClickSubjectAction:)];
-    [subjectsTableView setTarget:self]; 
+    [subjectsTableView setTarget:self];
 }
 
-- (NSManagedObjectContext *)managedObjectContext{
-    if (managedObjectContext != nil)
-        return managedObjectContext;
-    return nil;
+- (void)loadWindow{
+    if (![NSBundle loadNibNamed:@"Detail" owner:self]) {
+	NSLog(@"Error loading Nib!");
+        return;
+    }
 }
 
 - (void)saveManagedObjectContext:(NSManagedObjectContext*)context {
-
     NSError *error = nil;
     if (![context save:&error]) {
         [[NSApplication sharedApplication] presentError:error];
@@ -178,7 +256,7 @@
 
     if(![amazon successfullyFoundBook]){
         [isbnSearchErrors addObject:@"Amazon"];
-        [self displayErrorMessage:[NSString stringWithFormat:@"No results found for this ISBN on %@.", 
+        [self displayErrorMessage:[NSString stringWithFormat:@"No results found for this ISBN on %@.",
                                                             [NSString stringFromArray:isbnSearchErrors withCombiner:@"or"]]];
         [amazon release];
         return false;
@@ -226,7 +304,7 @@
 
     if(![isbndb successfullyFoundBook]){
         [isbnSearchErrors addObject:@"ISBNDb"];
-        [self displayErrorMessage:[NSString stringWithFormat:@"No results found for this ISBN on %@.", 
+        [self displayErrorMessage:[NSString stringWithFormat:@"No results found for this ISBN on %@.",
                                                             [NSString stringFromArray:isbnSearchErrors withCombiner:@"or"]]];
         [isbndb release];
         return false;
@@ -262,7 +340,7 @@
     [txt_physicalDescrip addItemWithObjectValue:[isbndb bookPhysicalDescrip]];
 
     [self updateAuthorsAndSubjectsFromISBNDb:isbndb];
-    
+
     [isbndb release];
     return true;
 }
@@ -436,7 +514,7 @@
                                                    @"Display",
                                                    nil);
         if (alertReturn == NSAlertAlternateReturn){
-            [managedObjectContext deleteObject:obj];
+            [[obj managedObjectContext] deleteObject:obj];
             //get hold of existing object and update UI.
             [self setObj:bookObj];
             [self updateUIFromManagedObject];
@@ -465,11 +543,11 @@
 
     [progIndicator setUsesThreadedAnimation:true];
     [progIndicator startAnimation:self];
-    [NSApp beginSheet:progressSheet modalForWindow:window 
-                                     modalDelegate:self 
-                                    didEndSelector:NULL 
+    [NSApp beginSheet:progressSheet modalForWindow:[self window]
+                                     modalDelegate:self
+                                    didEndSelector:NULL
                                        contextInfo:nil];
-    
+
     [self clearAllFields];
     if([self updateUIFromAmazonWithISBN:searchedISBN]){
         [self selectFirstItemInComboBox:txt_title];
@@ -477,7 +555,7 @@
         [self selectFirstItemInComboBox:txt_publisher];
         [self selectFirstItemInComboBox:txt_physicalDescrip];
     }
-    
+
     if([self updateUIFromISBNDbWithISBN:searchedISBN]){
         [self selectFirstItemInComboBox:txt_titleLong];
         [self selectFirstItemInComboBox:txt_subject];
@@ -493,8 +571,8 @@
 
 - (IBAction)saveClicked:(id)sender {
     [self updateManagedObjectFromUI];
-    [self saveManagedObjectContext:managedObjectContext];
-    [window close];
+    [self saveManagedObjectContext:[obj managedObjectContext]];
+    [[self window] close];
 
     if([[self delegate] respondsToSelector:@selector(saveClicked:)]){
         [delegate saveClicked:self];
@@ -511,7 +589,7 @@
         [delegate cancelClicked:self];
     }
 
-    [window close];
+    [[self window] close];
 }
 
 - (IBAction)copiesValueChanged:(id)sender {
@@ -586,13 +664,13 @@
 }
 
 - (void)displayManagedAuthorsWithSelectedAuthor:(author*)authorObj{
-    AuthorsWindowController *detailWin = [[AuthorsWindowController alloc] initWithManagedObjectContext:managedObjectContext
-                                                                          selectedAuthor:authorObj 
-                                                                            selectButton:true];
+    AuthorsWindowController *detailWin = [[AuthorsWindowController alloc] initWithPersistentStoreCoordinator:[managedObjectContext persistentStoreCoordinator]
+                                                                                                 application:sofiaApplication
+                                                                                              selectedAuthor:authorObj
+                                                                                                selectButton:true];
     [detailWin setDelegate:self];
-    if (![NSBundle loadNibNamed:@"AuthorDetail" owner:detailWin]) {
-        NSLog(@"Error loading Nib!");
-    }
+    [detailWin loadWindow];
+    [[detailWin window] setDelegate:sofiaApplication];
 }
 
 - (IBAction)addAuthorClicked:(id)sender{
@@ -617,13 +695,13 @@
 }
 
 - (void)displayManagedSubjectsWithSelectedSubject:(subject*)subjectObj{
-    SubjectWindowController *detailWin = [[SubjectWindowController alloc] initWithManagedObjectContext:managedObjectContext
-                                                                          selectedSubject:subjectObj 
-                                                                             selectButton:true];
+    SubjectWindowController *detailWin = [[SubjectWindowController alloc] initWithPersistentStoreCoordinator:[managedObjectContext persistentStoreCoordinator]
+                                                                                                     withApp:sofiaApplication
+                                                                                             selectedSubject:subjectObj
+                                                                                                selectButton:true];
     [detailWin setDelegate:self];
-    if (![NSBundle loadNibNamed:@"SubjectDetail" owner:detailWin]) {
-        NSLog(@"Error loading Nib!");
-    }
+    [detailWin loadWindow];
+    [[detailWin window] setDelegate:sofiaApplication];
 }
 
 - (IBAction)addSubjectClicked:(id)sender{

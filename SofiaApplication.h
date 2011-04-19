@@ -4,17 +4,17 @@
 // Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
-// 
+//
 // Sofia is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Sofia is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
@@ -45,38 +45,58 @@
 #define COVER_VIEW @"coverflowView"
 #define FIVE_MINUTES (60*5)
 
-@interface SofiaApplication : NSObject <BooksWindowControllerDelegate, ImportBooksControllerDelegate> {
-	
-	IBOutlet NSWindow                 *window;
-	IBOutlet NSTextField              *summaryText;
-	IBOutlet NSArrayController        *arrayController;
-	IBOutlet NSApplication            *theApplication;
-	IBOutlet NSSegmentedControl       *addRemoveButtons;
-	IBOutlet NSSegmentedControl       *changeViewButtons;
-	IBOutlet SidebarOutlineView       *sideBar;
-	IBOutlet NSSlider                 *zoomSlider;
+@interface SofiaApplication : NSObject <BooksWindowControllerDelegate, ImportBooksControllerDelegate, NSWindowDelegate> {
 
-	IBOutlet BooksTableView           *tableView;
-	IBOutlet BooksImageBrowserView    *imagesView;
-	IBOutlet BooksCoverflowController *coverflowController;
+	NSWindow                     *window;
+	NSTextField                  *summaryText;
+	NSArrayController            *arrayController;
+	NSApplication                *theApplication;
+	NSSegmentedControl           *addRemoveButtons;
+	NSSegmentedControl           *changeViewButtons;
+	SidebarOutlineView           *sideBar;
+	NSSlider                     *zoomSlider;
 
-        IBOutlet NSView                   *mainViewContainerView;
-	IBOutlet NSView                   *mainView;
-	IBOutlet NSView                   *mainTableView; //this includes the scrollview
-	IBOutlet NSView                   *mainImagesView;
-	IBOutlet NSView                   *mainCoverflowView;
-	NSView                            *currentView;
+	BooksTableView               *tableView;
+	BooksImageBrowserView        *imagesView;
+	BooksCoverflowController     *coverflowController;
 
-	NSPersistentStoreCoordinator      *persistentStoreCoordinator;
-	NSManagedObjectModel              *managedObjectModel;
-	NSManagedObjectContext            *managedObjectContext;
+        NSView                       *mainViewContainerView;
+	NSView                       *mainView;
+	NSView                       *mainTableView; //this includes the scrollview
+	NSView                       *mainImagesView;
+	NSView                       *mainCoverflowView;
+	NSView                       *currentView;
 
-        NSViewAnimation                   *revealFilterAnimation;
-        NSViewAnimation                   *hideFilterAnimation;
+	NSPersistentStoreCoordinator *persistentStoreCoordinator;
+	NSManagedObjectModel         *managedObjectModel;
+	NSManagedObjectContext       *managedObjectContext;
 
-        IBOutlet NSMenu                   *viewMenu;
+        NSViewAnimation              *revealFilterAnimation;
+        NSViewAnimation              *hideFilterAnimation;
+
+        NSMenu                       *viewMenu;
 
 }
+
+@property (nonatomic, assign) IBOutlet NSWindow                 *window;
+@property (nonatomic, assign) IBOutlet NSTextField              *summaryText;
+@property (nonatomic, assign) IBOutlet NSArrayController        *arrayController;
+@property (nonatomic, assign) IBOutlet NSApplication            *theApplication;
+@property (nonatomic, assign) IBOutlet NSSegmentedControl       *addRemoveButtons;
+@property (nonatomic, assign) IBOutlet NSSegmentedControl       *changeViewButtons;
+@property (nonatomic, assign) IBOutlet SidebarOutlineView       *sideBar;
+@property (nonatomic, assign) IBOutlet NSSlider                 *zoomSlider;
+
+@property (nonatomic, assign) IBOutlet BooksTableView           *tableView;
+@property (nonatomic, assign) IBOutlet BooksImageBrowserView    *imagesView;
+@property (nonatomic, assign) IBOutlet BooksCoverflowController *coverflowController;
+
+@property (nonatomic, assign) IBOutlet NSView                   *mainViewContainerView;
+@property (nonatomic, assign) IBOutlet NSView                   *mainView;
+@property (nonatomic, assign) IBOutlet NSView                   *mainTableView; //this includes the scrollview
+@property (nonatomic, assign) IBOutlet NSView                   *mainImagesView;
+@property (nonatomic, assign) IBOutlet NSView                   *mainCoverflowView;
+@property (nonatomic, assign) IBOutlet NSMenu                   *viewMenu;
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator;
 - (NSManagedObjectModel *)managedObjectModel;

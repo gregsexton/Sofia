@@ -23,6 +23,7 @@
 
 
 @implementation BooksTableView
+@synthesize viewController;
 
 // Overridden Methods //////////////////////////////////////////////////////
 

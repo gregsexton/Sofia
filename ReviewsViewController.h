@@ -28,11 +28,13 @@
 
 @interface ReviewsViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource> {
 
-    IBOutlet WebView*             _webview;
-    IBOutlet NSProgressIndicator* progIndicator;
-    NSString*                     reviewsForISBN;
+    WebView*             _webview;
+    NSProgressIndicator* progIndicator;
+    NSString*            reviewsForISBN;
 
 }
+@property (nonatomic, assign) IBOutlet WebView*             _webview;
+@property (nonatomic, assign) IBOutlet NSProgressIndicator* progIndicator;
 
 - (void)setISBN:(NSString*)isbn;
 

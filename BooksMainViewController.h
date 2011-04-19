@@ -22,16 +22,20 @@
 #import <Cocoa/Cocoa.h>
 #import "SidebarOutlineView.h"
 #import "SofiaApplication.h"
+#import "ExternalLinkEditorController.h"
 #import "book.h"
 
 #define SofiaDragType @"SofiaDragType"
 
 @interface BooksMainViewController : NSViewController <BooksWindowControllerDelegate>{
 
-    IBOutlet NSArrayController *arrayController;
-    IBOutlet SidebarOutlineView* sideBar;
-    IBOutlet SofiaApplication* application;
+    NSArrayController *arrayController;
+    SidebarOutlineView* sideBar;
+    SofiaApplication* application;
 }
+@property (nonatomic, assign) IBOutlet NSArrayController *arrayController;
+@property (nonatomic, assign) IBOutlet SidebarOutlineView* sideBar;
+@property (nonatomic, assign) IBOutlet SofiaApplication* application;
 
 - (void)removeSelectedItems;
 - (void)writeBooksWithIndexes:(NSIndexSet*)rowIndexes toPasteboard:(NSPasteboard*)pboard;

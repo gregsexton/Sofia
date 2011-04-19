@@ -23,6 +23,9 @@
 
 
 @implementation BooksCoverflowController
+@synthesize coverflow;
+@synthesize mainTableView;
+@synthesize tableViewSuper;
 
 - (void)awakeFromNib{
 

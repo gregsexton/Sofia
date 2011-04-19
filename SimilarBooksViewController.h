@@ -23,16 +23,19 @@
 #import "amazonInterface.h"
 #import "book.h"
 @class BooksWindowController;
+@class SofiaApplication;
 
 
 @interface SimilarBooksViewController : NSViewController <NSTableViewDelegate, NSTableViewDataSource> {
 
-    IBOutlet NSTableView* tableView;
-    IBOutlet BooksWindowController* bookWinController;
-    IBOutlet NSProgressIndicator* progIndicator;
+    NSTableView*           tableView;
+    BooksWindowController* bookWinController;
+    NSProgressIndicator*   progIndicator;
+
+    SofiaApplication* application;
 
     NSString* similarToISBN;
-    NSArray* amazonASINs;
+    NSArray*  amazonASINs;
 
     NSMutableArray* titles;
     NSMutableArray* images;
@@ -40,6 +43,11 @@
     NSMutableArray* urls;
 
 }
+
+@property (nonatomic, assign) SofiaApplication* application;
+@property (nonatomic, assign) IBOutlet NSTableView*           tableView;
+@property (nonatomic, assign) IBOutlet BooksWindowController* bookWinController;
+@property (nonatomic, assign) IBOutlet NSProgressIndicator*   progIndicator;
 
 - (void)setASINs:(NSArray*)asins;
 - (void)setISBN:(NSString*)isbn;

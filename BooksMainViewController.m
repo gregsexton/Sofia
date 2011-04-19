@@ -23,6 +23,9 @@
 
 
 @implementation BooksMainViewController
+@synthesize arrayController;
+@synthesize sideBar;
+@synthesize application;
 
 - (void)removeSelectedItems{
     id item = [sideBar selectedItem];
@@ -55,12 +58,12 @@
 
 - (void)openDetailWindowForBook:(book*)obj{
     BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj
+                                                                                    withApp:application
 										 withSearch:NO];
     [detailWin setDelegate:self];
-
-    if (![NSBundle loadNibNamed:@"Detail" owner:[detailWin autorelease]]) {
-	NSLog(@"Error loading Nib!");
-    }
+    [detailWin loadWindow];
+    //the application delegate will release the controller when the window closes.
+    [[detailWin window] setDelegate:application];
 }
 
 // menu methods ////////////////////////////////////////////////////////
@@ -164,9 +167,10 @@
 }
 
 - (void)menuEditViewBookOnItems{
-    if (![NSBundle loadNibNamed:@"ExternalLinkEditor" owner:self]) {
-	NSLog(@"Error loading Nib!");
-    }
+    ExternalLinkEditorController* control = [[ExternalLinkEditorController alloc] init];
+    [control loadWindow];
+    //the application delegate will release the controller when the window closes.
+    [[control window] setDelegate:application]; //this is not a leak -- application releases the controller
 }
 
 // delegate methods ////////////////////////////////////////////////////

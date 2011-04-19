@@ -23,9 +23,25 @@
 
 
 @implementation ExternalLinkEditorController
+@synthesize dictController;
+@synthesize userDefaults;
+
+- (void)dealloc{
+    [dictController release];
+    [userDefaults release];
+
+    [super dealloc];
+}
 
 - (void)awakeFromNib{
     [[self window] makeKeyAndOrderFront:self];
+}
+
+- (void)loadWindow{
+    if (![NSBundle loadNibNamed:@"ExternalLinkEditor" owner:self]) {
+	NSLog(@"Error loading Nib!");
+        return;
+    }
 }
 
 @end
