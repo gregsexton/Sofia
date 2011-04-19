@@ -488,7 +488,6 @@
     [arrayController rearrangeObjects]; //sort the newly added book this also has the side
 					//affect of keeping smart lists updated after adding a book
     [self updateSummaryText];
-    [imagesView reloadData];
 }
 
 - (void)cancelClicked:(BooksWindowController*)booksWindowController{
@@ -507,7 +506,6 @@
 }
 
 //NSWindowDelegate methods
-
 - (void)windowWillClose:(NSNotification*)notification{
     //release controller, which should in turn release everything
     NSWindow* win = [notification object];
