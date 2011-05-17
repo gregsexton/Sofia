@@ -4,17 +4,17 @@
 // Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
-// 
+//
 // Sofia is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Sofia is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
@@ -69,28 +69,6 @@
     [super dealloc];
 }
 
-- (void)awakeFromNib {
-    [[self window] makeKeyAndOrderFront:self];
-
-    //add ListEditorRowTemplate -- has to be done programatically as need to pass lists/smartLists to it.
-    ListEditorRowTemplate* leRowTemplate = [[ListEditorRowTemplate alloc] init];
-    [leRowTemplate setLists:[self lists]];
-    [leRowTemplate setSmartLists:[self smartLists]];
-
-    NSMutableArray* templates = [[predicateEditor rowTemplates] mutableCopy];
-    [templates insertObject:leRowTemplate atIndex:2];
-    [predicateEditor setRowTemplates:templates];
-    [templates release];
-
-    [leRowTemplate release];
-
-    [predicateEditor setObjectValue:predicate];
-
-    if(!listToTransferTo){
-        [includeShoppingListBtn setHidden:YES];
-    }
-}
-
 - (NSPredicate*)parsePredicateAndSetFlags:(NSString*)predStr{ //has side effects
     //parses the compound predicate string and returns the
     //subpredicate that was wrapped (potentially) in okClicked
@@ -116,6 +94,131 @@
 
     //NSLog(@"OPENING PREDICATE: %@", subPred);
     return [NSPredicate predicateWithFormat:subPred];
+}
+
+- (void)awakeFromNib{
+    [[self window] makeKeyAndOrderFront:self];
+
+    [predicateEditor setRowTemplates:[self createRowTemplates]];
+    [predicateEditor setObjectValue:predicate];
+
+    if(!listToTransferTo){
+        [includeShoppingListBtn setHidden:YES];
+    }
+}
+
+- (NSArray*)createRowTemplates{
+    //keyPath -> string ///////////////////////////////////////////////////////////
+    NSArray *compoundTypes = [NSArray arrayWithObjects:[NSNumber numberWithInteger:NSNotPredicateType],
+                                                       [NSNumber numberWithInteger:NSAndPredicateType],
+                                                       [NSNumber numberWithInteger:NSOrPredicateType],
+                                                       nil];
+    NSPredicateEditorRowTemplate* compound = [[NSPredicateEditorRowTemplate alloc] initWithCompoundTypes:compoundTypes];
+
+    NSArray* aKeys = [NSArray arrayWithObjects:[NSExpression expressionForKeyPath:@"authorText"],
+                                               [NSExpression expressionForKeyPath:@"awards"],
+                                               nil];
+    NSPredicateEditorRowTemplate* a = [self stringTemplateFromKeys:aKeys];
+
+    NSArray* dKeys = [NSArray arrayWithObjects:[NSExpression expressionForKeyPath:@"dewey"],
+                                               [NSExpression expressionForKeyPath:@"dewey_normalised"],
+                                               nil];
+    NSPredicateEditorRowTemplate* d = [self stringTemplateFromKeys:dKeys];
+
+    NSArray* eKeys = [NSArray arrayWithObjects:[NSExpression expressionForKeyPath:@"edition"],
+                                               [NSExpression expressionForKeyPath:@"isbn10"],
+                                               [NSExpression expressionForKeyPath:@"isbn13"],
+                                               [NSExpression expressionForKeyPath:@"language"],
+                                               [NSExpression expressionForKeyPath:@"lccNumber"],
+                                               [NSExpression expressionForKeyPath:@"notes"],
+                                               nil];
+    NSPredicateEditorRowTemplate* e = [self stringTemplateFromKeys:eKeys];
+
+    NSArray* pKeys = [NSArray arrayWithObjects:[NSExpression expressionForKeyPath:@"physicalDescription"],
+                                               [NSExpression expressionForKeyPath:@"publisherText"],
+                                               [NSExpression expressionForKeyPath:@"subjectText"],
+                                               [NSExpression expressionForKeyPath:@"summary"],
+                                               [NSExpression expressionForKeyPath:@"title"],
+                                               [NSExpression expressionForKeyPath:@"titleLong"],
+                                               [NSExpression expressionForKeyPath:@"toc"],
+                                               [NSExpression expressionForKeyPath:@"urls"],
+                                               nil];
+    NSPredicateEditorRowTemplate* p = [self stringTemplateFromKeys:pKeys];
+
+    //custom //////////////////////////////////////////////////////////////////////
+    ListEditorRowTemplate* booklists = [[ListEditorRowTemplate alloc] init];
+    [booklists setLists:[self lists]];
+    [booklists setSmartLists:[self smartLists]];
+
+    DateEditorRowTemplate* relativeDates = [[DateEditorRowTemplate alloc] init];
+
+    BoolEditorRowTemplate* booleans = [[BoolEditorRowTemplate alloc] init];
+
+    //date ////////////////////////////////////////////////////////////////////////
+    NSPredicateEditorRowTemplate* concreteDates;
+    NSArray* concreteDateKeyPaths = [NSArray arrayWithObjects:[NSExpression expressionForKeyPath:@"dateAdded"],nil];
+    NSArray* dateOps = [NSArray arrayWithObjects:[NSNumber numberWithInteger:NSLessThanOrEqualToPredicateOperatorType],
+                                                 [NSNumber numberWithInteger:NSGreaterThanPredicateOperatorType],
+                                                 nil];
+    concreteDates = [[NSPredicateEditorRowTemplate alloc] initWithLeftExpressions:concreteDateKeyPaths
+                                                     rightExpressionAttributeType:NSDateAttributeType
+                                                                         modifier:NSDirectPredicateModifier
+                                                                        operators:dateOps
+                                                                          options:0];
+
+    //integers ////////////////////////////////////////////////////////////////////
+    NSPredicateEditorRowTemplate* numberCopies;
+    NSArray* numCopiesKeyPaths = [NSArray arrayWithObjects:[NSExpression expressionForKeyPath:@"noOfCopies"],nil];
+    NSArray* numCopiesOps = [NSArray arrayWithObjects:[NSNumber numberWithInteger:NSLessThanOrEqualToPredicateOperatorType],
+                                                      [NSNumber numberWithInteger:NSLessThanPredicateOperatorType],
+                                                      [NSNumber numberWithInteger:NSGreaterThanPredicateOperatorType],
+                                                      [NSNumber numberWithInteger:NSGreaterThanOrEqualToPredicateOperatorType],
+                                                      [NSNumber numberWithInteger:NSEqualToPredicateOperatorType],
+                                                      [NSNumber numberWithInteger:NSNotEqualToPredicateOperatorType],
+                                                      nil];
+    numberCopies = [[NSPredicateEditorRowTemplate alloc] initWithLeftExpressions:numCopiesKeyPaths
+                                                    rightExpressionAttributeType:NSDecimalAttributeType
+                                                                        modifier:NSDirectPredicateModifier
+                                                                       operators:numCopiesOps
+                                                                         options:0];
+
+
+    //result //////////////////////////////////////////////////////////////////////
+    NSArray* rowTemplates = [NSArray arrayWithObjects:compound,
+                                                      a,
+                                                      booklists,
+                                                      concreteDates,
+                                                      relativeDates,
+                                                      d,
+                                                      booleans,
+                                                      e,
+                                                      numberCopies,
+                                                      p,
+                                                      nil];
+    [compound release];
+    [booklists release];
+    [relativeDates release];
+    [booleans release];
+    return rowTemplates;
+}
+
+- (NSPredicateEditorRowTemplate*)stringTemplateFromKeys:(NSArray*)keyPaths{
+    NSArray *operators = [NSArray arrayWithObjects:[NSNumber numberWithInteger:NSEqualToPredicateOperatorType],
+                                                   [NSNumber numberWithInteger:NSNotEqualToPredicateOperatorType],
+                                                   [NSNumber numberWithInteger:NSMatchesPredicateOperatorType],
+                                                   [NSNumber numberWithInteger:NSLikePredicateOperatorType],
+                                                   [NSNumber numberWithInteger:NSBeginsWithPredicateOperatorType],
+                                                   [NSNumber numberWithInteger:NSEndsWithPredicateOperatorType],
+                                                   [NSNumber numberWithInteger:NSContainsPredicateOperatorType],
+                                                   nil];
+    NSPredicateEditorRowTemplate* template;
+    NSUInteger opts = NSCaseInsensitivePredicateOption | NSDiacriticInsensitivePredicateOption;
+    template = [[NSPredicateEditorRowTemplate alloc] initWithLeftExpressions:keyPaths
+                                                rightExpressionAttributeType:NSStringAttributeType
+                                                                    modifier:NSDirectPredicateModifier
+                                                                   operators:operators
+                                                                     options:opts];
+    return [template autorelease];
 }
 
 - (IBAction)okClicked:(id)sender{

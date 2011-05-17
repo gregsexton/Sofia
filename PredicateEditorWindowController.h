@@ -58,6 +58,8 @@
 - (IBAction)okClicked:(id)sender;
 - (IBAction)cancelClicked:(id)sender;
 - (NSPredicate*)parsePredicateAndSetFlags:(NSString*)predStr;
+- (NSPredicateEditorRowTemplate*)stringTemplateFromKeys:(NSArray*)keyPaths;
+- (NSArray*)createRowTemplates;
 
 @end
 
