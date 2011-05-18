@@ -58,6 +58,7 @@
 - (IBAction)okClicked:(id)sender;
 - (IBAction)cancelClicked:(id)sender;
 - (NSPredicate*)parsePredicateAndSetFlags:(NSString*)predStr;
+- (NSArray*)createRowTemplates;
 
 @end
 
@@ -113,4 +114,28 @@ typedef enum {timeFrameDays,
 - (NSInteger)timeIntervalFromPredicate:(NSPredicate*)pred;
 - (BOOL)isIntegral:(double)x;
 
+@end
+
+@interface StringPredicateEditorRowTemplate : NSPredicateEditorRowTemplate {}
+
+- (id)initWithKeys:(NSArray*)keys;
+
+@end
+
+@interface AtoCStringEditorTemplate : StringPredicateEditorRowTemplate{}
+@end
+
+@interface DStringEditorTemplate : StringPredicateEditorRowTemplate{}
+@end
+
+@interface EtoNStringEditorTemplate : StringPredicateEditorRowTemplate{}
+@end
+
+@interface OtoZStringEditorTemplate : StringPredicateEditorRowTemplate{}
+@end
+
+@interface ConcreteDatesEditorTemplate : NSPredicateEditorRowTemplate {}
+@end
+
+@interface IntegersEditorTemplate : NSPredicateEditorRowTemplate {}
 @end

@@ -356,7 +356,15 @@
     }
 
     [arrayController setFilterPredicate:pred];
-    [application updateSummaryText];
+    @try{
+        [application updateSummaryText];
+    }
+    @catch(NSException* e){
+        // Do nothing. This is a known bug. Basically some of my custom preds (specifically relative dates)
+        // aren't supported by managedObjectContext countForFetchRequest:
+        // by handling like this the count at the bottom of the main window is out of sync but Sofia keeps running
+        // in a future version FIXME.
+    }
     [searchField setStringValue:@""]; //clear out anything in search
 
 }
