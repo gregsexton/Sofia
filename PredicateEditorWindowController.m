@@ -108,44 +108,17 @@
 }
 
 - (NSArray*)createRowTemplates{
-    //keyPath -> string ///////////////////////////////////////////////////////////
     NSArray *compoundTypes = [NSArray arrayWithObjects:[NSNumber numberWithInteger:NSNotPredicateType],
                                                        [NSNumber numberWithInteger:NSAndPredicateType],
                                                        [NSNumber numberWithInteger:NSOrPredicateType],
                                                        nil];
     NSPredicateEditorRowTemplate* compound = [[NSPredicateEditorRowTemplate alloc] initWithCompoundTypes:compoundTypes];
 
-    NSArray* aKeys = [NSArray arrayWithObjects:[NSExpression expressionForKeyPath:@"authorText"],
-                                               [NSExpression expressionForKeyPath:@"awards"],
-                                               nil];
-    NSPredicateEditorRowTemplate* a = [self stringTemplateFromKeys:aKeys];
+    AtoCStringEditorTemplate* a = [[AtoCStringEditorTemplate alloc] init];
+    DStringEditorTemplate*    d = [[DStringEditorTemplate alloc] init];
+    EtoNStringEditorTemplate* e = [[EtoNStringEditorTemplate alloc] init];
+    OtoZStringEditorTemplate* p = [[OtoZStringEditorTemplate alloc] init];
 
-    NSArray* dKeys = [NSArray arrayWithObjects:[NSExpression expressionForKeyPath:@"dewey"],
-                                               [NSExpression expressionForKeyPath:@"dewey_normalised"],
-                                               nil];
-    NSPredicateEditorRowTemplate* d = [self stringTemplateFromKeys:dKeys];
-
-    NSArray* eKeys = [NSArray arrayWithObjects:[NSExpression expressionForKeyPath:@"edition"],
-                                               [NSExpression expressionForKeyPath:@"isbn10"],
-                                               [NSExpression expressionForKeyPath:@"isbn13"],
-                                               [NSExpression expressionForKeyPath:@"language"],
-                                               [NSExpression expressionForKeyPath:@"lccNumber"],
-                                               [NSExpression expressionForKeyPath:@"notes"],
-                                               nil];
-    NSPredicateEditorRowTemplate* e = [self stringTemplateFromKeys:eKeys];
-
-    NSArray* pKeys = [NSArray arrayWithObjects:[NSExpression expressionForKeyPath:@"physicalDescription"],
-                                               [NSExpression expressionForKeyPath:@"publisherText"],
-                                               [NSExpression expressionForKeyPath:@"subjectText"],
-                                               [NSExpression expressionForKeyPath:@"summary"],
-                                               [NSExpression expressionForKeyPath:@"title"],
-                                               [NSExpression expressionForKeyPath:@"titleLong"],
-                                               [NSExpression expressionForKeyPath:@"toc"],
-                                               [NSExpression expressionForKeyPath:@"urls"],
-                                               nil];
-    NSPredicateEditorRowTemplate* p = [self stringTemplateFromKeys:pKeys];
-
-    //custom //////////////////////////////////////////////////////////////////////
     ListEditorRowTemplate* booklists = [[ListEditorRowTemplate alloc] init];
     [booklists setLists:[self lists]];
     [booklists setSmartLists:[self smartLists]];
@@ -154,36 +127,10 @@
 
     BoolEditorRowTemplate* booleans = [[BoolEditorRowTemplate alloc] init];
 
-    //date ////////////////////////////////////////////////////////////////////////
-    NSPredicateEditorRowTemplate* concreteDates;
-    NSArray* concreteDateKeyPaths = [NSArray arrayWithObjects:[NSExpression expressionForKeyPath:@"dateAdded"],nil];
-    NSArray* dateOps = [NSArray arrayWithObjects:[NSNumber numberWithInteger:NSLessThanOrEqualToPredicateOperatorType],
-                                                 [NSNumber numberWithInteger:NSGreaterThanPredicateOperatorType],
-                                                 nil];
-    concreteDates = [[NSPredicateEditorRowTemplate alloc] initWithLeftExpressions:concreteDateKeyPaths
-                                                     rightExpressionAttributeType:NSDateAttributeType
-                                                                         modifier:NSDirectPredicateModifier
-                                                                        operators:dateOps
-                                                                          options:0];
+    ConcreteDatesEditorTemplate* concreteDates = [[ConcreteDatesEditorTemplate alloc] init];
 
-    //integers ////////////////////////////////////////////////////////////////////
-    NSPredicateEditorRowTemplate* numberCopies;
-    NSArray* numCopiesKeyPaths = [NSArray arrayWithObjects:[NSExpression expressionForKeyPath:@"noOfCopies"],nil];
-    NSArray* numCopiesOps = [NSArray arrayWithObjects:[NSNumber numberWithInteger:NSLessThanOrEqualToPredicateOperatorType],
-                                                      [NSNumber numberWithInteger:NSLessThanPredicateOperatorType],
-                                                      [NSNumber numberWithInteger:NSGreaterThanPredicateOperatorType],
-                                                      [NSNumber numberWithInteger:NSGreaterThanOrEqualToPredicateOperatorType],
-                                                      [NSNumber numberWithInteger:NSEqualToPredicateOperatorType],
-                                                      [NSNumber numberWithInteger:NSNotEqualToPredicateOperatorType],
-                                                      nil];
-    numberCopies = [[NSPredicateEditorRowTemplate alloc] initWithLeftExpressions:numCopiesKeyPaths
-                                                    rightExpressionAttributeType:NSDecimalAttributeType
-                                                                        modifier:NSDirectPredicateModifier
-                                                                       operators:numCopiesOps
-                                                                         options:0];
+    IntegersEditorTemplate* numberCopies = [[IntegersEditorTemplate alloc] init];
 
-
-    //result //////////////////////////////////////////////////////////////////////
     NSArray* rowTemplates = [NSArray arrayWithObjects:compound,
                                                       a,
                                                       booklists,
@@ -196,29 +143,16 @@
                                                       p,
                                                       nil];
     [compound release];
+    [a release];
+    [d release];
+    [e release];
+    [p release];
     [booklists release];
     [relativeDates release];
     [booleans release];
+    [concreteDates release];
+    [numberCopies release];
     return rowTemplates;
-}
-
-- (NSPredicateEditorRowTemplate*)stringTemplateFromKeys:(NSArray*)keyPaths{
-    NSArray *operators = [NSArray arrayWithObjects:[NSNumber numberWithInteger:NSEqualToPredicateOperatorType],
-                                                   [NSNumber numberWithInteger:NSNotEqualToPredicateOperatorType],
-                                                   [NSNumber numberWithInteger:NSMatchesPredicateOperatorType],
-                                                   [NSNumber numberWithInteger:NSLikePredicateOperatorType],
-                                                   [NSNumber numberWithInteger:NSBeginsWithPredicateOperatorType],
-                                                   [NSNumber numberWithInteger:NSEndsWithPredicateOperatorType],
-                                                   [NSNumber numberWithInteger:NSContainsPredicateOperatorType],
-                                                   nil];
-    NSPredicateEditorRowTemplate* template;
-    NSUInteger opts = NSCaseInsensitivePredicateOption | NSDiacriticInsensitivePredicateOption;
-    template = [[NSPredicateEditorRowTemplate alloc] initWithLeftExpressions:keyPaths
-                                                rightExpressionAttributeType:NSStringAttributeType
-                                                                    modifier:NSDirectPredicateModifier
-                                                                   operators:operators
-                                                                     options:opts];
-    return [template autorelease];
 }
 
 - (IBAction)okClicked:(id)sender{
@@ -799,4 +733,165 @@
 
 }
 
+@end
+
+
+//the following subclasses are all simple derivations
+//hand-coded because XCode4 seems to lack support for changing menu names
+
+@implementation StringPredicateEditorRowTemplate
+- (id)initWithKeys:(NSArray*)keys{
+    NSArray *operators = [NSArray arrayWithObjects:[NSNumber numberWithInteger:NSEqualToPredicateOperatorType],
+                                                   [NSNumber numberWithInteger:NSNotEqualToPredicateOperatorType],
+                                                   [NSNumber numberWithInteger:NSMatchesPredicateOperatorType],
+                                                   [NSNumber numberWithInteger:NSLikePredicateOperatorType],
+                                                   [NSNumber numberWithInteger:NSBeginsWithPredicateOperatorType],
+                                                   [NSNumber numberWithInteger:NSEndsWithPredicateOperatorType],
+                                                   [NSNumber numberWithInteger:NSContainsPredicateOperatorType],
+                                                   nil];
+    NSUInteger opts = NSCaseInsensitivePredicateOption | NSDiacriticInsensitivePredicateOption;
+    self = [super initWithLeftExpressions:keys
+             rightExpressionAttributeType:NSStringAttributeType
+                                 modifier:NSDirectPredicateModifier
+                                operators:operators
+                                  options:opts];
+    return self;
+}
+@end
+
+@implementation AtoCStringEditorTemplate
+- (id)init{
+    NSArray* aKeys = [NSArray arrayWithObjects:[NSExpression expressionForKeyPath:@"authorText"],
+                                               [NSExpression expressionForKeyPath:@"awards"],
+                                               nil];
+    self = [super initWithKeys:aKeys];
+    return self;
+}
+- (NSArray*)templateViews{
+    NSArray* templates = [super templateViews];
+    NSPopUpButton* keyPathMenu = [templates objectAtIndex:0];
+    [[keyPathMenu itemAtIndex:0] setTitle:@"Authors"];
+    [[keyPathMenu itemAtIndex:1] setTitle:@"Awards"];
+    return templates;
+}
+@end
+
+@implementation DStringEditorTemplate
+- (id)init{
+    NSArray* dKeys = [NSArray arrayWithObjects:[NSExpression expressionForKeyPath:@"dewey"],
+                                               [NSExpression expressionForKeyPath:@"dewey_normalised"],
+                                               [NSExpression expressionForKeyPath:@"edition"],
+                                               nil];
+    self = [super initWithKeys:dKeys];
+    return self;
+}
+- (NSArray*)templateViews{
+    NSArray* templates = [super templateViews];
+    NSPopUpButton* keyPathMenu = [templates objectAtIndex:0];
+    [[keyPathMenu itemAtIndex:0] setTitle:@"Dewey"];
+    [[keyPathMenu itemAtIndex:1] setTitle:@"Dewey (Normalised)"];
+    [[keyPathMenu itemAtIndex:2] setTitle:@"Edition"];
+    return templates;
+}
+@end
+
+@implementation EtoNStringEditorTemplate
+- (id)init{
+    NSArray* eKeys = [NSArray arrayWithObjects:[NSExpression expressionForKeyPath:@"isbn10"],
+                                               [NSExpression expressionForKeyPath:@"isbn13"],
+                                               [NSExpression expressionForKeyPath:@"language"],
+                                               [NSExpression expressionForKeyPath:@"lccNumber"],
+                                               [NSExpression expressionForKeyPath:@"notes"],
+                                               nil];
+    self = [super initWithKeys:eKeys];
+    return self;
+}
+- (NSArray*)templateViews{
+    NSArray* templates = [super templateViews];
+    NSPopUpButton* keyPathMenu = [templates objectAtIndex:0];
+    [[keyPathMenu itemAtIndex:0] setTitle:@"ISBN (10)"];
+    [[keyPathMenu itemAtIndex:1] setTitle:@"ISBN (13)"];
+    [[keyPathMenu itemAtIndex:2] setTitle:@"Language"];
+    [[keyPathMenu itemAtIndex:3] setTitle:@"LCC Number"];
+    [[keyPathMenu itemAtIndex:4] setTitle:@"Notes"];
+    return templates;
+}
+@end
+
+@implementation OtoZStringEditorTemplate
+- (id)init{
+    NSArray* pKeys = [NSArray arrayWithObjects:[NSExpression expressionForKeyPath:@"physicalDescription"],
+                                               [NSExpression expressionForKeyPath:@"publisherText"],
+                                               [NSExpression expressionForKeyPath:@"subjectText"],
+                                               [NSExpression expressionForKeyPath:@"summary"],
+                                               [NSExpression expressionForKeyPath:@"title"],
+                                               [NSExpression expressionForKeyPath:@"titleLong"],
+                                               [NSExpression expressionForKeyPath:@"toc"],
+                                               [NSExpression expressionForKeyPath:@"urls"],
+                                               nil];
+    self = [super initWithKeys:pKeys];
+    return self;
+}
+- (NSArray*)templateViews{
+    NSArray* templates = [super templateViews];
+    NSPopUpButton* keyPathMenu = [templates objectAtIndex:0];
+    [[keyPathMenu itemAtIndex:0] setTitle:@"Physical Description"];
+    [[keyPathMenu itemAtIndex:1] setTitle:@"Publisher"];
+    [[keyPathMenu itemAtIndex:2] setTitle:@"Subject"];
+    [[keyPathMenu itemAtIndex:3] setTitle:@"Summary"];
+    [[keyPathMenu itemAtIndex:4] setTitle:@"Title"];
+    [[keyPathMenu itemAtIndex:5] setTitle:@"Title (Long)"];
+    [[keyPathMenu itemAtIndex:6] setTitle:@"Table of Contents"];
+    [[keyPathMenu itemAtIndex:7] setTitle:@"URLs"];
+    return templates;
+}
+@end
+
+@implementation ConcreteDatesEditorTemplate
+- (id)init{
+    NSArray* concreteDateKeyPaths = [NSArray arrayWithObjects:[NSExpression expressionForKeyPath:@"dateAdded"],nil];
+    NSArray* dateOps = [NSArray arrayWithObjects:[NSNumber numberWithInteger:NSLessThanOrEqualToPredicateOperatorType],
+                                                 [NSNumber numberWithInteger:NSGreaterThanPredicateOperatorType],
+                                                 nil];
+    self = [super initWithLeftExpressions:concreteDateKeyPaths
+             rightExpressionAttributeType:NSDateAttributeType
+                                 modifier:NSDirectPredicateModifier
+                                operators:dateOps
+                                  options:0];
+    return self;
+}
+- (NSArray*)templateViews{
+    NSArray* templates = [super templateViews];
+    NSPopUpButton* keyPathMenu = [templates objectAtIndex:0];
+    [[keyPathMenu itemAtIndex:0] setTitle:@"Date Added"];
+    NSPopUpButton* operations = [templates objectAtIndex:1];
+    [[operations itemAtIndex:0] setTitle:@"is on or before"];
+    [[operations itemAtIndex:1] setTitle:@"is after"];
+    return templates;
+}
+@end
+
+@implementation IntegersEditorTemplate
+- (id)init{
+    NSArray* numCopiesKeyPaths = [NSArray arrayWithObjects:[NSExpression expressionForKeyPath:@"noOfCopies"],nil];
+    NSArray* numCopiesOps = [NSArray arrayWithObjects:[NSNumber numberWithInteger:NSLessThanOrEqualToPredicateOperatorType],
+                                                      [NSNumber numberWithInteger:NSLessThanPredicateOperatorType],
+                                                      [NSNumber numberWithInteger:NSGreaterThanPredicateOperatorType],
+                                                      [NSNumber numberWithInteger:NSGreaterThanOrEqualToPredicateOperatorType],
+                                                      [NSNumber numberWithInteger:NSEqualToPredicateOperatorType],
+                                                      [NSNumber numberWithInteger:NSNotEqualToPredicateOperatorType],
+                                                      nil];
+    self = [super initWithLeftExpressions:numCopiesKeyPaths
+             rightExpressionAttributeType:NSDecimalAttributeType
+                                 modifier:NSDirectPredicateModifier
+                                operators:numCopiesOps
+                                  options:0];
+    return self;
+}
+- (NSArray*)templateViews{
+    NSArray* templates = [super templateViews];
+    NSPopUpButton* keyPathMenu = [templates objectAtIndex:0];
+    [[keyPathMenu itemAtIndex:0] setTitle:@"Number of Copies"];
+    return templates;
+}
 @end
