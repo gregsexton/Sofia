@@ -146,12 +146,8 @@
     }
 }
 
-- (void)saveManagedObjectContext:(NSManagedObjectContext*)context {
-    NSError *error = nil;
-    if (![context save:&error]) {
-        [[NSApplication sharedApplication] presentError:error];
-    }
-
+- (void)saveManagedObjectContext{
+    [sofiaApplication saveAction:self];
 }
 
 - (void)searchForISBN:(NSString*)isbn{
@@ -360,7 +356,7 @@
             NSError *error;
             authorObj = [[managedObjectContext executeFetchRequest:request error:&error] objectAtIndex:0];
         }else{
-            authorObj = [NSEntityDescription insertNewObjectForEntityForName:@"author" inManagedObjectContext:managedObjectContext];
+            authorObj = [NSEntityDescription insertNewObjectForEntityForName:@"author" inManagedObjectContext:[obj managedObjectContext]];
         }
         [authorObj setValue:object forKey:@"name"];
         [authorObj addBooksObject:obj];
@@ -375,7 +371,7 @@
             NSError *error;
             subjectObj = [[managedObjectContext executeFetchRequest:request error:&error] objectAtIndex:0];
         }else{
-            subjectObj = [NSEntityDescription insertNewObjectForEntityForName:@"subject" inManagedObjectContext:managedObjectContext];
+            subjectObj = [NSEntityDescription insertNewObjectForEntityForName:@"subject" inManagedObjectContext:[obj managedObjectContext]];
         }
         [subjectObj setValue:object forKey:@"name"];
         [subjectObj addBooksObject:obj];
@@ -571,7 +567,7 @@
 
 - (IBAction)saveClicked:(id)sender {
     [self updateManagedObjectFromUI];
-    [self saveManagedObjectContext:[obj managedObjectContext]];
+    [self saveManagedObjectContext];
     [[self window] close];
 
     if([[self delegate] respondsToSelector:@selector(saveClicked:)]){

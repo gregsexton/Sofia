@@ -204,7 +204,7 @@
 - (void)displayErrorMessage:(NSString*)error;
 - (void)displayManagedAuthorsWithSelectedAuthor:(author*)authorObj;
 - (void)displayManagedSubjectsWithSelectedSubject:(subject*)subjectObj;
-- (void)saveManagedObjectContext:(NSManagedObjectContext*)context;
+- (void)saveManagedObjectContext;
 - (void)searchForISBN:(NSString*)isbn;
 - (void)selectFirstItemInComboBox:(NSComboBox*)combo;
 - (void)updateAuthorsAndSubjectsFromISBNDb:(isbndbInterface*)isbndb;

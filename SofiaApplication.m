@@ -206,28 +206,28 @@
     return YES;
 }
 
-- (IBAction) saveAction:(id)sender {
+- (IBAction)saveAction:(id)sender{
     NSError *error = nil;
     if ([managedObjectContext hasChanges] && ![[self managedObjectContext] save:&error]) {
         [[NSApplication sharedApplication] presentError:error];
     }
 }
 
-- (IBAction) manageAuthorsClickAction:(id)sender {
+- (IBAction)manageAuthorsClickAction:(id)sender {
     AuthorsWindowController *detailWin = [[AuthorsWindowController alloc] initWithPersistentStoreCoordinator:[self persistentStoreCoordinator]
                                                                                                  application:self];
     [detailWin loadWindow];
     [[detailWin window] setDelegate:self]; //this is not a leak -- application releases the controller
 }
 
-- (IBAction) manageSubjectsClickAction:(id)sender {
+- (IBAction)manageSubjectsClickAction:(id)sender {
     SubjectWindowController *detailWin = [[SubjectWindowController alloc] initWithPersistentStoreCoordinator:[self persistentStoreCoordinator]
                                                                                                      withApp:self];
     [detailWin loadWindow];
     [[detailWin window] setDelegate:self]; //this is not a leak -- application releases the controller
 }
 
-- (IBAction) addRemoveClickAction:(id)sender {
+- (IBAction)addRemoveClickAction:(id)sender {
     if ([addRemoveButtons selectedSegment] == 0){
 	[self addBookAction:self];
     }else{
@@ -235,11 +235,11 @@
     }
 }
 
-- (IBAction) addBookAction:(id)sender {
+- (IBAction)addBookAction:(id)sender {
     [self createBookAndOpenDetailWindow];
 }
 
-- (IBAction) removeBookAction:(id)sender {
+- (IBAction)removeBookAction:(id)sender {
     int alertReturn = -1;
     int noOfRowsSelected = [tableView numberOfSelectedRows];
     if(noOfRowsSelected == 0){
@@ -258,13 +258,13 @@
     }
 }
 
-- (IBAction) aboutClickAction:(id)sender {
+- (IBAction)aboutClickAction:(id)sender {
 	NSDictionary *aboutDict = [NSDictionary dictionaryWithObjectsAndKeys:
 				@"Greg Sexton 2009", @"Copyright", nil];
 	[[NSApplication sharedApplication] orderFrontStandardAboutPanelWithOptions:aboutDict];
 }
 
-- (IBAction) displayPreferencesClickAction:(id)sender{
+- (IBAction)displayPreferencesClickAction:(id)sender{
 
     [[MBPreferencesController sharedController] showWindow:sender];
 }
@@ -297,7 +297,7 @@
     [self updateSummaryText];
 }
 
-- (IBAction) importBooks:(id)sender{
+- (IBAction)importBooks:(id)sender{
     ImportBooksController *importWin = [[ImportBooksController alloc] initWithSofiaApplication:self];
     [importWin setWindowToAttachTo:window];
     [importWin setDelegate:self];
