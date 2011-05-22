@@ -123,6 +123,7 @@
         <relationship name="entitymapping" type="1/1" destination="XDDEVENTITYMAPPING" idrefs="z126"></relationship>
     </object>
     <object type="XDDEVENTITYMAPPING" id="z117">
+        <attribute name="migrationpolicyclassname" type="string"></attribute>
         <attribute name="sourcename" type="string">person</attribute>
         <attribute name="mappingtypename" type="string">Undefined</attribute>
         <attribute name="mappingnumber" type="int16">5</attribute>
@@ -147,6 +148,7 @@
         <relationship name="entitymapping" type="1/1" destination="XDDEVENTITYMAPPING" idrefs="z126"></relationship>
     </object>
     <object type="XDDEVENTITYMAPPING" id="z120">
+        <attribute name="migrationpolicyclassname" type="string">Version3To4EntityMigrationPolicy</attribute>
         <attribute name="sourcename" type="string">author</attribute>
         <attribute name="mappingtypename" type="string">Undefined</attribute>
         <attribute name="mappingnumber" type="int16">8</attribute>
