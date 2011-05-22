@@ -49,13 +49,13 @@
     currentView = nil;
     NSString* view = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentView"];
     if(view == nil) //initial launch
-	[self changeToListView:self];
+        [self changeToListView:self];
     if([view isEqualToString:LIST_VIEW])
-	[self changeToListView:self];
+        [self changeToListView:self];
     else if([view isEqualToString:IMAGE_VIEW])
-	[self changeToImagesView:self];
+        [self changeToImagesView:self];
     else if([view isEqualToString:COVER_VIEW])
-	[self changeToCoverflowView:self];
+        [self changeToCoverflowView:self];
 
     //setup preferences
     AccessKeyViewController *accessKeys = [[AccessKeyViewController alloc] initWithNibName:@"Preferences_AccessKeys" bundle:nil];
@@ -99,7 +99,7 @@
     return [basePath stringByAppendingPathComponent:@"Sofia"];
 }
 
-- (NSManagedObjectModel*)managedObjectModel {
+- (NSManagedObjectModel*)managedObjectModel{
 
     if (managedObjectModel != nil) {
         return managedObjectModel;
@@ -109,7 +109,7 @@
     return managedObjectModel;
 }
 
-- (NSPersistentStoreCoordinator *) persistentStoreCoordinator {
+- (NSPersistentStoreCoordinator*)persistentStoreCoordinator{
 
     if (persistentStoreCoordinator != nil) {
         return persistentStoreCoordinator;
@@ -124,37 +124,97 @@
     applicationSupportFolder = [self applicationSupportFolder];
     if ( ![fileManager fileExistsAtPath:applicationSupportFolder isDirectory:NULL] ) {
         [fileManager createDirectoryAtPath:applicationSupportFolder
-	       withIntermediateDirectories:true
-				attributes:nil
-				     error:NULL];
+               withIntermediateDirectories:true
+                                attributes:nil
+                                     error:NULL];
     }
 
     NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-	[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
-	[NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+        [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+        [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
 
 
 #ifdef CONFIGURATION_Debug
-    url = [NSURL fileURLWithPath: [applicationSupportFolder stringByAppendingPathComponent: @"Sofia-debug"]];
-    persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
-    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error]){
-        [[NSApplication sharedApplication] presentError:error];
-    }
+    url = [NSURL fileURLWithPath:[applicationSupportFolder stringByAppendingPathComponent: @"Sofia-debug"]];
     [window setTitle:@"!!!!!!! DEBUG DEBUG DEBUG !!!!!!!"];
 #endif
-
 #ifdef CONFIGURATION_Release
     url = [NSURL fileURLWithPath: [applicationSupportFolder stringByAppendingPathComponent: @"Sofia"]];
-    persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
-    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:options error:&error]){
-        [[NSApplication sharedApplication] presentError:error];
-    }
 #endif
 
+    persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    if([self checkCompatabilityOfPersistentStore:persistentStoreCoordinator withURL:url storeType:NSSQLiteStoreType]){
+
+        if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
+                                                      configuration:nil
+                                                                URL:url
+                                                            options:options
+                                                              error:&error]){
+            [[NSApplication sharedApplication] presentError:error];
+        }
+
+    }else{
+        //could not migrate the persistent store, continuing execution is pointless and potentially dangerous.
+        //TODO: make this a nicer, more general, error.
+        NSError* err = [NSError errorWithDomain:@"Could not migrate persistent store." code:0 userInfo:nil];
+        [[NSApplication sharedApplication] presentError:err];
+        [NSApp terminate:nil];
+    }
     return persistentStoreCoordinator;
 }
 
-- (NSManagedObjectContext *) managedObjectContext {
+- (BOOL)checkCompatabilityOfPersistentStore:(NSPersistentStoreCoordinator*)psc withURL:(NSURL*)url storeType:(NSString*)storeType{
+    NSError* error = nil;
+    NSDictionary* sourceMetadata = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:storeType
+                                                                                              URL:url
+                                                                                            error:&error];
+    if(sourceMetadata == nil){
+        return YES;                 //no metadata: go ahead and create a new store.
+    }
+
+    NSString* configuration = nil;
+    NSManagedObjectModel* destinationModel = [psc managedObjectModel];
+    BOOL pscCompatibile = [destinationModel isConfiguration:configuration
+                                compatibleWithStoreMetadata:sourceMetadata];
+
+    if(pscCompatibile) return YES;
+
+    return [self migratePersistentStoreSourceMetadata:sourceMetadata
+                                            destModel:destinationModel
+                                            sourceURL:url
+                                           sourceType:storeType];
+}
+
+- (BOOL)migratePersistentStoreSourceMetadata:(NSDictionary*)sourceMetadata
+                                   destModel:(NSManagedObjectModel*)destModel
+                                   sourceURL:(NSURL*)srcUrl
+                                  sourceType:(NSString*)storeType{
+
+    NSManagedObjectModel* sourceModel = [NSManagedObjectModel mergedModelFromBundles:nil
+                                                                    forStoreMetadata:sourceMetadata];
+    if(sourceModel == nil) return NO;
+
+    NSMigrationManager* migrationManager = [[[NSMigrationManager alloc] initWithSourceModel:sourceModel
+                                                                          destinationModel:destModel] autorelease];
+
+    NSMappingModel* mappingModel = [NSMappingModel mappingModelFromBundles:nil
+                                                            forSourceModel:sourceModel
+                                                          destinationModel:destModel];
+    if(mappingModel == nil) return NO;
+
+    NSError* error;
+    BOOL result =  [migrationManager migrateStoreFromURL:srcUrl
+                                                    type:storeType
+                                                 options:nil
+                                        withMappingModel:mappingModel
+                                        toDestinationURL:[srcUrl URLByAppendingPathExtension:@"tmp"]
+                                         destinationType:storeType
+                                      destinationOptions:nil
+                                                   error:&error];
+    return result;
+}
+
+- (NSManagedObjectContext*)managedObjectContext{
 
     if (managedObjectContext != nil) {
         return managedObjectContext;
@@ -164,14 +224,12 @@
     if (coordinator != nil) {
         managedObjectContext = [[NSManagedObjectContext alloc] init];
         [managedObjectContext setPersistentStoreCoordinator: coordinator];
-	//this line was suggested as fixing the EXC_BAD_ACCESS error, turns out I don't need it.
-	//[managedObjectContext setRetainsRegisteredObjects:YES];
     }
 
     return managedObjectContext;
 }
 
-- (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window {
+- (NSUndoManager*)windowWillReturnUndoManager:(NSWindow*)window{
     return [[self managedObjectContext] undoManager];
 }
 
@@ -189,10 +247,10 @@
                 }
                 else {
                     int alertReturn = NSRunAlertPanel(nil, @"Could not save changes while quitting. Quit anyway?",
-						      @"Quit anyway", @"Cancel", nil);
+                                                      @"Quit anyway", @"Cancel", nil);
                     if (alertReturn == NSAlertAlternateReturn) {
                         reply = NSTerminateCancel;
-		    }
+                    }
                 }
             }
         }else {
@@ -229,9 +287,9 @@
 
 - (IBAction)addRemoveClickAction:(id)sender {
     if ([addRemoveButtons selectedSegment] == 0){
-	[self addBookAction:self];
+        [self addBookAction:self];
     }else{
-	[self removeBookAction:self];
+        [self removeBookAction:self];
     }
 }
 
@@ -243,25 +301,25 @@
     int alertReturn = -1;
     int noOfRowsSelected = [tableView numberOfSelectedRows];
     if(noOfRowsSelected == 0){
-	NSRunInformationalAlertPanel(@"Selection Error", @"You must select at least one book to remove." , @"Ok", nil, nil);
+        NSRunInformationalAlertPanel(@"Selection Error", @"You must select at least one book to remove." , @"Ok", nil, nil);
     }else if(noOfRowsSelected == 1){
-	alertReturn = NSRunAlertPanel(@"Remove Book?", @"Are you sure you wish to permanently remove this book from Sofia?",
-				      @"No", @"Yes", nil);
+        alertReturn = NSRunAlertPanel(@"Remove Book?", @"Are you sure you wish to permanently remove this book from Sofia?",
+                                      @"No", @"Yes", nil);
     }else if(noOfRowsSelected > 1){
-	alertReturn = NSRunAlertPanel(@"Remove Books?", @"Are you sure you wish to permanently remove these books from Sofia?",
-				      @"No", @"Yes", nil);
+        alertReturn = NSRunAlertPanel(@"Remove Books?", @"Are you sure you wish to permanently remove these books from Sofia?",
+                                      @"No", @"Yes", nil);
     }
     if (alertReturn == NSAlertAlternateReturn){
-	[arrayController remove:self];
-	[self saveAction:self];
-	[self updateSummaryText];
+        [arrayController remove:self];
+        [self saveAction:self];
+        [self updateSummaryText];
     }
 }
 
 - (IBAction)aboutClickAction:(id)sender {
-	NSDictionary *aboutDict = [NSDictionary dictionaryWithObjectsAndKeys:
-				@"Greg Sexton 2009", @"Copyright", nil];
-	[[NSApplication sharedApplication] orderFrontStandardAboutPanelWithOptions:aboutDict];
+        NSDictionary *aboutDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                @"Greg Sexton 2009", @"Copyright", nil];
+        [[NSApplication sharedApplication] orderFrontStandardAboutPanelWithOptions:aboutDict];
 }
 
 - (IBAction)displayPreferencesClickAction:(id)sender{
@@ -275,22 +333,22 @@
     NSPredicate* totalPred;
 
     if([searchVal isEqualToString:@""]){
-	totalPred = [sideBar getPredicateForSelectedItem];
+        totalPred = [sideBar getPredicateForSelectedItem];
     }else{
         [sideBar removeCurrentFilter]; //does nothing if no filter applied
 
         NSString* escapedSearchVal = [searchVal escapeSingleQuote];
-	NSArray* predicates = [NSArray arrayWithObjects:
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"title contains[cd] '%@'",         escapedSearchVal]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"authorText contains[cd] '%@'",    escapedSearchVal]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"publisherText contains[cd] '%@'", escapedSearchVal]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"subjectText contains[cd] '%@'",   escapedSearchVal]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn10 contains[cd] '%@'",        escapedSearchVal]],
-	    [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn13 contains[cd] '%@'",        escapedSearchVal]], nil];
-	NSPredicate* searchPred = [NSCompoundPredicate orPredicateWithSubpredicates:predicates];
+        NSArray* predicates = [NSArray arrayWithObjects:
+            [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"title contains[cd] '%@'",         escapedSearchVal]],
+            [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"authorText contains[cd] '%@'",    escapedSearchVal]],
+            [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"publisherText contains[cd] '%@'", escapedSearchVal]],
+            [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"subjectText contains[cd] '%@'",   escapedSearchVal]],
+            [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn10 contains[cd] '%@'",        escapedSearchVal]],
+            [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"isbn13 contains[cd] '%@'",        escapedSearchVal]], nil];
+        NSPredicate* searchPred = [NSCompoundPredicate orPredicateWithSubpredicates:predicates];
 
-	NSArray* searchAndCurrentFilter = [NSArray arrayWithObjects:searchPred, [sideBar getPredicateForSelectedItem], nil];
-	totalPred = [NSCompoundPredicate andPredicateWithSubpredicates:searchAndCurrentFilter];
+        NSArray* searchAndCurrentFilter = [NSArray arrayWithObjects:searchPred, [sideBar getPredicateForSelectedItem], nil];
+        totalPred = [NSCompoundPredicate andPredicateWithSubpredicates:searchAndCurrentFilter];
     }
 
     [arrayController setFilterPredicate:totalPred];
@@ -306,13 +364,13 @@
 
 - (IBAction)changeViewClickAction:(id)sender{
     if ([changeViewButtons selectedSegment] == 0){
-	[self changeToListView:self];
+        [self changeToListView:self];
     }else if([changeViewButtons selectedSegment] == 1){
-	[self changeToImagesView:self];
+        [self changeToImagesView:self];
     }else if([changeViewButtons selectedSegment] == 2){
-	[self changeToCoverflowView:self];
+        [self changeToCoverflowView:self];
     }else{
-	//serious error!
+        //serious error!
     }
 }
 
@@ -329,7 +387,7 @@
     [zoomSlider setHidden:false];
     [changeViewButtons setSelectedSegment:1];
     [imagesView setSelectionIndexes:[arrayController selectionIndexes]
-	       byExtendingSelection:NO];
+               byExtendingSelection:NO];
     [imagesView scrollIndexToVisible:[arrayController selectionIndex]];
     [[NSUserDefaults standardUserDefaults] setObject:IMAGE_VIEW forKey:@"currentView"];
 }
@@ -350,9 +408,9 @@
     [viewToChangeTo setFrame:rect];
 
     if(currentView == nil){
-	[mainView addSubview:viewToChangeTo];
+        [mainView addSubview:viewToChangeTo];
     }else{
-	[mainView replaceSubview:[currentView retain] with:viewToChangeTo];
+        [mainView replaceSubview:[currentView retain] with:viewToChangeTo];
     }
     currentView = viewToChangeTo;
 }
@@ -369,17 +427,17 @@
     [request release];
 
     if(count == 0){
-	[summaryText setStringValue:@"Empty"];
+        [summaryText setStringValue:@"Empty"];
     }else if(count == 1){
-	[summaryText setStringValue:@"1 book"];
+        [summaryText setStringValue:@"1 book"];
     }else {
-	[summaryText setStringValue:[NSString stringWithFormat:@"%d books", count]];
+        [summaryText setStringValue:[NSString stringWithFormat:@"%d books", count]];
     }
 }
 
 - (BooksWindowController*)createBookAndOpenDetailWindow{
     book *obj = [[book alloc] initWithEntity:[[managedObjectModel entitiesByName] objectForKey:@"book"]
-						    insertIntoManagedObjectContext:managedObjectContext];
+                                                    insertIntoManagedObjectContext:managedObjectContext];
 
     [obj setDateAdded:[NSDate date]];
 
@@ -388,7 +446,7 @@
 
     BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj
                                                                                     withApp:self
-										 withSearch:YES];
+                                                                                 withSearch:YES];
     [detailWin loadWindow];
     [detailWin setDelegate:self];
 
@@ -486,7 +544,7 @@
 //delegate methods performed by BooksWindowController.
 - (void)saveClicked:(BooksWindowController*)booksWindowController {
     [arrayController rearrangeObjects]; //sort the newly added book this also has the side
-					//affect of keeping smart lists updated after adding a book
+                                        //affect of keeping smart lists updated after adding a book
     [self updateSummaryText];
 }
 

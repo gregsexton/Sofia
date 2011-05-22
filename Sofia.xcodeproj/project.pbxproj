@@ -44,6 +44,8 @@
 		378AE28612A4582700047F23 /* SortByView.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AE28512A4582700047F23 /* SortByView.m */; };
 		378AE56612D281C900047F23 /* filter.png in Resources */ = {isa = PBXBuildFile; fileRef = 378AE56512D281C900047F23 /* filter.png */; };
 		378AE5AA12D5148D00047F23 /* FilterNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 378AE5A912D5148D00047F23 /* FilterNotificationView.m */; };
+		378E1CB9138859AA001C9734 /* Version2To3MappingModel.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 378E1CB8138859AA001C9734 /* Version2To3MappingModel.xcmappingmodel */; };
+		378E1CBB138859B1001C9734 /* Version3To4MappingModel.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 378E1CBA138859B1001C9734 /* Version3To4MappingModel.xcmappingmodel */; };
 		37970AB111D920CA003A9D0D /* importarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 37970AB011D920CA003A9D0D /* importarrow.png */; };
 		37970AF911DAA847003A9D0D /* missing.png in Resources */ = {isa = PBXBuildFile; fileRef = 37970AF811DAA847003A9D0D /* missing.png */; };
 		37AF6DD611FA298B007A7C85 /* OverviewSplitViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37AF6DD511FA298B007A7C85 /* OverviewSplitViewDelegate.m */; };
@@ -87,9 +89,7 @@
 		37D7096310C1BFFB0004F441 /* GeneralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D7096210C1BFFB0004F441 /* GeneralViewController.m */; };
 		37D7099E10C1D8400004F441 /* SubjectDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D7099D10C1D8400004F441 /* SubjectDetail.xib */; };
 		37D709A410C1D8E50004F441 /* SubjectWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D709A310C1D8E50004F441 /* SubjectWindowController.m */; };
-		37D8003212EF705000F49E11 /* database 3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 37D8003112EF705000F49E11 /* database 3.xcmappingmodel */; };
 		37D8005C12F36C6900F49E11 /* Version2To3EntityMigrationPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D8005B12F36C6900F49E11 /* Version2To3EntityMigrationPolicy.m */; };
-		37D801B013083E3300F49E11 /* database4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 37D801AF13083E3300F49E11 /* database4.xcmappingmodel */; };
 		37D801C11308595900F49E11 /* Version3To4EntityMigrationPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D801C01308595900F49E11 /* Version3To4EntityMigrationPolicy.m */; };
 		37E4E040131D92ED00B196FF /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E4E03F131D92ED00B196FF /* WebKit.framework */; };
 		37F36B0E124027340012D62E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F36B0D124027340012D62E /* QuartzCore.framework */; };
@@ -116,7 +116,7 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		32CA4F630368D1EE00C91783 /* books_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = books_Prefix.pch; sourceTree = "<group>"; };
+		32CA4F630368D1EE00C91783 /* Sofia_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; path = Sofia_Prefix.pch; sourceTree = "<group>"; };
 		37106D5612A2C77B0008CF18 /* CoverflowSplitViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverflowSplitViewDelegate.h; sourceTree = "<group>"; };
 		37106D5712A2C77B0008CF18 /* CoverflowSplitViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverflowSplitViewDelegate.m; sourceTree = "<group>"; };
 		371182B010C454E200732634 /* SidebarOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarOutlineView.h; sourceTree = "<group>"; };
@@ -132,7 +132,7 @@
 		3735AAF011CEBDD300DD7461 /* BooksWindowControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooksWindowControllerDelegate.h; sourceTree = "<group>"; };
 		37365592101CCC3C00709C8F /* BooksWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooksWindowController.h; sourceTree = "<group>"; };
 		37365593101CCC3C00709C8F /* BooksWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BooksWindowController.m; sourceTree = "<group>"; };
-		373751491054219600718317 /* database.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = database.xcdatamodel; sourceTree = "<group>"; };
+		373751491054219600718317 /* database.xcdatamodel */ = {isa = PBXFileReference; explicitFileType = wrapper.xcdatamodel; fileEncoding = 4; path = database.xcdatamodel; sourceTree = "<group>"; };
 		3737514C105426BF00718317 /* isbndbInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = isbndbInterface.h; sourceTree = "<group>"; };
 		3737514D105426BF00718317 /* isbndbInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = isbndbInterface.m; sourceTree = "<group>"; };
 		373752BF105EB4FF00718317 /* Detail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Detail.xib; sourceTree = "<group>"; };
@@ -184,6 +184,8 @@
 		378AE56512D281C900047F23 /* filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter.png; sourceTree = "<group>"; };
 		378AE5A812D5148D00047F23 /* FilterNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterNotificationView.h; sourceTree = "<group>"; };
 		378AE5A912D5148D00047F23 /* FilterNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterNotificationView.m; sourceTree = "<group>"; };
+		378E1CB8138859AA001C9734 /* Version2To3MappingModel.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; name = Version2To3MappingModel.xcmappingmodel; path = database.xcdatamodeld/Version2To3MappingModel.xcmappingmodel; sourceTree = "<group>"; };
+		378E1CBA138859B1001C9734 /* Version3To4MappingModel.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; name = Version3To4MappingModel.xcmappingmodel; path = database.xcdatamodeld/Version3To4MappingModel.xcmappingmodel; sourceTree = "<group>"; };
 		37970AB011D920CA003A9D0D /* importarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = importarrow.png; sourceTree = "<group>"; };
 		37970AF811DAA847003A9D0D /* missing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = missing.png; sourceTree = "<group>"; };
 		37AF6DD411FA298B007A7C85 /* OverviewSplitViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverviewSplitViewDelegate.h; sourceTree = "<group>"; };
@@ -201,7 +203,7 @@
 		37AF72ED120DB8CA007A7C85 /* ReflectionImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReflectionImageView.m; sourceTree = "<group>"; };
 		37AF75E71216CFBB007A7C85 /* PreviewSplitViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewSplitViewDelegate.h; sourceTree = "<group>"; };
 		37AF75E81216CFBB007A7C85 /* PreviewSplitViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewSplitViewDelegate.m; sourceTree = "<group>"; };
-		37AF7A44121FEFE5007A7C85 /* database 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "database 2.xcdatamodel"; sourceTree = "<group>"; };
+		37AF7A44121FEFE5007A7C85 /* database 2.xcdatamodel */ = {isa = PBXFileReference; explicitFileType = wrapper.xcdatamodel; path = "database 2.xcdatamodel"; sourceTree = "<group>"; };
 		37AF7A9C122172B5007A7C85 /* NSString+Sofia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Sofia.h"; sourceTree = "<group>"; };
 		37AF7A9D122172B5007A7C85 /* NSString+Sofia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Sofia.m"; sourceTree = "<group>"; };
 		37AF7BB2122465E4007A7C85 /* SimilarBooksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimilarBooksViewController.h; sourceTree = "<group>"; };
@@ -257,12 +259,10 @@
 		37D7099D10C1D8400004F441 /* SubjectDetail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubjectDetail.xib; sourceTree = "<group>"; };
 		37D709A210C1D8E50004F441 /* SubjectWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubjectWindowController.h; sourceTree = "<group>"; };
 		37D709A310C1D8E50004F441 /* SubjectWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubjectWindowController.m; sourceTree = "<group>"; };
-		37D8002812EF594C00F49E11 /* database 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "database 3.xcdatamodel"; sourceTree = "<group>"; };
-		37D8003112EF705000F49E11 /* database 3.xcmappingmodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcmappingmodel; path = "database 3.xcmappingmodel"; sourceTree = "<group>"; };
+		37D8002812EF594C00F49E11 /* database 3.xcdatamodel */ = {isa = PBXFileReference; explicitFileType = wrapper.xcdatamodel; path = "database 3.xcdatamodel"; sourceTree = "<group>"; };
 		37D8005A12F36C6900F49E11 /* Version2To3EntityMigrationPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version2To3EntityMigrationPolicy.h; sourceTree = "<group>"; };
 		37D8005B12F36C6900F49E11 /* Version2To3EntityMigrationPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Version2To3EntityMigrationPolicy.m; sourceTree = "<group>"; };
-		37D801AA13083DAF00F49E11 /* database 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "database 4.xcdatamodel"; sourceTree = "<group>"; };
-		37D801AF13083E3300F49E11 /* database4.xcmappingmodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcmappingmodel; path = database4.xcmappingmodel; sourceTree = "<group>"; };
+		37D801AA13083DAF00F49E11 /* database 4.xcdatamodel */ = {isa = PBXFileReference; explicitFileType = wrapper.xcdatamodel; path = "database 4.xcdatamodel"; sourceTree = "<group>"; };
 		37D801BF1308595900F49E11 /* Version3To4EntityMigrationPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version3To4EntityMigrationPolicy.h; sourceTree = "<group>"; };
 		37D801C01308595900F49E11 /* Version3To4EntityMigrationPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Version3To4EntityMigrationPolicy.m; sourceTree = "<group>"; };
 		37E4E03F131D92ED00B196FF /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -372,7 +372,7 @@
 				3745170D11C56D8B001C7960 /* Unit Tests */,
 				37BAFB72115C07FA00F95C41 /* NSMangedObject Subclasses */,
 				37D708D010C18F7C0004F441 /* Controllers */,
-				32CA4F630368D1EE00C91783 /* books_Prefix.pch */,
+				32CA4F630368D1EE00C91783 /* Sofia_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
 			name = "Other Sources";
@@ -634,10 +634,10 @@
 			children = (
 				37D8005A12F36C6900F49E11 /* Version2To3EntityMigrationPolicy.h */,
 				37D8005B12F36C6900F49E11 /* Version2To3EntityMigrationPolicy.m */,
-				37D8003112EF705000F49E11 /* database 3.xcmappingmodel */,
 				37D801BF1308595900F49E11 /* Version3To4EntityMigrationPolicy.h */,
 				37D801C01308595900F49E11 /* Version3To4EntityMigrationPolicy.m */,
-				37D801AF13083E3300F49E11 /* database4.xcmappingmodel */,
+				378E1CB8138859AA001C9734 /* Version2To3MappingModel.xcmappingmodel */,
+				378E1CBA138859B1001C9734 /* Version3To4MappingModel.xcmappingmodel */,
 			);
 			name = "Migration Policies";
 			sourceTree = "<group>";
@@ -689,7 +689,7 @@
 			attributes = {
 				ORGANIZATIONNAME = "Greg Sexton Software";
 			};
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "books" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Sofia" */;
 			compatibilityVersion = "Xcode 3.1";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -835,10 +835,10 @@
 				37106D5812A2C77B0008CF18 /* CoverflowSplitViewDelegate.m in Sources */,
 				378AE28612A4582700047F23 /* SortByView.m in Sources */,
 				378AE5AA12D5148D00047F23 /* FilterNotificationView.m in Sources */,
-				37D8003212EF705000F49E11 /* database 3.xcmappingmodel in Sources */,
 				37D8005C12F36C6900F49E11 /* Version2To3EntityMigrationPolicy.m in Sources */,
-				37D801B013083E3300F49E11 /* database4.xcmappingmodel in Sources */,
 				37D801C11308595900F49E11 /* Version3To4EntityMigrationPolicy.m in Sources */,
+				378E1CB9138859AA001C9734 /* Version2To3MappingModel.xcmappingmodel in Sources */,
+				378E1CBB138859B1001C9734 /* Version3To4MappingModel.xcmappingmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -936,7 +936,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = books_Prefix.pch;
+				GCC_PREFIX_HEADER = Sofia_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_VERSION = "";
 				INFOPLIST_FILE = Info.plist;
@@ -956,7 +956,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = books_Prefix.pch;
+				GCC_PREFIX_HEADER = Sofia_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_VERSION = "";
 				INFOPLIST_FILE = Info.plist;
@@ -1020,7 +1020,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "books" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Sofia" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
