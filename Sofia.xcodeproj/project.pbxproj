@@ -23,6 +23,8 @@
 		373752C0105EB4FF00718317 /* Detail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 373752BF105EB4FF00718317 /* Detail.xib */; };
 		373752C6105EB6D500718317 /* SofiaApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 373752C5105EB6D500718317 /* SofiaApplication.m */; };
 		3737550E106839A700718317 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 3737550D106839A700718317 /* Credits.html */; };
+		373EADB413898B5400454605 /* Version2To4MappingModel.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 373EADB313898B5400454605 /* Version2To4MappingModel.xcmappingmodel */; };
+		373EADB813898B6E00454605 /* Version2To4EntityMigrationPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 373EADB713898B6E00454605 /* Version2To4EntityMigrationPolicy.m */; };
 		374360D2126F8C6F00F5711A /* missing_coverflow.png in Resources */ = {isa = PBXBuildFile; fileRef = 374360D1126F8C6F00F5711A /* missing_coverflow.png */; };
 		3745147F11B70B2A001C7960 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3745147E11B70B2A001C7960 /* Quartz.framework */; };
 		3745148611B70B85001C7960 /* BooksImageBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3745148511B70B85001C7960 /* BooksImageBrowserView.m */; };
@@ -116,7 +118,7 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		32CA4F630368D1EE00C91783 /* Sofia_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; path = Sofia_Prefix.pch; sourceTree = "<group>"; };
+		32CA4F630368D1EE00C91783 /* Sofia_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sofia_Prefix.pch; sourceTree = "<group>"; };
 		37106D5612A2C77B0008CF18 /* CoverflowSplitViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverflowSplitViewDelegate.h; sourceTree = "<group>"; };
 		37106D5712A2C77B0008CF18 /* CoverflowSplitViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverflowSplitViewDelegate.m; sourceTree = "<group>"; };
 		371182B010C454E200732634 /* SidebarOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarOutlineView.h; sourceTree = "<group>"; };
@@ -139,6 +141,9 @@
 		373752C4105EB6D500718317 /* SofiaApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SofiaApplication.h; sourceTree = "<group>"; };
 		373752C5105EB6D500718317 /* SofiaApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SofiaApplication.m; sourceTree = "<group>"; };
 		3737550D106839A700718317 /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
+		373EADB313898B5400454605 /* Version2To4MappingModel.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; name = Version2To4MappingModel.xcmappingmodel; path = database.xcdatamodeld/Version2To4MappingModel.xcmappingmodel; sourceTree = "<group>"; };
+		373EADB613898B6E00454605 /* Version2To4EntityMigrationPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version2To4EntityMigrationPolicy.h; sourceTree = "<group>"; };
+		373EADB713898B6E00454605 /* Version2To4EntityMigrationPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Version2To4EntityMigrationPolicy.m; sourceTree = "<group>"; };
 		374360D1126F8C6F00F5711A /* missing_coverflow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = missing_coverflow.png; sourceTree = "<group>"; };
 		3745147E11B70B2A001C7960 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		3745148411B70B85001C7960 /* BooksImageBrowserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooksImageBrowserView.h; sourceTree = "<group>"; };
@@ -634,9 +639,12 @@
 			children = (
 				37D8005A12F36C6900F49E11 /* Version2To3EntityMigrationPolicy.h */,
 				37D8005B12F36C6900F49E11 /* Version2To3EntityMigrationPolicy.m */,
+				373EADB613898B6E00454605 /* Version2To4EntityMigrationPolicy.h */,
+				373EADB713898B6E00454605 /* Version2To4EntityMigrationPolicy.m */,
 				37D801BF1308595900F49E11 /* Version3To4EntityMigrationPolicy.h */,
 				37D801C01308595900F49E11 /* Version3To4EntityMigrationPolicy.m */,
 				378E1CB8138859AA001C9734 /* Version2To3MappingModel.xcmappingmodel */,
+				373EADB313898B5400454605 /* Version2To4MappingModel.xcmappingmodel */,
 				378E1CBA138859B1001C9734 /* Version3To4MappingModel.xcmappingmodel */,
 			);
 			name = "Migration Policies";
@@ -839,6 +847,8 @@
 				37D801C11308595900F49E11 /* Version3To4EntityMigrationPolicy.m in Sources */,
 				378E1CB9138859AA001C9734 /* Version2To3MappingModel.xcmappingmodel in Sources */,
 				378E1CBB138859B1001C9734 /* Version3To4MappingModel.xcmappingmodel in Sources */,
+				373EADB413898B5400454605 /* Version2To4MappingModel.xcmappingmodel in Sources */,
+				373EADB813898B6E00454605 /* Version2To4EntityMigrationPolicy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
