@@ -278,6 +278,7 @@ cBIAAYagrxEEnAAHAAgAFwAYADQANQA2AEwATQBOAE8AUABRAFIAUwBUAG8AcABxAHcAeACEAJQAlQCW
         <relationship name="entitymapping" type="1/1" destination="XDDEVENTITYMAPPING" idrefs="z111"></relationship>
     </object>
     <object type="XDDEVENTITYMAPPING" id="z146">
+        <attribute name="migrationpolicyclassname" type="string">Version2To4EntityMigrationPolicy</attribute>
         <attribute name="sourcename" type="string">author</attribute>
         <attribute name="mappingtypename" type="string">Undefined</attribute>
         <attribute name="mappingnumber" type="int16">3</attribute>

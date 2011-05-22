@@ -16,14 +16,20 @@
                                             manager:(NSMigrationManager*)manager
                                               error:(NSError **)error{
 
-    NSLog(@"here.");
     NSManagedObject *newObject;
     NSEntityDescription *sourceInstanceEntity = [sInstance entity];
 
-    if([[sourceInstanceEntity name] isEqualToString:@"book"]){
+    if([[sourceInstanceEntity name] isEqualToString:@"author"]){
+        newObject = [NSEntityDescription insertNewObjectForEntityForName:@"author"
+                                                  inManagedObjectContext:[manager destinationContext]];
 
+    }else if([[sourceInstanceEntity name] isEqualToString:@"book"]){
         newObject = [NSEntityDescription insertNewObjectForEntityForName:@"book"
                                                   inManagedObjectContext:[manager destinationContext]];
+    }
+
+    if([[sourceInstanceEntity name] isEqualToString:@"book"]
+            || [[sourceInstanceEntity name] isEqualToString:@"author"]){
 
         //NSDictionary* keyValDict = [sInstance committedValuesForKeys:nil];
         NSArray* allKeys = [[[sInstance entity] attributesByName] allKeys];
