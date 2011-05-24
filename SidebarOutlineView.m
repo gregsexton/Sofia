@@ -1,29 +1,39 @@
 //
 // SidebarOutlineView.m
 //
-// Copyright 2010 Greg Sexton
+// Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
-// 
+//
 // Sofia is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Sofia is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
+
+//TODO: this class acts as the view and the controller performing all logic for anything to do with
+//libraries, lists or smart lists as well as predicates for filtering. Extract a controller class!
 
 #import "SidebarOutlineView.h"
 
 @implementation SidebarOutlineView
 @synthesize bookLists;
 @synthesize smartBookLists;
+@synthesize selectedPredicate;
+
+//Outlets
+@synthesize arrayController;
+@synthesize application;
+@synthesize searchField;
+@synthesize removeFilterMenuItem;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -65,13 +75,17 @@
     }
 }
 
-- (void) dealloc{
+- (void)dealloc{
     [bookLibrary release];
     [shoppingListLibrary release];
+    if(bookLists)
+        [bookLists release];
+    if(smartBookLists)
+        [smartBookLists release];
     [super dealloc];
 }
 
-- (NSFetchRequest*) libraryExistsWithName:(NSString*)libraryName{
+- (NSFetchRequest*)libraryExistsWithName:(NSString*)libraryName{
     //returns the request in order to get hold of the library
     //otherwise returns nil if the library cannot be found.
     NSError *error;
@@ -107,13 +121,51 @@
     //TODO: hold option key and click for this
     NSManagedObjectModel *managedObjectModel = [application managedObjectModel];
 
-    smartList* obj = [[smartList alloc] initWithEntity:[[managedObjectModel entitiesByName] objectForKey:@"smartList"] 
+    smartList* obj = [[smartList alloc] initWithEntity:[[managedObjectModel entitiesByName] objectForKey:@"smartList"]
 			insertIntoManagedObjectContext:managedObjectContext];
 
     [application saveAction:self];
     [self reloadData];
     [self setSelectedItem:obj];
     [self beginEditingCurrentlySelectedItem];
+}
+
+- (IBAction)applyFilterToCurrentView:(id)sender{
+
+    [self setupToApplyFilter];
+    //display predicate editor, delegate method handles applying filter
+
+    PredicateEditorWindowController *predWin = [[PredicateEditorWindowController alloc] init];
+    [predWin setDelegate:self];
+    [predWin setLists:[self getBookLists]];
+    [predWin setSmartLists:[self getSmartBookLists]];
+    [predWin loadWindow];
+    [[predWin window] setDelegate:application];
+}
+
+- (IBAction)removeFilterFromCurrentView:(id)sender{
+    [self removeCurrentFilter];
+}
+
+- (IBAction)showBooksWithoutAnAuthor:(id)sender{
+    [self setSelectedItem:bookLibrary];
+    [self programaticallyApplyFilterToCurrentView:[NSPredicate predicateWithFormat:@"authors.@count == 0"]];
+}
+
+- (IBAction)showBooksWithoutASubject:(id)sender{
+    [self setSelectedItem:bookLibrary];
+    [self programaticallyApplyFilterToCurrentView:[NSPredicate predicateWithFormat:@"subjects.@count == 0"]];
+}
+
+- (void)programaticallyApplyFilterToCurrentView:(NSPredicate*)predicate{
+    [self setupToApplyFilter];
+    [self predicateEditingDidFinish:predicate];
+}
+
+- (void)setupToApplyFilter{
+    [self removeCurrentFilter]; //does nothing if no filter applied
+    //invariant: if selectedPredicate is not nil then a filter is being applied
+    [self setSelectedPredicate:[self getPredicateForSelectedItem]];
 }
 
 - (NSUInteger)numberOfBookLists{
@@ -152,7 +204,7 @@
     [request setEntity:[NSEntityDescription entityForName:entityName inManagedObjectContext:managedObjectContext]];
 
     NSArray* objects = [managedObjectContext executeFetchRequest:request error:&error];
-    NSSortDescriptor* descriptor = [[[NSSortDescriptor alloc] initWithKey:sortKey 
+    NSSortDescriptor* descriptor = [[[NSSortDescriptor alloc] initWithKey:sortKey
 								ascending:YES] autorelease];
     objects = [objects sortedArrayUsingDescriptors:[NSArray arrayWithObject:descriptor]];
 
@@ -241,11 +293,24 @@
     }
 }
 
-- (void) beginEditingCurrentlySelectedItem{
+- (void)beginEditingCurrentlySelectedItem{
     [self editColumn:0
 		 row:[self selectedRow]
 	   withEvent:nil
 	      select:YES];
+}
+
+- (void)editCurrentlySelectedSmartList{
+    id item = [self selectedItem];
+    if([item isKindOfClass:[smartList class]]){
+	smartList* list = item;
+	PredicateEditorWindowController *predWin = [[PredicateEditorWindowController alloc] initWithSmartList:list];
+	[predWin setDelegate:self];
+        [predWin setLists:[self getBookLists]];
+        [predWin setSmartLists:[self getSmartBookLists]];
+        [predWin loadWindow];
+        [[predWin window] setDelegate:application];
+    }
 }
 
 - (NSPredicate*)getPredicateForSelectedItem{
@@ -279,24 +344,48 @@
     return nil;
 }
 
-- (void)editCurrentlySelectedSmartList{
-    id item = [self selectedItem];
-    if([item isKindOfClass:[smartList class]]){
-	smartList* list = item;
-	PredicateEditorWindowController *predWin = [[PredicateEditorWindowController alloc] initWithSmartList:list];
-	[predWin setDelegate:self];
-	if (![NSBundle loadNibNamed:@"PredicateEditor" owner:predWin]) {
-	    NSLog(@"Error loading Nib!");
-	}
+- (void)updateFilterPredicateWith:(NSPredicate*)predicate{
+
+    NSPredicate* pred = predicate;
+
+    //invariant: if selectedPredicate is not nil then a filter is being applied
+    if([self selectedPredicate]){
+        //apply the filter AND the current predicate
+        NSArray* preds = [NSArray arrayWithObjects:pred, [self selectedPredicate], nil];
+        pred = [NSCompoundPredicate andPredicateWithSubpredicates:preds];
+    }
+
+    [arrayController setFilterPredicate:pred];
+    @try{
+        [application updateSummaryText];
+    }
+    @catch(NSException* e){
+        // Do nothing. This is a known bug. Basically some of my custom preds (specifically relative dates)
+        // aren't supported by managedObjectContext countForFetchRequest:
+        // by handling like this the count at the bottom of the main window is out of sync but Sofia keeps running
+        // in a future version FIXME.
+    }
+    [searchField setStringValue:@""]; //clear out anything in search
+
+}
+
+- (void)removeCurrentFilter{
+    //does nothing if no filter applied
+    if([self selectedPredicate]){
+        //filter applied
+        NSPredicate* oldPred = [[self selectedPredicate] copy];
+        [self setSelectedPredicate:nil];
+        [self updateFilterPredicateWith:oldPred];
+        [oldPred release];
+
+        [application hideFilterNotificationView];
+        [removeFilterMenuItem setEnabled:NO];
     }
 }
 
-- (void)updateFilterPredicateWith:(NSPredicate*)predicate{
-
-    [arrayController setFilterPredicate:predicate];
-    [application updateSummaryText];
-    [searchField setStringValue:@""]; //clear out anything in search
-
+- (void)refreshCurrentFilter{
+    [managedObjectContext processPendingChanges];
+    [arrayController fetch:self];
 }
 
 - (void)addToCurrentLibraryTheBook:(book*)obj{
@@ -372,7 +461,7 @@
 	[(ImageAndTextCell*)cell setImage:[NSImage imageNamed:@"list.tif"]];
 
     }else if([item isKindOfClass:[smartList class]]){
-	
+
 	[(ImageAndTextCell*)cell setImage:[NSImage imageNamed:@"smartlist.tif"]];
 
     }else if([item isKindOfClass:[Library class]]){
@@ -515,21 +604,35 @@
 
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification{
 
+    [self removeCurrentFilter];
+
     NSPredicate* predicate = [self getPredicateForSelectedItem];
     [self updateFilterPredicateWith:predicate];
 
 }
 
-//delegate for PredicateEditorWindowController.
+//delegate methods for PredicateEditorWindowController.
+
 - (void)predicateEditingDidFinish:(NSPredicate*)predicate{
+    //invariant: if selectedPredicate is not nil then a filter is being applied
+    if([self selectedPredicate]){
+        //filter being applied
+        [application revealFilterNotificationView];
+        [removeFilterMenuItem setEnabled:YES];
+    }
+
     [self updateFilterPredicateWith:predicate];
+}
+
+- (void)predicateEditingWasCancelled{
+    [self removeCurrentFilter];
 }
 
 //delegates for drag and drop
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView 
-	 acceptDrop:(id < NSDraggingInfo >)info 
-	       item:(id)item 
+- (BOOL)outlineView:(NSOutlineView *)outlineView
+	 acceptDrop:(id < NSDraggingInfo >)info
+	       item:(id)item
 	 childIndex:(NSInteger)index{
 
 
@@ -546,9 +649,7 @@
 
 	    [self moveBook:theBook toLibrary:item andSave:false];
 
-	    //refresh the filter
-	    [managedObjectContext processPendingChanges];
-	    [arrayController fetch:self];
+            [self refreshCurrentFilter];
 
 	}else if([item isKindOfClass:[list class]]){
 
@@ -561,9 +662,9 @@
     return YES;
 }
 
-- (NSDragOperation)outlineView:(NSOutlineView *)outlineView 
-		  validateDrop:(id < NSDraggingInfo >)info 
-		  proposedItem:(id)item 
+- (NSDragOperation)outlineView:(NSOutlineView *)outlineView
+		  validateDrop:(id < NSDraggingInfo >)info
+		  proposedItem:(id)item
 	    proposedChildIndex:(NSInteger)index{
 
     if([self selectedItem] == item){
@@ -629,17 +730,17 @@
     if([item isKindOfClass:[list class]]){
 	return true; //everything is valid
     }
-    
+
     if([item isKindOfClass:[smartList class]]){
 	return true; //everything valid for now
     }
-    
+
     if([title isEqualToString:@"Rename"]){
 	return false;
     }else if([title isEqualToString:@"Delete"]){
 	return false;
     }
-    
+
     //shouldn't get here...
     return true;
 }

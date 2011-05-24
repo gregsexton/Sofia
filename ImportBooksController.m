@@ -1,20 +1,20 @@
 //
 // ImportBooksController.m
 //
-// Copyright 2010 Greg Sexton
+// Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
-// 
+//
 // Sofia is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Sofia is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
@@ -27,6 +27,12 @@
 @synthesize isbns;
 @synthesize windowToAttachTo;
 @synthesize delegate;
+
+//outlets
+@synthesize importSheet;
+@synthesize contentTextView;
+@synthesize urlTextField;
+@synthesize isbnsController;
 
 //TODO: drag and drop a file
 
@@ -43,15 +49,28 @@
     }
     return self;
 }
-	
+
 - (void)awakeFromNib {
     [contentTextView setDelegate:self];
 
     if(windowToAttachTo != nil){
-	[NSApp beginSheet:importSheet modalForWindow:windowToAttachTo 
-				       modalDelegate:self 
-				      didEndSelector:NULL 
+	[NSApp beginSheet:importSheet modalForWindow:windowToAttachTo
+				       modalDelegate:self
+				      didEndSelector:NULL
 					 contextInfo:nil];
+    }
+}
+
+- (void)dealloc{
+    [isbns release];
+    [isbnsController release];
+    [super dealloc];
+}
+
+- (void)loadWindow{
+    if (![NSBundle loadNibNamed:@"ImportBooks" owner:self]) {
+	NSLog(@"Error loading Nib!");
+        return;
     }
 }
 
@@ -63,7 +82,7 @@
     if(inputUrl == nil)
 	return;
 
-    // Synchronously grab the data 
+    // Synchronously grab the data
     NSError *error;
     NSURLRequest *request = [NSURLRequest requestWithURL:inputUrl];
     NSURLResponse *response;
@@ -111,6 +130,7 @@
 - (void) updateISBNsWithContent:(NSString*)content{
     isbnExtractor* extract = [[isbnExtractor alloc] initWithContent:content];
     [self setIsbns:[extract discoveredISBNsWithoutDups]];
+    [isbnsController setContent:[self isbns]];
     [extract release];
 }
 

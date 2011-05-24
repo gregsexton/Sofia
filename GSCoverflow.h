@@ -1,20 +1,20 @@
 //
 // GSCoverflow.h
 //
-// Copyright 2010 Greg Sexton
+// Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
-// 
+//
 // Sofia is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Sofia is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
@@ -41,45 +41,52 @@
 #define SCROLLBAR_Y_POSITION (20.0)
 #define SCROLL_BUBBLE_MIN_WIDTH (20.0)
 
+@interface GSNoHitGradientLayer : CAGradientLayer {} @end
+
 @interface GSCoverflow : NSView {
 
-    id <GSCoverflowDelegate> delegate;
+    id <GSCoverflowDelegate>   delegate;
     id <GSCoverflowDataSource> dataSource;
 
-    NSMutableArray* _cachedLayers;
-    NSMutableArray* _cachedReflectionLayers;
-    NSMutableArray* _cachedTitles;
-    NSMutableArray* _cachedSubtitles;
+    NSMutableArray*       _cachedLayers;
+    NSMutableArray*       _cachedReflectionLayers;
+    NSMutableArray*       _cachedTitles;
+    NSMutableArray*       _cachedSubtitles;
 
-    CATextLayer* _titleLayer;
-    CALayer*	 _scrollLayer;
-    BOOL	 _bubbleDragged;
-    BOOL	 _focusedDragged;
+    CATextLayer*          _titleLayer;
+    CALayer*              _scrollLayer;
+    GSNoHitGradientLayer* _leftFadeLayer;
+    GSNoHitGradientLayer* _rightFadeLayer;
+    BOOL                  _bubbleDragged;
+    BOOL                  _focusedDragged;
 
-    NSUInteger _focusedItemIndex;
+    NSUInteger            _focusedItemIndex;
 
-    NSSize	_currentViewSize;
+    NSSize                _currentViewSize;
 
 }
 
 @property (nonatomic,assign) id <GSCoverflowDelegate> delegate;
 @property (nonatomic,assign) id <GSCoverflowDataSource> dataSource;
 
-- (BOOL)isOnscreen:(CGPoint)pos;
+- (BOOL)isEven:(CGFloat)n;
+- (BOOL)isOnscreenFrom:(CGPoint)posFrom to:(CGPoint)posTo offset:(CGFloat)offset;
 - (CALayer*)layerForGSCoverflowItem:(GSCoverflowItem*)item;
 - (CALayer*)reflectionLayerForGSCoverflowItem:(GSCoverflowItem*)item;
 - (CGRect)scaleRect:(CGRect)rect toWithin:(CGFloat)length;
+- (GSNoHitGradientLayer*)leftFadeLayer;
+- (GSNoHitGradientLayer*)rightFadeLayer;
+- (void)addContentsToVisibleLayers;
 - (void)adjustCachedLayersWithAnimation:(BOOL)animate;
 - (void)adjustLayerBounds;
 - (void)adjustLayerPositions;
+- (void)adjustLeftFadeLayer;
+- (void)adjustRightFadeLayer;
 - (void)deleteCache;
 - (void)moveLayer:(CALayer*)layer to:(CGPoint)position anchoredAt:(CGPoint)anchor zPosition:(CGFloat)zPos transform:(CATransform3D)transform;
 - (void)reloadData;
 - (void)updateScrollLayer;
 - (void)updateTitleLayer;
-- (void)adjustFadeLayers;
-- (void)adjustFadeSublayerOf:(CALayer*)layer toOpacity:(CGFloat)opacity;
-- (BOOL)isEven:(CGFloat)n;
 
 - (CATransform3D)identityReflectionTransform;
 - (CATransform3D)identityTransform;

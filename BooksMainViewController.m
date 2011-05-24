@@ -1,20 +1,20 @@
 //
 // BooksMainViewController.m
 //
-// Copyright 2010 Greg Sexton
+// Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
-// 
+//
 // Sofia is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Sofia is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
@@ -23,6 +23,9 @@
 
 
 @implementation BooksMainViewController
+@synthesize arrayController;
+@synthesize sideBar;
+@synthesize application;
 
 - (void)removeSelectedItems{
     id item = [sideBar selectedItem];
@@ -55,10 +58,12 @@
 
 - (void)openDetailWindowForBook:(book*)obj{
     BooksWindowController *detailWin = [[BooksWindowController alloc] initWithManagedObject:obj
+                                                                                    withApp:application
 										 withSearch:NO];
-    if (![NSBundle loadNibNamed:@"Detail" owner:[detailWin autorelease]]) {
-	NSLog(@"Error loading Nib!");
-    }
+    [detailWin setDelegate:self];
+    [detailWin loadWindow];
+    //the application delegate will release the controller when the window closes.
+    [[detailWin window] setDelegate:application];
 }
 
 // menu methods ////////////////////////////////////////////////////////
@@ -162,9 +167,18 @@
 }
 
 - (void)menuEditViewBookOnItems{
-    if (![NSBundle loadNibNamed:@"ExternalLinkEditor" owner:self]) {
-	NSLog(@"Error loading Nib!");
-    }
+    ExternalLinkEditorController* control = [[ExternalLinkEditorController alloc] init];
+    [control loadWindow];
+    //the application delegate will release the controller when the window closes.
+    [[control window] setDelegate:application]; //this is not a leak -- application releases the controller
+}
+
+// delegate methods ////////////////////////////////////////////////////
+
+//delegate method performed by booksWindowController.
+- (void)saveClicked:(BooksWindowController*)booksWindowController {
+    //this updates the current filter, be sure to call this if overriding.
+    [sideBar refreshCurrentFilter];
 }
 
 @end

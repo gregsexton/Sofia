@@ -1,20 +1,20 @@
 //
 // BooksImageBrowserController.h
 //
-// Copyright 2010 Greg Sexton
+// Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
-// 
+//
 // Sofia is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Sofia is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
@@ -27,12 +27,24 @@
 #import "BooksMainViewController.h"
 
 
-@interface BooksImageBrowserController : BooksMainViewController {
+@interface BooksImageBrowserController : BooksMainViewController <BooksWindowControllerDelegate>{
 
-    IBOutlet BooksImageBrowserView* browserView;
+    BooksImageBrowserView* browserView;
+    NSPopUpButton* sortPopup;
+
+    NSArray* sortByOptions;
+    NSDictionary* _sortDescriptors;
 
     float imageZoomLevel;
+    NSUInteger _currentVersion;
 }
 @property (nonatomic) float imageZoomLevel;
+@property (nonatomic, assign) NSArray* sortByOptions;
+//IBOutlets
+@property (nonatomic, assign) IBOutlet BooksImageBrowserView* browserView;
+@property (nonatomic, assign) IBOutlet NSPopUpButton* sortPopup;
 
+- (IBAction)sortSelectionChanged:(id)sender;
+- (void)createSortByOptions;
+- (void)updateSortPopupSelection;
 @end

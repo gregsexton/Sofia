@@ -1,20 +1,20 @@
 //
 // amazonInterface.h
 //
-// Copyright 2010 Greg Sexton
+// Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
-// 
+//
 // Sofia is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Sofia is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
@@ -22,7 +22,6 @@
 #import <Cocoa/Cocoa.h>
 #import "RegexKitLite.h"
 #import "NSString+Sofia.h"
-#import "BookReview.h"
 
 typedef enum {pNone,
 	      pLargeImage, 
@@ -44,14 +43,8 @@ typedef enum {pNone,
 	      pWeight,
 	      pASIN,
 	      pEditorialContent,
-	      pReviewRating,
-	      pReviewHelpfulVotes,
-	      pReviewTotalVotes,
-	      pReviewDate,
-	      pReviewSummary,
-	      pReviewContent,
-	      pReviewAverageRating,
-	      pTotalReviewPages} amazonProperties;
+              pTotalReviewPages,
+              pReviewsIFrameURL } amazonProperties;
 
 #define HUNDREDTH_INCH_TO_CM 0.0254
 #define HUNDREDTH_POUND_TO_KG 0.00453592
@@ -74,9 +67,9 @@ typedef enum {pNone,
     NSString*	    bookPhysicalDescrip;
     NSString*	    bookSummary;
 
-    NSMutableArray* bookReviews;
-    double	    bookAverageRating;
     int		    numberOfReviewPages;
+
+    NSString*       bookReviewIFrameURL;
 
     NSMutableArray* bookAuthors;
     NSMutableArray* dimensions;
@@ -90,7 +83,6 @@ typedef enum {pNone,
     BOOL _SimilarProducts;
 
     NSMutableString* currentStringValue;
-    BookReview* currentReview;
     BOOL successfullyFoundBook; 
 }
 
@@ -105,18 +97,17 @@ typedef enum {pNone,
 @property (nonatomic,copy) NSString*	bookEdition;
 @property (nonatomic,copy) NSString*	bookPhysicalDescrip;
 @property (nonatomic,copy) NSString*	bookSummary;
-@property (nonatomic,retain) NSArray*	bookReviews;
+@property (nonatomic,copy) NSString*	bookReviewIFrameURL;
 @property (nonatomic)	   BOOL		successfullyFoundBook;
-@property (nonatomic)	   double	bookAverageRating;
 
 - (BOOL)parseAmazonDataWithParamaters:(NSDictionary*)params;
 - (BOOL)searchASIN:(NSString*)theAsin;
-- (BOOL)searchForCustomerReviewsWithASIN:(NSString*)theASIN withPage:(NSString*)pageNumber;
+- (BOOL)searchForCustomerReviewsWithASIN:(NSString*)theASIN;
 - (BOOL)searchForDetailsWithASIN:(NSString*)theASIN;
 - (BOOL)searchForDetailsWithISBN:(NSString*)isbn;
 - (BOOL)searchForEditorialReviewWithASIN:(NSString*)asin;
 - (BOOL)searchISBN:(NSString*)isbn;
-- (NSArray*)allReviewsForISBN:(NSString*)isbn;
+- (BOOL)allReviewsForISBN:(NSString*)isbn;
 - (NSArray*)similarBooksToISBN:(NSString*)isbn;
 - (NSAttributedString*)getTableOfContentsFromURL:(NSURL*)url;
 @end

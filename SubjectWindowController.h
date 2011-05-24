@@ -1,20 +1,20 @@
 //
 // SubjectWindowController.h
 //
-// Copyright 2010 Greg Sexton
+// Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
-// 
+//
 // Sofia is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Sofia is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
@@ -24,31 +24,42 @@
 #import "book.h"
 #import "BooksWindowController.h"
 #import "SubjectWindowControllerDelegate.h"
+#import "SofiaApplication.h"
 
 
-@interface SubjectWindowController : NSObject {
-    IBOutlet NSWindow		*window;
+@interface SubjectWindowController : NSWindowController {
+    NSManagedObjectContext*        managedObjectContext;
+    NSArrayController*             bookArrayController;
+    NSTableView*                   bookTableView;
+    NSArrayController*             subjectArrayController;
+    NSTableView*                   subjectTableView;
+    NSButton*                      saveButton;
 
-    IBOutlet NSArrayController	*bookArrayController;
-    IBOutlet NSTableView	*bookTableView;
-    IBOutlet NSArrayController	*subjectArrayController;
-    IBOutlet NSTableView	*subjectTableView;
-    IBOutlet NSButton		*saveButton;
+    SofiaApplication*              sofiaApplication;
 
-    subject			*initialSelection;
-    BOOL			useSelectButton;
-    NSManagedObjectContext	*managedObjectContext;
+    subject*                       initialSelection;
+    BOOL                           useSelectButton;
+    NSPersistentStoreCoordinator*  coordinator;
 
     id<SubjectWindowControllerDelegate> delegate;
 }
 @property (nonatomic, assign) id<SubjectWindowControllerDelegate> delegate;
+@property (nonatomic, assign) IBOutlet NSManagedObjectContext* managedObjectContext;
+@property (nonatomic, assign) IBOutlet NSArrayController*      bookArrayController;
+@property (nonatomic, assign) IBOutlet NSTableView*            bookTableView;
+@property (nonatomic, assign) IBOutlet NSArrayController*      subjectArrayController;
+@property (nonatomic, assign) IBOutlet NSTableView*            subjectTableView;
+@property (nonatomic, assign) IBOutlet NSButton*               saveButton;
 
 - (IBAction)saveClicked:(id)sender;
 - (IBAction)cancelClicked:(id)sender;
 - (IBAction)doubleClickBookAction:(id)sender;
 - (IBAction)addSubjectAction:(id)sender;
-- (id)initWithManagedObjectContext:(NSManagedObjectContext*)context;
-- (id)initWithManagedObjectContext:(NSManagedObjectContext*)context selectedSubject:(subject*)subjectInput selectButton:(BOOL)withSelect;
+- (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)coord withApp:(SofiaApplication*)app;
+- (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)coord
+                                 withApp:(SofiaApplication*)app
+                         selectedSubject:(subject*)subjectInput
+                            selectButton:(BOOL)withSelect;
 - (void)saveManagedObjectContext:(NSManagedObjectContext*)context;
 - (void)selectAndScrollToSubject:(subject*)subjectObj;
 
@@ -56,7 +67,7 @@
 
 @interface SubjectsTableView : NSTableView {
 
-    IBOutlet NSArrayController	*subjectArrayController;
+    IBOutlet NSArrayController  *subjectArrayController;
 
 }
 

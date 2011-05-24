@@ -1,20 +1,20 @@
 //
 // SidebarOutlineView.h
 //
-// Copyright 2010 Greg Sexton
+// Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
-// 
+//
 // Sofia is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Sofia is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
@@ -36,11 +36,13 @@
 #define BOOK_LIBRARY @"Books"
 #define SHOPPING_LIST_LIBRARY @"Shopping List"
 
-@interface SidebarOutlineView : NSOutlineView <NSOutlineViewDelegate, NSOutlineViewDataSource, PredicateEditorWindowControllerDelegate> {
+@interface SidebarOutlineView : NSOutlineView <NSOutlineViewDelegate,
+                                               NSOutlineViewDataSource,
+                                               PredicateEditorWindowControllerDelegate> {
 
-    IBOutlet NSArrayController *arrayController;
-    IBOutlet SofiaApplication *application;
-    IBOutlet NSSearchField *searchField;
+    NSArrayController *arrayController;
+    SofiaApplication *application;
+    NSSearchField *searchField;
 
     Library* bookLibrary;
     Library* shoppingListLibrary;
@@ -50,13 +52,29 @@
     NSArray* bookLists;
     NSArray* smartBookLists;
 
+    //NOTE: this is used for filtering and is not an accurate reflection of the current selected predicate
+    //invariant: if selectedPredicate is not nil then a filter is being applied
+    NSPredicate* selectedPredicate;
+    NSMenuItem* removeFilterMenuItem;
+
 }
 
 @property (nonatomic, copy) NSArray* bookLists;
 @property (nonatomic, copy) NSArray* smartBookLists;
+@property (nonatomic, retain) NSPredicate* selectedPredicate;
+
+//IBOutlets:
+@property (nonatomic, assign) IBOutlet NSArrayController *arrayController;
+@property (nonatomic, assign) IBOutlet SofiaApplication *application;
+@property (nonatomic, assign) IBOutlet NSSearchField *searchField;
+@property (nonatomic, assign) IBOutlet NSMenuItem* removeFilterMenuItem;
 
 - (IBAction)addListAction:(id)sender;
 - (IBAction)addSmartListAction:(id)sender;
+- (IBAction)applyFilterToCurrentView:(id)sender;
+- (IBAction)removeFilterFromCurrentView:(id)sender;
+- (IBAction)showBooksWithoutASubject:(id)sender;
+- (IBAction)showBooksWithoutAnAuthor:(id)sender;
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item;
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item;
@@ -67,6 +85,8 @@
 - (BOOL)listOrSmartlistAlreadyNamed:(NSString*)name notIncluding:(NSManagedObject*)obj;
 - (Library*)selectedLibrary;
 - (NSArray*)getAllManagedObjectsWithEntityName:(NSString*)entityName sortDescriptorKey:(NSString*)sortKey;
+- (NSArray*)getBookLists;
+- (NSArray*)getSmartBookLists;
 - (NSFetchRequest*)libraryExistsWithName:(NSString*)libraryName;
 - (NSPredicate*)getPredicateForSelectedItem;
 - (NSUInteger)numberOfBookLists;
@@ -77,6 +97,11 @@
 - (void)beginEditingCurrentlySelectedItem;
 - (void)editCurrentlySelectedSmartList;
 - (void)moveBook:(book*)theBook toLibrary:(Library*)theLibrary andSave:(BOOL)save;
+- (void)programaticallyApplyFilterToCurrentView:(NSPredicate*)predicate;
+- (void)removeCurrentFilter;
+- (void)refreshCurrentFilter;
 - (void)setSelectedItem:(id)item;
+- (void)setupToApplyFilter;
 - (void)updateFilterPredicateWith:(NSPredicate*)predicate;
+
 @end

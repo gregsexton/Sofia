@@ -1,20 +1,20 @@
 //
 // book.h
 //
-// Copyright 2010 Greg Sexton
+// Copyright 2011 Greg Sexton
 //
 // This file is part of Sofia.
-// 
+//
 // Sofia is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Sofia is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU Lesser General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU Lesser General Public License
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
@@ -30,33 +30,37 @@
 {
 }
 
-@property (nonatomic, retain) NSString * isbn13;
-@property (nonatomic, retain) NSString * dewey_normalised;
-@property (nonatomic, retain) NSString * title;
-@property (nonatomic, retain) NSString * language;
-@property (nonatomic, retain) NSString * summary;
-@property (nonatomic, retain) NSString * isbn10;
-@property (nonatomic, retain) NSString * authorText;
-@property (nonatomic, retain) NSString * lccNumber;
-@property (nonatomic, retain) NSString * awards;
-@property (nonatomic, retain) NSString * edition;
-@property (nonatomic, retain) NSString * noOfCopies;
-@property (nonatomic, retain) NSNumber * read;
-@property (nonatomic, retain) NSString * subjectText;
-@property (nonatomic, retain) NSString * titleLong;
-@property (nonatomic, retain) id coverImage;
-@property (nonatomic, retain) NSString * physicalDescription;
-@property (nonatomic, retain) NSString * publisherText;
-@property (nonatomic, retain) NSString * dewey;
-@property (nonatomic, retain) NSString * urls;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSDate * dateAdded;
-@property (nonatomic, retain) NSManagedObject * publisher;
-@property (nonatomic, retain) NSSet* lists;
-@property (nonatomic, retain) NSSet* subjects;
-@property (nonatomic, retain) NSSet* authors;
-@property (nonatomic, retain) Library * library;
-@property (nonatomic, retain) NSString * toc;
+@property (nonatomic, retain) NSString        *isbn13;
+@property (nonatomic, retain) NSString        *dewey_normalised;
+@property (nonatomic, retain) NSString        *title;
+@property (nonatomic, retain) NSString        *language;
+@property (nonatomic, retain) NSString        *summary;
+@property (nonatomic, retain) NSString        *isbn10;
+@property (nonatomic, retain) NSString        *authorText;
+@property (nonatomic, retain) NSString        *lccNumber;
+@property (nonatomic, retain) NSString        *awards;
+@property (nonatomic, retain) NSString        *toc;
+@property (nonatomic, retain) NSString        *edition;
+@property (nonatomic, retain) NSDecimalNumber *noOfCopies;
+@property (nonatomic, retain) NSNumber        *read;
+@property (nonatomic, retain) NSString        *subjectText;
+@property (nonatomic, retain) NSString        *titleLong;
+@property (nonatomic, retain) NSString        *coverImage;
+@property (nonatomic, retain) NSString        *physicalDescription;
+@property (nonatomic, retain) NSString        *publisherText;
+@property (nonatomic, retain) NSString        *dewey;
+@property (nonatomic, retain) NSString        *urls;
+@property (nonatomic, retain) NSString        *notes;
+@property (nonatomic, retain) NSDate          *dateAdded;
+@property (nonatomic, retain) NSManagedObject *publisher;
+@property (nonatomic, retain) NSSet           *lists;
+@property (nonatomic, retain) NSSet           *subjects;
+@property (nonatomic, retain) NSSet           *authors;
+@property (nonatomic, retain) Library         *library;
+
+- (NSImage*)coverImageImage;
+- (void)setCoverImageImage:(NSImage*)image;
+- (NSString*)applicationSupportFolder;
 
 @end
 
