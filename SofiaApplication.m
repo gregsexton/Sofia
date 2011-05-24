@@ -155,9 +155,9 @@
 
     }else{
         //could not migrate the persistent store, continuing execution is pointless and potentially dangerous.
-        //TODO: make this a nicer, more general, error.
-        NSError* err = [NSError errorWithDomain:@"Could not migrate persistent store." code:0 userInfo:nil];
-        [[NSApplication sharedApplication] presentError:err];
+        NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+        [alert setMessageText:@"Migrating the database to a newer version failed. You should still be able to open your database in an older version of Sofia."];
+        [alert runModal];
         [NSApp terminate:nil];
     }
     return persistentStoreCoordinator;

@@ -1,6 +1,7 @@
 build/*
 *.swp
 .DS_Store
+releases/
 *.xcodeproj/*.pbxuser
 *.xcodeproj/*.mode1v3
 *.xcodeproj/*.perspectivev3
