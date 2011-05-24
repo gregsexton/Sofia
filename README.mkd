@@ -121,41 +121,49 @@ extract any ISBN numbers from it and start adding your book.
 Release Notes
 =============
 
-v0.3.0      * 32/64 Bit build.
-            * Added more dynamic smart list predicates.
-            * Added a view filtering feature.
-            * 'Sort by' option in images view.
-            * Huge efficiency improvements, particularly in memory.
-            * Improved Coverflow responsiveness.
-            * Reviews are provided by Amazon again.
-            * Fixed many memory leaks.
-            * Migration process improved.
-            * Upgraded to XCode 4.
+v0.3.0
+------
+* 32/64 Bit build.
+* Added more dynamic smart list predicates.
+* Added a view filtering feature.
+* 'Sort by' option in images view.
+* Huge efficiency improvements, particularly in memory.
+* Improved Coverflow responsiveness.
+* Reviews are provided by Amazon again.
+* Fixed many memory leaks.
+* Migration process improved.
+* Upgraded to XCode 4.
 
-v0.2.1      * Bug fix and small improvements release.
-            * Database periodically saved every 5 minutes.
-            * Sofia quits on closing the last window.
-            * UI improvements.
-            * Improved database resiliance.
-            * Reviews feature disabled until next release.
+v0.2.1
+------
+* Bug fix and small improvements release.
+* Database periodically saved every 5 minutes.
+* Sofia quits on closing the last window.
+* UI improvements.
+* Improved database resiliance.
+* Reviews feature disabled until next release.
 
-v0.2.0      * Contextual menu for books. Includes user editable
-              'view book on' menu.
-            * Improved error reporting in Detail window.
-            * Preview pane.
-            * Enhanced Amazon download coverage. Enhancements
-              include: TOC, similar books and reviews.
-            * Custom for Sofia, open source, Coverflow view.
-            * Bug fixes and UI improvements.
+v0.2.0
+------
+* Contextual menu for books. Includes user editable
+  'view book on' menu.
+* Improved error reporting in Detail window.
+* Preview pane.
+* Enhanced Amazon download coverage. Enhancements
+  include: TOC, similar books and reviews.
+* Custom for Sofia, open source, Coverflow view.
+* Bug fixes and UI improvements.
 
-v0.1.0	    This is the first release of Sofia. Features include:
-	    * The ability to import book details by ISBN number,
-	      ISBNDb and Amazon are used as the source of
-	      information.
-	    * Viewing books by a details list or by cover artwork.
-	    * Mass import of books by extracting ISBN numbers from
-	      text.
-	    * Viewing a book's details, including general
-	      information, notes and summary, cover artwork.
-	    * Searching for a book in the database using simple
-	      text matching.
+v0.1.0
+------
+This is the first release of Sofia. Features include:
+* The ability to import book details by ISBN number,
+  ISBNDb and Amazon are used as the source of
+  information.
+* Viewing books by a details list or by cover artwork.
+* Mass import of books by extracting ISBN numbers from
+  text.
+* Viewing a book's details, including general
+  information, notes and summary, cover artwork.
+* Searching for a book in the database using simple
+  text matching.
