@@ -157,6 +157,7 @@ v0.2.0
 v0.1.0
 ------
 This is the first release of Sofia. Features include:
+
 * The ability to import book details by ISBN number,
   ISBNDb and Amazon are used as the source of
   information.
