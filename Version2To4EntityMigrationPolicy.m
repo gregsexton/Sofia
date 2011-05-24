@@ -1,5 +1,5 @@
 //
-// Version2To3EntityMigrationPolicy.m
+// Version2To4EntityMigrationPolicy.m
 //
 // Copyright 2011 Greg Sexton
 //
@@ -19,10 +19,10 @@
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "Version2To3EntityMigrationPolicy.h"
+#import "Version2To4EntityMigrationPolicy.h"
 
 
-@implementation Version2To3EntityMigrationPolicy
+@implementation Version2To4EntityMigrationPolicy
 
 - (BOOL)createDestinationInstancesForSourceInstance:(NSManagedObject*)sInstance
                                       entityMapping:(NSEntityMapping*)mapping
@@ -31,14 +31,23 @@
 
     NSManagedObject *newObject;
     NSEntityDescription *sourceInstanceEntity = [sInstance entity];
-    
-    if([[sourceInstanceEntity name] isEqualToString:@"book"]){
 
+    if([[sourceInstanceEntity name] isEqualToString:@"author"]){
+        newObject = [NSEntityDescription insertNewObjectForEntityForName:@"author"
+                                                  inManagedObjectContext:[manager destinationContext]];
+
+    }else if([[sourceInstanceEntity name] isEqualToString:@"book"]){
         newObject = [NSEntityDescription insertNewObjectForEntityForName:@"book"
                                                   inManagedObjectContext:[manager destinationContext]];
+    }
+
+    if([[sourceInstanceEntity name] isEqualToString:@"book"]
+            || [[sourceInstanceEntity name] isEqualToString:@"author"]){
 
         //NSDictionary* keyValDict = [sInstance committedValuesForKeys:nil];
         NSArray* allKeys = [[[sInstance entity] attributesByName] allKeys];
+
+        NSString* applicationSupportFolder = [self applicationSupportFolder];
 
         NSInteger max = [allKeys count];
 
@@ -47,8 +56,18 @@
             NSString *key = [allKeys objectAtIndex:i];
             id value = [sInstance valueForKey:key];
 
-            if([key isEqualToString:@"noOfCopies"]){
+            if([key isEqualToString:@"coverImage"]){
 
+                NSString* fileName = [NSString stringWithFormat:@"%@.tiff", [[NSProcessInfo processInfo] globallyUniqueString]];
+                NSString* filePath = [applicationSupportFolder stringByAppendingPathComponent:fileName];
+
+                NSImage* img = (NSImage*)value;
+                NSData* data = [img TIFFRepresentation];
+                [data writeToFile:filePath atomically:NO];
+
+                [newObject setValue:filePath forKey:key];
+
+            }else if([key isEqualToString:@"noOfCopies"]){
                 [newObject setValue:[NSDecimalNumber numberWithInteger:[(NSString*)value integerValue]]
                              forKey:key];
             }else{
@@ -58,12 +77,20 @@
             }
         }
     }
-    
+
     [manager associateSourceInstance:sInstance
              withDestinationInstance:newObject
                     forEntityMapping:mapping];
-    
+
     return YES;
+}
+
+- (NSString*)applicationSupportFolder{
+    //Returns the support folder for the application
+
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : NSTemporaryDirectory();
+    return [basePath stringByAppendingPathComponent:@"Sofia"];
 }
 
 @end

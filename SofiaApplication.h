@@ -104,6 +104,11 @@
 - (NSManagedObjectModel *)managedObjectModel;
 - (NSManagedObjectContext *)managedObjectContext;
 
+- (BOOL)checkCompatabilityOfPersistentStore:(NSPersistentStoreCoordinator*)psc withURL:(NSURL*)url
+                                  storeType:(NSString*)storeType;
+- (BOOL)migratePersistentStoreSourceMetadata:(NSDictionary*)sourceMetadata destModel:(NSManagedObjectModel*)destModel
+                                                                           sourceURL:(NSURL*)srcUrl
+                                                                          sourceType:(NSString*)storeType;
 - (IBAction)aboutClickAction:(id)sender;
 - (IBAction)addBookAction:(id)sender;
 - (IBAction)addRemoveClickAction:(id)sender;

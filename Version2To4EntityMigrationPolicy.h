@@ -1,5 +1,5 @@
 //
-// author.m
+// Version2To4EntityMigrationPolicy.h
 //
 // Copyright 2011 Greg Sexton
 //
@@ -19,12 +19,12 @@
 // along with Sofia.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "author.h"
+#import <Foundation/Foundation.h>
 
-#import "book.h"
 
-@implementation author 
+@interface Version2To4EntityMigrationPolicy : NSEntityMigrationPolicy {
+    
+}
 
-@dynamic books;
-
+- (NSString*)applicationSupportFolder;
 @end
